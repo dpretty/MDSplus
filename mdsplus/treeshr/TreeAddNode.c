@@ -22,7 +22,7 @@
 
 #define max(a,b) ((a) > (b) ? (a) : (b))
 
-static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.25 $ $Date: 1998/07/29 14:06:50 $";
+static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.26 $ $Date: 1998/07/29 14:27:05 $";
 
 #define node_to_node_number(node_ptr) node_ptr - dblist->tree_info->node
 #define __toupper(c) (((c) >= 'a' && (c) <= 'z') ? (c) & 0xDF : (c))
@@ -764,7 +764,7 @@ static void trim_excess_nodes(TREE_INFO *info_ptr)
       {
 		  if (node_ptr->parent)
 		  {
-			  *free_ptr += node_ptr->parent;
+			  *free_ptr += swapint((char *)&node_ptr->parent);
 			  (parent_of(node_ptr))->child = 0;
 		  }
 		  else
