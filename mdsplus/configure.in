@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.21 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.22 $
 AC_INIT()
 
 AC_CONFIG_HEADER(include/config.h)
@@ -116,7 +116,7 @@ AC_MSG_CHECKING(...d3d library...)
 if test "$d3d_lib"
 then
 		 D3DSHR="d3dshr";
-		 D3DLIB="$d3d_lib";
+		 D3DLIB="-L$d3d_lib";
                  AC_MSG_RESULT($D3DLIB)
 else
 		 D3DSHR="";
