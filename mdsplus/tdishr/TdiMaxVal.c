@@ -55,7 +55,7 @@ extern int Tdi3Divide(  );
 #include <string.h>
 #include <tdimessages.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiMaxVal.c,v $ $Revision: 1.9 $ $Date: 2001/02/12 21:31:02 $";
+static char *cvsrev = "@(#)$RCSfile: TdiMaxVal.c,v $ $Revision: 1.10 $ $Date: 2001/02/14 19:17:45 $";
 
 extern int CvtConvertFloat();
 
@@ -176,7 +176,7 @@ int TdiGtQ();
 }
 
 #define OperateFloc(type,dtype,start,operator) \
-{ type *outp = (int *)out->pointer;\
+{ int *outp = (int *)out->pointer;\
   type *pi0=(type *)in->pointer,*pi1=pi0,*pi2=pi0;\
   char *pm0, *pm1, *pm2 = (char *)mask->pointer;\
   count = -1;\
