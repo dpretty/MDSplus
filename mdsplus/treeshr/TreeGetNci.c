@@ -12,7 +12,7 @@
 #include <starlet.h>
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.19 $ $Date: 1998/04/08 18:51:37 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.20 $ $Date: 1998/04/21 19:50:18 $";
 
 #define min(a,b) (((a) < (b)) ? (a) : (b))
 #define read_nci \
@@ -43,7 +43,7 @@ int _TreeGetNci(void *dbid, int nid_in, struct nci_itm *nci_itm)
 {
   PINO_DATABASE *dblist = (PINO_DATABASE *)dbid;
   NID nid = *(NID *)&nid_in;
-  int       status = 1;
+  int       status = TreeNORMAL;
   int       node_number;
   TREE_INFO *info;
   NCI_ITM  *itm;
@@ -658,7 +658,7 @@ static void FixupNciIn(NCI *nci)
 
 int TreeGetNciW(TREE_INFO *info, int node_num, NCI *nci)
 {
-	int       status = 1;
+	int       status = TreeNORMAL;
 
 	/******************************************
 	If the tree is not open for edit then

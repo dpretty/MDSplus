@@ -37,7 +37,7 @@ int TreeDeleteNodeInitialize(NID *nid,int *count,reset)
 #include <string.h>
 #include <stdlib.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeDeleteNode.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 18:51:34 $";
+static char *cvsrev = "@(#)$RCSfile: TreeDeleteNode.c,v $ $Revision: 1.4 $ $Date: 1998/04/21 19:50:17 $";
 
 extern void *DBID;
 
@@ -101,7 +101,7 @@ int _TreeDeleteNodeInitialize(void *dbid, int nidin, int *count, int reset)
   }
   if (nid)
     check_nid(dblist, nid, count);
-  return 1;
+  return TreeNORMAL;
 }
 
 static int getbit(int bitnum)
@@ -336,8 +336,9 @@ int       _TreeDeleteNodeGetNid(void *dbid, int *innid)
   NID       *nid = (NID *)innid;
   int       i;
   int       status = TreeNORMAL;
-  int       found;
-  for (i = nid->node + 1;i<dblist->tree_info->header->nodes && ((found = getbit(i)) == 0);i++);
+  int       found=0;
+  if (TREE_DELETE_LIST != NULL)
+    for (i = nid->node + 1;i<dblist->tree_info->header->nodes && ((found = getbit(i)) == 0);i++);
   if (found)
     nid->node = i;
   else

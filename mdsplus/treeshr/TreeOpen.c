@@ -17,7 +17,7 @@
 #define __toupper(c) (((c) >= 'a' && (c) <= 'z') ? (c) & 0xDF : (c))
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.24 $ $Date: 1998/04/15 18:33:17 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.25 $ $Date: 1998/04/21 19:50:19 $";
 
 int treeshr_errno = 0;
 
@@ -323,7 +323,9 @@ static int CloseTopTree(PINO_DATABASE *dblist, int call_hook)
 			dblist->modified = 0;
 			dblist->remote = 0;
 			free(dblist->experiment);
+                        dblist->experiment = 0;
 			free(dblist->main_treenam);
+                        dblist->main_treenam = 0;
 		}
 	}
 	return status;

@@ -33,7 +33,7 @@
 #include <treeshr.h>
 #include "treeshrp.h"
 
-static char *cvsrev = "@(#)$RCSfile: TreeRemoveNodesTags.c,v $ $Revision: 1.5 $ $Date: 1998/04/08 18:51:39 $";
+static char *cvsrev = "@(#)$RCSfile: TreeRemoveNodesTags.c,v $ $Revision: 1.6 $ $Date: 1998/04/21 19:50:21 $";
 
 extern void *DBID;
 
@@ -79,7 +79,13 @@ int _TreeRemoveTag(void *dbid, char *name)
   PINO_DATABASE *dblist = (PINO_DATABASE *)dbid;
   int idx;
   int status;
-  if ((status = TreeFindTag(name, "\0", &idx))&1)
+  TREE_INFO *info;
+  NODE *node;
+  if (!(IS_OPEN_FOR_EDIT(dblist)))
+    return TreeNOEDIT;
+
+  info = dblist->tree_info;
+  if ((status = _TreeFindTag(dblist, info->node, strlen(info->treenam),info->treenam, strlen(name), name, &node, &idx))&1 && idx >=0)
     _RemoveTagIdx(dblist, idx);
   return status;
 }
