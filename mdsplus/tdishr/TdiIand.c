@@ -52,7 +52,7 @@ int Tdi3Iand(struct descriptor *in1, struct descriptor *in2, struct descriptor *
 #include <string.h>
 #include <tdimessages.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiIand.c,v $ $Revision: 1.7 $ $Date: 1998/10/23 08:58:17 $";
+static char *cvsrev = "@(#)$RCSfile: TdiIand.c,v $ $Revision: 1.8 $ $Date: 1998/11/06 14:43:45 $";
 
 extern int CvtConvertFloat();
 extern void DoubleToWideInt();
@@ -226,6 +226,8 @@ common(Inand,&)
 common(InandNot,& ~)
 common(Inor,|)
 common(InorNot,| ~)
+#undef not
+#define not
 common(Iand,&)
 common(IandNot,& ~)
 common(Ior,|)
