@@ -44,7 +44,7 @@
 #include "tdirefstandard.h"
 #include "tdinelements.h"
 
-static char *cvsrev = "@(#)$RCSfile: TdiGetNci.c,v $ $Revision: 1.14 $ $Date: 1999/01/26 19:44:31 $";
+static char *cvsrev = "@(#)$RCSfile: TdiGetNci.c,v $ $Revision: 1.15 $ $Date: 1999/01/26 20:08:15 $";
 
 extern unsigned short OpcVector;
 
@@ -444,9 +444,7 @@ skip:		if (status & 1 && wild) goto more;
 			char **xd_ptr = (char **)tmp.pointer->pointer;
 				hold_ptr = holda_ptr->pointer;
 				for (j=outcount; --j>=0; hold_ptr+=step) *xd_ptr++ = hold_ptr;
-                                printf("About to Tdi1Vector\n");
 				status = Tdi1Vector(OpcVector, outcount, tmp.pointer->pointer, out_ptr);
-                                printf("Done Tdi1Vector\n");
 			}
 			MdsFree1Dx(&tmp, NULL);
 		}
