@@ -9,7 +9,7 @@
 #include <mds_stdarg.h>
 #include <librtl_messages.h>
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.71 $ $Date: 2000/09/14 18:09:23 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.72 $ $Date: 2000/10/11 17:54:21 $";
 
 extern int MdsCopyDxXd();
 
@@ -835,7 +835,7 @@ int StrLenExtr(struct descriptor *dest, struct descriptor *source, int *start_in
   int status = StrGet1Dx(&len, &s);
   int i,j;
   memset(s.pointer,32,len);
-  for (i=start-1,j=0;i<source->length;i++,j++)
+  for (i=start-1,j=0; ((i<source->length) && (j < len));i++,j++)
     s.pointer[j]=source->pointer[i];
   status = StrCopyDx(dest,&s);
   StrFree1Dx(&s);
