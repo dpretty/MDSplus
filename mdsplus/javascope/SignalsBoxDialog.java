@@ -1,3 +1,4 @@
+/* $Id: SignalsBoxDialog.java,v 1.3 2002/04/26 13:14:30 jgk Exp $ */
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;

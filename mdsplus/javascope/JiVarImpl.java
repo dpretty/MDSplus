@@ -1,9 +1,10 @@
+/* $Id: JiVarImpl.java,v 1.3 2002/04/26 13:14:29 jgk Exp $ */
 
 import java.io.*;
 import java.util.*;
 
-public abstract class JiVarImpl implements JiVar {
-
+public abstract class JiVarImpl implements JiVar 
+{
 	protected JiDataSource mSource;	// Source object for this variable
 	protected String mName;
 	protected int mType = 0;

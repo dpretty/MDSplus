@@ -1,3 +1,4 @@
+/* $Id: jScopeBrowseSignals.java,v 1.12 2002/04/26 13:14:30 jgk Exp $ */
  import javax.swing.*; 
  import javax.swing.event.*; 
  import javax.swing.text.*; 

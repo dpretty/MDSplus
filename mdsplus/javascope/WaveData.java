@@ -1,3 +1,4 @@
+/* $Id: WaveData.java,v 1.2 2002/04/26 13:14:30 jgk Exp $ */
 import java.io.IOException;
 
 /**
@@ -8,7 +9,6 @@ import java.io.IOException;
  */
 interface WaveData
 {
-
     /**
      * Returns the number of dimensions of the corresponding signal. Currently only unidimensional signals
      * are supported by jScope.

@@ -1,3 +1,4 @@
+/* $Id: RowColumnLayout.java,v 1.12 2002/04/26 13:14:30 jgk Exp $ */
 import java.awt.*;
 import java.util.Vector;
 import java.awt.image.*;

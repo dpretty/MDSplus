@@ -1,3 +1,4 @@
+/* $Id: MultiWavePopup.java,v 1.7 2002/04/26 13:14:30 jgk Exp $ */
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;

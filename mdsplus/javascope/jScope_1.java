@@ -1,3 +1,4 @@
+/* $Id: jScope_1.java,v 1.19 2002/04/26 13:14:30 jgk Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.List;

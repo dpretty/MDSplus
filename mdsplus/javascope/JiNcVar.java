@@ -1,7 +1,9 @@
+/* $Id: JiNcVar.java,v 1.3 2002/04/26 13:14:29 jgk Exp $ */
 import java.io.*;
 import java.util.*;
 
-public class JiNcVar extends JiVarImpl {
+public class JiNcVar extends JiVarImpl 
+{
 	private JiVar[] mAtts = null;	// Attributes for this variable
 	private JiDim[] mDims;	// Array of dimensions for variable
 	protected int mNcType;	// Two types -- our own type and netCDF type

@@ -1,3 +1,4 @@
+/* $Id: Grid.java,v 1.10 2002/04/26 13:14:29 jgk Exp $ */
 import java.awt.*;
 import java.awt.image.*;
 import java.awt.event.*;
@@ -5,7 +6,8 @@ import java.io.*;
 import java.util.*;
 
   
-public class Grid implements Serializable {
+public class Grid implements Serializable 
+{
     WaveformMetrics wm;
     boolean reversed = false;
     int x_dim, y_dim;

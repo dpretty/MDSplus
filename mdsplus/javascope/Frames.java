@@ -1,10 +1,11 @@
+/* $Id: Frames.java,v 1.17 2002/04/26 13:14:29 jgk Exp $ */
 import java.awt.*;
 import java.io.*;
 import java.awt.image.*;
 import java.util.*;
 
-class Frames extends Canvas {
-    
+class Frames extends Canvas 
+{
     static final int ROI = 20;
     Vector frame = new Vector();
     Vector frame_time = new Vector();

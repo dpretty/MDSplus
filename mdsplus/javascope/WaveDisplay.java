@@ -1,3 +1,4 @@
+/* $Id: WaveDisplay.java,v 1.9 2002/04/26 13:14:30 jgk Exp $ */
 import java.awt.*;
 import java.net.URL;
 import java.awt.event.*;

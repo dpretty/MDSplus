@@ -1,4 +1,4 @@
-
+/* $Id: AboutWindow.java,v 1.8 2002/04/26 13:14:29 jgk Exp $ */
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;

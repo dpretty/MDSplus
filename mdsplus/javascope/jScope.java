@@ -1,3 +1,4 @@
+/* $Id: jScope.java,v 1.34 2002/04/26 13:14:30 jgk Exp $ */
 import java.util.Properties;
 
 public class jScope

@@ -1,7 +1,9 @@
+/* $Id: JiNcVarImp.java,v 1.3 2002/04/26 13:14:29 jgk Exp $ */
 import java.io.*;
 import java.util.*;
 
-abstract class JiNcVarImp {
+abstract class JiNcVarImp 
+{
 	protected JiNcVar mParent;
 	protected RandomAccessData mRFile;
 	protected long mOffset;

@@ -1,3 +1,4 @@
+/* $Id: WaveformManager.java,v 1.4 2002/04/26 13:14:30 jgk Exp $ */
 import java.awt.Point;
 
 /**
@@ -7,8 +8,8 @@ import java.awt.Point;
  * 
  * @see WaveformContainer
  */
-public interface  WaveformManager   {    
-
+public interface  WaveformManager
+{
     /**
      * Autoscale operation on all waveforms
      * 

@@ -1,7 +1,9 @@
+/* $Id: JiNcSource.java,v 1.3 2002/04/26 13:14:29 jgk Exp $ */
 import java.util.*;
 import java.io.*;
 
-public class JiNcSource implements JiDataSource {
+public class JiNcSource implements JiDataSource 
+{
 	private int mRecs = 0;
 	private JiDim[] mDimArray;
 	private JiNcVar[] mGattArray;

@@ -1,3 +1,4 @@
+/* $Id: SetupDefaults.java,v 1.20 2002/04/26 13:14:30 jgk Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.util.*;
@@ -7,7 +8,8 @@ import java.lang.Integer;
 import javax.swing.*;
  
 
-public class SetupDefaults extends JDialog implements ActionListener {
+public class SetupDefaults extends JDialog implements ActionListener 
+{
    JTextField        title, shot, experiment;
    JTextField        x_max, x_min, x_label;
    JTextField        y_max, y_min, y_label;

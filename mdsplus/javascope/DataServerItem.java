@@ -1,3 +1,4 @@
+/* $Id: DataServerItem.java,v 1.4 2002/04/26 13:14:29 jgk Exp $ */
 public class DataServerItem
 {
     String name;

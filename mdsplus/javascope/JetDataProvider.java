@@ -1,3 +1,4 @@
+/* $Id: JetDataProvider.java,v 1.20 2002/04/26 13:14:29 jgk Exp $ */
 import java.io.*;
 import java.net.*;
 import java.util.*;

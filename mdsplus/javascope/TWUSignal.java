@@ -10,9 +10,13 @@
  * Authors: Jon Krom, H.R.Koslowski, 
  *          Forschungszentrum Jülich, Institut für Plasmaphysik.
  *
- * $Id: TWUSignal.java,v 1.4 2002/04/24 09:06:17 manduchi Exp $
+ * $Id: TWUSignal.java,v 1.5 2002/04/26 13:14:30 jgk Exp $
  *
  * $Log: TWUSignal.java,v $
+ * Revision 1.5  2002/04/26 13:14:30  jgk
+ * Changed End-Of-Line marker from Windows- to CVS standard.
+ * No code changes (or at least, not intentional :-) ).
+ *
  * Revision 1.4  2002/04/24 09:06:17  manduchi
  * Added Asdex Data Provider
  *
@@ -146,7 +150,7 @@ public class TWUSignal
             URLConnection con = bulkURL.openConnection();
 
             con.setRequestProperty("User-Agent",
-                                   "TWUSignal.java for jScope ($Revision: 1.4 $)");
+                                   "TWUSignal.java for jScope ($Revision: 1.5 $)");
             con.connect();
 
             instream = 
@@ -240,10 +244,10 @@ public class TWUSignal
     public static String 
     revision()
     {
-        return "$Id: TWUSignal.java,v 1.4 2002/04/24 09:06:17 manduchi Exp $";
+        return "$Id: TWUSignal.java,v 1.5 2002/04/26 13:14:30 jgk Exp $";
     }
 }
 
 /* ------------------------------------------------------------------------ */
-// $Id: TWUSignal.java,v 1.4 2002/04/24 09:06:17 manduchi Exp $
+// $Id: TWUSignal.java,v 1.5 2002/04/26 13:14:30 jgk Exp $
 /* ------------------------------------------------------------------------ */

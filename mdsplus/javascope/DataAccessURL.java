@@ -1,3 +1,4 @@
+/* $Id: DataAccessURL.java,v 1.5 2002/04/26 13:14:29 jgk Exp $ */
 import java.util.Vector;
 import java.io.IOException;
 

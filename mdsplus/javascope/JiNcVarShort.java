@@ -1,7 +1,9 @@
+/* $Id: JiNcVarShort.java,v 1.3 2002/04/26 13:14:29 jgk Exp $ */
 import java.io.*;
 import java.util.*;
 
-class JiNcVarShort extends JiNcVarImp {
+class JiNcVarShort extends JiNcVarImp 
+{
 	public JiNcVarShort(RandomAccessData in, JiNcVar parent, long offset)
 	  {
 	  super(in, parent, offset);

@@ -1,3 +1,4 @@
+/* $Id: FrameData.java,v 1.3 2002/04/26 13:14:29 jgk Exp $ */
 import java.awt.Dimension;
 import java.io.IOException;
 

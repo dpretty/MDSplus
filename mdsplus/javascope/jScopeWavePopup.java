@@ -1,3 +1,4 @@
+/* $Id: jScopeWavePopup.java,v 1.13 2002/04/26 13:14:30 jgk Exp $ */
 import java.awt.Point;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -9,12 +10,13 @@ import java.io.IOException;
 import javax.swing.*;
 
 
-class jScopeWavePopup extends MultiWavePopup {
-	private   SetupDataDialog setup_dialog;
-	protected JMenuItem refresh, saveAsText;
-	protected JMenuItem  selectWave, remove_panel, profile_dialog;
-	protected JSeparator sep1, sep3;
-        
+class jScopeWavePopup extends MultiWavePopup 
+{
+    private   SetupDataDialog setup_dialog;
+    protected JMenuItem refresh, saveAsText;
+    protected JMenuItem  selectWave, remove_panel, profile_dialog;
+    protected JSeparator sep1, sep3;
+
     public jScopeWavePopup(SetupDataDialog setup_dialog)
     {
         super();

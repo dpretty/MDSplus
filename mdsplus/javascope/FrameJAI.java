@@ -1,3 +1,4 @@
+/* $Id: FrameJAI.java,v 1.7 2002/04/26 13:14:29 jgk Exp $ */
 import java.awt.*;
 import java.util.*;
 import java.awt.image.*;

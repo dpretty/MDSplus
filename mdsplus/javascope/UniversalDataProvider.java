@@ -1,3 +1,4 @@
+/* $Id: UniversalDataProvider.java,v 1.6 2002/04/26 13:14:30 jgk Exp $ */
 import java.io.*;
 import javax.swing.JFrame;
 import java.util.*;

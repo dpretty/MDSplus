@@ -1,3 +1,4 @@
+/* $Id: jScopeWaveContainer.java,v 1.22 2002/04/26 13:14:30 jgk Exp $ */
 import java.awt.Graphics;
 import java.awt.Component;
 import java.awt.Font;

@@ -1,3 +1,4 @@
+/* $Id: jScope_2.java,v 1.3 2002/04/26 13:14:30 jgk Exp $ */
 import java.awt.*;
 import java.lang.*;
 import java.util.*;

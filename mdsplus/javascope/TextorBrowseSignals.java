@@ -1,3 +1,4 @@
+/* $Id: TextorBrowseSignals.java,v 1.6 2002/04/26 13:14:30 jgk Exp $ */
 import java.net.*; 
 import java.io.*;
 import java.util.StringTokenizer;

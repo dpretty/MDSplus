@@ -1,8 +1,10 @@
+/* $Id: JiVar.java,v 1.3 2002/04/26 13:14:29 jgk Exp $ */
 
 import java.io.*;
 import java.util.*;
 
-public interface JiVar {
+public interface JiVar 
+{
 	public static final int Byte = 1;
 	public static final int Char = 2;
 	public static final int Short = 3;

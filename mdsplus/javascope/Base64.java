@@ -1,3 +1,4 @@
+/* $Id: Base64.java,v 1.6 2002/04/26 13:14:29 jgk Exp $ */
 class Base64
 {
     static byte []Base64Alphabet = new String("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=").getBytes();

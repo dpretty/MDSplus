@@ -1,3 +1,4 @@
+/* $Id: MdsDataClient.java,v 1.3 2002/04/26 13:14:29 jgk Exp $ */
 public class MdsDataClient
 {
     private MdsConnection mds;

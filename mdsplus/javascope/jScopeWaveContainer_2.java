@@ -1,3 +1,4 @@
+/* $Id: jScopeWaveContainer_2.java,v 1.5 2002/04/26 13:14:30 jgk Exp $ */
 import java.awt.*;
 import java.awt.print.*;
 

@@ -1,3 +1,4 @@
+/* $Id: CompositeWaveDisplay.java,v 1.13 2002/04/26 13:14:29 jgk Exp $ */
 import java.applet.*;
 import java.awt.*;
 import java.awt.event.*;
