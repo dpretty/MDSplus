@@ -56,11 +56,11 @@ int Tdi3xxxxx(struct descriptor *in1, struct descriptor *in2,
 #include <stdlib.h>
 #include <string.h>
 
-#include <mdsdescrip.h>
 #include <mdstypes.h>
+#include <mdsdescrip.h>
 #include <tdimessages.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiDim.c,v $ $Revision: 1.10 $ $Date: 2000/09/14 18:10:56 $";
+static char *cvsrev = "@(#)$RCSfile: TdiDim.c,v $ $Revision: 1.11 $ $Date: 2000/09/14 20:36:24 $";
 
 extern int TdiConvert(  ); 
 extern int Tdi3Subtract(  );

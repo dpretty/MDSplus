@@ -29,6 +29,7 @@
 +-----------------------------------------------------------------------------*/
 #include <stdio.h>
 #include <stdlib.h>
+#include <mdstypes.h>
 #include <mdsdescrip.h>
 #include <mdsshr.h>
 #include <ncidef.h>
@@ -57,7 +58,7 @@
 static int timezone = 0;
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.52 $ $Date: 2000/09/14 18:10:10 $";
+static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.53 $ $Date: 2000/09/14 20:36:18 $";
 
 #ifdef min
 #undef min
