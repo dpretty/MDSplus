@@ -73,7 +73,7 @@ static Pixmap *gray_icons;
 
  Local variables:                                                             */
 
-static char *cvsrev = "@(#)$RCSfile: XmdsUsageIcons.c,v $ $Revision: 1.5 $ $Date: 1998/04/08 19:23:53 $";
+static char *cvsrev = "@(#)$RCSfile: XmdsUsageIcons.c,v $ $Revision: 1.6 $ $Date: 1999/09/29 20:35:51 $";
 
 /*------------------------------------------------------------------------------
 
@@ -81,7 +81,7 @@ static char *cvsrev = "@(#)$RCSfile: XmdsUsageIcons.c,v $ $Revision: 1.5 $ $Date
 
 void XmdsUsageIconsInitialize(Widget w)
 {
-  static String hierarchy_name[] = {{"xmds_usage_icons.uid"}};
+  static String hierarchy_name[] = {"xmds_usage_icons.uid"};
   static MrmHierarchy mrm_hierarchy;
   int usage;
   int usages;

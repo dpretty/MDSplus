@@ -79,7 +79,7 @@ Boolean XmdsIsDigChans(Widget w)
 
  Local variables:                                                             */
 
-static char *cvsrev = "@(#)$RCSfile: XmdsDigChans.c,v $ $Revision: 1.7 $ $Date: 1998/04/09 18:30:24 $";
+static char *cvsrev = "@(#)$RCSfile: XmdsDigChans.c,v $ $Revision: 1.8 $ $Date: 1999/09/29 20:35:51 $";
 
 void XmdsDigChansReset(Widget w);
 
@@ -118,7 +118,7 @@ static XtResource resources[] =
 Widget XmdsCreateDigChans(Widget parent,String name,ArgList args,Cardinal argcount)
 {
   XmdsDigChansPart info = {4,-1,0,0,1,2,3,1};
-  static String hierarchy_name[] = {{"XmdsDigChans.uid"}};
+  static String hierarchy_name[] = {"XmdsDigChans.uid"};
   MrmHierarchy drm_hierarchy;
   MrmType class;
   int i;
