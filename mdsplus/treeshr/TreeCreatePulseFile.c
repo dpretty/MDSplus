@@ -41,7 +41,7 @@ extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
 extern char *MaskReplace();
 
-static char *cvsrev = "@(#)$RCSfile: TreeCreatePulseFile.c,v $ $Revision: 1.18 $ $Date: 2001/02/27 17:46:12 $";
+static char *cvsrev = "@(#)$RCSfile: TreeCreatePulseFile.c,v $ $Revision: 1.19 $ $Date: 2001/02/28 20:03:48 $";
 
 #ifdef _WIN32
 #include <windows.h>
@@ -80,6 +80,7 @@ int       _TreeCreatePulseFile(void *dbid, int shotid, int numnids_in, int *nids
   {
     void       *ctx = 0;
     for (num = 0; num < 256 && _TreeFindTagWild(dbid, "TOP", &nids[num], &ctx); num++);
+    TreeFindTagEnd(&ctx);
   }
   else
   {

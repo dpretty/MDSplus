@@ -36,7 +36,7 @@ TreeFindTagEnd(void **ctx);
 #include "treeshrp.h"
 #include <strroutines.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeFindTagWild.c,v $ $Revision: 1.9 $ $Date: 1999/06/02 16:54:00 $";
+static char *cvsrev = "@(#)$RCSfile: TreeFindTagWild.c,v $ $Revision: 1.10 $ $Date: 2001/02/28 20:03:49 $";
 
 extern int MdsCopyDxXd();
 extern char * FindTagWildRemote();
@@ -213,7 +213,7 @@ char *_TreeFindTagWild(void *dbid, char *wild, int *nidout, void **ctx_inout)
     }
     else
     {
-      *ctx = 0;
+      TreeFindTagEnd(ctx_inout);
       status = TreeNMT;
     }
     return (status & 1) ? answer : NULL;

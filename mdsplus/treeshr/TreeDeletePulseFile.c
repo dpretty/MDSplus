@@ -40,7 +40,7 @@ int TreeDeletePulseFile(int shotid,int numnids, int *nids)
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
 
-static char *cvsrev = "@(#)$RCSfile: TreeDeletePulseFile.c,v $ $Revision: 1.10 $ $Date: 2000/05/22 14:58:03 $";
+static char *cvsrev = "@(#)$RCSfile: TreeDeletePulseFile.c,v $ $Revision: 1.11 $ $Date: 2001/02/28 20:03:49 $";
 
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
@@ -100,6 +100,8 @@ int       _TreeDeletePulseFile(void *dbid, int shotid, int allfiles)
         retstatus = status;
     }
     _TreeClose(&dbid_tmp, dblist->experiment, shotid);
+    free(dbid_tmp);
+    TreeFindTagEnd(&ctx);
   }
   return retstatus;
 }
