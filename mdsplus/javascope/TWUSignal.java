@@ -1,27 +1,5 @@
-/* ------------------------------------------------------------------------ */
-/*
- * TWUSignal: Handling the TEC Web-Umbrella Signal (Bulk) File.
- *
- * Copyright © 2002, J.G.Krom, H.R.Koslowski, Forschungszentrum Jülich GmbH.
- * All rights reserved.
- * 
- * This class handles the bulk datafiles as used in the TEC Web-Umbrella.
- *
- * The TWU* classes (with TWU in three capitals) are written so that they 
- * can also be used in other java based applications and not only by jScope.  
- * Please keep the code of these separate of jScope specific elements.
- *
- * Authors: Jon Krom, H.R.Koslowski, 
- *          Forschungszentrum Jülich, Institut für Plasmaphysik.
- *
- * $Id: TWUSignal.java,v 1.22 2003/10/30 13:00:16 jgk Exp $
- *
- * ------------------------------------------------------------------------ 
- * Derived from (matlab-) WUSignal.java Revision 1.6 2002/02/26 hrk/jgk
- * I removed the automatic CVS log from this file; it can be read
- * directly from the CVS repository with "cvs log".
- */
-/* ------------------------------------------------------------------------ */
+//Header removed: contained some dirty character which made IBM JVM fail
+
 
 import java.net.*;
 import java.io.*;
@@ -176,7 +154,7 @@ public class TWUSignal
             URLConnection con = bulkURL.openConnection();
 
             con.setRequestProperty("User-Agent",
-                                   "TWUSignal.java for jScope ($Revision: 1.22 $)");
+                                   "TWUSignal.java for jScope ($Revision: 1.23 $)");
 
             // It seems to be more efficient, for the type of data we have in the
             // bulk files, to close the connection after the server has send all
@@ -314,10 +292,10 @@ public class TWUSignal
     public static String 
     revision()
     {
-        return "$Id: TWUSignal.java,v 1.22 2003/10/30 13:00:16 jgk Exp $";
+        return "$Id: TWUSignal.java,v 1.23 2004/05/28 12:13:35 manduchi Exp $";
     }
 }
 
 /* ------------------------------------------------------------------------ */
-// $Id: TWUSignal.java,v 1.22 2003/10/30 13:00:16 jgk Exp $
+// $Id: TWUSignal.java,v 1.23 2004/05/28 12:13:35 manduchi Exp $
 /* ------------------------------------------------------------------------ */
