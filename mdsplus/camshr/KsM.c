@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: KsM.c,v 1.3 2003/02/10 21:43:56 twf Exp $
+//	$Id: KsM.c,v 1.4 2003/04/16 16:19:05 twf Exp $
 //-------------------------------------------------------------------------
 // Mon Oct 15 16:35:42 EDT 2001	-- seperated out
 //-----------------------------------------------------------
@@ -73,7 +73,7 @@ static int KsMultiIo(
   Command[7] = xfer_len.b[MID];
   Command[8] = xfer_len.b[LO];
   
-  direction = ((F & 0x08) == 0) ? 0 : ((F < 8) ? 1 : 2);
+  direction = ((F & 0x08) == 0) ? ((F < 8) ? 1 : 2) : 0;
   
   // talk to the physical device
   status = scsi_io( scsiDevice, direction, Command, sizeof(Command),
