@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: xlate_logicalname.c,v 1.1 2002/09/10 16:06:59 twf Exp $
+//	$Id: xlate_logicalname.c,v 1.2 2004/10/25 11:54:59 manduchi Exp $
 //-------------------------------------------------------------------------
 
 //-------------------------------------------------------------------------
@@ -55,7 +55,7 @@ int xlate_logicalname( char *Name, CamKey *key )
 	}
 
 	// look up entry in db file
-	if( (i = lookup_entry( CTS_DB, Name )) == ERROR ) {
+	if( (i = lookup_entry( CTS_DB, Name )) < 0 ) {
 		status = NO_DEVICE;
 		goto Xlate_LogicalName_Exit;
 	}
