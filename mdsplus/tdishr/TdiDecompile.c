@@ -9,7 +9,7 @@
 
 #include <tdimessages.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiDecompile.c,v $ $Revision: 1.7 $ $Date: 1999/10/19 20:14:42 $";
+static char *cvsrev = "@(#)$RCSfile: TdiDecompile.c,v $ $Revision: 1.8 $ $Date: 1999/11/04 15:33:43 $";
 
 unsigned int TdiDECOMPILE_MAX = 0xffff;
 
@@ -25,6 +25,11 @@ extern unsigned int TdiIndent;
 #include <mdsshr.h>
 #include <treeshr.h>
 #include <mds_stdarg.h>
+
+#ifdef max
+#undef max
+#endif
+#define max(a,b) (((a) > (b)) ? (a) : (b))
 
 extern int TdiGetLong();
 extern int TdiDecompileDeindent();
@@ -95,7 +100,7 @@ char			**item_ptr_ptr,
 struct descriptor_d	*out_ptr)
 {
 array_bounds_desc *a_ptr = (array_bounds_desc *)in_ptr;
-int	n = a_ptr->aflags.coeff ? a_ptr->m[level] : (int)a_ptr->arsize / (int)a_ptr->length;
+int	n = a_ptr->aflags.coeff ? a_ptr->m[level] : (int)a_ptr->arsize / max(1,(int)a_ptr->length);
 int	j, status;
 
 	status = StrAppend(out_ptr, &LEFT_BRACKET);
@@ -560,7 +565,7 @@ char n1c;
 		int	length = a_ptr->length;
 		int	coeff = a_ptr->aflags.coeff;
 		int	dimct = coeff ? a_ptr->dimct : 1;
-		unsigned int	count = (int)a_ptr->arsize / length;
+		unsigned int	count = (int)a_ptr->arsize / max(1,length);
 		int	more = count > TdiDECOMPILE_MAX || a_ptr->arsize >= 32768;
 
 		/**************************************
