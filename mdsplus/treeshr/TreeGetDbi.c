@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetDbi.c,v $ $Revision: 1.7 $ $Date: 1998/10/21 12:10:52 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetDbi.c,v $ $Revision: 1.8 $ $Date: 1998/11/06 15:10:25 $";
 
 extern void *DBID;
 #ifndef vxWorks
@@ -61,7 +61,7 @@ int _TreeGetDbi(void *dbid, struct dbi_itm *itmlst)
 
       {
 	int       idx;
-	for (idx = 0, db = (PINO_DATABASE *)dbid; db && (idx < *((unsigned char *) (lst->pointer))); idx++, db = db->next);
+	for (idx = 0, db = (PINO_DATABASE *)dbid; db && (idx < (*(int *) (lst->pointer) & 0xff)); idx++, db = db->next);
 	if (!(db ? db->open : 0))
 	  status = TreeNOT_OPEN;
 	break;
