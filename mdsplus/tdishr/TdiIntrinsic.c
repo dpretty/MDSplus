@@ -24,6 +24,11 @@
 #define MAXLINE 120
 #define MAXFRAC 40
 #define MINMAX(min, test, max) ((min) >= (test) ? (min) : (test) < (max) ? (test) : (max))
+
+#if defined(_WIN32)
+#include <windows.h>
+#endif
+
 #include "tdirefcat.h"
 #include "tdireffunction.h"
 #include "tdirefstandard.h"
@@ -37,8 +42,7 @@
 #include <tdimessages.h>
 #include <mdsshr.h>
 #include <mds_stdarg.h>
-
-static char *cvsrev = "@(#)$RCSfile: TdiIntrinsic.c,v $ $Revision: 1.6 $ $Date: 1998/04/24 18:49:16 $";
+static char *cvsrev = "@(#)$RCSfile: TdiIntrinsic.c,v $ $Revision: 1.7 $ $Date: 1998/05/04 20:31:45 $";
 
 typedef struct _bounds { int l; int u; } BOUNDS;
 
@@ -184,8 +188,20 @@ int				narg,
 struct descriptor		*list[],
 struct descriptor_xd	*out_ptr)
 {
-	LibEstablish(TdiFaultHandlerNoFixup);
-	return (*f1)(opcode, narg, list, out_ptr);
+	int status;
+#if defined(_WIN32)
+	__try
+	{
+#endif
+		status = (*f1)(opcode, narg, list, out_ptr);
+#if defined(_WIN32)
+	}
+	__except (EXCEPTION_EXECUTE_HANDLER )
+	{
+		status = TdiBOMB;
+	}
+#endif
+	return status;
 }
 
 static EMPTYXD(emptyxd);
