@@ -39,3 +39,4 @@ tdi	mdsplus/tdi
 trees   mdsplus/trees
 mdsplus mdsplus
 mitdevices mdsplus/mitdevices
+mdstcpip mdsplus/mdstcpip
