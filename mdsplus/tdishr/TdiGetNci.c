@@ -44,7 +44,7 @@
 #include "tdirefstandard.h"
 #include "tdinelements.h"
 
-static char *cvsrev = "@(#)$RCSfile: TdiGetNci.c,v $ $Revision: 1.15 $ $Date: 1999/01/26 20:08:15 $";
+static char *cvsrev = "@(#)$RCSfile: TdiGetNci.c,v $ $Revision: 1.16 $ $Date: 1999/05/05 18:58:46 $";
 
 extern unsigned short OpcVector;
 
@@ -341,7 +341,15 @@ more:		switch (dtype) {
                         masked[0].pointer = (unsigned char *)&flag;
 			masked[0].return_length_address = &retlen;
 			if (status & 1) status = TreeGetNci(nid, masked);
-			if (status & 1) *(char *)hold_ptr = (char)((unsigned short)(flag & key_ptr->item_mask) == key_ptr->item_test);
+			if (status & 1) 
+                        {
+                          switch (retlen)
+			  {
+			  case 1: flag = (int)(*(char *)&flag); break;
+                          case 2: flag = (int)(*(short *)&flag); break;
+                          }
+                          *(char *)hold_ptr = (char)((unsigned short)(flag & key_ptr->item_mask) == key_ptr->item_test);
+                        }
 		}
 		/*************************
 		Only nid arrays are here.
