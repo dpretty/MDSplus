@@ -47,6 +47,9 @@ char *string;
 #include <X11/Intrinsic.h>
 #include <X11/StringDefs.h>
 #include <Xm/MessageB.h>
+
+static char *cvsrev = "@(#)$RCSfile: XmdsComplain.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:23:45 $";
+
 void XmdsComplain(Widget parent,char *string)
 {
 

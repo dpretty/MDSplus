@@ -63,6 +63,8 @@ int XmdsCreateCancelButton(Widget parent, String name, ArgList args, Cardinal nu
 #include <Xmds/XmdsOkButtons.h>
 #include <Xmds/XmdsCallbacks.h>
 #include <xmdsshr.h>
+static char *cvsrev = "@(#)$RCSfile: XmdsOkButtons.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:23:50 $";
+
 static Widget CreateButton(Widget parent,String name,ArgList args,Cardinal numargs,String ident,Boolean set_default);
 static int Apply(Widget w,XtCallbackList callbacks);
 static Widget FindShellChild(Widget w);

@@ -34,6 +34,9 @@ int XmdsBells(int *number_of_bells )
 ------------------------------------------------------------------------------*/
 
 #include <X11/Xlib.h>
+
+static char *cvsrev = "@(#)$RCSfile: XmdsBells.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:23:44 $";
+
 int XmdsBells(int *num_bells)
 {
   static Display *display = 0;

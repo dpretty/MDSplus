@@ -74,6 +74,8 @@
 
  Local variables:                                                             */
 
+static char *cvsrev = "@(#)$RCSfile: XmdsDisplay.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:23:46 $";
+
 typedef struct _DisplayPart
 {
   int       nid;

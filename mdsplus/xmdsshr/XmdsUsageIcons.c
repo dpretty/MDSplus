@@ -73,6 +73,8 @@ static Pixmap *gray_icons;
 
  Local variables:                                                             */
 
+static char *cvsrev = "@(#)$RCSfile: XmdsUsageIcons.c,v $ $Revision: 1.5 $ $Date: 1998/04/08 19:23:53 $";
+
 /*------------------------------------------------------------------------------
 
  Executable:                                                                  */

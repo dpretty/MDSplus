@@ -56,6 +56,8 @@ void      XmdsPopupMenuPosition(XmRowColumnWidget w, XButtonEvent *event)
 
  Local variables:                                                             */
 
+static char *cvsrev = "@(#)$RCSfile: XmdsPopupMenuPosition.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:23:51 $";
+
 /*------------------------------------------------------------------------------
 
  Executable:                                                                  */

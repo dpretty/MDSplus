@@ -39,6 +39,8 @@
 #endif
 #endif
 
+static char *cvsrev = "@(#)$RCSfile: ListTree.c,v $ $Revision: 1.5 $ $Date: 1998/04/08 19:23:43 $";
+
 #ifdef DEBUG
 #include <stdlib.h>
 #include <stdarg.h>

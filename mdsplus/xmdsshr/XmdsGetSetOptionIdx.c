@@ -58,6 +58,8 @@ int XmdsGetOptionIdx(Widget w);
 
  Local variables:                                                             */
 
+static char *cvsrev = "@(#)$RCSfile: XmdsGetSetOptionIdx.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:23:47 $";
+
 /*------------------------------------------------------------------------------
 
  Executable:                                                                  */

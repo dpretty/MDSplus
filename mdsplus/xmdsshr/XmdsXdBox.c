@@ -131,6 +131,8 @@ extern char *DescToNull ( struct descriptor_s *desc );
 #include <Xmds/XmdsExpr.h>
 #include <Xmds/XmdsExprField.h>
 #include <xmdsshr.h>
+static char *cvsrev = "@(#)$RCSfile: XmdsXdBox.c,v $ $Revision: 1.6 $ $Date: 1998/04/08 19:23:56 $";
+
 extern int TdiCompile();
 /*------------------------------------------------------------------------------
 

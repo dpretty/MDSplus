@@ -194,6 +194,8 @@ int XmdsCreateWavedraw( parent, name, args, argcount )
 
  Local variables:                                                             */
 
+static char *cvsrev = "@(#)$RCSfile: XmdsWavedraw.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:23:54 $";
+
 #ifdef __VMS
 #ifdef __ALPHA
 #define HandleMissing lib$establish(lib$sig_to_ret)

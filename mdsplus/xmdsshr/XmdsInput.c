@@ -115,6 +115,8 @@
 
  Local variables:                                                             */
 
+static char *cvsrev = "@(#)$RCSfile: XmdsInput.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:23:49 $";
+
 /*------------------------------------------------------------------------------
 
  Executable:                                                                  */

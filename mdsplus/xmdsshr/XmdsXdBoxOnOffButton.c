@@ -58,6 +58,8 @@ int XmdsXdBoxOnOffButtonApply(Widget w);
 #include <Mrm/MrmPublic.h>
 #include <xmdsshr.h>
 
+static char *cvsrev = "@(#)$RCSfile: XmdsXdBoxOnOffButton.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:23:57 $";
+
 typedef struct _Resources
 {
   int nid;

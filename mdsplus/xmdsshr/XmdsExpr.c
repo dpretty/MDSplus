@@ -176,6 +176,7 @@ static void MoveChildren(XmdsExprWidget w);
 
  Local variables:                                                             */
 
+static char *cvsrev = "@(#)$RCSfile: XmdsExpr.c,v $ $Revision: 1.6 $ $Date: 1998/04/08 19:23:47 $";
 static struct descriptor_xd const empty_xd = {0, DTYPE_DSC, CLASS_XD, 0, 0};
 /*------------------------------------------------------------------------------
 

@@ -91,6 +91,8 @@ int XmdsInitialize( )
 
 #include <Xmds/XmdsWaveform.h>
 
+static char *cvsrev = "@(#)$RCSfile: XmdsInitialize.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:23:48 $";
+
 void XmdsInitialize()
 {
 #ifndef _NO_XDS

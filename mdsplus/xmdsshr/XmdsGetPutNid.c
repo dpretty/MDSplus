@@ -117,6 +117,8 @@ static int GetLong(int nid,int *intptr);
 
  Local variables:                                                             */
 
+static char *cvsrev = "@(#)$RCSfile: XmdsGetPutNid.c,v $ $Revision: 1.5 $ $Date: 1998/04/08 19:23:47 $";
+
 /*------------------------------------------------------------------------------
 
  Executable:                                                                  */

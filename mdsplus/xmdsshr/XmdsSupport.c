@@ -74,6 +74,8 @@ extern int TdiDebug();
 
  Local variables:                                                             */
 
+static char *cvsrev = "@(#)$RCSfile: XmdsSupport.c,v $ $Revision: 1.4 $ $Date: 1998/04/08 19:23:52 $";
+
 static struct descriptor_xd empty_xd = {0, DTYPE_DSC, CLASS_XD, 0, 0};
 
 /*------------------------------------------------------------------------------

@@ -77,6 +77,8 @@
 
  Local variables:                                                             */
 
+static char *cvsrev = "@(#)$RCSfile: XmdsPath.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:23:51 $";
+
 typedef struct _PathPart
 {
   int nid;
