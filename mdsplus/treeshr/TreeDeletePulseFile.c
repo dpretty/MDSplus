@@ -37,7 +37,10 @@ int TreeDeletePulseFile(int shotid,int numnids, int *nids)
 #include "treeshrp.h"
 #include <ncidef.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeDeletePulseFile.c,v $ $Revision: 1.6 $ $Date: 1998/04/24 19:40:06 $";
+extern char *TranslateLogical(char *);
+extern void TranslateLogicalFree(char *);
+
+static char *cvsrev = "@(#)$RCSfile: TreeDeletePulseFile.c,v $ $Revision: 1.7 $ $Date: 1998/08/04 15:11:07 $";
 
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
@@ -120,11 +123,9 @@ static int  TreeDeleteTreeFiles(char *tree, int shot)
   strcpy(pathname,tree_lower);
   strcat(pathname,TREE_PATH_SUFFIX);
 #if defined(__VMS)
-  pathin = pathname;
-#elif defined(_MSC_VER)
-  pathin = GetRegistryPath(pathname);
+  pathin = strcpy(malloc(strlen(pathname)+1,pathname);
 #else
-  pathin = getenv(pathname);
+  pathin = TranslateLogical(pathname);
 #endif
   if (pathin)
   {
@@ -172,6 +173,7 @@ static int  TreeDeleteTreeFiles(char *tree, int shot)
       }
     }
     free(path);
+	TranslateLogicalFree(pathin);
   }
   return status;
 }

@@ -22,7 +22,7 @@
 
 #define max(a,b) ((a) > (b) ? (a) : (b))
 
-static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.34 $ $Date: 1998/07/30 20:37:27 $";
+static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.35 $ $Date: 1998/08/04 15:11:06 $";
 
 #define node_to_node_number(node_ptr) node_ptr - dblist->tree_info->node
 #define __toupper(c) (((c) >= 'a' && (c) <= 'z') ? (c) & 0xDF : (c))
@@ -711,9 +711,9 @@ int _TreeWriteTree(void **dbid, char *exp_ptr, int shotid)
       ntreef = fopen(nfilenam,"wb");
       if (ntreef)
       {
-        TREE_HEADER tmp;
         size_t num;
 #ifdef _big_endian
+        TREE_HEADER tmp;
         num = fwrite(HeaderOut(info_ptr->header,&tmp),512,header_pages,ntreef);
 #else
         num = fwrite(info_ptr->header,512,header_pages,ntreef);
