@@ -5,11 +5,14 @@
 #define MAXEXPR 16384
 extern int TdiExecute();
 
-static char *cvsrev = "@(#)$RCSfile: tditest.c,v $ $Revision: 1.4 $ $Date: 1999/04/22 15:51:50 $";
+static char *cvsrev = "@(#)$RCSfile: tditest.c,v $ $Revision: 1.5 $ $Date: 2003/09/24 08:44:24 $";
 
 static void tdiputs(char *line);
-
+#ifdef HAVE_VXWORKS_H
+int tditest(int argc, char **argv)
+#else
 int main(int argc, char **argv)
+#endif
 {
   FILE *in = stdin;
   int status;
