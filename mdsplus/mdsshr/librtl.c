@@ -402,7 +402,7 @@ int LibWait(float *secs)
 
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.47 $ $Date: 1999/05/03 19:46:55 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.48 $ $Date: 1999/05/04 21:47:26 $";
 #ifndef va_count
 #define  va_count(narg) va_start(incrmtr, first); \
                         for (narg=1; (narg < 256) && (va_arg(incrmtr, struct descriptor *) != MdsEND_ARG); narg++)
@@ -755,6 +755,11 @@ int libfreevm_(int *len, void **vm, ZoneList **zone)
   return(LibFreeVm(len, vm, zone));
 }
 
+int libfreevm(int *len, void **vm, ZoneList **zone)
+{
+  return(LibFreeVm(len, vm, zone));
+}
+
 int LibGetVm(int *len, void **vm, ZoneList **zone)
 {
   VmList *list = malloc(sizeof(VmList));
@@ -772,6 +777,11 @@ int LibGetVm(int *len, void **vm, ZoneList **zone)
 }
 
 int libgetvm_(int *len, void **vm, ZoneList **zone)
+{
+  return(LibGetVm(len, vm, zone));
+}
+
+int libgetvm(int *len, void **vm, ZoneList **zone)
 {
   return(LibGetVm(len, vm, zone));
 }
