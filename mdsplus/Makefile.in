@@ -1,4 +1,4 @@
-#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.21 $
+#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.22 $
 # @configure_input@
 SHELL=/bin/sh
 
@@ -34,6 +34,7 @@ PARTS = \
         wfevent \
         setevent \
 	rpm \
+        manpages \
         @D3D_PACKAGE@ \
         @JAVA_APS@ \
         @IDLSQL@ \
