@@ -37,7 +37,7 @@ int TreeDeleteNodeInitialize(NID *nid,int *count,reset)
 #include <string.h>
 #include <stdlib.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeDeleteNode.c,v $ $Revision: 1.7 $ $Date: 1998/07/29 15:11:09 $";
+static char *cvsrev = "@(#)$RCSfile: TreeDeleteNode.c,v $ $Revision: 1.8 $ $Date: 1998/07/29 19:23:24 $";
 
 extern void *DBID;
 
@@ -276,8 +276,10 @@ extern void       _TreeDeleteNodeExecute(void *dbid)
     node->usage = 0;
     if (prevnode)
     {
+      int tmp;
       link_it(prevnode->parent, node, prevnode);
-      node->child = -prevnode->parent;
+      tmp = -swapint((char *)&prevnode->parent);
+      node->child = swapint((char *)&tmp);
     }
     else
     {
