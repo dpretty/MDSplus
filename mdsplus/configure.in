@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.51 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.52 $
 AC_INIT()
 
 AC_CONFIG_HEADER(include/config.h)
@@ -236,9 +236,9 @@ fi
 
 dnl Check for Sybase
 AC_MSG_CHECKING(for SYBASE open/client)
-if test -r "/usr/local/sybase/lib/libsybdb.a"
+: ${SYBASE=/usr/local/sybase}
+if test -r "$SYBASE/lib/libsybdb.a" 
 then 
-        SYBASE="/usr/local/sybase"
         SYBASE_INC="-I$SYBASE/include"
         SYBASE_LIB="-L$SYBASE/lib $LD_LDARC -lsybdb $LD_LDSHARE"
         AC_MSG_RESULT(have sybase open/client)
