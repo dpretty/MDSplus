@@ -102,7 +102,9 @@ char *index(char *str, char c)
 
 static char *GetRegistry(char *where, char *pathname)
 {
-  HKEY regkey1,regkey2,regkey3;
+  HKEY regkey1=(HKEY)0;
+  HKEY regkey2=(HKEY)0;
+  HKEY regkey3=(HKEY)0;
   unsigned char *path = NULL;
   if ( (RegOpenKeyEx(where,"SOFTWARE",0,KEY_READ,&regkey1) == ERROR_SUCCESS) &&
        (RegOpenKeyEx(regkey1,"MIT",0,KEY_READ,&regkey2) == ERROR_SUCCESS) &&
@@ -124,9 +126,9 @@ static char *GetRegistry(char *where, char *pathname)
 	  }
     }
   }
-  RegCloseKey(regkey1);
-  RegCloseKey(regkey2);
-  RegCloseKey(regkey3);
+  if (regkey1) RegCloseKey(regkey1);
+  if (regkey2) RegCloseKey(regkey2);
+  if (regkey3) RegCloseKey(regkey3);
   return (char *)path;
 }
 
@@ -402,7 +404,7 @@ int LibWait(float *secs)
 
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.48 $ $Date: 1999/05/04 21:47:26 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.49 $ $Date: 1999/05/17 18:15:31 $";
 #ifndef va_count
 #define  va_count(narg) va_start(incrmtr, first); \
                         for (narg=1; (narg < 256) && (va_arg(incrmtr, struct descriptor *) != MdsEND_ARG); narg++)
