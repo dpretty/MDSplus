@@ -1,4 +1,4 @@
-/* $Id: SetupDataDialog.java,v 1.33 2002/07/26 10:55:59 manduchi Exp $ */
+/* $Id: SetupDataDialog.java,v 1.35 2002/09/03 13:27:30 manduchi Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;

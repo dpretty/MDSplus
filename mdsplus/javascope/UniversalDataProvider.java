@@ -1,4 +1,4 @@
-/* $Id: UniversalDataProvider.java,v 1.7 2002/07/26 10:56:00 manduchi Exp $ */
+/* $Id: UniversalDataProvider.java,v 1.16 2003/01/16 14:18:08 manduchi Exp $ */
 import java.io.*;
 import javax.swing.JFrame;
 import java.util.*;

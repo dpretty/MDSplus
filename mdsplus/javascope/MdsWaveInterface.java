@@ -1,4 +1,4 @@
-/* $Id: MdsWaveInterface.java,v 1.18 2002/07/26 10:55:58 manduchi Exp $ */
+/* $Id: MdsWaveInterface.java,v 1.22 2002/10/04 12:53:59 manduchi Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.util.*;

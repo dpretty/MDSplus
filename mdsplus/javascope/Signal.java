@@ -1,4 +1,4 @@
-/* $Id: Signal.java,v 1.18 2002/07/26 10:55:59 manduchi Exp $ */
+/* $Id: Signal.java,v 1.20 2002/09/03 13:27:30 manduchi Exp $ */
 import java.awt.Color;
 
 /**

@@ -1,4 +1,4 @@
-/* $Id: jScopeMultiWave.java,v 1.14 2002/07/26 10:56:03 manduchi Exp $ */
+/* $Id: jScopeMultiWave.java,v 1.16 2002/09/03 13:27:34 manduchi Exp $ */
 import java.awt.*;
 import java.util.*;
 import java.io.*;

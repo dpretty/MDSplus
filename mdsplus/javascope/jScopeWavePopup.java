@@ -1,4 +1,4 @@
-/* $Id: jScopeWavePopup.java,v 1.14 2002/07/26 10:56:03 manduchi Exp $ */
+/* $Id: jScopeWavePopup.java,v 1.18 2002/10/04 12:54:02 manduchi Exp $ */
 import java.awt.Point;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;

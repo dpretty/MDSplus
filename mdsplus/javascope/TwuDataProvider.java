@@ -8,7 +8,7 @@
 // this class (starting revision line 2.x) mainly in order to ensure that zooming
 // works in more situations. (See also the cvs log.)
 //
-// $Id: TwuDataProvider.java,v 2.9 2002/07/26 10:56:00 manduchi Exp $
+// $Id: TwuDataProvider.java,v 2.12 2002/09/04 14:11:26 manduchi Exp $
 // 
 // -------------------------------------------------------------------------------------------------
 
@@ -1392,7 +1392,7 @@ class TwuDataProvider
     public static String 
     revision()
     {
-        return "$Id: TwuDataProvider.java,v 2.9 2002/07/26 10:56:00 manduchi Exp $";
+        return "$Id: TwuDataProvider.java,v 2.12 2002/09/04 14:11:26 manduchi Exp $";
     }
 
     public TwuDataProvider(String user_agent)
@@ -1406,5 +1406,5 @@ class TwuDataProvider
 }
 
 // -------------------------------------------------------------------------------------------------
-// End of: $Id: TwuDataProvider.java,v 2.9 2002/07/26 10:56:00 manduchi Exp $
+// End of: $Id: TwuDataProvider.java,v 2.12 2002/09/04 14:11:26 manduchi Exp $
 // -------------------------------------------------------------------------------------------------

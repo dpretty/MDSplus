@@ -1,4 +1,4 @@
-/* $Id: jScopeProperties.java,v 1.5 2002/07/26 10:56:03 manduchi Exp $ */
+/* $Id: jScopeProperties.java,v 1.22 2003/08/08 12:35:42 manduchi Exp $ */
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;

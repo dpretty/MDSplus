@@ -1,4 +1,4 @@
-/* $Id: Frames.java,v 1.18 2002/07/26 10:55:56 manduchi Exp $ */
+/* $Id: Frames.java,v 1.22 2002/10/04 12:53:57 manduchi Exp $ */
 import java.awt.*;
 import java.io.*;
 import java.awt.image.*;

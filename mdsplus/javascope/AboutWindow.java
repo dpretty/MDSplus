@@ -1,4 +1,4 @@
-/* $Id: AboutWindow.java,v 1.9 2002/07/26 10:55:55 manduchi Exp $ */
+/* $Id: AboutWindow.java,v 1.11 2002/09/03 13:27:24 manduchi Exp $ */
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;

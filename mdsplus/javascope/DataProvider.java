@@ -1,4 +1,4 @@
-/* $Id: DataProvider.java,v 1.19 2002/07/26 10:55:56 manduchi Exp $ */
+/* $Id: DataProvider.java,v 1.28 2003/01/16 14:18:03 manduchi Exp $ */
 import java.io.IOException;
 import javax.swing.JFrame;
 

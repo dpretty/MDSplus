@@ -1,4 +1,4 @@
-/* $Id: jScopeDefaultValues.java,v 1.5 2002/07/26 10:56:03 manduchi Exp $ */
+/* $Id: jScopeDefaultValues.java,v 1.18 2003/05/16 08:12:36 manduchi Exp $ */
 class jScopeDefaultValues 
 {
    long	  shots[];

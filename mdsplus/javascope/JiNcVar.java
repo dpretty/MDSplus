@@ -1,4 +1,4 @@
-/* $Id: JiNcVar.java,v 1.4 2002/07/26 10:55:57 manduchi Exp $ */
+/* $Id: JiNcVar.java,v 1.21 2003/08/08 12:35:37 manduchi Exp $ */
 import java.io.*;
 import java.util.*;
 

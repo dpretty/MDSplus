@@ -1,4 +1,4 @@
-/* $Id: TSDataProvider.java,v 1.4 2002/07/26 10:56:00 manduchi Exp $ */
+/* $Id: TSDataProvider.java,v 1.11 2002/11/12 17:18:29 manduchi Exp $ */
 import java.util.*;
 import java.io.IOException;
 import javax.swing.JFrame;

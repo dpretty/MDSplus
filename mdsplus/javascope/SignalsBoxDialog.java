@@ -1,4 +1,4 @@
-/* $Id: SignalsBoxDialog.java,v 1.4 2002/07/26 10:56:00 manduchi Exp $ */
+/* $Id: SignalsBoxDialog.java,v 1.8 2002/10/04 12:54:00 manduchi Exp $ */
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;

@@ -1,4 +1,4 @@
-/* $Id: WaveformContainer.java,v 1.14 2002/07/26 10:56:02 manduchi Exp $ */
+/* $Id: WaveformContainer.java,v 1.18 2002/10/04 12:54:01 manduchi Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;

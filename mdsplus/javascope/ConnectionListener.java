@@ -1,5 +1,5 @@
 /**
- * $Id: ConnectionListener.java,v 1.4 2002/07/26 10:55:55 manduchi Exp $
+ * $Id: ConnectionListener.java,v 1.21 2003/08/08 12:35:34 manduchi Exp $
  *
  * Interface ConnectionListener describes method processConnectionEvent called by the DataProvider 
  * implementation to notify jScope of the current status of the data transfer. ConnectionListener objects

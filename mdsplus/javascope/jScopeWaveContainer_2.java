@@ -1,4 +1,4 @@
-/* $Id: jScopeWaveContainer_2.java,v 1.6 2002/07/26 10:56:03 manduchi Exp $ */
+/* $Id: jScopeWaveContainer_2.java,v 1.10 2002/10/04 12:54:02 manduchi Exp $ */
 import java.awt.*;
 import java.awt.print.*;
 

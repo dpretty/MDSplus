@@ -1,4 +1,4 @@
-/* $Id: WaveDisplay.java,v 1.10 2002/07/26 10:56:01 manduchi Exp $ */
+/* $Id: WaveDisplay.java,v 1.14 2002/10/04 12:54:01 manduchi Exp $ */
 import java.awt.*;
 import java.net.URL;
 import java.awt.event.*;

@@ -1,4 +1,4 @@
-/* $Id: WaveInterface.java,v 1.42 2002/07/26 10:56:01 manduchi Exp $ */
+/* $Id: WaveInterface.java,v 1.44 2002/09/03 13:27:32 manduchi Exp $ */
 import java.awt.*;
 import java.io.*;
 import java.awt.image.*;

@@ -1,4 +1,4 @@
-/* $Id: FrameData.java,v 1.4 2002/07/26 10:55:56 manduchi Exp $ */
+/* $Id: FrameData.java,v 1.14 2003/02/28 09:50:34 manduchi Exp $ */
 import java.awt.Dimension;
 import java.io.IOException;
 

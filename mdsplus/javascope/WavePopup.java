@@ -1,4 +1,4 @@
-/* $Id: WavePopup.java,v 1.12 2002/07/26 10:56:02 manduchi Exp $ */
+/* $Id: WavePopup.java,v 1.16 2002/10/04 12:54:01 manduchi Exp $ */
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;

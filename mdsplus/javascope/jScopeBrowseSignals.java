@@ -1,4 +1,4 @@
-/* $Id: jScopeBrowseSignals.java,v 1.16 2002/07/26 10:56:02 manduchi Exp $ */
+/* $Id: jScopeBrowseSignals.java,v 1.33 2003/08/08 12:35:42 manduchi Exp $ */
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.text.*;

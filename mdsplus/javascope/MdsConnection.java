@@ -1,4 +1,4 @@
-/* $Id: MdsConnection.java,v 1.10 2002/07/26 10:55:58 manduchi Exp $ */
+/* $Id: MdsConnection.java,v 1.19 2003/01/16 14:18:06 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.*;

@@ -1,4 +1,4 @@
-/* $Id: FontSelection.java,v 1.14 2002/07/26 10:55:56 manduchi Exp $ */
+/* $Id: FontSelection.java,v 1.18 2002/10/04 12:53:57 manduchi Exp $ */
 import java.lang.Integer;
 import java.awt.*;
 import java.awt.event.*;

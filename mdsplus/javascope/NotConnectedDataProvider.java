@@ -1,4 +1,4 @@
-/* $Id: NotConnectedDataProvider.java,v 1.3 2002/07/26 10:55:59 manduchi Exp $ */
+/* $Id: NotConnectedDataProvider.java,v 1.7 2002/10/04 12:53:59 manduchi Exp $ */
 import java.io.*;
 import javax.swing.JFrame;
 

@@ -1,4 +1,4 @@
-/* $Id: ProfileDialog.java,v 1.6 2002/07/26 10:55:59 manduchi Exp $ */
+/* $Id: ProfileDialog.java,v 1.16 2003/02/28 09:50:44 manduchi Exp $ */
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import java.awt.event.*;

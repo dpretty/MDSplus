@@ -1,4 +1,4 @@
-/* $Id: MdsDataClient.java,v 1.4 2002/07/26 10:55:58 manduchi Exp $ */
+/* $Id: MdsDataClient.java,v 1.18 2003/06/10 12:23:25 manduchi Exp $ */
 public class MdsDataClient
 {
     private MdsConnection mds;

@@ -1,4 +1,4 @@
-/* $Id: AsdexDataProvider.java,v 1.3 2002/07/26 10:55:55 manduchi Exp $ */
+/* $Id: AsdexDataProvider.java,v 1.12 2003/01/16 14:18:02 manduchi Exp $ */
 import java.util.*;
 import java.io.IOException;
 import javax.swing.JFrame;

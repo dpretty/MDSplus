@@ -1,4 +1,4 @@
-/* $Id: jScope_2.java,v 1.4 2002/07/26 10:56:03 manduchi Exp $ */
+/* $Id: jScope_2.java,v 1.8 2002/10/04 12:54:02 manduchi Exp $ */
 import java.awt.*;
 import java.lang.*;
 import java.util.*;

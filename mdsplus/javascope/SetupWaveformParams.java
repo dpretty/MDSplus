@@ -1,4 +1,4 @@
-/* $Id: SetupWaveformParams.java,v 1.3 2002/07/26 10:55:59 manduchi Exp $ */
+/* $Id: SetupWaveformParams.java,v 1.7 2002/10/04 12:54:00 manduchi Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.util.*;

@@ -1,4 +1,4 @@
-/* $Id: RowColumnContainer.java,v 1.9 2002/07/26 10:55:59 manduchi Exp $ */
+/* $Id: RowColumnContainer.java,v 1.20 2003/03/07 15:11:10 manduchi Exp $ */
 import java.awt.Panel;
 import java.awt.Component;
 import java.awt.Point;

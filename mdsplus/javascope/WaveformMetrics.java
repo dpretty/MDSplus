@@ -1,4 +1,4 @@
-/* $Id: WaveformMetrics.java,v 1.10 2002/07/26 10:56:02 manduchi Exp $ */
+/* $Id: WaveformMetrics.java,v 1.17 2002/11/12 17:18:30 manduchi Exp $ */
 import java.awt.*;
 import java.awt.image.*;
 import java.awt.event.*;

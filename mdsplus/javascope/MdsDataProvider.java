@@ -1,4 +1,4 @@
-/* $Id: MdsDataProvider.java,v 1.8 2002/07/26 10:55:58 manduchi Exp $ */
+/* $Id: MdsDataProvider.java,v 1.16 2002/11/22 14:44:04 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.*;

@@ -1,4 +1,4 @@
-/* $Id: WaveformManager.java,v 1.5 2002/07/26 10:56:02 manduchi Exp $ */
+/* $Id: WaveformManager.java,v 1.22 2003/08/08 12:35:42 manduchi Exp $ */
 import java.awt.Point;
 
 /**

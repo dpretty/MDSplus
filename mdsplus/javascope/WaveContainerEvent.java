@@ -1,4 +1,4 @@
-/* $Id: WaveContainerEvent.java,v 1.3 2002/07/26 10:56:01 manduchi Exp $ */
+/* $Id: WaveContainerEvent.java,v 1.20 2003/08/08 12:35:41 manduchi Exp $ */
 import java.awt.AWTEvent;
 import java.awt.Event;
 

@@ -1,4 +1,4 @@
-/* $Id: JiNcVarInt.java,v 1.5 2002/07/26 10:55:57 manduchi Exp $ */
+/* $Id: JiNcVarInt.java,v 1.22 2003/08/08 12:35:38 manduchi Exp $ */
 import java.io.IOException;
 import java.util.*;
 

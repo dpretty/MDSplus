@@ -1,4 +1,4 @@
-/* $Id: WaveformListener.java,v 1.3 2002/07/26 10:56:02 manduchi Exp $ */
+/* $Id: WaveformListener.java,v 1.20 2003/08/08 12:35:42 manduchi Exp $ */
 import java.util.EventListener;
 
 public interface WaveformListener extends EventListener 

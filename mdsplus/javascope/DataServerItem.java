@@ -1,4 +1,4 @@
-/* $Id: DataServerItem.java,v 1.5 2002/07/26 10:55:56 manduchi Exp $ */
+/* $Id: DataServerItem.java,v 1.13 2002/11/22 14:44:02 manduchi Exp $ */
 public class DataServerItem
 {
     String name;
