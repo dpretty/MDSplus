@@ -54,7 +54,7 @@ static int daylight = 0;
 #define LONG_LONG_CONSTANT(value) value##ll
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.65 $ $Date: 2002/11/05 15:34:05 $";
+static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.66 $ $Date: 2003/02/12 21:37:31 $";
 
 #ifdef min
 #undef min
@@ -306,7 +306,7 @@ static int CheckUsage(PINO_DATABASE *dblist, NID *nid_ptr, NCI *nci)
 
 static int FixupNid(NID *nid, unsigned char *tree, struct descriptor *path)
 {
-  int       status = 0;
+  int       status = 1;
   if (nid->tree != *tree)
   {
     char *path_c = TreeGetPath(*(int *)nid);
