@@ -5,7 +5,8 @@
 /*  CMS REPLACEMENT HISTORY, Element T.C */
 #include <ipdesc.h>
 #include <stdio.h>
-static char *cvsrev = "@(#)$RCSfile: t.c,v $ $Revision: 1.1 $ $Date: 2004/04/26 15:00:18 $";
+#include <stdlib.h>
+static char *cvsrev = "@(#)$RCSfile: t.c,v $ $Revision: 1.2 $ $Date: 2004/09/15 14:53:44 $";
 int main( int argc, void **argv)
 {
   int status;
@@ -24,7 +25,7 @@ int main( int argc, void **argv)
       val = val + (float)1.;
     }
     else
-      printf("%s\n",ans.ptr);
+      printf("%s\n",(char *)ans.ptr);
     if (ans.ptr) 
     {
       free(ans.ptr);
@@ -36,7 +37,7 @@ int main( int argc, void **argv)
     if (MdsValue(sock,"42.0",&ans,0) & 1)
       printf("%g\n",*(float *)ans.ptr);
     else
-      printf("%s\n",ans.ptr);
+      printf("%s\n",(char *)ans.ptr);
     if (ans.ptr) free(ans.ptr);
   }
   return 1;
