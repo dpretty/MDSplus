@@ -1,5 +1,5 @@
 #include <STATICdef.h>
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.58 $ $Date: 2004/01/30 13:29:57 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.59 $ $Date: 2004/03/17 18:41:47 $";
 
 #ifndef HAVE_VXWORKS_H
 #include <config.h>
@@ -640,7 +640,7 @@ STATIC_CONSTANT int zero = 0;
 #ifdef WORDS_BIGENDIAN
 STATIC_ROUTINE TREE_HEADER *HeaderOut(TREE_HEADER *hdr)
 {
-  TREE_HEADER ans = malloc(sizeof(TREE_HEADER));
+  TREE_HEADER *ans = (TREE_HEADER *)malloc(sizeof(TREE_HEADER));
   ((char *)ans)[1] = (char)((hdr->sort_children ? 1 : 0) | (hdr->sort_members ? 2 : 0));
   ans->free = swapint((char *)&hdr->free);
   ans->tags = swapint((char *)&hdr->tags);
