@@ -131,7 +131,7 @@ extern char *DescToNull ( struct descriptor_s *desc );
 #include <Xmds/XmdsExpr.h>
 #include <Xmds/XmdsExprField.h>
 #include <xmdsshr.h>
-static char *cvsrev = "@(#)$RCSfile: XmdsXdBox.c,v $ $Revision: 1.6 $ $Date: 1998/04/08 19:23:56 $";
+static char *cvsrev = "@(#)$RCSfile: XmdsXdBox.c,v $ $Revision: 1.7 $ $Date: 2000/09/14 20:31:03 $";
 
 extern int TdiCompile();
 /*------------------------------------------------------------------------------
@@ -1321,13 +1321,13 @@ struct descriptor_xd *TaskUnload(Widget w)
   Widget routine_widget = XtNameToWidget(w, "routine_box");
   XmdsXdBoxWidget method_widget = (XmdsXdBoxWidget) XtNameToWidget(w, "method_box");
 
-  if (XtIsManaged(expr_widget) || XtIsManaged(routine_widget) || XtIsManaged(method_widget))
+  if (XtIsManaged(expr_widget) || XtIsManaged(routine_widget) || XtIsManaged((Widget)method_widget))
   {
     if (XtIsManaged(expr_widget))
     {
       data = (struct descriptor_xd *)XmdsExprGetXd(expr_widget);
     }
-    else if (XtIsManaged(method_widget))
+    else if (XtIsManaged((Widget)method_widget))
     {
       int i;
       int nargs = 0;

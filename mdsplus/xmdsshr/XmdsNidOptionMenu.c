@@ -76,7 +76,7 @@ struct dsc$descriptor_xd *XmdsNidOptionMenuIdxGetXd(Widget w, int selected);
 #include <xmdsshr.h>
 #include <mds_stdarg.h>
 
-static char *cvsrev = "@(#)$RCSfile: XmdsNidOptionMenu.c,v $ $Revision: 1.4 $ $Date: 1998/04/08 19:23:50 $";
+static char *cvsrev = "@(#)$RCSfile: XmdsNidOptionMenu.c,v $ $Revision: 1.5 $ $Date: 2000/09/14 20:31:00 $";
 
 typedef struct _Resources
 {
@@ -153,7 +153,7 @@ Widget XmdsCreateNidOptionMenu(Widget parent,String name,ArgList args,Cardinal a
     arglist[2].value = info->nid_offset;
     arglist[3].value = info->put_on_apply;
     XmdsCreateXdBoxDialogButton(info->pulldown,"computed",arglist,XtNumber(arglist));
-    XmStringFree((unsigned char *) arglist[0].value);
+    XmStringFree((XmString) arglist[0].value);
   }
   XtVaGetValues(info->pulldown,XtNnumChildren,&num,XtNchildren,&children,NULL);
   XtManageChildren(children,num);

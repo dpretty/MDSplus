@@ -490,7 +490,7 @@ Widget XmdsCreateWaveform( parent, name, args, argcount )
 
  Local variables:                                                             */
 
-static char *cvsrev = "@(#)$RCSfile: XmdsWaveform.c,v $ $Revision: 1.5 $ $Date: 1998/09/15 19:17:11 $";
+static char *cvsrev = "@(#)$RCSfile: XmdsWaveform.c,v $ $Revision: 1.6 $ $Date: 2000/09/14 20:31:01 $";
 
 enum crosshairsmode
 {
@@ -824,7 +824,7 @@ static void Redisplay(XmdsWaveformWidget w,XExposeEvent *event)
     {
 */
       while (XCheckWindowEvent(XtDisplay(w),XtWindow(w),ExposureMask,(XEvent *) event));
-      if (XtIsRealized((Widget)w) && XtIsManaged(w))
+      if (XtIsRealized((Widget)w) && XtIsManaged((Widget)w))
       {
 	if (waveformPixmap(w) && !waveformRedraw(w))
 	  XCopyArea(XtDisplay(w),waveformPixmap(w),XtWindow(w),waveformPlotGC(w),0,0,XtWidth(w),XtHeight(w),0,0);
@@ -3313,6 +3313,6 @@ static void ForceUpdate(XmdsWaveformWidget w)
 {
   XEvent event;
   while (XCheckWindowEvent(XtDisplay(w),XtWindow(w),ExposureMask,&event));
-  if (XtIsRealized((Widget)w) && XtIsManaged(w))
+  if (XtIsRealized((Widget)w) && XtIsManaged((Widget)w))
     XClearArea(XtDisplay(w),XtWindow(w),0,0,0,0,TRUE);
 }

@@ -39,7 +39,7 @@
 #endif
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: ListTree.c,v $ $Revision: 1.7 $ $Date: 1998/04/10 13:40:37 $";
+static char *cvsrev = "@(#)$RCSfile: ListTree.c,v $ $Revision: 1.8 $ $Date: 2000/09/14 20:30:59 $";
 
 #ifdef DEBUG
 #include <stdlib.h>
@@ -423,9 +423,9 @@ InitializeScrollBars(ListTreeWidget w)
     w->list.mom = NULL;
   
   if(w->list.mom) {
-    char *name = XtMalloc(strlen(XtName(w))+4);
+    char *name = XtMalloc(strlen(XtName((Widget)w))+4);
     
-    strcpy(name,XtName(w));
+    strcpy(name,XtName((Widget)w));
     strcat(name,"HSB");
     w->list.hsb = XtVaCreateManagedWidget(name, 
       xmScrollBarWidgetClass,w->list.mom,
@@ -440,7 +440,7 @@ InitializeScrollBars(ListTreeWidget w)
     XtAddCallback(w->list.hsb, XmNtoTopCallback,HSBCallback,(XtPointer)w);
     XtAddCallback(w->list.hsb, XmNvalueChangedCallback,HSBCallback,(XtPointer)w);
     
-    strcpy(name,XtName(w));
+    strcpy(name,XtName((Widget)w));
     strcat(name,"VSB");
     w->list.vsb = XtVaCreateManagedWidget(name,
       xmScrollBarWidgetClass,XtParent(w),
@@ -561,7 +561,7 @@ Redisplay(Widget aw, XExposeEvent * event, Region region)
 {
   ListTreeWidget w = (ListTreeWidget) aw;
 
-  if (!XtIsRealized(w))
+  if (!XtIsRealized((Widget)w))
     return;
 
   if (event) {
@@ -748,7 +748,7 @@ HSBCallback(Widget scrollbar, XtPointer client_data, XtPointer call_data)
 static void
 Resize(ListTreeWidget w)
 {
-  if (!XtIsRealized(w))
+  if (!XtIsRealized((Widget)w))
     return;
 
   ResizeStuff(w);
