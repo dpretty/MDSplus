@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-static char *cvsrev = "@(#)$RCSfile: CamIosb.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:34:23 $";
+static char *cvsrev = "@(#)$RCSfile: CamIosb.c,v $ $Revision: 1.3 $ $Date: 1998/04/28 19:05:38 $";
 
 extern unsigned short RemCamLastIosb[4];
 
@@ -33,6 +33,7 @@ int CamQ(unsigned short *iosb_in)
 int CamGetStat(unsigned short *iosb_in)
 {
   memcpy(iosb_in,RemCamLastIosb,sizeof(RemCamLastIosb));
+  return 1;
 }
 
 int CamXandQ(unsigned short *iosb_in)
