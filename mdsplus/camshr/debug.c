@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: debug.c,v 1.1 2002/09/10 16:06:59 twf Exp $
+//	$Id: debug.c,v 1.2 2004/06/04 14:34:13 manduchi Exp $
 //-------------------------------------------------------------------------
 // Tue Mar 27 16:52:46 EST 2001
 // Fri Oct 26 15:24:28 EDT 2001	-- added version display
@@ -98,7 +98,7 @@ void _init()
 	CRATEdbFileIsMapped = FALSE;	// initial state [2002.01.03]
 
 	if( MSGLVL(0) ) {
-		pDIR = getenv("MDSPLUS");
+		pDIR = getenv("MDSPLUS_DIR");
 
 		while( !major_done ) {
 			sprintf(file, "%s/lib/%s.%d", pDIR, base, major);
