@@ -26,7 +26,7 @@
 #endif
 #define max(a,b) ((a) > (b) ? (a) : (b))
 
-static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.45 $ $Date: 1999/10/19 18:10:24 $";
+static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.46 $ $Date: 2000/01/18 17:26:06 $";
 
 #define node_to_node_number(node_ptr) node_ptr - dblist->tree_info->node
 #define __toupper(c) (((c) >= 'a' && (c) <= 'z') ? (c) & 0xDF : (c))
@@ -808,11 +808,13 @@ static int TreeWriteNci(TREE_INFO *info)
     int numnodes = info->header->nodes - info->edit->first_in_mem;
     int i;
     char nci_bytes[42];
-    for (i = 0; i < numnodes && (status & 1); i++)
+    int nbytes = sizeof(nci_bytes);
+    int offset;
+    for (i = 0,offset = info->edit->first_in_mem * nbytes; i < numnodes && (status & 1); i++,offset += nbytes)
     {
-      lseek(info->nci_file->put,(info->edit->first_in_mem + i) * sizeof(nci_bytes),SEEK_SET);
+      lseek(info->nci_file->put,offset,SEEK_SET);
       TreeSerializeNciOut(&info->edit->nci[i],nci_bytes);
-      status = (write(info->nci_file->put,nci_bytes,sizeof(nci_bytes)) == sizeof(nci_bytes)) ? TreeNORMAL : TreeFAILURE;
+      status = (write(info->nci_file->put,nci_bytes,nbytes) == nbytes) ? TreeNORMAL : TreeFAILURE;
       if (status & 1)
         info->edit->first_in_mem++;
     }
