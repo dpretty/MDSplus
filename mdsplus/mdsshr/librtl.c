@@ -16,7 +16,7 @@
 #include <math.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.136 $ $Date: 2003/12/18 16:04:43 $ $Name:  $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.137 $ $Date: 2004/03/19 15:26:18 $ $Name:  $";
 
 extern int MdsCopyDxXd();
 STATIC_ROUTINE char *GetTdiLogical(char *name);
@@ -830,6 +830,7 @@ int LibSpawn(struct descriptor *cmd, int waitflag, int notifyFlag)
     char  *arglist[4];
     char  *p;
     int i=0;
+    signal(SIGCHLD,SIG_DFL);
     arglist[0] = getenv("SHELL");
     if (arglist[0] == 0)
       arglist[0] = sh;
