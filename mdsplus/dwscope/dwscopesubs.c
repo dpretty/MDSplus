@@ -80,7 +80,7 @@
 extern int sys$filescan();
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: dwscopesubs.c,v $ $Revision: 1.5 $ $Date: 2002/05/31 19:07:17 $";
+static char *cvsrev = "@(#)$RCSfile: dwscopesubs.c,v $ $Revision: 1.6 $ $Date: 2002/09/06 19:10:12 $";
 
 extern int XmdsManageWindow();
 Boolean   ConvertSelectionToWave(Widget w, Atom result_type, unsigned long length, CutHeader *header, WaveInfo *info);
@@ -506,7 +506,7 @@ Boolean   ConvertWaveToSelection(Widget w, String prefix, WaveInfo *wave, Atom t
   }
   else if (target == XA_TARGETS)
   {
-    *type = XA_ATOM;
+    *type = target;
     *value = (String)XtMalloc(sizeof(Atom) * 4);
     ((Atom *) * value)[0] = XA_STRING;
     ((Atom *) * value)[1] = XA_DWSCOPE_PANEL;
