@@ -1,4 +1,4 @@
-/* $Id: jScopeWavePopup.java,v 1.28 2003/06/10 12:23:31 manduchi Exp $ */
+/* $Id: jScopeWavePopup.java,v 1.31 2003/08/08 12:35:43 manduchi Exp $ */
 import java.awt.Point;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -14,12 +14,13 @@ class jScopeWavePopup extends MultiWavePopup
 {
     private   SetupDataDialog setup_dialog;
     protected JMenuItem refresh, saveAsText;
-    protected JMenuItem  selectWave, profile_dialog;
+    protected JMenuItem  selectWave;
+    //profile_dialog;
     protected JSeparator sep1, sep3;
 
-    public jScopeWavePopup(SetupDataDialog setup_dialog)
+    public jScopeWavePopup(SetupDataDialog setup_dialog, ProfileDialog profDialog)
     {
-        super();
+        super(null, profDialog);
         setup.setText("Setup data source...");
 	    this.setup_dialog = setup_dialog;
         
@@ -57,7 +58,7 @@ class jScopeWavePopup extends MultiWavePopup
 	            }
 	        }
 	    );
-
+/*************
 	    profile_dialog = new JMenuItem("Show profile dialog");
 	    profile_dialog.addActionListener(new ActionListener()
 	        {
@@ -67,6 +68,7 @@ class jScopeWavePopup extends MultiWavePopup
 	            }
 	        }
 	    );
+**************/
 
     }
 
@@ -83,7 +85,7 @@ class jScopeWavePopup extends MultiWavePopup
        setup.setEnabled((setup_dialog != null));
        if(is_image)
 	   {
-           insert(profile_dialog, 3);
+           //insert(profile_dialog, 3);
        } else {
            insert(selectWave, 2);
 	       add(sep3);

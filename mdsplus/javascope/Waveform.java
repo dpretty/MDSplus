@@ -1,4 +1,4 @@
-/* $Id: Waveform.java,v 1.53 2003/06/12 16:02:50 manduchi Exp $ */
+/* $Id: Waveform.java,v 1.56 2003/08/08 12:35:42 manduchi Exp $ */
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -2207,11 +2207,14 @@ public class Waveform extends JComponent
 	            sendProfileEvent();
 	    }
 	    
-	    NotifyZoom(waveform_signal.xmin, 
-	               waveform_signal.xmax, 
-	               waveform_signal.ymin,
-	               waveform_signal.ymax, 
-                   update_timestamp);
+	    if(waveform_signal != null)
+	    {
+	        NotifyZoom(waveform_signal.xmin, 
+	                   waveform_signal.xmax, 
+	                   waveform_signal.ymin,
+	                   waveform_signal.ymax, 
+                       update_timestamp);
+        }
         
     }
     
@@ -2276,7 +2279,7 @@ public class Waveform extends JComponent
         waveform_listener.addElement(l);
    }
 
-    public synchronized void removeWaveformListener(ActionListener l) 
+    public synchronized void removeWaveformListener(WaveformListener l) 
     {
 	    if (l == null) {
 	        return;

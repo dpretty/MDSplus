@@ -1,4 +1,4 @@
-/* $Id: CompositeWaveDisplay.java,v 1.28 2003/06/10 12:23:20 manduchi Exp $ */
+/* $Id: CompositeWaveDisplay.java,v 1.29 2003/08/06 09:29:48 manduchi Exp $ */
 import java.applet.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -126,7 +126,7 @@ public class CompositeWaveDisplay extends JApplet implements WaveContainerListen
         setBackground(Color.lightGray);
         wave_container = new WaveformContainer();
         wave_container.addWaveContainerListener(this);
-        WavePopup wave_popup = new MultiWavePopup(new SetupWaveformParams(f, "Waveform Params"));
+        WavePopup wave_popup = new MultiWavePopup(new SetupWaveformParams(f, "Waveform Params"), new ProfileDialog(null, null));
         wave_container.setPopupMenu(wave_popup);
         wave_container.SetMode(Waveform.MODE_ZOOM);
                 
@@ -552,7 +552,7 @@ public class CompositeWaveDisplay extends JApplet implements WaveContainerListen
             {
                                        
                 wi.experiment = da.getExperiment();
-                wi.AddSignal(da.getSignal());
+                wi.AddSignal(da.getSignalName());
                 wi.setShotArray(da.getShot());
                                             
 	            wi.StartEvaluate();
