@@ -34,7 +34,7 @@
 #include <string.h>
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeAddTag.c,v $ $Revision: 1.5 $ $Date: 1998/07/29 15:22:26 $";
+static char *cvsrev = "@(#)$RCSfile: TreeAddTag.c,v $ $Revision: 1.6 $ $Date: 1998/07/29 15:24:26 $";
 
 extern void *DBID;
 
@@ -177,7 +177,7 @@ the tag name specified does not already exist.
 
   memcpy(tag_info.name,tag,sizeof(tag));
   tmp = node_ptr - dblist->tree_info->node;
-  tag_info.node_idx = swapint(tmp);
+  tag_info.node_idx = swapint((char *)&tmp);
   tag_info.tag_link = node_ptr->tag_link;
 
 /*******************************************************
