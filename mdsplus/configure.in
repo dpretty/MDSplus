@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.128 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.129 $
 AC_INIT()
 
 AC_CONFIG_HEADER(include/config.h)
@@ -58,7 +58,7 @@ IDL_BIN_SUF=""
 MDSVME=""
 
 CFLAGS="$CFLAGS $MEMCHK -I\$(top_srcdir)/include"
-FFLAGS="$FFLAGS -I\$(top_srcdir)/include"
+FFLAGS="$FFLAGS  -I\$(top_srcdir)/include"
 
 case "$exec_prefix" in
 NONE) : ${uiddir=/usr/lib/X11/uid};;
