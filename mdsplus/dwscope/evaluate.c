@@ -87,7 +87,7 @@ void CloseDataSources();
 # define _toupper(c)	(((c) >= 'a' && (c) <= 'z') ? (c) & 0xDF : (c))
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: evaluate.c,v $ $Revision: 1.6 $ $Date: 1998/08/14 16:19:44 $";
+static char *cvsrev = "@(#)$RCSfile: evaluate.c,v $ $Revision: 1.7 $ $Date: 1998/08/14 18:18:20 $";
 
 extern void EventUpdate(XtPointer client_data, int *source, XtInputId *id);
 
@@ -390,7 +390,7 @@ static Boolean Error(Boolean brief, String topic, String *error, struct descript
     topic_d.length = strlen(topic);
     topic_d.pointer = topic;
     TdiDebug(&get_messages,&messages MDS_END_ARG);
-    StrConcat(&messages,&topic_d,&lflf,&messages,0);
+    StrConcat(&messages,&topic_d,&lflf,&messages MDS_END_ARG);
     *error = memcpy(XtMalloc(messages.length+1),messages.pointer,messages.length);
     (*error)[messages.length]='\0';
     StrFree1Dx(&messages);
