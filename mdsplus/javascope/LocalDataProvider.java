@@ -1,4 +1,4 @@
-/* $Id: LocalDataProvider.java,v 1.25 2004/05/27 09:29:57 manduchi Exp $ */
+/* $Id: LocalDataProvider.java,v 1.26 2004/05/27 11:36:02 manduchi Exp $ */
 import javax.swing.JFrame;
 import java.io.IOException;
 import java.util.*;
@@ -47,16 +47,21 @@ public class LocalDataProvider extends MdsDataProvider implements DataProvider
 
     public synchronized float[] GetFloatArray(String in)  throws IOException
     {
-        in = "( _jscope_"+var_idx+" = ("+in+"), fs_float(_jscope_"+var_idx+"))";// "fs_float(("+in+"))";
+      //  in = "( _jscope_"+var_idx+" = ("+in+"), fs_float(_jscope_"+var_idx+"))";// "fs_float(("+in+"))";
         var_idx++;
         return GetFloatArrayNative(in);
     }
     public synchronized double[] GetDoubleArray(String in)  throws IOException
     {
-        in = "( _jscope_"+var_idx+" = ("+in+"), fs_float(_jscope_"+var_idx+"))";// "fs_float(("+in+"))";
+      //  in = "( _jscope_"+var_idx+" = ("+in+"), ft_float(_jscope_"+var_idx+"))";// "fs_float(("+in+"))";
         var_idx++;
         return GetDoubleArrayNative(in);
     }
+    public synchronized RealArray GetRealArray(String in)  throws IOException
+    {
+      return new RealArray(GetDoubleArray(in));
+    }
+
 
     native public float[] GetFloatArrayNative(String in);
     native public double[] GetDoubleArrayNative(String in);
