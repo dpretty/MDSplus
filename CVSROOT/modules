@@ -31,3 +31,4 @@ tdishr mdsplus/tdishr
 include mdsplus/include
 mdsshr mdsplus/mdsshr
 tditest mdsplus/tditest
+treeshr mdsplus/treeshr
