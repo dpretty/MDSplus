@@ -1,4 +1,4 @@
-/* $Id: MdsMessage.java,v 1.27 2004/04/16 12:13:39 manduchi Exp $ */
+/* $Id: MdsMessage.java,v 1.28 2005/02/18 08:04:41 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.*;
@@ -226,8 +226,12 @@ class MdsMessage extends Object
         int idx = 0;
 
         //ReadBuf(header_b, dis);
-        if(dis.read(header_b)== -1)
+
+/*
+        if(dis.read(header_b) == -1)
             throw(new IOException("Broken connection with mdsip server"));
+*/
+        dis.readFully(header_b);
 
         c_type = header_b[14];
         swap = ((c_type & BIG_ENDIAN_MASK) != BIG_ENDIAN_MASK);
