@@ -51,7 +51,7 @@
 #include <string.h>
 #include <librtl_messages.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiVar.c,v $ $Revision: 1.16 $ $Date: 2004/03/02 18:12:46 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiVar.c,v $ $Revision: 1.17 $ $Date: 2004/04/06 15:16:44 $";
 
 extern unsigned short OpcEquals, OpcEqualsFirst;
 extern unsigned short OpcFun;
@@ -473,7 +473,6 @@ block_type *private = (block_type *)&((TdiThreadStatic())->TdiVar_private);
 	Get name of function to do. Check its type.
 	******************************************/
 
-  LockTdiMutex(&lock,&lock_initialized);
 	status = TdiFindIdent(7, (struct descriptor_r *)ident_ptr, 0, &node_ptr, 0);
 	if (!(status & 1)) ;
 	else if ((formal_ptr = (struct descriptor_r *)node_ptr->xd.pointer) == 0
@@ -584,7 +583,6 @@ block_type *private = (block_type *)&((TdiThreadStatic())->TdiVar_private);
 	MdsFree1Dx(&tmp, NULL);
 	private->head = old_head;
 	*new_narg = old_narg;
-  UnlockTdiMutex(&lock);
 	return status;
 }
 /***************************************************************
