@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: KsM.c,v 1.8 2003/05/14 15:16:07 twf Exp $
+//	$Id: KsM.c,v 1.9 2004/11/17 16:02:42 manduchi Exp $
 //-------------------------------------------------------------------------
 // Mon Oct 15 16:35:42 EDT 2001	-- seperated out
 //-----------------------------------------------------------
@@ -48,7 +48,12 @@ static int KsMultiIo(
   if( MSGLVL(FUNCTION_NAME) )
     printf( "%s()\n", KM_ROUTINE_NAME );
   
-  sprintf(dev_name, "GK%c%d", Key.scsi_port, Key.scsi_address);
+
+
+  // sprintf(dev_name, "GK%c%d", Key.scsi_port, Key.scsi_address); 
+  sprintf(dev_name, "GK%c%d%0.2d", Key.scsi_port, Key.scsi_address, Key.crate);
+
+
   if( (scsiDevice = get_scsi_device_number( dev_name, &enhanced, &online )) < 0 ) {
     if( MSGLVL(IMPORTANT) )
       fprintf( stderr, "%s(): error -- no scsi device found for '%s'\n", KM_ROUTINE_NAME, dev_name );
