@@ -59,7 +59,7 @@ The expansion routine "xentry":
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 typedef ARRAY_COEFF(char, 1) array_coef;
 typedef RECORD(4) record_four;
-static char *cvsrev = "@(#)$RCSfile: MdsCompress.c,v $ $Revision: 1.11 $ $Date: 2000/03/16 21:57:40 $";
+static char *cvsrev = "@(#)$RCSfile: MdsCompress.c,v $ $Revision: 1.12 $ $Date: 2000/05/26 19:07:01 $";
 
   static unsigned short opcode = OpcDECOMPRESS;
   static record_four rec0 = {sizeof(opcode), DTYPE_FUNCTION, CLASS_R, (unsigned char *) &opcode, 4, 0, 0, 0, 0};
@@ -70,7 +70,7 @@ static char *cvsrev = "@(#)$RCSfile: MdsCompress.c,v $ $Revision: 1.11 $ $Date: 
 	The inner routine scans some classes and tries to compress arrays.
 	If successful returns 1, if unsuccessful returns NORMAL.
 */
-  int       compress(
+static  int       compress(
 		               struct descriptor *pcimage,
 		               struct descriptor *pcentry,
 		               int delta,
