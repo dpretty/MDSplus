@@ -133,7 +133,7 @@ extern struct yysvf yysvec[], *yybgin;
 #include <strroutines.h>
 #include <tdimessages.h>
 #include <treeshr.h>
-static char *cvsrev = "@(#)$RCSfile: TdiLex.c,v $ $Revision: 1.14 $ $Date: 1998/04/09 15:25:02 $";
+static char *cvsrev = "@(#)$RCSfile: TdiLex.c,v $ $Revision: 1.15 $ $Date: 1998/04/09 20:12:52 $";
 #ifdef WIN32
 #pragma warning (disable : 4013 4102 4035) /* LEX produces code with no forward declarations of yylook and yyback. Also has unreferenced label yyfussy. And two int functions: yyoutput and yyunput do not return a value.*/
 #endif
@@ -819,47 +819,47 @@ break;
 case 3:
 
 # line 714 "TdiLex.x"
-	{pos();  return	(TdiLexFloat(	yyleng, yytext, TdiYylvalPtr));}
+	{pos();  return	(TdiLexFloat(	yyleng, (unsigned char *)yytext, TdiYylvalPtr));}
 break;
 case 4:
 
 # line 716 "TdiLex.x"
-{pos(); return	(TdiLexFloat(	yyleng, yytext, TdiYylvalPtr));}
+{pos(); return	(TdiLexFloat(	yyleng, (unsigned char *)yytext, TdiYylvalPtr));}
 break;
 case 5:
 
 # line 718 "TdiLex.x"
-{pos();  return	(TdiLexInteger(	yyleng, yytext, TdiYylvalPtr));}
+{pos();  return	(TdiLexInteger(	yyleng, (unsigned char *)yytext, TdiYylvalPtr));}
 break;
 case 6:
 
 # line 720 "TdiLex.x"
-	{pos();  return	(TdiLexIdent(	yyleng, yytext, TdiYylvalPtr));}
+	{pos();  return	(TdiLexIdent(	yyleng, (unsigned char *)yytext, TdiYylvalPtr));}
 break;
 case 7:
 
 # line 722 "TdiLex.x"
-	{pos();  return	(TdiLexPath(	yyleng, yytext, TdiYylvalPtr));}
+	{pos();  return	(TdiLexPath(	yyleng, (unsigned char *)yytext, TdiYylvalPtr));}
 break;
 case 8:
 
 # line 724 "TdiLex.x"
-	{pos();  return	(TdiLexQuote(	yyleng, yytext, TdiYylvalPtr));}
+	{pos();  return	(TdiLexQuote(	yyleng, (unsigned char *)yytext, TdiYylvalPtr));}
 break;
 case 9:
 
 # line 726 "TdiLex.x"
-	{pos();  return	(TdiLexPoint(	yyleng, yytext, TdiYylvalPtr));}
+	{pos();  return	(TdiLexPoint(	yyleng, (unsigned char *)yytext, TdiYylvalPtr));}
 break;
 case 10:
 
 # line 728 "TdiLex.x"
-           {pos(); if      (TdiLexComment(      yyleng, yytext, TdiYylvalPtr)) return(LEX_ERROR);}
+           {pos(); if      (TdiLexComment(      yyleng, (unsigned char *)yytext, TdiYylvalPtr)) return(LEX_ERROR);}
 break;
 case 11:
 
 # line 730 "TdiLex.x"
-	{pos(); return	(TdiLexPunct(	yyleng, yytext, TdiYylvalPtr));}
+	{pos(); return	(TdiLexPunct(	yyleng, (unsigned char *)yytext, TdiYylvalPtr));}
 break;
 case -1:
 break;
