@@ -1,4 +1,4 @@
-/* $Id: WaveformContainer.java,v 1.31 2003/08/08 12:35:42 manduchi Exp $ */
+/* $Id: WaveformContainer.java,v 1.32 2003/11/07 10:18:37 manduchi Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -75,6 +75,7 @@ public class WaveformContainer extends RowColumnContainer implements WaveformMan
 		        int x = e.getX();
 		        int y = e.getY();
 		        
+		        
 		        if(wave_popup != null)
 		        {
 		            Point p = new Point();	
@@ -83,10 +84,10 @@ public class WaveformContainer extends RowColumnContainer implements WaveformMan
                     
                     if(wp_size.height == 0 || wp_size.width == 0)
                     {
-		                wave_popup.Show(w, x, y, 0, 0);
+                        wave_popup.Show(w, x, y, 0, 0);
                         wp_size = wave_popup.getSize();
                     }
-                    
+                 
 	                while(co != null)
 	                {
 	                    p.x += co.getLocation().x;

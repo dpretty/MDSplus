@@ -1,4 +1,4 @@
-/* $Id: Signal.java,v 1.35 2003/08/08 12:35:40 manduchi Exp $ */
+/* $Id: Signal.java,v 1.36 2003/11/07 10:18:36 manduchi Exp $ */
 import java.awt.Color;
 
 /**
@@ -906,8 +906,11 @@ public class Signal
         if(this.type == Signal.TYPE_1D)
             return;
 
-        curr_time_xy_plot = Float.NaN;
+        curr_time_xy_plot = Float.NaN;        
         curr_data_yt_plot = Float.NaN;
+        curr_time_xy_idx = -1;
+        curr_data_yt_idx = -1;
+
               
         switch(mode)
         {

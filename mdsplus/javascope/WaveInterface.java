@@ -1,4 +1,4 @@
-/* $Id: WaveInterface.java,v 1.62 2003/10/31 10:26:05 jgk Exp $ */
+/* $Id: WaveInterface.java,v 1.63 2003/11/07 10:18:36 manduchi Exp $ */
 import java.awt.*;
 import java.io.*;
 import java.awt.image.*;
@@ -995,7 +995,7 @@ public class WaveInterface
 		        evaluated[curr_wave] = true;
 		        signals[curr_wave] = GetSignal(curr_wave, (float)-HUGE, (float)HUGE);
 		        if(signals[curr_wave] == null)
-		        {
+		        {		            
 	                w_error[curr_wave] = curr_error;
 		            evaluated[curr_wave] = false;
 		        }
@@ -1337,9 +1337,9 @@ public class WaveInterface
                 curr_data = null;
             else
             {
-		        curr_data = wd.GetFloatData();	        
 	            xlabel = wd.GetXLabel();
 	            ylabel = wd.GetYLabel();
+		        curr_data = wd.GetFloatData();	        
 	        }
 	        
 	        if(dimension == 1)

@@ -1,4 +1,4 @@
-/* $Id: jScope.java,v 1.54 2003/10/31 15:00:35 jgk Exp $ */
+/* $Id: jScope.java,v 1.55 2003/11/07 10:18:37 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.List;
@@ -22,7 +22,7 @@ public class jScope extends JFrame implements ActionListener, ItemListener,
                              UpdateEventListener, ConnectionListener
 {
  
-   static final String VERSION = "jScope (version 7.2.7)";
+   static final String VERSION = "jScope (version 7.2.8)";
    static public boolean is_debug = false;
     
    public  static final int MAX_NUM_SHOT   = 30;

@@ -1,4 +1,4 @@
-/* $Id: MdsWaveInterface.java,v 1.35 2003/08/08 12:35:39 manduchi Exp $ */
+/* $Id: MdsWaveInterface.java,v 1.36 2003/11/07 10:18:36 manduchi Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.util.*;
@@ -590,7 +590,6 @@ class MdsWaveInterface extends WaveInterface
 	                if(error == null)
 		                EvaluateOthers();
 	            }
-
 	            //modified = (error != null);
             }
         } 

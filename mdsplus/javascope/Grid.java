@@ -1,4 +1,4 @@
-/* $Id: Grid.java,v 1.28 2003/08/08 12:35:37 manduchi Exp $ */
+/* $Id: Grid.java,v 1.29 2003/11/07 10:18:35 manduchi Exp $ */
 import java.awt.*;
 import java.awt.image.*;
 import java.awt.event.*;
@@ -181,7 +181,20 @@ private int BuildGrid(double val[], int mode, double xmax, double ymax, double x
 
     }
 
-    
+    public void updateValues(String x_label, String y_label, String title, 
+                             String error, int grid_step_x, int grid_step_y,
+	                         boolean int_xlabels, boolean int_ylabels, boolean reversed)
+    {
+        this.reversed = reversed;
+	    this.x_label = x_label;
+	    this.y_label = y_label;
+	    this.title = title;
+	    this.error = error;
+	    this.grid_step_x = grid_step_x;
+	    this.grid_step_y = grid_step_y;
+	    this.int_xlabels = int_xlabels;
+	    this.int_ylabels = int_ylabels;
+	}
     
     public void paint(Graphics g, Dimension d, Waveform w, WaveformMetrics wm)
     {
