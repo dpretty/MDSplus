@@ -31,6 +31,7 @@
 
 
 +-----------------------------------------------------------------------------*/
+#include <config.h>
 #ifdef _WIN32
 #include <windows.h>
 #include <io.h>
@@ -42,7 +43,7 @@
 #include "treeshrp.h"
 #include <ncidef.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.33 $ $Date: 2002/11/06 10:37:57 $";
+static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.34 $ $Date: 2004/08/24 18:54:23 $";
 
 extern void *DBID;
 

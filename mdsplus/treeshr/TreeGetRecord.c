@@ -1,3 +1,4 @@
+#include <config.h>
 #ifdef _WIN32
 #include <io.h>
 #endif
@@ -20,7 +21,7 @@
 
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.38 $ $Date: 2004/04/14 18:14:45 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.39 $ $Date: 2004/08/24 18:54:22 $";
 
 
 static int OpenDatafileR(TREE_INFO *info);

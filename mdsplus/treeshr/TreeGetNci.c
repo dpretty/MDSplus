@@ -1,3 +1,4 @@
+#include <config.h>
 #if defined(_WIN32)
 #include <io.h>
 #endif
@@ -20,7 +21,7 @@
 
 extern int StrFree1Dx();
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.49 $ $Date: 2002/11/05 15:34:05 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.50 $ $Date: 2004/08/24 18:54:21 $";
 
 #ifndef HAVE_VXWORKS_H
 #define min(a,b) (((a) < (b)) ? (a) : (b))

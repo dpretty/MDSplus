@@ -1,3 +1,4 @@
+#include <config.h>
 #include <stdlib.h>
 #include <string.h>
 #include <mdsdescrip.h>
@@ -44,7 +45,7 @@ extern char *index(char *str,char c);
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.74 $ $Date: 2004/04/30 17:24:23 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.75 $ $Date: 2004/08/24 18:54:22 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
