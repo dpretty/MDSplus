@@ -10,9 +10,13 @@
  * Authors: Jon Krom, H.R.Koslowski, 
  *          Forschungszentrum Jülich, Institut für Plasmaphysik.
  *
- * $Id: TWUSignal.java,v 1.5 2002/04/26 13:14:30 jgk Exp $
+ * $Id: TWUSignal.java,v 1.6 2002/04/26 14:00:35 jgk Exp $
  *
  * $Log: TWUSignal.java,v $
+ * Revision 1.6  2002/04/26 14:00:35  jgk
+ * Added an error reporting method, as suggested by
+ * Marco van de Giessen <A.P.M.vandeGiessen@phys.uu.nl>.
+ *
  * Revision 1.5  2002/04/26 13:14:30  jgk
  * Changed End-Of-Line marker from Windows- to CVS standard.
  * No code changes (or at least, not intentional :-) ).
@@ -42,6 +46,7 @@ public class TWUSignal
     private int            sampleCount  = 0;
     private int            samples2Read = 0;
     private boolean        finished     = false;
+    private boolean        error        = false;
 
     /* -------------------------------------------------------------------- */
     // Constructors (and related functions)
@@ -137,6 +142,7 @@ public class TWUSignal
     {
         try
         {
+            error = false ;
             StringBuffer bulk 
                 = new StringBuffer(twup.FQBulkName() + "?start=" + firstSample );
 
@@ -150,7 +156,7 @@ public class TWUSignal
             URLConnection con = bulkURL.openConnection();
 
             con.setRequestProperty("User-Agent",
-                                   "TWUSignal.java for jScope ($Revision: 1.5 $)");
+                                   "TWUSignal.java for jScope ($Revision: 1.6 $)");
             con.connect();
 
             instream = 
@@ -159,6 +165,7 @@ public class TWUSignal
         catch (Exception e) 
         {
             System.out.println("TWUSignal.prepareToRead :" + e);
+            error = true ;
         }
     }
 
@@ -169,6 +176,12 @@ public class TWUSignal
     complete()
     {
         return finished ;
+    }
+
+    public boolean
+    error()
+    { 
+	return error ;
     }
 
     public void
@@ -215,6 +228,7 @@ public class TWUSignal
         catch (Exception e) 
         {
             System.out.println("TWUSignal.tryToRead :" + e);
+	    error = true ;
         }
     }
 
@@ -244,10 +258,10 @@ public class TWUSignal
     public static String 
     revision()
     {
-        return "$Id: TWUSignal.java,v 1.5 2002/04/26 13:14:30 jgk Exp $";
+        return "$Id: TWUSignal.java,v 1.6 2002/04/26 14:00:35 jgk Exp $";
     }
 }
 
 /* ------------------------------------------------------------------------ */
-// $Id: TWUSignal.java,v 1.5 2002/04/26 13:14:30 jgk Exp $
+// $Id: TWUSignal.java,v 1.6 2002/04/26 14:00:35 jgk Exp $
 /* ------------------------------------------------------------------------ */
