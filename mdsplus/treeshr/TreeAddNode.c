@@ -22,7 +22,7 @@
 
 #define max(a,b) ((a) > (b) ? (a) : (b))
 
-static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.24 $ $Date: 1998/07/29 14:05:52 $";
+static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.25 $ $Date: 1998/07/29 14:06:50 $";
 
 #define node_to_node_number(node_ptr) node_ptr - dblist->tree_info->node
 #define __toupper(c) (((c) >= 'a' && (c) <= 'z') ? (c) & 0xDF : (c))
@@ -635,10 +635,10 @@ static TREE_HEADER *HeaderOut(TREE_HEADER *hdr)
   TREE_HEADER out = *hdr;
   char flags = (hdr->sort_children ? 1 : 0) | (hdr->sort_members ? 2 : 0);
   *(char *)&out = flags;
-  out.free = swapint(hdr->free);
-  out.tags = swapint(hdr->tags);
-  out.externals = swapint(hdr->externals);
-  out.nodes = swapint(hdr->nodes);
+  out.free = swapint((char *)&hdr->free);
+  out.tags = swapint((char *)&hdr->tags);
+  out.externals = swapint((char *)&hdr->externals);
+  out.nodes = swapint((char *)&hdr->nodes);
   return &out;
 }
 #endif
