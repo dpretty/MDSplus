@@ -64,7 +64,7 @@
 #include <mdsdescrip.h>
 #include <tdimessages.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiEq.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:06:02 $";
+static char *cvsrev = "@(#)$RCSfile: TdiEq.c,v $ $Revision: 1.3 $ $Date: 1999/02/18 19:46:25 $";
 
 extern int TdiBinary(  );
 #define OP_EQ 0 
@@ -140,7 +140,7 @@ break;
     l = longwords*i; \
     for (j=longwords-1;j>=0;j--) \
       if (!j || in1[s1 ? j : l+j] != in2[s2 ? j : l+j]) \
-        if (!(signed | (j != longwords-1))) \
+        if (!(signed) | !(j != longwords-1)) \
           {out[i] = (char)(in1[s1 ? j : l+j] op in2[s2 ? j : l+j]); break;} \
         else {i1 = (int *)(in1+(s1 ? j : l+j)), \
 	      i2 = (int *)(in2+(s2 ? j : l+j)); \
