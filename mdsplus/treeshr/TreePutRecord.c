@@ -59,7 +59,7 @@ static int timezone = 0;
 #define LONG_LONG_CONSTANT(value) value##ll
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.59 $ $Date: 2002/02/04 19:11:17 $";
+static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.60 $ $Date: 2002/02/11 20:15:19 $";
 
 #ifdef min
 #undef min
@@ -383,7 +383,6 @@ static int PutDatafile(TREE_INFO *info, int nodenum, NCI *nci_ptr, struct descri
     {
       unsigned short rlength = bytes_this_time + 10;
       eof = lseek(info->data_file->put,0,SEEK_END);
-      printf("eof = %ld\n",eof);
       bytes_to_put -= bytes_this_time;
       LoadShort(rlength,(char *)&info->data_file->record_header->rlength);
       status = (write(info->data_file->put,(void *) info->data_file->record_header,sizeof(RECORD_HEADER)) == sizeof(RECORD_HEADER))
