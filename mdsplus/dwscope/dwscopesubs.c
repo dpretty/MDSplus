@@ -80,7 +80,7 @@
 extern int sys$filescan();
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: dwscopesubs.c,v $ $Revision: 1.8 $ $Date: 2003/06/23 15:21:06 $";
+static char *cvsrev = "@(#)$RCSfile: dwscopesubs.c,v $ $Revision: 1.9 $ $Date: 2003/06/23 15:31:35 $";
 
 extern int XmdsManageWindow();
 Boolean   ConvertSelectionToWave(Widget w, Atom result_type, unsigned long length, CutHeader *header, WaveInfo *info);
@@ -485,8 +485,8 @@ Boolean   ConvertWaveToSelection(Widget w, String prefix, WaveInfo *wave, Atom t
     {
       *type = target;
       *value = (String)memcpy(XtMalloc(count * sizeof(float)),x->addr,count * sizeof(float));
-      *length = count * sizeof(float);
-      *format = 8;
+      *length = count;
+      *format = 8 * sizeof(float);
       status = 1;
     }
   }
@@ -499,8 +499,8 @@ Boolean   ConvertWaveToSelection(Widget w, String prefix, WaveInfo *wave, Atom t
     {
       *type = target;
       *value = (String)memcpy(XtMalloc(count * sizeof(float)),y->addr,count * sizeof(float));
-      *length = count * sizeof(float);
-      *format = 8;
+      *length = count;
+      *format = 8 * sizeof(float);
       status = 1;
     }
   }
