@@ -11,7 +11,7 @@
 // Most of this revision 2.x work has now, from 2.21 onwards, been moved into separate classes.
 // No new major revision number was started; has little use in CVS.
 //
-// $Id: TwuDataProvider.java,v 2.25 2003/07/10 15:52:05 jgk Exp $
+// $Id: TwuDataProvider.java,v 2.26 2003/07/22 12:56:54 jgk Exp $
 // 
 // -------------------------------------------------------------------------------------------------
 
@@ -124,8 +124,8 @@ class TwuDataProvider
             // Check if signal path is in the format
             //   //url_server_address/experiment/shotGroup/#####/signal_path
 
-            if(IsHashedURL(in))
-              return hashed2shot(in,shot);
+            if(TwuNameServices.isHashedURL(in))
+              return TwuNameServices.hashed2shot(in,shot);
 
             // If not, then it is of the old jScope internal format 
             //   url_server_address//group/signal_path
@@ -152,32 +152,6 @@ class TwuDataProvider
         in = in.toLowerCase();
         return (in.startsWith("http://") || in.startsWith("//") ) && in.indexOf("#")==-1 ;
     }
-
-    public static boolean IsHashedURL(String in)
-    { 
-        in = in.toLowerCase();
-        return in.startsWith("//") && in.indexOf("#")!=-1 ;
-        
-    }
-
-    public static String hashed2shot(String hashedURL, long shot)
-    { 
-        if (hashedURL==null )
-          return hashedURL;
-
-        final int hashfield = hashedURL.indexOf("#");
-            
-        if (hashfield ==-1 )
-          return hashedURL;
-        
-        String full_url = 
-            hashedURL.substring(0,hashfield) 
-            + shot 
-            + hashedURL.substring(hashedURL.lastIndexOf("#")+1);
-
-        return full_url ;
-    }
-        
 
     static 
     private String GetURLserver(String in)
@@ -582,7 +556,7 @@ class TwuDataProvider
     public static String 
     revision()
     {
-        return "$Id: TwuDataProvider.java,v 2.25 2003/07/10 15:52:05 jgk Exp $";
+        return "$Id: TwuDataProvider.java,v 2.26 2003/07/22 12:56:54 jgk Exp $";
     }
 
     public TwuDataProvider(String user_agent)
@@ -596,5 +570,5 @@ class TwuDataProvider
 }
 
 // -------------------------------------------------------------------------------------------------
-// End of: $Id: TwuDataProvider.java,v 2.25 2003/07/10 15:52:05 jgk Exp $
+// End of: $Id: TwuDataProvider.java,v 2.26 2003/07/22 12:56:54 jgk Exp $
 // -------------------------------------------------------------------------------------------------
