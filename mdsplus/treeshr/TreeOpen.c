@@ -17,7 +17,7 @@
 #define __toupper(c) (((c) >= 'a' && (c) <= 'z') ? (c) & 0xDF : (c))
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.21 $ $Date: 1998/04/08 18:51:38 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.22 $ $Date: 1998/04/10 18:55:57 $";
 
 int treeshr_errno = 0;
 
@@ -76,7 +76,7 @@ int _TreeOpen(void **dbid, char *tree_in, int shot_in, int read_only_flag)
 		{
 			if (((status = ConnectTree(*dblist, tree, 0, subtree_list)) == TreeNORMAL) ||
 			    (status == TreeNOTALLSUBS) ||
-			    ((status = ConnectTreeRemote(*dblist, tree, subtree_list)) == TreeNORMAL) ||
+			    ((status = ConnectTreeRemote(*dblist, tree, subtree_list, status)) == TreeNORMAL) ||
 			    (status == TreeNOTALLSUBS))
 			{
                                 if (db_slot_status == TreeNORMAL)
@@ -780,10 +780,8 @@ static int OpenTreefile(char *tree, int shot, TREE_INFO *info, int edit_flag, in
 		info->filespec=resnam;
 		*remote_file = info->channel == 0;
 	}
-	else if (errno == ENOENT)
+	else 
 		status = TreeFILE_NOT_FOUND;
-	else
-		status = TreeFAILURE;
 
 #else
 
