@@ -17,6 +17,8 @@
 #define __toupper(c) (((c) >= 'a' && (c) <= 'z') ? (c) & 0xDF : (c))
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.21 $ $Date: 1998/04/08 18:51:38 $";
+
 int treeshr_errno = 0;
 
 extern int MdsEventCan();

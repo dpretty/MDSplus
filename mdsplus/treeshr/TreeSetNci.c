@@ -51,6 +51,8 @@ extern RMS$_WER;
 #pragma extern_model restore
 #endif /* VMS */
 
+static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.6 $ $Date: 1998/04/08 18:51:40 $";
+
 extern void *DBID;
 
 int TreeSetNci(int nid, NCI_ITM *nci_itm_ptr) { return _TreeSetNci(DBID, nid, nci_itm_ptr);}

@@ -32,6 +32,8 @@
 #include "treeshrp.h"
 #include <stdlib.h>
 
+static char *cvsrev = "@(#)$RCSfile: TreeAddTag.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 18:51:33 $";
+
 extern void *DBID;
 
 #define min(a,b)  ( (a) <= (b) ? (a) : (b) )

@@ -10,6 +10,7 @@
 
 #include <stdlib.h>
 
+static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.13 $ $Date: 1998/04/08 18:51:37 $";
 
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 

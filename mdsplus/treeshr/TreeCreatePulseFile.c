@@ -37,6 +37,8 @@ int TreeCreatePulseFile(int shotid,int numnids, int *nids)
 #include "treeshrp.h"
 #include <ncidef.h>
 
+static char *cvsrev = "@(#)$RCSfile: TreeCreatePulseFile.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 18:51:34 $";
+
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 extern void *DBID;

@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+static char *cvsrev = "@(#)$RCSfile: TreeGetDbi.c,v $ $Revision: 1.5 $ $Date: 1998/04/08 18:51:36 $";
+
 extern void *DBID;
 #define min(a,b) (((a) < (b)) ? (a) : (b))
 int TreeGetDbi(struct dbi_itm *itmlst) {return _TreeGetDbi(DBID,itmlst);}

@@ -43,6 +43,8 @@
 #include <strroutines.h>
 #include <libroutines.h>
 
+static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.15 $ $Date: 1998/04/08 18:51:39 $";
+
 #define min(a,b) (((a) < (b)) ? (a) : (b))
 
 static int CheckUsage(PINO_DATABASE *dblist, NID *nid_ptr, NCI *nci);

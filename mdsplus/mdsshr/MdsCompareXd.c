@@ -30,6 +30,7 @@
 #include <mdsdescrip.h>
 #include <mdsshr.h>
 #include <string.h>
+static char *cvsrev = "@(#)$RCSfile: MdsCompareXd.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 18:46:34 $";
 
 int       MdsCompareXd(struct descriptor * dsc1_ptr, struct descriptor * dsc2_ptr)
 {

@@ -12,6 +12,7 @@
 #include <starlet.h>
 #endif
 
+static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.19 $ $Date: 1998/04/08 18:51:37 $";
 
 #define min(a,b) (((a) < (b)) ? (a) : (b))
 #define read_nci \

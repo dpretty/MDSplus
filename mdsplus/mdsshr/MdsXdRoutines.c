@@ -21,6 +21,7 @@
 #include <stdlib.h>
 #include <mdsshr.h>
 
+static char *cvsrev = "@(#)$RCSfile: MdsXdRoutines.c,v $ $Revision: 1.9 $ $Date: 1998/04/08 18:46:39 $";
 #define LibVM_FIRST_FIT      1
 #define LibVM_BOUNDARY_TAGS  1
 #define LibVM_EXTEND_AREA    32

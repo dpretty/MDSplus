@@ -57,7 +57,7 @@ The expansion routine "xentry":
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 typedef ARRAY_COEFF(char, 1) array_coef;
 typedef RECORD(4) record_four;
-
+static char *cvsrev = "@(#)$RCSfile: MdsCompress.c,v $ $Revision: 1.4 $ $Date: 1998/04/08 18:46:35 $";
 
   static unsigned short opcode = OpcDECOMPRESS;
   static record_four rec0 = {sizeof(opcode), DTYPE_FUNCTION, CLASS_R, (unsigned char *) &opcode, 4, 0, 0, 0, 0};

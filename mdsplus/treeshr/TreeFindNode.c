@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+static char *cvsrev = "@(#)$RCSfile: TreeFindNode.c,v $ $Revision: 1.13 $ $Date: 1998/04/08 18:51:35 $";
+
 extern void *DBID;
 
 #define min(a,b) (((a) < (b)) ? (a) : (b))
