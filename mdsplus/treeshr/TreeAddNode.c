@@ -22,7 +22,7 @@
 
 #define max(a,b) ((a) > (b) ? (a) : (b))
 
-static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.33 $ $Date: 1998/07/30 20:34:55 $";
+static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.34 $ $Date: 1998/07/30 20:37:27 $";
 
 #define node_to_node_number(node_ptr) node_ptr - dblist->tree_info->node
 #define __toupper(c) (((c) >= 'a' && (c) <= 'z') ? (c) & 0xDF : (c))
@@ -143,7 +143,7 @@ int       _TreeAddNode(void *dbid, char *name, int *nid_out, char usage)
 	    new_ptr->name[i]=' ';
           free(node_name);
 	  new_ptr->child = 0;
-	  new_ptr->conglomerate_elt = swapint((char *)conglom_index);
+	  new_ptr->conglomerate_elt = swapshort((char *)conglom_index);
 	  if (node_type == BROTHER_TYPE_NOWILD)
 	  {
 	    status = TreeInsertChild(parent, new_ptr, dblist->tree_info->header->sort_children);
