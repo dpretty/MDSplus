@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.102 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.103 $
 AC_INIT()
 
 AC_CONFIG_HEADER(include/config.h)
@@ -84,7 +84,7 @@ sparc-sun-solaris2*)
          LDARC="-Wl,-B,static";
          CFLAGS="$CFLAGS -fpic";
        else 
-         LINKSHARED="-G -B symbolic -R \\\$\$LD_LIBRARY_PATH:/usr/local/mdsplus/lib:\$(exec_prefix)/lib";
+         LINKSHARED="-G -R \\\$\$LD_LIBRARY_PATH:/usr/local/mdsplus/lib:\$(exec_prefix)/lib";
          LD_LDARC="-B static ";
          LD_LDSHARE="-B dynamic ";
          LDSHARE="-B dynamic";
