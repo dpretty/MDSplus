@@ -59,7 +59,7 @@ static int timezone = 0;
 #define LONG_LONG_CONSTANT(value) value##ll
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.58 $ $Date: 2002/02/04 17:54:38 $";
+static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.59 $ $Date: 2002/02/04 19:11:17 $";
 
 #ifdef min
 #undef min
@@ -471,14 +471,14 @@ static int UpdateDatafile(TREE_INFO *info, int nodenum, NCI *nci_ptr, struct des
 
 static int LockStart;
 static int LockSize;
-int TreeLockDatafile(TREE_INFO *info, int readonly, int offset)
+int TreeLockDatafile(TREE_INFO *info, int readonly, off_t offset)
 {
 	LockStart = offset >= 0 ? offset : _lseek(info->data_file->put,0,SEEK_END);
 	LockSize = offset >= 0 ? 12 : 0x7fffffff;
 	return LockFile((HANDLE)_get_osfhandle(readonly ? info->data_file->get : info->data_file->put), LockStart, 0,
 	   LockSize, 0) == 0 ? TreeFAILURE : TreeSUCCESS;
 }
-int TreeUnLockDatafile(TREE_INFO *info, int readonly, int offset)
+int TreeUnLockDatafile(TREE_INFO *info, int readonly, off_t offset)
 {
   return UnlockFile((HANDLE)_get_osfhandle(readonly ? info->data_file->get : info->data_file->put), LockStart, 0,
 	   LockSize, 0) == 0 ? TreeFAILURE : TreeSUCCESS;
