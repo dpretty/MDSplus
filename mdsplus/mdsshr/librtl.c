@@ -32,7 +32,7 @@ void __MB(){return;}
 #include <libroutines.h>
 #include <mds_stdarg.h>
 #include <librtl_messages.h>
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.29 $ $Date: 1998/07/31 13:44:46 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.30 $ $Date: 1998/07/31 13:47:06 $";
 #ifndef va_count
 #define  va_count(narg) va_start(incrmtr, first); \
                         for (narg=1; (narg < 256) && (va_arg(incrmtr, struct descriptor *) != MdsEND_ARG); narg++)
@@ -934,7 +934,7 @@ static void *dlopen(char *filename, int flags)
 void *dlsym(void *handle, char *name)
 {
   void *symbol = NULL;
-  int s = shl_findsym((shl_t *)&handle,name,0,&symbol_value);
+  int s = shl_findsym((shl_t *)&handle,name,0,&symbol);
   return symbol;
 }
 #endif
