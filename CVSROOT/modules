@@ -38,3 +38,4 @@ traverser mdsplus/traverser
 tdi	mdsplus/tdi
 trees   mdsplus/trees
 mdsplus mdsplus
+mitdevices mdsplus/mitdevices
