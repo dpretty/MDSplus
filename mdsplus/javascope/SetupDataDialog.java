@@ -1,4 +1,4 @@
-/* $Id: SetupDataDialog.java,v 1.45 2003/04/18 13:09:00 manduchi Exp $ */
+/* $Id: SetupDataDialog.java,v 1.46 2003/05/16 08:12:27 manduchi Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -1114,7 +1114,8 @@ import javax.swing.event.*;
       //wi = (MdsWaveInterface)wave.wi;
       wi = new MdsWaveInterface(wave, 
                                 ((MdsWaveInterface)wave.wi).dp, 
-                                ((MdsWaveInterface)wave.wi).def_vals);
+                                ((MdsWaveInterface)wave.wi).def_vals, 
+                                wave.wi.cache_enabled);
       wi.defaults = ((MdsWaveInterface)wave.wi).defaults;
       putWindowSetup((MdsWaveInterface)wave.wi);
       updateDataSetup();
@@ -1809,7 +1810,7 @@ import javax.swing.event.*;
             applyWaveform();
             if(ob == ok) 
             {
-                wave.removeWaveformListener(this);
+                //wave.removeWaveformListener(this);
                 setVisible(false);
                 signalList.reset();
             }

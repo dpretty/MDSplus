@@ -1,4 +1,4 @@
-/* $Id: UniversalDataProvider.java,v 1.19 2003/04/18 13:09:04 manduchi Exp $ */
+/* $Id: UniversalDataProvider.java,v 1.24 2003/08/08 12:35:41 manduchi Exp $ */
 import java.io.*;
 import javax.swing.JFrame;
 import java.util.*;
@@ -28,7 +28,7 @@ class UniversalDataProvider implements DataProvider
         jetmds = new JetMdsDataProvider();
         ts = new TSDataProvider();
         try {
-            ts.SetArgument("132.169.8.122:8000");
+            ts.SetArgument("132.169.8.164:8000");
         }catch(Exception exc){ts = null;}
         asd = new AsdexDataProvider();
         try {

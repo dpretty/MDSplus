@@ -1,4 +1,4 @@
-/* $Id: LocalDataProvider.java,v 1.18 2003/04/18 13:08:55 manduchi Exp $ */
+/* $Id: LocalDataProvider.java,v 1.19 2003/05/16 08:12:18 manduchi Exp $ */
 import javax.swing.JFrame;
 import java.io.IOException;
 
@@ -34,7 +34,7 @@ public class LocalDataProvider extends MdsDataProvider implements DataProvider
     public long[] GetShots(String in)  
     {
         try {
-            int []shots =  GetIntArray(in);
+            int shots[] =  GetIntArray(in.trim());
             long lshots[] = new long[shots.length];
             for(int i = 0; i < shots.length; i++)
                 lshots[i] = shots[i];
@@ -43,7 +43,8 @@ public class LocalDataProvider extends MdsDataProvider implements DataProvider
         {
             System.err.println("Errore in GetLongArray: " + exc);
             
-            return null;}
+            return null;
+        }
     }
 
     native public byte [] GetByteArray(String in);

@@ -1,4 +1,4 @@
-/* $Id: DataServerItem.java,v 1.17 2003/04/18 13:08:49 manduchi Exp $ */
+/* $Id: DataServerItem.java,v 1.22 2003/08/08 12:35:34 manduchi Exp $ */
 public class DataServerItem
 {
     String name;
@@ -9,6 +9,10 @@ public class DataServerItem
     String browse_url;
     boolean fast_network_access;
     String tunnel_port;
+    
+    boolean enable_cache = false;
+    boolean enable_compression = false;
+    
     
     public DataServerItem(String user)
     {
@@ -58,5 +62,4 @@ public class DataServerItem
     {
         return this.name.equals(name);
     }
-        
 }

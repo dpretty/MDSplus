@@ -1,4 +1,4 @@
-/* $Id: jScopeMultiWave.java,v 1.26 2003/04/18 13:09:06 manduchi Exp $ */
+/* $Id: jScopeMultiWave.java,v 1.27 2003/05/16 08:12:36 manduchi Exp $ */
 import java.awt.*;
 import java.util.*;
 import java.io.*;
@@ -16,10 +16,10 @@ public class jScopeMultiWave extends MultiWaveform implements UpdateEventListene
    // MdsWaveInterface wi;
    
     
-    public jScopeMultiWave(DataProvider dp, jScopeDefaultValues def_values)
+    public jScopeMultiWave(DataProvider dp, jScopeDefaultValues def_values, boolean cache_enabled)
     {
 	    super();
-	    wi = new MdsWaveInterface(this, dp, def_values);
+	    wi = new MdsWaveInterface(this, dp, def_values, cache_enabled);
     }
     
     public void processUpdateEvent(UpdateEvent e)
@@ -42,7 +42,11 @@ public class jScopeMultiWave extends MultiWaveform implements UpdateEventListene
         Thread p = new Thread() {
             public void run()
             {
-                ((MdsWaveInterface)wi).refresh();
+                MdsWaveInterface mwi = (MdsWaveInterface)wi;
+                boolean cache_state = mwi.cache_enabled;
+                mwi.cache_enabled = false;
+                mwi.refresh();
+                mwi.cache_enabled = cache_state;
                     
 	            SwingUtilities.invokeLater(new Runnable() {
 	                public void run() {
@@ -71,7 +75,7 @@ public class jScopeMultiWave extends MultiWaveform implements UpdateEventListene
         return er;
     }
     
-    public void jScopeWaveUpdate()
+    public synchronized void jScopeWaveUpdate()
     {
         String out_error;
         

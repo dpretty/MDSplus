@@ -1,4 +1,4 @@
-/* $Id: SignalCache.java,v 1.18 2003/04/18 13:09:04 manduchi Exp $ */
+/* $Id: SignalCache.java,v 1.23 2003/08/08 12:35:41 manduchi Exp $ */
 import java.security.*;
 import java.io.*;
 
@@ -109,7 +109,7 @@ public class SignalCache
                   expression.trim().toUpperCase()+
                   experiment.trim().toUpperCase()+shot;
     
-    if(isInCache(name)) return;
+//    if(isInCache(name)) return;
     
     if(cache_size > max_cache_size)
         purgeCache();

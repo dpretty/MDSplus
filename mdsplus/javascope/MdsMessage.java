@@ -1,4 +1,4 @@
-/* $Id: MdsMessage.java,v 1.21 2003/04/18 13:08:57 manduchi Exp $ */
+/* $Id: MdsMessage.java,v 1.23 2003/06/10 12:23:25 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.*;
@@ -108,7 +108,7 @@ class MdsMessage extends Object
         
         ReadBuf(b4, dis);
         bytes_to_read = ToInt(b4) - HEADER_SIZE;
-        
+                
         out = new byte[bytes_to_read];
         
         InflaterInputStream zis = new InflaterInputStream(dis);
@@ -133,6 +133,7 @@ class MdsMessage extends Object
         ConnectionEvent e;
         int bytes_to_read = buf.length, read_bytes = 0, curr_offset = 0;
         boolean send = false;
+                
         if(bytes_to_read > 2000)
         {
             send = true;
