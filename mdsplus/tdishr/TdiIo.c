@@ -14,8 +14,9 @@
 #include <libroutines.h>
 #include <strroutines.h>
 #include <mdsshr.h>
+#include <string.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiIo.c,v $ $Revision: 1.5 $ $Date: 1999/10/08 20:19:23 $";
+static char *cvsrev = "@(#)$RCSfile: TdiIo.c,v $ $Revision: 1.6 $ $Date: 2000/05/04 20:21:35 $";
 
 static struct descriptor_d EMPTY_D = {0,DTYPE_T,CLASS_D,0};
 static DESCRIPTOR(dNUL, "\0");
@@ -188,7 +189,7 @@ struct descriptor_d out = EMPTY_D;
 	if (narg > 1 && list[1] && status & 1) status = TdiText(list[1], &inp MDS_END_ARG);
 	if (narg > 2 && list[2] && status & 1) status = TdiText(list[2], &out MDS_END_ARG);
 	if (status & 1) {
-		stat1 = LibSpawn(&cmd, &inp, &out);
+		stat1 = LibSpawn(&cmd, 1, 0);
 		status = TdiPutLong((int *)&stat1, out_ptr);
 	}
 	return status;
