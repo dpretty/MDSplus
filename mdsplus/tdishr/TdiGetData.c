@@ -30,7 +30,7 @@
 #include <treeshr.h>
 #include <string.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiGetData.c,v $ $Revision: 1.4 $ $Date: 1998/04/08 19:06:04 $";
+static char *cvsrev = "@(#)$RCSfile: TdiGetData.c,v $ $Revision: 1.5 $ $Date: 1998/04/13 18:58:01 $";
 
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 

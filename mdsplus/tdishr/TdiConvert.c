@@ -6,7 +6,7 @@
 #include <stdio.h>
 #define MAXTYPE (DTYPE_FTC + 1)
 
-static char *cvsrev = "@(#)$RCSfile: TdiConvert.c,v $ $Revision: 1.6 $ $Date: 1998/04/08 19:05:56 $";
+static char *cvsrev = "@(#)$RCSfile: TdiConvert.c,v $ $Revision: 1.7 $ $Date: 1998/04/13 18:58:00 $";
 
 extern void CvtConvertFloat();
 extern int IsRoprand();

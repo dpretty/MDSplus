@@ -24,7 +24,7 @@
 #include <mds_stdarg.h>
 #include <string.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiDecompileDependency.c,v $ $Revision: 1.5 $ $Date: 1998/04/08 19:05:58 $";
+static char *cvsrev = "@(#)$RCSfile: TdiDecompileDependency.c,v $ $Revision: 1.6 $ $Date: 1998/04/13 18:58:01 $";
 
 static DESCRIPTOR(AND,		" & ");
 static DESCRIPTOR(OR,		" | ");
