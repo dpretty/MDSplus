@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: turn_crate_on_off_line.c,v 1.4 2003/09/05 19:47:23 twf Exp $
+//	$Id: turn_crate_on_off_line.c,v 1.5 2003/09/05 19:50:46 twf Exp $
 //-------------------------------------------------------------------------
 
 //-----------------------------------------------------------
@@ -67,7 +67,7 @@ int turn_crate_on_off_line( char *crate_name, int state )
 
 	pController = &controller[0];
 
-        if (CRATEdb[idx].HwyType != JORWAY_73A) {
+        if (CRATEdb[idx].HwyType != ('0'+JORWAY_73A)) {
 	  SCCdata = 1;					// initiates Dataway Z
 	  status = CamPiow(
 			   pController,		// serial crate controller name
