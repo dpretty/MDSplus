@@ -17,5 +17,5 @@
 #
 # For example:
 DEFAULT		(echo ""; whoami; echo %s; date; cat) >> $CVSROOT/CVSROOT/commitlog
-\/ipcs		mail -s %s meyer8@llnl.gov
+\/ipcs		mailx -s %s meyer8@llnl.gov
 ##
