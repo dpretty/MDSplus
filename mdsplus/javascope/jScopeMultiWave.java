@@ -1,4 +1,4 @@
-/* $Id: jScopeMultiWave.java,v 1.32 2003/08/08 12:35:42 manduchi Exp $ */
+/* $Id: jScopeMultiWave.java,v 1.33 2003/08/20 11:20:28 jgk Exp $ */
 import java.awt.*;
 import java.util.*;
 import java.io.*;
@@ -224,13 +224,13 @@ public class jScopeMultiWave extends MultiWaveform implements UpdateEventListene
             }
         }
 
-        // Hashed_URLs
+        // TWU Signal URLs
         // If the signal is a TWU URL, we would like it to be displayed as a URL.
         // I hope that this does not clash with other jScope codes.  If so, tell me!
         // J.G.Krom (Textor, Juelich, Germany) <J.Krom@fz-juelich.de>
 
-        if(TwuDataProvider.IsHashedURL(name))
-          s=TwuDataProvider.hashed2shot(name, wi.shots==null ? 0 : wi.shots[i]);
+        if ( TwuNameServices.catersFor( wi.dp ) )
+          s=TwuNameServices.legendString( wi, name, wi.shots==null ? 0 : wi.shots[i] );
 
         return s;
     }
