@@ -29,7 +29,7 @@
 */
 #include <config.h>
 #include <STATICdef.h>
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: MdsPk.c,v $ $Revision: 1.16 $ $Date: 2004/08/26 16:23:58 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: MdsPk.c,v $ $Revision: 1.17 $ $Date: 2004/08/26 16:42:43 $";
 STATIC_CONSTANT unsigned int masks[33] = {0,
 0x1, 0x3, 0x7, 0xf, 0x1f, 0x3f, 0x7f, 0xff,
 0x1ff, 0x3ff, 0x7ff, 0xfff, 0x1fff, 0x3fff, 0x7fff, 0xffff,
@@ -37,6 +37,9 @@ STATIC_CONSTANT unsigned int masks[33] = {0,
 0x1ffffff, 0x3ffffff, 0x7ffffff, 0xfffffff, 0x1fffffff, 0x3fffffff, 0x7fffffff, 0xffffffff,};
 #include  <string.h>
 #include <mdsdescrip.h>
+
+STATIC_ROUTINE int dummy(int in){return in;}
+
 STATIC_ROUTINE int SwapBytes(char *in_c)
 {
   int out;
@@ -98,7 +101,7 @@ void      MdsPk(signed char *nbits_ptr, int *nitems_ptr, int pack[], int items[]
 	hold |= *pitems << off;
 #ifdef WORDS_BIGENDIAN
 #ifdef __APPLE__
-        *ppack = hold;
+        *ppack = dummy(hold);
 #endif
         for (i=0;i<4;i++)
           ((char *)ppack)[i] = ((char *)&hold)[3-i];
@@ -120,7 +123,7 @@ void      MdsPk(signed char *nbits_ptr, int *nitems_ptr, int pack[], int items[]
       {
 #ifdef WORDS_BIGENDIAN
 #ifdef __APPLE__
-        *ppack = hold;
+        *ppack = dummy(hold);
 #endif
         for (i=0;i<4;i++)
           ((char *)ppack)[i] = ((char *)&hold)[3-i];
