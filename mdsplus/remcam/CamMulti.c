@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-static char *cvsrev = "@(#)$RCSfile: CamMulti.c,v $ $Revision: 1.9 $ $Date: 2003/03/04 15:25:50 $";
+static char *cvsrev = "@(#)$RCSfile: CamMulti.c,v $ $Revision: 1.10 $ $Date: 2003/03/06 21:16:12 $";
 
 #ifndef min
 #define min(a,b) ((a) < (b)) ? (a) : (b)
@@ -27,7 +27,7 @@ int locnam(char *name, int a, int f, int count, void *data, int mem, unsigned sh
 
 MakeMulti(CamFQrepw,FQrepw)
 MakeMulti(CamFQstopw,FQstopw)
-MakeMulti(CamFStopw,Fstopw)
+MakeMulti(CamFStopw,FStopw)
 MakeMulti(CamQrepw,Qrepw)
 MakeMulti(CamQscanw,Qscanw)
 MakeMulti(CamQstopw,Qstopw)
