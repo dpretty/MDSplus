@@ -1,4 +1,4 @@
-/* $Id: MdsDataProvider.java,v 1.31 2004/10/08 13:32:59 manduchi Exp $ */
+/* $Id: MdsDataProvider.java,v 1.32 2004/11/30 09:32:12 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.*;
@@ -1002,7 +1002,9 @@ public class MdsDataProvider implements DataProvider
         //To shot evaluation don't execute check
         //if a pulse file is open
         CheckConnection();
-        return GetLongArray(in);
+        try {
+          return GetLongArray(in);
+        }catch(Exception exc){return null;}
     }
 
 
