@@ -9,7 +9,7 @@
 #include <mds_stdarg.h>
 #include <librtl_messages.h>
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.62 $ $Date: 2000/05/09 16:06:44 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.63 $ $Date: 2000/05/15 17:56:36 $";
 
 extern int MdsCopyDxXd();
 
@@ -146,9 +146,26 @@ char *TranslateLogical(char *pathname)
 int LibSpawn(struct descriptor *cmd, int waitFlag, int notifyFlag)
 {
   char *cmd_c = MdsDescrToCstring(cmd);
-  int status = _spawnlp(waitFlag ? _P_WAIT : _P_NOWAIT, cmd_c, cmd_c, NULL);
+  int status;
+  char *arglist[255];
+  char *tok;
+  tok = strtok(cmd_c," ");
+  arglist[0] = (char *)6;
+  arglist[1] = (char *)(waitFlag ? _P_WAIT : _P_NOWAIT);
+  arglist[2] = "command";
+  arglist[3] = arglist[2];
+  arglist[4] = "/C";
+  arglist[5] = tok;
+  while ((tok = strtok(0," ")) != 0)
+  {
+	  if (strlen(tok) > 0)
+	    arglist[(int)(arglist[0]++)] = tok;
+  }
+  arglist[((int)arglist[0])] = (char *)0;
+  status = LibCallg(arglist,_spawnlp);
+  if (status != 0) perror("Error doing spawn"); 
   free(cmd_c);
-  return (status == 0);
+  return (status);
 }
 
 int LibWait(float *secs)
