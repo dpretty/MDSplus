@@ -1,4 +1,4 @@
-/* $Id: MdsDataProvider.java,v 1.32 2004/11/30 09:32:12 manduchi Exp $ */
+/* $Id: MdsDataProvider.java,v 1.33 2004/12/22 15:05:10 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.*;
@@ -350,18 +350,23 @@ public class MdsDataProvider implements DataProvider
 
         RealArray currXData = null;
 
-        public double[] GetXDoubleData() throws IOException
+        public double[] GetXDoubleData()
         {
-          if(currXData == null)
-            currXData = GetXRealData();
-          if(!currXData.isDouble()) return null;
-          return currXData.getDoubleArray();
+          try {
+            if (currXData == null)
+              currXData = GetXRealData();
+            if (!currXData.isDouble())
+              return null;
+            return currXData.getDoubleArray();
+          }catch(Exception exc){return null;}
         }
-        public float[] GetXData() throws IOException
+        public float[] GetXData()
         {
-          if (currXData == null)
-            currXData = GetXRealData();
-          return currXData.getFloatArray();
+          try {
+            if (currXData == null)
+              currXData = GetXRealData();
+            return currXData.getFloatArray();
+          }catch(Exception exc){return null;}
         }
 
 
@@ -1003,7 +1008,8 @@ public class MdsDataProvider implements DataProvider
         //if a pulse file is open
         CheckConnection();
         try {
-          return GetLongArray(in);
+
+         return GetLongArray(in);
         }catch(Exception exc){return null;}
     }
 
