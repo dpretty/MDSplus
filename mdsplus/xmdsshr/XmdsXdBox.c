@@ -131,7 +131,7 @@ extern char *DescToNull ( struct descriptor_s *desc );
 #include <Xmds/XmdsExpr.h>
 #include <Xmds/XmdsExprField.h>
 #include <xmdsshr.h>
-static char *cvsrev = "@(#)$RCSfile: XmdsXdBox.c,v $ $Revision: 1.10 $ $Date: 2002/05/29 14:43:39 $";
+static char *cvsrev = "@(#)$RCSfile: XmdsXdBox.c,v $ $Revision: 1.11 $ $Date: 2003/01/28 15:44:18 $";
 
 extern int TdiCompile();
 /*------------------------------------------------------------------------------
@@ -1666,7 +1666,7 @@ static void axis_change_type_proc(Widget w,int *tag)
 
 static int WidgetNameCmp(Widget w, char *string)
 {
-  return ((w->core.name == 0) || (w->core.name==(char *)0xffffff) || strcmp(w->core.name,"xd_box"));
+  return ((w->core.name == 0) || (w->core.name==(char *)0xffffff) || strcmp(w->core.name, string));
 }
 
 static void dispatch_change_type_proc(Widget w,int *tag)
