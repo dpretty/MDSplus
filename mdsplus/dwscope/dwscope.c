@@ -57,7 +57,7 @@ $ dwcope [-default setup]
 #include <DXm/DECspecific.h>
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: dwscope.c,v $ $Revision: 1.19 $ $Date: 2003/01/23 21:41:13 $";
+static char *cvsrev = "@(#)$RCSfile: dwscope.c,v $ $Revision: 1.20 $ $Date: 2003/04/26 02:22:53 $";
 
 extern void XmdsInitialize();
 extern void XmdsDestroyWidgetCallback();
@@ -2077,10 +2077,11 @@ static void /*XtActionProc*/Resize(Widget w, XEvent *event, String *params, Card
   int       r;
   double orig_height = XtHeight(Pane[0]);
   double new_height;
+  XEvent ev;
 
   /* flush the event que for resize events */
-  while (XCheckTypedWindowEvent(XtDisplay(w),XtWindow(w),event->type,(XEvent *) event));
-
+  while (XCheckTypedWindowEvent(XtDisplay(w),XtWindow(w),event->type, &ev))
+    event = &ev;
   if (!PreventResize)
   {
     for (c = 0; c < Columns; c++)
