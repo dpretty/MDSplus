@@ -19,7 +19,7 @@
 
 extern int StrFree1Dx();
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.45 $ $Date: 2002/03/28 20:25:11 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.46 $ $Date: 2002/04/09 12:45:59 $";
 
 #ifndef HAVE_VXWORKS_H
 #define min(a,b) (((a) < (b)) ? (a) : (b))
@@ -655,7 +655,7 @@ int TreeGetNciW(TREE_INFO *info, int node_num, NCI *nci)
 		  status = TreeLockNci(info,1,node_num);
 		  if (status & 1)
 		  {
-                    char nci_bytes[42];
+        char nci_bytes[42];
 		    MDS_IO_LSEEK(info->nci_file->get, node_num * sizeof(nci_bytes), SEEK_SET);
 		    status = MDS_IO_READ(info->nci_file->get,(void *)nci_bytes, sizeof(nci_bytes)) == sizeof(nci_bytes) ?
                       TreeSUCCESS : TreeFAILURE;
