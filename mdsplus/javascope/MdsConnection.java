@@ -1,4 +1,4 @@
-/* $Id: MdsConnection.java,v 1.32 2004/04/16 12:13:39 manduchi Exp $ */
+/* $Id: MdsConnection.java,v 1.33 2004/04/26 12:02:25 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.*;
@@ -226,12 +226,15 @@ public class MdsConnection
 		        break;
 	            case Descriptor.DTYPE_USHORT:
 	            case Descriptor.DTYPE_SHORT:
+                      /* ???? 26/04/2004
 		            short data[] = message.ToShortArray();
 		            out.int_data = new int[data.length];
 		            for(i = 0; i < data.length; i++)
 		                out.int_data[i] = (int)data[i];
 		            out.dtype = Descriptor.DTYPE_LONG;
-		        break;
+                      */
+                           out.short_data = message.ToShortArray();
+                     break;
 	            case Descriptor.DTYPE_LONG:
 		            out.int_data = message.ToIntArray();
 		        break;

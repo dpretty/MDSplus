@@ -1,4 +1,4 @@
-/* $Id: Descriptor.java,v 1.24 2004/04/16 12:13:39 manduchi Exp $ */
+/* $Id: Descriptor.java,v 1.25 2004/04/26 12:02:24 manduchi Exp $ */
 import java.io.*;
 
 class Descriptor
@@ -44,12 +44,14 @@ class Descriptor
         this.error = error;
     }
 
+/*
     public Descriptor(byte dtype, int dims[], byte byte_data[])
     {
         this.dtype = dtype;
         this.dims = dims;
         this.byte_data = byte_data;
     }
+*/
 
     public Descriptor(int dims[], byte byte_data[])
     {
@@ -57,6 +59,7 @@ class Descriptor
         this.dims = dims;
         this.byte_data = byte_data;
     }
+
 
     public Descriptor(int dims[], float float_data[])
     {
@@ -70,6 +73,13 @@ class Descriptor
         this.dtype = DTYPE_LONG;
         this.dims = dims;
         this.int_data = int_data;
+    }
+
+    public Descriptor(int dims[], short short_data[])
+    {
+        this.dtype = DTYPE_SHORT;
+        this.dims = dims;
+        this.short_data = short_data;
     }
 
     public Descriptor(int dims[], String strdata)
@@ -148,8 +158,9 @@ class Descriptor
                 else
                   return byte_data;
             case DTYPE_BYTE:
-              dos.close();
-              return byte_data;
+            case DTYPE_CHAR:
+                dos.close();
+                return byte_data;
             case DTYPE_USHORT :
             case DTYPE_SHORT :
               for(int i = 0; i < short_data.length; i++)
