@@ -1,4 +1,4 @@
-#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.46 $
+#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.47 $
 # @configure_input@
 prefix=@prefix@
 SHELL=/bin/sh
@@ -82,13 +82,13 @@ depend:
 	  cd $${dir}; make depend > /dev/null 2> /dev/null; cd $$cdir;\
 	done
 
-ChangeLog :
+CHANGELOG :
 	devscripts/MakeChangeLog
 
-Release:
+RELEASE:
 	devscripts/MakeRelease
 
-rpm :
+RPM :
 	devscripts/MakeRpm
 
 MISC_PARTS = tdi idl trees setup.sh setup.csh ChangeLog java LabView include
