@@ -1,4 +1,4 @@
-static char *cvsrev = "@(#)$RCSfile: main-uil.c,v $ $Revision: 1.9 $ $Date: 1998/04/01 17:35:59 $"; 
+static char *cvsrev = "@(#)$RCSfile: main-uil.c,v $ $Revision: 1.10 $ $Date: 1998/04/07 18:09:00 $"; 
 /*
  * README: Portions of this file are merged at file generation
  * time. Edits can be made *only* in between specified code blocks, look
@@ -167,7 +167,7 @@ int main(int argc, char **argv)
     MrmHierarchy HierarchyID;
     MrmType MrmWClass;
     static char *UidFile [] = { BX_UID_FILE_NAME };
-    MRMRegisterArg NamesList[35];
+    MRMRegisterArg NamesList[45];
     Cardinal Nlac;
     Nlac = 0;
     NamesList[Nlac].name = "CloseTree";
@@ -220,6 +220,10 @@ int main(int argc, char **argv)
     NamesList[Nlac++].value = (XtPointer) SetupDevice;
     NamesList[Nlac].name = "AddNode";
     NamesList[Nlac++].value = (XtPointer) AddNode;
+#ifdef __hpux
+    NamesList[Nlac].name = "AddListTree";
+    NamesList[Nlac++].value = (XtPointer) AddListTree;
+#endif
     NamesList[Nlac].name = "AddNodeApply";
     NamesList[Nlac++].value = (XtPointer) AddNodeApply;
     NamesList[Nlac].name = "AddNodeDismiss";
@@ -240,6 +244,10 @@ int main(int argc, char **argv)
     NamesList[Nlac++].value = (XtPointer) tag_button_proc;
     NamesList[Nlac].name = "tag_selection_proc";
     NamesList[Nlac++].value = (XtPointer) tag_selection_proc;
+#ifdef __hpux
+    NamesList[Nlac].name = "WriteTree";
+    NamesList[Nlac++].value = (XtPointer) WriteTree;
+#endif
     NamesList[Nlac].name = NULL;
     NamesList[Nlac].value = NULL;
     
