@@ -1,4 +1,4 @@
-/* $Id: WaveInterface.java,v 1.66 2004/10/08 13:32:59 manduchi Exp $ */
+/* $Id: WaveInterface.java,v 1.67 2005/03/21 14:36:05 manduchi Exp $ */
 import java.awt.*;
 import java.io.*;
 import java.awt.image.*;
@@ -742,7 +742,7 @@ public class WaveInterface
 	        return 0;
 	    }
 
-	    if(shots != null)
+	    if(shots != null && shots.length > 0)
 	    {
 	        int i = 0;
 	        do
