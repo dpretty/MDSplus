@@ -7,6 +7,7 @@
 #include <ctype.h>
 #ifdef _WIN32
 #include <io.h>
+extern char *index(char *str,char c);
 #else
 #include <unistd.h>
 #include <sys/mman.h>
@@ -32,7 +33,7 @@
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.50 $ $Date: 2000/11/30 21:22:13 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.51 $ $Date: 2000/12/01 15:11:07 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
