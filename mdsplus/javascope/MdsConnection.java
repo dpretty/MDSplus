@@ -1,4 +1,4 @@
-/* $Id: MdsConnection.java,v 1.19 2003/01/16 14:18:06 manduchi Exp $ */
+/* $Id: MdsConnection.java,v 1.20 2003/02/06 15:26:45 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.*;
@@ -90,7 +90,13 @@ public class MdsConnection
 	                } else {
                         //System.out.println("Ricevuto messaggio");
 	                    pending_count--;
-	                    message = curr_message;
+	                    
+	                    synchronized (this)
+	                    {
+	                        message = curr_message;
+	                        notify();
+	                    }
+	                    
 	                    curr_message = null;
 	                    if(pending_count == 0)
 	                        MdsConnection.this.NotifyMessage();
@@ -113,6 +119,10 @@ public class MdsConnection
 	    
 	    public synchronized MdsMessage GetMessage()
 	    {
+	       while(message == null)
+	        try {
+	                wait();
+	        }catch(InterruptedException exc){}
            MdsMessage msg = message;
            message = null;
 	       return msg;
@@ -200,9 +210,7 @@ public class MdsConnection
 	    Descriptor out = new Descriptor();
 	    int i;
 
-        try
-        {
-            wait();
+            //wait();//!!!!!!!!!!
             MdsMessage message = receiveThread.GetMessage();
 
 	        if(message == null || message.length == 0)
@@ -242,12 +250,7 @@ public class MdsConnection
 	            case Descriptor.DTYPE_DOUBLE:
 		            out.double_data = message.ToDoubleArray();
 		        break;
-	        }
 	    }
-        catch (InterruptedException e) 
-            {
-                out = new Descriptor("Could not get IO for "+provider + e);
-            }  
         return out;
     }
 
