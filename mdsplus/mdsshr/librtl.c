@@ -11,7 +11,7 @@
 #include <math.h>
 
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.110 $ $Date: 2002/09/12 14:04:34 $ $Name:  $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.111 $ $Date: 2002/09/12 14:10:42 $ $Name:  $";
 
 extern int MdsCopyDxXd();
 
@@ -2159,7 +2159,7 @@ char *MdsRelease()
     int major = 0;
     int minor = 0;
     int sub = 0;
-    int status = sscanf(tag,"$Name:  $",&major,&minor,&sub);
+    int status = sscanf(&tag[1],"Name: release-%d-%d-%d",&major,&minor,&sub);
     if (status == 0)
       strcpy(rel,"MDSplus, beta version");
     else if (status == 1)
