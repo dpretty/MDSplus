@@ -27,7 +27,7 @@
 	Pack Macro timings				3.25	3.50		3.40
 	Unpack Macro timings				3.01	3.07		3.02
 */
-static char *cvsrev = "@(#)$RCSfile: MdsPk.c,v $ $Revision: 1.10 $ $Date: 1998/07/27 19:10:41 $";
+static char *cvsrev = "@(#)$RCSfile: MdsPk.c,v $ $Revision: 1.11 $ $Date: 1998/07/27 19:21:58 $";
 static unsigned int masks[33] = {0,
 0x1, 0x3, 0x7, 0xf, 0x1f, 0x3f, 0x7f, 0xff,
 0x1ff, 0x3ff, 0x7ff, 0xfff, 0x1fff, 0x3fff, 0x7fff, 0xffff,
@@ -95,7 +95,7 @@ void      MdsPk(char *nbits_ptr, int *nitems_ptr, int pack[], int items[], int *
       {
 	hold |= *pitems << off;
 #ifdef _big_endian
-        for (i=0;i<3;i++)
+        for (i=0;i<4;i++)
           ((char *)ppack)[i] = ((char *)&hold)[3-i];
         ppack++;
 #else
@@ -114,7 +114,7 @@ void      MdsPk(char *nbits_ptr, int *nitems_ptr, int pack[], int items[], int *
       if (off >= test)
       {
 #ifdef _big_endian
-        for (i=0;i<3;i++)
+        for (i=0;i<4;i++)
           ((char *)ppack)[i] = ((char *)&hold)[3-i];
         ppack++;
 #else
@@ -129,7 +129,7 @@ void      MdsPk(char *nbits_ptr, int *nitems_ptr, int pack[], int items[], int *
   }
   if (off)
 #ifdef _big_endian
-    for (i=0;i<3;i++)
+    for (i=0;i<4;i++)
       ((char *)ppack)[i] = ((char *)&hold)[3-i];
 #else
     *ppack = hold;
