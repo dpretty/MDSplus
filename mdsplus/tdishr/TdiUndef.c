@@ -5,7 +5,7 @@
 
 #include <tdimessages.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiUndef.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:06:20 $";
+static char *cvsrev = "@(#)$RCSfile: TdiUndef.c,v $ $Revision: 1.3 $ $Date: 1999/10/08 20:19:23 $";
 
 int TdiON_ERROR=0;
 
@@ -38,7 +38,9 @@ UNDEF(Tdi1OnError)
 UNDEF(Tdi1Project)
 UNDEF(Tdi1Promote)
 UNDEF(Tdi1RandomSeed)
+     /*
 UNDEF(Tdi1Read)
+     */
 UNDEF(Tdi1Rebin)
 UNDEF(Tdi1Reshape)
 UNDEF(Tdi1Rewind)
