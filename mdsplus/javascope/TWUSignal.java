@@ -10,9 +10,13 @@
  * Authors: Jon Krom, H.R.Koslowski, 
  *          Forschungszentrum Jülich, Institut für Plasmaphysik.
  *
- * $Id: TWUSignal.java,v 1.8 2002/05/06 16:09:57 jgk Exp $
+ * $Id: TWUSignal.java,v 1.9 2002/06/05 15:00:08 jgk Exp $
  *
  * $Log: TWUSignal.java,v $
+ * Revision 1.9  2002/06/05 15:00:08  jgk
+ * Tell the server to close the connection after sending
+ * all the data.  This stops it "chunking" the data.
+ *
  * Revision 1.8  2002/05/06 16:09:57  jgk
  * Fiddles (sorry).
  *
@@ -162,7 +166,16 @@ public class TWUSignal
             URLConnection con = bulkURL.openConnection();
 
             con.setRequestProperty("User-Agent",
-                                   "TWUSignal.java for jScope ($Revision: 1.8 $)");
+                                   "TWUSignal.java for jScope ($Revision: 1.9 $)");
+
+            // It seems to be more efficient, for the type of data we have in the
+            // bulk files, to close the connection after the server has send all
+            // the data.  In that way HTTP/1.1 servers will not "chunk" the data.
+            // This chunking doubled the amounts to transfer and the de-chunking 
+            // on the client side took significant effort.
+
+            con.setRequestProperty("Connection", "close"); 
+
             con.connect();
 
             instream = 
@@ -266,10 +279,10 @@ public class TWUSignal
     public static String 
     revision()
     {
-        return "$Id: TWUSignal.java,v 1.8 2002/05/06 16:09:57 jgk Exp $";
+        return "$Id: TWUSignal.java,v 1.9 2002/06/05 15:00:08 jgk Exp $";
     }
 }
 
 /* ------------------------------------------------------------------------ */
-// $Id: TWUSignal.java,v 1.8 2002/05/06 16:09:57 jgk Exp $
+// $Id: TWUSignal.java,v 1.9 2002/06/05 15:00:08 jgk Exp $
 /* ------------------------------------------------------------------------ */
