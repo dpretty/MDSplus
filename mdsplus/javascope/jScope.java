@@ -1,4 +1,4 @@
-/* $Id: jScope.java,v 1.34 2002/04/26 13:14:30 jgk Exp $ */
+/* $Id: jScope.java,v 1.35 2002/06/05 15:39:07 twf Exp $ */
 import java.util.Properties;
 
 public class jScope
@@ -49,6 +49,5 @@ public class jScope
         
         win.num_scope++;
         win.startScope(file);
-        
     }
 }
