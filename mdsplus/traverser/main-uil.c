@@ -1,4 +1,4 @@
-static char *cvsrev = "@(#)$RCSfile: main-uil.c,v $ $Revision: 1.13 $ $Date: 1998/05/15 20:05:32 $"; 
+static char *cvsrev = "@(#)$RCSfile: main-uil.c,v $ $Revision: 1.14 $ $Date: 1999/09/14 15:55:05 $"; 
 /*
  * README: Portions of this file are merged at file generation
  * time. Edits can be made *only* in between specified code blocks, look
@@ -99,6 +99,7 @@ static XrmOptionDescRec options[] = {
 {"-bg",		"*background",		XrmoptionSepArg,	NULL},
 {"-borderwidth","*borderWidth",		XrmoptionSepArg,	NULL},
 {"-bordercolor","*borderColor",		XrmoptionSepArg,	NULL},
+{"-buttonfont","*buttonFontList",       XrmoptionSepArg,        NULL},
 {"-bw",		"*borderWidth",		XrmoptionSepArg,	NULL},
 {"-display",	".display",		XrmoptionSepArg,	NULL},
 {"-fg",		"*foreground",		XrmoptionSepArg,	NULL},
