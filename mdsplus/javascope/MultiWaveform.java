@@ -1,4 +1,4 @@
-/* $Id: MultiWaveform.java,v 1.46 2003/08/06 09:29:52 manduchi Exp $ */
+/* $Id: MultiWaveform.java,v 1.48 2003/08/08 12:35:39 manduchi Exp $ */
 import java.awt.*;
 import java.util.*;
 import java.io.*;
@@ -549,6 +549,13 @@ public class MultiWaveform extends Waveform
 	        if(frames != null)
 	            super.Update();
 	    }
+    }
+    
+    public void Update(Frames frames)
+    {
+        this.frames = frames;
+        this.is_image = true;
+        Update();
     }
     
     public void Update(Signal signals[])

@@ -1,4 +1,4 @@
-/* $Id: Frames.java,v 1.33 2003/08/06 09:29:49 manduchi Exp $ */
+/* $Id: Frames.java,v 1.35 2003/08/08 12:35:36 manduchi Exp $ */
 import java.awt.*;
 import java.io.*;
 import java.awt.image.*;
@@ -797,10 +797,11 @@ class Frames extends Canvas
     public Point getImagePoint(Point p, Dimension d)
     {
         Point p_out = new Point(0, 0);
-        Dimension fr_dim = getFrameSize(curr_frame_idx, d);
         
         if(curr_frame_idx != -1 && frame.size() != 0)
         {
+            Dimension fr_dim = getFrameSize(curr_frame_idx, d);
+  
             Dimension view_dim;
             Dimension dim;
             
