@@ -1,5 +1,5 @@
 #include <STATICdef.h>
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.57 $ $Date: 2004/01/05 15:53:31 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.58 $ $Date: 2004/01/30 13:29:57 $";
 
 #ifndef HAVE_VXWORKS_H
 #include <config.h>
@@ -476,7 +476,7 @@ int       TreeExpandNodes(PINO_DATABASE *db_ptr, int num_fixup, NODE ***fixup_no
 int _TreeAddConglom(void *dbid, char *path, char *congtype, int *nid)
 {
   PINO_DATABASE *dblist = (PINO_DATABASE *)dbid;
-  int       status;
+  int       status = 1;
   struct descriptor expdsc = {0, DTYPE_T, CLASS_S, 0};
   char exp[256];
   void *arglist[4] = {(void *)3};
