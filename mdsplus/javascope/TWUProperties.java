@@ -2,7 +2,7 @@
 /*
  * TWUProperties: Handling the Web-Umbrella Signal Properties.
  *
- * Copyright (c) 2002, J.G.krom, Forschungszentrum Jülich GmbH.
+ * Copyright (c) 2002...2003, J.G.krom, Forschungszentrum Juelich GmbH.
  * All rights reserved.
  * 
  * This class handles the properties 'file' as used in the TEC Web-Umbrella.
@@ -16,9 +16,9 @@
  * because it is also used in contexts where the handling of such exceptions 
  * is somewhat troublesome. (E.g. JVMs running implicitly by matlab.)
  *
- * Author: Jon Krom, Forschungszentrum Jülich, Institut für Plasmaphysik.
+ * Author: Jon Krom, Forschungszentrum Juelich, Institut fuer Plasmaphysik.
  *
- * $Id: TWUProperties.java,v 1.22 2003/03/14 15:53:49 jgk Exp $
+ * $Id: TWUProperties.java,v 1.23 2003/10/30 12:51:40 jgk Exp $
  *
  * ------------------------------------------------------------------------ 
  * Derived from (matlab-) WUProperties.java Revision 1.6 2002/02/26 hrk/jgk
@@ -51,7 +51,7 @@ public class TWUProperties
     {
         final String
             actual_user_agent = (user_agent!=null) ?  user_agent
-            : "TWUProperties.java for jScope ($Revision: 1.22 $)";
+            : "TWUProperties.java for jScope ($Revision: 1.23 $)";
         signalProps = new Properties();
 
         if (SigURL==null)
@@ -331,7 +331,7 @@ public class TWUProperties
     public static String 
     revision()
     {
-        return "$Id: TWUProperties.java,v 1.22 2003/03/14 15:53:49 jgk Exp $";
+        return "$Id: TWUProperties.java,v 1.23 2003/10/30 12:51:40 jgk Exp $";
     }
 
     public static void 
@@ -380,8 +380,9 @@ class FakeTWUProperties extends TWUProperties {
 
     signalProps.put ("Signal.Maximum", String.valueOf( (double)(len-1) ) );
   }
+    public boolean valid() {return true;}
 }
 
 /* ------------------------------------------------------------------------ */
-// End of $Id: TWUProperties.java,v 1.22 2003/03/14 15:53:49 jgk Exp $
+// End of $Id: TWUProperties.java,v 1.23 2003/10/30 12:51:40 jgk Exp $
 /* ------------------------------------------------------------------------ */
