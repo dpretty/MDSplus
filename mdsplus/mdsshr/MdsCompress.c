@@ -58,7 +58,7 @@ The expansion routine "xentry":
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 typedef ARRAY_COEFF(char, 1) array_coef;
 typedef RECORD(4) record_four;
-static char *cvsrev = "@(#)$RCSfile: MdsCompress.c,v $ $Revision: 1.7 $ $Date: 1999/05/18 18:20:43 $";
+static char *cvsrev = "@(#)$RCSfile: MdsCompress.c,v $ $Revision: 1.8 $ $Date: 1999/05/18 18:35:56 $";
 
   static unsigned short opcode = OpcDECOMPRESS;
   static record_four rec0 = {sizeof(opcode), DTYPE_FUNCTION, CLASS_R, (unsigned char *) &opcode, 4, 0, 0, 0, 0};
@@ -149,7 +149,7 @@ static char *cvsrev = "@(#)$RCSfile: MdsCompress.c,v $ $Revision: 1.7 $ $Date: 1
     **************************************************************/
       prec = (record_four *) align((long)((char *) pwork + sizeof(record_four)),sizeof(void *));
       pca1 = (array_coef *) ((char *) prec + sizeof(rec0));
-      pdat = (struct descriptor_a *) ((char *) pca1 + asize);
+      pdat = (struct descriptor_a *) align((long)((char *) pca1 + asize),sizeof(void *));
       pcmp = (char *) pdat + sizeof(struct descriptor_a);
       plim = porig->pointer + porig->arsize - sizeof(opcode);
       if (pcmp >= plim)
