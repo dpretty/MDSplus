@@ -1,5 +1,5 @@
 /* include/config.h.in.  Generated automatically from configure.in by autoheader.  */
-/* @(#)$RCSfile: config.h.in,v $ $Revision: 1.9 $ */
+/* @(#)$RCSfile: config.h.in,v $ $Revision: 1.10 $ */
 #ifndef _CONFIG_INCLUDED
 
 /* Define to empty if the keyword does not work.  */
@@ -156,6 +156,9 @@
 
 /* Define if you prefer to use named pipes over SysV msg */
 #undef USE_PIPED_MESSAGING
+
+/* Define if you are using SRB */
+#undef SRB
 
 /* Define if use need to use localtime instead of timezone and daylight */
 #undef USE_TM_GMTOFF
