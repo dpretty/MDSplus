@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetDbi.c,v $ $Revision: 1.5 $ $Date: 1998/04/08 18:51:36 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetDbi.c,v $ $Revision: 1.6 $ $Date: 1998/05/04 14:47:59 $";
 
 extern void *DBID;
 #define min(a,b) (((a) < (b)) ? (a) : (b))
@@ -110,7 +110,7 @@ int _TreeGetDbi(void *dbid, struct dbi_itm *itmlst)
 	    retlen = min((unsigned short)strlen(string), lst->buffer_length);
         strncpy((char *)lst->pointer,string,retlen);
         if (retlen < lst->buffer_length)
-          lst->pointer[retlen] = '\0';
+          ((char *)lst->pointer)[retlen] = '\0';
         free(string);
       }
       else
