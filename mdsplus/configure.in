@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.67 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.68 $
 AC_INIT()
 
 AC_CONFIG_HEADER(include/config.h)
@@ -115,7 +115,7 @@ alpha-dec-osf*) CFLAGS="$CFLAGS -pthread -ieee";
        LIBPATH="LIBPATH";
        MAKESHLIBDIR="\$(top_srcdir)/shlib/";
        EXPORTS_FILE="\$(EXPORTS)";
-       MAKESHARED="\$(LD) -o \$@ $LINKSHARED \$(OBJECTS) \$(LIBS)";
+       MAKESHARED="\$(LD) -o shared_library.o $LINKSHARED \$(OBJECTS) \$(LIBS); \$(AR) qv \$@ shared_library.o";
        SHARETYPE=".a";;
 *windows*)     CFLAGS="$CFLAGS";
        LDSHARE="";
