@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.129 $ $Date: 2003/09/11 15:30:32 $ $Name:  $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.130 $ $Date: 2003/09/25 12:03:57 $ $Name:  $";
 
 extern int MdsCopyDxXd();
 static char *GetTdiLogical(char *name);
@@ -233,7 +233,8 @@ char *TranslateLogical(char *pathname)
 	{
 	  path = GetRegistry((char *)HKEY_LOCAL_MACHINE, pathname);
           if (!path)
-            path = GetTdiLogical(char *pathname);
+           // path = GetTdiLogical(char *pathname);
+           path = GetTdiLogical(pathname);
 	}
 
 	return path;
