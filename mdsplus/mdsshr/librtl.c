@@ -9,7 +9,7 @@
 #include <mds_stdarg.h>
 #include <librtl_messages.h>
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.77 $ $Date: 2001/04/02 18:05:21 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.78 $ $Date: 2001/04/05 14:04:18 $";
 
 extern int MdsCopyDxXd();
 
@@ -1752,7 +1752,7 @@ unsigned short Crc(unsigned int len, unsigned char *bufptr)
     for (j=0;j<256;j++)
     {
       icrctb[j]=icrc1(j << 8);
-      rchr[j]=(uchar)(it[j & 0xF] << 4 | it[j >> 4]);
+      rchr[j]=(unsigned char)(it[j & 0xF] << 4 | it[j >> 4]);
     }
   }
   for (j=0;j<len;j++)
