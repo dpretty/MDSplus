@@ -1,3 +1,4 @@
+static char *cvsrev = "@(#)$RCSfile: ReadString.c,v $ $Revision: 1.4 $ $Date: 1998/04/01 17:35:57 $"; 
 #include <mdsdescrip.h>
 #include <mdsdescrip.h>
 #include <string.h>

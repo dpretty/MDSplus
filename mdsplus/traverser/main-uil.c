@@ -1,3 +1,4 @@
+static char *cvsrev = "@(#)$RCSfile: main-uil.c,v $ $Revision: 1.9 $ $Date: 1998/04/01 17:35:59 $"; 
 /*
  * README: Portions of this file are merged at file generation
  * time. Edits can be made *only* in between specified code blocks, look

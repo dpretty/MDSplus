@@ -1,3 +1,4 @@
+static char *cvsrev = "@(#)$RCSfile: bxutils-uil.c,v $ $Revision: 1.2 $ $Date: 1998/04/01 17:35:58 $"; 
 /*
  * WARNING: This file is overwritten at code generation time.
  * Any changes to this file will be lost.
