@@ -19,7 +19,7 @@
 
 extern int StrFree1Dx();
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.28 $ $Date: 1998/07/27 14:49:16 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.29 $ $Date: 1998/07/27 14:50:11 $";
 
 #define min(a,b) (((a) < (b)) ? (a) : (b))
 #define read_nci \
@@ -96,8 +96,8 @@ int _TreeGetNci(void *dbid, int nid_in, struct nci_itm *nci_itm)
 		  break_on_no_node;
 		  read_nci;
 		  set_retlen(sizeof(nci.time_inserted));
-                  ((int *)itm->pointer)[0] = swapint(nci.time_inserted[0]);
-                  ((int *)itm->pointer)[1] = swapint(nci.time_inserted[1]);
+                  ((int *)itm->pointer)[0] = swapint((char *)&nci.time_inserted[0]);
+                  ((int *)itm->pointer)[1] = swapint((char *)&nci.time_inserted[1]);
 		  break;
 	  case NciOWNER_ID:
 		  break_on_no_node;
