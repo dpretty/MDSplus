@@ -43,7 +43,7 @@ extern char *index(char *str,char c);
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.71 $ $Date: 2003/01/31 15:02:58 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.72 $ $Date: 2003/02/21 21:08:34 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
@@ -1256,6 +1256,7 @@ int       _TreeOpenNew(void **dbid, char *tree_in, int shot_in)
             info->edit->tag_info_pages = sizeof(TAG_INFO);
             info->external = malloc(512);
             info->edit->external_pages = 1;
+	    info->edit->first_in_mem = 0;
             info->header->version = 1;
             info->header->sort_children = 1;
             info->header->sort_members = 1;

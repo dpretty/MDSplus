@@ -4,7 +4,7 @@
 #include <treeshr.h>
 #include "treeshrp.h"
 
-static char *cvsrev = "@(#)$RCSfile: TreeFindNode.c,v $ $Revision: 1.28 $ $Date: 2001/07/13 14:50:15 $";
+static char *cvsrev = "@(#)$RCSfile: TreeFindNode.c,v $ $Revision: 1.29 $ $Date: 2003/02/21 21:08:34 $";
 
 extern void *DBID;
 
@@ -1245,6 +1245,7 @@ int TreeFindParent(PINO_DATABASE *dblist, char *path_ptr, NODE **node_ptrptr, ch
       *node_ptrptr = NULL;
     }
   }
+  if (ctx->string) free(ctx->string);
   return status;
 }
 
