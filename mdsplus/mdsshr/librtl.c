@@ -9,7 +9,7 @@
 #include <mds_stdarg.h>
 #include <librtl_messages.h>
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.93 $ $Date: 2001/10/03 16:34:08 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.94 $ $Date: 2001/10/03 19:11:13 $";
 
 extern int MdsCopyDxXd();
 
@@ -491,7 +491,10 @@ void pthread_lock_global_np()
 {
   if (!Initialized)
   {
-#if defined(PTHREAD_MUTEX_RECURSIVE) 
+#if !defined(PTHREAD_MUTEX_RECURSIVE)
+#define PTHREAD_MUTEX_RECURSIVE PTHREAD_MUTEX_RECURSIVE_NP
+#endif
+
     pthread_mutexattr_t m_attr;
     pthread_mutexattr_init(&m_attr);
 #ifdef HAVE_PTHREAD_MUTEXATTR_SETKIND_NP
@@ -500,9 +503,6 @@ void pthread_lock_global_np()
     pthread_mutexattr_settype(&m_attr,PTHREAD_MUTEX_RECURSIVE);
 #endif
     pthread_mutex_init(&GlobalMutex,&m_attr);
-#else 
-    pthread_mutex_init(&GlobalMutex,pthread_mutexattr_default);
-#endif
     Initialized = 1;
   }
 #ifdef ___DEBUG_IT
