@@ -4,7 +4,7 @@
 #include <treeshr.h>
 #include "treeshrp.h"
 
-static char *cvsrev = "@(#)$RCSfile: TreeFindNode.c,v $ $Revision: 1.22 $ $Date: 1999/08/25 14:51:49 $";
+static char *cvsrev = "@(#)$RCSfile: TreeFindNode.c,v $ $Revision: 1.23 $ $Date: 2000/02/15 16:27:45 $";
 
 extern void *DBID;
 
@@ -1020,7 +1020,7 @@ static char *AbsPath(void *dbid, char *inpath, int nid_in)
         strcpy(answer,"\\");
         strcat(answer,Treename(dblist,nid_in));
         strcat(answer,"::");
-        strcat(answer,pathptr);
+        strcat(answer,pathptr+1);
       }
     }
     else if (ctx[1].type == PARENT_TYPE)
