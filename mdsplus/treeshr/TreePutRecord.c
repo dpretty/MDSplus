@@ -54,7 +54,7 @@ static int daylight = 0;
 #define LONG_LONG_CONSTANT(value) value##ll
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.70 $ $Date: 2004/01/05 15:53:31 $";
+static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.71 $ $Date: 2004/04/30 17:25:01 $";
 
 #ifdef min
 #undef min
@@ -376,7 +376,7 @@ int TreeOpenDatafileW(TREE_INFO *info, int *stv_ptr, int tmpfile)
     TreeCallHook(OpenDataFileWrite, info,0);
   return status;
 }
-
+#define BUFFERED_IO
 #ifdef BUFFERED_IO
 static int PutDatafile(TREE_INFO *info, int nodenum, NCI *nci_ptr, struct descriptor_xd *data_dsc_ptr)
 {
