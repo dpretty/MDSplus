@@ -1,4 +1,4 @@
-/* $Id: Waveform.java,v 1.43 2002/11/06 13:49:57 manduchi Exp $ */
+/* $Id: Waveform.java,v 1.45 2002/11/22 14:44:07 manduchi Exp $ */
 import java.awt.*;
 import java.awt.image.*;
 import java.awt.event.*;
@@ -467,6 +467,23 @@ public class Waveform extends JComponent
         }
     }
     
+    
+    protected float convertX(int x)
+    {
+        Insets i = getInsets();
+        Dimension d = getWaveSize();
+        //return (float)wm.XValue(x - i.right, d);
+        return (float)wm.XValue(x, d);
+    }
+    
+    protected float convertY(int y)
+    {
+        Insets i = getInsets();
+        Dimension d = getWaveSize();
+        //return (float)wm.YValue(y - i.top, d);
+        return (float)wm.YValue(y, d);
+    }
+    
     public String  getIntervalPoints()
     {
         Dimension d = getWaveSize();
@@ -504,7 +521,7 @@ public class Waveform extends JComponent
     public boolean isSendProfile(){return send_profile;}
     
    
-    private void setMouse()
+    protected void setMouse()
     {
         final Waveform w = this;
        
