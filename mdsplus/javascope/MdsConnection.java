@@ -1,4 +1,4 @@
-/* $Id: MdsConnection.java,v 1.31 2003/12/18 15:40:37 manduchi Exp $ */
+/* $Id: MdsConnection.java,v 1.32 2004/04/16 12:13:39 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.*;
@@ -288,15 +288,12 @@ public class MdsConnection
                 cmd.append("$)");
             }
             sendArg(idx++, Descriptor.DTYPE_CSTRING, totalarg, null, cmd.toString().getBytes());
-
             Descriptor p;
-
             for(int i = 0; i < n_args; i++)
             {
                 p = (Descriptor) args.elementAt(i);
-                sendArg(idx++, p.dtype, totalarg, p.dims, p.byte_data);
+                sendArg(idx++, p.dtype, totalarg, p.dims, p.dataToByteArray());
             }
-
             pending_count++;
             if(wait)
                 out = getAnswer();
@@ -317,8 +314,8 @@ public class MdsConnection
                             byte body[]) throws IOException
     {
        MdsMessage msg = new MdsMessage( descr_idx, dtype,
-                                              nargs, dims,
-                                              body);
+                                        nargs, dims,
+                                        body);
        msg.Send(dos);
     }
 
