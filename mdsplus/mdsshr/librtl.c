@@ -9,7 +9,7 @@
 #include <mds_stdarg.h>
 #include <librtl_messages.h>
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.72 $ $Date: 2000/10/11 17:54:21 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.73 $ $Date: 2000/12/19 20:15:56 $";
 
 extern int MdsCopyDxXd();
 
@@ -100,7 +100,7 @@ struct dirent *readdir(DIR *dir)
 char *index(char *str, char c)
 {
 	int pos = strcspn(str,&c);
-	return (pos == 0) ? ((str[0] == c) ? str : 0) : &str[pos];
+  return (pos == 0) ? ((str[0] == c) ? str : 0) : ((pos == strlen(str)) ? 0 : &str[pos]);
 }
 
 static char *GetRegistry(char *where, char *pathname)
