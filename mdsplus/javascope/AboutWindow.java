@@ -1,4 +1,4 @@
-/* $Id: AboutWindow.java,v 1.13 2002/10/04 12:53:56 manduchi Exp $ */
+/* $Id: AboutWindow.java,v 1.20 2003/03/07 15:10:59 manduchi Exp $ */
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -13,7 +13,7 @@ public class AboutWindow extends JLabel  {
   {
     try
     {
-        String icon_file = jScope_1.findFileInClassPath("about_jscope.jpg");
+        String icon_file = jScope.findFileInClassPath("about_jscope.jpg");
         if(icon_file != null)
             io = new ImageIcon(icon_file);
         else

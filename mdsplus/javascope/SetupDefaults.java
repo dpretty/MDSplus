@@ -1,4 +1,4 @@
-/* $Id: SetupDefaults.java,v 1.25 2002/10/04 12:54:00 manduchi Exp $ */
+/* $Id: SetupDefaults.java,v 1.32 2003/03/07 15:11:11 manduchi Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.util.*;
@@ -17,7 +17,7 @@ public class SetupDefaults extends JDialog implements ActionListener
    JButton           ok, cancel, reset, erase, apply;
    JLabel            lab;
    
-   jScope_1 main_scope;
+   jScope main_scope;
    
    jScopeDefaultValues def_vals;
       
@@ -39,10 +39,9 @@ public class SetupDefaults extends JDialog implements ActionListener
    {
 
       super(fw, frame_title, true);
-//      super.setFont(new Font("Helvetica", Font.PLAIN, 10));    
       setModal(true);
       
-      main_scope = (jScope_1)fw;
+      main_scope = (jScope)fw;
       
 	  GetPropertiesValue();
   

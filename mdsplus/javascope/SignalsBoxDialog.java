@@ -1,4 +1,4 @@
-/* $Id: SignalsBoxDialog.java,v 1.8 2002/10/04 12:54:00 manduchi Exp $ */
+/* $Id: SignalsBoxDialog.java,v 1.21 2003/08/08 12:35:41 manduchi Exp $ */
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
@@ -9,14 +9,14 @@ import javax.swing.table.*;
 
 public class SignalsBoxDialog extends JDialog
 {  
-    jScope_1 scope;
+    jScope scope;
     JTable table;
     TableModel dataModel;
             
     SignalsBoxDialog(JFrame f, String title, boolean modal)
     {
         super(f, title, false);
-        scope = (jScope_1)f; 
+        scope = (jScope)f; 
         dataModel = new AbstractTableModel() 
         {
             public int getColumnCount() { return 2; }

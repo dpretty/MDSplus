@@ -1,4 +1,4 @@
-/* $Id: RdaAccess.java,v 1.11 2002/10/04 12:53:59 manduchi Exp $ */
+/* $Id: RdaAccess.java,v 1.16 2003/01/16 14:18:07 manduchi Exp $ */
 import java.util.*;
 import java.awt.*;
 import java.io.IOException;
@@ -11,6 +11,7 @@ public class RdaAccess implements DataAccess
     String experiment = null;
     JetDataProvider jp = null;
     String encoded_credentials;
+    int    login_status = DataProvider.LOGIN_CANCEL;
     
     class SignalInfo 
     {
@@ -57,12 +58,24 @@ public class RdaAccess implements DataAccess
             if(jp == null)
                 jp = new JetDataProvider();
             jp.setEvaluateUrl(true);
-            //jp.setUrlSource(protocol+"://"+addr+"/");
             jp.setUrlSource("http://"+addr+"/");
-            if(!jp.CheckPasswd(encoded_credentials))
-                throw(new IOException("Invalid autentication"));
             
-            ip_addr = addr;
+            if( ( encoded_credentials == null && login_status != DataProvider.LOGIN_OK) || 
+                ( ip_addr != null && !ip_addr.equals(addr)) )
+            {
+                encoded_credentials = new String();
+                login_status = jp.InquireCredentials(null, "");
+                if(login_status == DataProvider.LOGIN_OK)
+                    ip_addr = addr;
+                else
+                    ip_addr = null;
+            } 
+            else 
+            {
+                if(!jp.CheckPasswd(encoded_credentials))
+                    throw(new IOException("Invalid autentication"));
+                ip_addr = addr;
+            }    
         }
         
         return signal;

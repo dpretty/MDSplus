@@ -1,4 +1,4 @@
-/* $Id: WaveformEvent.java,v 1.15 2002/10/04 12:54:01 manduchi Exp $ */
+/* $Id: WaveformEvent.java,v 1.21 2003/02/28 09:51:11 manduchi Exp $ */
 import java.awt.AWTEvent;
 import java.awt.Event;
 
@@ -185,6 +185,6 @@ public class WaveformEvent extends AWTEvent
 		        }
 	        break;
 	    }
-	    return s;
+	    return (s == null ? "" : s);
     }
 }

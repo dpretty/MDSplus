@@ -1,4 +1,4 @@
-/* $Id: FontSelection.java,v 1.18 2002/10/04 12:53:57 manduchi Exp $ */
+/* $Id: FontSelection.java,v 1.21 2002/11/12 17:18:26 manduchi Exp $ */
 import java.lang.Integer;
 import java.awt.*;
 import java.awt.event.*;
@@ -19,7 +19,7 @@ public class FontSelection extends JDialog implements ActionListener, ItemListen
     String fontchoice = "fontchoice";
     int stChoice = 0;
     String siChoice = "10";
-    jScope_1 main_scope;
+    jScope main_scope;
     String envfonts[];
     String size_l[];
     String style_l[];
@@ -28,7 +28,7 @@ public class FontSelection extends JDialog implements ActionListener, ItemListen
     public FontSelection(Frame dw, String title) {
         super(dw, title, true);
         
-	    main_scope = (jScope_1)dw;
+	    main_scope = (jScope)dw;
 
         getContentPane().setLayout( new BorderLayout(5, 5) );
 

@@ -1,4 +1,4 @@
-/* $Id: MdsWaveInterface.java,v 1.22 2002/10/04 12:53:59 manduchi Exp $ */
+/* $Id: MdsWaveInterface.java,v 1.28 2003/02/28 09:50:44 manduchi Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.util.*;
@@ -212,7 +212,7 @@ class MdsWaveInterface extends WaveInterface
     
     if(c_shot_str != null)
     {
-        if(previous_shot.equals(c_shot_str))
+        if(previous_shot.equals(c_shot_str) && !previous_shot.equals("0"))
             return;
         previous_shot = new String(c_shot_str);
     }

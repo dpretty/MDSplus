@@ -1,4 +1,4 @@
-/* $Id: MdsMessage.java,v 1.13 2002/10/04 12:53:58 manduchi Exp $ */
+/* $Id: MdsMessage.java,v 1.21 2003/04/18 13:08:57 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.*;
@@ -90,7 +90,7 @@ class MdsMessage extends Object
         this.dims = new int[Descriptor.MAX_DIM];
         for(int i = 0; i < Descriptor.MAX_DIM; i++)
 	        //this.dims[i] = (dims == null || dims.length >= i) ? 0 : dims[i];
-	        this.dims[i] = (dims != null && i < dims.length) ? dims[i]:0;
+	        this.dims[i] = (dims != null && i < dims.length) ?  dims[i] : 0;
         this.dtype = dtype;
         client_type = JAVA_CLIENT;
         this.body = body;

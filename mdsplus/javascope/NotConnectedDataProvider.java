@@ -1,4 +1,4 @@
-/* $Id: NotConnectedDataProvider.java,v 1.7 2002/10/04 12:53:59 manduchi Exp $ */
+/* $Id: NotConnectedDataProvider.java,v 1.12 2003/01/16 14:18:07 manduchi Exp $ */
 import java.io.*;
 import javax.swing.JFrame;
 
@@ -28,7 +28,7 @@ class NotConnectedDataProvider implements DataProvider
     public void    Dispose(){}
     public boolean SupportsCompression(){return false;}
     public void    SetCompression(boolean state){}
-    public boolean SupportsContinuous() { return true; }
+    public boolean SupportsContinuous() { return false; }
     public int     InquireCredentials(JFrame f, String user){return DataProvider.LOGIN_OK;}
     public boolean SupportsFastNetwork(){return false;}
     public void    SetArgument(String arg){}
