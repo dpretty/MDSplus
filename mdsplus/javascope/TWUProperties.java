@@ -18,62 +18,12 @@
  *
  * Author: Jon Krom, Forschungszentrum Jülich, Institut für Plasmaphysik.
  *
- * $Id: TWUProperties.java,v 1.21 2003/03/14 15:43:08 jgk Exp $
+ * $Id: TWUProperties.java,v 1.22 2003/03/14 15:53:49 jgk Exp $
  *
  * ------------------------------------------------------------------------ 
- * $Log: TWUProperties.java,v $
- * Revision 1.21  2003/03/14 15:43:08  jgk
- * Some unimportant changes to the comment texts, in effect
- * going back to the situation of revision 1.17.
- *
- * Revision 1.20  2003/02/28 09:50:59  manduchi
- * New jScope version (7.2.2) supporting ssh tunneling
- *
- * Revision 1.19  2003/01/09 16:49:41  jgk
- * Another trivial change to test the CVS notification system.
- *
- * Revision 1.18  2003/01/09 14:35:58  jgk
- * Some trivial changes to test the CVS notification system.
- *
- * Revision 1.17  2002/11/28 11:56:51  jgk
- * Some unimportant changes to the comment texts, in effect
- * going back to the situation of revision 1.13.
- *
- * Revision 1.16  2002/11/12 17:18:29  manduchi
- * Added support for waveform editing
- *
- * Revision 1.13  2002/09/20 12:37:08  jgk
- * Factored-out the (nested) class TwuFetchOptions in to its own source file.
- * Clarified a minor naming convention: Classes with names starting with TWU
- * are written such that they are not strongly bound to jScope, but can also
- * be used by other java based TEC Web-Umbrella clients.
- *
- * Revision 1.12  2002/09/04 14:11:25  manduchi
- * Fixed porting to jdk1.4
- *
- * Revision 1.8  2002/05/27 13:49:51  jgk
- * Suggestion from Marco: NaN for min/max when the're no proper values.
- *
- * Revision 1.7  2002/05/24 08:55:19  jgk
- * A bit more robust when faced with HTTP servers that do not provide
- * a mime_type.   Assume it to be text/html in these cases (like most
- * browsers seem to do).
- *
- * Revision 1.6  2002/05/07 11:24:31  jgk
- * Improvement to the Units() method.
- *
- * Revision 1.5  2002/05/06 16:02:05  jgk
- * Suggested by  Marco van de Giessen <A.P.M.vandeGiessen@phys.uu.nl>:
- * - equalsIgnoreCase() is more generally useful than equals().
- * - A faked properties page can sometimes be useful.
- *
- * Revision 1.4  2002/04/26 11:42:38  jgk
- * Changed End-Of-Line marker from Windows- to CVS standard.
- *
- * Revision 1.3  2002/04/24 09:06:17  manduchi
- * Added Asdex Data Provider
- *
  * Derived from (matlab-) WUProperties.java Revision 1.6 2002/02/26 hrk/jgk
+ * I removed the automatic CVS log from this file; it can be read
+ * directly from the CVS repository with "cvs log".
  */
 /* ------------------------------------------------------------------------ */
 
@@ -101,7 +51,7 @@ public class TWUProperties
     {
         final String
             actual_user_agent = (user_agent!=null) ?  user_agent
-            : "TWUProperties.java for jScope ($Revision: 1.21 $)";
+            : "TWUProperties.java for jScope ($Revision: 1.22 $)";
         signalProps = new Properties();
 
         if (SigURL==null)
@@ -381,7 +331,7 @@ public class TWUProperties
     public static String 
     revision()
     {
-        return "$Id: TWUProperties.java,v 1.21 2003/03/14 15:43:08 jgk Exp $";
+        return "$Id: TWUProperties.java,v 1.22 2003/03/14 15:53:49 jgk Exp $";
     }
 
     public static void 
@@ -433,5 +383,5 @@ class FakeTWUProperties extends TWUProperties {
 }
 
 /* ------------------------------------------------------------------------ */
-// End of $Id: TWUProperties.java,v 1.21 2003/03/14 15:43:08 jgk Exp $
+// End of $Id: TWUProperties.java,v 1.22 2003/03/14 15:53:49 jgk Exp $
 /* ------------------------------------------------------------------------ */
