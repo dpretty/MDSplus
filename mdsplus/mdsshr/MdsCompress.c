@@ -58,7 +58,7 @@ The expansion routine "xentry":
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 typedef ARRAY_COEFF(char, 1) array_coef;
 typedef RECORD(4) record_four;
-static char *cvsrev = "@(#)$RCSfile: MdsCompress.c,v $ $Revision: 1.6 $ $Date: 1999/05/17 17:55:52 $";
+static char *cvsrev = "@(#)$RCSfile: MdsCompress.c,v $ $Revision: 1.7 $ $Date: 1999/05/18 18:20:43 $";
 
   static unsigned short opcode = OpcDECOMPRESS;
   static record_four rec0 = {sizeof(opcode), DTYPE_FUNCTION, CLASS_R, (unsigned char *) &opcode, 4, 0, 0, 0, 0};
@@ -80,6 +80,7 @@ static char *cvsrev = "@(#)$RCSfile: MdsCompress.c,v $ $Revision: 1.6 $ $Date: 1
               status = 1;
   int       bit = 0,
               asize,
+              asize_rec,
               nitems,
               (*symbol) ();
   char     *pcmp,
@@ -146,7 +147,7 @@ static char *cvsrev = "@(#)$RCSfile: MdsCompress.c,v $ $Revision: 1.6 $ $Date: 1
     Second is dummy for expansion function.
     ASSUME compressor fails gracefully and only changes *pdat data.
     **************************************************************/
-      prec = (record_four *) ((char *) pwork + asize);
+      prec = (record_four *) align((long)((char *) pwork + sizeof(record_four)),sizeof(void *));
       pca1 = (array_coef *) ((char *) prec + sizeof(rec0));
       pdat = (struct descriptor_a *) ((char *) pca1 + asize);
       pcmp = (char *) pdat + sizeof(struct descriptor_a);
