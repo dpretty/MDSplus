@@ -39,7 +39,7 @@
 #endif
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: ListTree.c,v $ $Revision: 1.8 $ $Date: 2000/09/14 20:30:59 $";
+static char *cvsrev = "@(#)$RCSfile: ListTree.c,v $ $Revision: 1.9 $ $Date: 2002/03/07 17:15:24 $";
 
 #ifdef DEBUG
 #include <stdlib.h>
@@ -517,7 +517,7 @@ Initialize(Widget request, Widget tnew, ArgList args, Cardinal * num)
   w->list.HasFocus=False;
 
   w->list.timer_id = (XtIntervalId) 0;
-  w->list.multi_click_time = XtGetMultiClickTime(XtDisplay((Widget) w));
+  w->list.multi_click_time = XtGetMultiClickTime(XtDisplay((Widget) w))*2;
 
   w->list.hsb = w->list.vsb=NULL;
   w->list.hsbPos=0;
