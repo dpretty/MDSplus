@@ -42,7 +42,7 @@
 #include "tdirefstandard.h"
 #include "tdinelements.h"
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiGetNci.c,v $ $Revision: 1.22 $ $Date: 2003/11/17 21:21:21 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiGetNci.c,v $ $Revision: 1.23 $ $Date: 2004/04/02 19:11:58 $";
 
 extern unsigned short OpcVector;
 
@@ -105,7 +105,7 @@ STATIC_CONSTANT struct item {
 {"PATH",		0,			0,			NciPATH,		DTYPE_T,	0},
 {"PATH_REFERENCE",	NciM_PATH_REFERENCE,	NciM_PATH_REFERENCE,	NciGET_FLAGS,		DTYPE_BU,	1},
 {"RECORD",		0,			0,			RECORDIDX,		DTYPE_L,	0},
-{"RFA",			0,			0,			NciRFA,		DTYPE_L,	4},
+{"RFA",			0,			0,			NciRFA,		DTYPE_Q,	8},
 {"RLENGTH",		0,			0,			NciRLENGTH,		DTYPE_L,	4},
 {"SETUP_INFORMATION",	NciM_SETUP_INFORMATION,NciM_SETUP_INFORMATION,NciGET_FLAGS,		DTYPE_BU,	1},
 {"STATE",		NciM_STATE,		NciM_STATE,		NciGET_FLAGS,		DTYPE_BU,	1},
