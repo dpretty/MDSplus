@@ -9,7 +9,7 @@
 #include <mds_stdarg.h>
 #include <librtl_messages.h>
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.80 $ $Date: 2001/06/06 17:04:08 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.81 $ $Date: 2001/06/15 17:18:38 $";
 
 extern int MdsCopyDxXd();
 
@@ -467,8 +467,15 @@ static int Initialized = 0;
 void pthread_lock_global_np()
 {
   if (!Initialized)
-  { 
+  {
+#ifdef PTHREAD_MUTEX_INITIALIZER 
+    pthread_mutexattr_t m_attr;
+    pthread_mutexattr_init(&m_attr);
+    pthread_mutexattr_setkind_np(&m_attr,PTHREAD_MUTEX_RECURSIVE_NP);
+    pthread_mutex_init(&GlobalMutex,&m_attr);
+#else 
     pthread_mutex_init(&GlobalMutex,pthread_mutexattr_default);
+#endif
     Initialized = 1;
   }
 #ifdef ___DEBUG_IT
@@ -484,7 +491,14 @@ void pthread_unlock_global_np()
 {
   if (!Initialized)
   { 
+#ifdef PTHREAD_MUTEX_INITIALIZER
+    pthread_mutexattr_t m_attr;
+    pthread_mutexattr_init(&m_attr);
+    pthread_mutexattr_setkind_np(&m_attr,PTHREAD_MUTEX_RECURSIVE_NP);
+    pthread_mutex_init(&GlobalMutex,&m_attr);
+#else 
     pthread_mutex_init(&GlobalMutex,pthread_mutexattr_default);
+#endif
     Initialized = 1;
   }
 #ifdef ___DEBUG_IT
