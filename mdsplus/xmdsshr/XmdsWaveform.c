@@ -490,7 +490,7 @@ Widget XmdsCreateWaveform( parent, name, args, argcount )
 
  Local variables:                                                             */
 
-static char *cvsrev = "@(#)$RCSfile: XmdsWaveform.c,v $ $Revision: 1.9 $ $Date: 2003/01/31 15:29:34 $";
+static char *cvsrev = "@(#)$RCSfile: XmdsWaveform.c,v $ $Revision: 1.10 $ $Date: 2003/03/04 21:29:16 $";
 
 enum crosshairsmode
 {
@@ -1196,6 +1196,8 @@ static void Point(XmdsWaveformWidget w,XButtonEvent *event)
   float y = Round((((float) ((int) XtHeight(w) - event->y)) / XtHeight(w)) * (*yMax(w) - *yMin(w)) + *yMin(w), yResolution(w));
   crosshair.event = (XEvent *) event;
   if (!waveformCount(w)) return;
+  /* flush the event que for crosshair events */
+  while (XCheckTypedWindowEvent(XtDisplay(w),XtWindow(w),event->type,(XEvent *) event));
   SetCrosshairs((Widget)w,&x,&y,waveformAttachCrosshairs(w));
   crosshair.x = xCrosshair(w);
   crosshair.y = yCrosshair(w);
