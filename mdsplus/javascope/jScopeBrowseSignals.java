@@ -1,4 +1,4 @@
-/* $Id: jScopeBrowseSignals.java,v 1.14 2002/05/24 08:55:19 jgk Exp $ */
+/* $Id: jScopeBrowseSignals.java,v 1.15 2002/05/24 12:54:30 jgk Exp $ */
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.text.*;
@@ -50,7 +50,9 @@ public abstract class jScopeBrowseSignals extends jScopeBrowseUrl
             });
 
         pack();
-        setSize(480,700);
+
+        setSize(p.getPreferredSize().width +50,
+                Toolkit.getDefaultToolkit().getScreenSize().height -80);
     }
 
     abstract protected String getSignal(String url);
