@@ -35,11 +35,13 @@ int TreeGetCurrentShotId(experiment,shot)
 extern void TranslateLogicalFree();
 extern int TreeGetCurrentShotIdRemote();
 extern int TreeSetCurrentShotIdRemote();
+#ifndef index
 extern char *index();
+#endif
 
 extern char *TranslateLogical();
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetSetShotId.c,v $ $Revision: 1.4 $ $Date: 1999/10/19 18:10:24 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetSetShotId.c,v $ $Revision: 1.5 $ $Date: 2000/04/21 19:15:10 $";
 
 #define _ToLower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
