@@ -42,7 +42,7 @@
 #define  DTYPE_D DTYPE_G
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TdiSql.c,v $ $Revision: 1.11 $ $Date: 2002/04/04 14:19:25 $";
+static char *cvsrev = "@(#)$RCSfile: TdiSql.c,v $ $Revision: 1.12 $ $Date: 2002/05/29 14:58:31 $";
 
 extern int stat;
 extern int TdiFindImageSymbol();
@@ -469,15 +469,15 @@ ARGLIST 	*arg;
       *pout++ = *pin++;
       break;
     case '\'' :			/* quoted string */
-      while (*pout++ = *pin) {bufchk if (*pin++ == '\'') break; }
+      while (*pout++ = *pin) {bufchk if (*++pin == '\'') break; }
       break;
     case '"' :			/* quoted string */
-      while (*pout++ = *pin) {bufchk if (*pin++ == '"') break; }
+      while (*pout++ = *pin) {bufchk if (*++pin == '"') break; }
       break;
     case '?' : ++pin;		/* parameter marker */
       ++*nmarks;
       if (used >= arg->c) {
-	/*   sprintf(hold, "Expect >= %d parameters, %d given.", arg->used, arg->c); */
+	/*	   sprintf(hold, "Expect >= %d parameters, %d given.", arg->used, arg->c);  */
 	return TdiMISS_ARG;
       }
       if (argv
