@@ -9,7 +9,7 @@
 #include <mds_stdarg.h>
 #include <librtl_messages.h>
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.70 $ $Date: 2000/09/13 16:27:31 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.71 $ $Date: 2000/09/14 18:09:23 $";
 
 extern int MdsCopyDxXd();
 
@@ -109,7 +109,7 @@ static char *GetRegistry(char *where, char *pathname)
   HKEY regkey2=(HKEY)0;
   HKEY regkey3=(HKEY)0;
   unsigned char *path = NULL;
-  if ( (RegOpenKeyEx(where,"SOFTWARE",0,KEY_READ,&regkey1) == ERROR_SUCCESS) &&
+  if ( (RegOpenKeyEx((HKEY)where,"SOFTWARE",0,KEY_READ,&regkey1) == ERROR_SUCCESS) &&
        (RegOpenKeyEx(regkey1,"MIT",0,KEY_READ,&regkey2) == ERROR_SUCCESS) &&
        (RegOpenKeyEx(regkey2,"MDSplus",0,KEY_READ,&regkey3) == ERROR_SUCCESS) )
   {
@@ -137,9 +137,9 @@ static char *GetRegistry(char *where, char *pathname)
 
 char *TranslateLogical(char *pathname)
 {
-	char *path = GetRegistry(HKEY_CURRENT_USER, pathname);
+	char *path = GetRegistry((char *)HKEY_CURRENT_USER, pathname);
 	if (!path)
-		path = GetRegistry(HKEY_LOCAL_MACHINE, pathname);
+		path = GetRegistry((char *)HKEY_LOCAL_MACHINE, pathname);
 	return path;
 }
 
@@ -1421,6 +1421,7 @@ unsigned int StrMatchWild(struct descriptor *candidate, struct descriptor *patte
       } 
     }   
   }
+  return StrNOMATCH;
 }
 
 #ifdef MAX
