@@ -27,7 +27,7 @@
 	Pack Macro timings				3.25	3.50		3.40
 	Unpack Macro timings				3.01	3.07		3.02
 */
-static char *cvsrev = "@(#)$RCSfile: MdsPk.c,v $ $Revision: 1.6 $ $Date: 1998/05/01 16:38:31 $";
+static char *cvsrev = "@(#)$RCSfile: MdsPk.c,v $ $Revision: 1.7 $ $Date: 1998/05/01 17:47:58 $";
 static unsigned int masks[33] = {0,
 0x1, 0x3, 0x7, 0xf, 0x1f, 0x3f, 0x7f, 0xff,
 0x1ff, 0x3ff, 0x7ff, 0xfff, 0x1fff, 0x3fff, 0x7fff, 0xffff,
@@ -36,16 +36,15 @@ static unsigned int masks[33] = {0,
 #include  <string.h>
 #include <mdsdescrip.h>
 #ifdef _big_endian
-static int SwapBytes(int in)
+static int SwapBytes(char *in_c)
 {
-  char *in_c = (char *)&in;
   int out;
   char *out_c = (char *)&out;
   int i;
   for (i=0;i<4;i++) out_c[i] = in_c[3-i];
   return out;
 }
-#define getppack SwapBytes(*ppack)
+#define getppack SwapBytes((char *)ppack)
 #else
 #define getppack *ppack
 #endif
