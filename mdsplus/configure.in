@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.77 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.78 $
 AC_INIT()
 
 AC_CONFIG_HEADER(include/config.h)
@@ -173,6 +173,7 @@ AC_CHECK_LIB(dnet_stub,gethostbyname,DNET_STUB="-ldnet_stub",DNET_STUB="")
 AC_CHECK_LIB(pthread,pthread_kill,LIBPTHREAD="-lpthread",AC_CHECK_LIB(cma,pthread_create,LIBPTHREAD="-lcma",LIBPTHREAD=""))
 AC_CHECK_LIB(exc,__Ots_CSpecificHandler,LIBPTHREAD="$LIBPTHREAD -lexc")
 AC_CHECK_LIB(pthread,pthread_lock_global_np,AC_DEFINE(HAVE_PTHREAD_LOCK_GLOBAL_NP))
+AC_CHECK_LIB(pthread,__pthread_lock_global_np,AC_DEFINE(HAVE_PTHREAD_LOCK_GLOBAL_NP))
 
 if test "$enable_d3d" = yes -o "$enable_d3d" = on ; then
   AC_MSG_CHECKING(...D3DLIB_PATH...)
