@@ -1,4 +1,4 @@
-/* $Id: DataServerItem.java,v 1.13 2002/11/22 14:44:02 manduchi Exp $ */
+/* $Id: DataServerItem.java,v 1.14 2003/01/16 14:18:03 manduchi Exp $ */
 public class DataServerItem
 {
     String name;
@@ -7,14 +7,16 @@ public class DataServerItem
     String class_name;
     String browse_class;
     String browse_url;
+    boolean fast_network_access;
     
     public DataServerItem()
     {
-        this(null, null, null, null, null, null);
+        this(null, null, null, null, null, null, false);
     }
     
     public DataServerItem(String name, String argument, String user, 
-                          String class_name, String browse_class, String browse_url)
+                          String class_name, String browse_class, 
+                          String browse_url, boolean fast_network_access)
     {
         this.name = name;
         this.argument = argument;
@@ -22,6 +24,7 @@ public class DataServerItem
         this.class_name = class_name; 
         this.browse_class = browse_class;
         this.browse_url = browse_url;
+        this.fast_network_access = fast_network_access;
     }
             
     public String toString() {return name;}

@@ -1,4 +1,4 @@
-/* $Id: SetupDataDialog.java,v 1.41 2002/11/22 14:44:06 manduchi Exp $ */
+/* $Id: SetupDataDialog.java,v 1.42 2003/01/16 14:18:08 manduchi Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -1086,6 +1086,14 @@ import javax.swing.event.*;
       x_expr.setPreferredSize(x_expr.getSize());
       p3.setPreferredSize(p3.getSize());
       p9.setPreferredSize(p9.getSize());
+      
+      addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) 
+            {
+                cancelOperation();
+            }
+      });
+
 
    }
    
@@ -1760,6 +1768,14 @@ import javax.swing.event.*;
              break;
         }
     }
+    
+   private void cancelOperation()
+   {
+        wave.removeWaveformListener(this);
+	    setVisible(false);
+	    signalList.reset();
+   }
+    
    public void actionPerformed(ActionEvent e)
    {
       Object ob = e.getSource();
@@ -1774,11 +1790,8 @@ import javax.swing.event.*;
 //	    wave.jScopeErase();
       }
 		
-      if(ob == cancel) {
-        wave.removeWaveformListener(this);
-	    setVisible(false);
-	    signalList.reset();
-      }
+      if(ob == cancel) 
+        cancelOperation();
 	
       if(ob == apply || ob == ok)
       {

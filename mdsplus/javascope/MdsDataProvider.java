@@ -1,4 +1,4 @@
-/* $Id: MdsDataProvider.java,v 1.16 2002/11/22 14:44:04 manduchi Exp $ */
+/* $Id: MdsDataProvider.java,v 1.17 2003/01/16 14:18:06 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.*;
@@ -917,6 +917,19 @@ public class MdsDataProvider implements DataProvider
     public int     InquireCredentials(JFrame f, String user)
     {
        mds.setUser(user);
+       /*
+       try
+       {
+        Process p = java.lang.Runtime.getRuntime().exec("cmd.exe /K plink -L 8000:igi.pd.cnr.it:8000");
+        PrintWriter bo = new PrintWriter(p.getOutputStream(), true);
+        bo.println();
+        String line;
+        while(true)            
+            System.out.println(bo);
+        java.lang.Runtime.getRuntime().exec("cmd.exe /K dir > c:\\pippo.txt ");
+       }
+       catch(Exception exc){System.out.println("plink error");}
+       */
        return DataProvider.LOGIN_OK;
     }
     public boolean SupportsFastNetwork(){return true;}
