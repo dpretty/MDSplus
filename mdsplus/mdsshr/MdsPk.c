@@ -27,7 +27,7 @@
 	Pack Macro timings				3.25	3.50		3.40
 	Unpack Macro timings				3.01	3.07		3.02
 */
-static char *cvsrev = "@(#)$RCSfile: MdsPk.c,v $ $Revision: 1.8 $ $Date: 1998/05/01 17:53:46 $";
+static char *cvsrev = "@(#)$RCSfile: MdsPk.c,v $ $Revision: 1.9 $ $Date: 1998/07/27 17:34:05 $";
 static unsigned int masks[33] = {0,
 0x1, 0x3, 0x7, 0xf, 0x1f, 0x3f, 0x7f, 0xff,
 0x1ff, 0x3ff, 0x7ff, 0xfff, 0x1fff, 0x3fff, 0x7fff, 0xffff,
@@ -60,6 +60,10 @@ void      MdsPk(char *nbits_ptr, int *nitems_ptr, int pack[], int items[], int *
   int      hold = off ? *ppack & masks[off] : 0;
   int      mask;
   int       test;
+  int i;
+  int j;
+  char *pin;
+  char *pout;
   if (size == 0 || nitems <= 0)
     return;
   *bit_ptr += size * nitems;
@@ -67,14 +71,26 @@ void      MdsPk(char *nbits_ptr, int *nitems_ptr, int pack[], int items[], int *
   {
     if ((off & 7) == 0)
     {
+#ifdef _big_endian
+      for (i=0,pout = ((char *)ppack) + (off >> 3),pin = (char *)pitems;i<nitems;i++,pout+=4,pin+=4)
+        for (j=0;j<4;j++)
+          pout[j] = pin[3-j];
+#else
       memcpy( ((char *) ppack) +(off >> 3), pitems, sizeof(int) * nitems);
+#endif
       return;
     }
     else
       for (; --nitems >= 0;)
       {
 	hold |= *pitems << off;
+#ifdef _big_endian
+        for (i=0;i<3;i++)
+          ((char *)ppack)[i] = ((char *)&hold)[3-i];
+        ppack++;
+#else
 	*ppack++ = hold;
+#endif
 	hold = *(unsigned int *) pitems++ >> (32 - off);
       }
   }
@@ -87,11 +103,13 @@ void      MdsPk(char *nbits_ptr, int *nitems_ptr, int pack[], int items[], int *
       hold |= (mask & *pitems) << off;
       if (off >= test)
       {
+#ifdef _big_endian
+        for (i=0;i<3;i++)
+          ((char *)ppack)[i] = ((char *)&hold)[3-i];
+        ppack++;
+#else
 	*ppack++ = hold;
-/************** Don't know why this was here but it just can't be correct ***********
-            if VAX
-	      hold = (mask & *pitems) << (off - 32);
-************************************************************************************/
+#endif
 	hold = (mask & *pitems) >> (32 - off);
 	off -= test;
       }
@@ -100,7 +118,12 @@ void      MdsPk(char *nbits_ptr, int *nitems_ptr, int pack[], int items[], int *
     }
   }
   if (off)
+#ifdef _big_endian
+    for (i=0;i<3;i++)
+      ((char *)ppack)[i] = ((char *)&hold)[3-i];
+#else
     *ppack = hold;
+#endif
   return;
 }
 
