@@ -9,7 +9,7 @@
 #include <mds_stdarg.h>
 #include <librtl_messages.h>
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.95 $ $Date: 2001/10/03 19:24:51 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.96 $ $Date: 2001/10/04 16:01:48 $";
 
 extern int MdsCopyDxXd();
 
@@ -896,7 +896,10 @@ int LibFindImageSymbol(struct descriptor *filename, struct descriptor *symbol, v
   handle = dlopen(full_filename,RTLD_LAZY);
   if (handle == NULL) {
     if (strcmp(c_filename,"MdsFunctions"))
+    {
       dlopen_error = dlerror();
+      dlopen_error = strcpy((char *)malloc(strlen(dlopen_error)+1),dlopen_error);
+    }
     handle = dlopen(&full_filename[3],RTLD_LAZY);
   }
   if (handle != NULL)
@@ -910,6 +913,8 @@ int LibFindImageSymbol(struct descriptor *filename, struct descriptor *symbol, v
   else if (strcmp(c_filename,"MdsFunctions") && strcmp(c_filename,"TreeShrHooks"))
     printf("Error opening library %s, %s\nError opening library %s, %s\n",full_filename,dlopen_error,
        &full_filename[3],dlerror());
+  if (dlopen_error)
+    free(dlopen_error);
   free(c_filename);
   free(full_filename);
   if (*symbol_value == NULL)
