@@ -17,7 +17,7 @@ int yyleng; extern unsigned char yytext[];
 int yymorfg;
 extern unsigned char *yysptr, yysbuf[];
 int yytchar;
-#ifdef vxWorks
+#if  defined( vxWorks ) || defined (__PPC)
 FILE *yyin = 0, *yyout = 0;
 #else
 FILE *yyin = {stdin}, *yyout = {stdout};
@@ -78,7 +78,7 @@ extern struct yysvf yysvec[], *yybgin;
 #include <strroutines.h>
 #include <tdimessages.h>
 #include <treeshr.h>
-static char *cvsrev = "@(#)$RCSfile: TdiLex.c,v $ $Revision: 1.18 $ $Date: 1998/10/23 08:58:17 $";
+static char *cvsrev = "@(#)$RCSfile: TdiLex.c,v $ $Revision: 1.19 $ $Date: 1999/09/24 20:14:38 $";
 #ifdef WIN32
 #pragma warning (disable : 4013 4102 4035) /* LEX produces code with no forward declarations of yylook and yyback. Also has unreferenced label yyfussy. And two int functions: yyoutput and yyunput do not return a value.*/
 #endif
