@@ -87,7 +87,7 @@ void CloseDataSources();
 # define _toupper(c)	(((c) >= 'a' && (c) <= 'z') ? (c) & 0xDF : (c))
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: evaluate.c,v $ $Revision: 1.12 $ $Date: 2001/11/14 18:38:30 $";
+static char *cvsrev = "@(#)$RCSfile: evaluate.c,v $ $Revision: 1.13 $ $Date: 2001/11/16 18:35:20 $";
 
 extern void EventUpdate(XtPointer client_data, int *source, XtInputId *id);
 
@@ -589,7 +589,6 @@ void SetupEvent(String event, Boolean *received, int *id)
   if (strlen(event))
   {
     MDSEventAst(event,EventAst,received,id);
-    printf("MDSEventAst(%s)\n",event);
   }
 }
 

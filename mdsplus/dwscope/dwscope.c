@@ -57,7 +57,7 @@ $ dwcope [-default setup]
 #include <DXm/DECspecific.h>
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: dwscope.c,v $ $Revision: 1.11 $ $Date: 2001/11/15 21:11:35 $";
+static char *cvsrev = "@(#)$RCSfile: dwscope.c,v $ $Revision: 1.12 $ $Date: 2001/11/16 18:35:20 $";
 
 extern void XmdsInitialize();
 extern void XmdsDestroyWidgetCallback();
@@ -1891,6 +1891,7 @@ static void  RestoreDatabase(String dbname)
   int      num;
   Widget   *widgets;
   String   override_shot;
+  char     *default_printer = 0;
   XrmDatabase scopedb;
   scopedb = MdsGetFileDatabase(dbname);
   XtVaGetValues(PlotsWidget,XmNchildren,&widgets,XmNnumChildren,&num,NULL);
@@ -1910,7 +1911,9 @@ static void  RestoreDatabase(String dbname)
   ReplaceString(&ScopePrintFile, GetResource(scopedb, "Scope.print_file", "dwscope.ps"), 0);
 #endif
   ScopePrintWindowTitle = atoi(GetResource(scopedb, "Scope.print_window_title", "0"));
-  ReplaceString(&ScopePrinter, GetResource(scopedb,"Scope.printer","To file"),0);
+  default_printer = getenv("PRINTER");
+  if (default_printer == 0) default_printer="To file";  
+  ReplaceString(&ScopePrinter, GetResource(scopedb,"Scope.printer",default_printer),0);
   ScopePrintToFile = strcmp(ScopePrinter,"To file") == 0;
 /*
   ScopePrintToFile = atoi(GetResource(scopedb, "Scope.print_to_file", "0"));
