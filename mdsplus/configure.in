@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.70 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.71 $
 AC_INIT()
 
 AC_CONFIG_HEADER(include/config.h)
@@ -93,10 +93,10 @@ alpha-dec-osf*) CFLAGS="$CFLAGS -pthread -ieee";
        SHARETYPE=".so";;
 *linux*) CFLAGS="$CFLAGS -fpic";
        FFLAGS="$FFLAGS -fpic";
-       LDSHARE="-shared ";
-       LDARC="-static ";
-       LD_LDSHARE="-shared";
-       LD_LDARC="-static";
+       LDSHARE="-Wl,-Bdynamic ";
+       LDARC="-Wl,-Bstatic ";
+       LD_LDSHARE="-Bdynamic ";
+       LD_LDARC="-Bstatic ";
        LINKSHARED="-shared ";
        LIBPATH="LD_LIBRARY_PATH";
        FOR_LDFLAGS="";
