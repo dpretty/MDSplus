@@ -32,7 +32,7 @@
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.42 $ $Date: 1999/10/19 18:10:25 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.43 $ $Date: 1999/11/29 15:08:24 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
@@ -821,7 +821,7 @@ static int MapFile(void *file_handle, TREE_INFO *info, int edit_flag, int remote
                         status = addr != (void *)-1;
                         if (!status)
                           printf("Error mapping file - errno = %d\n",errno);
-#else /* defined(__hpux) || defined(__sun) || defined(__sgi) || defined(_AIX) */
+#elif !defined(_WIN32) /* defined(__hpux) || defined(__sun) || defined(__sgi) || defined(_AIX) */
 #ifndef MAP_FILE
 #define MAP_FILE 0
 #endif

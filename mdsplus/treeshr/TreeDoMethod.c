@@ -36,7 +36,7 @@ int TreeDoMethod( nid_dsc, method_dsc [,args]...)
 #include <strroutines.h>
 #include <mds_stdarg.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeDoMethod.c,v $ $Revision: 1.6 $ $Date: 1998/12/16 10:41:14 $";
+static char *cvsrev = "@(#)$RCSfile: TreeDoMethod.c,v $ $Revision: 1.7 $ $Date: 1999/11/29 15:09:03 $";
 
 #define  count(num) va_start(incrmtr, method_ptr); \
                      for (num=2; (num < 256) && (va_arg(incrmtr, struct descriptor *) != MdsEND_ARG);  num++)
@@ -134,17 +134,22 @@ int _TreeDoMethod(void *dbid, struct descriptor *nid_dsc, struct descriptor *met
       static DESCRIPTOR(tdiexecute,"TdiExecute");
       StrCopyDx(&exp, &method);
       StrAppend(&exp,&open);
-      for (i=2;i<nargs;i++) StrAppend(&exp,&arg);
+      for (i=1;i<nargs;i++) StrAppend(&exp,&arg);
       StrAppend(&exp,&close);
       status = LibFindImageSymbol(&tdishr,&tdiexecute,&addr);
       if (status & 1)
       {
+		static int retstatus;
+		static DESCRIPTOR_LONG(retstatus_d,&retstatus);
         for (i=nargs;i>0;i--) arglist[i+1] = arglist[i];
-        nargs += 2;
+        nargs += 3;
         arglist[0] = (void *)nargs;
         arglist[1] = &exp;
+		arglist[nargs-1] = (void *)&retstatus_d;
         arglist[nargs] = MdsEND_ARG;
         status = LibCallg(arglist,addr);
+		if (status & 1)
+			status = retstatus;
       }
       StrFree1Dx(&exp);
       /*      status = TreeNOMETHOD; */
