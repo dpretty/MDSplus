@@ -52,7 +52,7 @@ int Tdi3And(struct descriptor *in1, struct descriptor *in2, struct descriptor *o
 #include <mdsdescrip.h>
 #include <tdimessages.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiAnd.c,v $ $Revision: 1.5 $ $Date: 1998/12/16 10:55:06 $";
+static char *cvsrev = "@(#)$RCSfile: TdiAnd.c,v $ $Revision: 1.6 $ $Date: 1999/10/19 20:14:40 $";
 
 typedef struct { int longword[2]; } quadword;
 typedef struct { int longword[4]; } octaword;
@@ -113,7 +113,7 @@ typedef struct { int longword[4]; } octaword;
   break;\
 }
 
-#ifdef _big_endian
+#ifdef WORDS_BIGENDIAN
 #define setPointers in1p += (size-1); in2p += (size-1);
 #else
 #define setPointers

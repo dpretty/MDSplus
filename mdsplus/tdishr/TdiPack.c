@@ -25,7 +25,7 @@
 #include <mdsshr.h>
 #include <string.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiPack.c,v $ $Revision: 1.5 $ $Date: 1998/04/08 19:06:13 $";
+static char *cvsrev = "@(#)$RCSfile: TdiPack.c,v $ $Revision: 1.6 $ $Date: 1999/10/19 20:14:45 $";
 
 extern int TdiGetArgs();
 extern int TdiMasterData();
@@ -63,7 +63,7 @@ struct TdiCatStruct		cats[4];
 			numa = bytes / lena;
 			numm = (int)((struct descriptor_a *)dat[1].pointer)->arsize / lenm;
 			pi = parr->pointer;
-#ifdef _big_endian
+#ifdef WORDS_BIGENDIAN
 			pm = dat[1].pointer->pointer + lenm - 1;
 #else
 			pm = dat[1].pointer->pointer;

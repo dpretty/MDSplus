@@ -9,7 +9,7 @@
 
 #include <tdimessages.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiDecompile.c,v $ $Revision: 1.6 $ $Date: 1998/04/08 19:05:57 $";
+static char *cvsrev = "@(#)$RCSfile: TdiDecompile.c,v $ $Revision: 1.7 $ $Date: 1999/10/19 20:14:42 $";
 
 unsigned int TdiDECOMPILE_MAX = 0xffff;
 
@@ -414,7 +414,7 @@ char n1c;
 		case DTYPE_OU :
                         cptr = c0;
 			j = in_ptr->length;
-#ifdef _big_endian
+#ifdef WORDS_BIGENDIAN
 			bptr = in_ptr->pointer - 1;
 			while (--j >= 0) {
 				*cptr++ = htab[( *(++bptr) >> 4) & 15];

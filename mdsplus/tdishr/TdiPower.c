@@ -12,7 +12,7 @@
 #include "tdinelements.h"
 #include <tdimessages.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiPower.c,v $ $Revision: 1.6 $ $Date: 1998/12/16 10:55:14 $";
+static char *cvsrev = "@(#)$RCSfile: TdiPower.c,v $ $Revision: 1.7 $ $Date: 1999/10/19 20:14:46 $";
 
 static int one = 1;
 static struct descriptor one_dsc = {sizeof(one),DTYPE_L,CLASS_S,(char *)&one};
@@ -125,7 +125,7 @@ int Tdi3Merge(struct descriptor_a *pdtrue, struct descriptor_a *pdfalse, struct 
   char	*pf = pdfalse->pointer;
 
   int	stepm = pdmask->class == CLASS_A ? pdmask->length : 0;
-#ifdef _big_endian
+#ifdef WORDS_BIGENDIAN
   char	*pm = pdmask->pointer + pdmask->length - 1;
 #else
   char	*pm = pdmask->pointer;

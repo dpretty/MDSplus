@@ -55,7 +55,7 @@
 #include <strroutines.h>
 #include <tdimessages.h>
 #include <treeshr.h>
-static char *cvsrev = "@(#)$RCSfile: TdiLex.x,v $ $Revision: 1.12 $ $Date: 1998/04/09 20:12:52 $";
+static char *cvsrev = "@(#)$RCSfile: TdiLex.x,v $ $Revision: 1.13 $ $Date: 1999/10/19 20:14:44 $";
 #ifdef WIN32
 #pragma warning (disable : 4013 4102 4035) /* LEX produces code with no forward declarations of yylook and yyback. Also has unreferenced label yyfussy. And two int functions: yyoutput and yyunput do not return a value.*/
 #endif
@@ -463,7 +463,7 @@ int			length, is_signed, status = 1, tst, type;
 
 	if (status & 1)
         {
-#ifdef _big_endian
+#ifdef WORDS_BIGENDIAN
           int i;
           unsigned char *ptr = mark_ptr->rptr->pointer;
           for (i=0;i<length/2;i++)

@@ -52,13 +52,13 @@
 
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 
-#ifdef _big_endian
+#ifdef WORDS_BIGENDIAN
 #define MaskTrue (pi0[leni-1] & 1)
 #else
 #define MaskTrue (pi0[0] & 1)
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TdiTrans.c,v $ $Revision: 1.6 $ $Date: 1998/04/08 19:06:19 $";
+static char *cvsrev = "@(#)$RCSfile: TdiTrans.c,v $ $Revision: 1.7 $ $Date: 1999/10/19 20:14:46 $";
 
 extern  unsigned short
 	OpcAccumulate,

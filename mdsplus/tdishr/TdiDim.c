@@ -60,7 +60,7 @@ int Tdi3xxxxx(struct descriptor *in1, struct descriptor *in2,
 /*#include <mdsdescrip.h>*/
 #include <tdimessages.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiDim.c,v $ $Revision: 1.6 $ $Date: 1998/12/16 10:55:12 $";
+static char *cvsrev = "@(#)$RCSfile: TdiDim.c,v $ $Revision: 1.7 $ $Date: 1999/10/19 20:14:43 $";
 
 extern int TdiConvert(  ); 
 extern int Tdi3Subtract(  );
@@ -120,7 +120,7 @@ extern int TdiGtQ(  );
 
 #define unconv } TdiConvert(&o,out); free(i1p); free(i2p); free(op);}
 
-#ifdef _big_endian
+#ifdef WORDS_BIGENDIAN
 #define _offset size - *in2p/8 - 1
 #else
 #define _offset *in2p/8

@@ -11,7 +11,7 @@
 #include <strroutines.h>
 #include <tdimessages.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiChar.c,v $ $Revision: 1.5 $ $Date: 1998/12/16 10:55:07 $";
+static char *cvsrev = "@(#)$RCSfile: TdiChar.c,v $ $Revision: 1.6 $ $Date: 1999/10/19 20:14:41 $";
 
 extern int TdiHash();
 
@@ -76,7 +76,7 @@ char	*p2 = out_ptr->pointer;
 int	step = in_ptr->length, n, status = 1;
 
 	N_ELEMENTS(out_ptr, n);
-#ifdef _big_endian
+#ifdef WORDS_BIGENDIAN
 	for (; --n >= 0; p1 += step) *p2++ = *(p1 + step - 1);
 #else
 	for (; --n >= 0; p1 += step) *p2++ = *(p1);
@@ -189,7 +189,7 @@ char	*p2 = out_ptr->pointer;
 int	n, status = 1;
 
 	N_ELEMENTS(out_ptr, n);
-#ifdef _big_endian
+#ifdef WORDS_BIGENDIAN
 	if (status & 1) for (; --n >= 0; p1 += step) *p2++ = *(p1 + step - 1);
 #else
 	if (status & 1) for (; --n >= 0; p1 += step) *p2++ = *(p1);
