@@ -30,7 +30,7 @@ void __MB(){return;}
 #include <libroutines.h>
 #include <mds_stdarg.h>
 #include <librtl_messages.h>
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.21 $ $Date: 1998/04/08 18:46:39 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.22 $ $Date: 1998/04/13 18:33:02 $";
 #ifndef va_count
 #define  va_count(narg) va_start(incrmtr, first); \
                         for (narg=1; (narg < 256) && (va_arg(incrmtr, struct descriptor *) != MdsEND_ARG); narg++)
@@ -1077,6 +1077,12 @@ int LibFindImageSymbol(struct descriptor *filename, struct descriptor *symbol, v
   strcat(full_filename,c_filename);
   strcat(full_filename,".sl");
   handle = shl_load(full_filename,BIND_DEFERRED | BIND_NOSTART | DYNAMIC_PATH,0);
+  if (handle == NULL)
+  {
+    strcpy(full_filename,c_filename);
+    strcat(full_filename,".sl");
+    handle = shl_load(full_filename,BIND_DEFERRED | BIND_NOSTART | DYNAMIC_PATH,0);
+  }
   if (handle != NULL)
   {
     char *c_symbol = MdsDescrToCstring(symbol);
