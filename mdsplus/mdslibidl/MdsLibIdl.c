@@ -13,7 +13,7 @@ extern int TdiData();
 extern int TdiCvt();
 extern int TdiCompile();
 
-static char *cvsrev = "@(#)$RCSfile: MdsLibIdl.c,v $ $Revision: 1.4 $ $Date: 1998/09/18 20:21:00 $";
+static char *cvsrev = "@(#)$RCSfile: MdsLibIdl.c,v $ $Revision: 1.5 $ $Date: 1999/02/03 16:41:00 $";
 
 #ifdef _WINDOWS
 #define sighold(a)
@@ -95,6 +95,7 @@ static void *MakeDescr(int idx, int *argsize, void *bytes)
     arrayArgs[idx].scale = 0;
     arrayArgs[idx].digits = 0;
     arrayArgs[idx].dimct = argsize[0];
+    arrayArgs[idx].aflags.coeff = 1;
     for (i=0 ; i < argsize[0]; i++)
       arrayArgs[idx].m[i]=argsize[i+1];
     switch (argsize[argsize[0]+1])
