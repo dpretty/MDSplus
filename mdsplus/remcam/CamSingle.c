@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 
-static char *cvsrev = "@(#)$RCSfile: CamSingle.c,v $ $Revision: 1.7 $ $Date: 2003/03/04 15:25:50 $";
+static char *cvsrev = "@(#)$RCSfile: CamSingle.c,v $ $Revision: 1.8 $ $Date: 2003/03/24 15:56:03 $";
 
 struct descriptor { unsigned short length;
                     char dtype;
@@ -66,7 +66,7 @@ static void getdata(int serverid, void *data)
   struct descrip ans_d = {0,0,{0,0,0,0,0,0,0},0};
   status = MdsValue(serverid,"_data",&ans_d,0);
   if (status & 1 && (ans_d.dtype == DTYPE_USHORT || ans_d.dtype == DTYPE_LONG) && ans_d.ptr)
-    memcpy(data,ans_d.ptr,(ans_d.dtype == DTYPE_SHORT) ? 2 : 4);
+    memcpy(data,ans_d.ptr,(ans_d.dtype == DTYPE_USHORT) ? 2 : 4);
   if (ans_d.ptr)
     free(ans_d.ptr);
 }
