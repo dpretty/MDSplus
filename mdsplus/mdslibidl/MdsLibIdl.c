@@ -13,7 +13,7 @@ extern int TdiData();
 extern int TdiCvt();
 extern int TdiCompile();
 
-static char *cvsrev = "@(#)$RCSfile: MdsLibIdl.c,v $ $Revision: 1.9 $ $Date: 1999/11/15 21:29:58 $";
+static char *cvsrev = "@(#)$RCSfile: MdsLibIdl.c,v $ $Revision: 1.10 $ $Date: 1999/11/15 22:03:13 $";
 
 #ifdef _WINDOWS
 #define sighold(a)
@@ -113,7 +113,7 @@ static void *MakeDescr(int idx, int *argsize, void *bytes)
         int num = 1;
         unsigned short maxlen;
 	arrayArgs[idx].dtype = DTYPE_T;
-        for (i=0,str = (IDL_STRING *)bytes;i<arrayArgs[idx].dimct;i++)
+        for (i=0;i<arrayArgs[idx].dimct;i++)
           num = num * arrayArgs[idx].m[i];
         for (i=0,str = (IDL_STRING *)bytes,maxlen=0;i<num;i++,str++)
           if (str->slen > maxlen) maxlen = str->slen;
@@ -128,7 +128,7 @@ static void *MakeDescr(int idx, int *argsize, void *bytes)
           memset(blanks,32,maxlen);
           for (i=0,str = (IDL_STRING *)bytes;i<num;i++,str++,ptr += maxlen)
 	  {
-            strcpy(ptr,str->s);
+            if (str->s) strcpy(ptr,str->s);
             if (str->slen < maxlen) strncat(ptr,blanks,maxlen - str->slen);
           }
           free(blanks);
