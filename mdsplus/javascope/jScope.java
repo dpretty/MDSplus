@@ -1,4 +1,4 @@
-/* $Id: jScope.java,v 1.60 2004/05/27 07:50:44 manduchi Exp $ */
+/* $Id: jScope.java,v 1.61 2004/12/02 16:23:48 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.List;
@@ -22,7 +22,7 @@ public class jScope extends JFrame implements ActionListener, ItemListener,
                              UpdateEventListener, ConnectionListener
 {
 
-   static final String VERSION = "jScope (version 7.2.9)";
+   static final String VERSION = "jScope (version 7.3.0)";
    static public boolean is_debug = false;
 
    public  static final int MAX_NUM_SHOT   = 30;
@@ -2319,14 +2319,14 @@ public class jScope extends JFrame implements ActionListener, ItemListener,
     {
         FromFile(pr);
         font_dialog.fromFile(pr, "Scope.font");
-        color_dialog.fromFile(pr, "Scope.color_");
+        color_dialog.FromFile(pr, "Scope.color_");
         pub_var_diag.fromFile(pr, "Scope.public_variable_");
-	    wave_panel.FromFile(pr , "Scope");
-	 }
-	 catch (Exception e)
-	 {
+        wave_panel.FromFile(pr , "Scope", color_dialog.getColorMapIndex());
+    }
+    catch (Exception e)
+    {
         throw (new IOException("Configuration file syntax error : "+e.getMessage()));
-	 }
+    }
   }
 
   private void Reset()
