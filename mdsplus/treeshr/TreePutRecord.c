@@ -27,6 +27,7 @@
 
 
 +-----------------------------------------------------------------------------*/
+#include <config.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <mdstypes.h>
@@ -54,7 +55,7 @@ static int daylight = 0;
 #define LONG_LONG_CONSTANT(value) value##ll
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.71 $ $Date: 2004/04/30 17:25:01 $";
+static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.72 $ $Date: 2004/08/24 18:46:23 $";
 
 #ifdef min
 #undef min
