@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: KsM.c,v 1.2 2003/02/09 17:34:29 twf Exp $
+//	$Id: KsM.c,v 1.3 2003/02/10 21:43:56 twf Exp $
 //-------------------------------------------------------------------------
 // Mon Oct 15 16:35:42 EDT 2001	-- seperated out
 //-----------------------------------------------------------
@@ -39,12 +39,14 @@ static int KsMultiIo(
   RequestSenseData sense;
   unsigned char sb_out_len;
   unsigned int transfer_len;
+  int enhanced;
+  int online;
   
   if( MSGLVL(FUNCTION_NAME) )
     printf( "%s()\n", KM_ROUTINE_NAME );
   
   sprintf(dev_name, "GK%c%d", Key.scsi_port, Key.scsi_address);
-  if( (scsiDevice = get_scsi_device_number( dev_name )) < 0 ) {
+  if( (scsiDevice = get_scsi_device_number( dev_name, &enhanced, &online )) < 0 ) {
     if( MSGLVL(IMPORTANT) )
       fprintf( stderr, "%s(): error -- no scsi device found for '%s'\n", KM_ROUTINE_NAME, dev_name );
     
@@ -52,6 +54,11 @@ static int KsMultiIo(
     goto KsMultiIo_Exit;
   }
 
+  if (!online && (Key.slot != 30))
+    return CamOFFLINE;
+
+  if (!Enhanced)
+    enhanced = 0;
   if( MSGLVL(DETAILS) )
     printf( "%s(): device '%s' = '/dev/sg%d'\n", KM_ROUTINE_NAME, dev_name, scsiDevice );
   
@@ -59,7 +66,7 @@ static int KsMultiIo(
   Command[0] = OpCodeBlockCAMAC;
   Command[1] = 0;
   Command[2] = Key.crate;
-  Command[3] = (Enhanced << 6) | (!Enhanced << 5) | MODE(dmode, Mem);
+  Command[3] = (enhanced << 6) | (!enhanced << 5) | MODE(dmode, Mem);
   Command[4] = NAFhi(Key.slot, A, F);
   Command[5] = NAFlo(Key.slot, A, F);
   Command[6] = xfer_len.b[HI];

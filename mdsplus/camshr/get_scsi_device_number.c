@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: get_scsi_device_number.c,v 1.1 2002/09/10 16:06:59 twf Exp $
+//	$Id: get_scsi_device_number.c,v 1.2 2003/02/10 21:43:56 twf Exp $
 //-------------------------------------------------------------------------
 
 #include <stdio.h>
@@ -31,7 +31,7 @@
 // and return O/S specific device number, eg '/dev/sg#'
 // returns '/dev/sg#' value; if non-existant, parse_crate_db() returns -1
 //-------------------------------------------------------------------------
-int get_scsi_device_number( char *highway_name )
+int get_scsi_device_number( char *highway_name, int *enhanced, int *online )
 {
 	char				highway[5];						// temp copy
 	int					device_num, i;
@@ -63,6 +63,8 @@ int get_scsi_device_number( char *highway_name )
 
 	parse_crate_db( CRATEdb+i, &crate );				// get data from db
 	device_num = crate.device;							// extract dev num from db
+        *enhanced = crate.enhanced;
+        *online = crate.online;
 
 GetScsiDeviceNumber_Exit:
 	if( MSGLVL(DETAILS) ) {

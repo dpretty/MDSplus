@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: verbs.c,v 1.5 2003/02/10 15:12:02 twf Exp $
+//	$Id: verbs.c,v 1.6 2003/02/10 21:43:56 twf Exp $
 //-------------------------------------------------------------------------
 
 //-------------------------------------------------------------------------
@@ -773,7 +773,7 @@ int AddCrate()
 	}		// else OK
 
 	// make an entry line, with online and enhanced set as undefined
-	sprintf( line, "%-.6s:...:.\n",
+	sprintf( line, "%-.6s:...:.:.:.\n",
 		phy_name.pointer
 		);
 
