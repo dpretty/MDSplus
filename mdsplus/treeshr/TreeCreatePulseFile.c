@@ -44,7 +44,7 @@ extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
 extern char *MaskReplace();
 
-static char *cvsrev = "@(#)$RCSfile: TreeCreatePulseFile.c,v $ $Revision: 1.21 $ $Date: 2001/10/03 15:17:05 $";
+static char *cvsrev = "@(#)$RCSfile: TreeCreatePulseFile.c,v $ $Revision: 1.22 $ $Date: 2003/01/22 13:44:54 $";
 
 #ifdef _WIN32
 #include <windows.h>
@@ -283,6 +283,10 @@ static int CopyFile(char *src, char *dst, int dont_replace)
   status = system(cmd);
   if (status != 0)
      printf("Error creating pulse with command: %s, status = %d\n",cmd,status);
+  else {
+    sprintf(cmd,"SetMdsplusFileProtection %s 2> /dev/null",dst);
+    system(cmd);
+  }
   free(cmd);
   return status == 0;
 }

@@ -37,7 +37,7 @@ int TreeDoMethod( nid_dsc, method_dsc [,args]...)
 #include <strroutines.h>
 #include <mds_stdarg.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeDoMethod.c,v $ $Revision: 1.10 $ $Date: 2002/08/30 18:26:18 $";
+static char *cvsrev = "@(#)$RCSfile: TreeDoMethod.c,v $ $Revision: 1.11 $ $Date: 2003/01/22 13:44:46 $";
 
 #define  count(num) va_start(incrmtr, method_ptr); \
                      for (num=2; (num < 256) && (va_arg(incrmtr, struct descriptor *) != MdsEND_ARG);  num++)
@@ -126,6 +126,12 @@ int _TreeDoMethod(void *dbid, struct descriptor *nid_dsc, struct descriptor *met
       DBID = dbid;
       status = LibCallg(arglist, addr);
       DBID = old_dbid;
+      if (arglist[nargs])
+      {
+        struct descriptor *ans = (struct descriptor *)arglist[nargs];
+        if ((ans->dtype == DTYPE_L) && (ans->length == 4) && (ans->pointer))
+	  *(int *)ans->pointer = status;
+      }
     }
     else
     {
