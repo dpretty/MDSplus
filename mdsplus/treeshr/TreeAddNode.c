@@ -19,7 +19,7 @@
 
 #define max(a,b) ((a) > (b) ? (a) : (b))
 
-static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.19 $ $Date: 1998/05/05 20:05:43 $";
+static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.20 $ $Date: 1998/05/08 16:06:20 $";
 
 #define node_to_node_number(node_ptr) node_ptr - dblist->tree_info->node
 #define __toupper(c) (((c) >= 'a' && (c) <= 'z') ? (c) & 0xDF : (c))
@@ -661,13 +661,13 @@ int _TreeWriteTree(void **dbid, char *exp_ptr, int shotid)
 	    db->next = (*dblist);
 	    *dblist = db;
 	  }
-	  status = (*dblist)->open_for_edit ? TreeNORMAL : TreeNOT_OPEN;
+	  status = IS_OPEN_FOR_EDIT(*dblist) ? TreeNORMAL : TreeNOT_OPEN;
 	  break;
 	}
       }
     }
     else
-      status = (*dblist)->open_for_edit ? TreeNORMAL : TreeNOT_OPEN;
+      status = IS_OPEN_FOR_EDIT(*dblist) ? TreeNORMAL : TreeNOT_OPEN;
     if (status & 1)
     {
     /**************************************
