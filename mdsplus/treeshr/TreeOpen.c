@@ -30,7 +30,7 @@
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.38 $ $Date: 1998/12/17 19:40:43 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.39 $ $Date: 1999/06/23 14:56:49 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
@@ -82,7 +82,7 @@ int _TreeOpen(void **dbid, char *tree_in, int shot_in, int read_only_flag)
  tree which will in turn link up any subtrees.
 **************************************************/
 
-	shot = shot_in ? shot_in : MdsGetCurrentShotId(tree);
+	shot = shot_in ? shot_in : TreeGetCurrentShotId(tree);
 	if (shot)
 	{
 		PINO_DATABASE **dblist = (PINO_DATABASE **)dbid;
@@ -150,7 +150,7 @@ int _TreeClose(void **dbid, char *tree, int shot)
 			uptree[i]='\0';
 			status = TreeNOT_OPEN;
 			if (!shot)
-				shot = MdsGetCurrentShotId(tree);
+				shot = TreeGetCurrentShotId(tree);
 			for (prev_db = 0, db = *dblist; db ? db->open : 0; prev_db = db, db = db->next)
 			{
 				if ((shot == db->shotid) && (strcmp(db->main_treenam, uptree) == 0))
@@ -1004,7 +1004,7 @@ int       _TreeOpenEdit(void **dbid, char *tree_in, int shot_in)
   int       status = TreeFAILURE;
 
   RemoveBlanksAndUpcase(tree,tree_in);
-  shot = shot_in ? shot_in : MdsGetCurrentShotId(tree);
+  shot = shot_in ? shot_in : TreeGetCurrentShotId(tree);
   if (shot)
   {
     PINO_DATABASE **dblist = (PINO_DATABASE **)dbid;
@@ -1060,7 +1060,7 @@ int       _TreeOpenNew(void **dbid, char *tree_in, int shot_in)
   int       status = TreeFAILURE;
 
   RemoveBlanksAndUpcase(tree,tree_in);
-  shot = shot_in ? shot_in : MdsGetCurrentShotId(tree);
+  shot = shot_in ? shot_in : TreeGetCurrentShotId(tree);
   if (shot)
   {
     PINO_DATABASE **dblist = (PINO_DATABASE **)dbid;
