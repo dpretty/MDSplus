@@ -1,4 +1,4 @@
-/* $Id: TSDataProvider.java,v 1.12 2002/11/22 14:44:06 manduchi Exp $ */
+/* $Id: TSDataProvider.java,v 1.13 2002/12/03 10:34:25 manduchi Exp $ */
 import java.util.*;
 import java.io.IOException;
 import javax.swing.JFrame;
@@ -30,22 +30,25 @@ class TSDataProvider extends MdsDataProvider
 	
 	protected String ParseExpression(String in)
 	{
-	    if(in.startsWith("DIM_OF("))
-	        return in;
-	    StringTokenizer st = new StringTokenizer(in, ":");
+	    //if(in.startsWith("DIM_OF("))
+	    //    return in;
+	        
+	    String res = MdsplusParser.parseFun(in, "GetTsBase(" + shot + ", \"", "\")");
+	        
+/*	    StringTokenizer st = new StringTokenizer(in, ":");
         String res = "GetTSData(\"";
 	    try{
-	        String name = st.nextToken();
+	        String name = st.nextToken();*/
 /*	        String rang0 = st.nextToken();
 	        String rang1 = st.nextToken();
 	        res = "GetTSData(\"" + name + "\", " + shot + ", " +
 	            rang0 + ", " + rang1 + ")"; */
-	        res = "GetTsBase(" + shot + ", \"" + name + "\")";
-	    }catch(Exception e)
+	        //res = "GetTsBase(" + shot + ", \"" + name + "\")";
+/*	    }catch(Exception e)
 	    {
 	        error = "Wrong signal format: must be <signal_name>:<rangs[0]>:<rangs[1]>";
 	        return null;
-	    }
+	    }*/
 	    //System.out.println(res);
 	    return res;
 	}
