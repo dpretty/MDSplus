@@ -1,4 +1,4 @@
-/* $Id: MdsConnection.java,v 1.20 2003/02/06 15:26:45 manduchi Exp $ */
+/* $Id: MdsConnection.java,v 1.21 2003/02/06 16:38:40 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.*;
@@ -94,12 +94,12 @@ public class MdsConnection
 	                    synchronized (this)
 	                    {
 	                        message = curr_message;
-	                        notify();
+	                        if(pending_count == 0) notify();
 	                    }
 	                    
 	                    curr_message = null;
-	                    if(pending_count == 0)
-	                        MdsConnection.this.NotifyMessage();
+	                    //if(pending_count == 0)
+	                      //  MdsConnection.this.NotifyMessage();
 	                }
         	    }
 	        } 
