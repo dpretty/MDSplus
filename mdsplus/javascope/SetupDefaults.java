@@ -1,4 +1,4 @@
-/* $Id: SetupDefaults.java,v 1.32 2003/03/07 15:11:11 manduchi Exp $ */
+/* $Id: SetupDefaults.java,v 1.34 2003/05/16 08:12:30 manduchi Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.util.*;
@@ -188,8 +188,9 @@ public class SetupDefaults extends JDialog implements ActionListener
 
         lab = new JLabel("Grid: Mode");
         panel1.add(lab);
-                        
-        grid_mode = new JComboBox(Grid.GRID_MODE);    
+        
+        String grd[] = {"Dotted", "Gray"};
+        grid_mode = new JComboBox(grd);//Grid.GRID_MODE);    
         grid_mode.setSelectedIndex(curr_grid_mode);	      	
         panel1.add(grid_mode);    
                 

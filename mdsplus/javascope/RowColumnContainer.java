@@ -1,4 +1,4 @@
-/* $Id: RowColumnContainer.java,v 1.20 2003/03/07 15:11:10 manduchi Exp $ */
+/* $Id: RowColumnContainer.java,v 1.26 2003/08/08 12:35:40 manduchi Exp $ */
 import java.awt.Panel;
 import java.awt.Component;
 import java.awt.Point;
@@ -37,7 +37,7 @@ public class RowColumnContainer extends JComponent
    /**
     * number of component in column
     */
-   protected int rows[] = {1};
+   protected int rows[] = {1,0,0,0};
 
    /**
     * Normalize height of the components in column.
@@ -646,13 +646,17 @@ public class RowColumnContainer extends JComponent
                 }
             }
         }
-        
+
         if(!rows.equals(this.rows))
         {
             this.rows = new int[rows.length];
             for(int i = 0; i < rows.length; i++)
                 this.rows[i] = rows[i];
         }
+        
+        row_col_layout.SetRowColumn(rows);
+        invalidate();
+        validate();   
     }
 
    /**

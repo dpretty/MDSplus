@@ -1,4 +1,4 @@
-/* $Id: WaveformContainer.java,v 1.25 2003/03/07 15:11:14 manduchi Exp $ */
+/* $Id: WaveformContainer.java,v 1.26 2003/04/18 13:09:04 manduchi Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -361,40 +361,13 @@ public class WaveformContainer extends RowColumnContainer implements WaveformMan
     synchronized public void UpdatePoints(double x, Waveform curr_w)
     {
         Waveform w;       
-//        int i = 0, ii;
-//        int idx = GetWaveIndex(curr_w);
 
-
-	        for(int i = 0; i < getGridComponentCount(); i++)
-	        {
-	            w = GetWavePanel(i);
-	            if(w != null || w == curr_w) 
-	                 w.UpdatePoint(x);
-	        }
-
-
-
-	/*        
-        for(i = 0, ii = 0; i < rows.length; i++)
-        {
-            if(idx < ii + rows[i])
-                break;
-            ii += rows[i];
-        }
-        
-        i = 0;
-		while(i < getGridComponentCount())
-		{
-            w = GetWavePanel(ii);
-            if(ii != idx)
-            {
-                if(w != null)
-		            w.UpdatePoint(x);
-		    }
-		    ii = (ii+1)%getGridComponentCount();
-		    i++;
-		}
-	*/
+	    for(int i = 0; i < getGridComponentCount(); i++)
+	    {
+	        w = GetWavePanel(i);
+	        if(w != null && w != curr_w)
+	              w.UpdatePoint(x);
+	    }
     }
         
     

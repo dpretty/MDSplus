@@ -1,4 +1,4 @@
-/* $Id: DataCacheObject.java,v 1.14 2003/03/07 15:10:59 manduchi Exp $ */
+/* $Id: DataCacheObject.java,v 1.20 2003/08/08 12:35:34 manduchi Exp $ */
 import java.io.Serializable;
 
 class DataCacheObject implements Serializable
@@ -12,4 +12,5 @@ class DataCacheObject implements Serializable
     String title;
     String x_label;
     String y_label;
+    String z_label;
 }

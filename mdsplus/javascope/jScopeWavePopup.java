@@ -1,4 +1,4 @@
-/* $Id: jScopeWavePopup.java,v 1.25 2003/03/07 15:11:16 manduchi Exp $ */
+/* $Id: jScopeWavePopup.java,v 1.27 2003/05/16 08:12:36 manduchi Exp $ */
 import java.awt.Point;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -157,6 +157,13 @@ class jScopeWavePopup extends MultiWavePopup
         super.SetInterpolate(state);
 	    jScopeMultiWave w = (jScopeMultiWave)wave;
         w.wi.interpolates[w.GetSelectedSignal()] = state;
+    }
+
+    protected void SetMode2D(int mode)
+    {
+        super.SetMode2D(mode);
+	    jScopeMultiWave w = (jScopeMultiWave)wave;
+        w.wi.mode2D[w.GetSelectedSignal()] = (byte)mode;
     }
 
     public void SetDeselectPoint(Waveform w)

@@ -1,4 +1,4 @@
-/* $Id: MdsWaveInterface.java,v 1.29 2003/03/07 15:11:08 manduchi Exp $ */
+/* $Id: MdsWaveInterface.java,v 1.30 2003/04/18 13:08:57 manduchi Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.util.*;
@@ -297,6 +297,7 @@ class MdsWaveInterface extends WaveInterface
 	    markers_step = new int[num_waves];
 	    colors_idx = new int[num_waves];
 	    interpolates = new boolean[num_waves];
+	    mode2D = new byte[num_waves];
 	    
 	    w_error = new String[num_waves];
 	    evaluated = new boolean[num_waves];
@@ -338,6 +339,7 @@ class MdsWaveInterface extends WaveInterface
 	        markers_step[i] = wi.markers_step[i];
 	        colors_idx[i] = wi.colors_idx[i];
 	        interpolates[i] = wi.interpolates[i];
+	        mode2D[i] = wi.mode2D[i];
 	        if(wi.shots != null)
 	            shots[i] = wi.shots[i];
 /*****/
@@ -620,6 +622,7 @@ class MdsWaveInterface extends WaveInterface
 	    markers_step = new int[num_waves];
 	    colors_idx   = new int[num_waves];
 	    interpolates = new boolean[num_waves];
+	    mode2D       = new byte[num_waves];
 	
 	    for(int i = 0; i < num_waves; i++)
 	    {
@@ -627,6 +630,7 @@ class MdsWaveInterface extends WaveInterface
 	        markers_step[i] = 1;
     	    colors_idx[i]   = i % Waveform.colors.length;
 	        interpolates[i] = true;
+	        mode2D[i] = (byte)Signal.MODE_YTIME;
 	    }
     }
 
