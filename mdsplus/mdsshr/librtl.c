@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.130 $ $Date: 2003/09/25 12:03:57 $ $Name:  $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.131 $ $Date: 2003/11/04 04:52:53 $ $Name:  $";
 
 extern int MdsCopyDxXd();
 static char *GetTdiLogical(char *name);
@@ -680,8 +680,11 @@ char *TranslateLogical(char *name)
 {
 	char *env = getenv(name);
 	env = env ? strcpy(malloc(strlen(env)+1),env) : 0;
+      
+/*
         if (!env)
           env = GetTdiLogical(name);
+*/
 	return env;
 }
 unsigned int LibCallg(void **arglist, unsigned int (*routine)())
