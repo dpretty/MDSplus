@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.160 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.161 $
 AC_INIT()
 
 AC_CONFIG_HEADER(include/config.h)
@@ -329,7 +329,8 @@ then
 	AC_MSG_RESULT(yes)
 else
 	AC_MSG_RESULT(no)
-	JNITYPE="$SHARETYPE"
+	SHARETYPEJNI="$SHARETYPE"
+        LINKJNI="$LINKSHARED"
 fi
 
 dnl Checks for libraries.
