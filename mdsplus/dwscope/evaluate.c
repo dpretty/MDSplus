@@ -87,7 +87,7 @@ void CloseDataSources();
 # define _toupper(c)	(((c) >= 'a' && (c) <= 'z') ? (c) & 0xDF : (c))
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: evaluate.c,v $ $Revision: 1.10 $ $Date: 2000/04/11 15:30:40 $";
+static char *cvsrev = "@(#)$RCSfile: evaluate.c,v $ $Revision: 1.11 $ $Date: 2000/09/20 16:29:37 $";
 
 extern void EventUpdate(XtPointer client_data, int *source, XtInputId *id);
 
@@ -582,7 +582,7 @@ static void  EventAst(Boolean *received)
   XFlush(XtDisplay(this_widget));
 }
 
-void SetupEvent(String event, Boolean *received, void **id)
+void SetupEvent(String event, Boolean *received, int *id)
 {
   if (*id)
     MDSEventCan(*id);
@@ -1041,7 +1041,7 @@ static void  EventReceived(Boolean *received)
   *received = True;
 }
 
-void SetupEvent(String event, Boolean *received, void **id)
+void SetupEvent(String event, Boolean *received, int *id)
 {
   if (*id) {
     MdsEventCan(ConnectEvents(), *id);
