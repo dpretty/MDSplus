@@ -3,7 +3,7 @@
 #include <treeshr.h>
 #include "treeshrp.h"
 
-static char *cvsrev = "@(#)$RCSfile: TreeFindNode.c,v $ $Revision: 1.20 $ $Date: 1998/12/16 10:41:15 $";
+static char *cvsrev = "@(#)$RCSfile: TreeFindNode.c,v $ $Revision: 1.21 $ $Date: 1999/07/13 15:50:29 $";
 
 extern void *DBID;
 
@@ -876,6 +876,23 @@ int _TreeFindNodeEnd(void *dbid, void **ctx_in)
     status = TreeNO_CONTEXT;
 
   return status;
+}
+
+
+int TreeFindNodeTagsDsc(int nid_in, void **ctx_ptr, struct descriptor *tag)
+{
+  int status;
+  char *tagname = TreeFindNodeTags(nid_in, ctx_ptr);
+  if (tagname)
+  {
+    struct descriptor tagd = {0,DTYPE_T,CLASS_S,0};
+    tagd.length = strlen(tagname);
+    tagd.pointer = tagname;
+    StrCopyDx(tag,&tagd);
+    status = 1;
+  }
+  else
+    status = 0;
 }
 
 char *_TreeFindNodeTags(void *dbid, int nid_in, void **ctx_ptr)
