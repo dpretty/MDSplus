@@ -57,7 +57,7 @@ $ dwcope [-default setup]
 #include <DXm/DECspecific.h>
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: dwscope.c,v $ $Revision: 1.16 $ $Date: 2002/07/09 16:27:46 $";
+static char *cvsrev = "@(#)$RCSfile: dwscope.c,v $ $Revision: 1.17 $ $Date: 2002/08/05 18:37:07 $";
 
 extern void XmdsInitialize();
 extern void XmdsDestroyWidgetCallback();
@@ -1060,7 +1060,7 @@ static void  Setup(Widget w, XtPointer client_data, XButtonEvent *event, Boolean
     }
     else
     {
-      XUngrabPointer(XtDisplay(Button3Widget), CurrentTime);
+      XUngrabPointer(XtDisplay(Button3Widget), event->time);
       XtPopdown(XtParent(Button3Widget));
     }
   }
