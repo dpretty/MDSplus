@@ -17,7 +17,7 @@
 #define __toupper(c) (((c) >= 'a' && (c) <= 'z') ? (c) & 0xDF : (c))
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.23 $ $Date: 1998/04/13 17:31:01 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.24 $ $Date: 1998/04/15 18:33:17 $";
 
 int treeshr_errno = 0;
 
@@ -1351,4 +1351,11 @@ int       _TreeOpenNew(void **dbid, char *tree_in, int shot_in)
   if (status & 1)
     _TreeWriteTree(dbid, 0, 0);
   return status;
+}
+
+void *TreeSwitchDbid(void *dbid)
+{
+  void *old_dbid = DBID;
+  DBID = dbid;
+  return old_dbid;
 }
