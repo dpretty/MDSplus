@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.25 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.26 $
 AC_INIT()
 
 AC_CONFIG_HEADER(include/config.h)
@@ -216,7 +216,7 @@ AC_CHECK_SIZEOF(_int64)
 AC_CHECK_SIZEOF(int *)
 SIZEOF_INT_P=$ac_cv_sizeof_int_p
 AC_PATH_XTRA
-AC_PATH_PROG(UIL,uil,uil,/usr/bin/X11:$PATH)
+AC_PATH_PROG(UIL,uil,uil,$UILPATH:/usr/bin/X11:$PATH)
 AC_PATH_PROG(JAVAC,javac,javac)
 AC_PATH_PROG(JAR,jar,jar)
 XM_LIBS="-lMrm -lXm"
