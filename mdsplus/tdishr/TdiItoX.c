@@ -26,7 +26,9 @@
 #ifndef HAVE_VXWORKS_H
 #define const
 #endif
-#define ROPRAND(fptr) (*(unsigned short *)(fptr) == 0x8000)
+extern int IsRoprand();
+#define ROPRAND(fptr) IsRoprand(DTYPE_NATIVE_FLOAT,fptr)
+/* #define ROPRAND(fptr) (*(unsigned short *)(fptr) == 0x8000) */
 
 #include "tdirefcat.h"
 #include "tdirefstandard.h"
@@ -36,7 +38,7 @@
 #include <mdsshr.h>
 #include <string.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiItoX.c,v $ $Revision: 1.7 $ $Date: 2001/06/06 17:05:18 $";
+static char *cvsrev = "@(#)$RCSfile: TdiItoX.c,v $ $Revision: 1.8 $ $Date: 2001/06/19 19:49:37 $";
 
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 
