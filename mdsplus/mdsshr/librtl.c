@@ -16,7 +16,7 @@
 #include <math.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.139 $ $Date: 2004/05/21 16:12:00 $ $Name:  $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.140 $ $Date: 2004/11/04 09:31:36 $ $Name:  $";
 
 extern int MdsCopyDxXd();
 STATIC_ROUTINE char *GetTdiLogical(char *name);
@@ -898,7 +898,12 @@ STATIC_ROUTINE void sleep(unsigned int secs)
 
 int LibWait(float *secs)
 {
-  sleep((unsigned int)*secs);
+  struct timespec ts;
+  ts.tv_sec = (unsigned int)*secs;
+  ts.tv_nsec = (unsigned int)((*secs - (unsigned int)*secs)*1E9);
+  nanosleep(&ts, 0);
+
+  /*sleep((unsigned int)*secs);*/
   return 1;
 }
 
