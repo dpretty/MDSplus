@@ -23,7 +23,7 @@ extern unsigned short OpcValue;
 #include <stdlib.h>
 #include <mdsshr.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiDtypeRange.c,v $ $Revision: 1.5 $ $Date: 1998/04/08 19:06:01 $";
+static char *cvsrev = "@(#)$RCSfile: TdiDtypeRange.c,v $ $Revision: 1.6 $ $Date: 1999/04/14 13:32:59 $";
 
 static DESCRIPTOR_A(arr0, 1, DTYPE_B, 0, 0);
 static int minus_one_value = -1;
@@ -130,7 +130,12 @@ struct TdiCatStruct		cats[4];
 	if (status & 1) status = TdiSubtract(&dat[1], dat[0].pointer, &nelem MDS_END_ARG);
 	if (new[2] && status & 1) status = TdiDivide(&nelem, dat[2].pointer, &nelem MDS_END_ARG);
 	if (status & 1) status = TdiDim(&nelem, &minus_one, &nelem MDS_END_ARG);
-	if (status & 1 && nelem.pointer->dtype != DTYPE_L) status = TdiLong(&nelem, &nelem MDS_END_ARG);
+        if (status & 1 && nelem.pointer->dtype != DTYPE_L)
+        {
+          status = TdiNint(&nelem, &nelem MDS_END_ARG);
+          if (status & 1 && nelem.pointer->dtype != DTYPE_L)
+            status = TdiLong(&nelem, &nelem MDS_END_ARG);
+        }
 	if (status & 1) N_ELEMENTS(nelem.pointer, nseg);
 	if (status & 1) for (j = nseg, pl = (int *)nelem.pointer->pointer, tot = 0; --j >= 0;) tot += *pl++;
 
