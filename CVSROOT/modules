@@ -34,3 +34,4 @@ tditest mdsplus/tditest
 treeshr mdsplus/treeshr
 xmdsshr mdsplus/xmdsshr
 dwscope mdsplus/dwscope
+traverser mdsplus/traverser
