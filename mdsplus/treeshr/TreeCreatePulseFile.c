@@ -44,7 +44,7 @@ extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
 extern char *MaskReplace();
 
-static char *cvsrev = "@(#)$RCSfile: TreeCreatePulseFile.c,v $ $Revision: 1.20 $ $Date: 2001/06/06 17:04:33 $";
+static char *cvsrev = "@(#)$RCSfile: TreeCreatePulseFile.c,v $ $Revision: 1.21 $ $Date: 2001/10/03 15:17:05 $";
 
 #ifdef _WIN32
 #include <windows.h>
@@ -107,7 +107,7 @@ int       _TreeCreatePulseFile(void *dbid, int shotid, int numnids_in, int *nids
   retstatus = status;
   if (status & 1)
   {
-    for (i = 0; i < num; i++)
+    for (i = 0; i < num && (retstatus & 1); i++)
     {
       char name[13];
       if (nids[i])
@@ -124,7 +124,7 @@ int       _TreeCreatePulseFile(void *dbid, int shotid, int numnids_in, int *nids
       }
       if (status & 1)
         status = TreeCreateTreeFiles(name, shot, source_shot);
-      if (!(status & 1))
+      if (!(status & 1) && (i==0))
         retstatus = status;
     }
   }
@@ -261,12 +261,16 @@ int  TreeCreateTreeFiles(char *tree, int shot, int source_shot)
           free(dstfile);
         }
         else
-          status = 0;
+          status = TreeINVPATH;
         free(srcfile);
       }
+      else
+        status = TreeTREENF;
     }
     TranslateLogicalFree(pathin);
   }
+  else
+    status = TreeINVPATH;
   return status;
 }
 
