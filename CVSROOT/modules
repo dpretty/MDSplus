@@ -41,3 +41,4 @@ mdsplus mdsplus
 mitdevices mdsplus/mitdevices
 mdstcpip mdsplus/mdstcpip
 .cvsrc	mdsplus	 .cvsrc
+binaries binaries
