@@ -1,7 +1,7 @@
 #include <string.h>
 #include <mdsdescrip.h>
 
-static char *cvsrev = "@(#)$RCSfile: CvtConvertFloat.c,v $ $Revision: 1.8 $ $Date: 2000/02/10 19:48:28 $";
+static char *cvsrev = "@(#)$RCSfile: CvtConvertFloat.c,v $ $Revision: 1.9 $ $Date: 2000/09/14 19:54:24 $";
 
 /** Adapted from VMS V7.0 sources CvtConvertFloat.lis                      **/  
 /******************************************************************************/
@@ -264,7 +264,7 @@ typedef UNPACKED_REAL	*UNPACKED_REAL_PTR;
 #define U_R_INVALID	8
 #define U_R_UNUSUAL (U_R_ZERO | U_R_INFINITY | U_R_INVALID)
 
-#define U_R_BIAS	2147483648L
+#define U_R_BIAS	2147483648LU
 
 /*
 ** Special floating point constant definitions
