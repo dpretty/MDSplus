@@ -11,7 +11,7 @@
 #include <math.h>
 
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.109 $ $Date: 2002/09/12 13:31:22 $ $Name:  $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.110 $ $Date: 2002/09/12 14:04:34 $ $Name:  $";
 
 extern int MdsCopyDxXd();
 
@@ -2148,4 +2148,37 @@ int libffs(int *position, int *size, char *base, int *find_position)
     }
   }
   return status;
+}
+
+char *MdsRelease()
+{
+  static const char *tag = "$Name:  $";
+  static char rel[512] = {0};
+  if (rel[0] == 0)
+  {
+    int major = 0;
+    int minor = 0;
+    int sub = 0;
+    int status = sscanf(tag,"$Name:  $",&major,&minor,&sub);
+    if (status == 0)
+      strcpy(rel,"MDSplus, beta version");
+    else if (status == 1)
+      sprintf(rel,"MDSplus, Version %d",major);
+    else if (status == 2)
+      sprintf(rel,"MDSplus, Version %d.%d",major,minor);
+    else if (status == 3)
+      sprintf(rel,"MDSplus, Version %d.%d-%d",major,minor,sub);
+  }
+  return rel;
+}
+
+struct descriptor *MdsReleaseDsc()
+{
+  static struct descriptor ans = {0,DTYPE_T,CLASS_S,0};
+  if (ans.length == 0)
+  {
+    ans.pointer = MdsRelease();
+    ans.length = strlen(ans.pointer);
+  }
+  return &ans;
 }
