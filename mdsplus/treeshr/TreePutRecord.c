@@ -54,7 +54,7 @@ static int daylight = 0;
 #define LONG_LONG_CONSTANT(value) value##ll
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.67 $ $Date: 2003/02/20 16:26:23 $";
+static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.68 $ $Date: 2003/06/02 16:31:49 $";
 
 #ifdef min
 #undef min
@@ -320,7 +320,6 @@ static int FixupNid(NID *nid, unsigned char *tree, struct descriptor *path)
       }
     
     path_reference = 1;
-    status = 1;
   }
   else
     nid_reference = 1;
@@ -345,6 +344,7 @@ int TreeOpenDatafileW(TREE_INFO *info, int *stv_ptr, int tmpfile)
   }
   if (status & 1)
   {
+    int old_get = df_ptr->get; 
     size_t len = strlen(info->filespec)-4;
     char *filename = strncpy(malloc(len+20),info->filespec,len);
     filename[len]='\0';
@@ -352,7 +352,9 @@ int TreeOpenDatafileW(TREE_INFO *info, int *stv_ptr, int tmpfile)
     df_ptr->get = MDS_IO_OPEN(filename,tmpfile ? O_RDWR | O_CREAT | O_TRUNC : O_RDONLY, 0664);
     status = (df_ptr->get == -1) ? TreeFAILURE : TreeNORMAL;
     if (df_ptr->get == -1)
-      df_ptr->get = 0;
+      df_ptr->get = old_get;
+    else if (df_ptr->get > 0)
+      MDS_IO_CLOSE(old_get);
     if (status & 1)
     {
       df_ptr->put = MDS_IO_OPEN(filename,O_RDWR, 0);
