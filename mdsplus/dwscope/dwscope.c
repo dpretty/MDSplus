@@ -274,7 +274,7 @@ $ dwcope [-default setup]
 #include <DXm/DECspecific.h>
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: dwscope.c,v $ $Revision: 1.5 $ $Date: 1998/09/15 19:38:44 $";
+static char *cvsrev = "@(#)$RCSfile: dwscope.c,v $ $Revision: 1.6 $ $Date: 1998/09/18 16:30:45 $";
 
 extern void XmdsInitialize();
 extern void XmdsDestroyWidgetCallback();
@@ -1973,7 +1973,6 @@ static void  Complain(WaveInfo *info, char mode, String error)
     case 2:
     PopupComplaint(DataSetupWidget, error);
   }
-  XtFree(error);
 }
 
 static void  ClearWaveform(WaveInfo *info)
