@@ -11,7 +11,7 @@
 #include <math.h>
 
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.113 $ $Date: 2002/09/13 17:41:11 $ $Name:  $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.114 $ $Date: 2002/09/24 13:01:14 $ $Name:  $";
 
 extern int MdsCopyDxXd();
 
@@ -1206,6 +1206,33 @@ int LibCreateVmZone(ZoneList **zone)
     list->next = *zone;
   }
   return (*zone != NULL);
+}
+
+int LibDeleteVmZone(ZoneList **zone)
+{
+  int found = 0;
+  ZoneList *list,*prev;
+  LibResetVmZone(zone);
+  if (*zone == MdsZones)
+  {
+    found = 1;
+    MdsZones = (*zone)->next;
+  }
+  else
+  {
+    for (prev=0,list = MdsZones; list && list != *zone; prev=list,list = list->next);
+    if (list && prev)
+    {
+      prev->next = list->next;
+      found = 1;
+    }
+  }
+  if (found)
+  {
+    free(*zone);
+    *zone=0;
+  }
+  return found;
 }
    
 int LibResetVmZone(ZoneList **zone)
