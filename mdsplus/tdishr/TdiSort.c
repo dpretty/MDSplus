@@ -31,7 +31,7 @@
 #include <mdsshr.h>
 #include <string.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiSort.c,v $ $Revision: 1.5 $ $Date: 2000/04/12 19:58:50 $";
+static char *cvsrev = "@(#)$RCSfile: TdiSort.c,v $ $Revision: 1.6 $ $Date: 2003/06/27 14:30:31 $";
 
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 extern unsigned short OpcVector;
@@ -272,7 +272,7 @@ struct TdiCatStruct		cats[3];
 	It could be done by sorting indices of equal value elements.
 */
 TdiRefStandard(Tdi1Sort)
-static int			ran = 0;
+static _int64			ran = 0;
 int				i, j, keep, l, r, jstack, *ndx;
 int				upcase = 0, cmode = -1, len, n=0;
 int				(*gtr)()=0;
@@ -353,7 +353,7 @@ int				stack[64];
 		Choose an index between l and r.
 		***********************************/
 		ran = (ran * 211 + 1663) % 7875;
-		i = l + (r - l + 1) * ran / 7875;
+                i = l + (r - l + 1) * ran / 7875; 
 		keep = *(ndx+i);
 		pkeep = pinput+len*keep;
 		*(ndx+i) = *(ndx+l);
