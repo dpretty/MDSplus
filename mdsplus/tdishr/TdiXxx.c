@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <mdsshr.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiXxx.c,v $ $Revision: 1.4 $ $Date: 1998/10/19 14:10:46 $";
+static char *cvsrev = "@(#)$RCSfile: TdiXxx.c,v $ $Revision: 1.5 $ $Date: 2000/09/14 13:31:16 $";
 
 extern int TdiConcat();
 extern int TdiTranslate();
@@ -649,6 +649,8 @@ unsigned int	ncopies, status;
 */
 TdiRefStandard2(Tdi2Shft)
 
+	cats[1].out_dtype = cats[0].out_dtype;
+	cats[1].out_cat = cats[0].out_cat;
 	cats[narg].out_dtype = cats[0].out_dtype;
 	cats[narg].out_cat = cats[0].out_cat;
 	return 1;
