@@ -1,4 +1,4 @@
-/* $Id: Frames.java,v 1.17 2002/04/26 13:14:29 jgk Exp $ */
+/* $Id: Frames.java,v 1.18 2002/07/26 10:55:56 manduchi Exp $ */
 import java.awt.*;
 import java.io.*;
 import java.awt.image.*;
@@ -141,7 +141,8 @@ class Frames extends Canvas
     {
         Image img;
         if(buf == null) return false;
-        img = getToolkit().createImage(buf);
+        //img = getToolkit().createImage(buf);
+        img = Toolkit.getDefaultToolkit().createImage(buf);
         return AddFrame(img, t);        
     }    
 
@@ -282,7 +283,8 @@ class Frames extends Canvas
     {
         Image img;
         if(buf == null) return false;
-        img = getToolkit().createImage(buf);
+//        img = getToolkit().createImage(buf);
+        img = Toolkit.getDefaultToolkit().createImage(buf);
         return AddFrame(img, t);
         
     }    
@@ -308,6 +310,8 @@ class Frames extends Canvas
     public void WaitLoadFrame() throws InterruptedException
     {
         tracker.waitForID(0);
+        for(int i = 0; i < frame.size(); i++)
+            tracker.removeImage((Image)frame.elementAt(i));
     }    
 
     protected int[] getPixelArray(int idx, int x, int y, int img_w, int img_h)
@@ -829,10 +833,19 @@ class Frames extends Canvas
     public Object GetFrame(int idx)
     {
         int count;
+
         if(idx >= frame.size())
             idx = frame.size() - 1;
         if(idx < 0 || frame.elementAt(idx) == null) return null;
         curr_frame_idx = idx;
+        try
+        {
+            WaitLoadFrame();
+        }
+        catch(InterruptedException exc)
+        {
+            return null;
+        }
         return frame.elementAt(idx);
     }
 }

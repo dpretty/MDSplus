@@ -1,4 +1,4 @@
-/* $Id: MdsAccess.java,v 1.7 2002/04/26 13:14:29 jgk Exp $ */
+/* $Id: MdsAccess.java,v 1.8 2002/07/26 10:55:58 manduchi Exp $ */
 import java.net.*;
 import java.util.*;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-/* $Id: Descriptor.java,v 1.5 2002/04/26 13:14:29 jgk Exp $ */
+/* $Id: Descriptor.java,v 1.6 2002/07/26 10:55:56 manduchi Exp $ */
 import java.io.*;
 
 class Descriptor 

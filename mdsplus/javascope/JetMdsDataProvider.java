@@ -1,4 +1,4 @@
-/* $Id: JetMdsDataProvider.java,v 1.3 2002/04/26 13:14:29 jgk Exp $ */
+/* $Id: JetMdsDataProvider.java,v 1.4 2002/07/26 10:55:56 manduchi Exp $ */
 import java.util.*;
 import java.io.IOException;
 import javax.swing.JFrame;
@@ -12,7 +12,7 @@ class JetMdsDataProvider extends MdsDataProvider
     
     public void SetArgument(String arg){};
         
-    public synchronized void Update(String exp, int s)
+    public synchronized void Update(String exp, long s)
 	{
 	    error = null;
 		shot = s;

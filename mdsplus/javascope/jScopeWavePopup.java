@@ -1,4 +1,4 @@
-/* $Id: jScopeWavePopup.java,v 1.13 2002/04/26 13:14:30 jgk Exp $ */
+/* $Id: jScopeWavePopup.java,v 1.14 2002/07/26 10:56:03 manduchi Exp $ */
 import java.awt.Point;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -214,7 +214,7 @@ class jScopeWavePopup extends MultiWavePopup
         
         if(w.ShowMeasure() && f_name != null && f_name.length() != 0)
         {
-            int shot = 0;
+            long shot = 0;
             jScopeMultiWave mw = (jScopeMultiWave) w;
             if(mw.wi.shots != null)
                 shot = mw.wi.shots[mw.GetSelectedSignal()];

@@ -1,4 +1,4 @@
-/* $Id: JiDim.java,v 1.3 2002/04/26 13:14:29 jgk Exp $ */
+/* $Id: JiDim.java,v 1.4 2002/07/26 10:55:56 manduchi Exp $ */
 import java.io.*;
 
 public class JiDim 

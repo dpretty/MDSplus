@@ -1,4 +1,4 @@
-/* $Id: ColorDialog.java,v 1.18 2002/04/26 13:14:29 jgk Exp $ */
+/* $Id: ColorDialog.java,v 1.19 2002/07/26 10:55:55 manduchi Exp $ */
 import java.awt.*;
 import java.awt.event.*;
 import java.lang.*;

@@ -1,7 +1,7 @@
-/* $Id: jScopeDefaultValues.java,v 1.4 2002/04/26 13:14:30 jgk Exp $ */
+/* $Id: jScopeDefaultValues.java,v 1.5 2002/07/26 10:56:03 manduchi Exp $ */
 class jScopeDefaultValues 
 {
-   int	  shots[];
+   long	  shots[];
    String xmin, xmax, ymax, ymin;
    String title_str, xlabel, ylabel;
    String experiment_str, shot_str;

@@ -1,4 +1,4 @@
-/* $Id: DemoDataProvider.java,v 1.2 2002/04/26 13:14:29 jgk Exp $ */
+/* $Id: DemoDataProvider.java,v 1.3 2002/07/26 10:55:56 manduchi Exp $ */
 import java.io.*;
 import javax.swing.JFrame;
 
@@ -91,7 +91,7 @@ class DemoDataProvider implements DataProvider
     {
         error = null;
     }
-    public void Update(String exp, int s)
+    public void Update(String exp, long s)
     {
         error = null;
     }
@@ -150,10 +150,10 @@ class DemoDataProvider implements DataProvider
         return d;
     }
     
-    public int[] GetShots(String in)
+    public long[] GetShots(String in)
     {
         error = null;
-        int d[] = new int[1];
+        long d[] = new long[1];
         d[0] = 0;
         return d;
         

@@ -1,4 +1,4 @@
-/* $Id: DataCacheObject.java,v 1.2 2002/04/26 13:14:29 jgk Exp $ */
+/* $Id: DataCacheObject.java,v 1.3 2002/07/26 10:55:55 manduchi Exp $ */
 import java.io.Serializable;
 
 class DataCacheObject implements Serializable

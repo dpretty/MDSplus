@@ -1,5 +1,5 @@
 /* 
- * $Id: RotateFilter.java,v 1.3 2002/04/26 13:14:30 jgk Exp $ 
+ * $Id: RotateFilter.java,v 1.4 2002/07/26 10:55:59 manduchi Exp $ 
  *
  * Copyright (c) 1995, 1996 Sun Microsystems, Inc. All Rights Reserved.
  *

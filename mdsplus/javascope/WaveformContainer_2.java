@@ -1,4 +1,4 @@
-/* $Id: WaveformContainer_2.java,v 1.3 2002/04/26 13:14:30 jgk Exp $ */
+/* $Id: WaveformContainer_2.java,v 1.4 2002/07/26 10:56:02 manduchi Exp $ */
 import java.awt.*;
 import java.awt.print.*;
 import java.awt.geom.*;

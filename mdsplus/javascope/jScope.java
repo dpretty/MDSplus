@@ -1,4 +1,4 @@
-/* $Id: jScope.java,v 1.35 2002/06/05 15:39:07 twf Exp $ */
+/* $Id: jScope.java,v 1.36 2002/07/26 10:56:02 manduchi Exp $ */
 import java.util.Properties;
 
 public class jScope

@@ -1,4 +1,4 @@
-/* $Id: Waveform.java,v 1.36 2002/04/26 13:14:30 jgk Exp $ */
+/* $Id: Waveform.java,v 1.37 2002/07/26 10:56:02 manduchi Exp $ */
 import java.awt.*;
 import java.awt.image.*;
 import java.awt.event.*;

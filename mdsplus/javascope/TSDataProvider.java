@@ -1,4 +1,4 @@
-/* $Id: TSDataProvider.java,v 1.3 2002/04/26 13:14:30 jgk Exp $ */
+/* $Id: TSDataProvider.java,v 1.4 2002/07/26 10:56:00 manduchi Exp $ */
 import java.util.*;
 import java.io.IOException;
 import javax.swing.JFrame;
@@ -22,7 +22,7 @@ class TSDataProvider extends MdsDataProvider
         mds.setUser("mdsplus");
     }
     
-    public synchronized void Update(String exp, int s)
+    public synchronized void Update(String exp, long s)
 	{
 	    error = null;
 		shot = s;

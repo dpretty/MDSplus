@@ -13,9 +13,12 @@
  *
  * Author: Jon Krom, Forschungszentrum Jülich, Institut für Plasmaphysik.
  *
- * $Id: TWUProperties.java,v 1.8 2002/05/27 13:49:51 jgk Exp $
+ * $Id: TWUProperties.java,v 1.9 2002/07/26 10:56:00 manduchi Exp $
  *
  * $Log: TWUProperties.java,v $
+ * Revision 1.9  2002/07/26 10:56:00  manduchi
+ * Used longs for shot numbers
+ *
  * Revision 1.8  2002/05/27 13:49:51  jgk
  * Suggestion from Marco: NaN for min/max when the're no proper values.
  *
@@ -66,7 +69,7 @@ public class TWUProperties
     {
         final String
             actual_user_agent = (user_agent!=null) ?  user_agent
-            : "TWUProperties.java for jScope ($Revision: 1.8 $)";
+            : "TWUProperties.java for jScope ($Revision: 1.9 $)";
         signalProps = new Properties();
 
         if (SigURL==null)
@@ -346,7 +349,7 @@ public class TWUProperties
     public static String 
     revision()
     {
-        return "$Id: TWUProperties.java,v 1.8 2002/05/27 13:49:51 jgk Exp $";
+        return "$Id: TWUProperties.java,v 1.9 2002/07/26 10:56:00 manduchi Exp $";
     }
 
     public static void 
@@ -398,5 +401,5 @@ class FakeTWUProperties extends TWUProperties {
 }
 
 /* ------------------------------------------------------------------------ */
-// End of $Id: TWUProperties.java,v 1.8 2002/05/27 13:49:51 jgk Exp $
+// End of $Id: TWUProperties.java,v 1.9 2002/07/26 10:56:00 manduchi Exp $
 /* ------------------------------------------------------------------------ */

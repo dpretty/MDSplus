@@ -1,4 +1,4 @@
-/* $Id: MdsMessage.java,v 1.8 2002/04/26 13:14:30 jgk Exp $ */
+/* $Id: MdsMessage.java,v 1.9 2002/07/26 10:55:58 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.*;

@@ -1,10 +1,10 @@
-/* $Id: WaveDisplay.java,v 1.9 2002/04/26 13:14:30 jgk Exp $ */
+/* $Id: WaveDisplay.java,v 1.10 2002/07/26 10:56:01 manduchi Exp $ */
 import java.awt.*;
 import java.net.URL;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
-import java.security.AccessControlException;
+import java.security.*;
 
 public class WaveDisplay extends JApplet implements WaveformListener
 {

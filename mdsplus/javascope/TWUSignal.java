@@ -10,9 +10,12 @@
  * Authors: Jon Krom, H.R.Koslowski, 
  *          Forschungszentrum Jülich, Institut für Plasmaphysik.
  *
- * $Id: TWUSignal.java,v 1.9 2002/06/05 15:00:08 jgk Exp $
+ * $Id: TWUSignal.java,v 1.10 2002/07/26 10:56:00 manduchi Exp $
  *
  * $Log: TWUSignal.java,v $
+ * Revision 1.10  2002/07/26 10:56:00  manduchi
+ * Used longs for shot numbers
+ *
  * Revision 1.9  2002/06/05 15:00:08  jgk
  * Tell the server to close the connection after sending
  * all the data.  This stops it "chunking" the data.
@@ -166,7 +169,7 @@ public class TWUSignal
             URLConnection con = bulkURL.openConnection();
 
             con.setRequestProperty("User-Agent",
-                                   "TWUSignal.java for jScope ($Revision: 1.9 $)");
+                                   "TWUSignal.java for jScope ($Revision: 1.10 $)");
 
             // It seems to be more efficient, for the type of data we have in the
             // bulk files, to close the connection after the server has send all
@@ -279,10 +282,10 @@ public class TWUSignal
     public static String 
     revision()
     {
-        return "$Id: TWUSignal.java,v 1.9 2002/06/05 15:00:08 jgk Exp $";
+        return "$Id: TWUSignal.java,v 1.10 2002/07/26 10:56:00 manduchi Exp $";
     }
 }
 
 /* ------------------------------------------------------------------------ */
-// $Id: TWUSignal.java,v 1.9 2002/06/05 15:00:08 jgk Exp $
+// $Id: TWUSignal.java,v 1.10 2002/07/26 10:56:00 manduchi Exp $
 /* ------------------------------------------------------------------------ */

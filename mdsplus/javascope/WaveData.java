@@ -1,4 +1,4 @@
-/* $Id: WaveData.java,v 1.2 2002/04/26 13:14:30 jgk Exp $ */
+/* $Id: WaveData.java,v 1.3 2002/07/26 10:56:01 manduchi Exp $ */
 import java.io.IOException;
 
 /**

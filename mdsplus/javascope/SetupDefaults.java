@@ -1,4 +1,4 @@
-/* $Id: SetupDefaults.java,v 1.20 2002/04/26 13:14:30 jgk Exp $ */
+/* $Id: SetupDefaults.java,v 1.21 2002/07/26 10:55:59 manduchi Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.util.*;

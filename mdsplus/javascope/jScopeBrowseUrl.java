@@ -1,4 +1,4 @@
-/* $Id: jScopeBrowseUrl.java,v 1.8 2002/05/24 14:16:50 jgk Exp $ */
+/* $Id: jScopeBrowseUrl.java,v 1.9 2002/07/26 10:56:02 manduchi Exp $ */
 import javax.swing.border.*;
 import javax.swing.colorchooser.*;
 import javax.swing.filechooser.*;
@@ -110,7 +110,7 @@ public class jScopeBrowseUrl extends JDialog
     }
 
 
-    final static String u_agent = "jScopeBrowseUrl.java ($Revision: 1.8 $) for "+jScope.VERSION;
+    final static String u_agent = "jScopeBrowseUrl.java ($Revision: 1.9 $) for "+jScope.VERSION;
 
     protected void setPage(URL url) throws IOException
     {

@@ -1,4 +1,4 @@
-/* $Id: UpdateEvent.java,v 1.2 2002/04/26 13:14:30 jgk Exp $ */
+/* $Id: UpdateEvent.java,v 1.3 2002/07/26 10:56:00 manduchi Exp $ */
 import java.awt.AWTEvent;
 import java.awt.Event;
 

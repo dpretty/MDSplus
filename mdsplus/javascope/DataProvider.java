@@ -1,4 +1,4 @@
-/* $Id: DataProvider.java,v 1.18 2002/04/26 13:14:29 jgk Exp $ */
+/* $Id: DataProvider.java,v 1.19 2002/07/26 10:55:56 manduchi Exp $ */
 import java.io.IOException;
 import javax.swing.JFrame;
 
@@ -40,7 +40,7 @@ public interface DataProvider
          * @param exp The experiment name
          * @param s The shot number.
          */
-        public void    Update(String exp, int s);
+        public void    Update(String exp, long s);
 
         /**
          * GetString is called by jScope to evaluate title, X label and Y label. These labels are defined
@@ -353,5 +353,5 @@ public interface DataProvider
          */
         public void    SetArgument(String arg) throws IOException;
         
-        public int[]   GetShots(String in) throws IOException;
+        public long[]   GetShots(String in) throws IOException;
     }	    

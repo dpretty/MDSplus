@@ -1,4 +1,4 @@
-/* $Id: NotConnectedDataProvider.java,v 1.2 2002/04/26 13:14:30 jgk Exp $ */
+/* $Id: NotConnectedDataProvider.java,v 1.3 2002/07/26 10:55:59 manduchi Exp $ */
 import java.io.*;
 import javax.swing.JFrame;
 
@@ -37,7 +37,7 @@ class NotConnectedDataProvider implements DataProvider
     public void SetEnvironment(String exp)
     {
     }
-    public void Update(String exp, int s)
+    public void Update(String exp, long s)
     {
     }
     public String GetString(String in)
@@ -60,9 +60,9 @@ class NotConnectedDataProvider implements DataProvider
         return null;
     }
     
-    public int[] GetShots(String in)
+    public long[] GetShots(String in)
     {
-        int d[] = new int[1];
+        long d[] = new long[1];
         d[0] = 0;
         return d;        
     }

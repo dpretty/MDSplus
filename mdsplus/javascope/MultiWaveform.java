@@ -1,4 +1,4 @@
-/* $Id: MultiWaveform.java,v 1.30 2002/04/26 13:14:30 jgk Exp $ */
+/* $Id: MultiWaveform.java,v 1.31 2002/07/26 10:55:58 manduchi Exp $ */
 import java.awt.*;
 import java.util.*;
 import java.io.*;

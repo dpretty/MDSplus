@@ -1,4 +1,4 @@
-/* $Id: FtuDataProvider.java,v 1.2 2002/04/26 13:14:29 jgk Exp $ */
+/* $Id: FtuDataProvider.java,v 1.3 2002/07/26 10:55:56 manduchi Exp $ */
 import java.util.*;
 import java.io.IOException;
 import javax.swing.JFrame;
@@ -23,7 +23,7 @@ class FtuDataProvider extends MdsDataProvider
         SetEnvironment("public _IMODE = 0;");       
     }
     
-    public synchronized void Update(String exp, int s)
+    public synchronized void Update(String exp, long s)
 	{
 	    error = null;
 		shot = s;
