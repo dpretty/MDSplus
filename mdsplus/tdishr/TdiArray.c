@@ -26,7 +26,7 @@
 #include "tdirefstandard.h"
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiArray.c,v $ $Revision: 1.13 $ $Date: 2004/04/05 15:14:52 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiArray.c,v $ $Revision: 1.14 $ $Date: 2004/04/08 14:02:15 $";
 
 int Tdi_RandomSeed = 1234567;
 
@@ -189,8 +189,13 @@ int	i;
 
         if (Tdi_RandomSeed == 1234567)
 	{
+#ifdef HAVE_WINDOWS_H
+          srand(time(0)+getpid());
+          Tdi_RandomSeed = rand();
+#else
           srandom(time(0)+getpid());
           Tdi_RandomSeed = random();
+#endif
         }
 	N_ELEMENTS(out_ptr, n);
 	switch (out_ptr->dtype) {
