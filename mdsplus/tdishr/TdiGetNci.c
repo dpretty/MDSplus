@@ -44,7 +44,7 @@
 #include "tdirefstandard.h"
 #include "tdinelements.h"
 
-static char *cvsrev = "@(#)$RCSfile: TdiGetNci.c,v $ $Revision: 1.17 $ $Date: 2000/02/10 18:56:22 $";
+static char *cvsrev = "@(#)$RCSfile: TdiGetNci.c,v $ $Revision: 1.18 $ $Date: 2000/02/15 16:11:54 $";
 
 extern unsigned short OpcVector;
 
@@ -293,7 +293,8 @@ more:		switch (dtype) {
 			if (status == TreeNMN || status == TreeNNF) {
 				TreeFindNodeEnd(&pctx);
 				pctx = NULL;
-				status = 1;
+				if (status == TreeNMN)
+                                  status = 1;
 				continue;
 			}
 			wild = 1;
