@@ -5,12 +5,12 @@
 #include "treeshrp.h"
 #include <treeshr.h>
 #include <librtl_messages.h>
-#include <sys/errno.h>
+#include <errno.h>
 #include <string.h>
 
 #include <stdlib.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.14 $ $Date: 1998/04/21 19:50:18 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.15 $ $Date: 1998/04/24 17:51:19 $";
 
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 
