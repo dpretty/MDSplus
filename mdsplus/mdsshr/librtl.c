@@ -311,7 +311,7 @@ int LibWait(float *secs)
 
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.36 $ $Date: 1998/08/04 15:11:05 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.37 $ $Date: 1998/08/06 18:17:56 $";
 #ifndef va_count
 #define  va_count(narg) va_start(incrmtr, first); \
                         for (narg=1; (narg < 256) && (va_arg(incrmtr, struct descriptor *) != MdsEND_ARG); narg++)
@@ -1276,3 +1276,4 @@ void TranslateLogicalFree(char *value)
 {
 	free(value);
 }
+
