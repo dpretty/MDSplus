@@ -13,7 +13,7 @@ extern int TdiData();
 extern int TdiCvt();
 extern int TdiCompile();
 
-static char *cvsrev = "@(#)$RCSfile: MdsLibIdl.c,v $ $Revision: 1.22 $ $Date: 2002/01/31 16:09:50 $";
+static char *cvsrev = "@(#)$RCSfile: MdsLibIdl.c,v $ $Revision: 1.23 $ $Date: 2002/02/06 17:53:28 $";
 
 #ifdef _WINDOWS
 #define BlockSig(a)
@@ -44,7 +44,7 @@ int IdlMdsClose(int argc, void **argv)
   int status;
   BlockSig(SIGALRM);
   if (argc > 1)
-    status = TreeClose((char *)argv[0],(int)argv[1]);
+    status = TreeClose((char *)argv[0],((char *)argv[1] - (char *)0));
   else
   {
     status = TreeClose(0,0);
@@ -58,7 +58,7 @@ int IdlMdsOpen(int argc, void **argv)
 {
   int status;
   BlockSig(SIGALRM);
-  status = TreeOpen((char *)argv[0],(int)argv[1],0);
+  status = TreeOpen((char *)argv[0],((char *)argv[1] - (char *)0),0);
   UnBlockSig(SIGALRM);
   return status;
 }

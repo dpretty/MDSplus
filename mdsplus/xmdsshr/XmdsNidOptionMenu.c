@@ -76,7 +76,7 @@ struct dsc$descriptor_xd *XmdsNidOptionMenuIdxGetXd(Widget w, int selected);
 #include <xmdsshr.h>
 #include <mds_stdarg.h>
 
-static char *cvsrev = "@(#)$RCSfile: XmdsNidOptionMenu.c,v $ $Revision: 1.5 $ $Date: 2000/09/14 20:31:00 $";
+static char *cvsrev = "@(#)$RCSfile: XmdsNidOptionMenu.c,v $ $Revision: 1.6 $ $Date: 2002/02/06 17:48:56 $";
 
 typedef struct _Resources
 {
@@ -355,15 +355,16 @@ static void MenuChanged(Widget w,Resources *info,XmRowColumnCallbackStruct *cb)
   {
     int status = 0;
     int num;
+    int bnum = (char *)cb->data - (char *)0;
     Widget *buttons;
     struct descriptor_xd *xd = 0;
     XtVaGetValues(info->pulldown,XtNnumChildren,&num,XtNchildren,&buttons,NULL);
     num--;
     XtCallCallbacks(cb->widget,XmNactivateCallback,cb->data);
-    if ((int) cb->data < num)
+    if (bnum < num)
     {
       struct descriptor_xd *ans = (struct descriptor_xd *) XtMalloc(sizeof(struct descriptor_xd));
-      XtVaGetValues(buttons[(int) cb->data],XmNuserData,&xd,NULL);
+      XtVaGetValues(buttons[bnum],XmNuserData,&xd,NULL);
       XmdsXdBoxSetXd(XmdsXdBoxDialogButtonGetXdBox(buttons[num]),(struct descriptor *) xd);
     }
   }

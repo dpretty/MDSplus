@@ -62,7 +62,7 @@ The expansion routine "xentry":
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 typedef ARRAY_COEFF(char, 1) array_coef;
 typedef RECORD(4) record_four;
-static char *cvsrev = "@(#)$RCSfile: MdsCompress.c,v $ $Revision: 1.15 $ $Date: 2001/10/12 17:44:05 $";
+static char *cvsrev = "@(#)$RCSfile: MdsCompress.c,v $ $Revision: 1.16 $ $Date: 2002/02/06 17:42:21 $";
 
   static unsigned short opcode = OpcDECOMPRESS;
   static record_four rec0 = {sizeof(opcode), DTYPE_FUNCTION, CLASS_R, (unsigned char *) &opcode, 4, 0, 0, 0, 0};
@@ -230,7 +230,7 @@ static  int       compress(
       pca0 = (array_coef *) pwork;
       pca0->class = CLASS_CA;
       if (pca0->aflags.coeff)
-	pca0->a0 -= (int) porig->pointer;
+	pca0->a0 = (char *)(pca0->a0 - porig->pointer);
       _MOVC3((short) asize, (char *) pca0, (char *) pca1);
       pca0->pointer = (char *) prec;
       pca1->pointer = 0;

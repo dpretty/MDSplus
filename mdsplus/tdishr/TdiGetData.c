@@ -30,7 +30,7 @@
 #include <treeshr.h>
 #include <string.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiGetData.c,v $ $Revision: 1.7 $ $Date: 2000/04/12 19:58:46 $";
+static char *cvsrev = "@(#)$RCSfile: TdiGetData.c,v $ $Revision: 1.8 $ $Date: 2002/02/06 17:44:01 $";
 
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 
@@ -79,7 +79,7 @@ int	in_size, out_size, dimct, status = 1;
 			For CA it is a relative pointer.
 			*******************************/
 			if (in_ptr->class == CLASS_CA) 
-                          arr.a0 = pout->pointer + (int)arr.a0;
+                          arr.a0 = pout->pointer + ((char *)arr.a0 - (char *)0);
 			else arr.a0 = pout->pointer + (arr.a0 - arr.pointer);
 		}
 		arr.pointer = pout->pointer;

@@ -19,7 +19,7 @@
 
 extern int StrFree1Dx();
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.43 $ $Date: 2002/02/04 17:54:38 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.44 $ $Date: 2002/02/06 17:43:01 $";
 
 #ifndef HAVE_VXWORKS_H
 #define min(a,b) (((a) < (b)) ? (a) : (b))
@@ -284,7 +284,7 @@ int _TreeGetNci(void *dbid, int nid_in, struct nci_itm *nci_itm)
 				  for (node = child_of(node); node && (out_nids + 1 <= end_nids);
 			  node = node->brother ? brother_of(node) : 0, out_nids++)
 				  node_to_nid(dblist, node, out_nids);
-			  retlen = (int) out_nids - (int) itm->pointer;
+			  retlen = (char *) out_nids - (char *) itm->pointer;
 		  }
 		  break;
 	  case NciMEMBER_NIDS:
@@ -295,7 +295,7 @@ int _TreeGetNci(void *dbid, int nid_in, struct nci_itm *nci_itm)
 			  for (node = member_of(node); node && (out_nids + 1 <= end_nids);
 		  node = node->brother ? brother_of(node) : 0, out_nids++)
 			  node_to_nid(dblist, node, out_nids);
-		  retlen = (int) out_nids - (int) itm->pointer;
+		  retlen = (char *) out_nids - (char *) itm->pointer;
 		  break;
 	  case NciUSAGE:
 		  break_on_no_node;           

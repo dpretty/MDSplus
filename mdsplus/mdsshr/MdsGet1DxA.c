@@ -53,7 +53,7 @@
 
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 
-static char *cvsrev = "@(#)$RCSfile: MdsGet1DxA.c,v $ $Revision: 1.10 $ $Date: 1999/10/26 19:50:38 $";
+static char *cvsrev = "@(#)$RCSfile: MdsGet1DxA.c,v $ $Revision: 1.11 $ $Date: 2002/02/06 17:42:21 $";
 
   int       MdsGet1DxA(struct descriptor_a * in_ptr, unsigned short *length_ptr, unsigned char *dtype_ptr,
 			            struct descriptor_xd *out_xd)
@@ -88,13 +88,13 @@ static char *cvsrev = "@(#)$RCSfile: MdsGet1DxA.c,v $ $Revision: 1.10 $ $Date: 1
     {
       if (out_dsc->dscB_class == CLASS_CA)
       {
-        int offset = ((int) out_dsc->dscW_length) * ((int) in_dsc->dscA_a0 / ((int) in_dsc->dscW_length));
+        int offset = ((int) out_dsc->dscW_length) * ((in_dsc->dscA_a0 - (char *)0) / ((int) in_dsc->dscW_length));
 	out_dsc->dscA_a0 = out_dsc->dscA_pointer + offset;
       }
       else
       {
         int offset = ((int) out_dsc->dscW_length) *
-		       (((char *)in_dsc->dscA_a0 - (char *)in_dsc->dscA_pointer) / ((int) in_dsc->dscW_length));
+		       ((in_dsc->dscA_a0 - in_dsc->dscA_pointer) / ((int) in_dsc->dscW_length));
 	out_dsc->dscA_a0 = out_dsc->dscA_pointer + offset;
       }
       for (i = 0; i < out_dsc->dscB_dimct; i++)

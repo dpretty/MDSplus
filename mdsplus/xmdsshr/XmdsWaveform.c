@@ -490,7 +490,7 @@ Widget XmdsCreateWaveform( parent, name, args, argcount )
 
  Local variables:                                                             */
 
-static char *cvsrev = "@(#)$RCSfile: XmdsWaveform.c,v $ $Revision: 1.7 $ $Date: 2001/11/15 21:11:50 $";
+static char *cvsrev = "@(#)$RCSfile: XmdsWaveform.c,v $ $Revision: 1.8 $ $Date: 2002/02/06 17:48:56 $";
 
 enum crosshairsmode
 {
@@ -3068,7 +3068,7 @@ static void DrawSegments(Display *display,Window win,GC gc,float *crosshairs,int
     fprintf(printfid,"newpath\n");
     for (i = 0; i < num_dashes_ps; i++) dashes[i] = dashes_ps[i] * resinc;
     if (gc == dash_gc) fprintf(printfid,"[%d %d] %d setdash\n",
-	     (int) (dashes),num_dashes_ps,(int) offset_dashes);
+	     (int) *(dashes),num_dashes_ps,(int) offset_dashes);
     XtFree((char *)dashes);
     fprintf(printfid,"%g %g scale\n",1. / resinc,1. / resinc);
     fprintf(printfid,"%g setlinewidth\n",.25);	/* Width for grid lines*/
@@ -3289,7 +3289,7 @@ static Boolean UpdateLimit(float *old,float *req,float **new)
 {
   if (old == req)
     return FALSE;
-  else if ((int) req == -1)
+  else if (((char *)req - (char *)0) & 0xffffffff == 0xffffffff)
   {
     *new = old;
     return FALSE;
