@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.170 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.171 $
 AC_INIT()
 
 AC_CONFIG_HEADER(include/config.h)
@@ -294,6 +294,10 @@ dnl          -seg_addr_table_filename \$(@F) -seg_addr_table ../macosx/bindtable
        FEXECLIBDIR="-L";
        SHARETYPE=".so";;
 esac
+
+if test "$SHARETYPEMOD" == ""; then
+  SHARETYPEMOD=$SHARETYPE
+fi
 
 dnl Checks for programs.
 AC_PROG_RANLIB
