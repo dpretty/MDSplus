@@ -1,4 +1,4 @@
-/* $Id: jScope.java,v 1.56 2003/12/18 15:40:37 manduchi Exp $ */
+/* $Id: jScope.java,v 1.57 2003/12/18 15:51:56 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.List;
@@ -2794,7 +2794,8 @@ class ServerDialog extends JDialog implements ActionListener
                                              "FtuDataProvider",
                                              "TSDataProvider",
                                              "AsdexDataProvider",
-                                             "ASCIIDataProvider"};
+                                             "ASCIIDataProvider",
+                                             "T2DataProvider"};
 
 
     ServerDialog(JFrame _dw, String title)
