@@ -43,7 +43,7 @@ extern char *index(char *str,char c);
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.72 $ $Date: 2003/02/21 21:08:34 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.73 $ $Date: 2004/02/12 17:13:59 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
@@ -248,6 +248,8 @@ static int CloseTopTree(PINO_DATABASE *dblist, int call_hook)
     if (dblist->remote)
     {
       status = CloseTreeRemote(dblist, call_hook);
+      if (status == TreeNOT_OPEN)  /**** Remote server might have already opened the tree ****/
+	status = TreeNORMAL;
     }
     else if (local_info)
     {
