@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.86 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.87 $
 AC_INIT()
 
 AC_CONFIG_HEADER(include/config.h)
@@ -160,6 +160,13 @@ if test "$MAKELIBDIR" = "$MAKESHLIBDIR"; then
 else
 	MAKESHLIBDIR_RULE="$MAKESHLIBDIR : ; mkdir $MAKESHLIBDIR"
 fi
+
+
+dnl Check for 0xnnnnll (long long constants)
+AC_LANG_SAVE
+AC_LANG_C
+AC_TRY_COMPILE(,int gub(){return((int)0x1ll);},AC_DEFINE(HAVE_LL_CONSTANTS))
+AC_LANG_RESTORE
 
 
 dnl Checks for libraries.
