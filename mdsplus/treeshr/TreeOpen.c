@@ -40,7 +40,7 @@ extern char *index(char *str,char c);
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.64 $ $Date: 2002/03/29 19:40:56 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.65 $ $Date: 2002/04/02 13:50:16 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
@@ -86,7 +86,13 @@ static char *TreePath( char *tree, char *tree_lower_out )
   strcat(pathname,TREE_PATH_SUFFIX);
   if (tree_lower_out)
     strcpy(tree_lower_out,tree_lower);
-  return TranslateLogical(pathname);
+  path = TranslateLogical(pathname);
+  if (path)
+  {
+    for (i=strlen(path)-1;i>=0 && (path[i]==32 || path[i]==9);i--) 
+      path[i]=0;
+  }
+  return path;
 }
 
 int _TreeOpen(void **dbid, char *tree_in, int shot_in, int read_only_flag)
