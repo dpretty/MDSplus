@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-static char *cvsrev = "@(#)$RCSfile: CamMulti.c,v $ $Revision: 1.5 $ $Date: 1999/08/26 20:07:55 $";
+static char *cvsrev = "@(#)$RCSfile: CamMulti.c,v $ $Revision: 1.6 $ $Date: 2000/11/16 16:18:48 $";
 
 #ifndef min
 #define min(a,b) ((a) < (b)) ? (a) : (b)
@@ -66,7 +66,7 @@ static int DoCamMulti(char *routine, struct descriptor *name, int *a, int *f, in
     char cmd[512];
     strncpy(name_c,name->pointer,name->length);
     name_c[name->length] = '\0';
-    sprintf(cmd,"RemCamMulti('%s','%s',%d,%d,%d,%s,%d,_iosb)",routine,name_c,*a,*f,*count,*f < 8 ? "_data" : "_data=$",*mem);
+    sprintf(cmd,"CamMulti('%s','%s',%d,%d,%d,%s,%d,_iosb)",routine,name_c,*a,*f,*count,*f < 8 ? "_data" : "_data=$",*mem);
     if (*f < 8)
     {
       status = MdsValue(serverid,cmd,&ans_d,0);
