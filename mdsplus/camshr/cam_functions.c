@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: cam_functions.c,v 1.18 2003/09/05 20:06:15 twf Exp $
+//	$Id: cam_functions.c,v 1.19 2003/09/05 20:13:58 twf Exp $
 //-------------------------------------------------------------------------
 // Tue Aug  1 11:22:06 EDT 2000
 // Tue Apr  3 09:57:52 EDT 2001
@@ -830,7 +830,7 @@ static int Jorway73ADoIo(
 
         if (online && Key.slot == 30 && F == 1 && A == 0)
 	{
-          *(short *)Data = 0x1000;
+          *(short *)Data = 0x30;
           return CamDONE_Q;
         }
         if (!Enhanced)
