@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.168 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.169 $
 AC_INIT()
 
 AC_CONFIG_HEADER(include/config.h)
@@ -31,9 +31,7 @@ AC_ARG_ENABLE(globus,
                : ${GLOBUS_FLAVOR=gcc32dbg}
                GLOBUS_CFLAGS="-DGLOBUS -I\$(GLOBUS_LOCATION)/include/$GLOBUS_FLAVOR"
                GLOBUS_LIBS="-L\$(GLOBUS_LOCATION)/lib -lglobus_io_$GLOBUS_FLAVOR \
-                            -lglobus_gss_assist_$GLOBUS_FLAVOR -lssl_$GLOBUS_FLAVOR \
-                            -lglobus_ssl_utils_$GLOBUS_FLAVOR -lcrypto_$GLOBUS_FLAVOR \
-                            -lglobus_common_$GLOBUS_FLAVOR -lglobus_gssapi_gsi_$GLOBUS_FLAVOR"
+                            -lglobus_common_$GLOBUS_FLAVOR"
         else
                GLOBUS_CFLAGS=""
                GLOBUS_LIBS=""
