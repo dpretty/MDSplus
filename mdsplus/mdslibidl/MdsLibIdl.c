@@ -13,7 +13,7 @@ extern int TdiData();
 extern int TdiCvt();
 extern int TdiCompile();
 
-static char *cvsrev = "@(#)$RCSfile: MdsLibIdl.c,v $ $Revision: 1.5 $ $Date: 1999/02/03 16:41:00 $";
+static char *cvsrev = "@(#)$RCSfile: MdsLibIdl.c,v $ $Revision: 1.6 $ $Date: 1999/05/27 19:06:23 $";
 
 #ifdef _WINDOWS
 #define sighold(a)
@@ -241,9 +241,9 @@ int IdlMdsValue(int argc, void **argv)
         char dims[512] = "(";
         int i;
         if (ptr->aflags.coeff)
-          for (i=0;i<ptr->dimct;i++) sprintf(dims,"%s%d,",dims,ptr->m[i]);
+          for (i=0;i<ptr->dimct;i++) sprintf(dims,"%s%d,",dims,ptr->m[i] > 0 ? ptr->m[i] : 1);
         else
-          sprintf(dims,"%s%d,",dims,ptr->arsize/ptr->length);
+          sprintf(dims,"%s%d,",dims,((ptr->arsize/ptr->length) > 0) ? (ptr->arsize/ptr->length) : 1);
         dims[strlen(dims)-1]=')';
         switch (mdsValueAnswer.pointer->dtype)
 	{
