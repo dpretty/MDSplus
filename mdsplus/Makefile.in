@@ -1,4 +1,4 @@
-#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.40 $
+#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.41 $
 # @configure_input@
 prefix=@prefix@
 SHELL=/bin/sh
@@ -19,6 +19,7 @@ PARTS = \
         xmdsshr \
         mdstcpip \
         dwscope \
+	gen_device \
         mitdevices \
         mdslibidl \
         remcam \
