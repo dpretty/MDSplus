@@ -6,7 +6,7 @@
 #include <math.h>
 #define MAXTYPE (DTYPE_FTC + 1)
 
-static char *cvsrev = "@(#)$RCSfile: TdiConvert.c,v $ $Revision: 1.12 $ $Date: 2000/04/12 19:58:44 $";
+static char *cvsrev = "@(#)$RCSfile: TdiConvert.c,v $ $Revision: 1.13 $ $Date: 2001/02/02 14:51:09 $";
 
 extern void CvtConvertFloat();
 extern int IsRoprand();
@@ -623,7 +623,8 @@ static void FLOAT_TO_TEXT(int itype, char *pa, char *pb, int numb, int lenb, cha
         *pe=sym; 
       else 
       {
-        strcpy(text,text+2);
+        if (text[0] == ' ') memcpy(text,text+1,n-1);
+        if (text[0] == ' ') memcpy(text,text+1,n-2);
         text[n-2]=sym; 
         text[n-1]='0';
       }
@@ -670,7 +671,8 @@ static void DOUBLE_TO_TEXT(int itype, char *pa, char *pb, int numb, int lenb, ch
         *pe=sym; 
       else 
       {
-        strcpy(text,text+2);
+        if (text[0] == ' ') memcpy(text,text+1,n-1);
+        if (text[0] == ' ') memcpy(text,text+1,n-2);
         text[n-2]=sym; 
         text[n-1]='0';
       }
