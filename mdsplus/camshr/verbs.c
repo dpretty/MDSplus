@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: verbs.c,v 1.4 2003/02/09 16:11:32 twf Exp $
+//	$Id: verbs.c,v 1.5 2003/02/10 15:12:02 twf Exp $
 //-------------------------------------------------------------------------
 
 //-------------------------------------------------------------------------
@@ -482,7 +482,7 @@ int SetCrate()
 
 	  status = turn_crate_on_off_line( cratename , (on) ? ON : OFF );
           if (!(status & 1) && !quiet)
-            printf("Error turning crate %s %\n",cratename,on ? "online" : "offline");
+            printf("Error turning crate %s %s\n",cratename,on ? "online" : "offline");
           free(cratename);
         }
         find_crate_end(&ctx);
