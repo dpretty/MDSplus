@@ -48,7 +48,7 @@
 #define O_RANDOM 0
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.25 $ $Date: 2000/12/01 14:32:56 $";
+static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.26 $ $Date: 2000/12/19 21:31:38 $";
 
 extern void *DBID;
 
@@ -428,7 +428,7 @@ int TreePutNci(TREE_INFO *info, int node_num, NCI *nci, int flush)
 *****************************/
 
   else
-    memcpy(info->edit->nci + (node_num - info->edit->first_in_mem),nci,sizeof(nci));
+    memcpy(info->edit->nci + (node_num - info->edit->first_in_mem),nci,sizeof(*nci));
   return status;
 }
 
