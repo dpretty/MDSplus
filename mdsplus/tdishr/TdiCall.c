@@ -29,7 +29,7 @@
 #include <mdsshr.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiCall.c,v $ $Revision: 1.14 $ $Date: 2004/06/22 13:03:49 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiCall.c,v $ $Revision: 1.15 $ $Date: 2004/08/04 18:26:38 $";
 
 extern unsigned short OpcDescr;
 extern unsigned short OpcRef;
@@ -71,7 +71,9 @@ STATIC_ROUTINE int TdiInterlude  (int opcode, struct descriptor **newdsc, int (*
             break;
           case DTYPE_D:
           case DTYPE_G:
-	  case DTYPE_T:
+#if SIZE_OF_INT_P == 8
+      	  case DTYPE_T:
+#endif
           case DTYPE_FC:
 	  case DTYPE_FSC:
             if (f_regs)
