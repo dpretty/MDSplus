@@ -57,7 +57,7 @@
 static int timezone = 0;
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.48 $ $Date: 2000/09/13 15:49:08 $";
+static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.49 $ $Date: 2000/09/13 16:01:22 $";
 
 #ifdef min
 #undef min
@@ -130,7 +130,7 @@ int       _TreePutRecord(void *dbid, int nid, struct descriptor *descriptor_ptr,
       {
         unsigned int m1;
         unsigned int m2 = 10000000;
-        _int64 addin = (_int64)0x7c95674beb4000;
+        _int64 addin = 0x7c95674beb4000ll;
         _int64 zero = 0;
 /*
         unsigned int zero[2] = {0,0};
