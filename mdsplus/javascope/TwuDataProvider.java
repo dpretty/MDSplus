@@ -8,7 +8,7 @@
 // this class (starting revision line 2.x) mainly in order to ensure that zooming
 // works in more situations. (See also the cvs log.)
 //
-// $Id: TwuDataProvider.java,v 2.5 2002/05/27 17:07:44 jgk Exp $
+// $Id: TwuDataProvider.java,v 2.6 2002/06/06 08:57:32 jgk Exp $
 // 
 // -------------------------------------------------------------------------------------------------
 
@@ -530,6 +530,12 @@ class TwuDataProvider
             throws Exception 
         {
             TWUSignal bulk ;
+
+            ConnectionEvent ce;
+            ce = new ConnectionEvent(this, "Start Loading "+ (isAbscissa ? "X" : "Y"));
+
+            DispatchConnectionEvent(ce);
+
             bulk = new TWUSignal (properties, opt.start, opt.step, opt.total);
             return SimplifiedGetFloats(bulk, isAbscissa, opt.total);
         }
@@ -1351,6 +1357,12 @@ class TwuDataProvider
         super();
     }
 
+    public static String 
+    revision()
+    {
+        return "$Id: TwuDataProvider.java,v 2.6 2002/06/06 08:57:32 jgk Exp $";
+    }
+
     public TwuDataProvider(String user_agent)
     {
         this.user_agent = user_agent;
@@ -1362,5 +1374,5 @@ class TwuDataProvider
 }
 
 // -------------------------------------------------------------------------------------------------
-// End of: $Id: TwuDataProvider.java,v 2.5 2002/05/27 17:07:44 jgk Exp $
+// End of: $Id: TwuDataProvider.java,v 2.6 2002/06/06 08:57:32 jgk Exp $
 // -------------------------------------------------------------------------------------------------
