@@ -32,8 +32,9 @@ int Tdi3Add(struct descriptor *in1, struct descriptor *in2, struct descriptor *o
 #include <string.h>
 #include <mdsdescrip.h>
 #include <tdimessages.h>
+#include "roprand.h"
 
-static char *cvsrev = "@(#)$RCSfile: TdiAdd.c,v $ $Revision: 1.17 $ $Date: 1998/12/18 18:54:56 $";
+static char *cvsrev = "@(#)$RCSfile: TdiAdd.c,v $ $Revision: 1.18 $ $Date: 1999/05/03 20:02:56 $";
 
 extern int CvtConvertFloat();
 
@@ -90,10 +91,23 @@ static const int roprand = 0x8000;
 
 #define OperateFloatOne(type,dtype,native,operator,p1,p2) \
 { type a,b,ans;\
-  if (CvtConvertFloat(p1,dtype,&a,native,0) && CvtConvertFloat(p2,dtype,&b,native,0))\
-  { ans = a operator b;\
-    CvtConvertFloat(&ans,native,outp++,dtype,0);\
-  } else CvtConvertFloat(&roprand,DTYPE_F,outp++,dtype,0); }
+  type p1v = *p1;\
+  type p2v = *p2;\
+  if (IsRoprand(dtype,&p1v) || IsRoprand(dtype,&p2v))\
+    CvtConvertFloat(&roprand,DTYPE_F,outp++,dtype,0); \
+  else\
+  {\
+    if (dtype == native)\
+      *outp++ = p1v operator p2v;\
+    else\
+    {\
+      if (CvtConvertFloat(&p1v,dtype,&a,native,0) && CvtConvertFloat(&p2v,dtype,&b,native,0))\
+      { ans = a operator b;\
+        CvtConvertFloat(&ans,native,outp++,dtype,0);\
+      } else CvtConvertFloat(&roprand,DTYPE_F,outp++,dtype,0); \
+    }\
+  }\
+}
 
 #define OperateFloat(type,dtype,native,operator) \
 { type *in1p = (type *)in1->pointer;\
