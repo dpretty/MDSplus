@@ -1,4 +1,4 @@
-/* $Id: Waveform.java,v 1.45 2002/11/22 14:44:07 manduchi Exp $ */
+/* $Id: Waveform.java,v 1.46 2003/01/09 17:07:37 manduchi Exp $ */
 import java.awt.*;
 import java.awt.image.*;
 import java.awt.event.*;
@@ -9,7 +9,6 @@ import javax.swing.*;
 import java.awt.Insets;
 import java.awt.image.*;
 import java.awt.geom.*;
-
 
 //import java.awt.geom.*;
 
