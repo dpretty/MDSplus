@@ -11,7 +11,7 @@
 // Written by Marco van de Giessen <A.P.M.vandeGiessen@phys.uu.nl>, originally as a nested 
 // class in TwuDataProvider.java, now a proper 'first class' class in its own source file.
 //
-// $Id: TWUFetchOptions.java,v 2.1 2002/09/20 12:37:08 jgk Exp $
+// $Id: TWUFetchOptions.java,v 2.2 2003/10/28 18:36:43 jgk Exp $
 // 
 // For the modification history, see the CVS log.
 // -------------------------------------------------------------------------------------------------
@@ -29,7 +29,7 @@ class TWUFetchOptions
     public TWUFetchOptions (int sta, int ste, int tot) 
     {
         start = sta ; 
-        step  = ste ;
+        step  = ste>0 ? ste : 1 ;
         total = tot ; 
     }
 
@@ -47,7 +47,7 @@ class TWUFetchOptions
         // note: should we allow total = 0 ? it *may* not be
         // a good idea to have 'total = 0' translated to 'get all'.
 
-        if (step == 0)
+        if (step < 1)
           step = 1 ;
 
         int begin = start, end = start + (total-1)*step ;
@@ -112,5 +112,5 @@ class TWUFetchOptions
 }
 
 // -------------------------------------------------------------------------------------------------
-// End of: $Id: TWUFetchOptions.java,v 2.1 2002/09/20 12:37:08 jgk Exp $
+// End of: $Id: TWUFetchOptions.java,v 2.2 2003/10/28 18:36:43 jgk Exp $
 // -------------------------------------------------------------------------------------------------
