@@ -26,7 +26,7 @@ typedef struct {int lo; unsigned int hi;} quadw;
 #include <mdsshr.h>
 #include <treeshr.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiDoTask.c,v $ $Revision: 1.7 $ $Date: 2001/03/14 18:05:17 $";
+static char *cvsrev = "@(#)$RCSfile: TdiDoTask.c,v $ $Revision: 1.8 $ $Date: 2003/03/05 17:36:14 $";
 
 extern int TdiTaskOf();
 extern int TdiGetFloat();
@@ -90,6 +90,9 @@ static int Doit(struct descriptor_routine	*ptask, struct descriptor_xd *out_ptr)
 	    struct descriptor_program *prog_task = (struct descriptor_program *)ptask;
 	    if(prog_task->program && prog_task->program->dtype == DTYPE_T) 
 	    status = LibSpawn(prog_task->program, 1, 0);
+		
+		status = TdiPutLong(&status, out_ptr);
+
 	}
 	break;
     case DTYPE_ROUTINE :
