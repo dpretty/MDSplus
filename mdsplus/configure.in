@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.50 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.51 $
 AC_INIT()
 
 AC_CONFIG_HEADER(include/config.h)
@@ -66,7 +66,7 @@ sparc-sun-solaris2*)
          LDARC="-B static";
          CFLAGS="$CFLAGS -Kpic";
        fi;
-       FFLAGS="$FFLAGS -pic";
+       FFLAGS="$FFLAGS -PIC";
        IDL_BIN_SUF="solaris2.sparc"
        LIBPATH="LD_LIBRARY_PATH";
        SHARETYPE=".so";;
