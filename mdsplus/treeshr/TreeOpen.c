@@ -45,7 +45,7 @@ extern char *index(char *str,char c);
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.76 $ $Date: 2004/10/22 18:55:20 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.77 $ $Date: 2005/01/21 21:31:26 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
@@ -100,6 +100,39 @@ static char *TreePath( char *tree, char *tree_lower_out )
   return path;
 }
 
+static char *ReplaceAliasTrees(char *tree_in)
+{
+  int i;
+  int buflen=strlen(tree_in)+1;
+  char *ans=malloc(buflen);
+  char *tree=strtok(tree_in,",");
+  memset(ans,0,buflen);
+  while(tree)
+  {
+    char *treepath=TreePath(tree,0);
+    if (treepath && (strlen(treepath) > 5) && (strncmp(treepath,"ALIAS",5) == 0))
+      tree=&treepath[5];
+    if ((buflen - strlen(ans)) < (strlen(tree) + 1))
+    {
+      buflen += (strlen(tree) + 1);
+      ans=realloc(ans,buflen);
+    }
+    if (strlen(ans) == 0)
+      strcpy(ans,tree);
+    else
+    {
+      strcat(ans,",");
+      strcat(ans,tree);
+    }
+    if (treepath)
+      TranslateLogicalFree(treepath);
+    tree=strtok(0,",");
+  }
+  free(tree_in);
+  for (i=0;i<buflen;i++) ans[i]=__toupper(ans[i]);
+  return ans;
+}
+    
 int _TreeOpen(void **dbid, char *tree_in, int shot_in, int read_only_flag)
 {
   int       status = TreeFAILURE;
@@ -109,6 +142,7 @@ int _TreeOpen(void **dbid, char *tree_in, int shot_in, int read_only_flag)
   char     *comma_ptr;
 
   RemoveBlanksAndUpcase(tree,tree_in);
+  tree = ReplaceAliasTrees(tree);
   if (comma_ptr = strchr(tree, ','))
   {
     subtree_list = strcpy(malloc(strlen(tree)+1),tree);
