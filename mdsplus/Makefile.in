@@ -1,4 +1,4 @@
-#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.9 $
+#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.10 $
 # @configure_input@
 SHELL=/bin/sh
 
@@ -34,7 +34,8 @@ PARTS = \
         mdsremote \
         @JAVA_APS@ \
         @IDLSQL@ \
-	@IDLMDSEVENT@
+	@IDLMDSEVENT@ \
+	@MDSVME@
 
 all:
 	cdir=`pwd`;\
