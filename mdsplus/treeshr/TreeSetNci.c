@@ -51,7 +51,7 @@ extern RMS$_WER;
 #pragma extern_model restore
 #endif /* VMS */
 
-static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.7 $ $Date: 1998/04/10 20:01:41 $";
+static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.8 $ $Date: 1998/04/13 17:31:02 $";
 
 extern void *DBID;
 
@@ -63,7 +63,6 @@ int TreeTurnOff(int nid) { return _TreeTurnOff(DBID, nid);}
 
 int TreeGetNciLw(TREE_INFO *info, int node_num, NCI *nci);
 
-int TreeOpenNciW(TREE_INFO *info);
 static int UnlockNci(TREE_INFO *info, int node_num);
 static int SetNodeParentState(PINO_DATABASE *db, NODE *node, NCI *nci, unsigned int state);
 
@@ -204,7 +203,7 @@ int TreeGetNciLw(TREE_INFO *info, int node_num, NCI *nci)
 #else /* __VMS */
     if ((info->nci_file == 0) || (info->nci_file->put == 0))
 #endif
-      status = TreeOpenNciW(info);
+      status = TreeOpenNciW(info, 0);
     if (status & 1)
     {
       nci_num = node_num + 1;
@@ -266,7 +265,7 @@ int TreeGetNciLw(TREE_INFO *info, int node_num, NCI *nci)
 
 
 +-----------------------------------------------------------------------------*/
-int TreeOpenNciW(TREE_INFO *info)
+int TreeOpenNciW(TREE_INFO *info, int tmpfile)
 {
   int       status;
 
@@ -310,11 +309,11 @@ int TreeOpenNciW(TREE_INFO *info)
       status = sys$open(info->nci_file->fab, 0, 0);
 #else /* __VMS */
       size_t len = strlen(info->filespec)-4;
-      char *filename = strncpy(malloc(len+16),info->filespec,len);
+      char *filename = strncpy(malloc(len+20),info->filespec,len);
       filename[len]='\0';
-      strcat(filename,"characteristics");
+      strcat(filename,tmpfile ? "characteristics#" : "characteristics");
       memset(info->nci_file,0, NCI_FILE_VM_SIZE);
-      info->nci_file->get = fopen(filename,"rb");
+      info->nci_file->get = fopen(filename,tmpfile ? "w+b" : "rb");
       status = (info->nci_file->get == NULL) ? TreeFAILURE : TreeNORMAL;
       if (status & 1)
       {
@@ -322,6 +321,7 @@ int TreeOpenNciW(TREE_INFO *info)
         info->nci_file->put = fopen(filename,"r+b");
         status = (info->nci_file->put == NULL) ? TreeFAILURE : TreeNORMAL;
       }
+      free(filename);
 #endif /* __VMS */
     }
   }
@@ -342,10 +342,11 @@ int TreeOpenNciW(TREE_INFO *info)
     }
 #else /* __VMS */
     size_t len = strlen(info->filespec)-4;
-    char *filename = strncpy(malloc(len+16),info->filespec,len);
+    char *filename = strncpy(malloc(len+20),info->filespec,len);
     filename[len]='\0';
-    strcat(filename,"characteristics");
-    info->nci_file->put = fopen(filename,"r+b");
+    strcat(filename,tmpfile ? "characteristics#" : "characteristics");
+    info->nci_file->put = fopen(filename,tmpfile ? "w+b" : "r+b");
+    free(filename);
     status = (info->nci_file->put == NULL) ? TreeFAILURE : TreeNORMAL;
 #endif /* __VMS */
   }
@@ -387,7 +388,7 @@ int TreeOpenNciW(TREE_INFO *info)
 		rab.rab$b_rac = RAB$C_SEQ;
 		status = sys$put(&rab, 0, 0);
 		if (status & 1)
-		  return TreeOpenNciW(info);
+		  return TreeOpenNciW(info, 0);
 	      }
 	    }
 	  }
