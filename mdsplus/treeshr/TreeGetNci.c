@@ -19,7 +19,7 @@
 
 extern int StrFree1Dx();
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.25 $ $Date: 1998/07/27 14:21:25 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.26 $ $Date: 1998/07/27 14:42:52 $";
 
 #define min(a,b) (((a) < (b)) ? (a) : (b))
 #define read_nci \
@@ -635,7 +635,7 @@ static void FixupNciIn(NCI *nci)
   nci->owner_identifier = swapint((char *)&nci->owner_identifier);
   nci->length = swapint((char *)&nci->length);
   nci->status = swapint((char *)&nci->status);
-  if (nci->data_in_att_block)
+  if (nci->flags & NciM_DATA_IN_ATT_BLOCK)
   {
   }
   else if (nci->error_on_put)
