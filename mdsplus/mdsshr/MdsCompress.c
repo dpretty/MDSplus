@@ -55,9 +55,10 @@ The expansion routine "xentry":
 #include <librtl_messages.h>
 
 #define _MOVC3(a,b,c) memcpy(c,b,a)
+#define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 typedef ARRAY_COEFF(char, 1) array_coef;
 typedef RECORD(4) record_four;
-static char *cvsrev = "@(#)$RCSfile: MdsCompress.c,v $ $Revision: 1.5 $ $Date: 1998/07/27 15:50:04 $";
+static char *cvsrev = "@(#)$RCSfile: MdsCompress.c,v $ $Revision: 1.6 $ $Date: 1999/05/17 17:55:52 $";
 
   static unsigned short opcode = OpcDECOMPRESS;
   static record_four rec0 = {sizeof(opcode), DTYPE_FUNCTION, CLASS_R, (unsigned char *) &opcode, 4, 0, 0, 0, 0};
@@ -93,6 +94,7 @@ static char *cvsrev = "@(#)$RCSfile: MdsCompress.c,v $ $Revision: 1.5 $ $Date: 1
              *pd0,
              *pd1,
             **ppd;
+  int align_size;
   if (pwork)
     switch (pwork->class)
     {
@@ -135,8 +137,9 @@ static char *cvsrev = "@(#)$RCSfile: MdsCompress.c,v $ $Revision: 1.5 $ $Date: 1
       asize = sizeof(struct descriptor_a) + 
 	      (porig->aflags.coeff ? sizeof(void *) + porig->dimct * sizeof(int) : 0) +
 	      (porig->aflags.bounds ? porig->dimct * 2 * sizeof(int) : 0);
-      asize = ((asize + asize - 1)/sizeof(void *)) * sizeof(void *);
-    /**************************************************************
+      align_size = (porig->dtype == DTYPE_T) ? 1 : porig->length;
+      asize = align(asize,align_size);
+  /**************************************************************
     Check if we have minimum requirements.
     Make two CLASS_CA descriptors with a0=offset.
     First points to function descriptor.
