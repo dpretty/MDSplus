@@ -36,7 +36,7 @@ TreeFindTagEnd(void **ctx);
 #include <stdlib.h>
 #include <string.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeFindTagWild.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 18:51:36 $";
+static char *cvsrev = "@(#)$RCSfile: TreeFindTagWild.c,v $ $Revision: 1.4 $ $Date: 1998/04/24 18:45:41 $";
 
 extern void *DBID;
 typedef struct tag_search
@@ -211,7 +211,6 @@ static TAG_SEARCH *NewTagSearch(char *tagnam_ptr)
   static struct descriptor_d empty = {0, DTYPE_T, CLASS_D, 0};
   struct descriptor tag_dsc = {0, DTYPE_T, CLASS_S, 0};
   unsigned short tree_len;
-  int       garbage;
   char *cptr;
   static unsigned short one = 1;
   tag_dsc.length = strlen(tagnam_ptr);

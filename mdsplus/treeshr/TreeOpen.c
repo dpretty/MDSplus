@@ -17,7 +17,7 @@
 #define __toupper(c) (((c) >= 'a' && (c) <= 'z') ? (c) & 0xDF : (c))
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.25 $ $Date: 1998/04/21 19:50:19 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.26 $ $Date: 1998/04/24 18:45:43 $";
 
 int treeshr_errno = 0;
 
@@ -634,10 +634,10 @@ int _TreeSetStackSize(void **dbid, int size)
 	return old_size;
 }
 
-#ifdef _MSC_VER
+#ifdef _WIN32
 #include <wtypes.h>
 #include <winreg.h>
-static char *GetRegistryPath(char *pathname)
+char *GetRegistryPath(char *pathname)
 {
 	HKEY regkey1,regkey2,regkey3;
 	unsigned char *path = NULL;

@@ -12,7 +12,9 @@
 #include <starlet.h>
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.20 $ $Date: 1998/04/21 19:50:18 $";
+extern int StrFree1Dx();
+
+static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.21 $ $Date: 1998/04/24 18:45:41 $";
 
 #define min(a,b) (((a) < (b)) ? (a) : (b))
 #define read_nci \
@@ -30,7 +32,6 @@ static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.20 $ $Date: 1
 static char *GetPath(PINO_DATABASE *dblist, NODE *node, int remove_tree_refs);
 static const char *nonode = "<no-node>   ";
 static int OpenNciR(TREE_INFO *info);
-extern int RfaToSeek(unsigned char *rfa);
 
 extern void *DBID;
 

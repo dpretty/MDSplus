@@ -51,7 +51,7 @@ extern RMS$_WER;
 #pragma extern_model restore
 #endif /* VMS */
 
-static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.9 $ $Date: 1998/04/21 19:50:21 $";
+static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.10 $ $Date: 1998/04/24 18:45:45 $";
 
 extern void *DBID;
 
@@ -345,6 +345,8 @@ int TreeOpenNciW(TREE_INFO *info, int tmpfile)
     char *filename = strncpy(malloc(len+20),info->filespec,len);
     filename[len]='\0';
     strcat(filename,tmpfile ? "characteristics#" : "characteristics");
+	if (info->nci_file->put)
+		fclose(info->nci_file->put);
     info->nci_file->put = fopen(filename,tmpfile ? "w+b" : "r+b");
     free(filename);
     status = (info->nci_file->put == NULL) ? TreeFAILURE : TreeNORMAL;

@@ -38,7 +38,7 @@
 #include <mdsshr.h>
 #include <mds_stdarg.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiIntrinsic.c,v $ $Revision: 1.5 $ $Date: 1998/04/10 18:28:17 $";
+static char *cvsrev = "@(#)$RCSfile: TdiIntrinsic.c,v $ $Revision: 1.6 $ $Date: 1998/04/24 18:49:16 $";
 
 typedef struct _bounds { int l; int u; } BOUNDS;
 
@@ -351,7 +351,6 @@ int	option = -1;
 
 	if (narg > 0 && list[0]) status = TdiGetLong(list[0], &option);
 	if (option & 1 && mess_stat != 1) {
-	int	len;
 	struct descriptor dmsg = {0,DTYPE_T,CLASS_S,0};
         dmsg.pointer = MdsGetMsg(mess_stat);
         dmsg.length = strlen(dmsg.pointer);
