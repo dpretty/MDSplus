@@ -57,7 +57,7 @@ $ dwcope [-default setup]
 #include <DXm/DECspecific.h>
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: dwscope.c,v $ $Revision: 1.22 $ $Date: 2003/04/29 14:09:39 $";
+static char *cvsrev = "@(#)$RCSfile: dwscope.c,v $ $Revision: 1.23 $ $Date: 2003/05/22 13:48:48 $";
 
 extern void XmdsInitialize();
 extern void XmdsDestroyWidgetCallback();
@@ -2028,7 +2028,7 @@ static void  WriteDatabase(String dbname, Boolean zoom)
     fprintf(file, "Scope.print_event: %s\n", ScopePrintEvent);
     fprintf(file, "Scope.print_portrait: %d\n", ScopePrintPortrait);
     fprintf(file, "Scope.print_window_title: %d\n", ScopePrintWindowTitle);
-    fprintf(file, "Scope.printer: %d\n",ScopePrinter);
+    fprintf(file, "Scope.printer: %s\n",ScopePrinter);
 /*
     fprintf(file, "Scope.print_to_file: %d\n", ScopePrintToFile);
 */
