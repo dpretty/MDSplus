@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: parse_crate_db.c,v 1.2 2003/02/10 21:43:56 twf Exp $
+//	$Id: parse_crate_db.c,v 1.3 2004/08/26 10:17:22 manduchi Exp $
 //-------------------------------------------------------------------------
 
 //-------------------------------------------------------------------------
@@ -60,7 +60,9 @@ void parse_crate_db( struct CRATE *in, struct Crate_ *out )
 			 );
 
 	out->device = (in->DSFname[0] != '.') ? atoi(in->DSFname)	// valid /dev/sg#
+
 										  : -1;					// in-valid
+
 	out->type	= in->HwyType;			// highway type
         out->enhanced   = in->enhanced == '1';
         out->online     = in->online == '1';

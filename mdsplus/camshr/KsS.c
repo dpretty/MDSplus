@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: KsS.c,v 1.5 2003/05/13 20:24:03 twf Exp $
+//	$Id: KsS.c,v 1.6 2004/08/26 10:17:22 manduchi Exp $
 //-------------------------------------------------------------------------
 // Mon Oct 15 16:35:42 EDT 2001	-- seperated out
 //-----------------------------------------------------------
@@ -60,6 +60,10 @@ static int KsSingleIo(
   Command[3] = MODE(dmode, Mem);
   Command[4] = NAFhi(Key.slot, A, F);
   Command[5] = NAFlo(Key.slot, A, F);
+  Command[6] = 0;
+  Command[7] = 0;
+  Command[8] = 0;
+  Command[9] = 0;
   
   direction = ((F & 0x08) == 0) ? ((F < 8) ? 1 : 2) : 0;
   
