@@ -10,3 +10,4 @@
 #
 # For example:
 ALL /bin/echo /bin/mail %s -s "CVS notification" > /tmp/cvsnotify.log
+DEFAULT /bin/echo /bin/mail %s -s "CVS notification" > /tmp/cvsnotify.log
