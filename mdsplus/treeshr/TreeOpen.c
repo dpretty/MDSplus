@@ -36,7 +36,7 @@ extern char *index(char *str,char c);
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.58 $ $Date: 2001/04/12 15:45:40 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.59 $ $Date: 2001/05/29 20:25:06 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
@@ -713,11 +713,19 @@ char *MaskReplace(char *path_in,char *tree,int shot)
     case 'i':  tilde[0]=ShotMask[3]; strcpy(&tilde[1],&tilde[2]); break;
     case 'j':  tilde[0]=ShotMask[2]; strcpy(&tilde[1],&tilde[2]); break;
     case 'n':  fname = GetFname(tree,shot);
-               tmp = strcpy(malloc(strlen(tilde+2)+1),tilde+2);
-               tmp2 = strcpy(malloc(strlen(path)+1+strlen(fname)),path);
-               strcpy(tmp2 +(tilde-path)+strlen(fname), tmp);
-               free(tmp);
-               strncpy(tmp2+(tilde-path),fname,strlen(fname)); 
+               if ((strlen(tilde+2) > 1) || ((strlen(tilde+2) == 1) && (tilde[2] != '\\')))
+               {
+                 tmp = strcpy(malloc(strlen(tilde+2)+1),tilde+2);
+                 tmp2 = strcpy(malloc(strlen(path)+1+strlen(fname)),path);
+                 strcpy(tmp2 +(tilde-path)+strlen(fname), tmp);
+                 free(tmp);
+                 strncpy(tmp2+(tilde-path),fname,strlen(fname));
+               }
+               else
+               {
+                 tmp2 = strcpy(malloc(strlen(path)+1+strlen(fname)),path);
+                 strcpy(tmp2+(tilde-path),fname);
+                }
                free(path);
                path=tmp2;
                break;
