@@ -1,4 +1,4 @@
-/* $Id: WaveInterface.java,v 1.65 2004/09/24 08:35:21 manduchi Exp $ */
+/* $Id: WaveInterface.java,v 1.66 2004/10/08 13:32:59 manduchi Exp $ */
 import java.awt.*;
 import java.io.*;
 import java.awt.image.*;
@@ -1340,7 +1340,7 @@ public class WaveInterface
                         curr_x_double = wd.GetXDoubleData();
                         if(curr_x_double == null || curr_x_double.length <= 1)
                           curr_x = wd.GetXData();
-		        if(curr_x == null || curr_x.length <= 1)
+		        if((curr_x == null || curr_x.length <= 1)&&(curr_x_double == null || curr_x_double.length <= 1))
 			        curr_data = null;
 	        }
 	    }

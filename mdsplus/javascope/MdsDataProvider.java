@@ -1,4 +1,4 @@
-/* $Id: MdsDataProvider.java,v 1.30 2004/05/27 07:50:44 manduchi Exp $ */
+/* $Id: MdsDataProvider.java,v 1.31 2004/10/08 13:32:59 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.*;
@@ -7,6 +7,7 @@ import java.lang.OutOfMemoryError;
 import java.lang.InterruptedException;
 import javax.swing.*;
 import java.awt.event.*;
+
 
 
 public class MdsDataProvider implements DataProvider
@@ -98,6 +99,7 @@ public class MdsDataProvider implements DataProvider
                 }
             }
             else
+
             {
                 String mframe_error = ErrorString();
 

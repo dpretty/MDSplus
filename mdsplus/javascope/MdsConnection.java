@@ -1,4 +1,4 @@
-/* $Id: MdsConnection.java,v 1.34 2004/05/25 15:08:52 manduchi Exp $ */
+/* $Id: MdsConnection.java,v 1.35 2004/10/08 13:32:58 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.*;
@@ -214,7 +214,8 @@ public class MdsConnection
 
 	        if(message == null || message.length == 0)
 	        {
-	            out.error = "Null response from server";
+
+	            out.error = "Null response from server" ;
 	            return out;
 	        }
 	        out.status = message.status;
