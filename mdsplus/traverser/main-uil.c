@@ -1,4 +1,4 @@
-static char *cvsrev = "@(#)$RCSfile: main-uil.c,v $ $Revision: 1.10 $ $Date: 1998/04/07 18:09:00 $"; 
+static char *cvsrev = "@(#)$RCSfile: main-uil.c,v $ $Revision: 1.11 $ $Date: 1998/04/09 19:31:05 $"; 
 /*
  * README: Portions of this file are merged at file generation
  * time. Edits can be made *only* in between specified code blocks, look
@@ -32,16 +32,6 @@ static char *cvsrev = "@(#)$RCSfile: main-uil.c,v $ $Revision: 1.10 $ $Date: 199
 #include <Xm/MwmUtil.h>
 
 #define DECLARE_BX_GLOBALS
-
-/*
- * Global declarations are now stored in "MAIN-UIL.H"
- *
- * If DECLARE_BX_GLOBALS is defined then this header file
- * declares the globals, otherwise it just externs them.
- */
-
-#include "MAIN-UIL.H"
-
 
 /*
  * Application name and class definition
