@@ -57,7 +57,7 @@ $ dwcope [-default setup]
 #include <DXm/DECspecific.h>
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: dwscope.c,v $ $Revision: 1.17 $ $Date: 2002/08/05 18:37:07 $";
+static char *cvsrev = "@(#)$RCSfile: dwscope.c,v $ $Revision: 1.18 $ $Date: 2002/09/10 13:04:53 $";
 
 extern void XmdsInitialize();
 extern void XmdsDestroyWidgetCallback();
@@ -1406,9 +1406,9 @@ static XrmDatabase MdsGetFileDatabase(String file_spec)
   XrmDatabase db = 0;
   if (file)
   {
-    char      line_text[1024];
-    char      doubled[1024];
-    while (fgets(line_text, 1024, file))
+    char      line_text[8192];
+    char      doubled[8192];
+    while (fgets(line_text, 8192, file))
     {
       int       i;
       int       j;
@@ -1426,7 +1426,7 @@ static XrmDatabase MdsGetFileDatabase(String file_spec)
       if (put_it)
       {
 	j = 0;
-	for (i = 0; i < size; i++)
+	for (i = 0; (i < size) && (j < sizeof(doubled)); i++)
 	{
 	  if (line_text[i] == '\\')
 	    doubled[j++] = line_text[i];
