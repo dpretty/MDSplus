@@ -22,7 +22,7 @@
 
 #define max(a,b) ((a) > (b) ? (a) : (b))
 
-static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.26 $ $Date: 1998/07/29 14:27:05 $";
+static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.27 $ $Date: 1998/07/29 14:33:16 $";
 
 #define node_to_node_number(node_ptr) node_ptr - dblist->tree_info->node
 #define __toupper(c) (((c) >= 'a' && (c) <= 'z') ? (c) & 0xDF : (c))
@@ -313,7 +313,7 @@ static int       TreeNewNode(PINO_DATABASE *db_ptr, NODE **node_ptrptr, NODE **t
 
     if (node_ptr->parent)
     {
-      header_ptr->free += node_ptr->parent;
+      header_ptr->free += swapint((char *)&node_ptr->parent);
       (parent_of(node_ptr))->child = 0;
     }
     else
