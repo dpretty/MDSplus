@@ -28,6 +28,7 @@
 #endif
 extern int IsRoprand();
 #define ROPRAND(fptr) IsRoprand(DTYPE_NATIVE_FLOAT,fptr)
+#define ROPRAND_TYPED(type, fptr) IsRoprand(type, fptr)
 /* #define ROPRAND(fptr) (*(unsigned short *)(fptr) == 0x8000) */
 
 #include "tdirefcat.h"
@@ -38,7 +39,7 @@ extern int IsRoprand();
 #include <mdsshr.h>
 #include <string.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiItoX.c,v $ $Revision: 1.8 $ $Date: 2001/06/19 19:49:37 $";
+static char *cvsrev = "@(#)$RCSfile: TdiItoX.c,v $ $Revision: 1.9 $ $Date: 2002/03/05 16:55:36 $";
 
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 
@@ -253,9 +254,9 @@ unsigned char			omits[] = {DTYPE_WITH_UNITS,DTYPE_DIMENSION,0};
 		* WARNING may need more careful rounding.
 		*************************************************************************/
 		big_beg = cats[0].in_dtype == DTYPE_MISSING || (cats[0].in_cat & TdiCAT_FLOAT
-			&& ROPRAND(dat[beg].pointer->pointer));
+			&& ROPRAND_TYPED(dat[beg].pointer->dtype, dat[beg].pointer->pointer));
 		big_end = cats[1].in_dtype == DTYPE_MISSING || (cats[1].in_cat & TdiCAT_FLOAT
-			&& ROPRAND(dat[end].pointer->pointer+dat[end].pointer->length*(nseg-1)));
+			&& ROPRAND_TYPED(dat[end].pointer->dtype, dat[end].pointer->pointer+dat[end].pointer->length*(nseg-1)));
 		if (nseg == 1) {
 			dat[beg].pointer->class = CLASS_S;
 			dat[end].pointer->class = CLASS_S;
