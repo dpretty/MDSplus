@@ -1,4 +1,4 @@
-static char *cvsrev = "@(#)$RCSfile: bxutils-uil.c,v $ $Revision: 1.2 $ $Date: 1998/04/01 17:35:58 $"; 
+static char *cvsrev = "@(#)$RCSfile: bxutils-uil.c,v $ $Revision: 1.3 $ $Date: 2000/09/20 18:35:51 $"; 
 /*
  * WARNING: This file is overwritten at code generation time.
  * Any changes to this file will be lost.
@@ -1433,22 +1433,29 @@ XtPointer CONVERT
 	 * return is in the correct bytes of the XtPointer that we
 	 * return.  Here we check all sizes from 1 to 8 bytes.
 	 */
+      union { char c;
+	      short s;
+	      int   i;
+	      long  l;
+	      XTPOINTER p;
+            } uval;
 	switch(toVal.size)
 	{
-	case 1:
-	    val = (XTPOINTER)(*(char*)toVal.addr);
+        case 1:
+	    uval.c = *(char*)toVal.addr;
 	    break;
 	case 2:
-	    val = (XTPOINTER)(*(short*)toVal.addr);
+	    uval.s = *(short*)toVal.addr;
 	    break;
 	case 4:
-	    val = (XTPOINTER)(*(int*)toVal.addr);
+	    uval.i = *(int*)toVal.addr;
 	    break;
 	case 8:
 	default:
-	    val = (XTPOINTER)(*(long*)toVal.addr);
+	    uval.l = *(long*)toVal.addr;
 	    break;
 	}
+        val = uval.p;
     }
 
     /*
