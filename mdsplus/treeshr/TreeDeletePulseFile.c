@@ -37,7 +37,7 @@ int TreeDeletePulseFile(int shotid,int numnids, int *nids)
 #include "treeshrp.h"
 #include <ncidef.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeDeletePulseFile.c,v $ $Revision: 1.5 $ $Date: 1998/04/24 18:45:40 $";
+static char *cvsrev = "@(#)$RCSfile: TreeDeletePulseFile.c,v $ $Revision: 1.6 $ $Date: 1998/04/24 19:40:06 $";
 
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
@@ -184,3 +184,4 @@ static int DeleteFile(char *src)
   return system(cmd) == 0;
 }
 #endif
+
