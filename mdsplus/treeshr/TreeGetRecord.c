@@ -20,7 +20,7 @@
 
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.24 $ $Date: 1998/12/16 10:41:16 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.25 $ $Date: 2000/02/09 20:14:51 $";
 
 
 static int OpenDatafileR(TREE_INFO *info);
@@ -109,8 +109,7 @@ int _TreeGetRecord(void *dbid, int nid_in, struct descriptor_xd *dsc)
 		  {
 		  case 2: *(short *)dptr->pointer = swapshort(dptr->pointer); break;
 		  case 4: *(int *)dptr->pointer = swapint(dptr->pointer); break;
-		  case 8: *(int *)dptr->pointer = swapint(dptr->pointer); 
-		          ((int *)dptr->pointer)[1] = swapint(dptr->pointer+sizeof(int)); break;
+		  case 8: *(_int64 *)dptr->pointer = swapquad(dptr->pointer); break;
 		  }
   	        }
 	      }
