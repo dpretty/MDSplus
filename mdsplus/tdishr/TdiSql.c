@@ -43,7 +43,7 @@
 #define  DTYPE_D DTYPE_G
 #endif
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSql.c,v $ $Revision: 1.16 $ $Date: 2004/02/23 19:52:21 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSql.c,v $ $Revision: 1.17 $ $Date: 2004/02/23 20:00:39 $";
 
 extern int stat;
 extern int TdiFindImageSymbol();
@@ -424,8 +424,8 @@ int 	rblob;
 							*(unsigned long *)buf = *((unsigned long *)buf+1);
 							*((unsigned long *)buf+1) = hi;
 #endif
-							status = SYB_dbconvert(dbproc,type,buf,bufs[j].len,SYBCHAR,(unsigned char *)ddate,sizeof(ddate)-1);
                                                         if (bufs[j].len != 0) {
+							  status = SYB_dbconvert(dbproc,type,buf,bufs[j].len,SYBCHAR,(unsigned char *)ddate,sizeof(ddate)-1);
 							  if (status >= 0) {
 							    ddate[status] = '\0'; 
 							    len = status;
@@ -441,6 +441,7 @@ int 	rblob;
 							  dtype = DTYPE_T;
 							  len = strlen(default_date);
 							}
+						
 							AppendAnswer(j, buf, len, dtype);
 						}
 					}
