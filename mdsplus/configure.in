@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.54 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.55 $
 AC_INIT()
 
 AC_CONFIG_HEADER(include/config.h)
@@ -20,6 +20,7 @@ AC_PROG_CC
 
 if test "$NOF77"
 then
+:;
 else
 AC_PROG_F77
 fi
