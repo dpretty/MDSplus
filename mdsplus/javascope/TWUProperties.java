@@ -13,9 +13,14 @@
  *
  * Author: Jon Krom, Forschungszentrum Jülich, Institut für Plasmaphysik.
  *
- * $Id: TWUProperties.java,v 1.6 2002/05/07 11:24:31 jgk Exp $
+ * $Id: TWUProperties.java,v 1.7 2002/05/24 08:55:19 jgk Exp $
  *
  * $Log: TWUProperties.java,v $
+ * Revision 1.7  2002/05/24 08:55:19  jgk
+ * A bit more robust when faced with HTTP servers that do not provide
+ * a mime_type.   Assume it to be text/html in these cases (like most
+ * browsers seem to do).
+ *
  * Revision 1.6  2002/05/07 11:24:31  jgk
  * Improvement to the Units() method.
  *
@@ -58,7 +63,7 @@ public class TWUProperties
     {
         final String
             actual_user_agent = (user_agent!=null) ?  user_agent
-            : "TWUProperties.java for jScope ($Revision: 1.6 $)";
+            : "TWUProperties.java for jScope ($Revision: 1.7 $)";
         signalProps = new Properties();
 
         if (SigURL==null)
@@ -72,8 +77,10 @@ public class TWUProperties
 
             URLConnection con = signalURL.openConnection();
             con.setRequestProperty("User-Agent",actual_user_agent);
-        
-            if(con.getContentType().indexOf("text") >=0)
+            String mime_type = con.getContentType();
+
+            // Assume (like browsers) that missing mime-type indicates text/html.
+            if(mime_type==null || mime_type.indexOf("text") >=0)
             {
                 signalProps.load(con.getInputStream());
                 textRead = true;
@@ -336,7 +343,7 @@ public class TWUProperties
     public static String 
     revision()
     {
-        return "$Id: TWUProperties.java,v 1.6 2002/05/07 11:24:31 jgk Exp $";
+        return "$Id: TWUProperties.java,v 1.7 2002/05/24 08:55:19 jgk Exp $";
     }
 
     public static void 
@@ -388,5 +395,5 @@ class FakeTWUProperties extends TWUProperties {
 }
 
 /* ------------------------------------------------------------------------ */
-// End of $Id: TWUProperties.java,v 1.6 2002/05/07 11:24:31 jgk Exp $
+// End of $Id: TWUProperties.java,v 1.7 2002/05/24 08:55:19 jgk Exp $
 /* ------------------------------------------------------------------------ */

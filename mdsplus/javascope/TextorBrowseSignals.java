@@ -1,4 +1,4 @@
-/* $Id: TextorBrowseSignals.java,v 1.6 2002/04/26 13:14:30 jgk Exp $ */
+/* $Id: TextorBrowseSignals.java,v 1.7 2002/05/24 08:55:19 jgk Exp $ */
 import java.net.*; 
 import java.io.*;
 import java.util.StringTokenizer;
@@ -15,7 +15,9 @@ public class TextorBrowseSignals extends jScopeBrowseSignals
     protected String getSignal(String url_name)
     {
         String sig_path = null, curr_line;
-        boolean is_image = (mime_type.indexOf("image") != -1);
+
+        // Assume (like browsers) that missing mime-type indicates text/html.
+        boolean is_image = (mime_type!=null && mime_type.indexOf("image") != -1);
         
         try
         {

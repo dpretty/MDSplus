@@ -1,4 +1,4 @@
-/* $Id: jScopeBrowseUrl.java,v 1.6 2002/05/24 07:58:06 jgk Exp $ */
+/* $Id: jScopeBrowseUrl.java,v 1.7 2002/05/24 08:55:19 jgk Exp $ */
 import javax.swing.border.*;
 import javax.swing.colorchooser.*;
 import javax.swing.filechooser.*;
@@ -114,7 +114,8 @@ public class jScopeBrowseUrl extends JDialog
         url_con = url.openConnection();
         mime_type = url_con.getContentType();
 
-        if(mime_type.indexOf("text") != -1)
+        // Assume (like browsers) that missing mime-type indicates text/html.
+        if(mime_type==null || mime_type.indexOf("text") != -1)
           html.setPage(url);
         else
         {
