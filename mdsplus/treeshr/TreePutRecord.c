@@ -59,7 +59,7 @@ static int timezone = 0;
 #define LONG_LONG_CONSTANT(value) value##ll
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.55 $ $Date: 2001/06/06 17:04:37 $";
+static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.56 $ $Date: 2001/07/26 13:51:09 $";
 
 #ifdef min
 #undef min
@@ -140,7 +140,7 @@ int       _TreePutRecord(void *dbid, int nid, struct descriptor *descriptor_ptr,
 #ifndef HAVE_VXWORKS_H
         tzset();
 #endif
-        m1 = (unsigned int)time(NULL) - timezone;
+        m1 = (unsigned int)time(NULL) - timezone + daylight * 3600;
 	LibEmul(&m1,&m2,&zero,&temp);
         local_nci.time_inserted = temp + addin;
       }
