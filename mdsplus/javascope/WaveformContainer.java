@@ -1,4 +1,4 @@
-/* $Id: WaveformContainer.java,v 1.33 2003/12/18 15:40:37 manduchi Exp $ */
+/* $Id: WaveformContainer.java,v 1.34 2004/09/24 08:35:21 manduchi Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -588,14 +588,14 @@ public class WaveformContainer extends RowColumnContainer implements WaveformMan
     public void SetColors(Color colors[], String colors_name[])
     {
  //     Waveform.SetColors(colors, colors_name);
-        jScopeMultiWave w;
+        Waveform w;
         for(int i = 0, k = 0; i < rows.length; i++)
         {
             for(int j = 0; j < rows[i]; j++, k++)
             {
-                w = (jScopeMultiWave) GetWavePanel(k);
+                w = GetWavePanel(k);
                 if (w != null) {
-                w.SetColors(colors, colors_name);
+                    w.SetColors(colors, colors_name);
                 }
             }
         }

@@ -1,10 +1,11 @@
-/* $Id: DataCacheObject.java,v 1.20 2003/08/08 12:35:34 manduchi Exp $ */
+/* $Id: DataCacheObject.java,v 1.21 2004/09/24 08:35:21 manduchi Exp $ */
 import java.io.Serializable;
 
 class DataCacheObject implements Serializable
 {
     float data[];
     float x[];
+    double x_double[];
     float y[];
     float up_err[];
     float low_err[];
