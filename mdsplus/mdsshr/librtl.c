@@ -197,7 +197,7 @@ void *dlsym(void *handle, char *name)
 char *TranslateLogical(char *name)
 {
 	char *env = getenv(name);
-	return env ? strcpy(malloc(strlen(env)+1,env) : 0;
+	return env ? strcpy(malloc(strlen(env)+1),env) : 0;
 }
 unsigned int LibCallg(void **arglist, unsigned int (*routine)())
 {
@@ -303,7 +303,7 @@ int LibWait(float *secs)
 
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.34 $ $Date: 1998/07/31 15:12:19 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.35 $ $Date: 1998/07/31 15:13:32 $";
 #ifndef va_count
 #define  va_count(narg) va_start(incrmtr, first); \
                         for (narg=1; (narg < 256) && (va_arg(incrmtr, struct descriptor *) != MdsEND_ARG); narg++)
