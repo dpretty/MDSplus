@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.9 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.10 $
 AC_INIT()
 
 AC_CONFIG_HEADER(include/config.h)
@@ -176,8 +176,6 @@ AC_SUBST(LDSHARE)
 AC_SUBST(LDARC)
 AC_SUBST(LINKSHARED)
 AC_SUBST(SHARETYPE)
-AC_SUBST(XINC)
-AC_SUBST(XLIB)
 AC_SUBST(host)
 AC_SUBST(NEED_SEMUN)
 AC_SUBST(TARGETSYS)
