@@ -1,4 +1,4 @@
-/* $Id: MdsDataClient.java,v 1.20 2003/08/06 15:30:47 manduchi Exp $ */
+/* $Id: MdsDataClient.java,v 1.21 2003/08/08 12:35:38 manduchi Exp $ */
 import java.util.Vector;
 
 public class MdsDataClient extends MdsConnection 
@@ -270,6 +270,7 @@ public class MdsDataClient extends MdsConnection
 	        case Descriptor.DTYPE_DOUBLE: 
 	            throw new MdsIOException("Cannot convert a string to byte array");
 	        case Descriptor.DTYPE_CHAR:
+	        case Descriptor.DTYPE_BYTE:
 	            out_data = new byte[desc.byte_data.length];
 	            for(int i = 0; i < desc.byte_data.length; i++)
 		            out_data[i] = (byte)desc.byte_data[i];
