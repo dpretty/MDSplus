@@ -29,7 +29,8 @@ int MdsGetCurrentShotId(experiment,shot)
 #include <libroutines.h>
 #include <strroutines.h>
 #include <ctype.h>
-static char *cvsrev = "@(#)$RCSfile: MdsGetSetShotId.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 18:46:37 $";
+#include <string.h>
+static char *cvsrev = "@(#)$RCSfile: MdsGetSetShotId.c,v $ $Revision: 1.4 $ $Date: 1998/04/24 18:28:31 $";
 
 #define _ToLower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
