@@ -5,11 +5,11 @@
 /*  CMS REPLACEMENT HISTORY, Element T.C */
 #include <ipdesc.h>
 #include <stdio.h>
-static char *cvsrev = "@(#)$RCSfile: t.c,v $ $Revision: 1.5 $ $Date: 1998/04/28 20:48:17 $";
+static char *cvsrev = "@(#)$RCSfile: t.c,v $ $Revision: 1.6 $ $Date: 1998/10/01 16:57:23 $";
 int main( int argc, void **argv)
 {
   struct descrip ans;
-  long sock = ConnectToMds("cmoda.pfc.mit.edu");
+  long sock = ConnectToMds("198.125.176.13");
   if (sock != -1)
   {
     printf("status from MdsOpen = %d\n",MdsOpen(sock,"CMOD",0));
