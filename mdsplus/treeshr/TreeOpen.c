@@ -25,7 +25,7 @@
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.32 $ $Date: 1998/11/06 15:19:17 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.33 $ $Date: 1998/11/06 15:20:44 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
@@ -399,12 +399,12 @@ static int ConnectTree(PINO_DATABASE *dblist, char *tree, NODE *parent, char *su
 	  
 	  info->flush = (dblist->shotid == -1);
 	  info->treenam = strcpy(malloc(strlen(tree)+1),tree);
-	  status = MapTree(tree, dblist->shotid, info, 0, parent != 0);
+	  status = MapTree(tree, dblist->shotid, info, 0, parent == 0);
 	  if (status == TreeFAILURE && treeshr_errno == TreeFILE_NOT_FOUND)
 	  {
 	    status = TreeCallHook(RetrieveTree, info);
 	    if (status == TreeNORMAL)
-	      status = MapTree(tree, dblist->shotid, info, 0, parent != 0);
+	      status = MapTree(tree, dblist->shotid, info, 0, parent == 0);
 	  }
 	  if (status == TreeNORMAL)
 	  {
