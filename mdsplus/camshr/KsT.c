@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: KsT.c,v 1.3 2003/05/09 15:20:15 twf Exp $
+//	$Id: KsT.c,v 1.4 2003/05/12 14:16:31 twf Exp $
 //-------------------------------------------------------------------------
 // Mon Oct 15 16:35:42 EDT 2001	-- seperated out
 //-----------------------------------------------------------
@@ -93,6 +93,11 @@ int KsTranslateIosb( RequestSenseData *sense, int cam_status)
       LastIosb.no_sync =  sense->u2.esr.no_sync;
       LastIosb.tmo     =  sense->u2.esr.tmo;
       LastIosb.adnr    =  sense->u2.esr.adnr;
+      if (sense->u2.esr.adnr)
+      {
+        status = CamDONE_NOX;
+        LastIosb.status = Shorten( CamDONE_NOX );
+      }
       LastIosb.list    =  0;			// list processing not supported
       LastIosb.lbytcnt =  0;			// list processing not supported
     }      
