@@ -31,7 +31,7 @@
 #include <mdsshr.h>
 #include <string.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiSort.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:06:16 $";
+static char *cvsrev = "@(#)$RCSfile: TdiSort.c,v $ $Revision: 1.4 $ $Date: 1999/09/01 14:38:55 $";
 
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 extern unsigned short OpcVector;
@@ -300,7 +300,7 @@ int				stack[64];
 	case DTYPE_FS :	gtr = (int (*)())&GTR_FS; break;
 	case DTYPE_D :	gtr = (int (*)())&GTR_D; break;
 	case DTYPE_G :	gtr = (int (*)())&GTR_G; break;
-	case DTYPE_FT : 	gtr = (int (*)())&GTR_FS; break;
+	case DTYPE_FT : gtr = (int (*)())&GTR_FT; break;
 
 	case DTYPE_FC :	gtr = (int (*)())&GTR_FC; break;
 	case DTYPE_DC :	gtr = (int (*)())&GTR_DC; break;
