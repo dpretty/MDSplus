@@ -7,6 +7,7 @@
 */
 
 #define _MOVC3(a,b,c) memcpy(c,b,a)
+#include "STATICdef.h"
 #include "tdirefstandard.h"
 #include "tdirefcat.h"
 #include "tdinelements.h"
@@ -15,7 +16,7 @@
 #include <mdsshr.h>
 #include <string.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiMatrix.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:06:11 $";
+static char *cvsrev = "@(#)$RCSfile: TdiMatrix.c,v $ $Revision: 1.4 $ $Date: 2003/11/14 21:34:17 $";
 
 extern int TdiGetArgs();
 extern int TdiData();
@@ -24,7 +25,7 @@ extern int TdiMasterData();
 
 static struct descriptor missing = {0,DTYPE_MISSING,CLASS_S,0};
 typedef struct {int q[2];} quadw;
-static int copy(
+STATIC_ROUTINE int copy(
 int	len,
 int	n,
 char	*x,
