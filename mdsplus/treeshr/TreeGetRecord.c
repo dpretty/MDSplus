@@ -20,7 +20,7 @@
 
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.37 $ $Date: 2004/01/05 15:53:31 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.38 $ $Date: 2004/04/14 18:14:45 $";
 
 
 static int OpenDatafileR(TREE_INFO *info);
@@ -120,15 +120,20 @@ int _TreeGetRecord(void *dbid, int nid_in, struct descriptor_xd *dsc)
 	      else
 	      {
                 int length = nci.DATA_INFO.DATA_LOCATION.record_length;
-                char *data = malloc(length);
-		status = GetDatafile(info, nci.DATA_INFO.DATA_LOCATION.rfa,&length,data,&retsize,&nodenum,nci.flags2);
-                if (!(status & 1))
-                  status = TreeBADRECORD;
-		else if (!(nci.flags2 & NciM_NON_VMS) && ((retsize != length) || (nodenum != nidx)))
-		  status = TreeBADRECORD;
+                if (length > 0)
+		{
+                  char *data = malloc(length);
+   		  status = GetDatafile(info, nci.DATA_INFO.DATA_LOCATION.rfa,&length,data,&retsize,&nodenum,nci.flags2);
+                  if (!(status & 1))
+                    status = TreeBADRECORD;
+		  else if (!(nci.flags2 & NciM_NON_VMS) && ((retsize != length) || (nodenum != nidx)))
+		    status = TreeBADRECORD;
+		  else
+		    status = (MdsSerializeDscIn(data,dsc) & 1) ? TreeNORMAL : TreeBADRECORD;
+		  free(data);
+                }
                 else
-	          status = (MdsSerializeDscIn(data,dsc) & 1) ? TreeNORMAL : TreeBADRECORD;
-                free(data);
+                  status = TreeBADRECORD;
 	      }
 	      break;
 	   default:
