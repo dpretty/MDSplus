@@ -35,7 +35,11 @@ int XmdsBells(int *number_of_bells )
 
 #include <X11/Xlib.h>
 
-static char *cvsrev = "@(#)$RCSfile: XmdsBells.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:23:44 $";
+static char *cvsrev = "@(#)$RCSfile: XmdsBells.c,v $ $Revision: 1.3 $ $Date: 1998/05/22 20:23:03 $";
+
+#ifdef __linux__
+char * _Xsetlocale() { printf("_Xsetlocale called.\n"); return NULL;}
+#endif
 
 int XmdsBells(int *num_bells)
 {

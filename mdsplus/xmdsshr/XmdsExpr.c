@@ -176,7 +176,7 @@ static void MoveChildren(XmdsExprWidget w);
 
  Local variables:                                                             */
 
-static char *cvsrev = "@(#)$RCSfile: XmdsExpr.c,v $ $Revision: 1.6 $ $Date: 1998/04/08 19:23:47 $";
+static char *cvsrev = "@(#)$RCSfile: XmdsExpr.c,v $ $Revision: 1.7 $ $Date: 1998/05/22 20:23:04 $";
 static struct descriptor_xd const empty_xd = {0, DTYPE_DSC, CLASS_XD, 0, 0};
 /*------------------------------------------------------------------------------
 
@@ -500,13 +500,20 @@ static void Initialize(Widget req,Widget new,ArgList args,Cardinal *num_args,Boo
   int want_height;
   int want_width;
   change_quotes_callback_list[0].closure = (XtPointer) w;
-  quote_args[0].value = (XtArgVal) XmStringCreateSimple("\"");
   w->manager.navigation_type = XmTAB_GROUP;
   if (w->expr.auto_quote)
   {
+    static Arg quote_args[] = {
+                        {XmNlabelString, 0},
+                        {XmNx, 0},
+                        {XmNheight, 20},
+                        {XmNactivateCallback, (XtArgVal) change_quotes_callback_list},
+                        {XmNtraversalOn, FALSE}
+                     };
+    quote_args[0].value = (XtArgVal) XmStringCreateSimple("\"");
     w->expr.open_quote_widget = XmCreatePushButton((Widget) w,"open_quote",quote_args,XtNumber(quote_args));
     w->expr.close_quote_widget = XmCreatePushButton((Widget) w,"close_quote",quote_args,XtNumber(quote_args));
-    XtFree((char *)quote_args[0].value);
+    XmStringFree((XmString)quote_args[0].value);
   }
   else
   {
@@ -608,6 +615,7 @@ static Boolean SetValues(Widget old,Widget req,Widget new,ArgList args,Cardinal 
       quote_args[0].value = (XtArgVal) XmStringCreateSimple("\"");
       new_ew->expr.open_quote_widget = XmCreatePushButton((Widget) new_ew,"open_quote",quote_args,XtNumber(quote_args));
       new_ew->expr.close_quote_widget = XmCreatePushButton((Widget) new_ew,"open_quote",quote_args,XtNumber(quote_args));
+      XmStringFree((XmString)quote_args[0].value);
       SetEnclosures(new_ew,(struct descriptor *) new_ew->expr.xd);
     }
     if (req_ew->expr.default_quote != old_ew->expr.default_quote && new_ew->expr.auto_quote)
