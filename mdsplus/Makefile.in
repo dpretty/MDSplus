@@ -1,9 +1,10 @@
-#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.35 $
+#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.36 $
 # @configure_input@
 prefix=@prefix@
 SHELL=/bin/sh
 
-JAVA_APS = javamds \
+JAVA_APS = javadispatcher \
+	   javamds \
 	   javascope \
            javatraverser \
 	   javaclient
