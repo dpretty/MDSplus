@@ -1,4 +1,4 @@
-#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.1 $
+#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.2 $
 # @configure_input@
 SHELL=/bin/sh
 
@@ -16,12 +16,13 @@ PARTS = ipcs \
         cdu     \
         mdsdcl  \
         ccl     \
+	servershr \
         tcl \
         traverser \
         actions \
         mdslib \
         math \
-        d3dshr \
+        @D3DSHR@ \
         wfevent
 
 all:

@@ -48,21 +48,18 @@ The expansion routine "xentry":
 
 
 #include <string.h>
+#include <mdstypes.h>
 #include <mdsdescrip.h>
 #include <mdsshr.h>
 #include <libroutines.h>
 #include <strroutines.h>
 #include <librtl_messages.h>
 
-#ifndef _WIN32
-typedef long long _int64;
-#endif
-
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 typedef ARRAY_COEFF(char, 1) array_coef;
 typedef RECORD(4) record_four;
-static char *cvsrev = "@(#)$RCSfile: MdsCompress.c,v $ $Revision: 1.9 $ $Date: 1999/05/18 19:15:05 $";
+static char *cvsrev = "@(#)$RCSfile: MdsCompress.c,v $ $Revision: 1.10 $ $Date: 1999/10/26 19:50:38 $";
 
   static unsigned short opcode = OpcDECOMPRESS;
   static record_four rec0 = {sizeof(opcode), DTYPE_FUNCTION, CLASS_R, (unsigned char *) &opcode, 4, 0, 0, 0, 0};

@@ -27,7 +27,7 @@
 	Pack Macro timings				3.25	3.50		3.40
 	Unpack Macro timings				3.01	3.07		3.02
 */
-static char *cvsrev = "@(#)$RCSfile: MdsPk.c,v $ $Revision: 1.11 $ $Date: 1998/07/27 19:21:58 $";
+static char *cvsrev = "@(#)$RCSfile: MdsPk.c,v $ $Revision: 1.12 $ $Date: 1999/10/26 19:50:39 $";
 static unsigned int masks[33] = {0,
 0x1, 0x3, 0x7, 0xf, 0x1f, 0x3f, 0x7f, 0xff,
 0x1ff, 0x3ff, 0x7ff, 0xfff, 0x1fff, 0x3fff, 0x7fff, 0xffff,
@@ -40,7 +40,7 @@ static int SwapBytes(char *in_c)
   int out;
   char *out_c = (char *)&out;
   int i;
-#ifdef _big_endian
+#ifdef WORDS_BIGENDIAN
   for (i=0;i<4;i++) out_c[i] = in_c[3-i];
 #else
   for (i=0;i<4;i++) out_c[i] = in_c[i];
@@ -49,7 +49,7 @@ static int SwapBytes(char *in_c)
 }
 #define getppack SwapBytes((char *)ppack)
 
-void      MdsPk(char *nbits_ptr, int *nitems_ptr, int pack[], int items[], int *bit_ptr)
+void      MdsPk(signed char *nbits_ptr, int *nitems_ptr, int pack[], int items[], int *bit_ptr)
 {
   int       nbits = *nbits_ptr;
   int       nitems = *nitems_ptr;
@@ -59,11 +59,11 @@ void      MdsPk(char *nbits_ptr, int *nitems_ptr, int pack[], int items[], int *
   int       off = *bit_ptr & 31;
   int      mask;
   int       test;
-#ifdef _big_endian
+#ifdef WORDS_BIGENDIAN
   int i;
   int j;
-  char *pin;
-  char *pout;
+  signed char *pin;
+  signed char *pout;
   int      hold = 0;
   if (off)
   {
@@ -81,8 +81,8 @@ void      MdsPk(char *nbits_ptr, int *nitems_ptr, int pack[], int items[], int *
   {
     if ((off & 7) == 0)
     {
-#ifdef _big_endian
-      for (i=0,pout = ((char *)ppack) + (off >> 3),pin = (char *)pitems;i<nitems;i++,pout+=4,pin+=4)
+#ifdef WORDS_BIGENDIAN
+      for (i=0,pout = ((signed char *)ppack) + (off >> 3),pin = (signed char *)pitems;i<nitems;i++,pout+=4,pin+=4)
         for (j=0;j<4;j++)
           pout[j] = pin[3-j];
 #else
@@ -94,7 +94,7 @@ void      MdsPk(char *nbits_ptr, int *nitems_ptr, int pack[], int items[], int *
       for (; --nitems >= 0;)
       {
 	hold |= *pitems << off;
-#ifdef _big_endian
+#ifdef WORDS_BIGENDIAN
         for (i=0;i<4;i++)
           ((char *)ppack)[i] = ((char *)&hold)[3-i];
         ppack++;
@@ -113,7 +113,7 @@ void      MdsPk(char *nbits_ptr, int *nitems_ptr, int pack[], int items[], int *
       hold |= (mask & *pitems) << off;
       if (off >= test)
       {
-#ifdef _big_endian
+#ifdef WORDS_BIGENDIAN
         for (i=0;i<4;i++)
           ((char *)ppack)[i] = ((char *)&hold)[3-i];
         ppack++;
@@ -128,7 +128,7 @@ void      MdsPk(char *nbits_ptr, int *nitems_ptr, int pack[], int items[], int *
     }
   }
   if (off)
-#ifdef _big_endian
+#ifdef WORDS_BIGENDIAN
     for (i=0;i<4;i++)
       ((char *)ppack)[i] = ((char *)&hold)[3-i];
 #else
@@ -139,7 +139,7 @@ void      MdsPk(char *nbits_ptr, int *nitems_ptr, int pack[], int items[], int *
 
 
 /*-------------------------------------------------------------*/
-void      MdsUnpk(char *nbits_ptr, int *nitems_ptr, int pack[], int items[], int *bit_ptr)
+void      MdsUnpk(signed char *nbits_ptr, int *nitems_ptr, int pack[], int items[], int *bit_ptr)
 {
   int       nbits = *nbits_ptr;
   int       nitems = *nitems_ptr;
