@@ -67,7 +67,7 @@
 #include <mdsdescrip.h>
 #include <mdsshr.h>
 #include <librtl_messages.h>
-static char *cvsrev = "@(#)$RCSfile: MdsCmprs.c,v $ $Revision: 1.19 $ $Date: 2000/01/18 19:27:35 $";
+static char *cvsrev = "@(#)$RCSfile: MdsCmprs.c,v $ $Revision: 1.20 $ $Date: 2000/10/06 19:06:51 $";
 
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
 #define MAXX 1024		/*length of longest run allowed*/
@@ -290,7 +290,7 @@ Do this in runs.
   Build exception table.
   Assume 2's complement.
   *********************/
-    mark = -1 << yn - 1;
+    mark = -1 << (yn - 1);
     maxim = ~mark;
     for (pn = diff, pe = exce, j = xe; --j >= 0;)
     {
@@ -382,7 +382,7 @@ Note the sign-extended unpacking.
       pe = exce;
       nbits = (char)ye;
       MdsUnpk(&nbits, &xe, (int *) ppack, (int *) pe, (int *) bit_ptr);
-      mark = -1 << -yn - 1;
+      mark = -1 << (-yn - 1);
     }
 
   /***********************************

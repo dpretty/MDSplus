@@ -26,7 +26,7 @@ typedef struct {int lo; unsigned int hi;} quadw;
 #include <mdsshr.h>
 #include <treeshr.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiDoTask.c,v $ $Revision: 1.5 $ $Date: 1999/11/29 15:18:49 $";
+static char *cvsrev = "@(#)$RCSfile: TdiDoTask.c,v $ $Revision: 1.6 $ $Date: 2000/10/06 19:07:00 $";
 
 extern int TdiTaskOf();
 extern int TdiGetFloat();
@@ -100,7 +100,7 @@ quadw	dt = {0,0};
 float	timeout = (float)0.;
 DESCRIPTOR_FLOAT(timeout_dsc, 0);
 struct descriptor	dt_dsc = {sizeof(dt),DTYPE_Q,CLASS_S,0};
-struct descriptor_xd	task_xd = EMPTY_XD, image_xd = EMPTY_XD;
+struct descriptor_xd	task_xd = EMPTY_XD;
 struct descriptor_routine	*ptask;
         timeout_dsc.pointer = (char *)&timeout;
         dt_dsc.pointer = (char *)&dt;

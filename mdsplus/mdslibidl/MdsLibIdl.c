@@ -13,7 +13,7 @@ extern int TdiData();
 extern int TdiCvt();
 extern int TdiCompile();
 
-static char *cvsrev = "@(#)$RCSfile: MdsLibIdl.c,v $ $Revision: 1.15 $ $Date: 2000/08/03 16:15:07 $";
+static char *cvsrev = "@(#)$RCSfile: MdsLibIdl.c,v $ $Revision: 1.16 $ $Date: 2000/10/06 19:06:50 $";
 
 #ifdef _WINDOWS
 #define BlockSig(a)
@@ -126,7 +126,6 @@ static void *MakeDescr(int idx, int *argsize, void *bytes)
     case 6: arrayArgs[idx].length = 8; arrayArgs[idx].dtype = DTYPE_FSC; arrayArgs[idx].arsize = argsize[argsize[0]+2] * 8; break;
     case 7: 
       {
-	int j;
 	IDL_STRING *str;
         int num = 1;
         unsigned short maxlen;

@@ -5,7 +5,7 @@
 /*  CMS REPLACEMENT HISTORY, Element T.C */
 #include <ipdesc.h>
 #include <stdio.h>
-static char *cvsrev = "@(#)$RCSfile: t.c,v $ $Revision: 1.8 $ $Date: 2000/04/20 14:01:36 $";
+static char *cvsrev = "@(#)$RCSfile: t.c,v $ $Revision: 1.9 $ $Date: 2000/10/06 19:06:52 $";
 int main( int argc, void **argv)
 {
   int status;
@@ -21,7 +21,7 @@ int main( int argc, void **argv)
     {
       printf("%g\n",*(float *)ans.ptr);
       val = *(float *)ans.ptr;
-      val = val + 1.;
+      val = val + (float)1.;
     }
     else
       printf("%s\n",ans.ptr);

@@ -42,7 +42,7 @@
 #include <tdimessages.h>
 #include <mdsshr.h>
 #include <mds_stdarg.h>
-static char *cvsrev = "@(#)$RCSfile: TdiIntrinsic.c,v $ $Revision: 1.7 $ $Date: 1998/05/04 20:31:45 $";
+static char *cvsrev = "@(#)$RCSfile: TdiIntrinsic.c,v $ $Revision: 1.8 $ $Date: 2000/10/06 19:07:01 $";
 
 typedef struct _bounds { int l; int u; } BOUNDS;
 
@@ -177,6 +177,7 @@ unsigned short		now = message.length;
 		}
 	}
 	add(")\n");
+  return 1;
 }
 /**********************************
 Useful for access violation errors.
