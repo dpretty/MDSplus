@@ -43,7 +43,7 @@
 #define  DTYPE_D DTYPE_G
 #endif
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSql.c,v $ $Revision: 1.19 $ $Date: 2004/03/08 19:58:53 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSql.c,v $ $Revision: 1.19.2.1 $ $Date: 2005/04/06 03:35:12 $";
 
 extern int stat;
 extern int TdiFindImageSymbol();
@@ -117,21 +117,33 @@ typedef const LPBYTE         LPCBYTE ;
 /*********************************************************/
 STATIC_ROUTINE int	TDISQL_LINK(char *name, int (**routine)()) {
 STATIC_CONSTANT DESCRIPTOR(dimage,	"MdsSql");
+#ifdef __APPLE__
+STATIC_CONSTANT DESCRIPTOR(dimage2,	"sybdb");
+#endif	
 struct descriptor dname = {0,DTYPE_T,CLASS_S,0};
 int	status;
 dname.length = (unsigned short)strlen(name);
 dname.pointer = name;
 status = TdiFindImageSymbol(&dimage, &dname, routine);
+#ifdef __APPLE__
+if (!(status & 1)) status = TdiFindImageSymbol(&dimage2, &dname, routine);
+#endif
 return status;
 }
 /*********************************************************/
 STATIC_ROUTINE int	TDISQL_LINKCPTR(char *name, char * (**routine)()) {
 STATIC_CONSTANT DESCRIPTOR(dimage,	"MdsSql");
+#ifdef __APPLE__
+	STATIC_CONSTANT DESCRIPTOR(dimage2,	"sybdb");
+#endif	
 struct descriptor dname = {0,DTYPE_T,CLASS_S,0};
 int	status;
 dname.length = (unsigned short)strlen(name);
 dname.pointer = name;
 status = TdiFindImageSymbol(&dimage, &dname, routine);
+#ifdef __APPLE__
+if (!(status & 1)) status = TdiFindImageSymbol(&dimage2, &dname, routine);
+#endif
 return status;
 }
 
