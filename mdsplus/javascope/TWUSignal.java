@@ -10,9 +10,12 @@
  * Authors: Jon Krom, H.R.Koslowski, 
  *          Forschungszentrum Jülich, Institut für Plasmaphysik.
  *
- * $Id: TWUSignal.java,v 1.7 2002/05/06 16:07:10 jgk Exp $
+ * $Id: TWUSignal.java,v 1.8 2002/05/06 16:09:57 jgk Exp $
  *
  * $Log: TWUSignal.java,v $
+ * Revision 1.8  2002/05/06 16:09:57  jgk
+ * Fiddles (sorry).
+ *
  * Revision 1.7  2002/05/06 16:07:10  jgk
  * Further adjustment suggested by Marco van de Giessen.
  *
@@ -159,7 +162,7 @@ public class TWUSignal
             URLConnection con = bulkURL.openConnection();
 
             con.setRequestProperty("User-Agent",
-                                   "TWUSignal.java for jScope ($Revision: 1.7 $)");
+                                   "TWUSignal.java for jScope ($Revision: 1.8 $)");
             con.connect();
 
             instream = 
@@ -184,7 +187,7 @@ public class TWUSignal
     public boolean
     error()
     { 
-	return error ;
+        return error ;
     }
 
     public void
@@ -233,7 +236,7 @@ public class TWUSignal
         catch (Exception e) 
         {
             System.out.println("TWUSignal.tryToRead :" + e);
-	    error = true ;
+            error = true ;
         }
     }
 
@@ -263,10 +266,10 @@ public class TWUSignal
     public static String 
     revision()
     {
-        return "$Id: TWUSignal.java,v 1.7 2002/05/06 16:07:10 jgk Exp $";
+        return "$Id: TWUSignal.java,v 1.8 2002/05/06 16:09:57 jgk Exp $";
     }
 }
 
 /* ------------------------------------------------------------------------ */
-// $Id: TWUSignal.java,v 1.7 2002/05/06 16:07:10 jgk Exp $
+// $Id: TWUSignal.java,v 1.8 2002/05/06 16:09:57 jgk Exp $
 /* ------------------------------------------------------------------------ */

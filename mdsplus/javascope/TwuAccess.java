@@ -1,4 +1,4 @@
-/* $Id: TwuAccess.java,v 1.6 2002/04/26 13:14:30 jgk Exp $ */
+/* $Id: TwuAccess.java,v 1.7 2002/05/06 16:09:57 jgk Exp $ */
 import java.util.*;
 import java.awt.*;
 import java.io.IOException;
@@ -14,7 +14,7 @@ public class TwuAccess implements DataAccess
     public static void main(String args[])
     {
         TwuAccess access = new TwuAccess();
-        String url = "twu://ipp333.ipp.kfa-juelich.de/textor/all/86858/RT2/IVD/IBT2P-star";
+        String url = "twu://ipptwu.ipp.kfa-juelich.de/textor/all/86858/RT2/IVD/IBT2P-star";
         boolean supports = access.supports(url);
         try
         {
