@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.46 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.47 $
 AC_INIT()
 
 AC_CONFIG_HEADER(include/config.h)
@@ -12,6 +12,7 @@ hppa*) : ${CC=cc};
        : ${F77=f77};;
 alpha-dec-osf*) : ${CC=cc};
 		: ${F77=f77};;
+mips*) : ${CC=cc};;
 esac
 
 dnl Check out the compiler
