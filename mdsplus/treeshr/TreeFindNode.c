@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeFindNode.c,v $ $Revision: 1.16 $ $Date: 1998/05/06 14:12:12 $";
+static char *cvsrev = "@(#)$RCSfile: TreeFindNode.c,v $ $Revision: 1.17 $ $Date: 1998/07/29 16:27:13 $";
 
 extern void *DBID;
 
@@ -919,7 +919,7 @@ char *_TreeFindNodeTags(void *dbid, int nid_in, void **ctx_ptr)
     if (*ctx == 0)
     {
       nid_to_node(dblist, nid, node_ptr);
-      *ctx = node_ptr->tag_link;
+      *ctx = swapint((char *)&node_ptr->tag_link);
     }
     else if (*ctx == -1)
     {
@@ -932,7 +932,7 @@ char *_TreeFindNodeTags(void *dbid, int nid_in, void **ctx_ptr)
       for (i=0;i<sizeof(TAG_NAME) && name[i] != ' ';i++);
       answer = strncpy(malloc(i+1),name,i);
       answer[i]='\0';
-      *ctx = (info_ptr->tag_info + *ctx - 1)->tag_link;
+      *ctx = swapint((char *)&(info_ptr->tag_info + *ctx - 1)->tag_link);
       if (*ctx == 0)
 	*ctx = -1;
     }
