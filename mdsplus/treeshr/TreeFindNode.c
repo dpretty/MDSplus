@@ -4,7 +4,7 @@
 #include <treeshr.h>
 #include "treeshrp.h"
 
-static char *cvsrev = "@(#)$RCSfile: TreeFindNode.c,v $ $Revision: 1.27 $ $Date: 2001/06/06 17:04:34 $";
+static char *cvsrev = "@(#)$RCSfile: TreeFindNode.c,v $ $Revision: 1.28 $ $Date: 2001/07/13 14:50:15 $";
 
 extern void *DBID;
 
@@ -1172,6 +1172,7 @@ int _TreeFindTag(PINO_DATABASE *db, NODE *default_node, short treelen, char *tre
         TreeFindTagEnd(&ctx);
       }
   }
+  return status;
 }
 
 static int BsearchCompare(const void *this_one, const void *compare_one)

@@ -9,7 +9,7 @@
 #include <mds_stdarg.h>
 #include <librtl_messages.h>
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.86 $ $Date: 2001/07/06 00:45:34 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.87 $ $Date: 2001/07/13 14:50:04 $";
 
 extern int MdsCopyDxXd();
 
@@ -25,7 +25,7 @@ void TranslateLogicalFree(char *value);
 #include <windows.h>
 #include <process.h>
 
-#define RTLDLAZY 0
+#define RTLD_LAZY 0
 
 static void *dlopen(char *filename, int flags)
 {
@@ -1154,8 +1154,12 @@ time_t LibCvtTim(int *time_in,double *t)
     bintim = (time_t)(time_d > 0 ? time_d : 0);  
   }
   else
-    bintim = t_out = time(0);
+    bintim = (long)t_out = time(0);
+#ifdef HAVE_WINDOWS_H
+  bintim = (long)t_out = bintim + _daylight * 3600;
+#else
   bintim -= _tm->tm_gmtoff;
+#endif
 #else
   bintim = t_out = time(0);
 #endif
