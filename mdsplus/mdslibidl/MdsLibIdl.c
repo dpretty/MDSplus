@@ -14,7 +14,7 @@ extern int TdiCvt();
 extern int TdiCompile();
 extern int TdiDebug();
 
-static char *cvsrev = "@(#)$RCSfile: MdsLibIdl.c,v $ $Revision: 1.28 $ $Date: 2003/08/22 16:32:14 $";
+static char *cvsrev = "@(#)$RCSfile: MdsLibIdl.c,v $ $Revision: 1.29 $ $Date: 2004/05/21 15:42:35 $";
 
 #ifdef _WINDOWS
 #define BlockSig(a)
@@ -242,7 +242,7 @@ int IdlMdsValue(int argc, void **argv)
   }
   arglist[argidx++] = (void *)&tmp;
   arglist[argidx++] = MdsEND_ARG;
-  *(int *)&arglist[0] = argidx; 
+  *(long *)&arglist[0] = argidx; 
   status = LibCallg(arglist,TdiExecute);
   if (status & 1)
   {
