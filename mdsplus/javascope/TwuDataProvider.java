@@ -8,7 +8,7 @@
 // this class (starting revision line 2.x) mainly in order to ensure that zooming
 // works in more situations. (See also the cvs log.)
 //
-// $Id: TwuDataProvider.java,v 2.17 2003/01/14 16:01:06 jgk Exp $
+// $Id: TwuDataProvider.java,v 2.18 2003/01/14 16:34:03 jgk Exp $
 // 
 // -------------------------------------------------------------------------------------------------
 
@@ -424,7 +424,7 @@ class TwuDataProvider
             opt.clip (length);
         }
 
-        private void fetchBulkData() throws Exception 
+        private synchronized void fetchBulkData() throws Exception 
         {
             if (! fetchOptionsAvailable) 
               throwError ("unspecified fetch options (internal error)");
@@ -446,7 +446,7 @@ class TwuDataProvider
             dataAvailable = true ;
         }
 
-        private float[] doFetch(TWUFetchOptions opt)
+        private synchronized float[] doFetch(TWUFetchOptions opt)
             throws Exception 
         {
             TWUSignal bulk ;
@@ -481,7 +481,7 @@ class TwuDataProvider
             dataAvailable = true ;
         }
 
-        public String ScalarToTitle() throws Exception 
+        public synchronized String ScalarToTitle() throws Exception 
         {
             TWUProperties props = getTWUProperties(); 
             // makes sure that the properties are really fetched.
@@ -783,24 +783,24 @@ class TwuDataProvider
         return (new SimpleFrameData(in_y, in_x, time_min, time_max));
     }
 
-    public WaveData GetWaveData (String in) 
+    public synchronized WaveData GetWaveData (String in) 
     { 
         return GetWaveData (in, null); 
     }
 
-    public WaveData GetWaveData (String in_y, String in_x) 
+    public synchronized WaveData GetWaveData (String in_y, String in_x) 
     {
         TwuWaveData find = FindWaveData (in_y, in_x);
         find.setFullFetch() ;
         return find ;
     }
 
-    public WaveData GetResampledWaveData(String in, float start, float end, int n_points) 
+    public synchronized WaveData GetResampledWaveData(String in, float start, float end, int n_points) 
     { 
         return GetResampledWaveData(in, null, start, end, n_points); 
     }
 
-    public WaveData
+    public synchronized WaveData
     GetResampledWaveData(String in_y, String in_x, float start, float end, int n_points) 
     {
         TwuWaveData find = FindWaveData (in_y, in_x);
@@ -810,7 +810,7 @@ class TwuDataProvider
 
     private TwuWaveData lastWaveData = null ;
 
-    public TwuWaveData FindWaveData (String in_y, String in_x) 
+    public synchronized TwuWaveData FindWaveData (String in_y, String in_x) 
     {
         if ( lastWaveData == null  ||  lastWaveData.notEqualsInputSignal (in_y, in_x) )
         {
@@ -834,7 +834,7 @@ class TwuDataProvider
     //     abscissa / signal properties / path utility methods
     //  ----------------------------------------------------------
 
-    private String GetSignalPath(String in)
+    private synchronized String GetSignalPath(String in)
     {
         if(IsFullURL(in))
           return in;
@@ -914,7 +914,7 @@ class TwuDataProvider
     //       data fetching (or creation) methods below.
     //  ----------------------------------------------------
 
-    protected TWUFetchOptions
+    protected synchronized TWUFetchOptions
     FindIndicesForXRange( SingleTwuSignal xsig, float x_start, float x_end, int n_points ) 
         throws  Exception
     {
@@ -1026,7 +1026,7 @@ class TwuDataProvider
         return new TWUFetchOptions (ix_start, step, real_n_points) ;
     }
 
-    protected int
+    protected synchronized int
     FindNonEquiIndex(float target, SingleTwuSignal xsig, int start, int laststep, int maxpts, int len)
         throws Exception
     {
@@ -1097,7 +1097,7 @@ class TwuDataProvider
         //  or if (debug) e.printStackTrace (System.out) ....
     }
 
-    public float[] GetFloatArray(String in)
+    public synchronized float[] GetFloatArray(String in)
     {
         boolean is_time;
         error_string = null;
@@ -1123,7 +1123,7 @@ class TwuDataProvider
         return data ;
     }
 
-    protected float [] SimplifiedGetFloats(TWUSignal bulk, boolean is_time, int n_point)
+    protected synchronized float [] SimplifiedGetFloats(TWUSignal bulk, boolean is_time, int n_point)
     {
         boolean okay = true ;
 
@@ -1171,14 +1171,14 @@ class TwuDataProvider
     //       some old TwuDataProvider methods :(
     //  ----------------------------------------------------
 
-    public float[] 
+    public synchronized float[] 
     GetFloatArray (String in, boolean is_time) throws IOException
     {
         WaveData wd = GetWaveData(in) ; // TwuAccess wants to get the full signal data .
         return is_time ? wd.GetXData() : wd.GetYData() ;
     }
 
-    public String GetSignalProperty (String prop, String in) throws IOException
+    public synchronized String GetSignalProperty (String prop, String in) throws IOException
     {
         TwuWaveData wd = (TwuWaveData) GetWaveData(in) ;  
         return wd.getTWUProperties().getProperty(prop);
@@ -1295,7 +1295,7 @@ class TwuDataProvider
     public static String 
     revision()
     {
-        return "$Id: TwuDataProvider.java,v 2.17 2003/01/14 16:01:06 jgk Exp $";
+        return "$Id: TwuDataProvider.java,v 2.18 2003/01/14 16:34:03 jgk Exp $";
     }
 
     public TwuDataProvider(String user_agent)
@@ -1309,5 +1309,5 @@ class TwuDataProvider
 }
 
 // -------------------------------------------------------------------------------------------------
-// End of: $Id: TwuDataProvider.java,v 2.17 2003/01/14 16:01:06 jgk Exp $
+// End of: $Id: TwuDataProvider.java,v 2.18 2003/01/14 16:34:03 jgk Exp $
 // -------------------------------------------------------------------------------------------------
