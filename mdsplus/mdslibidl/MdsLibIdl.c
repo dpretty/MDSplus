@@ -13,7 +13,7 @@ extern int TdiData();
 extern int TdiCvt();
 extern int TdiCompile();
 
-static char *cvsrev = "@(#)$RCSfile: MdsLibIdl.c,v $ $Revision: 1.24 $ $Date: 2002/09/10 15:10:02 $";
+static char *cvsrev = "@(#)$RCSfile: MdsLibIdl.c,v $ $Revision: 1.25 $ $Date: 2002/12/03 16:15:44 $";
 
 #ifdef _WINDOWS
 #define BlockSig(a)
@@ -108,8 +108,10 @@ static void *MakeDescr(int idx, int *argsize, void *bytes)
     case 4: scalarArgs[idx].length = 4; scalarArgs[idx].dtype = DTYPE_FS; break;
     case 5: scalarArgs[idx].length = 8; scalarArgs[idx].dtype = DTYPE_FT; break;
     case 6: scalarArgs[idx].length = 8; scalarArgs[idx].dtype = DTYPE_FSC; break;
-    case 7: scalarArgs[idx].length = ((IDL_STRING *)bytes)->slen ; scalarArgs[idx].dtype = DTYPE_T; 
-               scalarArgs[idx].pointer = ShortStrings(bytes) ? 
+    case 7: scalarArgs[idx].length = ShortStrings(bytes) ? 
+                         ((IDL_STRING *)bytes)->slen : ((IDL_STRING_L *)bytes)->slen;
+            scalarArgs[idx].dtype = DTYPE_T; 
+            scalarArgs[idx].pointer = ShortStrings(bytes) ? 
                          ((IDL_STRING *)bytes)->s : ((IDL_STRING_L *)bytes)->s; break;
     case 9: scalarArgs[idx].length = 16; scalarArgs[idx].dtype = DTYPE_FTC; break;
     case 12: scalarArgs[idx].length = 2; scalarArgs[idx].dtype = DTYPE_WU; break;
