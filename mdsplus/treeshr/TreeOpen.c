@@ -43,7 +43,7 @@ extern char *index(char *str,char c);
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.69 $ $Date: 2002/12/03 20:25:59 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.70 $ $Date: 2003/01/22 13:42:05 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
@@ -710,7 +710,7 @@ static char *GetFname(char *tree, int shot)
     status = LibCallg(arglist,TdiExecute);
   if (status & 1)
   {
-    ans = strcpy(malloc(fname.length+2),fname.pointer);
+    ans = strncpy(malloc(fname.length+2),fname.pointer,fname.length);
     ans[fname.length] = '+';
     ans[fname.length+1] = 0;
   }
