@@ -1,4 +1,4 @@
-/* $Id: MultiWaveform.java,v 1.52 2005/02/10 14:57:52 manduchi Exp $ */
+/* $Id: MultiWaveform.java,v 1.53 2005/03/09 15:54:19 manduchi Exp $ */
 import java.awt.*;
 import java.util.*;
 import java.io.*;
@@ -1053,7 +1053,8 @@ public class MultiWaveform extends Waveform
        int type = -1;
        if(idx >= 0 && idx < signals.size())
        {
-           type = ((Signal)signals.elementAt(idx)).getType();
+           if(signals.elementAt(idx) != null)
+               type = ((Signal)signals.elementAt(idx)).getType();
        }
        return type;
     }
