@@ -22,7 +22,7 @@
 
 #define max(a,b) ((a) > (b) ? (a) : (b))
 
-static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.31 $ $Date: 1998/07/30 17:49:32 $";
+static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.32 $ $Date: 1998/07/30 20:32:30 $";
 
 #define node_to_node_number(node_ptr) node_ptr - dblist->tree_info->node
 #define __toupper(c) (((c) >= 'a' && (c) <= 'z') ? (c) & 0xDF : (c))
@@ -80,7 +80,7 @@ int       _TreeAddNode(void *dbid, char *name, int *nid_out, char usage)
   NODE     *new_ptr;
   char     *node_name;
   SEARCH_TYPE node_type;
-  NID       nid;
+  int      nid;
   static NCI nci;
   static char blank = ' ';
   short    *conglom_size;
@@ -108,7 +108,7 @@ int       _TreeAddNode(void *dbid, char *name, int *nid_out, char usage)
   /****************************************************
     make sure that the node is not already there
   *****************************************************/
-    status = TreeFindNode(upcase_name, (int *)&nid);
+    status = TreeFindNode(upcase_name, &nid);
     free(upcase_name);
     if (status & 1)
       status = TreeALREADY_THERE;
@@ -161,8 +161,8 @@ int       _TreeAddNode(void *dbid, char *name, int *nid_out, char usage)
 	  static NCI new_nci;
 	  NCI       scratch_nci;
 	  NID       nid;
-	  NID       parent_nid;
-	  node_to_nid(dblist, parent, (&parent_nid));
+	  int       parent_nid;
+	  node_to_nid(dblist, parent, ((NID *)&parent_nid));
 	  node_to_nid(dblist, new_ptr, (&nid));
 	  status = TreeGetNciLw(dblist->tree_info, nid.node, &scratch_nci);
 	  if (status & 1)
@@ -171,9 +171,6 @@ int       _TreeAddNode(void *dbid, char *name, int *nid_out, char usage)
               new_nci.flags &= ~NciM_PARENT_STATE;
             else
               new_nci.flags |= NciM_PARENT_STATE;
-	    /*
-	    new_nci.NCI_FLAG_WORD.NCI_FLAGS.parent_state = !(_TreeIsOn(dblist,*(int *)&parent_nid) & 1);
-	    */
 	    status = TreePutNci(dblist->tree_info, nid.node, &new_nci, 1);
 	  }
 	}
