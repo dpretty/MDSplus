@@ -1,4 +1,4 @@
-/* $Id: jScope_1.java,v 1.22 2002/09/03 13:27:35 manduchi Exp $ */
+/* $Id: jScope_1.java,v 1.24 2002/10/04 12:54:02 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.List;
@@ -1150,9 +1150,11 @@ static int T_messageType;
   {
     net_text.setText("Data Server:" + wave_panel.GetServerLabel());
   }
+  
 
-  public void SetStatusLabel(String msg)
+  public synchronized void SetStatusLabel(String msg)
   {
+    
     info_text.setText(" Status: " + msg);
   }
   
@@ -2542,8 +2544,7 @@ class ServerDialog extends JDialog implements ActionListener
                                              "JetDataProvider",
                                              "FtuDataProvider",
                                              "TSDataProvider",
-                                             "AsdexDataProvider",
-                                             "DemoDataProvider"};
+                                             "AsdexDataProvider"};
     
 
     ServerDialog(JFrame _dw, String title)

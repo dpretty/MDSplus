@@ -1,4 +1,4 @@
-/* $Id: jScopeMultiWave.java,v 1.16 2002/09/03 13:27:34 manduchi Exp $ */
+/* $Id: jScopeMultiWave.java,v 1.18 2002/10/04 12:54:02 manduchi Exp $ */
 import java.awt.*;
 import java.util.*;
 import java.io.*;
@@ -24,7 +24,7 @@ public class jScopeMultiWave extends MultiWaveform implements UpdateEventListene
          //System.out.println("Evento su waveform "+e.name);
          WaveformEvent we = new WaveformEvent(this, WaveformEvent.EVENT_UPDATE,  "Update on event " + e.name);
          dispatchWaveformEvent(we);
-//         Refresh();
+         //Refresh();
     }
 
     public void Refresh()
