@@ -7,11 +7,18 @@
  * 
  * This class handles the properties 'file' as used in the TEC Web-Umbrella.
  *
+ * This class does not throw any exceptions; this should be left so.  This is
+ * because it is also used in contexts where the handling of such exceptions 
+ * is somewhat troublesome. (E.g. JVMs running implicitly by matlab.)
+ *
  * Author: Jon Krom, Forschungszentrum Jülich, Institut für Plasmaphysik.
  *
- * $Id: TWUProperties.java,v 1.5 2002/05/06 16:02:05 jgk Exp $
+ * $Id: TWUProperties.java,v 1.6 2002/05/07 11:24:31 jgk Exp $
  *
  * $Log: TWUProperties.java,v $
+ * Revision 1.6  2002/05/07 11:24:31  jgk
+ * Improvement to the Units() method.
+ *
  * Revision 1.5  2002/05/06 16:02:05  jgk
  * Suggested by  Marco van de Giessen <A.P.M.vandeGiessen@phys.uu.nl>:
  * - equalsIgnoreCase() is more generally useful than equals().
@@ -51,7 +58,7 @@ public class TWUProperties
     {
         final String
             actual_user_agent = (user_agent!=null) ?  user_agent
-            : "TWUProperties.java for jScope ($Revision: 1.5 $)";
+            : "TWUProperties.java for jScope ($Revision: 1.6 $)";
         signalProps = new Properties();
 
         if (SigURL==null)
@@ -161,7 +168,7 @@ public class TWUProperties
     Units()
     {
         String unitstr =  signalProps.getProperty("Unit");
-        return (unitstr == null ? "<unknown>" : unitstr) ;
+        return ((unitstr == null || unitstr.equalsIgnoreCase("None")) ? "" : unitstr) ;
     }
 
     public String
@@ -329,7 +336,7 @@ public class TWUProperties
     public static String 
     revision()
     {
-        return "$Id: TWUProperties.java,v 1.5 2002/05/06 16:02:05 jgk Exp $";
+        return "$Id: TWUProperties.java,v 1.6 2002/05/07 11:24:31 jgk Exp $";
     }
 
     public static void 
@@ -381,5 +388,5 @@ class FakeTWUProperties extends TWUProperties {
 }
 
 /* ------------------------------------------------------------------------ */
-// End of $Id: TWUProperties.java,v 1.5 2002/05/06 16:02:05 jgk Exp $
+// End of $Id: TWUProperties.java,v 1.6 2002/05/07 11:24:31 jgk Exp $
 /* ------------------------------------------------------------------------ */
