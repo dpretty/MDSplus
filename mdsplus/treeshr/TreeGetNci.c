@@ -19,7 +19,7 @@
 
 extern int StrFree1Dx();
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.38 $ $Date: 2000/09/13 16:27:51 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.39 $ $Date: 2000/09/14 18:10:29 $";
 
 #ifndef vxWorks
 #define min(a,b) (((a) < (b)) ? (a) : (b))
@@ -571,7 +571,6 @@ int TreeIsChild(NODE *node)
 char *_TreeGetPath(void *dbid, int nid_in)
 {
 	PINO_DATABASE *dblist = (PINO_DATABASE *)dbid;
-	NID nid = *(NID *)&nid;
 	NCI_ITM   itm_lst[] = {{0, NciPATH, 0, 0},{0, NciEND_OF_LIST, 0, 0}};
 	if (!(IS_OPEN(dblist)))
 		return NULL;
