@@ -62,7 +62,7 @@ typedef ARRAY_COEFF(char, 1) array_coef;
 #pragma member_alignment restore
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: MdsGet1DxA.c,v $ $Revision: 1.8 $ $Date: 1998/12/16 10:35:23 $";
+static char *cvsrev = "@(#)$RCSfile: MdsGet1DxA.c,v $ $Revision: 1.9 $ $Date: 1999/04/08 18:38:37 $";
 
   int       MdsGet1DxA(struct descriptor_a * in_ptr, unsigned short *length_ptr, unsigned char *dtype_ptr,
 			            struct descriptor_xd *out_xd)
@@ -97,13 +97,14 @@ static char *cvsrev = "@(#)$RCSfile: MdsGet1DxA.c,v $ $Revision: 1.8 $ $Date: 19
     {
       if (out_dsc->dscB_class == CLASS_CA)
       {
-	out_dsc->dscA_a0 = out_dsc->dscA_pointer + ((int) out_dsc->dscW_length) *
-		       ((int) in_dsc->dscA_a0 / ((int) in_dsc->dscW_length));
+        int offset = ((int) out_dsc->dscW_length) * ((int) in_dsc->dscA_a0 / ((int) in_dsc->dscW_length));
+	out_dsc->dscA_a0 = out_dsc->dscA_pointer + offset;
       }
       else
       {
-	out_dsc->dscA_a0 = out_dsc->dscA_pointer + ((int) out_dsc->dscW_length) *
+        int offset = ((int) out_dsc->dscW_length) *
 		       (((char *)in_dsc->dscA_a0 - (char *)in_dsc->dscA_pointer) / ((int) in_dsc->dscW_length));
+	out_dsc->dscA_a0 = out_dsc->dscA_pointer + offset;
       }
       for (i = 0; i < out_dsc->dscB_dimct; i++)
 	out_dsc->dscL_m[i] = in_dsc->dscL_m[i];
