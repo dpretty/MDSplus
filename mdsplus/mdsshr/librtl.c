@@ -30,7 +30,7 @@ void __MB(){return;}
 #include <libroutines.h>
 #include <mds_stdarg.h>
 #include <librtl_messages.h>
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.26 $ $Date: 1998/07/27 20:26:51 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.27 $ $Date: 1998/07/27 20:37:50 $";
 #ifndef va_count
 #define  va_count(narg) va_start(incrmtr, first); \
                         for (narg=1; (narg < 256) && (va_arg(incrmtr, struct descriptor *) != MdsEND_ARG); narg++)
@@ -943,7 +943,7 @@ unsigned int LibCallg(void **arglist, FARPROC *routine)
 
   return retval;
 }
-#elif defined(__unix__) || defined (unix)
+#elif defined(__unix__) || defined (unix) || defined(__unix)
 unsigned int LibCallg(void **arglist, unsigned int (*routine)())
 {
   switch (*(int *)arglist & 0xff)
