@@ -28,3 +28,4 @@
 CVSROOT	-i mkmodules CVSROOT
 modules -i mkmodules CVSROOT modules
 tdishr mdsplus/tdishr
+include mdsplus/include
