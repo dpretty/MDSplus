@@ -79,7 +79,7 @@ Boolean XmdsIsDigChans(Widget w)
 
  Local variables:                                                             */
 
-static char *cvsrev = "@(#)$RCSfile: XmdsDigChans.c,v $ $Revision: 1.6 $ $Date: 1998/04/08 19:23:46 $";
+static char *cvsrev = "@(#)$RCSfile: XmdsDigChans.c,v $ $Revision: 1.7 $ $Date: 1998/04/09 18:30:24 $";
 
 void XmdsDigChansReset(Widget w);
 
@@ -154,7 +154,7 @@ Widget XmdsCreateDigChans(Widget parent,String name,ArgList args,Cardinal argcou
     TreeGetNci(head_nid,nci);
     /*    StrConcat(&path_s,&path_s,&zero MDS_END_ARG); */
     path_s[path_len] = '\0';
-    path = XmStringCreateSimple(path_s);
+    path = XmStringCreateSimple((char *)path_s);
     /* StrFree1Dx(&path_s); */
     {
       static MrmRegisterArg uilnames[] = {{"c_nid",NULL},

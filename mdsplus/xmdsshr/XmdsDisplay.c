@@ -48,7 +48,7 @@
 #include <Mrm/MrmPublic.h>
 #include <Xmds/XmdsDisplay.h>
 #include <Xm/Label.h>
-#define DisplayUserData 0xABCDEFAB
+#define DisplayUserData 0xABCDEFA
 
 
 /*------------------------------------------------------------------------------
@@ -74,7 +74,7 @@
 
  Local variables:                                                             */
 
-static char *cvsrev = "@(#)$RCSfile: XmdsDisplay.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:23:46 $";
+static char *cvsrev = "@(#)$RCSfile: XmdsDisplay.c,v $ $Revision: 1.4 $ $Date: 1998/04/09 18:30:25 $";
 
 typedef struct _DisplayPart
 {

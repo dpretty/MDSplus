@@ -54,7 +54,7 @@
 #include <Xm/Label.h>
 #include <Xmds/XmdsPath.h>
 #include <xmdsshr.h>
-#define PathUserData 0xAAAAAAAA
+#define PathUserData 0xAAAAAAA
 
 
 /*------------------------------------------------------------------------------
@@ -77,7 +77,7 @@
 
  Local variables:                                                             */
 
-static char *cvsrev = "@(#)$RCSfile: XmdsPath.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:23:51 $";
+static char *cvsrev = "@(#)$RCSfile: XmdsPath.c,v $ $Revision: 1.4 $ $Date: 1998/04/09 18:30:25 $";
 
 typedef struct _PathPart
 {

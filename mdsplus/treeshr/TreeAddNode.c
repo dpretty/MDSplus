@@ -1,3 +1,4 @@
+#include <mdsdescrip.h>
 #include <mdsshr.h>
 #include <string.h>
 #include <stdlib.h>
@@ -13,7 +14,7 @@
 
 #define max(a,b) ((a) > (b) ? (a) : (b))
 
-static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.13 $ $Date: 1998/04/08 18:51:33 $";
+static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.14 $ $Date: 1998/04/09 18:35:10 $";
 
 #define node_to_node_number(node_ptr) node_ptr - dblist->tree_info->node
 #define __toupper(c) (((c) >= 'a' && (c) <= 'z') ? (c) & 0xDF : (c))
