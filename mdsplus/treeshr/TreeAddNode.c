@@ -26,7 +26,7 @@
 #endif
 #define max(a,b) ((a) > (b) ? (a) : (b))
 
-static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.44 $ $Date: 1999/10/19 18:03:32 $";
+static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.45 $ $Date: 1999/10/19 18:10:24 $";
 
 #define node_to_node_number(node_ptr) node_ptr - dblist->tree_info->node
 #define __toupper(c) (((c) >= 'a' && (c) <= 'z') ? (c) & 0xDF : (c))
@@ -636,14 +636,10 @@ static int one = 1;
 static int zero = 0;
 
 #ifdef WORDS_BIGENDIAN
-static TREE_HEADER *HeaderOut(TREE_HEADER *hdr, TREE_HEADER *out)
+static TREE_HEADER *HeaderOut(TREE_HEADER *hdr)
 {
   static TREE_HEADER ans;
-  out = *hdr;
-  {
-    char flags = (hdr->sort_children ? 1 : 0) | (hdr->sort_members ? 2 : 0);
-    ((char *)&out)[1] = flags;
-  }
+  ((char *)&ans)[1] = (char)((hdr->sort_children ? 1 : 0) | (hdr->sort_members ? 2 : 0));
   ans.free = swapint((char *)&hdr->free);
   ans.tags = swapint((char *)&hdr->tags);
   ans.externals = swapint((char *)&hdr->externals);
