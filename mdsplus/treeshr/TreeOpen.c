@@ -6,6 +6,7 @@
 #include "treeshrp.h"
 #include <ctype.h>
 #include <mds_stdarg.h>
+#include <libroutines.h>
 #ifdef _WIN32
 #include <io.h>
 extern char *index(char *str,char c);
@@ -34,7 +35,7 @@ extern char *index(char *str,char c);
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.56 $ $Date: 2001/03/08 16:43:16 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.57 $ $Date: 2001/04/11 19:09:07 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
