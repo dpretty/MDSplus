@@ -1,4 +1,4 @@
-#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.50 $
+#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.51 $
 # @configure_input@
 prefix=@prefix@
 SHELL=/bin/sh
@@ -47,6 +47,7 @@ PARTS = \
 	@MDSSQL@ \
         @IDLSQL@ \
 	@IDLMDSEVENT@ \
+        @IDLMDSWIDGETS@ \
 	@MDSVME@ \
 	@HDF5_APS@
 
