@@ -11,7 +11,7 @@
 #include <math.h>
 
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.105 $ $Date: 2002/05/31 14:59:13 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.106 $ $Date: 2002/06/05 14:06:25 $";
 
 extern int MdsCopyDxXd();
 
@@ -126,6 +126,67 @@ char *index(char *str, char c)
 {
 	unsigned int pos = strcspn(str,&c);
   return (pos == 0) ? ((str[0] == c) ? str : 0) : ((pos == strlen(str)) ? 0 : &str[pos]);
+}
+
+int MSIUnsetPATH()
+{
+  HKEY key = NULL;
+  if (RegOpenKeyEx(HKEY_LOCAL_MACHINE,"SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment",0,KEY_READ | KEY_WRITE,&key) == ERROR_SUCCESS)
+  {
+    long valtype;
+    unsigned long path_len;
+ 
+    if (RegQueryValueEx(key,"PATH",0,&valtype,NULL,&path_len) == ERROR_SUCCESS)
+    {
+      char *path;
+      char *newpath;
+      char *mdsplusdir = "%MDSPLUSDIR%";
+      char *mpath;
+      path = malloc(path_len);
+      newpath = malloc(path_len);
+      newpath[0] = 0;
+      RegQueryValueEx(key,"PATH",0,&valtype,path,&path_len);
+      for (mpath = strtok(path,";");mpath;mpath=strtok(0,";"))
+      {
+        if (strcmp(mpath,mdsplusdir))
+        {
+          if (newpath[0])
+            strcat(newpath,";");
+          strcat(newpath,mpath);
+        }
+      }
+      RegSetValueEx(key,"TESTPATH",0,REG_EXPAND_SZ,path,strlen(path)); 
+      free(path);
+      free(newpath);
+    }
+  }
+  if (key) RegCloseKey(key);
+  return 0;
+}
+
+int MSISetPATH()
+{
+  HKEY key = NULL;
+  if (RegOpenKeyEx(HKEY_LOCAL_MACHINE,"SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment",0,KEY_READ | KEY_WRITE,&key) == ERROR_SUCCESS)
+  {
+    long valtype;
+    unsigned long path_len;
+ 
+    if (RegQueryValueEx(key,"PATH",0,&valtype,NULL,&path_len) == ERROR_SUCCESS)
+    {
+      char *mdsplusdir = "%MDSPLUSDIR%";
+      char *path = malloc(path_len + strlen(mdsplusdir) + 1);
+      path[0] = 0;
+      RegQueryValueEx(key,"PATH",0,&valtype,path,&path_len);
+      if (path[0])
+        strcat(path,";");
+      strcat(path,mdsplusdir);
+      RegSetValueEx(key,"PATH",0,REG_EXPAND_SZ,path,strlen(path)); 
+      free(path);
+    }
+  }
+  if (key) RegCloseKey(key);
+  return 0;
 }
 
 static char *GetRegistry(char *where, char *pathname)
