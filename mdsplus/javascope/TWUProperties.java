@@ -7,6 +7,7 @@
  * 
  * This class handles the properties 'file' as used in the TEC Web-Umbrella.
  *
+ * NOTE:
  * The TWU* classes (with TWU in three capitals) are written so that they 
  * can also be used in other java based applications and not only by jScope.  
  * Please keep the code of these separate of jScope specific elements.
@@ -17,9 +18,13 @@
  *
  * Author: Jon Krom, Forschungszentrum Jülich, Institut für Plasmaphysik.
  *
- * $Id: TWUProperties.java,v 1.17 2002/11/28 11:56:51 jgk Exp $
+ * $Id: TWUProperties.java,v 1.18 2003/01/09 14:35:58 jgk Exp $
  *
+ * ------------------------------------------------------------------------ 
  * $Log: TWUProperties.java,v $
+ * Revision 1.18  2003/01/09 14:35:58  jgk
+ * Some trivial changes to test the CVS notification system.
+ *
  * Revision 1.17  2002/11/28 11:56:51  jgk
  * Some unimportant changes to the comment texts, in effect
  * going back to the situation of revision 1.13.
@@ -86,7 +91,7 @@ public class TWUProperties
     {
         final String
             actual_user_agent = (user_agent!=null) ?  user_agent
-            : "TWUProperties.java for jScope ($Revision: 1.17 $)";
+            : "TWUProperties.java for jScope ($Revision: 1.18 $)";
         signalProps = new Properties();
 
         if (SigURL==null)
@@ -366,7 +371,7 @@ public class TWUProperties
     public static String 
     revision()
     {
-        return "$Id: TWUProperties.java,v 1.17 2002/11/28 11:56:51 jgk Exp $";
+        return "$Id: TWUProperties.java,v 1.18 2003/01/09 14:35:58 jgk Exp $";
     }
 
     public static void 
@@ -418,5 +423,5 @@ class FakeTWUProperties extends TWUProperties {
 }
 
 /* ------------------------------------------------------------------------ */
-// End of $Id: TWUProperties.java,v 1.17 2002/11/28 11:56:51 jgk Exp $
+// End of $Id: TWUProperties.java,v 1.18 2003/01/09 14:35:58 jgk Exp $
 /* ------------------------------------------------------------------------ */
