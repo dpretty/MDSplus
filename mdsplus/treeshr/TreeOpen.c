@@ -43,7 +43,7 @@ extern char *index(char *str,char c);
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.68 $ $Date: 2002/10/25 16:51:00 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.69 $ $Date: 2002/12/03 20:25:59 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
@@ -445,6 +445,7 @@ static int ConnectTree(PINO_DATABASE *dblist, char *tree, NODE *parent, char *su
    
    info->flush = (dblist->shotid == -1);
    info->treenam = strcpy(malloc(strlen(tree)+1),tree);
+   info->shot = dblist->shotid;
    status = MapTree(tree, dblist->shotid, info, 0, parent == 0);
    if (status == TreeFAILURE && treeshr_errno == TreeFILE_NOT_FOUND)
    {
@@ -1140,6 +1141,7 @@ int       _TreeOpenEdit(void **dbid, char *tree_in, int shot_in)
         memset(info,0,sizeof(*info));
         info->flush = ((*dblist)->shotid == -1);
         info->treenam = strcpy(malloc(strlen(tree)+1),tree);
+	info->shot = (*dblist)->shotid;
         status = MapTree(tree, (*dblist)->shotid, info, 1, 1);
         if (status == TreeFAILURE && treeshr_errno == TreeFILE_NOT_FOUND)
         {
@@ -1202,6 +1204,7 @@ int       _TreeOpenNew(void **dbid, char *tree_in, int shot_in)
         memset(info,0,sizeof(*info));
         info->flush = ((*dblist)->shotid == -1);
         info->treenam = strcpy(malloc(strlen(tree)+1),tree);
+        info->shot = (*dblist)->shotid;
         fd = OpenOne(info, tree, (*dblist)->shotid, TREE_TREEFILE_TYPE, 1, &info->filespec, 0);
         if (fd != -1)
         {
