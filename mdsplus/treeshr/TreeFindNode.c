@@ -1,9 +1,10 @@
 #include <stdlib.h>
 #include <string.h>
+#include <strroutines.h>
 #include <treeshr.h>
 #include "treeshrp.h"
 
-static char *cvsrev = "@(#)$RCSfile: TreeFindNode.c,v $ $Revision: 1.21 $ $Date: 1999/07/13 15:50:29 $";
+static char *cvsrev = "@(#)$RCSfile: TreeFindNode.c,v $ $Revision: 1.22 $ $Date: 1999/08/25 14:51:49 $";
 
 extern void *DBID;
 
@@ -893,6 +894,7 @@ int TreeFindNodeTagsDsc(int nid_in, void **ctx_ptr, struct descriptor *tag)
   }
   else
     status = 0;
+  return status;
 }
 
 char *_TreeFindNodeTags(void *dbid, int nid_in, void **ctx_ptr)
