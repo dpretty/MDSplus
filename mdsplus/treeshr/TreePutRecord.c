@@ -58,7 +58,7 @@
 static int timezone = 0;
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.53 $ $Date: 2000/09/14 20:36:18 $";
+static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.54 $ $Date: 2001/02/06 16:01:26 $";
 
 #ifdef min
 #undef min
@@ -418,7 +418,7 @@ static int UpdateDatafile(TREE_INFO *info, int nodenum, NCI *nci_ptr, struct des
 {
   int       status = TreeNORMAL;
   int       bytes_to_put = nci_ptr->DATA_INFO.DATA_LOCATION.record_length;
-  info->data_file->record_header->node_number = swapint((char *)&nodenum);
+  LoadInt(nodenum, (char *)&info->data_file->record_header->node_number);
   memset(&info->data_file->record_header->rfa,0,sizeof(RFA));
   while (bytes_to_put && (status & 1))
   {
