@@ -26,13 +26,14 @@
 #include <stdlib.h>
 #include <mdsshr.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiCall.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:05:55 $";
+static char *cvsrev = "@(#)$RCSfile: TdiCall.c,v $ $Revision: 1.4 $ $Date: 1998/10/01 17:37:06 $";
 
 extern unsigned short OpcDescr;
 extern unsigned short OpcRef;
 extern unsigned short OpcVal;
 extern unsigned short OpcXd;
 
+extern int TdiConcat();
 extern int TdiData(  );
 extern int TdiEvaluate(  );
 extern int TdiFaultHandler(  );
@@ -150,8 +151,17 @@ unsigned char			origin[255];
 fort:			tmp[ntmp] = EMPTY_XD;
 			if (list[j]) status = TdiData(list[j], &tmp[ntmp] MDS_END_ARG);
                         newdsc[j-1] = tmp[ntmp].pointer;
-			if (newdsc[j-1] && newdsc[j-1]->dtype != DTYPE_T)
-				newdsc[j-1] = (struct descriptor *)newdsc[j-1]->pointer;
+			if (newdsc[j-1])
+                        {
+                          if (newdsc[j-1]->dtype != DTYPE_T)
+			    newdsc[j-1] = (struct descriptor *)newdsc[j-1]->pointer;
+                          else
+			  {
+                            DESCRIPTOR(zero_dsc,"\0");
+                            TdiConcat(&tmp[ntmp],&zero_dsc,&tmp[ntmp] MDS_END_ARG);
+                            newdsc[j-1] = (struct descriptor *)tmp[ntmp].pointer->pointer;
+                          }
+                        }
 			origin[ntmp++] = (unsigned char)j;
 		}
 	}
