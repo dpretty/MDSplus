@@ -22,7 +22,7 @@
 #endif
 #define max(a,b) ((a) > (b) ? (a) : (b))
 
-static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.49 $ $Date: 2002/03/28 20:25:11 $";
+static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.50 $ $Date: 2002/05/31 14:15:34 $";
 
 #define node_to_node_number(node_ptr) node_ptr - dblist->tree_info->node
 #define __toupper(c) (((c) >= 'a' && (c) <= 'z') ? (c) & 0xDF : (c))
@@ -726,7 +726,7 @@ int _TreeWriteTree(void **dbid, char *exp_ptr, int shotid)
         if (num != (external_pages*512)) goto error_exit;
 	status = TreeWriteNci(info_ptr);
 	if ((status & 1) == 0) goto error_exit;
-	MDS_IO_REMOVE(info_ptr->filespec);
+	    MDS_IO_REMOVE(info_ptr->filespec);
         MDS_IO_CLOSE(ntreefd);
         MDS_IO_RENAME(nfilenam,info_ptr->filespec);
 #ifdef HAVE_VXWORKS_H

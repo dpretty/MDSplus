@@ -20,7 +20,7 @@
 
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.35 $ $Date: 2002/03/28 20:25:11 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.36 $ $Date: 2002/05/31 14:15:34 $";
 
 
 static int OpenDatafileR(TREE_INFO *info);
@@ -285,7 +285,7 @@ static int GetDatafile(TREE_INFO *info, unsigned char *rfa_in, int *buffer_size,
     status = TreeLockDatafile(info, 1, rfa_l);
     if (status & 1)
     {
-      status = MDS_IO_LSEEK(info->data_file->get,rfa_l,SEEK_SET);
+      _int64 offset = MDS_IO_LSEEK(info->data_file->get,rfa_l,SEEK_SET);
       status = (MDS_IO_READ(info->data_file->get,(void *)&hdr,12) == 12) ? TreeSUCCESS : TreeFAILURE;
       if (status & 1)
       {

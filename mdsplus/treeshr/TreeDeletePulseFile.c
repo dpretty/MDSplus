@@ -40,7 +40,7 @@ int TreeDeletePulseFile(int shotid,int numnids, int *nids)
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
 
-static char *cvsrev = "@(#)$RCSfile: TreeDeletePulseFile.c,v $ $Revision: 1.11 $ $Date: 2001/02/28 20:03:49 $";
+static char *cvsrev = "@(#)$RCSfile: TreeDeletePulseFile.c,v $ $Revision: 1.12 $ $Date: 2002/05/31 14:15:34 $";
 
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
@@ -151,7 +151,7 @@ static int  TreeDeleteTreeFiles(char *tree, int shot)
       {
         if (*part == ' ') 
           part++;
-        else if ((path[i] == ' ' || path[i] == ';' || path[i] == 0) && strlen(part))
+        else if ((path[i] == ';' || path[i] == 0) && strlen(part))
         {
 	  path[i] = 0;
           sfile = strcpy(malloc(strlen(part)+strlen(name)+strlen(type)+2),part);

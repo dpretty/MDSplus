@@ -42,7 +42,7 @@
 #define  DTYPE_D DTYPE_G
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TdiSql.c,v $ $Revision: 1.12 $ $Date: 2002/05/29 14:58:31 $";
+static char *cvsrev = "@(#)$RCSfile: TdiSql.c,v $ $Revision: 1.13 $ $Date: 2002/05/31 14:16:29 $";
 
 extern int stat;
 extern int TdiFindImageSymbol();
@@ -94,6 +94,10 @@ static int      (*SYB_dbcoltype)() = 0;
 #include "sybfront.h"
 #include "sybdb.h"
 #else
+#define _LPCBYTE_DEFINED
+typedef unsigned char BYTE;
+typedef       BYTE *LPBYTE;
+typedef const LPBYTE         LPCBYTE ;
 #include <windows.h>
 #include <sqlfront.h>
 #include <sqldb.h>
