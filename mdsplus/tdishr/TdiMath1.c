@@ -43,7 +43,7 @@ int Tdi3xxx(struct descriptor *in, struct descriptor *out)
 #include <errno.h>
 #include <math.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiMath1.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:06:11 $";
+static char *cvsrev = "@(#)$RCSfile: TdiMath1.c,v $ $Revision: 1.3 $ $Date: 2000/04/12 19:58:48 $";
 
 extern int CvtConvertFloat();
 
@@ -77,9 +77,9 @@ static int roprand = 0x8000;
   double in;\
   double ans;\
   while (nout--) {errno=0; \
-                  if (CvtConvertFloat(inp++,dtype,&in,DTYPE_DOUBLE,0)) ans = function(in); else errno=-1;\
+                  if (CvtConvertFloat(inp++,dtype,&in,DTYPE_NATIVE_DOUBLE,0)) ans = function(in); else errno=-1;\
                   if (errno) CvtConvertFloat(&roprand,DTYPE_F,outp++,dtype,0); else\
-                             CvtConvertFloat(&ans,DTYPE_DOUBLE,outp++,dtype,0);} break; }
+                             CvtConvertFloat(&ans,DTYPE_NATIVE_DOUBLE,outp++,dtype,0);} break; }
 
 #define OperateC2C(type,dtype,function) \
 { type *inp = (type *)in->pointer;\
@@ -87,13 +87,13 @@ static int roprand = 0x8000;
   double in[2];\
   double ans[2];\
   while (nout--) {errno=0; \
-                  if (CvtConvertFloat(&inp[0],dtype,&in[0],DTYPE_DOUBLE,0) &&\
-                      CvtConvertFloat(&inp[1],dtype,&in[1],DTYPE_DOUBLE,0))\
+                  if (CvtConvertFloat(&inp[0],dtype,&in[0],DTYPE_NATIVE_DOUBLE,0) &&\
+                      CvtConvertFloat(&inp[1],dtype,&in[1],DTYPE_NATIVE_DOUBLE,0))\
                        function(in,ans); else errno=-1;\
                   if (errno) {CvtConvertFloat(&roprand,DTYPE_F,outp++,dtype,0);\
                               CvtConvertFloat(&roprand,DTYPE_F,outp++,dtype,0);} else {\
-                              CvtConvertFloat(&ans[0],DTYPE_DOUBLE,outp++,dtype,0);\
-                              CvtConvertFloat(&ans[1],DTYPE_DOUBLE,outp++,dtype,0);}\
+                              CvtConvertFloat(&ans[0],DTYPE_NATIVE_DOUBLE,outp++,dtype,0);\
+                              CvtConvertFloat(&ans[1],DTYPE_NATIVE_DOUBLE,outp++,dtype,0);}\
                   inp+=2;\
                  } break; }
 
@@ -103,11 +103,11 @@ static int roprand = 0x8000;
   double in[2];\
   double ans;\
   while (nout--) {errno=0; \
-                  if (CvtConvertFloat(&inp[0],dtype,&in[0],DTYPE_DOUBLE,0) &&\
-                      CvtConvertFloat(&inp[1],dtype,&in[1],DTYPE_DOUBLE,0))\
+                  if (CvtConvertFloat(&inp[0],dtype,&in[0],DTYPE_NATIVE_DOUBLE,0) &&\
+                      CvtConvertFloat(&inp[1],dtype,&in[1],DTYPE_NATIVE_DOUBLE,0))\
                        ans = function(in[1],in[0]); else errno=-1;\
                   if (errno) CvtConvertFloat(&roprand,DTYPE_F,outp++,dtype,0); else \
-                              CvtConvertFloat(&ans,DTYPE_DOUBLE,outp++,dtype,0);\
+                              CvtConvertFloat(&ans,DTYPE_NATIVE_DOUBLE,outp++,dtype,0);\
                   inp+=2;\
                  } break; }
 
@@ -295,7 +295,7 @@ static double atanh_static(double in)
 {
   double ans;
   if (in <= -1.0 || in >= 1.)
-    CvtConvertFloat(&roprand,DTYPE_F,&ans,DTYPE_DOUBLE,0);
+    CvtConvertFloat(&roprand,DTYPE_F,&ans,DTYPE_NATIVE_DOUBLE,0);
   else
     ans = log((in+1)/(in-1))/2.0;
   return ans;

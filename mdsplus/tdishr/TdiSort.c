@@ -31,7 +31,7 @@
 #include <mdsshr.h>
 #include <string.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiSort.c,v $ $Revision: 1.4 $ $Date: 1999/09/01 14:38:55 $";
+static char *cvsrev = "@(#)$RCSfile: TdiSort.c,v $ $Revision: 1.5 $ $Date: 2000/04/12 19:58:50 $";
 
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 extern unsigned short OpcVector;
@@ -89,8 +89,8 @@ static int GtrFloat(int dtype,void *a, void *b)
   int ans;
   float a_local;
   float b_local;
-  if (CvtConvertFloat(a,dtype,&a_local,DTYPE_FLOAT,0) &&
-      CvtConvertFloat(b,dtype,&b_local,DTYPE_FLOAT,0))
+  if (CvtConvertFloat(a,dtype,&a_local,DTYPE_NATIVE_FLOAT,0) &&
+      CvtConvertFloat(b,dtype,&b_local,DTYPE_NATIVE_FLOAT,0))
     ans = a_local > b_local;
   return ans;
 }
@@ -100,8 +100,8 @@ static int GtrDouble(int dtype,void *a, void *b)
   int ans;
   double a_local;
   double b_local;
-  if (CvtConvertFloat(a,dtype,&a_local,DTYPE_DOUBLE,0) &&
-      CvtConvertFloat(b,dtype,&b_local,DTYPE_DOUBLE,0))
+  if (CvtConvertFloat(a,dtype,&a_local,DTYPE_NATIVE_DOUBLE,0) &&
+      CvtConvertFloat(b,dtype,&b_local,DTYPE_NATIVE_DOUBLE,0))
     ans = a_local > b_local;
   return ans;
 }

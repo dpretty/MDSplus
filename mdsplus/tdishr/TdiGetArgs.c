@@ -15,7 +15,7 @@
 #include <tdimessages.h>
 #include <mdsshr.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiGetArgs.c,v $ $Revision: 1.5 $ $Date: 1998/12/16 10:55:13 $";
+static char *cvsrev = "@(#)$RCSfile: TdiGetArgs.c,v $ $Revision: 1.6 $ $Date: 2000/04/12 19:58:46 $";
 
 extern struct descriptor_xd *TdiSELF_PTR;
 
@@ -99,8 +99,8 @@ void UseNativeFloat(struct TdiCatStruct *cat)
   unsigned char k;
   for (k=0;k<TdiCAT_MAX;k++)
     if ( ((TdiREF_CAT[k].cat & ~(0x800)) == (cat->out_cat & ~(0x800))) && 
-         (k == DTYPE_FLOAT || 
-          k == DTYPE_DOUBLE ||
+         (k == DTYPE_NATIVE_FLOAT || 
+          k == DTYPE_NATIVE_DOUBLE ||
           k == DTYPE_FLOAT_COMPLEX ||
           k == DTYPE_DOUBLE_COMPLEX))
     {

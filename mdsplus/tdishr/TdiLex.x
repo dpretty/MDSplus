@@ -55,7 +55,7 @@
 #include <strroutines.h>
 #include <tdimessages.h>
 #include <treeshr.h>
-static char *cvsrev = "@(#)$RCSfile: TdiLex.x,v $ $Revision: 1.13 $ $Date: 1999/10/19 20:14:44 $";
+static char *cvsrev = "@(#)$RCSfile: TdiLex.x,v $ $Revision: 1.14 $ $Date: 2000/04/12 19:58:48 $";
 #ifdef WIN32
 #pragma warning (disable : 4013 4102 4035) /* LEX produces code with no forward declarations of yylook and yyback. Also has unreferenced label yyfussy. And two int functions: yyoutput and yyunput do not return a value.*/
 #endif
@@ -155,7 +155,7 @@ static int ConvertFloating(struct descriptor_s *str, struct descriptor_r *out_d)
   if (out_d->length == sizeof(double))
   {
     double tmp;
-    struct descriptor tmp_d = {sizeof(double),DTYPE_DOUBLE,CLASS_S,0};
+    struct descriptor tmp_d = {sizeof(double),DTYPE_NATIVE_DOUBLE,CLASS_S,0};
     tmp_d.pointer = (char *)&tmp;
     tmp = atof(str_c);
     return TdiConvert(&tmp_d,out_d);
@@ -163,7 +163,7 @@ static int ConvertFloating(struct descriptor_s *str, struct descriptor_r *out_d)
   else
   {
     float tmp;
-    struct descriptor tmp_d = {sizeof(float),DTYPE_FLOAT,CLASS_S,0};
+    struct descriptor tmp_d = {sizeof(float),DTYPE_NATIVE_FLOAT,CLASS_S,0};
     tmp_d.pointer = (char *)&tmp;
     sscanf(str_c,"%g",&tmp);
     return TdiConvert(&tmp_d,out_d);
@@ -181,8 +181,8 @@ static struct {
 	unsigned short	length;
 	unsigned char	dtype;
 } table[] = {
-		{4,	DTYPE_FLOAT},
-                {8,	DTYPE_DOUBLE},
+		{4,	DTYPE_NATIVE_FLOAT},
+                {8,	DTYPE_NATIVE_DOUBLE},
 		{8,	DTYPE_D},
 		{8,	DTYPE_G},
 		{16,	DTYPE_H},

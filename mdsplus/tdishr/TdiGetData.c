@@ -30,7 +30,7 @@
 #include <treeshr.h>
 #include <string.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiGetData.c,v $ $Revision: 1.6 $ $Date: 1998/11/16 20:48:39 $";
+static char *cvsrev = "@(#)$RCSfile: TdiGetData.c,v $ $Revision: 1.7 $ $Date: 2000/04/12 19:58:46 $";
 
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 
@@ -291,7 +291,7 @@ int				status = 1;
 		case DTYPE_W :			*val_ptr = (float) *(short *)		in_ptr->pointer; break;
 		case DTYPE_LU :			*val_ptr = (float) *(unsigned int *)	in_ptr->pointer; break;
 		case DTYPE_L :			*val_ptr = (float) *(int *)		in_ptr->pointer; break;
-		default : {struct descriptor val_dsc = {sizeof(float),DTYPE_FLOAT,CLASS_S,0};
+		default : {struct descriptor val_dsc = {sizeof(float),DTYPE_NATIVE_FLOAT,CLASS_S,0};
                            val_dsc.pointer = (char *)val_ptr;
 			   status = TdiConvert(in_ptr, &val_dsc MDS_END_ARG);
 			  } break;

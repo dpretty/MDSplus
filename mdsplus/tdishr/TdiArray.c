@@ -24,7 +24,7 @@
 #include "tdireffunction.h"
 #include "tdirefstandard.h"
 
-static char *cvsrev = "@(#)$RCSfile: TdiArray.c,v $ $Revision: 1.7 $ $Date: 1999/05/03 20:02:57 $";
+static char *cvsrev = "@(#)$RCSfile: TdiArray.c,v $ $Revision: 1.8 $ $Date: 2000/04/12 19:58:43 $";
 
 int Tdi_RandomSeed = 1234567;
 
@@ -137,11 +137,11 @@ int i;
 	case DTYPE_B  : case DTYPE_BU :	LoadRamp(char)
 	case DTYPE_W  : case DTYPE_WU :	LoadRamp(short)
 	case DTYPE_L  : case DTYPE_LU :	LoadRamp(int)
-	case DTYPE_F  : LoadRampF(float,DTYPE_F,DTYPE_FLOAT) 
-	case DTYPE_FS : LoadRampF(float,DTYPE_FS,DTYPE_FLOAT) 
-	case DTYPE_D  : LoadRampF(double,DTYPE_D,DTYPE_DOUBLE)
-	case DTYPE_G  : LoadRampF(double,DTYPE_G,DTYPE_DOUBLE)
-	case DTYPE_FT : LoadRampF(double,DTYPE_FT,DTYPE_DOUBLE)
+	case DTYPE_F  : LoadRampF(float,DTYPE_F,DTYPE_NATIVE_FLOAT) 
+	case DTYPE_FS : LoadRampF(float,DTYPE_FS,DTYPE_NATIVE_FLOAT) 
+	case DTYPE_D  : LoadRampF(double,DTYPE_D,DTYPE_NATIVE_DOUBLE)
+	case DTYPE_G  : LoadRampF(double,DTYPE_G,DTYPE_NATIVE_DOUBLE)
+	case DTYPE_FT : LoadRampF(double,DTYPE_FT,DTYPE_NATIVE_DOUBLE)
 
 	/**********************************************************
 	WARNING this depends on order of operations in ADD routine.
@@ -191,7 +191,7 @@ int	i;
 
 #define LoadRandom(type,value) { type *ptr = (type *)out_ptr->pointer; for (i=0;i<n;i++) ptr[i] = (type)(value);}
 #define LoadRandomFloat(dtype,type,value) { type *ptr = (type *)out_ptr->pointer; \
-                     for (i=0;i<n;i++) {double val = value; CvtConvertFloat(&val,DTYPE_DOUBLE,&ptr[i],dtype,0);}}
+                     for (i=0;i<n;i++) {double val = value; CvtConvertFloat(&val,DTYPE_NATIVE_DOUBLE,&ptr[i],dtype,0);}}
 
 	/*********************
 	WARNING falls through.

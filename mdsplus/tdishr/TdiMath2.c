@@ -42,7 +42,7 @@ int Tdi3Mod(struct descriptor *in1, struct descriptor *in2, struct descriptor *o
 #include <mdsdescrip.h>
 #include <tdimessages.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiMath2.c,v $ $Revision: 1.3 $ $Date: 1998/12/16 10:55:14 $";
+static char *cvsrev = "@(#)$RCSfile: TdiMath2.c,v $ $Revision: 1.4 $ $Date: 2000/04/12 19:58:48 $";
 
 extern int CvtConvertFloat();
 extern double WideIntToDouble();
@@ -102,9 +102,9 @@ static double mod_d(double in1, double in2) {
 
 #define OperateFloatOne(dtype,routine,p1,p2) \
 { double a,b,ans;\
-  if (CvtConvertFloat(p1,dtype,&a,DTYPE_DOUBLE,0) && CvtConvertFloat(p2,dtype,&b,DTYPE_DOUBLE,0))\
+  if (CvtConvertFloat(p1,dtype,&a,DTYPE_NATIVE_DOUBLE,0) && CvtConvertFloat(p2,dtype,&b,DTYPE_NATIVE_DOUBLE,0))\
   { ans = routine(a,b);\
-    CvtConvertFloat(&ans,DTYPE_DOUBLE,outp++,dtype,0);\
+    CvtConvertFloat(&ans,DTYPE_NATIVE_DOUBLE,outp++,dtype,0);\
   } else CvtConvertFloat(&roprand,DTYPE_F,outp++,dtype,0); }
 
 #define OperateFloat(type,dtype,routine) \
