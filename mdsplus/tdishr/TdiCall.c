@@ -26,7 +26,7 @@
 #include <tdimessages.h>
 #include <mdsshr.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiCall.c,v $ $Revision: 1.9 $ $Date: 2001/08/30 15:25:53 $";
+static char *cvsrev = "@(#)$RCSfile: TdiCall.c,v $ $Revision: 1.10 $ $Date: 2001/11/27 18:22:21 $";
 
 extern unsigned short OpcDescr;
 extern unsigned short OpcRef;
@@ -112,6 +112,8 @@ unsigned char			origin[255];
 	else status = TdiData(list[0], &image MDS_END_ARG);
 	if (status & 1) status = TdiData(list[1], &entry MDS_END_ARG);
 	if (status & 1) status = TdiFindImageSymbol(image.pointer, entry.pointer, &routine);
+if (!(status & 1))
+     printf("%s\n",LibFindImageSymbolErrString());
 	MdsFree1Dx(&entry, NULL);
 	MdsFree1Dx(&image, NULL);
 
