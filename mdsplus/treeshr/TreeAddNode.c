@@ -24,7 +24,7 @@
 
 #define max(a,b) ((a) > (b) ? (a) : (b))
 
-static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.38 $ $Date: 1998/09/15 13:52:26 $";
+static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.39 $ $Date: 1998/09/22 18:29:01 $";
 
 #define node_to_node_number(node_ptr) node_ptr - dblist->tree_info->node
 #define __toupper(c) (((c) >= 'a' && (c) <= 'z') ? (c) & 0xDF : (c))
@@ -155,7 +155,7 @@ int       _TreeAddNode(void *dbid, char *name, int *nid_out, char usage)
 	  else
 	  {
 	    status = TreeInsertMember(parent, new_ptr, dblist->tree_info->header->sort_members);
-            new_ptr->usage = usage;
+            new_ptr->usage = ((usage <= TreeUSAGE_MAXIMUM) && (usage >= 0)) ? usage : TreeUSAGE_ANY;
 	  }
           node_to_nid(dblist, new_ptr, ((NID *)nid_out));
 	}
