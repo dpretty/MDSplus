@@ -19,9 +19,9 @@
 
 extern int StrFree1Dx();
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.40 $ $Date: 2001/02/27 17:46:12 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.41 $ $Date: 2001/06/06 17:04:35 $";
 
-#ifndef vxWorks
+#ifndef HAVE_VXWORKS_H
 #define min(a,b) (((a) < (b)) ? (a) : (b))
 #endif
 
@@ -698,7 +698,7 @@ static int OpenNciR(TREE_INFO *info)
 		char *filename = strncpy(malloc(len+16),info->filespec,len);
 		filename[len]='\0';
 		strcat(filename,"characteristics");
-#ifdef vxWorks
+#ifdef HAVE_VXWORKS_H
 		info->nci_file->get = open(filename,O_RDONLY | O_BINARY | O_RANDOM, 0);
 #else
 		info->nci_file->get = open(filename,O_RDONLY | O_BINARY | O_RANDOM);

@@ -22,7 +22,7 @@
 	NEED parameter for sizeof(NODE_NAME).
 	NEED to be careful about any new names. They could take away uniqueness from existing code.
 */
-#ifndef vxWorks
+#ifndef HAVE_VXWORKS_H
 #undef MAX
 #endif
 #define EOL {0,NciEND_OF_LIST,0,0}
@@ -41,7 +41,7 @@
 #include "tdirefstandard.h"
 #include "tdinelements.h"
 
-static char *cvsrev = "@(#)$RCSfile: TdiGetNci.c,v $ $Revision: 1.19 $ $Date: 2000/09/14 20:27:39 $";
+static char *cvsrev = "@(#)$RCSfile: TdiGetNci.c,v $ $Revision: 1.20 $ $Date: 2001/06/06 17:05:17 $";
 
 extern unsigned short OpcVector;
 

@@ -54,12 +54,15 @@ The expansion routine "xentry":
 #include <libroutines.h>
 #include <strroutines.h>
 #include <librtl_messages.h>
+#ifdef HAVE_VXWORKS_H
+#define _pointer_int int
+#endif
 
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 typedef ARRAY_COEFF(char, 1) array_coef;
 typedef RECORD(4) record_four;
-static char *cvsrev = "@(#)$RCSfile: MdsCompress.c,v $ $Revision: 1.13 $ $Date: 2000/09/14 19:53:59 $";
+static char *cvsrev = "@(#)$RCSfile: MdsCompress.c,v $ $Revision: 1.14 $ $Date: 2001/06/06 17:04:07 $";
 
   static unsigned short opcode = OpcDECOMPRESS;
   static record_four rec0 = {sizeof(opcode), DTYPE_FUNCTION, CLASS_R, (unsigned char *) &opcode, 4, 0, 0, 0, 0};

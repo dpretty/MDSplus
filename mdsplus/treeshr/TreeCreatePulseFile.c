@@ -28,6 +28,9 @@ int TreeCreatePulseFile(int shotid,int numnids, int *nids)
 
 
 ------------------------------------------------------------------------------*/
+#ifdef HAVE_VXWORKS_H
+#include <ioLib.h>
+#endif
 #include <stdlib.h>
 #include <string.h>
 #include <mdsdescrip.h>
@@ -41,7 +44,7 @@ extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
 extern char *MaskReplace();
 
-static char *cvsrev = "@(#)$RCSfile: TreeCreatePulseFile.c,v $ $Revision: 1.19 $ $Date: 2001/02/28 20:03:48 $";
+static char *cvsrev = "@(#)$RCSfile: TreeCreatePulseFile.c,v $ $Revision: 1.20 $ $Date: 2001/06/06 17:04:33 $";
 
 #ifdef _WIN32
 #include <windows.h>

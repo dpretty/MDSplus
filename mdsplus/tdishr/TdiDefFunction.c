@@ -5,7 +5,9 @@
 
 	Ken Klare, LANL CTR-7	(c)1989,1990
 */
-
+#ifdef HAVE_VXWORKS_H
+#include <stdio.h>
+#endif
 #include <mds_stdarg.h>
 #include <libroutines.h>
 #include <tdimessages.h>
@@ -13,7 +15,7 @@
 /*#include <mdsdescrip.h>*/
 #define COM 
 
-static char *cvsrev = "@(#)$RCSfile: TdiDefFunction.c,v $ $Revision: 1.4 $ $Date: 1998/12/16 10:55:11 $";
+static char *cvsrev = "@(#)$RCSfile: TdiDefFunction.c,v $ $Revision: 1.5 $ $Date: 2001/06/06 17:05:16 $";
 
 extern int TdiIntrinsic();
 

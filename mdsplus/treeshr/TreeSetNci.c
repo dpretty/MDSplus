@@ -48,7 +48,7 @@
 #define O_RANDOM 0
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.26 $ $Date: 2000/12/19 21:31:38 $";
+static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.27 $ $Date: 2001/06/06 17:04:37 $";
 
 extern void *DBID;
 
@@ -304,7 +304,7 @@ int TreeOpenNciW(TREE_INFO *info, int tmpfile)
         info->nci_file->get = 0;
       if (status & 1)
       {
-#ifdef vxWorks
+#ifdef HAVE_VXWORKS_H
         info->nci_file->put = open(filename,O_RDWR | O_BINARY | O_RANDOM, 0);
 #else
         info->nci_file->put = open(filename,O_RDWR | O_BINARY | O_RANDOM);
@@ -703,7 +703,7 @@ int TreeUnLockNci(TREE_INFO *info, int readonly, int nodenum)
 }
 #else
 
-#ifdef vxWorks 
+#ifdef HAVE_VXWORKS_H 
 int TreeLockNci(TREE_INFO *info, int readonly, int nodenum)
 { return TreeSUCCESS; }
 int TreeUnLockNci(TREE_INFO *info, int readonly, int nodenum)

@@ -49,7 +49,7 @@
 #include <tdimessages.h>
 #include <math.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiAbs.c,v $ $Revision: 1.8 $ $Date: 2000/04/21 19:19:46 $";
+static char *cvsrev = "@(#)$RCSfile: TdiAbs.c,v $ $Revision: 1.9 $ $Date: 2001/06/06 17:05:16 $";
 
 extern int TdiConvert();
 extern int TdiSubtractQuadword();
@@ -58,7 +58,7 @@ extern int TdiUnary(  );
 extern int Tdi3Multiply(  );
 extern int CvtConvertFloat();
 
-#ifdef vxWorks
+#ifdef HAVE_VXWORKS_H
 #undef min
 #undef max
 #endif

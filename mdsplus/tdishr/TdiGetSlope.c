@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <tdimessages.h>
 #include "tdirefstandard.h"
-#ifdef vxWorks
+#ifdef HAVE_VXWORKS_H
 #undef MAX
 #endif
 
@@ -24,7 +24,7 @@
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
-static char *cvsrev = "@(#)$RCSfile: TdiGetSlope.c,v $ $Revision: 1.5 $ $Date: 1998/12/16 10:55:13 $";
+static char *cvsrev = "@(#)$RCSfile: TdiGetSlope.c,v $ $Revision: 1.6 $ $Date: 2001/06/06 17:05:18 $";
 
 extern int TdiData(  );
 extern int TdiGetLong(  );

@@ -34,7 +34,13 @@ int Tdi3Divide(struct descriptor *in1, struct descriptor *in2, struct descriptor
 #include <mdstypes.h>
 #include <tdimessages.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiDivide.c,v $ $Revision: 1.4 $ $Date: 2000/09/14 13:31:15 $";
+#ifdef HAVE_VXWORKS_H
+typedef long long _int64;
+typedef unsigned long long _int64u;
+#endif
+
+
+static char *cvsrev = "@(#)$RCSfile: TdiDivide.c,v $ $Revision: 1.5 $ $Date: 2001/06/06 17:05:17 $";
 
 extern int CvtConvertFloat();
 extern double WideIntToDouble();
@@ -186,10 +192,12 @@ int Tdi3Divide(struct descriptor *in1, struct descriptor *in2, struct descriptor
     case DTYPE_WU:  Operate(unsigned short) 
     case DTYPE_L:   Operate(int)
     case DTYPE_LU:  Operate(unsigned int) 
+#ifndef HAVE_VXWORKS_H
     case DTYPE_Q:   Operate(_int64);
     case DTYPE_QU:  Operate(_int64u);
     case DTYPE_O:   OperateWide(octaword,4,1);
     case DTYPE_OU:  OperateWide(octaword,4,0);
+#endif
     case DTYPE_F:   OperateF(float,DTYPE_F,DTYPE_NATIVE_FLOAT) 
     case DTYPE_FS:  OperateF(float,DTYPE_FS,DTYPE_NATIVE_FLOAT)
     case DTYPE_G:   OperateF(double,DTYPE_G,DTYPE_NATIVE_DOUBLE) 
