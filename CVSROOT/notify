@@ -9,5 +9,4 @@
 # "ALL" or "DEFAULT" can be used in place of the regular expression.
 #
 # For example:
-ALL /bin/echo /bin/mail %s -s "CVS notification" > /tmp/cvsnotify.log
-DEFAULT /bin/echo /bin/mail %s -s "CVS notification" > /tmp/cvsnotify.log
+ALL /bin/mail %s -s "CVS notification" 
