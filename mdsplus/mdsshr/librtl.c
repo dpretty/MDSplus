@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.124 $ $Date: 2003/02/14 20:35:04 $ $Name:  $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.125 $ $Date: 2003/03/05 17:40:55 $ $Name:  $";
 
 extern int MdsCopyDxXd();
 
@@ -255,11 +255,12 @@ int LibSpawn(struct descriptor *cmd, int waitFlag, int notifyFlag)
   }
   arglist[((int)arglist[0])] = (char *)0;
   status = LibCallg(arglist,_spawnlp);
-  if (status != 0) perror("Error doing spawn"); 
+  /*if (status != 0) perror("Error doing spawn"); */
   free(cmd_c);
-  return (status);
-  return (0);
-}
+
+  return status;
+
+ }
 
 int LibWait(float *secs)
 {
@@ -823,7 +824,8 @@ int LibSpawn(struct descriptor *cmd, int waitflag, int notifyFlag)
     }
   }
   free(cmdstring);
-  return sts;
+  /* return sts;*/
+  return sts >> 8;
 }
 
 #endif
