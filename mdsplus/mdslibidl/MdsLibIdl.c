@@ -13,7 +13,7 @@ extern int TdiData();
 extern int TdiCvt();
 extern int TdiCompile();
 
-static char *cvsrev = "@(#)$RCSfile: MdsLibIdl.c,v $ $Revision: 1.23 $ $Date: 2002/02/06 17:53:28 $";
+static char *cvsrev = "@(#)$RCSfile: MdsLibIdl.c,v $ $Revision: 1.24 $ $Date: 2002/09/10 15:10:02 $";
 
 #ifdef _WINDOWS
 #define BlockSig(a)
@@ -91,7 +91,7 @@ typedef struct {
 
 static int ShortStrings(char *b)
 {
-  return b[4] != 0 || b[5] != 0;
+  return ((b[4] != 0) && (b[4] != 1)) || (b[5] != 0);
 }
 
 static void *MakeDescr(int idx, int *argsize, void *bytes)
