@@ -64,9 +64,8 @@
 #include <mdsdescrip.h>
 #include <tdimessages.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiEq.c,v $ $Revision: 1.4 $ $Date: 2000/04/12 19:58:45 $";
+static char *cvsrev = "@(#)$RCSfile: TdiEq.c,v $ $Revision: 1.5 $ $Date: 2000/11/30 14:01:55 $";
 
-extern int TdiBinary(  );
 #define OP_EQ 0 
 #define OP_GE 1
 #define OP_GT 2 
@@ -75,6 +74,8 @@ extern int TdiBinary(  );
 #define OP_NE 5 
 
 extern int CvtConvertFloat();
+extern int TdiBinary(  );
+extern int Tdi3Not();
 
 #define min(a,b) ((a)<(b)) ? (a) : (b) 
 #define max(a,b) ((a)<(b)) ? (b) : (a) 
@@ -297,5 +298,7 @@ int       Tdi3Ne(struct descriptor *in1_ptr,
 		                struct descriptor *in2_ptr,
 		                struct descriptor *out_ptr)
 {
-	  return Tdi3_Eq(in1_ptr,in2_ptr,out_ptr,OP_NE);
+	  int status = Tdi3_Eq(in1_ptr,in2_ptr,out_ptr,OP_EQ);
+          if (status & 1)
+            return Tdi3Not(out_ptr, out_ptr);
 }
