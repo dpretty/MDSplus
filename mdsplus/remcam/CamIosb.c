@@ -1,9 +1,14 @@
 #include <stdlib.h>
 #include <string.h>
 
-static char *cvsrev = "@(#)$RCSfile: CamIosb.c,v $ $Revision: 1.3 $ $Date: 1998/04/28 19:05:38 $";
+static char *cvsrev = "@(#)$RCSfile: CamIosb.c,v $ $Revision: 1.4 $ $Date: 2003/02/25 13:48:01 $";
 
 extern unsigned short RemCamLastIosb[4];
+
+int CamVerbose(int flag)
+{
+  return 1;
+}
 
 int CamBytcnt(unsigned short *iosb)
 {
