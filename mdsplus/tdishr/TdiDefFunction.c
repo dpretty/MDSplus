@@ -13,13 +13,16 @@
 #include <mdsdescrip.h>
 #define COM 
 
-static char *cvsrev = "@(#)$RCSfile: TdiDefFunction.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:06:00 $";
+static char *cvsrev = "@(#)$RCSfile: TdiDefFunction.c,v $ $Revision: 1.3 $ $Date: 1998/05/01 18:05:12 $";
 
 extern int TdiIntrinsic();
 
 #ifndef va_count
-#define  va_count(narg) va_start(incrmtr, first); \
-                        for (narg=1; (narg < 256) && (va_arg(incrmtr, struct descriptor *) != MdsEND_ARG); narg++)
+#define  va_count(narg) if (first != MdsEND_ARG) \
+						{	va_start(incrmtr, first); \
+							for (narg=1; (narg < 256) && (va_arg(incrmtr, struct descriptor *) != MdsEND_ARG); narg++);\
+						} else narg=0
+	
 #endif /* va_count */
 
 #define OPC(name,builtin,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11) \
