@@ -1,4 +1,4 @@
-#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.4 $
+#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.5 $
 # @configure_input@
 SHELL=/bin/sh
 
@@ -30,7 +30,8 @@ PARTS = ipcs \
         math \
         @D3D_PACKAGE@ \
         wfevent \
-	@JAVA_APS@
+	@JAVA_APS@ \
+        @IDLSQL@ 
 
 all:
 	cdir=`pwd`;\
