@@ -34,7 +34,7 @@
 #include <mdsshr.h>
 #include <mds_stdarg.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiExtFunction.c,v $ $Revision: 1.7 $ $Date: 2003/03/26 21:37:28 $";
+static char *cvsrev = "@(#)$RCSfile: TdiExtFunction.c,v $ $Revision: 1.8 $ $Date: 2003/05/01 14:29:30 $";
 
 extern unsigned short OpcDescr;
 extern unsigned short OpcFun;
@@ -169,7 +169,7 @@ ident:
 	  LibFindFileRecurseCaseBlind(&file, &file, &ctx);
 	  LibFindFileEnd(&ctx);
 	  StrAppend(&file,&dnul);
-	  unit = fopen(file.pointer, "r");
+	  unit = fopen(file.pointer, "rb");
 	  if (unit) {
             long flen;
             fseek(unit,0,SEEK_END);
