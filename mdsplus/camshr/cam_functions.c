@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: cam_functions.c,v 1.6 2003/02/22 15:00:07 twf Exp $
+//	$Id: cam_functions.c,v 1.7 2003/03/11 19:43:05 twf Exp $
 //-------------------------------------------------------------------------
 // Tue Aug  1 11:22:06 EDT 2000
 // Tue Apr  3 09:57:52 EDT 2001
@@ -247,7 +247,7 @@ int CamBytcnt( TranslatedIosb *iosb )		// CAM$BYTCNT_SCSI()
 //printf("CamBytcnt(iosb)    ::->> bytecount= %d\n", iosb->bytcnt);		// [2002.12.13]
 //printf("CamBytcnt(iosb_use)::->> bytecount= %d\n", iosb_use->bytcnt);	// [2002.12.13]
 //printf("CamBytcnt(LastIosb)::->> bytecount= %d\n", LastIosb.bytcnt);	// [2002.12.13]
-	return iosb_use->bytcnt;
+	return ((int)iosb_use->bytcnt) | (((int)iosb_use->lbytcnt) << 16);
 }
 
 //-----------------------------------------------------------
@@ -548,7 +548,7 @@ static int JorwayDoIo(
         unsigned char *cmd;
         unsigned char cmdlen;
         int direction;
-        int bytcnt;
+        unsigned int bytcnt;
         int reqbytcnt = 0;
         SenseData sense;
         char sensretlen;
@@ -624,8 +624,10 @@ static int JorwayDoIo(
 		cmdlen = sizeof(NONDATAcommand);
                 direction = 0;
 	}
-        status = scsi_io( scsiDevice, direction, cmd, cmdlen, Data, reqbytcnt, (unsigned char *)&sense, sizeof(sense), &sensretlen, &bytcnt);
+        status = scsi_io( scsiDevice, direction, cmd, cmdlen, Data, reqbytcnt, (unsigned char *)&sense,
+			  sizeof(sense), &sensretlen, &bytcnt);
 	LastIosb.bytcnt = (unsigned short)(bytcnt & 0xffff);
+        LastIosb.lbytcnt = (unsigned short)(bytcnt >> 16);
         status = JorwayTranslateIosb(&sense,status);
 	if ( iosb ) *iosb = LastIosb;					// [2002.12.11]
 
@@ -724,7 +726,6 @@ JorwayTranslateIosb( SenseData *sense, int scsi_status )
         LastIosb.tmo=0;
         LastIosb.adnr=0;
         LastIosb.list=0;
-        LastIosb.lbytcnt=0;
 
 	if( MSGLVL(FUNCTION_NAME) )
 		printf( "%s()\n", JT_ROUTINE_NAME );
