@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: cam_functions.c,v 1.10 2003/05/09 15:20:15 twf Exp $
+//	$Id: cam_functions.c,v 1.11 2003/05/13 20:24:57 twf Exp $
 //-------------------------------------------------------------------------
 // Tue Aug  1 11:22:06 EDT 2000
 // Tue Apr  3 09:57:52 EDT 2001
@@ -640,8 +640,10 @@ static int JorwayDoIo(
 		cmdlen = sizeof(NONDATAcommand);
                 direction = 0;
 	}
+        scsi_lock(scsiDevice,1);
         status = scsi_io( scsiDevice, direction, cmd, cmdlen, Data, reqbytcnt, (unsigned char *)&sense,
 			  sizeof(sense), &sensretlen, &bytcnt);
+        scsi_lock(scsiDevice,0);
         status = JorwayTranslateIosb(reqbytcnt,&sense,status);
 	if ( iosb ) *iosb = LastIosb;					// [2002.12.11]
 
