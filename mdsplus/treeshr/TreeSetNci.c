@@ -48,7 +48,7 @@
 #define O_RANDOM 0
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.21 $ $Date: 1998/12/16 10:41:18 $";
+static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.22 $ $Date: 1999/02/22 15:13:21 $";
 
 extern void *DBID;
 
@@ -694,7 +694,7 @@ int TreeLockNci(TREE_INFO *info, int readonly, int nodenum)
   flock_info.l_start = nodenum * sizeof(NCI);
   flock_info.l_len = sizeof(NCI);
   return (fcntl(readonly ? info->nci_file->get : info->nci_file->put,F_SETLKW, &flock_info) != -1) ? 
-          TreeSUCCESS : TreeFAILURE;
+          TreeSUCCESS : TreeLOCK_FAILURE;
 }
 
 int TreeUnLockNci(TREE_INFO *info, int readonly, int nodenum)
@@ -705,7 +705,7 @@ int TreeUnLockNci(TREE_INFO *info, int readonly, int nodenum)
   flock_info.l_start = nodenum * sizeof(NCI);
   flock_info.l_len = sizeof(NCI);
   return (fcntl(readonly ? info->nci_file->get : info->nci_file->put,F_SETLKW, &flock_info) != -1) ? 
-          TreeSUCCESS : TreeFAILURE;
+          TreeSUCCESS : TreeLOCK_FAILURE;
 }
 #endif
 #endif
