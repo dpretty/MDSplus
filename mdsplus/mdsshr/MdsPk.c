@@ -29,7 +29,7 @@
 */
 #include <config.h>
 #include <STATICdef.h>
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: MdsPk.c,v $ $Revision: 1.14 $ $Date: 2004/08/26 15:29:48 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: MdsPk.c,v $ $Revision: 1.15 $ $Date: 2004/08/26 15:39:48 $";
 STATIC_CONSTANT unsigned int masks[33] = {0,
 0x1, 0x3, 0x7, 0xf, 0x1f, 0x3f, 0x7f, 0xff,
 0x1ff, 0x3ff, 0x7ff, 0xfff, 0x1fff, 0x3fff, 0x7fff, 0xffff,
@@ -97,6 +97,9 @@ void      MdsPk(signed char *nbits_ptr, int *nitems_ptr, int pack[], int items[]
       {
 	hold |= *pitems << off;
 #ifdef WORDS_BIGENDIAN
+#ifdef __APPLE__
+        *ppack = hold;
+#endif
         for (i=0;i<4;i++)
           ((char *)ppack)[i] = ((char *)&hold)[3-i];
         ppack++;
