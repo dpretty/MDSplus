@@ -1,4 +1,4 @@
-/* $Id: MdsDataProvider.java,v 1.34 2005/02/10 14:02:30 manduchi Exp $ */
+/* $Id: MdsDataProvider.java,v 1.35 2005/02/10 14:57:52 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.*;
@@ -272,18 +272,23 @@ public class MdsDataProvider implements DataProvider
             }
 
 
-           if(resample && in_x == null)
-           {
-	            String limits = "FLOAT("+xmin+"), " + "FLOAT("+xmax+")";
+            if (resample && in_x == null)
+            {
+                String limits = "FLOAT(" + xmin + "), " + "FLOAT(" + xmax + ")";
                 //String expr = "JavaResample("+ "FLOAT("+in_y+ "), "+
-		        //    "FLOAT(DIM_OF("+in_y+")), "+ limits + ")";
-                String expr = set_tdivar + "JavaResample("+ "FLOAT("+in_y_expr+ "), "+
-		            "FLOAT(DIM_OF("+in_y_expr+")), "+ limits + ")";
+                //    "FLOAT(DIM_OF("+in_y+")), "+ limits + ")";
+                String resampledExpr = "JavaResample(" + "FLOAT(" + in_y_expr +"), " +
+                    "FLOAT(DIM_OF(" + in_y_expr + ")), " + limits + ")";
 
-		        return GetFloatArray(expr);
-           }
+                set_tdivar = "_jscope_" + v_idx + " = (" + resampledExpr +"), ";
+
+                //String expr = set_tdivar + "fs_float("+resampledExpr+ ")";
+                String expr = set_tdivar + "fs_float(_jscope_"+v_idx+ ")";
+
+                return GetFloatArray(expr);
+            }
            else
-                return GetFloatArray(set_tdivar+"fs_float("+in_y_expr+")");
+               return GetFloatArray(set_tdivar+"fs_float("+in_y_expr+")");
         }
 
         private double[] encodeTimeBase(String expr)
@@ -378,6 +383,9 @@ public class MdsDataProvider implements DataProvider
 
             if(in_x == null)
             {
+
+
+
                 if(_jscope_set)
                 {
                     expr = "dim_of(_jscope_"+v_idx+")";

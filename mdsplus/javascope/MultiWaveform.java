@@ -1,4 +1,4 @@
-/* $Id: MultiWaveform.java,v 1.51 2005/01/13 09:14:48 manduchi Exp $ */
+/* $Id: MultiWaveform.java,v 1.52 2005/02/10 14:57:52 manduchi Exp $ */
 import java.awt.*;
 import java.util.*;
 import java.io.*;
@@ -1257,11 +1257,16 @@ public class MultiWaveform extends Waveform
         }
 
 
-        if(wi != null)
-	        wi.AsynchUpdate(signals, (float)(start_xs - x_range), (float)(end_xs + x_range),
-	            (float)orig_xmin, (float)orig_xmax, update_timestamp, mode == MODE_PAN, this);
+        if (wi != null)
 
-    }
+          wi.AsynchUpdate(signals, (float)(start_xs - x_range), (float)(end_xs + x_range),
+              (float)orig_xmin, (float)orig_xmax, update_timestamp, mode == MODE_PAN, this);
+          //wi.AsynchUpdate(signals, (float) (start_xs),
+          //                (float) (end_xs),
+          //                (float) orig_xmin, (float) orig_xmax, update_timestamp,
+          //                mode == MODE_PAN, this);
+
+      }
 
     protected void HandleCopy()
     {
