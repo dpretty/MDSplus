@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: cam_functions.c,v 1.24 2003/09/08 20:05:54 twf Exp $
+//	$Id: cam_functions.c,v 1.25 2003/09/09 12:19:38 twf Exp $
 //-------------------------------------------------------------------------
 // Tue Aug  1 11:22:06 EDT 2000
 // Tue Apr  3 09:57:52 EDT 2001
@@ -813,7 +813,8 @@ static int Jorway73ADoIo(
 	  __u8	transfer_len[3];
 	  __u8	zero5;
 	} LongDATAcommand = {0x21,0,0,0,0,0,0,0,0,0};
-	static char modes[4] = {1,2,3,0}; /* QStop, QIgnore, QRep, QScan */
+	static char modes[4] = {2,2,3,1}; /* QStop, QIgnore, QRep, QScan */
+        static char singlemodes[4] = {0,2,3,1};
 	if( MSGLVL(FUNCTION_NAME) )
 		printf( "%s()\n", J_ROUTINE_NAME );
 //printf( "%s(iosb is %sNULL)\n", J_ROUTINE_NAME, (iosb)?"NOT ":"" );		// [2002.12.13]
@@ -852,7 +853,7 @@ static int Jorway73ADoIo(
 	    ShortDATAcommand.f     = F;
 	    ShortDATAcommand.bs    = Mem == 24;
 	    ShortDATAcommand.n     = Key.slot;
-	    ShortDATAcommand.m     = modes[dmode];
+	    ShortDATAcommand.m     = Count > 1 ? modes[dmode] : singlemodes[dmode];
 	    ShortDATAcommand.a     = A;
 	    ShortDATAcommand.transfer_len = transfer_len.l;
 	  }
