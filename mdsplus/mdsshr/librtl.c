@@ -11,7 +11,7 @@
 #include <math.h>
 
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.106 $ $Date: 2002/06/05 14:06:25 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.107 $ $Date: 2002/07/23 14:55:11 $";
 
 extern int MdsCopyDxXd();
 
@@ -758,7 +758,17 @@ int LibSpawn(struct descriptor *cmd, int waitflag, int notifyFlag)
   char *sh = "/bin/sh";
   pid_t  pid,xpid;
   char *cmdstring = MdsDescrToCstring(cmd);
+  char *spawn_wrapper = TranslateLogical("MDSPLUS_SPAWN_WRAPPER");
   int   sts=0;
+  if (spawn_wrapper)
+  {
+    char *oldcmdstring = cmdstring;
+    cmdstring = strcpy(malloc(strlen(spawn_wrapper)+strlen(oldcmdstring)+5),spawn_wrapper);
+    strcat(cmdstring," ");
+    strcat(cmdstring,oldcmdstring);
+    free(oldcmdstring);
+    TranslateLogicalFree(spawn_wrapper);
+  }
   signal(SIGCHLD,notifyFlag ? child_done : (waitflag ? SIG_DFL : SIG_IGN));
   pid = fork();
   if (!pid)
@@ -2102,7 +2112,15 @@ unsigned short Crc(unsigned int len, unsigned char *bufptr)
 
 int MdsPutEnv(char *cmd)
 {
-  char *tmp=strcpy(malloc(strlen(cmd)+1),cmd);
-  putenv(tmp);
-  return 1;
+  int status;
+  if (strstr(cmd,"MDSPLUS_SPAWN_WRAPPER") ||
+      strstr(cmd,"MDSPLUS_LIBCALL_WRAPPER"))
+    status = 0;
+  else
+  {
+    char *tmp=strcpy(malloc(strlen(cmd)+1),cmd);
+    putenv(tmp);
+    status = 1;
+  }
+  return status;
 }
