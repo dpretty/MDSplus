@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.82 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.83 $
 AC_INIT()
 
 AC_CONFIG_HEADER(include/config.h)
@@ -427,6 +427,7 @@ servershr/Makefile
 setevent/Makefile
 tcl/Makefile 
 tdishr/Makefile 
+tdic/Makefile
 tditest/Makefile 
 traverser/Makefile 
 treeshr/Makefile 
