@@ -42,7 +42,7 @@
 #include "treeshrp.h"
 #include <ncidef.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.30 $ $Date: 2002/04/09 13:16:48 $";
+static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.31 $ $Date: 2002/10/30 15:10:42 $";
 
 extern void *DBID;
 
@@ -466,6 +466,11 @@ int _TreeTurnOn(void *dbid, int nid_in)
   status = TreeGetNciLw(info, node_num, &nci);
   if (~status & 1)
     return status;
+      
+  status = TreeLockNci(info, 0, node_num);
+  if (~status & 1)
+    return status;
+
   if (nci.flags & NciM_STATE)
   {
     bitassign(0,nci.flags,NciM_STATE);
