@@ -26,6 +26,9 @@ extern char *index(char *str,char c);
 #endif
 
 #ifdef HAVE_SYS_RESOURCE_H
+#ifdef __APPLE__
+#include <sys/time.h>
+#endif
 #include <sys/resource.h>
 #endif
 
@@ -40,7 +43,7 @@ extern char *index(char *str,char c);
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.67 $ $Date: 2002/04/19 14:52:15 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.68 $ $Date: 2002/10/25 16:51:00 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
@@ -843,7 +846,7 @@ static int  OpenOne(TREE_INFO *info, char *tree, int shot, char *type,int new,ch
         else
         {
           fd = MDS_IO_OPEN(resnam,O_RDONLY,0);
-#if (defined(__osf__) || defined(__linux) || defined(__hpux) || defined(__sun) || defined(__sgi) || defined(_AIX)) && !defined(HAVE_VXWORKS_H)
+#if (defined(__osf__) || defined(__linux) || defined(__hpux) || defined(__sun) || defined(__sgi) || defined(_AIX) || defined(__APPLE__)) && !defined(HAVE_VXWORKS_H)
           info->channel = (MDS_IO_SOCKET(fd) == -1) ? fd : 0;
 #endif
         }

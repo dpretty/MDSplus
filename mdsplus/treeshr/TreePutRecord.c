@@ -53,7 +53,7 @@ static int timezone = 0;
 #define LONG_LONG_CONSTANT(value) value##ll
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.63 $ $Date: 2002/04/09 13:16:48 $";
+static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.64 $ $Date: 2002/10/25 16:51:00 $";
 
 #ifdef min
 #undef min
@@ -137,7 +137,20 @@ int       _TreePutRecord(void *dbid, int nid, struct descriptor *descriptor_ptr,
 #ifndef HAVE_VXWORKS_H
         tzset();
 #endif
+
+#ifdef USE_TM_GMTOFF      
+    /* this is a suggestion to change all code 
+       for this as timezone is depricated unix
+       annother alternative is to use gettimeofday */
+       { struct tm *tm;
+         time_t t;
+         t = time(NULL);
+         tm = localtime(&t);
+         m1 = (unsigned int)t + tm->tm_gmtoff;
+       }
+#else
         m1 = (unsigned int)time(NULL) - timezone + daylight * 3600;
+#endif
 	LibEmul(&m1,&m2,&zero,&temp);
         local_nci.time_inserted = temp + addin;
       }

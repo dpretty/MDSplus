@@ -1,4 +1,4 @@
-static char *cvsrev = "@(#)$RCSfile: bxutils-uil.c,v $ $Revision: 1.3 $ $Date: 2000/09/20 18:35:51 $"; 
+static char *cvsrev = "@(#)$RCSfile: bxutils-uil.c,v $ $Revision: 1.4 $ $Date: 2002/10/25 16:48:22 $"; 
 /*
  * WARNING: This file is overwritten at code generation time.
  * Any changes to this file will be lost.
@@ -47,7 +47,7 @@ static char *cvsrev = "@(#)$RCSfile: bxutils-uil.c,v $ $Revision: 1.3 $ $Date: 2
  */
 #if defined(__cplusplus) || defined(__STDC__) || defined(__EXTENSIONS__)
 #include <stdlib.h>
-#ifndef VMS
+#if !defined(VMS) && !defined(__APPLE__)
 #include <malloc.h>
 #endif
 #endif
