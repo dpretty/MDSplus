@@ -53,7 +53,7 @@
 #define O_RANDOM 0
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.34 $ $Date: 1998/07/29 17:57:36 $";
+static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.35 $ $Date: 1998/07/29 17:59:17 $";
 
 #define min(a,b) (((a) < (b)) ? (a) : (b))
 
@@ -132,7 +132,7 @@ int       _TreePutRecord(void *dbid, int nid, struct descriptor *descriptor_ptr,
 	/* VMS time = unixtime * 10,000,000 + 0x7c95674beb4000q */
         tzset();
         m1 = (unsigned int)time(NULL) - timezone;
-	LibEmul(m1,m2,zero,temp);
+	LibEmul(&m1,&m2,zero,temp);
         AddQuadword(temp,addin,time_inserted);
 #ifdef _big_endian
         local_nci.time_inserted[0] = swapint((char *)&time_inserted[1]);
