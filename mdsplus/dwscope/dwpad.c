@@ -80,7 +80,7 @@ $ Run SYS$SYSTEM:DWPad
 #include <DXm/DECspecific.h>
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: dwpad.c,v $ $Revision: 1.4 $ $Date: 2003/04/28 21:15:36 $";
+static char *cvsrev = "@(#)$RCSfile: dwpad.c,v $ $Revision: 1.5 $ $Date: 2003/09/15 14:45:07 $";
 
 extern void XmdsDestroyWidgetCallback();
 extern void XmdsManageChildCallback();
@@ -401,9 +401,10 @@ static void /*XtCallbackProc*/Restore(Widget w, int *option, XmFileSelectionBoxC
             {
               if (reason->length)
               {
-                String filename;
-                if (XmStringGetLtoR(reason->value, (XmStringCharSet) XmSTRING_DEFAULT_CHARSET, &filename))
-                {
+                 String filename;
+                 filename = XmStringUnparse(reason->value, NULL, 0, XmCHARSET_TEXT, NULL, 0, XmOUTPUT_ALL);
+                 if (filename)
+                 {
                   int       length = strlen(filename);
                   if (length)
                   {
@@ -451,8 +452,9 @@ static void /*XtCallbackProc*/Save(Widget w, int *option, XmFileSelectionBoxCall
               if (reason->length)
               {
                 String filename;
-                if (XmStringGetLtoR(reason->value, (XmStringCharSet) XmSTRING_DEFAULT_CHARSET, &filename))
-                {
+                filename = XmStringUnparse(reason->value, NULL, 0, XmCHARSET_TEXT, NULL, 0, XmOUTPUT_ALL);
+                if (filename)
+                 {
                   int       length = strlen(filename);
                   if (length)
                   {
