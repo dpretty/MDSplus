@@ -1,4 +1,4 @@
-/* $Id: WavePopup.java,v 1.22 2003/02/28 09:51:10 manduchi Exp $ */
+/* $Id: WavePopup.java,v 1.23 2003/03/07 15:11:14 manduchi Exp $ */
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -361,6 +361,7 @@ public class WavePopup extends JPopupMenu implements  ItemListener
            }
            add(colorList);	
 	       add(playFrame);
+           add(set_point);
 	       add(sep2);
 	       add(autoscale);
 	       if(parent instanceof WaveformManager)           
@@ -428,7 +429,7 @@ public class WavePopup extends JPopupMenu implements  ItemListener
         colorList.setEnabled(state);	
         SelectListItem(colorList_bg, wave.GetColorIdx());
 	    playFrame.setEnabled(state);
-        set_point.setEnabled(state);
+        set_point.setEnabled(state && ((wave.mode == Waveform.MODE_POINT)));
 	}
 	
 	protected void SetSignalMenu()

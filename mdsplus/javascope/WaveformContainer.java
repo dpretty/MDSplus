@@ -1,4 +1,4 @@
-/* $Id: WaveformContainer.java,v 1.24 2003/02/28 09:51:11 manduchi Exp $ */
+/* $Id: WaveformContainer.java,v 1.25 2003/03/07 15:11:14 manduchi Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -260,7 +260,6 @@ public class WaveformContainer extends RowColumnContainer implements WaveformMan
     {
         this.wave_popup = wave_popup;
         wave_popup.setParent(this);
-        //add(this.wave_popup);
     }
     
        
