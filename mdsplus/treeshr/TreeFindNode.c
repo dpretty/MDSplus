@@ -4,7 +4,7 @@
 #include <treeshr.h>
 #include "treeshrp.h"
 
-static char *cvsrev = "@(#)$RCSfile: TreeFindNode.c,v $ $Revision: 1.23 $ $Date: 2000/02/15 16:27:45 $";
+static char *cvsrev = "@(#)$RCSfile: TreeFindNode.c,v $ $Revision: 1.24 $ $Date: 2000/02/29 19:58:38 $";
 
 extern void *DBID;
 
@@ -1226,4 +1226,20 @@ int TreeFindParent(PINO_DATABASE *dblist, char *path_ptr, NODE **node_ptrptr, ch
     }
   }
   return status;
+}
+
+int TreeAbsPathDsc(char *inpath, struct descriptor *outpath)
+{
+  char *ans_c = TreeAbsPath(inpath);
+  if (ans_c == 0)
+    return 0;
+  else
+    {
+      struct descriptor ans_d = {0, DTYPE_T, CLASS_S, 0};
+      ans_d.length = strlen(ans_c);
+      ans_d.pointer = ans_c;
+      StrCopyDx(outpath,&ans_d);
+      free(ans_c);
+    }
+  return 1;
 }
