@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: cam_functions.c,v 1.21 2003/09/08 15:02:08 twf Exp $
+//	$Id: cam_functions.c,v 1.22 2003/09/08 15:04:26 twf Exp $
 //-------------------------------------------------------------------------
 // Tue Aug  1 11:22:06 EDT 2000
 // Tue Apr  3 09:57:52 EDT 2001
@@ -813,7 +813,7 @@ static int Jorway73ADoIo(
 	  __u8	transfer_len[3];
 	  __u8	zero5;
 	} LongDATAcommand = {0x21,0,0,0,0,0,0,0,0,0};
-	static char modes[4] = {2,0,3,1};
+	static char modes[4] = {1,2,3,0}; /* QStop, QIgnore, QRep, QScan */
 	if( MSGLVL(FUNCTION_NAME) )
 		printf( "%s()\n", J_ROUTINE_NAME );
 //printf( "%s(iosb is %sNULL)\n", J_ROUTINE_NAME, (iosb)?"NOT ":"" );		// [2002.12.13]
