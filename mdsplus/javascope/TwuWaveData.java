@@ -2,7 +2,7 @@
 // TwuWaveData
 // An implementation of "WaveData" for signals from a TEC Web-Umbrella (TWU) server.
 //
-// $Id: TwuWaveData.java,v 2.2 2003/07/09 14:30:04 jgk Exp $
+// $Id: TwuWaveData.java,v 2.3 2003/07/09 14:43:48 jgk Exp $
 //
 // ---------------------------------------------------------------------------------------------
 
@@ -19,8 +19,8 @@ import java.lang.InterruptedException;
 class TwuWaveData
     implements WaveData
 {
-    private TwuDataProvider.SingleTwuSignal mainSignal      = null  ;
-    private TwuDataProvider.SingleTwuSignal abscissa_X      = null  ;
+    private TwuDataProvider.TwuSingleSignal mainSignal      = null  ;
+    private TwuDataProvider.TwuSingleSignal abscissa_X      = null  ;
     private String                          mainSignal_name = null  ;
     private String                          abscissa_X_name = null  ;
     private boolean                         fullfetch       = false ;
@@ -52,12 +52,12 @@ class TwuWaveData
         mainSignal_name = in_y ;
         abscissa_X_name = in_x ;
 
-        mainSignal = provider.newSingleTwuSignal (mainSignal_name) ;
+        mainSignal = provider.newTwuSingleSignal (mainSignal_name) ;
 
         if  (mainSignal_name != null && abscissa_X_name != null)
-          abscissa_X = provider.newSingleTwuSignal (abscissa_X_name);
+          abscissa_X = provider.newTwuSingleSignal (abscissa_X_name);
         else
-          abscissa_X = provider.newSingleTwuSignal (mainSignal);
+          abscissa_X = provider.newTwuSingleSignal (mainSignal);
 
     }
 
@@ -79,7 +79,7 @@ class TwuWaveData
         }
         catch ( Exception e ) {}
 
-        // the TwuDataProvider.SingleTwuSignal already has the error flag set (?),
+        // the TwuDataProvider.TwuSingleSignal already has the error flag set (?),
         // and it will throw an exception when jscope tries to
         // call GetFloatData().
     }
@@ -210,7 +210,7 @@ class TwuWaveData
 
     // another utility method. needed by TwuAccess (via via).
     // this is an efficient way to do it because it allows storage
-    // of the properties within the TwuDataProvider.SingleTwuSignal, so it won't
+    // of the properties within the TwuDataProvider.TwuSingleSignal, so it won't
     // need to be retrieved time after time ...
     //
     public TWUProperties getTWUProperties()
@@ -222,5 +222,5 @@ class TwuWaveData
 }
 
 // ---------------------------------------------------------------------------------------------
-// End of: $Id: TwuWaveData.java,v 2.2 2003/07/09 14:30:04 jgk Exp $
+// End of: $Id: TwuWaveData.java,v 2.3 2003/07/09 14:43:48 jgk Exp $
 // ---------------------------------------------------------------------------------------------
