@@ -9,7 +9,7 @@
 #include <mds_stdarg.h>
 #include <librtl_messages.h>
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.82 $ $Date: 2001/06/20 15:11:49 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.83 $ $Date: 2001/06/21 09:34:42 $";
 
 extern int MdsCopyDxXd();
 
@@ -25,7 +25,7 @@ void TranslateLogicalFree(char *value);
 #include <windows.h>
 #include <process.h>
 
-#define RTLD_LAZY 0
+#define RTLDLAZY 0
 
 static void *dlopen(char *filename, int flags)
 {
@@ -873,7 +873,6 @@ int LibFindImageSymbol(struct descriptor *filename, struct descriptor *symbol, v
     *symbol_value = dlsym(handle,c_symbol);
     free(c_symbol);
   }
-  else printf("%s\n", dlerror());
   free(c_filename);
   free(full_filename);
   if (*symbol_value == NULL)
