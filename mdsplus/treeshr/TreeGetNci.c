@@ -6,13 +6,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <mds_stdarg.h>
-#if defined(unix)
+#if !defined(_WIN32)
 #include <fcntl.h>
 #endif
 
 extern int StrFree1Dx();
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.22 $ $Date: 1998/05/05 19:51:19 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.23 $ $Date: 1998/05/05 20:19:22 $";
 
 #define min(a,b) (((a) < (b)) ? (a) : (b))
 #define read_nci \

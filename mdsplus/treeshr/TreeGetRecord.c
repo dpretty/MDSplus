@@ -9,11 +9,11 @@
 #include <string.h>
 
 #include <stdlib.h>
-#if defined(unix)
+#if !defined(_WIN32)
 #include <fcntl.h>
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.16 $ $Date: 1998/05/05 19:51:20 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.17 $ $Date: 1998/05/05 20:19:23 $";
 
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 
