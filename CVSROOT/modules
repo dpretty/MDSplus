@@ -30,3 +30,4 @@ modules -i mkmodules CVSROOT modules
 tdishr mdsplus/tdishr
 include mdsplus/include
 mdsshr mdsplus/mdsshr
+tditest mdsplus/tditest
