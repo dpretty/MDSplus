@@ -490,7 +490,7 @@ Widget XmdsCreateWaveform( parent, name, args, argcount )
 
  Local variables:                                                             */
 
-static char *cvsrev = "@(#)$RCSfile: XmdsWaveform.c,v $ $Revision: 1.6 $ $Date: 2000/09/14 20:31:01 $";
+static char *cvsrev = "@(#)$RCSfile: XmdsWaveform.c,v $ $Revision: 1.7 $ $Date: 2001/11/15 21:11:50 $";
 
 enum crosshairsmode
 {
@@ -2548,7 +2548,7 @@ static void Print(XmdsWaveformWidget w,FILE *filefid,int inp_total_width,int inp
       if (rotate != 0)
         fprintf(printfid,"%g %g translate\n",11. * 72. - (11. - 8.5) * 72. / 2.,(11. - 8.5) * 72. / 2.);
       /* Rotation is around origin, so must move origin for proper plot position */
-      fprintf(printfid,"%d rotate\n",rotate);
+      fprintf(printfid,"%g rotate\n",rotate);
 
       if (window_title && strlen(window_title))
       /* If window title, allow space at top of plot for printing window title. */
