@@ -9,9 +9,12 @@
  *
  * Author: Jon Krom, Forschungszentrum Jülich, Institut für Plasmaphysik.
  *
- * $Id: TWUProperties.java,v 1.3 2002/04/24 09:06:17 manduchi Exp $
+ * $Id: TWUProperties.java,v 1.4 2002/04/26 11:42:38 jgk Exp $
  *
  * $Log: TWUProperties.java,v $
+ * Revision 1.4  2002/04/26 11:42:38  jgk
+ * Changed End-Of-Line marker from Windows- to CVS standard.
+ *
  * Revision 1.3  2002/04/24 09:06:17  manduchi
  * Added Asdex Data Provider
  *
@@ -43,7 +46,7 @@ public class TWUProperties
     {
         final String
             actual_user_agent = (user_agent!=null) ?  user_agent
-            : "TWUProperties.java for jScope ($Revision: 1.3 $)";
+            : "TWUProperties.java for jScope ($Revision: 1.4 $)";
         signalProps = new Properties();
 
         if (SigURL==null)
@@ -321,7 +324,7 @@ public class TWUProperties
     public static String 
     revision()
     {
-        return "$Id: TWUProperties.java,v 1.3 2002/04/24 09:06:17 manduchi Exp $";
+        return "$Id: TWUProperties.java,v 1.4 2002/04/26 11:42:38 jgk Exp $";
     }
 
     public static void 
@@ -357,5 +360,5 @@ public class TWUProperties
 }
 
 /* ------------------------------------------------------------------------ */
-// End of $Id: TWUProperties.java,v 1.3 2002/04/24 09:06:17 manduchi Exp $
+// End of $Id: TWUProperties.java,v 1.4 2002/04/26 11:42:38 jgk Exp $
 /* ------------------------------------------------------------------------ */
