@@ -490,7 +490,7 @@ Widget XmdsCreateWaveform( parent, name, args, argcount )
 
  Local variables:                                                             */
 
-static char *cvsrev = "@(#)$RCSfile: XmdsWaveform.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:23:54 $";
+static char *cvsrev = "@(#)$RCSfile: XmdsWaveform.c,v $ $Revision: 1.4 $ $Date: 1998/05/22 19:47:21 $";
 
 enum crosshairsmode
 {
@@ -1266,7 +1266,8 @@ static Boolean SetValues(XmdsWaveformWidget old,XmdsWaveformWidget req,XmdsWavef
     SetTranslations(new);
   if (waveformTitle(req) != waveformTitle(old))
   {
-    XtFree(waveformTitle(old));
+    if (waveformTitle(old) != 0)
+      XtFree(waveformTitle(old));
     waveformTitle(new) = waveformTitle(req) ? XtNewString(waveformTitle(req)) : 0;
   }
   if (waveformDisabled(req) ? 0 : (waveformDisabled(old) ? 1 : plot_changed))
