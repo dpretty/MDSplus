@@ -1,4 +1,4 @@
-#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.18 $
+#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.19 $
 # @configure_input@
 SHELL=/bin/sh
 
@@ -24,6 +24,7 @@ PARTS = \
         cdu     \
         mdsdcl  \
         ccl     \
+        cts     \
 	servershr \
         tcl \
         traverser \
