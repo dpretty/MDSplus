@@ -19,7 +19,7 @@
 
 extern int StrFree1Dx();
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.27 $ $Date: 1998/07/27 14:43:37 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.28 $ $Date: 1998/07/27 14:49:16 $";
 
 #define min(a,b) (((a) < (b)) ? (a) : (b))
 #define read_nci \
@@ -96,7 +96,8 @@ int _TreeGetNci(void *dbid, int nid_in, struct nci_itm *nci_itm)
 		  break_on_no_node;
 		  read_nci;
 		  set_retlen(sizeof(nci.time_inserted));
-		  memcpy(itm->pointer,nci.time_inserted,retlen);
+                  ((int *)itm->pointer)[0] = swapint(nci.time_inserted[0]);
+                  ((int *)itm->pointer)[1] = swapint(nci.time_inserted[1]);
 		  break;
 	  case NciOWNER_ID:
 		  break_on_no_node;
@@ -630,8 +631,6 @@ int _TreeIsOn(void *dbid, int nid)
 #ifdef _big_endian
 static void FixupNciIn(NCI *nci)
 {
-  nci->time_inserted[0] = swapint((char *)&nci->time_inserted[0]);
-  nci->time_inserted[1] = swapint((char *)&nci->time_inserted[1]);
   nci->owner_identifier = swapint((char *)&nci->owner_identifier);
   nci->length = swapint((char *)&nci->length);
   nci->status = swapint((char *)&nci->status);
