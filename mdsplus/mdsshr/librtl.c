@@ -9,7 +9,7 @@
 #include <mds_stdarg.h>
 #include <librtl_messages.h>
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.85 $ $Date: 2001/06/27 22:34:34 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.86 $ $Date: 2001/07/06 00:45:34 $";
 
 extern int MdsCopyDxXd();
 
@@ -1705,11 +1705,12 @@ static int FindFileEnd(FindFileCtx *ctx)
       closedir(ctx->dir_ptr);
       ctx->dir_ptr = 0;
     }
-    free (ctx->env);
-    free (ctx->file);
+    if (ctx->env != 0) free (ctx->env);
+    if (ctx->file != 0) free (ctx->file);
     for (i=0; i<ctx->num_env; i++)
-      free(ctx->env_strs[i]);
-    free(ctx->env_strs);
+      if (ctx->env_strs[i] != 0)
+        free(ctx->env_strs[i]);
+    if (ctx->env_strs != 0) free(ctx->env_strs);
     free(ctx);
   }
   return 1;
