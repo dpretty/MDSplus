@@ -1,4 +1,4 @@
-#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.6 $
+#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.7 $
 # @configure_input@
 SHELL=/bin/sh
 
@@ -32,7 +32,8 @@ PARTS = \
         wfevent \
         setevent \
 	@JAVA_APS@ \
-        @IDLSQL@ 
+        @IDLSQL@ \
+	@IDLMDSEVENT@
 
 all:
 	cdir=`pwd`;\
