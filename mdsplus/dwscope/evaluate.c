@@ -87,7 +87,7 @@ void CloseDataSources();
 # define _toupper(c)	(((c) >= 'a' && (c) <= 'z') ? (c) & 0xDF : (c))
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: evaluate.c,v $ $Revision: 1.7 $ $Date: 1998/08/14 18:18:20 $";
+static char *cvsrev = "@(#)$RCSfile: evaluate.c,v $ $Revision: 1.8 $ $Date: 1999/11/09 21:04:34 $";
 
 extern void EventUpdate(XtPointer client_data, int *source, XtInputId *id);
 
@@ -825,6 +825,12 @@ static long Connect()
 {
   static long sock;
   if (!sock) {
+    char *host = getenv("mds_host");
+    if (host == 0)
+    {
+      printf("set environment variable mds_host to remote server name\n");
+      exit(1);
+    }
     sock = ConnectToMds(getenv("mds_host"));
   }
   if (sock == -1)
