@@ -8,6 +8,8 @@
 #include <mds_stdarg.h>
 #include <librtl_messages.h>
 
+extern int MdsCopyDxXd();
+
 char *MdsDescrToCstring(struct descriptor *in);
 int StrFree1Dx(struct descriptor *out);
 int StrGet1Dx(unsigned short *len, struct descriptor *out);
@@ -404,7 +406,7 @@ int LibWait(float *secs)
 
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.49 $ $Date: 1999/05/17 18:15:31 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.50 $ $Date: 1999/06/24 19:00:37 $";
 #ifndef va_count
 #define  va_count(narg) va_start(incrmtr, first); \
                         for (narg=1; (narg < 256) && (va_arg(incrmtr, struct descriptor *) != MdsEND_ARG); narg++)
