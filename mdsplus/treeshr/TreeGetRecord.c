@@ -20,7 +20,7 @@
 
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.29 $ $Date: 2001/01/19 20:34:55 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.30 $ $Date: 2001/02/27 17:46:13 $";
 
 
 static int OpenDatafileR(TREE_INFO *info);
@@ -166,6 +166,7 @@ static int OpenDatafileR(TREE_INFO *info)
 #else
     df_ptr->get = open(filename,O_RDONLY | O_BINARY | O_RANDOM);
 #endif
+    free(filename);
     status = (df_ptr->get == -1) ? TreeFAILURE : TreeNORMAL;
     if (df_ptr->get == -1)
       df_ptr->get = 0;

@@ -41,7 +41,7 @@ extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
 extern char *MaskReplace();
 
-static char *cvsrev = "@(#)$RCSfile: TreeCreatePulseFile.c,v $ $Revision: 1.17 $ $Date: 2001/01/22 19:56:07 $";
+static char *cvsrev = "@(#)$RCSfile: TreeCreatePulseFile.c,v $ $Revision: 1.18 $ $Date: 2001/02/27 17:46:12 $";
 
 #ifdef _WIN32
 #include <windows.h>
@@ -197,6 +197,7 @@ int  TreeCreateTreeFiles(char *tree, int shot, int source_shot)
           }
         }
       }
+      free(path);
       if (srcfile)
       {
         path = MaskReplace(pathin,tree_lower,shot);
@@ -249,6 +250,7 @@ int  TreeCreateTreeFiles(char *tree, int shot, int source_shot)
             part = &path[i+1];
           }
         }
+        free(path);
         if (dstfile)
         {
           status = CopyFile(srcfile,dstfile,0);
@@ -259,7 +261,6 @@ int  TreeCreateTreeFiles(char *tree, int shot, int source_shot)
         free(srcfile);
       }
     }
-    free(path);
     TranslateLogicalFree(pathin);
   }
   return status;

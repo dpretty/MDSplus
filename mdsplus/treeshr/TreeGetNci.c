@@ -19,7 +19,7 @@
 
 extern int StrFree1Dx();
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.39 $ $Date: 2000/09/14 18:10:29 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.40 $ $Date: 2001/02/27 17:46:12 $";
 
 #ifndef vxWorks
 #define min(a,b) (((a) < (b)) ? (a) : (b))
@@ -703,7 +703,8 @@ static int OpenNciR(TREE_INFO *info)
 #else
 		info->nci_file->get = open(filename,O_RDONLY | O_BINARY | O_RANDOM);
 #endif
-        status = (info->nci_file->get == -1) ? TreeFAILURE : TreeNORMAL;
+                free(filename);
+                status = (info->nci_file->get == -1) ? TreeFAILURE : TreeNORMAL;
 		if (!(status & 1))
 		{
 			free(info->nci_file);
