@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: cam_functions.c,v 1.11 2003/05/13 20:24:57 twf Exp $
+//	$Id: cam_functions.c,v 1.12 2003/06/04 15:37:11 twf Exp $
 //-------------------------------------------------------------------------
 // Tue Aug  1 11:22:06 EDT 2000
 // Tue Apr  3 09:57:52 EDT 2001
@@ -111,7 +111,7 @@ static BYTE JorwayModes[2][2][4] = {
 };
 
 #define	JORWAY_DISCONNECT			0
-#define	JORWAYMODE(multisample, mode, enhanced)	JorwayModes[enhanced][mode][multisample]
+#define	JORWAYMODE(mode, enhanced, multisample)	JorwayModes[multisample][enhanced][mode]
 #define	KSMODE(mode)				mode
 
 //-----------------------------------------------------------
