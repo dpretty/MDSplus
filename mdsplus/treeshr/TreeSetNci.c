@@ -40,7 +40,7 @@
 #include <fcntl.h>
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.13 $ $Date: 1998/05/08 14:19:46 $";
+static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.14 $ $Date: 1998/05/14 19:51:10 $";
 
 extern void *DBID;
 
@@ -322,7 +322,7 @@ int TreeOpenNciW(TREE_INFO *info, int tmpfile)
     fseek(info->nci_file->put,0,SEEK_END);
     info->edit->first_in_mem = ftell(info->nci_file->put)/sizeof(NCI);
 #else
-    info->edit->first_in_mem = lseek(info->nci_file->put,0,SEEK_END);
+    info->edit->first_in_mem = lseek(info->nci_file->put,0,SEEK_END)/sizeof(NCI);
 #endif
     }
   /**********************************************
