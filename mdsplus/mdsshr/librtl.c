@@ -30,7 +30,7 @@ void __MB(){return;}
 #include <libroutines.h>
 #include <mds_stdarg.h>
 #include <librtl_messages.h>
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.24 $ $Date: 1998/05/06 19:42:09 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.25 $ $Date: 1998/05/29 17:20:56 $";
 #ifndef va_count
 #define  va_count(narg) va_start(incrmtr, first); \
                         for (narg=1; (narg < 256) && (va_arg(incrmtr, struct descriptor *) != MdsEND_ARG); narg++)
@@ -1169,7 +1169,7 @@ struct dirent *readdir(DIR *dir)
 		return 0;
 }
 
-static char *index(char *str, char c)
+char *index(char *str, char c)
 {
 	int pos = strcspn(str,&c);
 	return (pos == 0) ? ((str[0] == c) ? str : 0) : &str[pos];
