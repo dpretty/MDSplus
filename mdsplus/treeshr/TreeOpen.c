@@ -30,7 +30,7 @@
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.35 $ $Date: 1998/11/09 15:54:42 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.36 $ $Date: 1998/11/10 16:39:17 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
@@ -581,6 +581,7 @@ static int CreateDbSlot(PINO_DATABASE **dblist, char *tree, int shot, int editti
 				{
 					move_to_top(saved_prev_db, useable_db);
 					_TreeClose((void **)dblist,0,0);
+					move_to_top(saved_prev_db, useable_db);
 					status = TreeNORMAL;
 				}
 				else
