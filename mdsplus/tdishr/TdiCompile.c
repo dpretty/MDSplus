@@ -13,8 +13,14 @@ extern unsigned short OpcCompile;
 #include <libroutines.h>
 #include <tdimessages.h>
 #include <mdsshr.h>
+#if HAVE_PTHREAD_LOCK_GLOBAL_NP
+#include <pthread.h>
+#else
+extern void pthread_lock_global_np();
+extern void pthread_unlock_global_np();
+#endif
 
-static char *cvsrev = "@(#)$RCSfile: TdiCompile.c,v $ $Revision: 1.4 $ $Date: 1998/12/16 10:55:08 $";
+static char *cvsrev = "@(#)$RCSfile: TdiCompile.c,v $ $Revision: 1.5 $ $Date: 2001/02/23 18:12:32 $";
 
 extern int TdiEvaluate();
 extern int TdiYacc();
@@ -46,6 +52,7 @@ static DESCRIPTOR(compile_zone,"TDI Compile Zone");
 	text_ptr = tmp.pointer;
 	if (status & 1 && text_ptr->dtype != DTYPE_T) status = TdiINVDTYDSC;
 	if (status & 1) {
+                pthread_lock_global_np();
 		if (!TdiRefZone.l_zone) status = LibCreateVmZone(&TdiRefZone.l_zone,0,0,0,0,0,0,0,0,0,&compile_zone);
 
 		/****************************************
@@ -73,6 +80,7 @@ static DESCRIPTOR(compile_zone,"TDI Compile Zone");
 			else status = MdsCopyDxXd((struct descriptor *)TdiRefZone.a_result, out_ptr);
 		}
 		LibResetVmZone(&TdiRefZone.l_zone);
+                pthread_unlock_global_np();
 	}
 	MdsFree1Dx(&tmp, NULL);
 	return(status);
