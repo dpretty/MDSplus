@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.28 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.29 $
 AC_INIT()
 
 AC_CONFIG_HEADER(include/config.h)
@@ -31,7 +31,7 @@ hppa*) CFLAGS="$CFLAGS -Ae -Wl,+s,+b\$(exec_prefix)/lib -I\$(top_srcdir)/include
        LIBPATH="SHLIB_PATH";
        SHARETYPE=".sl";;
 mips*) CFLAGS="$CFLAGS -I\$(top_srcdir)/include -signed -D_BSD_SIGNALS -KPIC";
-       FFLAGS="$FFLAGS -I\$(top_srcdir)/include -signed -D_BSD_SIGNALS -KPIC";
+       FFLAGS="$FFLAGS -I\$(top_srcdir)/include -D_BSD_SIGNALS -KPIC";
        LDSHARE="-B dynamic ";
        LDARC="-B static ";
        LINKSHARED="-shared -rpath $(exec_prefix)/lib";
