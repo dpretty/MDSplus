@@ -48,7 +48,7 @@
 #define O_RANDOM 0
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.18 $ $Date: 1998/09/14 20:56:32 $";
+static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.19 $ $Date: 1998/09/15 13:22:33 $";
 
 extern void *DBID;
 
@@ -313,7 +313,7 @@ int TreeOpenNciW(TREE_INFO *info, int tmpfile)
   {
     if (info->edit)
     {
-    info->edit->first_in_mem = lseek(info->nci_file->put,0,SEEK_END)/sizeof(NCI);
+    info->edit->first_in_mem = lseek(info->nci_file->put,0,SEEK_END)/42;
     }
   /**********************************************
    Set up the RABs for buffered reads and writes
