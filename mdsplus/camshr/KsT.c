@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: KsT.c,v 1.5 2003/05/13 17:04:26 twf Exp $
+//	$Id: KsT.c,v 1.6 2003/05/13 20:29:12 twf Exp $
 //-------------------------------------------------------------------------
 // Mon Oct 15 16:35:42 EDT 2001	-- seperated out
 //-----------------------------------------------------------
@@ -85,8 +85,8 @@ int KsTranslateIosb( RequestSenseData *sense, int cam_status)
 	  printf("CamSERTRAERR\n");
 	break;
       }
-      LastIosb.x       = !sense->u1.csr.nox;
-      LastIosb.q       = !sense->u1.csr.noq;
+      LastIosb.x       = !sense->u2.esr.nox;
+      LastIosb.q       = !sense->u2.esr.noq;
       LastIosb.err     =  sense->u2.esr.err;
       LastIosb.lpe     =  sense->u2.esr.lpe;
       LastIosb.tpe     =  sense->u2.esr.tpe;
