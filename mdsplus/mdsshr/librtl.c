@@ -30,7 +30,7 @@ void __MB(){return;}
 #include <libroutines.h>
 #include <mds_stdarg.h>
 #include <librtl_messages.h>
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.25 $ $Date: 1998/05/29 17:20:56 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.26 $ $Date: 1998/07/27 20:26:51 $";
 #ifndef va_count
 #define  va_count(narg) va_start(incrmtr, first); \
                         for (narg=1; (narg < 256) && (va_arg(incrmtr, struct descriptor *) != MdsEND_ARG); narg++)
@@ -147,7 +147,7 @@ int StrGet1Dx(unsigned short *len, struct descriptor *out)
 
 #if defined(__alpha) && defined(__vms)
 typedef __int64 _int64;
-#elif defined(__unix__) || defined(unix)
+#elif defined(__unix__) || defined(unix) || defined(__unix)
 typedef long long _int64;
 #endif
 
