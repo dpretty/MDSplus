@@ -87,7 +87,7 @@ void CloseDataSources();
 # define _toupper(c)	(((c) >= 'a' && (c) <= 'z') ? (c) & 0xDF : (c))
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: evaluate.c,v $ $Revision: 1.9 $ $Date: 1999/12/07 20:57:49 $";
+static char *cvsrev = "@(#)$RCSfile: evaluate.c,v $ $Revision: 1.10 $ $Date: 2000/04/11 15:30:40 $";
 
 extern void EventUpdate(XtPointer client_data, int *source, XtInputId *id);
 
@@ -833,13 +833,13 @@ static long Connect()
 {
   static long sock;
   if (!sock) {
-    char *host = getenv("mds_host");
+    char *host = getenv("MDS_HOST");
     if (host == 0)
     {
-      printf("set environment variable mds_host to remote server name\n");
+      printf("set environment variable MDS_HOST to remote server name\n");
       exit(1);
     }
-    sock = ConnectToMds(getenv("mds_host"));
+    sock = ConnectToMds(getenv("MDS_HOST"));
   }
   if (sock == -1)
     exit(1);
@@ -850,7 +850,7 @@ static long ConnectEvents()
 {
   static long sock;
   if (!sock) {
-    sock = ConnectToMdsEvents(getenv("mds_host"));
+    sock = ConnectToMdsEvents(getenv("MDS_HOST"));
   }
   if (sock == -1)
     exit(1);
