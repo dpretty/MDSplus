@@ -1,4 +1,4 @@
-/* $Id: WaveInterface.java,v 1.61 2003/09/24 14:25:45 manduchi Exp $ */
+/* $Id: WaveInterface.java,v 1.62 2003/10/31 10:26:05 jgk Exp $ */
 import java.awt.*;
 import java.io.*;
 import java.awt.image.*;
@@ -1132,8 +1132,11 @@ public class WaveInterface
 		
 		if(out_signal == null)
 		{
-		    out_signal = GetSignalFromProvider(curr_wave, xmin, xmax);
-		 
+            synchronized (dp)
+            {
+                out_signal = GetSignalFromProvider(curr_wave, xmin, xmax);
+            }
+            
 	        if(!(full_flag || 
 	             wave_signals == null || 
 	             wave_signals.length <= curr_wave || 
