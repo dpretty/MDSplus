@@ -19,7 +19,7 @@
 
 extern int StrFree1Dx();
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.41 $ $Date: 2001/06/06 17:04:35 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.42 $ $Date: 2001/12/03 16:42:41 $";
 
 #ifndef HAVE_VXWORKS_H
 #define min(a,b) (((a) < (b)) ? (a) : (b))
@@ -29,6 +29,8 @@ static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.41 $ $Date: 2
  if (need_nci)\
  {\
     nid_to_tree_nidx(dblist, (&nid), info, node_number);\
+    status = TreeCallHook(GetNci,info,nid_in);\
+    if (status && !(status & 1)) break;\
     if (info->reopen) TreeCloseFiles(info);\
     status = TreeGetNciW(info, node_number, &nci);\
     need_nci = 0;\

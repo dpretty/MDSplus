@@ -59,7 +59,7 @@ static int timezone = 0;
 #define LONG_LONG_CONSTANT(value) value##ll
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.56 $ $Date: 2001/07/26 13:51:09 $";
+static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.57 $ $Date: 2001/12/03 16:42:41 $";
 
 #ifdef min
 #undef min
@@ -113,6 +113,9 @@ int       _TreePutRecord(void *dbid, int nid, struct descriptor *descriptor_ptr,
   {
     int       stv;
     NCI       local_nci;
+    status = TreeCallHook(PutData,info_ptr,nid);
+    if (status && !(status & 1))
+      return status;
     if (info_ptr->reopen)
       TreeCloseFiles(info_ptr);
     if (info_ptr->data_file ? (!info_ptr->data_file->open_for_write) : 1)
@@ -358,7 +361,7 @@ int TreeOpenDatafileW(TREE_INFO *info, int *stv_ptr, int tmpfile)
   }
   info->data_file = df_ptr;
   if (status & 1)
-    TreeCallHook(OpenDataFileWrite, info);
+    TreeCallHook(OpenDataFileWrite, info,0);
   return status;
 }
 

@@ -20,7 +20,7 @@
 
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.31 $ $Date: 2001/06/06 17:04:35 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.32 $ $Date: 2001/12/03 16:42:41 $";
 
 
 static int OpenDatafileR(TREE_INFO *info);
@@ -66,6 +66,9 @@ int _TreeGetRecord(void *dbid, int nid_in, struct descriptor_xd *dsc)
   nid_to_tree_nidx(dblist, nid, info, nidx);
   if (info)
   {
+    status = TreeCallHook(GetNci,info,nid_in);
+    if (status && !(status & 1))
+      return;
     if (info->reopen)
       TreeCloseFiles(info);
     if (!info->data_file)

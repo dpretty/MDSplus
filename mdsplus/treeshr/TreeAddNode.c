@@ -26,7 +26,7 @@
 #endif
 #define max(a,b) ((a) > (b) ? (a) : (b))
 
-static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.47 $ $Date: 2000/12/01 21:19:51 $";
+static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.48 $ $Date: 2001/12/03 16:42:41 $";
 
 #define node_to_node_number(node_ptr) node_ptr - dblist->tree_info->node
 #define __toupper(c) (((c) >= 'a' && (c) <= 'z') ? (c) & 0xDF : (c))
@@ -743,7 +743,7 @@ int _TreeWriteTree(void **dbid, char *exp_ptr, int shotid)
 #endif
 
 		(*dblist)->modified = 0;
-        TreeCallHook(WriteTree, info_ptr);
+        TreeCallHook(WriteTree, info_ptr,0);
       }
     }
   }
