@@ -40,7 +40,7 @@ extern char *index(char *str,char c);
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.61 $ $Date: 2001/12/03 16:42:41 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.62 $ $Date: 2001/12/03 16:57:10 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
@@ -822,7 +822,7 @@ static FILE  *OpenOne(TREE_INFO *info, char *tree, int shot, char *type,int new,
                                 }
                                 else
 				{
-#if (defined(__osf__) || defined(__hpux) || defined(__sun) || defined(__sgi) || defined(_AIX)) && !defined(HAVE_VXWORKS_H)
+#if (defined(__osf__) || defined(__linux) || defined(__hpux) || defined(__sun) || defined(__sgi) || defined(_AIX)) && !defined(HAVE_VXWORKS_H)
 				  info->channel = open(resnam,O_RDONLY);
 				  file = (info->channel != -1) ? fdopen(info->channel,"rb") : NULL;
 #else
