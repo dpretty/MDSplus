@@ -1,4 +1,4 @@
-/* $Id: MdsDataProvider.java,v 1.22 2003/05/16 08:12:19 manduchi Exp $ */
+/* $Id: MdsDataProvider.java,v 1.27 2003/08/08 12:35:38 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.*;
@@ -678,6 +678,14 @@ public class MdsDataProvider implements DataProvider
 	        error = "Cannot connetion to data server";
 	        return;
         }
+        SetEnvironmentSpecific(in, default_node);
+        
+    }
+        
+    
+    void SetEnvironmentSpecific(String in, String defaultNode)	
+    {   
+        
         Descriptor desc = mds.MdsValue(in);
         switch(desc.dtype)  {
 	        case Descriptor.DTYPE_CSTRING:
@@ -685,7 +693,6 @@ public class MdsDataProvider implements DataProvider
 	                error = desc.error;
         }
     }
-        
     	
     public synchronized float GetFloat(String in)  throws IOException
     {
