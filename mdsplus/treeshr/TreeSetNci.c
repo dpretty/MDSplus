@@ -41,8 +41,14 @@
 #include <ncidef.h>
 #include <string.h>
 #include <stdlib.h>
+#ifndef O_BINARY
+#define O_BINARY 0
+#endif
+#ifndef O_RANDOM
+#define O_RANDOM 0
+#endif
 
-static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.15 $ $Date: 1998/05/15 15:43:41 $";
+static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.16 $ $Date: 1998/05/15 15:45:20 $";
 
 extern void *DBID;
 
