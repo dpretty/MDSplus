@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.36 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.37 $
 AC_INIT()
 
 AC_CONFIG_HEADER(include/config.h)
@@ -258,7 +258,7 @@ else
 fi
 
 AC_MSG_CHECKING(if idlsql should be built)
-if test -n $SYBASE_INC -a -n $IDL_INC
+if test -n "$SYBASE_INC" -a -n "$IDL_INC"
 then
         IDLSQL="idlsql"
         AC_MSG_RESULT(have both idl and sql so yes.)
