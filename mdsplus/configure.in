@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.174 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.175 $
 AC_INIT()
 
 AC_CONFIG_HEADER(include/config.h)
@@ -139,6 +139,7 @@ sparc-sun-solaris2*)
        if test $SIZEOF_INT_P = 4; then CFLAGS="$CFLAGS -D_ILP32 "; else CFLAGS="$CFLAGS -D_LP64 "; fi;
        if test $CC = gcc; then
 	 LD=gcc;
+	 FORLD=gcc;
          LINKSHARED="-Wl,-G -symbolic ";
          LD_LDSHARE="-Wl,-B,dynamic";
          LD_LDARC="-Wl,-B,static";
