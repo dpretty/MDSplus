@@ -42,7 +42,7 @@ mitdevices mdsplus/mitdevices
 mdstcpip mdsplus/mdstcpip
 .cvsrc	mdsplus	 .cvsrc
 binaries binaries
-Linux	binariesr Linux*
+Linux	binaries binaries/Linux*
 OSF	binaries Digital*
 DigitalUnix binaries Digital*
 HP-UX	binaries HP-UX*
