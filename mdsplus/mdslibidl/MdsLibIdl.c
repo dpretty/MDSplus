@@ -12,8 +12,9 @@ extern int TdiExecute();
 extern int TdiData();
 extern int TdiCvt();
 extern int TdiCompile();
+extern int TdiDebug();
 
-static char *cvsrev = "@(#)$RCSfile: MdsLibIdl.c,v $ $Revision: 1.25 $ $Date: 2002/12/03 16:15:44 $";
+static char *cvsrev = "@(#)$RCSfile: MdsLibIdl.c,v $ $Revision: 1.26 $ $Date: 2003/04/09 15:16:55 $";
 
 #ifdef _WINDOWS
 #define BlockSig(a)
@@ -222,6 +223,7 @@ int IdlMdsValue(int argc, void **argv)
   EMPTYXD(tmp);
   int argidx = 1;
   int i;
+  static int clear=4;
   BlockSig(SIGALRM);
   expression.length = strlen((char *)argv[0]);
   expression.pointer = (char *)argv[0];
@@ -358,6 +360,7 @@ int IdlMdsValue(int argc, void **argv)
       arrayArgs[i].pointer = 0;
     }
   }
+  TdiDebug(&clear,0 MDS_END_ARG);
   UnBlockSig(SIGALRM);
   return status;
 }
