@@ -39,7 +39,7 @@
 #include <mdsshr.h>
 #include <stdio.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiGetNci.c,v $ $Revision: 1.10 $ $Date: 1998/04/08 19:06:05 $";
+static char *cvsrev = "@(#)$RCSfile: TdiGetNci.c,v $ $Revision: 1.11 $ $Date: 1998/07/27 20:17:25 $";
 
 extern unsigned short OpcVector;
 
@@ -50,8 +50,8 @@ extern int Tdi1Vector();
 
 static struct item {
 	char		*item_name;
-	unsigned short	item_mask;
-	unsigned short	item_test;
+        int   	        item_mask;
+	int	        item_test;
 	char		item_code;
 	unsigned char	item_dtype;
 	unsigned short	item_length;
