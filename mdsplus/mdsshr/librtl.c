@@ -9,7 +9,7 @@
 #include <mds_stdarg.h>
 #include <librtl_messages.h>
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.92 $ $Date: 2001/10/03 15:39:51 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.93 $ $Date: 2001/10/03 16:34:08 $";
 
 extern int MdsCopyDxXd();
 
@@ -39,7 +39,7 @@ static void *dlsym(void *handle, char *name)
 
 static char *dlerror()
 {
-  static LPTSTR *error_string = 0;
+  static LPTSTR error_string = 0;
   DWORD last_error=GetLastError();
   if (error_string)
   {
