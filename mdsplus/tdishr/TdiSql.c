@@ -15,7 +15,7 @@
 	Note for calculated select, name will be just "_".
 	Note same names from different tables will be folded together.
 
-	The SQL string sElEcT is a blob write.
+	The SQL string sElEcT is a blob write. 
 	Ken Klare, LANL P-4	(c)1991,1992
 */
 #define _MOVC3(a,b,c) memcpy(c,b,a)
@@ -42,7 +42,7 @@
 #define  DTYPE_D DTYPE_G
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TdiSql.c,v $ $Revision: 1.8 $ $Date: 2002/02/07 19:33:16 $";
+static char *cvsrev = "@(#)$RCSfile: TdiSql.c,v $ $Revision: 1.9 $ $Date: 2002/02/13 14:25:47 $";
 
 extern int stat;
 extern int TdiFindImageSymbol();
