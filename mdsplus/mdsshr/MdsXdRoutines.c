@@ -12,16 +12,16 @@
 /*  *2    19-OCT-1995 14:57:44 TWF "Add mdsxdroutines.c" */
 /*  *1    19-OCT-1995 13:38:16 TWF "XD handling" */
 /*  CMS REPLACEMENT HISTORY, Element MDSXDROUTINES.C */
+#include <string.h>
+#include <stdlib.h>
 #include <mdsdescrip.h>
 #include <mdsdescrip.h>
 #include <libroutines.h>
 #include <strroutines.h>
 #include <librtl_messages.h>
-#include <string.h>
-#include <stdlib.h>
 #include <mdsshr.h>
 
-static char *cvsrev = "@(#)$RCSfile: MdsXdRoutines.c,v $ $Revision: 1.10 $ $Date: 1998/07/27 15:50:05 $";
+static char *cvsrev = "@(#)$RCSfile: MdsXdRoutines.c,v $ $Revision: 1.11 $ $Date: 1998/12/16 10:35:25 $";
 #define LibVM_FIRST_FIT      1
 #define LibVM_BOUNDARY_TAGS  1
 #define LibVM_EXTEND_AREA    32

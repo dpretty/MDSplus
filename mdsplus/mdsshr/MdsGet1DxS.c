@@ -40,10 +40,10 @@
 
 +-----------------------------------------------------------------------------*/
 
+#include <stdlib.h>
 #include <mdsdescrip.h>
 #include <mdsshr.h>
-#include <stdlib.h>
-static char *cvsrev = "@(#)$RCSfile: MdsGet1DxS.c,v $ $Revision: 1.5 $ $Date: 1998/04/08 18:46:36 $";
+static char *cvsrev = "@(#)$RCSfile: MdsGet1DxS.c,v $ $Revision: 1.6 $ $Date: 1998/12/16 10:35:23 $";
 
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 

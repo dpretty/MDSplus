@@ -23,14 +23,14 @@ int MdsGetCurrentShotId(experiment,shot)
    use without specific written approval of MIT Plasma Fusion Center
    Management.
 ------------------------------------------------------------------------------*/
-#include <mdsdescrip.h>
-#include <mdsshr.h>
-#include <stdio.h>
-#include <libroutines.h>
-#include <strroutines.h>
 #include <ctype.h>
 #include <string.h>
-static char *cvsrev = "@(#)$RCSfile: MdsGetSetShotId.c,v $ $Revision: 1.4 $ $Date: 1998/04/24 18:28:31 $";
+#include <stdio.h>
+#include <mdsdescrip.h>
+#include <mdsshr.h>
+#include <libroutines.h>
+#include <strroutines.h>
+static char *cvsrev = "@(#)$RCSfile: MdsGetSetShotId.c,v $ $Revision: 1.5 $ $Date: 1998/12/16 10:35:24 $";
 
 #define _ToLower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 

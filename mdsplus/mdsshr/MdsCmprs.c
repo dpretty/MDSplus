@@ -63,11 +63,11 @@
 	MdsPk/MdsUnpk do right-to-left packing/unpacking, not assumed here.
 */
 
+#include <string.h>
 #include <mdsdescrip.h>
 #include <mdsshr.h>
-#include <string.h>
 #include <librtl_messages.h>
-static char *cvsrev = "@(#)$RCSfile: MdsCmprs.c,v $ $Revision: 1.11 $ $Date: 1998/07/27 18:45:22 $";
+static char *cvsrev = "@(#)$RCSfile: MdsCmprs.c,v $ $Revision: 1.12 $ $Date: 1998/12/16 10:35:22 $";
 
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
 #define MAXX 1024		/*length of longest run allowed*/

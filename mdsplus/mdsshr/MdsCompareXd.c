@@ -27,10 +27,10 @@
        Management.
 
 -----------------------------------------------------------------------------*/
+#include <string.h>
 #include <mdsdescrip.h>
 #include <mdsshr.h>
-#include <string.h>
-static char *cvsrev = "@(#)$RCSfile: MdsCompareXd.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 18:46:34 $";
+static char *cvsrev = "@(#)$RCSfile: MdsCompareXd.c,v $ $Revision: 1.4 $ $Date: 1998/12/16 10:35:23 $";
 
 int       MdsCompareXd(struct descriptor * dsc1_ptr, struct descriptor * dsc2_ptr)
 {

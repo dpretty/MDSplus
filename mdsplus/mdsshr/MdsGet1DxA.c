@@ -47,9 +47,9 @@
 +-----------------------------------------------------------------------------*/
 
 #define _DESCRIPTOR_PREFIXES
+#include <stdlib.h>
 #include <mdsdescrip.h>
 #include <mdsshr.h>
-#include <stdlib.h>
 
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 
@@ -62,7 +62,7 @@ typedef ARRAY_COEFF(char, 1) array_coef;
 #pragma member_alignment restore
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: MdsGet1DxA.c,v $ $Revision: 1.7 $ $Date: 1998/04/08 18:46:36 $";
+static char *cvsrev = "@(#)$RCSfile: MdsGet1DxA.c,v $ $Revision: 1.8 $ $Date: 1998/12/16 10:35:23 $";
 
   int       MdsGet1DxA(struct descriptor_a * in_ptr, unsigned short *length_ptr, unsigned char *dtype_ptr,
 			            struct descriptor_xd *out_xd)
