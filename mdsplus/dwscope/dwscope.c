@@ -57,7 +57,7 @@ $ dwcope [-default setup]
 #include <DXm/DECspecific.h>
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: dwscope.c,v $ $Revision: 1.15 $ $Date: 2002/05/31 19:07:17 $";
+static char *cvsrev = "@(#)$RCSfile: dwscope.c,v $ $Revision: 1.16 $ $Date: 2002/07/09 16:27:46 $";
 
 extern void XmdsInitialize();
 extern void XmdsDestroyWidgetCallback();
@@ -239,6 +239,7 @@ int       main(int argc, String *argv)
 			    {"ApplyOverride", (XtPointer)ApplyOverride},
 			    {"Autoscale", (XtPointer)Autoscale},
 			    {"Clear", (XtPointer)Clear},
+			    {"Close",(XtPointer)CloseDataSources},
                             {"CreateCustomizeFont", (XtPointer)CreateCustomizeFont},
 			    {"Crosshairs", (XtPointer)Crosshairs},
 			    {"Cut", (XtPointer)Cut},
