@@ -49,7 +49,7 @@
 #include <string.h>
 #include <librtl_messages.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiVar.c,v $ $Revision: 1.8 $ $Date: 2002/09/24 13:02:08 $";
+static char *cvsrev = "@(#)$RCSfile: TdiVar.c,v $ $Revision: 1.9 $ $Date: 2002/12/26 16:36:34 $";
 
 extern unsigned short OpcEquals, OpcEqualsFirst;
 extern unsigned short OpcFun;
@@ -300,12 +300,16 @@ static int zero = 0;
 	************************************/
 	status = TdiFindIdent(3, ident_ptr, &key_dsc, 0, &block_ptr);
 	if (status & 1) status = LibInsertTree(&block_ptr->head, &key_dsc, &zero, compare, allocate, &node_ptr, block_ptr);
-	if (key_dsc.class != CLASS_S) StrFree1Dx(&key_dsc);
+	if (key_dsc.class != CLASS_S) 
+          StrFree1Dx(&key_dsc);
 	if (status & 1) {
-		if (node_ptr->xd.class == 0) node_ptr->xd = EMPTY_XD;
-		if (data_ptr) status = MdsCopyDxXdZ(data_ptr->pointer, &node_ptr->xd, &block_ptr->data_zone, 
+		if (node_ptr->xd.class == 0) 
+                  node_ptr->xd = EMPTY_XD;
+		if (data_ptr) 
+                  status = MdsCopyDxXdZ(data_ptr->pointer, &node_ptr->xd, &block_ptr->data_zone, 
 						NULL, NULL, NULL, NULL);
-		else node_ptr->xd = NULL_XD;
+		else
+                  MdsFree1Dx(&node_ptr->xd,&block_ptr->data_zone);  
 	}
 	return status;
 }
