@@ -13,6 +13,7 @@ void __MB(){return;}
 #if defined(__hpux)
 #include <dl.h>
 #define SHARELIB_TYPE ".sl"
+#define RTLD_LAZY BIND_DEFERRED | BIND_NOSTART | DYNAMIC_PATH
 #else
 #include <dlfcn.h>
 #define SHARELIB_TYPE ".so"
@@ -32,7 +33,7 @@ void __MB(){return;}
 #include <libroutines.h>
 #include <mds_stdarg.h>
 #include <librtl_messages.h>
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.30 $ $Date: 1998/07/31 13:47:06 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.31 $ $Date: 1998/07/31 13:48:45 $";
 #ifndef va_count
 #define  va_count(narg) va_start(incrmtr, first); \
                         for (narg=1; (narg < 256) && (va_arg(incrmtr, struct descriptor *) != MdsEND_ARG); narg++)
@@ -928,7 +929,7 @@ unsigned int LibCallg(void **arglist, unsigned int (*routine)())
 #if defined(__hpux)
 static void *dlopen(char *filename, int flags)
 {
-  return (void *)shl_load(filename,BIND_DEFERRED | BIND_NOSTART | DYNAMIC_PATH,0);
+  return (void *)shl_load(filename,flags,0);
 }
 
 void *dlsym(void *handle, char *name)
