@@ -5,11 +5,12 @@
 	Ken Klare, LANL CTR-7	(c)1989,1990
 */
 
+#include <STATICdef.h>
 #include "tdirefstandard.h"
 #include <libroutines.h>
 #include <librtl_messages.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiShowVm.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:06:15 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiShowVm.c,v $ $Revision: 1.3 $ $Date: 2003/11/17 21:21:21 $";
 
 extern int TdiGetLong();
 

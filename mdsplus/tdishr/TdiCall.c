@@ -27,8 +27,9 @@
 #include <strroutines.h>
 #include <tdimessages.h>
 #include <mdsshr.h>
+#include <STATICdef.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiCall.c,v $ $Revision: 1.12 $ $Date: 2002/11/05 15:35:15 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiCall.c,v $ $Revision: 1.13 $ $Date: 2003/11/17 21:21:21 $";
 
 extern unsigned short OpcDescr;
 extern unsigned short OpcRef;
@@ -43,7 +44,7 @@ extern int TdiFindImageSymbol(  );
 extern int TdiGetLong(  );
 extern int TdiPutIdent(  );
 
-static int TdiInterlude  (int opcode, struct descriptor **newdsc, int (*routine)(  ), unsigned int *(*called)(  ),
+STATIC_ROUTINE int TdiInterlude  (int opcode, struct descriptor **newdsc, int (*routine)(  ), unsigned int *(*called)(  ),
                           void **result, int *max)
 {
 #if  defined(__ALPHA) && defined(__VMS)

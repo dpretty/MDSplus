@@ -4,8 +4,9 @@
 	Ken Klare, LANL CTR-7	(c)1989,1990
 */
 #include <mdsdescrip.h>
+#include <STATICdef.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiSquare.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:06:17 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSquare.c,v $ $Revision: 1.3 $ $Date: 2003/11/17 21:21:21 $";
 
 extern int Tdi3Multiply();
 extern int Tdi3Complex();

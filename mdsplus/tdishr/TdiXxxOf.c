@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <mdsshr.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiXxxOf.c,v $ $Revision: 1.8 $ $Date: 2003/11/14 21:34:17 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiXxxOf.c,v $ $Revision: 1.9 $ $Date: 2003/11/17 21:21:21 $";
 
 extern int TdiGetData();
 extern int TdiGetLong();
@@ -964,7 +964,7 @@ STATIC_CONSTANT unsigned char omits[] = {
 	NEED thought about rescale of units, parameters...
 */
 TdiRefStandard(Tdi1UnitsOf)
-static DESCRIPTOR(none, " ");
+STATIC_CONSTANT DESCRIPTOR(none, " ");
 struct descriptor_xd	tmp = EMPTY_XD;
 STATIC_CONSTANT unsigned char omits[] = {
 	DTYPE_WITH_UNITS,

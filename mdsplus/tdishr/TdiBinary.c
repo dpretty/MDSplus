@@ -43,8 +43,9 @@
 ------------------------------------------------------------------------------*/
 #include <mdsdescrip.h>
 #include <tdimessages.h>
+#include <STATICdef.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiBinary.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:05:53 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiBinary.c,v $ $Revision: 1.3 $ $Date: 2003/11/17 21:21:21 $";
 
 int TdiBinary(struct descriptor *in1_ptr, struct descriptor *in2_ptr, struct descriptor *out_ptr, 
                 unsigned int *out_count)

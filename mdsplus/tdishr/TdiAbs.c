@@ -48,8 +48,9 @@
 #include <mdsdescrip.h>
 #include <tdimessages.h>
 #include <math.h>
+#include <STATICdef.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiAbs.c,v $ $Revision: 1.9 $ $Date: 2001/06/06 17:05:16 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiAbs.c,v $ $Revision: 1.10 $ $Date: 2003/11/17 21:21:21 $";
 
 extern int TdiConvert();
 extern int TdiSubtractQuadword();
@@ -72,7 +73,7 @@ typedef struct { Int64 longword[2]; } octaword;
 
 #define negate128 TdiSubtractOctaword(&octazero,&in[i],&out[i])
 
-static octaword octazero = {0,0,0,0};
+STATIC_CONSTANT octaword octazero = {0,0,0,0};
 #define copy64 out[i].int32[0]=in[i].int32[0]; out[i].int32[1]=in[i].int32[1]
 #define zero64 out[i].int32[0]=0; out[i].int32[1]=0
 #define negate64 TdiSubtractQuadword(&octazero,&in[i],&out[i])
@@ -94,7 +95,7 @@ static octaword octazero = {0,0,0,0};
 #define bool128 out[i]=(unsigned char)(1 & in[i].longword[0].int32[0])
 #endif
 
-static const int roprand = 0x8000;
+STATIC_CONSTANT const int roprand = 0x8000;
 
 #define start_operate(type) {\
   type *in=(type *)(in_ptr->pointer); \

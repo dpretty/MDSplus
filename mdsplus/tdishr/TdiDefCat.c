@@ -13,9 +13,10 @@
 
 	Ken Klare, LANL CTR-7	(c)1989,1990
 */
+#include <STATICdef.h>
 #include "tdirefcat.h"
 
-static char *cvsrev = "@(#)$RCSfile: TdiDefCat.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:05:59 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiDefCat.c,v $ $Revision: 1.3 $ $Date: 2003/11/17 21:21:21 $";
 
 #ifdef __VMS
 

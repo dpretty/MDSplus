@@ -23,9 +23,9 @@
 #include "tdirefcat.h"
 #include "tdireffunction.h"
 #include "tdirefstandard.h"
+#include <STATICdef.h>
 
-
-static char *cvsrev = "@(#)$RCSfile: TdiBound.c,v $ $Revision: 1.6 $ $Date: 1998/12/16 10:55:06 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiBound.c,v $ $Revision: 1.7 $ $Date: 2003/11/17 21:21:21 $";
 
 extern struct descriptor *TdiItoXSpecial;
 
@@ -43,11 +43,11 @@ extern int TdiProduct();
 extern int TdiItoX();
 extern int Tdi3Subtract();
 
-static int one = 1;
-static struct descriptor done = {sizeof(one),DTYPE_L,CLASS_S,(char *)&one};
-static DESCRIPTOR_A(adsc0,sizeof(int),DTYPE_L,0,0);
-static unsigned char dtype_l = DTYPE_L;
-static unsigned short size_l = sizeof(int);
+STATIC_CONSTANT int one = 1;
+STATIC_CONSTANT struct descriptor done = {sizeof(one),DTYPE_L,CLASS_S,(char *)&one};
+STATIC_CONSTANT DESCRIPTOR_A(adsc0,sizeof(int),DTYPE_L,0,0);
+STATIC_CONSTANT unsigned char dtype_l = DTYPE_L;
+STATIC_CONSTANT unsigned short size_l = sizeof(int);
 
 TdiRefStandard(Tdi1Bound)
 array_bounds			*pa=0;

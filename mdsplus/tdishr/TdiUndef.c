@@ -4,8 +4,9 @@
 */
 
 #include <tdimessages.h>
+#include <STATICdef.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiUndef.c,v $ $Revision: 1.3 $ $Date: 1999/10/08 20:19:23 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiUndef.c,v $ $Revision: 1.4 $ $Date: 2003/11/17 21:21:21 $";
 
 int TdiON_ERROR=0;
 

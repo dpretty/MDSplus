@@ -23,8 +23,9 @@
 #include "tdirefcat.h"
 #include "tdireffunction.h"
 #include "tdirefstandard.h"
+#include <STATICdef.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiArray.c,v $ $Revision: 1.9 $ $Date: 2001/02/23 18:12:49 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiArray.c,v $ $Revision: 1.10 $ $Date: 2003/11/17 21:21:21 $";
 
 int Tdi_RandomSeed = 1234567;
 
@@ -119,9 +120,9 @@ int		*out_ptr)
 int			Tdi3Ramp(
 struct descriptor	*out_ptr)
 {
-static int	i0 = 0, i1 = 1;
-static struct descriptor con0 = {sizeof(int),DTYPE_L,CLASS_S,(char *)&i0};
-static struct descriptor con1 = {sizeof(int),DTYPE_L,CLASS_S,(char *)&i1};
+STATIC_CONSTANT int	i0 = 0, i1 = 1;
+STATIC_CONSTANT struct descriptor con0 = {sizeof(int),DTYPE_L,CLASS_S,(char *)&i0};
+STATIC_CONSTANT struct descriptor con1 = {sizeof(int),DTYPE_L,CLASS_S,(char *)&i1};
 int	status = 1, n;
 int i;
 
@@ -230,8 +231,8 @@ int	i;
 int			Tdi3Zero(
 struct descriptor_a	*out_ptr)
 {
-static int	i0 = 0;
-static struct descriptor con0 = {sizeof(int),DTYPE_L,CLASS_S,(char *)&i0};
+STATIC_CONSTANT int	i0 = 0;
+STATIC_CONSTANT struct descriptor con0 = {sizeof(int),DTYPE_L,CLASS_S,(char *)&i0};
 int	status;
 
 	status = TdiConvert(&con0, out_ptr MDS_END_ARG);

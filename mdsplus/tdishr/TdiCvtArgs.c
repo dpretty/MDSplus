@@ -10,11 +10,12 @@
 #include "tdirefstandard.h"
 #include <tdimessages.h>
 #include <mdsshr.h>
+#include <STATICdef.h>
 
 #define SIGNEDNESS	(TdiCAT_B ^ TdiCAT_BU)
 #define FLOATMASK	(TdiCAT_FLOAT | TdiCAT_LENGTH)
 
-static char *cvsrev = "@(#)$RCSfile: TdiCvtArgs.c,v $ $Revision: 1.4 $ $Date: 1998/12/16 10:55:10 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiCvtArgs.c,v $ $Revision: 1.5 $ $Date: 2003/11/17 21:21:21 $";
 
 extern int TdiConvert(  );
 extern int TdiGetShape(  );

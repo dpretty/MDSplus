@@ -11,6 +11,7 @@
 	NEED to watch for rounding/precision problems.
 */
 
+#include <STATICdef.h>
 #include <stdlib.h>
 #include <tdimessages.h>
 #include "tdirefstandard.h"
@@ -24,7 +25,7 @@
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
-static char *cvsrev = "@(#)$RCSfile: TdiGetSlope.c,v $ $Revision: 1.6 $ $Date: 2001/06/06 17:05:18 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiGetSlope.c,v $ $Revision: 1.7 $ $Date: 2003/11/17 21:21:21 $";
 
 extern int TdiData(  );
 extern int TdiGetLong(  );

@@ -10,12 +10,13 @@
 
 	Ken Klare, LANL CTR-7	(c)1989,1990
 */
+#include <STATICdef.h>
 #include <stdlib.h>
 #include <mdsdescrip.h>
 #include <tdimessages.h>
 #include <mdsshr.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiGetArgs.c,v $ $Revision: 1.6 $ $Date: 2000/04/12 19:58:46 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiGetArgs.c,v $ $Revision: 1.7 $ $Date: 2003/11/17 21:21:21 $";
 
 extern struct descriptor_xd *TdiSELF_PTR;
 
@@ -37,9 +38,9 @@ struct descriptor_xd	*signal_ptr,
 struct descriptor_xd	*units_ptr,
 struct descriptor_xd	*data_ptr)
 {
-static unsigned char omitsu[] = {DTYPE_SIGNAL,DTYPE_WITH_UNITS,0};
-static unsigned char omits[] = {DTYPE_SIGNAL,0};
-static unsigned char omitu[] = {DTYPE_WITH_UNITS,0};
+STATIC_CONSTANT unsigned char omitsu[] = {DTYPE_SIGNAL,DTYPE_WITH_UNITS,0};
+STATIC_CONSTANT unsigned char omits[] = {DTYPE_SIGNAL,0};
+STATIC_CONSTANT unsigned char omitu[] = {DTYPE_WITH_UNITS,0};
 struct descriptor_xd	tmp, *keep;
 int				status;
 
