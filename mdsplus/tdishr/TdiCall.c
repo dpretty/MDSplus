@@ -26,7 +26,7 @@
 #include <tdimessages.h>
 #include <mdsshr.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiCall.c,v $ $Revision: 1.6 $ $Date: 1999/05/25 12:44:16 $";
+static char *cvsrev = "@(#)$RCSfile: TdiCall.c,v $ $Revision: 1.7 $ $Date: 2001/07/05 18:42:50 $";
 
 extern unsigned short OpcDescr;
 extern unsigned short OpcRef;
@@ -130,9 +130,16 @@ unsigned char			origin[255];
 			else if (code == OpcRef) {
 				tmp[ntmp] = EMPTY_XD;
 				status = TdiData(pfun->arguments[0], &tmp[ntmp] MDS_END_ARG);
-				if (tmp[ntmp].pointer) 
+				if (tmp[ntmp].pointer)
+				{
+                                  if (tmp[ntmp].pointer->dtype == DTYPE_T)
+				  {
+                                    DESCRIPTOR(zero,"\0");
+                                    TdiConcat(&tmp[ntmp],&zero,&tmp[ntmp]);
+                                  }  
                                   newdsc[j-1] = (struct descriptor *)tmp[ntmp].pointer->pointer;
-				origin[ntmp++] = (unsigned char)j;
+				}
+                                origin[ntmp++] = (unsigned char)j;
 			}
 			else if (code == OpcVal) 
                                 status = TdiGetLong(pfun->arguments[0], &newdsc[j-1]);
