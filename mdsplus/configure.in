@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.100 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.101 $
 AC_INIT()
 
 AC_CONFIG_HEADER(include/config.h)
@@ -455,7 +455,6 @@ mdsvme/Makefile
 mitdevices/Makefile 
 remcam/Makefile 
 rpm/Makefile
-rpm/makekit
 servershr/Makefile 
 setevent/Makefile
 tcl/Makefile 
