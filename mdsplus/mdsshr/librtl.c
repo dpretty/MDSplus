@@ -197,7 +197,9 @@ void *dlsym(void *handle, char *name)
   int s = shl_findsym((shl_t *)&handle,name,0,&symbol);
   return symbol;
 }
-
+#elif defined(_AIX)
+#include <dlfcn.h>
+#define SHARELIB_TYPE ".a"
 #else
 #include <dlfcn.h>
 #define SHARELIB_TYPE ".so"
@@ -399,7 +401,7 @@ int LibWait(float *secs)
 
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.42 $ $Date: 1998/11/09 20:09:35 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.43 $ $Date: 1998/12/17 20:12:10 $";
 #ifndef va_count
 #define  va_count(narg) va_start(incrmtr, first); \
                         for (narg=1; (narg < 256) && (va_arg(incrmtr, struct descriptor *) != MdsEND_ARG); narg++)
@@ -600,7 +602,7 @@ int StrGet1Dx(unsigned short *len, struct descriptor *out)
 
 #if defined(__alpha) && defined(__vms)
 typedef __int64 _int64;
-#elif defined(__unix__) || defined(unix) || defined(__unix) ||defined (vxWorks)
+#elif defined(__unix__) || defined(unix) || defined(__unix) ||defined (vxWorks) 
 typedef long long _int64;
 #endif
 
