@@ -34,7 +34,7 @@
 #include <treeshr.h>
 #include "treeshrp.h"
 
-static char *cvsrev = "@(#)$RCSfile: TreeRemoveNodesTags.c,v $ $Revision: 1.10 $ $Date: 1998/12/16 10:41:17 $";
+static char *cvsrev = "@(#)$RCSfile: TreeRemoveNodesTags.c,v $ $Revision: 1.11 $ $Date: 2000/06/26 15:16:50 $";
 
 extern void *DBID;
 
@@ -66,8 +66,6 @@ int       _TreeRemoveNodesTags(void *dbid, int nid)
     next_tag = swapint((char *)&dblist->tree_info->tag_info[tagidx-1].tag_link);
     _RemoveTagIdx(dblist, tagidx);
   }
-  node->tag_link=0;
-  dblist->modified = 1;
   return status;
 }
 
@@ -177,5 +175,6 @@ static void _RemoveTagIdx(PINO_DATABASE  *dblist, int tagidx)
 	memcpy(&dblist->tree_info->tag_info[tagidx-1], &dblist->tree_info->tag_info[tagidx], bytes);
     }
     dblist->tree_info->header->tags--;
+    dblist->modified = 1;
 }
 
