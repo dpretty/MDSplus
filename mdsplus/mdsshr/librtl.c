@@ -179,7 +179,9 @@ unsigned int LibCallg(void **arglist, FARPROC *routine)
 
 #else /* WIN32 */
 
+#ifndef _LINUX
 #include <unistd.h>
+#endif
 #include <sys/types.h>
 #include <dirent.h>
 #include <errno.h>
@@ -406,7 +408,7 @@ int LibWait(float *secs)
 
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.51 $ $Date: 1999/07/05 16:56:38 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.52 $ $Date: 1999/07/12 20:05:17 $";
 #ifndef va_count
 #define  va_count(narg) va_start(incrmtr, first); \
                         for (narg=1; (narg < 256) && (va_arg(incrmtr, struct descriptor *) != MdsEND_ARG); narg++)
@@ -1440,6 +1442,15 @@ static char *_FindNextFile(FindFileCtx *ctx, int recursively, int caseBlind)
       else
         return 0;
     dp = readdir(ctx->dir_ptr);
+#ifdef _LINUX
+    if (dp != NULL)
+    {
+      if( dp->d_type)
+      {
+        dp = (struct dirent *)(((char *)dp)-1);
+      }
+    }
+#endif
     if (dp != NULL) {
       struct descriptor upname = {0,DTYPE_T,CLASS_D,0};
       DESCRIPTOR_FROM_CSTRING(filename, dp->d_name)
