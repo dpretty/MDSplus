@@ -18,10 +18,13 @@
  *
  * Author: Jon Krom, Forschungszentrum Jülich, Institut für Plasmaphysik.
  *
- * $Id: TWUProperties.java,v 1.18 2003/01/09 14:35:58 jgk Exp $
+ * $Id: TWUProperties.java,v 1.19 2003/01/09 16:49:41 jgk Exp $
  *
  * ------------------------------------------------------------------------ 
  * $Log: TWUProperties.java,v $
+ * Revision 1.19  2003/01/09 16:49:41  jgk
+ * Another trivial change to test the CVS notification system.
+ *
  * Revision 1.18  2003/01/09 14:35:58  jgk
  * Some trivial changes to test the CVS notification system.
  *
@@ -91,7 +94,7 @@ public class TWUProperties
     {
         final String
             actual_user_agent = (user_agent!=null) ?  user_agent
-            : "TWUProperties.java for jScope ($Revision: 1.18 $)";
+            : "TWUProperties.java for jScope ($Revision: 1.19 $)";
         signalProps = new Properties();
 
         if (SigURL==null)
@@ -371,7 +374,7 @@ public class TWUProperties
     public static String 
     revision()
     {
-        return "$Id: TWUProperties.java,v 1.18 2003/01/09 14:35:58 jgk Exp $";
+        return "$Id: TWUProperties.java,v 1.19 2003/01/09 16:49:41 jgk Exp $";
     }
 
     public static void 
@@ -423,5 +426,5 @@ class FakeTWUProperties extends TWUProperties {
 }
 
 /* ------------------------------------------------------------------------ */
-// End of $Id: TWUProperties.java,v 1.18 2003/01/09 14:35:58 jgk Exp $
+// End of $Id: TWUProperties.java,v 1.19 2003/01/09 16:49:41 jgk Exp $
 /* ------------------------------------------------------------------------ */
