@@ -17,15 +17,20 @@
 #include <ncidef.h>
 #include <errno.h>
 #include <fcntl.h>
-#ifdef vxWorks
+#ifdef INCREASE_FILE_LIMIT
+#include <sys/resource.h>
+#endif
+#ifdef __toupper
 #undef __toupper
+#endif
+#ifdef __tolower
 #undef __tolower
 #endif
 #define __toupper(c) (((c) >= 'a' && (c) <= 'z') ? (c) & 0xDF : (c))
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.34 $ $Date: 1998/11/06 15:24:32 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.35 $ $Date: 1998/11/09 15:54:42 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
@@ -640,6 +645,17 @@ static FILE  *OpenOne(TREE_INFO *info, char *tree, int shot, char *type,int new,
 	char name[32];
 	int i;
 	char *resnam = 0;
+#ifdef INCREASE_FILE_LIMIT
+        static int initialized = 0;
+        if (!initialized)
+	{
+          struct rlimit rlp;
+          getrlimit(RLIMIT_NOFILE,&rlp);
+          rlp.rlim_cur = rlp.rlim_max;
+          setrlimit(RLIMIT_NOFILE,&rlp);
+          initialized = 1;
+        }
+#endif
 	for (i=0;i<len && i < 12;i++)
 		tree_lower[i] = __tolower(tree[i]);
 	tree_lower[i]=0;
