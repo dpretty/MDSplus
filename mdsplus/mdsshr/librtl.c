@@ -11,7 +11,7 @@
 #include <math.h>
 
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.114 $ $Date: 2002/09/24 13:01:14 $ $Name:  $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.115 $ $Date: 2002/10/02 15:25:10 $ $Name:  $";
 
 extern int MdsCopyDxXd();
 
@@ -155,7 +155,7 @@ int MSIUnsetPATH()
           strcat(newpath,mpath);
         }
       }
-      RegSetValueEx(key,"TESTPATH",0,REG_EXPAND_SZ,path,strlen(path)); 
+      RegSetValueEx(key,"PATH",0,REG_EXPAND_SZ,newpath,strlen(newpath)); 
       free(path);
       free(newpath);
     }
