@@ -8,7 +8,7 @@
 // this class (starting revision line 2.x) mainly in order to ensure that zooming
 // works in more situations. (See also the cvs log.)
 //
-// $Id: TwuDataProvider.java,v 2.22 2003/07/09 14:43:48 jgk Exp $
+// $Id: TwuDataProvider.java,v 2.23 2003/07/09 15:13:28 jgk Exp $
 // 
 // -------------------------------------------------------------------------------------------------
 
@@ -50,7 +50,7 @@ class TwuDataProvider
 
 
     // ---------------------------------------------------------------------------------------------
-    class SimpleFrameData 
+    class TwuSimpleFrameData 
         implements FrameData
     {
         String in_x, in_y;
@@ -66,7 +66,7 @@ class TwuDataProvider
         private Dimension dim = null;
         private int header_size = 0;
 
-        public SimpleFrameData (String in_y, String in_x, float time_min, float time_max) 
+        public TwuSimpleFrameData (String in_y, String in_x, float time_min, float time_max) 
             throws IOException
         {
             int i;
@@ -195,7 +195,7 @@ class TwuDataProvider
             }
             return b_img;
         }
-    } // end (nested) class SimpleFrameData 
+    } // end (nested) class TwuSimpleFrameData 
 
     // ---------------------------------------------------------------------------------------------
     class TwuSingleSignal 
@@ -611,7 +611,7 @@ class TwuDataProvider
     public FrameData GetFrameData(String in_y, String in_x, float time_min, float time_max) 
         throws IOException
     {
-        return (new SimpleFrameData(in_y, in_x, time_min, time_max));
+        return (new TwuSimpleFrameData(in_y, in_x, time_min, time_max));
     }
 
     public synchronized WaveData GetWaveData (String in) 
@@ -1126,7 +1126,7 @@ class TwuDataProvider
     public static String 
     revision()
     {
-        return "$Id: TwuDataProvider.java,v 2.22 2003/07/09 14:43:48 jgk Exp $";
+        return "$Id: TwuDataProvider.java,v 2.23 2003/07/09 15:13:28 jgk Exp $";
     }
 
     public TwuDataProvider(String user_agent)
@@ -1140,5 +1140,5 @@ class TwuDataProvider
 }
 
 // -------------------------------------------------------------------------------------------------
-// End of: $Id: TwuDataProvider.java,v 2.22 2003/07/09 14:43:48 jgk Exp $
+// End of: $Id: TwuDataProvider.java,v 2.23 2003/07/09 15:13:28 jgk Exp $
 // -------------------------------------------------------------------------------------------------
