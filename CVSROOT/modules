@@ -42,9 +42,9 @@ mitdevices mdsplus/mitdevices
 mdstcpip mdsplus/mdstcpip
 .cvsrc	mdsplus	 .cvsrc
 binaries binaries
-Linux	binaries binaries/Linux*
-OSF	binaries Digital*
-DigitalUnix binaries Digital*
+Linux	binaries Linux.tar.Z
+OSF	binaries Digital-Unix-4.0B.tar.Z
+DigitalUnix -a OSF
 HP-UX	binaries HP-UX*
 SunOS	binaries SunOS*
 Irix	binaries Irix*
