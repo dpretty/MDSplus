@@ -43,7 +43,7 @@
 #define  DTYPE_D DTYPE_G
 #endif
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSql.c,v $ $Revision: 1.15 $ $Date: 2003/11/17 21:21:21 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSql.c,v $ $Revision: 1.16 $ $Date: 2004/02/23 19:52:21 $";
 
 extern int stat;
 extern int TdiFindImageSymbol();
@@ -425,22 +425,24 @@ int 	rblob;
 							*((unsigned long *)buf+1) = hi;
 #endif
 							status = SYB_dbconvert(dbproc,type,buf,bufs[j].len,SYBCHAR,(unsigned char *)ddate,sizeof(ddate)-1);
-							if (status >= 0) {
-								ddate[status] = '\0'; 
-								len = status;
-							} else {
-								strcpy(ddate, "FAILED");
-								len = strlen(ddate);
+                                                        if (bufs[j].len != 0) {
+							  if (status >= 0) {
+							    ddate[status] = '\0'; 
+							    len = status;
+							  } else {
+							    strcpy(ddate, "FAILED");
+							    len = strlen(ddate);
+							  }
+							  buf = ddate;
+							  dtype = DTYPE_T; 
 							}
-							buf = ddate;
-							dtype = DTYPE_T; 
+							else {
+							  buf = (char *)default_date;
+							  dtype = DTYPE_T;
+							  len = strlen(default_date);
+							}
+							AppendAnswer(j, buf, len, dtype);
 						}
-						else {
-							buf = (char *)default_date;
-							dtype = DTYPE_T;
-							len = strlen(default_date);
-						}
-						AppendAnswer(j, buf, len, dtype);
 					}
                                         break;
 				case SYBMONEY:
