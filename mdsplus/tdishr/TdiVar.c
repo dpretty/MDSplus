@@ -49,7 +49,7 @@
 #include <string.h>
 #include <librtl_messages.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiVar.c,v $ $Revision: 1.9 $ $Date: 2002/12/26 16:36:34 $";
+static char *cvsrev = "@(#)$RCSfile: TdiVar.c,v $ $Revision: 1.10 $ $Date: 2002/12/26 16:44:01 $";
 
 extern unsigned short OpcEquals, OpcEqualsFirst;
 extern unsigned short OpcFun;
@@ -309,7 +309,10 @@ static int zero = 0;
                   status = MdsCopyDxXdZ(data_ptr->pointer, &node_ptr->xd, &block_ptr->data_zone, 
 						NULL, NULL, NULL, NULL);
 		else
-                  MdsFree1Dx(&node_ptr->xd,&block_ptr->data_zone);  
+		{
+                  MdsFree1Dx(&node_ptr->xd,&block_ptr->data_zone);
+                  node_ptr->xd = NULL_XD;
+                }
 	}
 	return status;
 }
