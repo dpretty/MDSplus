@@ -16,7 +16,7 @@
 #include <treeshr.h>
 #include <mdsshr.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiGetDbi.c,v $ $Revision: 1.7 $ $Date: 1998/04/08 19:06:05 $";
+static char *cvsrev = "@(#)$RCSfile: TdiGetDbi.c,v $ $Revision: 1.8 $ $Date: 1998/11/05 16:49:29 $";
 
 static DESCRIPTOR(pathtext, "PATH");
 static DESCRIPTOR(coloncolon, "::");
@@ -253,6 +253,5 @@ unsigned char	omits[] = {DTYPE_PATH,0};
 		MdsFree1Dx(&tmp, NULL);
 	}
 	if (ctx) TreeRestoreContext(ctx);
-	if (status & 1) status = stat1;
 	return status;
 }
