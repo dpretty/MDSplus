@@ -1,4 +1,4 @@
-/* $Id: jScope.java,v 1.59 2004/05/25 15:08:53 manduchi Exp $ */
+/* $Id: jScope.java,v 1.60 2004/05/27 07:50:44 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.List;
@@ -443,7 +443,7 @@ public class jScope extends JFrame implements ActionListener, ItemListener,
     p.setImageableArea(16., 16., 560., 810.);
     pageFormat.setPaper(p);
     prnJob.validatePage(pageFormat);
-    displayPageFormatAttributes(pageFormat);
+    //displayPageFormatAttributes(pageFormat);
 
 
     help_dialog = new jScopeBrowseUrl(this);
@@ -558,7 +558,7 @@ public class jScope extends JFrame implements ActionListener, ItemListener,
  //                 pageFormat = prnJob.defaultPage(pageFormat);
                     prnJob.printDialog();
  //                 prnJob.validatePage(pageFormat);
-                    displayPageFormatAttributes(pageFormat);
+ //                   displayPageFormatAttributes(pageFormat);
                 }
             };
             print_cnf.start();
@@ -580,7 +580,7 @@ public class jScope extends JFrame implements ActionListener, ItemListener,
                     setName("Page  Dialog Thread");
                     pageFormat = prnJob.pageDialog(pageFormat);
                     //prnJob.validatePage(pageFormat);
-                    displayPageFormatAttributes(pageFormat);
+ //                   displayPageFormatAttributes(pageFormat);
                 }
             };
             page_cnf.start();
