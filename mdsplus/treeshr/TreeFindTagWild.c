@@ -36,7 +36,7 @@ TreeFindTagEnd(void **ctx);
 #include <stdlib.h>
 #include <string.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeFindTagWild.c,v $ $Revision: 1.5 $ $Date: 1998/10/18 21:09:21 $";
+static char *cvsrev = "@(#)$RCSfile: TreeFindTagWild.c,v $ $Revision: 1.6 $ $Date: 1998/10/18 21:24:40 $";
 
 extern void *DBID;
 typedef struct tag_search
@@ -200,7 +200,10 @@ char *_TreeFindTagWild(void *dbid, char *wild, int *nidout, void **ctx_inout)
     status = 1;
   }
   else
+  {
+    *ctx = 0;
     status = TreeNMT;
+  }
   return (status & 1) ? answer : NULL;
 }
 /****************************************
