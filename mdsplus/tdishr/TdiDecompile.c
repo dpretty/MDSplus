@@ -9,7 +9,7 @@
 
 #include <tdimessages.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiDecompile.c,v $ $Revision: 1.10 $ $Date: 2002/02/11 17:46:53 $";
+static char *cvsrev = "@(#)$RCSfile: TdiDecompile.c,v $ $Revision: 1.11 $ $Date: 2003/04/10 20:01:41 $";
 
 unsigned int TdiDECOMPILE_MAX = 0xffff;
 
@@ -226,6 +226,7 @@ char	*pdec, *plast, *pexp, *ppass;
 		case 'H' :
 		case 'S' :
 		case 'T' :
+	        case 'V' :
 			*pwas++ = repl;
 			if (*pwas == '+') *pwas++ = ' ';
 			else if (*pwas == '-') pwas++;
