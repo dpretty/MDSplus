@@ -30,7 +30,7 @@
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.39 $ $Date: 1999/06/23 14:56:49 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.40 $ $Date: 1999/09/02 16:07:23 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
@@ -680,7 +680,7 @@ static FILE  *OpenOne(TREE_INFO *info, char *tree, int shot, char *type,int new,
 		{
 			if (*part == ' ') 
 				part++;
-			else if ((path[i] == ' ' || path[i] == ';' || path[i] == 0) && strlen(part))
+			else if ((path[i] == ';' || path[i] == 0) && strlen(part))
 			{
 				path[i] = 0;
 				resnam = strcpy(malloc(strlen(part)+strlen(name)+strlen(type)+2),part);
