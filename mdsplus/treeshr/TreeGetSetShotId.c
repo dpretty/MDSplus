@@ -44,7 +44,7 @@ extern char *index();
 
 extern char *TranslateLogical();
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetSetShotId.c,v $ $Revision: 1.12 $ $Date: 2003/02/14 20:34:25 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetSetShotId.c,v $ $Revision: 1.13 $ $Date: 2003/03/26 16:04:16 $";
 
 #define _ToLower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
@@ -118,7 +118,11 @@ static int OpenShotIdFile(char *experiment,int mode)
   char *filename;
   int found = 0;
   while ((filename = GetFileName(experiment,&ctx)) && !(found=(MDS_IO_EXISTS(filename))));
-  return (found ? MDS_IO_OPEN(filename,mode,0) : CreateShotIdFile(experiment));
+  if (found)
+    fd = MDS_IO_OPEN(filename,mode,0);
+  else if (mode == O_WRONLY)
+    fd = CreateShotIdFile(experiment);
+  return fd;
 }
 
 
