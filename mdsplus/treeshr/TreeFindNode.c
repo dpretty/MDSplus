@@ -3,11 +3,13 @@
 #include <stdlib.h>
 #include <string.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeFindNode.c,v $ $Revision: 1.18 $ $Date: 1998/07/29 19:50:19 $";
+static char *cvsrev = "@(#)$RCSfile: TreeFindNode.c,v $ $Revision: 1.19 $ $Date: 1998/10/21 12:10:01 $";
 
 extern void *DBID;
 
+#ifndef vxWorks
 #define min(a,b) (((a) < (b)) ? (a) : (b))
+#endif
 
 
 static int IsMember(NODE *node);

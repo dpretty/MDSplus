@@ -17,11 +17,15 @@
 #include <ncidef.h>
 #include <errno.h>
 #include <fcntl.h>
+#ifdef vxWorks
+#undef __toupper
+#undef __tolower
+#endif
 #define __toupper(c) (((c) >= 'a' && (c) <= 'z') ? (c) & 0xDF : (c))
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.30 $ $Date: 1998/08/05 14:29:39 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.31 $ $Date: 1998/10/21 12:13:25 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);

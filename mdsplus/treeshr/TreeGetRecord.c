@@ -20,7 +20,7 @@
 
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.22 $ $Date: 1998/09/14 20:56:30 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.23 $ $Date: 1998/10/21 12:12:22 $";
 
 
 static int OpenDatafileR(TREE_INFO *info);
@@ -34,7 +34,10 @@ extern void *DBID;
 
 
 
+#ifndef vxWorks
 #define min(a,b) (((a) < (b)) ? (a) : (b))
+#endif
+
 
 
 
@@ -158,7 +161,11 @@ static int OpenDatafileR(TREE_INFO *info)
     char *filename = strncpy(malloc(len+9),info->filespec,len);
     filename[len]='\0';
     strcat(filename,"datafile");
+#ifdef vxWorks
+    df_ptr->get = open(filename,O_RDONLY | O_BINARY | O_RANDOM, 0);
+#else
     df_ptr->get = open(filename,O_RDONLY | O_BINARY | O_RANDOM);
+#endif
     status = (df_ptr->get == -1) ? TreeFAILURE : TreeNORMAL;
     if (df_ptr->get == -1)
       df_ptr->get == 0;

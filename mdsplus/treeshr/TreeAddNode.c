@@ -24,7 +24,7 @@
 
 #define max(a,b) ((a) > (b) ? (a) : (b))
 
-static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.40 $ $Date: 1998/10/19 15:56:40 $";
+static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.41 $ $Date: 1998/10/21 12:06:38 $";
 
 #define node_to_node_number(node_ptr) node_ptr - dblist->tree_info->node
 #define __toupper(c) (((c) >= 'a' && (c) <= 'z') ? (c) & 0xDF : (c))
@@ -735,7 +735,15 @@ int _TreeWriteTree(void **dbid, char *exp_ptr, int shotid)
 			goto error_exit;
 		remove(info_ptr->filespec);
         fclose(ntreef);
+#ifdef vxWorks
+	/*rename is not supported by nfs on vxWorks*/
+
+	copy(nfilenam,info_ptr->filespec);
+	remove(nfilenam);
+#else
         rename(nfilenam,info_ptr->filespec);
+#endif
+
 		(*dblist)->modified = 0;
         TreeCallHook(WriteTree, info_ptr);
       }

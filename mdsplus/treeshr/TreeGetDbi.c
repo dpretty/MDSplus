@@ -4,10 +4,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetDbi.c,v $ $Revision: 1.6 $ $Date: 1998/05/04 14:47:59 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetDbi.c,v $ $Revision: 1.7 $ $Date: 1998/10/21 12:10:52 $";
 
 extern void *DBID;
+#ifndef vxWorks
 #define min(a,b) (((a) < (b)) ? (a) : (b))
+#endif
 int TreeGetDbi(struct dbi_itm *itmlst) {return _TreeGetDbi(DBID,itmlst);}
 #define set_retlen(length) if (lst->buffer_length < length) { status = TreeBUFFEROVF; break; } else retlen=length
 #define check_open(db) if (!db) {status=TreeNOT_OPEN;break;}
