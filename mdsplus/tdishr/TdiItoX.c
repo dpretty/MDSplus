@@ -23,8 +23,9 @@
 #define end	1
 #define delta	2
 #define HUGE (1<<28)
+#ifndef vxWorks
 #define const
-
+#endif
 #define ROPRAND(fptr) (*(unsigned short *)(fptr) == 0x8000)
 
 #include "tdirefcat.h"
@@ -35,7 +36,7 @@
 #include <mdsshr.h>
 #include <string.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiItoX.c,v $ $Revision: 1.5 $ $Date: 1998/04/08 19:06:09 $";
+static char *cvsrev = "@(#)$RCSfile: TdiItoX.c,v $ $Revision: 1.6 $ $Date: 1998/10/23 08:58:17 $";
 
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 

@@ -22,24 +22,29 @@
 	NEED parameter for sizeof(NODE_NAME).
 	NEED to be careful about any new names. They could take away uniqueness from existing code.
 */
+#ifndef vxWorks
+#undef MAX
+#endif
 #define EOL {0,NciEND_OF_LIST,0,0}
 #define NID_NUMBER -1
 #define RECORDIDX -2
+#ifndef vxWorks
 #define const
-#include "tdirefstandard.h"
-#include "tdinelements.h"
+#endif
+#include <string.h>
+#include <stdlib.h>
 #include <ncidef.h>
 #define NciM_ON (NciM_STATE | NciM_PARENT_STATE)
 #include <usagedef.h>
-#include <string.h>
 #include <strroutines.h>
-#include <stdlib.h>
 #include <tdimessages.h>
 #include <treeshr.h>
 #include <mdsshr.h>
 #include <stdio.h>
+#include "tdirefstandard.h"
+#include "tdinelements.h"
 
-static char *cvsrev = "@(#)$RCSfile: TdiGetNci.c,v $ $Revision: 1.12 $ $Date: 1998/07/27 20:18:50 $";
+static char *cvsrev = "@(#)$RCSfile: TdiGetNci.c,v $ $Revision: 1.13 $ $Date: 1998/10/23 08:58:16 $";
 
 extern unsigned short OpcVector;
 

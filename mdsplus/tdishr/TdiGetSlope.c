@@ -10,16 +10,21 @@
 	ASSUMES all slopes same sign and (end-start)*slope >= 0.
 	NEED to watch for rounding/precision problems.
 */
+
+#include <tdimessages.h>
+#include "tdirefstandard.h"
+#ifdef vxWorks
+#undef MAX
+#endif
+
+#include <stdlib.h>
+#include <mdsshr.h>
+
 #define HUGE 0x1FFFFFFF
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
-#include <tdimessages.h>
-#include "tdirefstandard.h"
-#include <stdlib.h>
-#include <mdsshr.h>
-
-static char *cvsrev = "@(#)$RCSfile: TdiGetSlope.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:06:06 $";
+static char *cvsrev = "@(#)$RCSfile: TdiGetSlope.c,v $ $Revision: 1.4 $ $Date: 1998/10/23 08:58:16 $";
 
 extern int TdiData(  );
 extern int TdiGetLong(  );
