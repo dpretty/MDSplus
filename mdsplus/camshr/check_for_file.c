@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: check_for_file.c,v 1.1 2002/09/10 16:06:59 twf Exp $
+//	$Id: check_for_file.c,v 1.2 2003/05/09 17:44:10 twf Exp $
 //-------------------------------------------------------------------------
 
 //-------------------------------------------------------------------------
@@ -47,7 +47,7 @@ int check_for_file( char *FileName )
 	if( MSGLVL(FUNCTION_NAME) )
 		printf( "check_for_file('%s')\n", FileName );
 
-	if( (fd = Open(FileName, O_RDONLY)) == ERROR ) { 	// file does not exist, yet
+	if( (fd = Open(FileName, O_RDONLY)) < 0 ) { 	// file does not exist, yet
 		status = FILE_ERROR;							// :<
 		goto Filecheck_Exit;
 	}
