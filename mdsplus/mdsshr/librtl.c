@@ -11,7 +11,7 @@
 #include <math.h>
 
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.111 $ $Date: 2002/09/12 14:10:42 $ $Name:  $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.112 $ $Date: 2002/09/12 14:29:09 $ $Name:  $";
 
 extern int MdsCopyDxXd();
 
@@ -2152,7 +2152,8 @@ int libffs(int *position, int *size, char *base, int *find_position)
 
 char *MdsRelease()
 {
-  static const char *tag = "$Name:  $";
+#include "release.h"
+  static const char *tag = MDSPLUS_RELEASE;
   static char rel[512] = {0};
   if (rel[0] == 0)
   {
