@@ -43,7 +43,7 @@
 #define  DTYPE_D DTYPE_G
 #endif
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSql.c,v $ $Revision: 1.18 $ $Date: 2004/02/23 21:05:23 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSql.c,v $ $Revision: 1.19 $ $Date: 2004/03/08 19:58:53 $";
 
 extern int stat;
 extern int TdiFindImageSymbol();
@@ -263,7 +263,8 @@ int 	rblob;
 		if (bufs) {
 			FreeBuffers();
 		}
-		bufs = (struct ans_buf *)calloc(ncol,sizeof(struct ans_buf));
+                if (ncol > 0)
+		  bufs = (struct ans_buf *)calloc(ncol,sizeof(struct ans_buf));
 		num_bufs = ncol;
 		
 		/*
