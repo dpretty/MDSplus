@@ -46,7 +46,7 @@
 #include <fcntl.h>
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.21 $ $Date: 1998/05/05 20:19:24 $";
+static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.22 $ $Date: 1998/05/06 20:38:50 $";
 
 #define min(a,b) (((a) < (b)) ? (a) : (b))
 
@@ -581,7 +581,7 @@ static int PutDatafile(TREE_INFO *info, int nodenum, NCI *nci_ptr, struct descri
 #else
       status = (write(info->data_file->put,(void *) info->data_file->record_header,sizeof(RECORD_HEADER)) == sizeof(RECORD_HEADER))
                     ? TreeNORMAL : TreeFAILURE;
-      status = (write(info->data_file->put,(void *) (data_dsc_ptr->pointer + bytes_to_put), bytes_this_time) == bytes_this_time)
+      status = (write(info->data_file->put,(void *) (((char *)data_dsc_ptr->pointer) + bytes_to_put), bytes_this_time) == bytes_this_time)
                     ? TreeNORMAL : TreeFAILURE;
 #endif
       if (!bytes_to_put)
@@ -636,7 +636,7 @@ static int UpdateDatafile(TREE_INFO *info, int nodenum, NCI *nci_ptr, struct des
       lseek(info->data_file->put,rfa_l,SEEK_SET);
       status = (write(info->data_file->put,(void *) info->data_file->record_header,sizeof(RECORD_HEADER)) == sizeof(RECORD_HEADER))
                    ? TreeNORMAL : TreeFAILURE;
-      status = (write(info->data_file->put,(void *) (data_dsc_ptr->pointer + bytes_to_put), bytes_this_time) == bytes_this_time) ? TreeNORMAL : TreeFAILURE;
+      status = (write(info->data_file->put,(void *) (((char *)data_dsc_ptr->pointer) + bytes_to_put), bytes_this_time) == bytes_this_time) ? TreeNORMAL : TreeFAILURE;
 #endif
       if (!bytes_to_put)
       {
