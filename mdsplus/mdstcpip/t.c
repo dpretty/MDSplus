@@ -5,14 +5,14 @@
 /*  CMS REPLACEMENT HISTORY, Element T.C */
 #include <ipdesc.h>
 #include <stdio.h>
-static char *cvsrev = "@(#)$RCSfile: t.c,v $ $Revision: 1.7 $ $Date: 1999/05/07 18:34:24 $";
+static char *cvsrev = "@(#)$RCSfile: t.c,v $ $Revision: 1.8 $ $Date: 2000/04/20 14:01:36 $";
 int main( int argc, void **argv)
 {
   int status;
   struct descrip ans;
   float val = 9876;
   struct descrip vald = {DTYPE_FLOAT,0};
-  long sock = ConnectToMds("lost.pfc.mit.edu:9000");
+  long sock = ConnectToMds((argc > 1) ? argv[1] : "lost.pfc.mit.edu:9000");
   if (sock != -1)
   {
     printf("status from MdsOpen = %d\n",MdsOpen(sock,"main",-1));
