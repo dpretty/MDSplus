@@ -40,7 +40,7 @@ int TreeCreatePulseFile(int shotid,int numnids, int *nids)
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
 
-static char *cvsrev = "@(#)$RCSfile: TreeCreatePulseFile.c,v $ $Revision: 1.13 $ $Date: 2000/10/10 18:22:01 $";
+static char *cvsrev = "@(#)$RCSfile: TreeCreatePulseFile.c,v $ $Revision: 1.14 $ $Date: 2000/10/11 19:31:11 $";
 
 #ifdef _WIN32
 #include <windows.h>
@@ -162,6 +162,7 @@ int  TreeCreateTreeFiles(char *tree, int shot, int source_shot)
       char *part;
       strcpy(path,pathin);
       MaskReplace(path,tree_lower,source_shot);
+      pathlen = strlen(path);
       if (source_shot < 0)
         sprintf(name,"%s_model",tree_lower);
       else if (source_shot < 1000)
@@ -194,6 +195,7 @@ int  TreeCreateTreeFiles(char *tree, int shot, int source_shot)
       {
         strcpy(path,pathin);
         MaskReplace(path,tree_lower,shot);
+        pathlen = strlen(path);
         if (shot < 0)
           sprintf(name,"%s_model",tree_lower);
         else if (shot < 1000)
