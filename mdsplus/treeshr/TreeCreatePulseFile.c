@@ -44,7 +44,7 @@ extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
 extern char *MaskReplace();
 
-static char *cvsrev = "@(#)$RCSfile: TreeCreatePulseFile.c,v $ $Revision: 1.23 $ $Date: 2003/03/04 17:57:47 $";
+static char *cvsrev = "@(#)$RCSfile: TreeCreatePulseFile.c,v $ $Revision: 1.24 $ $Date: 2003/03/10 15:39:48 $";
 
 #ifdef _WIN32
 #include <windows.h>
@@ -322,6 +322,8 @@ static int CopyFile(char *src, char *dst, int dont_replace)
         if (buff)
           free(buff);
       }
+      else if (src_len == 0)
+          status = TreeSUCCESS;
       MDS_IO_LOCK(src_fd,0,src_len,0);
       MDS_IO_CLOSE(dst_fd);
     }
