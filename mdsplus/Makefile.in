@@ -1,4 +1,4 @@
-#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.37 $
+#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.38 $
 # @configure_input@
 prefix=@prefix@
 SHELL=/bin/sh
@@ -39,6 +39,7 @@ PARTS = \
         manpages \
         @D3D_PACKAGE@ \
         @JAVA_APS@ \
+	@MDSSQL@ \
         @IDLSQL@ \
 	@IDLMDSEVENT@ \
 	@MDSVME@
