@@ -1,4 +1,4 @@
-/* $Id: LocalDataProvider.java,v 1.26 2004/05/27 11:36:02 manduchi Exp $ */
+/* $Id: LocalDataProvider.java,v 1.28 2005/01/13 09:14:48 manduchi Exp $ */
 import javax.swing.JFrame;
 import java.io.IOException;
 import java.util.*;
@@ -33,11 +33,17 @@ public class LocalDataProvider extends MdsDataProvider implements DataProvider
     static {
         try
         {
-	        System.loadLibrary("JavaMds");
-	    }
-	    catch(Throwable e)
-	    {
-	    }
+          System.loadLibrary("MdsShr");
+          System.loadLibrary("MdsIpShr");
+          System.loadLibrary("TreeShr");
+          System.loadLibrary("TdiShr");
+          System.loadLibrary("JavaMds");
+        }
+        catch(Throwable e)
+        {
+          System.out.println("Load library "+e);
+          e.printStackTrace();
+        }
     }
 
     native public void SetEnvironmentSpecific(String in, String defaultNode);
@@ -66,7 +72,6 @@ public class LocalDataProvider extends MdsDataProvider implements DataProvider
     native public float[] GetFloatArrayNative(String in);
     native public double[] GetDoubleArrayNative(String in);
     native public int[]   GetIntArray(String in);
-    native public long[]  GetLongArray(String in);
 
     public long[] GetShots(String in)
     {
@@ -78,7 +83,7 @@ public class LocalDataProvider extends MdsDataProvider implements DataProvider
             return lshots;
         }catch(Exception exc)
         {
-            System.err.println("Error in GetLongArray: " + exc);
+            System.err.println("Error in GetIntArray: " + exc);
 
             return null;
         }

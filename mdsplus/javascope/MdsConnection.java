@@ -1,4 +1,4 @@
-/* $Id: MdsConnection.java,v 1.35 2004/10/08 13:32:58 manduchi Exp $ */
+/* $Id: MdsConnection.java,v 1.37 2004/11/30 17:53:08 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.*;
@@ -69,8 +69,8 @@ public class MdsConnection
 	class MRT extends Thread // Mds Receive Thread
 	{
         MdsMessage message;
-        boolean    kill = false;
         boolean    pending = false;
+        boolean    killed = false;
 
 	    public void run()
 	    {
@@ -104,6 +104,11 @@ public class MdsConnection
 	        }
 	        catch(IOException e)
 	        {
+                   synchronized(this)
+                    {
+		      killed = true;
+                      notify();
+                    }
 	            if(connected)
 	            {
 	                message = null;
@@ -115,6 +120,14 @@ public class MdsConnection
 	        }
 	    }
 
+            public synchronized void waitExited()
+            {
+	    
+              while(!killed)
+                try{
+                  wait();
+                }catch(InterruptedException exc){}
+            }
 
 	    public synchronized MdsMessage GetMessage()
 	    {
@@ -353,6 +366,8 @@ public class MdsConnection
                 connection_listener.removeAllElements();
 	        dos.close();
             dis.close();
+	    
+            receiveThread.waitExited();
             connected = false;
 	    }
 	    catch(IOException e)
