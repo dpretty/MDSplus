@@ -14,7 +14,9 @@ extern unsigned short OpcCompile;
 #include <libroutines.h>
 #include <tdimessages.h>
 #include <mdsshr.h>
+#ifndef HAVE_WINDOWS_H
 #include <pthread.h>
+#endif
 #if (defined(_DECTHREADS_) && (_DECTHREADS_ != 1)) || !defined(_DECTHREADS_)
 #define pthread_attr_default NULL
 #define pthread_mutexattr_default NULL
@@ -24,7 +26,7 @@ extern unsigned short OpcCompile;
 #endif
 
 
-static char *cvsrev = "@(#)$RCSfile: TdiCompile.c,v $ $Revision: 1.8 $ $Date: 2003/01/31 15:34:20 $";
+static char *cvsrev = "@(#)$RCSfile: TdiCompile.c,v $ $Revision: 1.9 $ $Date: 2003/02/03 09:55:08 $";
 
 extern int TdiEvaluate();
 extern int TdiYacc();
