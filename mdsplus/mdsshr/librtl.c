@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.125 $ $Date: 2003/03/05 17:40:55 $ $Name:  $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.126 $ $Date: 2003/04/04 20:28:36 $ $Name:  $";
 
 extern int MdsCopyDxXd();
 
@@ -2414,7 +2414,8 @@ int libffs(int *position, int *size, char *base, int *find_position)
   int i;
   int status = 0;
   int *bits = (int *)(base + (*position)/8); 
-  for (i=(*position) % 8;i<*size;i++)
+  int top_bit_to_check = ((*size)+*position)-((*position)/8)*8;
+  for (i=(*position) % 8;i<top_bit_to_check;i++)
   {
     if (*bits & (1 << i))
     {
