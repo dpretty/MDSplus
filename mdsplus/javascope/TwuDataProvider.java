@@ -8,7 +8,7 @@
 // this class (starting revision line 2.x) mainly in order to ensure that zooming
 // works in more situations. (See also the cvs log.)
 //
-// $Id: TwuDataProvider.java,v 2.6 2002/06/06 08:57:32 jgk Exp $
+// $Id: TwuDataProvider.java,v 2.7 2002/06/06 12:50:07 jgk Exp $
 // 
 // -------------------------------------------------------------------------------------------------
 
@@ -48,6 +48,7 @@ class TwuDataProvider
     public void    SetArgument(String arg){}
 
 
+    // ---------------------------------------------------------------------------------------------
     class SimpleFrameData 
         implements FrameData
     {
@@ -187,6 +188,7 @@ class TwuDataProvider
         }
     }
 
+    // ---------------------------------------------------------------------------------------------
     class TwuFetchOptions 
     {
         public int start =  0 ;
@@ -283,6 +285,7 @@ class TwuDataProvider
     } // end (nested) class TwuFetchOptions.
 
 
+    // ---------------------------------------------------------------------------------------------
     class SingleTwuSignal 
     {
         TWUProperties   properties      = null  ;
@@ -404,7 +407,12 @@ class TwuDataProvider
             fetch_my_Properties (propsurl);
 
             if (! properties.valid())
-              throwError ("Error loading properties of Y data !");
+            {
+                if (error_string==null)
+                  error_string = "No Such Y Signal : " + propsurl ;
+                throwError ("Error loading properties of Y data !");
+            }
+            
         }
 
         private void fetch_my_Properties(String propsurl) throws Exception 
@@ -656,7 +664,7 @@ class TwuDataProvider
 
     } // end (nested) class SingleTwuSignal.
 
-
+    // ---------------------------------------------------------------------------------------------
     class TwuWaveData implements WaveData
     {
         private String  in_y = null, in_x = null ;
@@ -754,6 +762,9 @@ class TwuDataProvider
         public float[] GetFloatData()
             throws IOException 
         {
+            if (ysig==null || ysig.error() )
+              return null;
+            
             return ysig.getData() ; 
         }
 
@@ -892,6 +903,17 @@ class TwuDataProvider
         if ( lastWaveData == null  ||  lastWaveData.notEqualsInputSignal (in_y, in_x) )
         {
             lastWaveData = new TwuWaveData (in_y, in_x) ;
+            try
+            {
+                // Ensure that the properties are fetched right away.
+                lastWaveData.getTWUProperties() ;
+            }
+            catch (IOException e)
+            {
+                if (error_string==null)
+                  error_string = "No Such Signal : " + GetSignalPath(in_y) ;
+                //throw new IOException ("No Such Signal");
+            }
         }
         return lastWaveData ;
     }
@@ -1155,7 +1177,8 @@ class TwuDataProvider
 
     protected static void handleException (Exception e) 
     {
-        e.printStackTrace (System.out) ;
+        if (jScope.is_debug) 
+          e.printStackTrace (System.out) ;
 
         // this method exists only to improve consistency.
         // alternatively : e.printStackTrace() (prints to stderr),
@@ -1360,7 +1383,7 @@ class TwuDataProvider
     public static String 
     revision()
     {
-        return "$Id: TwuDataProvider.java,v 2.6 2002/06/06 08:57:32 jgk Exp $";
+        return "$Id: TwuDataProvider.java,v 2.7 2002/06/06 12:50:07 jgk Exp $";
     }
 
     public TwuDataProvider(String user_agent)
@@ -1374,5 +1397,5 @@ class TwuDataProvider
 }
 
 // -------------------------------------------------------------------------------------------------
-// End of: $Id: TwuDataProvider.java,v 2.6 2002/06/06 08:57:32 jgk Exp $
+// End of: $Id: TwuDataProvider.java,v 2.7 2002/06/06 12:50:07 jgk Exp $
 // -------------------------------------------------------------------------------------------------
