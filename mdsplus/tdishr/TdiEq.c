@@ -64,7 +64,7 @@
 #include <mdsdescrip.h>
 #include <tdimessages.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiEq.c,v $ $Revision: 1.5 $ $Date: 2000/11/30 14:01:55 $";
+static char *cvsrev = "@(#)$RCSfile: TdiEq.c,v $ $Revision: 1.6 $ $Date: 2000/12/01 15:11:35 $";
 
 #define OP_EQ 0 
 #define OP_GE 1
@@ -299,6 +299,7 @@ int       Tdi3Ne(struct descriptor *in1_ptr,
 		                struct descriptor *out_ptr)
 {
 	  int status = Tdi3_Eq(in1_ptr,in2_ptr,out_ptr,OP_EQ);
-          if (status & 1)
-            return Tdi3Not(out_ptr, out_ptr);
+    if (status & 1)
+      status = Tdi3Not(out_ptr, out_ptr);
+    return status;
 }
