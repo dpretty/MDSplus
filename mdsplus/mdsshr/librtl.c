@@ -4,14 +4,18 @@
 #include <mds_stdarg.h>
 #include <librtl_messages.h>
 #define _GNU_SOURCE /* glibc2 needs this */
+#if defined(__sparc__)
+#include "/usr/include/sys/types.h"
+#elif !defined(HAVE_WINDOWS_H)
+#include <sys/types.h>
+#endif
 #include <time.h>
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 
-
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.115 $ $Date: 2002/10/02 15:25:10 $ $Name:  $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.116 $ $Date: 2002/10/02 16:30:59 $ $Name:  $";
 
 extern int MdsCopyDxXd();
 
@@ -530,15 +534,13 @@ void pthread_cancel(unsigned long *thread)
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>
 #endif
-
-#include <sys/types.h>
 #include <dirent.h>
 #include <errno.h>
 #include <signal.h>
 #include <sys/wait.h>
 
-
 #ifndef HAVE_PTHREAD_LOCK_GLOBAL_NP
+#include <inttypes.h>
 #include <pthread.h>
 static pthread_mutex_t GlobalMutex;
 static int Initialized = 0;
