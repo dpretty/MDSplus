@@ -28,6 +28,7 @@ int TreeDeletePulseFile(int shotid,int numnids, int *nids)
 
 
 ------------------------------------------------------------------------------*/
+#include <STATICdef.h>
 #include <stdlib.h>
 #include <string.h>
 #include <mdsdescrip.h>
@@ -39,18 +40,19 @@ int TreeDeletePulseFile(int shotid,int numnids, int *nids)
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
+extern char *MaskReplace();
 
-static char *cvsrev = "@(#)$RCSfile: TreeDeletePulseFile.c,v $ $Revision: 1.13 $ $Date: 2003/02/25 20:45:09 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeDeletePulseFile.c,v $ $Revision: 1.14 $ $Date: 2004/01/05 15:53:31 $";
 
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 extern void *DBID;
-static int  TreeDeleteTreeFiles(char *tree, int shot);
+STATIC_ROUTINE int  TreeDeleteTreeFiles(char *tree, int shot);
 
 #if defined(_WIN32)
 #include <windows.h>
 #else
-static int DeleteFile(char *src);
+STATIC_ROUTINE int DeleteFile(char *src);
 #endif
 
 int       TreeDeletePulseFile(int shotid, int allfiles)
@@ -106,7 +108,7 @@ int       _TreeDeletePulseFile(void *dbid, int shotid, int allfiles)
   return retstatus;
 }
 
-static int  TreeDeleteTreeFiles(char *tree, int shot)
+STATIC_ROUTINE int  TreeDeleteTreeFiles(char *tree, int shot)
 {
   int len = strlen(tree);
   char tree_lower[13];
@@ -185,7 +187,7 @@ static int  TreeDeleteTreeFiles(char *tree, int shot)
 }
 
 #if !defined(_WIN32)
-static int DeleteFile(char *src)
+STATIC_ROUTINE int DeleteFile(char *src)
 {
   int status = remove(src);
   return status == 0;

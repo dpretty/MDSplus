@@ -28,6 +28,7 @@ int TreeCreatePulseFile(int shotid,int numnids, int *nids)
 
 
 ------------------------------------------------------------------------------*/
+#include <STATICdef.h>
 #ifdef HAVE_VXWORKS_H
 #include <ioLib.h>
 #endif
@@ -44,7 +45,7 @@ extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
 extern char *MaskReplace();
 
-static char *cvsrev = "@(#)$RCSfile: TreeCreatePulseFile.c,v $ $Revision: 1.24 $ $Date: 2003/03/10 15:39:48 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeCreatePulseFile.c,v $ $Revision: 1.25 $ $Date: 2004/01/05 15:57:59 $";
 
 #ifdef _WIN32
 #include <windows.h>
@@ -56,7 +57,7 @@ static char *cvsrev = "@(#)$RCSfile: TreeCreatePulseFile.c,v $ $Revision: 1.24 $
 #ifndef O_RANDOM
 #define O_RANDOM 0
 #endif
-static int CopyFile(char *src, char *dst, int dont_replace);
+STATIC_ROUTINE int CopyFile(char *src, char *dst, int dont_replace);
 #endif
 
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
@@ -282,7 +283,7 @@ int  TreeCreateTreeFiles(char *tree, int shot, int source_shot)
 }
 
 #if !defined(_WIN32)
-static int CopyFile(char *src, char *dst, int dont_replace)
+STATIC_ROUTINE int CopyFile(char *src, char *dst, int dont_replace)
 {
   /*
   int status=0;
