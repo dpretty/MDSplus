@@ -30,7 +30,7 @@ void __MB(){return;}
 #include <libroutines.h>
 #include <mds_stdarg.h>
 #include <librtl_messages.h>
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.27 $ $Date: 1998/07/27 20:37:50 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.28 $ $Date: 1998/07/29 18:09:00 $";
 #ifndef va_count
 #define  va_count(narg) va_start(incrmtr, first); \
                         for (narg=1; (narg < 256) && (va_arg(incrmtr, struct descriptor *) != MdsEND_ARG); narg++)
@@ -289,13 +289,14 @@ int LibSysAscTim(unsigned short *len, struct descriptor *str, unsigned int *time
   char *time_str;
   char time_out[23];
   unsigned short slen=sizeof(time_out);
+  tzset();
   if (time_in)
   {
     unsigned int tmp = (time_in[0] >> 24) | (time_in[1] << 8);
-    bintim = (time_t)((double)tmp * 1.6777216 - 3.5067168e+09); 
+    bintim = (time_t)((double)tmp * 1.6777216 - 3.5067168e+09) + timezone; 
   }
   else
-    bintim = time(0);
+    bintim = time(0) + timezone;
   time_str = ctime(&bintim);
   time_out[0]  = time_str[8];
   time_out[1]  = time_str[9];
