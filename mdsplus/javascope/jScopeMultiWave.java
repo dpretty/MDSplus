@@ -1,4 +1,4 @@
-/* $Id: jScopeMultiWave.java,v 1.34 2003/11/07 10:18:37 manduchi Exp $ */
+/* $Id: jScopeMultiWave.java,v 1.35 2003/11/07 12:42:47 manduchi Exp $ */
 import java.awt.*;
 import java.util.*;
 import java.io.*;
@@ -146,11 +146,6 @@ public class jScopeMultiWave extends MultiWaveform implements UpdateEventListene
             if(!all_null)
             {
                 Update(wi.signals);	    
-                return;
-            }
-            else
-            {
-                Update();
                 return;
             }
         }
