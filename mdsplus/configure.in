@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.84 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.85 $
 AC_INIT()
 
 AC_CONFIG_HEADER(include/config.h)
@@ -207,7 +207,8 @@ else
 fi
   
 dnl Checks for header files.
-AC_CHECK_HEADERS(stdarg.h fcntl.h strings.h sys/ioctl.h syslog.h unistd.h sys/filio.h netdb.h resolv.h dlfcn.h dl.h vxWorks.h windows.h sys/resource.h)
+AC_CHECK_HEADERS(stdarg.h fcntl.h strings.h sys/ioctl.h syslog.h unistd.h sys/filio.h netdb.h resolv.h)
+AC_CHECK_HEADERS(dlfcn.h dl.h vxWorks.h windows.h sys/resource.h readline/readline.h)
 
 dnl Check for jdk files
 AC_CHECK_FILE(/usr/include/java/jni.h,JDK_CFLAGS="-I/usr/include/java")
