@@ -57,7 +57,7 @@ $ dwcope [-default setup]
 #include <DXm/DECspecific.h>
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: dwscope.c,v $ $Revision: 1.21 $ $Date: 2003/04/28 21:09:49 $";
+static char *cvsrev = "@(#)$RCSfile: dwscope.c,v $ $Revision: 1.22 $ $Date: 2003/04/29 14:09:39 $";
 
 extern void XmdsInitialize();
 extern void XmdsDestroyWidgetCallback();
@@ -792,6 +792,7 @@ static void /*XtCallbackProc*/Restore(Widget w, int *option, XmFileSelectionBoxC
               XmString dirmask;
               XtRemoveAllCallbacks(w,XmNokCallback);
               XtAddCallback(w,XmNokCallback,(XtCallbackProc)Restore,0);
+	      SetDirMask(XtNameToWidget(TopWidget,"*file_dialog"),&defaultfile,0);
               XtVaGetValues(w,XmNdirMask,&dirmask,0);
               XmFileSelectionDoSearch(w, dirmask);
               XtVaSetValues(w, XmNdialogTitle, title, XmNselectionLabelString, label, XmNtextString, deffile, NULL);
