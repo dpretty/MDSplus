@@ -9,7 +9,7 @@
 #include <mds_stdarg.h>
 #include <librtl_messages.h>
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.83 $ $Date: 2001/06/21 09:34:42 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.84 $ $Date: 2001/06/25 13:12:50 $";
 
 extern int MdsCopyDxXd();
 
@@ -1138,21 +1138,27 @@ int LibEstablish()
 
 int LibSysAscTim(unsigned short *len, struct descriptor *str, int *time_in)
 {
-  time_t bintim;
+  time_t bintim = time(&bintim);
   char *time_str;
   char time_out[23];
+  struct tm *_tm;
   unsigned short slen=sizeof(time_out);
 #ifndef HAVE_VXWORKS_H
   tzset();
+  _tm = localtime(&bintim);
   if (time_in)
   {
     _int64 time_local;
+    double time_d;
     memcpy(&time_local,time_in,sizeof(time_local));
-    bintim = (time_t)((double)(time_local >> 24) * 1.6777216 - 3.5067168e+09) + timezone; 
+    time_d = ((double)(time_local >> 24)) * 1.6777216 - 3.5067168e+09;
+    bintim = (time_t)(time_d > 0 ? time_d : 0) - _tm->tm_gmtoff; 
   }
   else
+    bintim = time(0) - _tm->tm_gmtoff;
+#else
+  bintim = time(0) + timezone;
 #endif
-    bintim = time(0) + timezone;
   time_str = ctime(&bintim);
   time_out[0]  = time_str[8];
   time_out[1]  = time_str[9];
