@@ -54,7 +54,7 @@ static int daylight = 0;
 #define LONG_LONG_CONSTANT(value) value##ll
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.68 $ $Date: 2003/06/02 16:31:49 $";
+static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.69 $ $Date: 2003/06/03 16:55:52 $";
 
 #ifdef min
 #undef min
@@ -320,6 +320,7 @@ static int FixupNid(NID *nid, unsigned char *tree, struct descriptor *path)
       }
     
     path_reference = 1;
+    status = 1;
   }
   else
     nid_reference = 1;
