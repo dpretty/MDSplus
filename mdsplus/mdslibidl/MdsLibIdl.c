@@ -13,7 +13,7 @@ extern int TdiData();
 extern int TdiCvt();
 extern int TdiCompile();
 
-static char *cvsrev = "@(#)$RCSfile: MdsLibIdl.c,v $ $Revision: 1.8 $ $Date: 1999/11/15 16:05:47 $";
+static char *cvsrev = "@(#)$RCSfile: MdsLibIdl.c,v $ $Revision: 1.9 $ $Date: 1999/11/15 21:29:58 $";
 
 #ifdef _WINDOWS
 #define sighold(a)
@@ -100,11 +100,11 @@ static void *MakeDescr(int idx, int *argsize, void *bytes)
       arrayArgs[idx].m[i]=argsize[i+1];
     switch (argsize[argsize[0]+1])
     {
-    case 1: arrayArgs[idx].length = 1; arrayArgs[idx].dtype = DTYPE_BU; arrayArgs[idx].arsize = argsize[argsize[0]+2]; break;
-    case 2: arrayArgs[idx].length = 2; arrayArgs[idx].dtype = DTYPE_W; arrayArgs[idx].arsize = argsize[argsize[0]+2] * 2; break;
-    case 3: arrayArgs[idx].length = 4; arrayArgs[idx].dtype = DTYPE_L; arrayArgs[idx].arsize = argsize[argsize[0]+2] * 4; break;
-    case 4: arrayArgs[idx].length = 4; arrayArgs[idx].dtype = DTYPE_FS; arrayArgs[idx].arsize = argsize[argsize[0]+2] * 4; break;
-    case 5: arrayArgs[idx].length = 8; arrayArgs[idx].dtype = DTYPE_FT; arrayArgs[idx].arsize = argsize[argsize[0]+2] * 8; break;
+    case 1: arrayArgs[idx].length = 1; arrayArgs[idx].dtype = DTYPE_BU;  arrayArgs[idx].arsize = argsize[argsize[0]+2];     break;
+    case 2: arrayArgs[idx].length = 2; arrayArgs[idx].dtype = DTYPE_W;   arrayArgs[idx].arsize = argsize[argsize[0]+2] * 2; break;
+    case 3: arrayArgs[idx].length = 4; arrayArgs[idx].dtype = DTYPE_L;   arrayArgs[idx].arsize = argsize[argsize[0]+2] * 4; break;
+    case 4: arrayArgs[idx].length = 4; arrayArgs[idx].dtype = DTYPE_FS;  arrayArgs[idx].arsize = argsize[argsize[0]+2] * 4; break;
+    case 5: arrayArgs[idx].length = 8; arrayArgs[idx].dtype = DTYPE_FT;  arrayArgs[idx].arsize = argsize[argsize[0]+2] * 8; break;
     case 6: arrayArgs[idx].length = 8; arrayArgs[idx].dtype = DTYPE_FSC; arrayArgs[idx].arsize = argsize[argsize[0]+2] * 8; break;
     case 7: 
       {
@@ -115,7 +115,7 @@ static void *MakeDescr(int idx, int *argsize, void *bytes)
 	arrayArgs[idx].dtype = DTYPE_T;
         for (i=0,str = (IDL_STRING *)bytes;i<arrayArgs[idx].dimct;i++)
           num = num * arrayArgs[idx].m[i];
-        for (i=0,str = (IDL_STRING *)bytes,maxlen=0;i<num;i++)
+        for (i=0,str = (IDL_STRING *)bytes,maxlen=0;i<num;i++,str++)
           if (str->slen > maxlen) maxlen = str->slen;
         arrayArgs[idx].length = maxlen;
         arrayArgs[idx].arsize = maxlen * num;
