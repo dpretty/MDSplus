@@ -30,35 +30,9 @@ int MdsGetCurrentShotId(experiment,shot)
 #include <mdsshr.h>
 #include <libroutines.h>
 #include <strroutines.h>
-static char *cvsrev = "@(#)$RCSfile: MdsGetSetShotId.c,v $ $Revision: 1.6 $ $Date: 1999/05/03 14:12:45 $";
+static char *cvsrev = "@(#)$RCSfile: MdsGetSetShotId.c,v $ $Revision: 1.7 $ $Date: 1999/05/03 14:15:27 $";
 
 #define _ToLower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
-
-static FILE *OpenShotIdFile(char *experiment,char *mode)
-{
-  FILE *file = 0;
-  static struct descriptor file_d = {0, DTYPE_T, CLASS_D, 0};
-  static DESCRIPTOR(suffix_d,"_path:shotid.sys");
-  static struct descriptor experiment_d = {0, DTYPE_T, CLASS_S, 0};
-  static struct descriptor filename = {0, DTYPE_T, CLASS_D, 0};
-  unsigned short len;
-  void *ctx = 0;
-  int status = 0;
-  int i;
-  experiment_d.length = strlen(experiment);
-  experiment_d.pointer = experiment;
-  StrTrim(&file_d,&experiment_d,&len);
-  for (i=0;i<file_d.length;i++) 
-    file_d.pointer[i] = _ToLower(file_d.pointer[i]);
-  StrAppend(&file_d,&suffix_d);
-  if (LibFindFile(&file_d,&filename,&ctx) & 1)
-  {
-    static DESCRIPTOR(nullstr,"\0");
-    StrAppend(&filename,&nullstr);
-    file = fopen(filename.pointer,mode);
-  }
-  return file;
-}
 
 static FILE *CreateShotIdFile(char *experiment)
 {
@@ -83,6 +57,34 @@ static FILE *CreateShotIdFile(char *experiment)
     strcat(pathname,"shotid.sys");
     file = fopen(pathname,"w+b");
   }
+  return file;
+}
+
+static FILE *OpenShotIdFile(char *experiment,char *mode)
+{
+  FILE *file = 0;
+  static struct descriptor file_d = {0, DTYPE_T, CLASS_D, 0};
+  static DESCRIPTOR(suffix_d,"_path:shotid.sys");
+  static struct descriptor experiment_d = {0, DTYPE_T, CLASS_S, 0};
+  static struct descriptor filename = {0, DTYPE_T, CLASS_D, 0};
+  unsigned short len;
+  void *ctx = 0;
+  int status = 0;
+  int i;
+  experiment_d.length = strlen(experiment);
+  experiment_d.pointer = experiment;
+  StrTrim(&file_d,&experiment_d,&len);
+  for (i=0;i<file_d.length;i++) 
+    file_d.pointer[i] = _ToLower(file_d.pointer[i]);
+  StrAppend(&file_d,&suffix_d);
+  if (LibFindFile(&file_d,&filename,&ctx) & 1)
+  {
+    static DESCRIPTOR(nullstr,"\0");
+    StrAppend(&filename,&nullstr);
+    file = fopen(filename.pointer,mode);
+  }
+  else
+    file = CreateShotIdFile(experiment);
   return file;
 }
 
@@ -114,8 +116,6 @@ int       MdsSetCurrentShotId(char *experiment, int shot)
 {
   int status = 0;
   FILE *file = OpenShotIdFile(experiment,"r+b");
-  if (file == NULL)
-    file = CreateShotIdFile(experiment);
   if (file)
   {
     int lshot = shot;
