@@ -35,6 +35,8 @@
 #include <mdsshr.h>
 #include <string.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiItoX.c,v $ $Revision: 1.5 $ $Date: 1998/04/08 19:06:09 $";
+
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 
 static struct descriptor tdiItoXSpecial;

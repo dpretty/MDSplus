@@ -35,6 +35,8 @@ int Tdi3Add(struct descriptor *in1, struct descriptor *in2, struct descriptor *o
 #include <string.h>
 #include <tdimessages.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiAdd.c,v $ $Revision: 1.12 $ $Date: 1998/04/08 19:05:52 $";
+
 extern int CvtConvertFloat();
 
 int TdiMultiplyQuadword();

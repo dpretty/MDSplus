@@ -14,6 +14,8 @@
 #include <mdsshr.h>
 #include <mds_stdarg.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiTrim.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:06:19 $";
+
 extern int TdiGetLong();
 extern int TdiGetArgs();
 extern int TdiCvtArgs();

@@ -26,6 +26,8 @@
 #include <stdlib.h>
 #include <mdsshr.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiCall.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:05:55 $";
+
 extern unsigned short OpcDescr;
 extern unsigned short OpcRef;
 extern unsigned short OpcVal;

@@ -17,6 +17,8 @@
 #include <stdlib.h>
 #include <mdsshr.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiVector.c,v $ $Revision: 1.4 $ $Date: 1998/04/08 19:06:21 $";
+
 extern int TdiConvert();
 extern int TdiCvtArgs();
 extern int TdiGetArgs();

@@ -40,6 +40,8 @@
 #include <mdsshr.h>
 #include <string.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiSubscript.c,v $ $Revision: 1.4 $ $Date: 1998/04/08 19:06:18 $";
+
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 extern struct descriptor *TdiRANGE_PTRS[3];
 extern struct descriptor *TdiSELF_PTR;

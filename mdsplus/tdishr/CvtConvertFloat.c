@@ -1,6 +1,8 @@
 #include <string.h>
 #include <mdsdescrip.h>
 
+static char *cvsrev = "@(#)$RCSfile: CvtConvertFloat.c,v $ $Revision: 1.6 $ $Date: 1998/04/08 19:05:50 $";
+
 /** Adapted from VMS V7.0 sources CvtConvertFloat.lis                      **/  
 /******************************************************************************/
 /**                                                                          **/

@@ -25,6 +25,8 @@
 #include <mdsshr.h>
 #include <string.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiPack.c,v $ $Revision: 1.5 $ $Date: 1998/04/08 19:06:13 $";
+
 extern int TdiGetArgs();
 extern int TdiMasterData();
 extern int TdiCvtArgs();

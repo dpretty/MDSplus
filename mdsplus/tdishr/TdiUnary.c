@@ -35,6 +35,8 @@
 #include <mdsdescrip.h>
 #include <tdimessages.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiUnary.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:06:20 $";
+
 int       TdiUnary(struct descriptor *in_ptr,
 		                struct descriptor *out_ptr,
 				unsigned int *out_count)

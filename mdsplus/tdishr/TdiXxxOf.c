@@ -7,6 +7,9 @@
 #include "tdirefstandard.h"
 #include <stdlib.h>
 #include <mdsshr.h>
+
+static char *cvsrev = "@(#)$RCSfile: TdiXxxOf.c,v $ $Revision: 1.5 $ $Date: 1998/04/08 19:06:23 $";
+
 extern int TdiGetData();
 extern int TdiGetLong();
 extern int TdiPutLogical();

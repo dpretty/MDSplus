@@ -64,6 +64,8 @@
 #include <mdsdescrip.h>
 #include <tdimessages.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiEq.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:06:02 $";
+
 extern int TdiBinary(  );
 #define OP_EQ 0 
 #define OP_GE 1

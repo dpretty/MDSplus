@@ -42,6 +42,8 @@ int Tdi3Mod(struct descriptor *in1, struct descriptor *in2, struct descriptor *o
 #include <math.h>
 #include <tdimessages.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiMath2.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:06:11 $";
+
 extern int CvtConvertFloat();
 extern double WideIntToDouble();
 extern void DoubleToWideInt();

@@ -9,6 +9,8 @@
 #include <libroutines.h>
 #include <librtl_messages.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiShowVm.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:06:15 $";
+
 extern int TdiGetLong();
 
 TdiRefStandard(Tdi1ShowVm)

@@ -38,6 +38,8 @@
 #include <mdsshr.h>
 #include <mds_stdarg.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiIntrinsic.c,v $ $Revision: 1.4 $ $Date: 1998/04/08 19:06:07 $";
+
 typedef struct _bounds { int l; int u; } BOUNDS;
 
 #define _MOVC3(a,b,c) memcpy(c,b,a)

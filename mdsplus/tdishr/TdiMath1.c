@@ -43,6 +43,8 @@ int Tdi3xxx(struct descriptor *in, struct descriptor *out)
 #include <errno.h>
 #include <math.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiMath1.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:06:11 $";
+
 extern int CvtConvertFloat();
 
 static int roprand = 0x8000;

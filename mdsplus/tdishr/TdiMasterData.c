@@ -17,6 +17,8 @@
 #include <mdsshr.h>
 #include <stdlib.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiMasterData.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:06:10 $";
+
 static EMPTYXD(emptyxd);
 
 int				TdiMasterData(

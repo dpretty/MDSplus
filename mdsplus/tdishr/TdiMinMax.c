@@ -8,6 +8,8 @@
 #include <stdlib.h>
 #include <mdsshr.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiMinMax.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:06:12 $";
+
 extern int TdiEvaluate();
 extern int Tdi1Same();
 extern int TdiData();

@@ -23,6 +23,8 @@ extern unsigned short OpcValue;
 #include <stdlib.h>
 #include <mdsshr.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiDtypeRange.c,v $ $Revision: 1.5 $ $Date: 1998/04/08 19:06:01 $";
+
 static DESCRIPTOR_A(arr0, 1, DTYPE_B, 0, 0);
 static int minus_one_value = -1;
 static struct descriptor minus_one = {sizeof(int), DTYPE_L, CLASS_S, (char *)&minus_one_value};

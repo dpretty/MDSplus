@@ -52,6 +52,8 @@ int Tdi3And(struct descriptor *in1, struct descriptor *in2, struct descriptor *o
 #include <string.h>
 #include <tdimessages.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiAnd.c,v $ $Revision: 1.4 $ $Date: 1998/04/08 19:05:53 $";
+
 typedef struct { int longword[2]; } quadword;
 typedef struct { int longword[4]; } octaword;
 

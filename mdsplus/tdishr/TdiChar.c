@@ -11,6 +11,8 @@
 #include <string.h>
 #include <tdimessages.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiChar.c,v $ $Revision: 1.4 $ $Date: 1998/04/08 19:05:55 $";
+
 extern int TdiHash();
 
 static char		false = 0;

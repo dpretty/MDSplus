@@ -14,6 +14,8 @@
 #define SIGNEDNESS	(TdiCAT_B ^ TdiCAT_BU)
 #define FLOATMASK	(TdiCAT_FLOAT | TdiCAT_LENGTH)
 
+static char *cvsrev = "@(#)$RCSfile: TdiCvtArgs.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:05:57 $";
+
 extern int TdiConvert(  );
 extern int TdiGetShape(  );
 extern void UseNativeFloat();

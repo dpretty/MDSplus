@@ -56,6 +56,8 @@ extern int Tdi3Divide(  );
 #include <string.h>
 #include <tdimessages.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiMaxVal.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:06:12 $";
+
 extern int CvtConvertFloat();
 
 static int roprand = 0x8000;

@@ -58,6 +58,8 @@
 #define MaskTrue (pi0[0] & 1)
 #endif
 
+static char *cvsrev = "@(#)$RCSfile: TdiTrans.c,v $ $Revision: 1.6 $ $Date: 1998/04/08 19:06:19 $";
+
 extern  unsigned short
 	OpcAccumulate,
 	OpcFirstLoc,

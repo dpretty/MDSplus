@@ -49,6 +49,7 @@
 #include <string.h>
 #include <tdimessages.h>
 #include <mds_stdarg.h>
+static char *cvsrev = "@(#)$RCSfile: TdiYacc.y,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:06:24 $";
 
 extern unsigned short
 	OpcAbort,

@@ -10,6 +10,8 @@
 #include <stdlib.h>
 #include <mdsshr.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiXxx.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:06:22 $";
+
 extern int TdiConcat();
 extern int TdiTranslate();
 extern int TdiGetLong();

@@ -34,6 +34,8 @@
 #include <mdsshr.h>
 #include <mds_stdarg.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiExtFunction.c,v $ $Revision: 1.5 $ $Date: 1998/04/08 19:06:03 $";
+
 extern unsigned short OpcDescr;
 extern unsigned short OpcFun;
 extern unsigned short OpcPrivate;

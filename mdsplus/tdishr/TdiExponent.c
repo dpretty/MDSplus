@@ -9,6 +9,8 @@
 #include "tdinelements.h"
 #include <tdimessages.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiExponent.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:06:03 $";
+
 extern int IsRoprand();
 
 #define F_FLOAT_EXPONENT(val) (((*(int *)val) >> 7) & 0xFF)

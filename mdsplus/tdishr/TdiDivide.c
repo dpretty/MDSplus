@@ -34,6 +34,8 @@ int Tdi3Divide(struct descriptor *in1, struct descriptor *in2, struct descriptor
 #include <mdsdescrip.h>
 #include <tdimessages.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiDivide.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:06:01 $";
+
 extern int CvtConvertFloat();
 extern double WideIntToDouble();
 extern void DoubleToWideInt();

@@ -30,6 +30,8 @@
 #include <treeshr.h>
 #include <string.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiGetData.c,v $ $Revision: 1.4 $ $Date: 1998/04/08 19:06:04 $";
+
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 
 struct descriptor *TdiSELF_PTR = 0;

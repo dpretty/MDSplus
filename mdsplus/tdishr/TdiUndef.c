@@ -5,6 +5,8 @@
 
 #include <tdimessages.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiUndef.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:06:20 $";
+
 int TdiON_ERROR=0;
 
 #define UNDEF(x) int x() {return TdiNO_OPC;}

@@ -21,6 +21,8 @@ RULES OF THE GAME:
 #include <stdlib.h>
 #include <string.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiEvaluate.c,v $ $Revision: 1.5 $ $Date: 1998/04/08 19:06:02 $";
+
 static struct descriptor missing = {0,DTYPE_MISSING,CLASS_S,0};
 
 extern int TdiGetIdent();

@@ -18,6 +18,8 @@
 #include "tdirefstandard.h"
 #include <libroutines.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiSame.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:06:14 $";
+
 extern int Tdi3undef();
 extern int TdiGetArgs();
 extern int TdiCvtArgs();

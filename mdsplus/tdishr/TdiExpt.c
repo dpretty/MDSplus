@@ -10,6 +10,10 @@
 #include <string.h>
 #include <mdsshr.h>
 #include <treeshr.h>
+
+
+static char *cvsrev = "@(#)$RCSfile: TdiExpt.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:06:03 $";
+
 /*--------------------------------------------------------------
 	Default path name.
 */

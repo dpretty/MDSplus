@@ -16,6 +16,8 @@
 #include "opcbuiltins.h"
 #undef OPC
 
+static char *cvsrev = "@(#)$RCSfile: TdiMakeFunctionTable.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:06:10 $";
+
 	/******************************
 	Shorthand for conversions:
 	Destinctive forms.

@@ -19,6 +19,8 @@
 #include <stdlib.h>
 #include <mdsshr.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiGetSlope.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:06:06 $";
+
 extern int TdiData(  );
 extern int TdiGetLong(  );
 extern int TdiRange(  );

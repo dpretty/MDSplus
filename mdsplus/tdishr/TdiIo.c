@@ -15,6 +15,8 @@
 #include <strroutines.h>
 #include <mdsshr.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiIo.c,v $ $Revision: 1.4 $ $Date: 1998/04/08 19:06:08 $";
+
 static struct descriptor_d EMPTY_D = {0,DTYPE_T,CLASS_D,0};
 static DESCRIPTOR(dNUL, "\0");
 static DESCRIPTOR(dBAD, "/*bad*/");

@@ -20,6 +20,8 @@ extern unsigned short OpcDotProduct;
 #include <mdsshr.h>
 #include <string.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiScalar.c,v $ $Revision: 1.5 $ $Date: 1998/04/08 19:06:14 $";
+
 extern int Tdi2Keep();
 extern int TdiCvtArgs();
 extern int TdiGetArgs();

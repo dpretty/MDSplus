@@ -15,6 +15,8 @@
 #include <stdlib.h>
 #include <mdsshr.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiGetArgs.c,v $ $Revision: 1.4 $ $Date: 1998/04/08 19:06:04 $";
+
 extern struct descriptor_xd *TdiSELF_PTR;
 
 #include "tdirefcat.h"

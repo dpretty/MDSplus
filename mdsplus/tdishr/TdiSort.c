@@ -31,6 +31,8 @@
 #include <mdsshr.h>
 #include <string.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiSort.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:06:16 $";
+
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 extern unsigned short OpcVector;
 

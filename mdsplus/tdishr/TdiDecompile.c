@@ -9,6 +9,8 @@
 
 #include <tdimessages.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiDecompile.c,v $ $Revision: 1.6 $ $Date: 1998/04/08 19:05:57 $";
+
 unsigned int TdiDECOMPILE_MAX = 0xffff;
 
 extern unsigned short OpcDecompile;

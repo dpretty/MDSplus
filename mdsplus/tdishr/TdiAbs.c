@@ -50,6 +50,8 @@
 #include <string.h>
 #include <math.h>
 
+static char *cvsrev = "@(#)$RCSfile: TdiAbs.c,v $ $Revision: 1.4 $ $Date: 1998/04/08 19:05:52 $";
+
 extern int TdiConvert();
 extern int TdiSubtractQuadword();
 extern int TdiSubtractOctaword();
