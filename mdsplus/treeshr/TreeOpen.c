@@ -32,7 +32,7 @@
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.45 $ $Date: 2000/03/16 22:01:04 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.46 $ $Date: 2000/05/22 15:00:27 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
@@ -271,11 +271,13 @@ static int CloseTopTree(PINO_DATABASE *dblist, int call_hook)
 						{
 #if defined(__osf__) && !defined(vxWorks)
 							if (local_info->channel)
-							{
+							{ int status;
 							  close(local_info->channel);
-							  munmap(local_info->section_addr[0],local_info->alq * 512);
+							  status = munmap(local_info->section_addr[0],local_info->alq * 512);
+							  /*
 		                                          mmap(local_info->section_addr[0],local_info->alq * 512,PROT_READ | PROT_WRITE, 
                                                                         MAP_ANONYMOUS | MAP_PRIVATE | MAP_FIXED, -1, 0);
+							  */
 							}
 #endif
 							free(local_info->vm_addr);
