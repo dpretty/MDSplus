@@ -1,4 +1,4 @@
-static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.55 $ $Date: 2003/02/25 19:29:55 $";
+static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.56 $ $Date: 2003/09/03 13:28:04 $";
 
 #ifndef HAVE_VXWORKS_H
 #include <config.h>
@@ -173,6 +173,7 @@ int       _TreeAddNode(void *dbid, char *name, int *nid_out, char usage)
               new_nci.flags &= ~NciM_PARENT_STATE;
             else
               new_nci.flags |= NciM_PARENT_STATE;
+            new_nci.flags |= NciM_COMPRESS_ON_PUT;
 	    status = TreePutNci(dblist->tree_info, nid.node, &new_nci, 1);
 	  }
 	}
