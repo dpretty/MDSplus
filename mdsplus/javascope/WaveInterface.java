@@ -1,4 +1,4 @@
-/* $Id: WaveInterface.java,v 1.60 2003/08/08 12:35:41 manduchi Exp $ */
+/* $Id: WaveInterface.java,v 1.61 2003/09/24 14:25:45 manduchi Exp $ */
 import java.awt.*;
 import java.io.*;
 import java.awt.image.*;
@@ -1284,8 +1284,10 @@ public class WaveInterface
 	        return null;
 	    }
 	    
+	    
 	    if(in_x[curr_wave] != null && (in_x[curr_wave].trim()).length() != 0)
 	    {
+	        
 	        wd = dp.GetWaveData(in_y[curr_wave], in_x[curr_wave]);
 	        if(wd == null)
 	            curr_data = null;
@@ -1332,9 +1334,9 @@ public class WaveInterface
                 curr_data = null;
             else
             {
+		        curr_data = wd.GetFloatData();	        
 	            xlabel = wd.GetXLabel();
 	            ylabel = wd.GetYLabel();
-		        curr_data = wd.GetFloatData();	        
 	        }
 	        
 	        if(dimension == 1)
