@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <mdsshr.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiXxx.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:06:22 $";
+static char *cvsrev = "@(#)$RCSfile: TdiXxx.c,v $ $Revision: 1.4 $ $Date: 1998/10/19 14:10:46 $";
 
 extern int TdiConcat();
 extern int TdiTranslate();
@@ -405,11 +405,11 @@ TdiRefStandard2(Tdi2Keep)
 TdiRefStandard2(Tdi2Land)
 
 	only_mismatch(uni);
-	if (cats[0].in_cat != cats[0].out_cat) {
+	if (cats[0].out_cat != DTYPE_BU) {
 		cats[0].out_dtype = DTYPE_BU;
 		cats[0].out_cat = TdiREF_CAT[DTYPE_BU].cat;
 	}
-	if (cats[1].in_cat != cats[1].out_cat) {
+	if (cats[1].out_cat != DTYPE_BU) {
 		cats[1].out_dtype = DTYPE_BU;
 		cats[1].out_cat = TdiREF_CAT[DTYPE_BU].cat;
 	}
