@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <mdsshr.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiXxx.c,v $ $Revision: 1.5 $ $Date: 2000/09/14 13:31:16 $";
+static char *cvsrev = "@(#)$RCSfile: TdiXxx.c,v $ $Revision: 1.6 $ $Date: 2001/11/13 13:43:15 $";
 
 extern int TdiConcat();
 extern int TdiTranslate();
@@ -476,6 +476,25 @@ TdiRefStandard2(Tdi2Mask3)
 	}
 	return 1;
 }
+/*---------------------------------------------------
+        Fix categories for opcodes, out=long-scalar, in1=any numeric, in2=long-scalar in3=any logical:
+        MAXLOC MINLOC. 
+*/
+TdiRefStandard2(Tdi2Mask3L)
+
+        cats[narg].out_dtype = DTYPE_L;
+        cats[narg].out_cat = TdiREF_CAT[DTYPE_L].cat;
+        if (narg > 2) {
+                cats[2].out_cat =
+                   (unsigned short)((cats[2].in_cat | TdiREF_CAT[DTYPE_BU].cat) & TdiREF_CAT[DTYPE_O].cat);
+                if (cats[2].out_cat != cats[2].in_cat) {
+                        cats[2].out_dtype = DTYPE_BU;
+                        cats[2].out_cat = TdiREF_CAT[DTYPE_BU].cat;
+                }
+        }
+        return 1;
+}
+
 /*---------------------------------------------------
 	Fix categories for opcodes with input, same, logical:
 		any = MERGE(x,y,b).
