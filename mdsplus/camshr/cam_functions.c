@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: cam_functions.c,v 1.4 2003/02/11 18:44:00 twf Exp $
+//	$Id: cam_functions.c,v 1.5 2003/02/14 20:32:27 twf Exp $
 //-------------------------------------------------------------------------
 // Tue Aug  1 11:22:06 EDT 2000
 // Tue Apr  3 09:57:52 EDT 2001
@@ -555,7 +555,7 @@ static int JorwayDoIo(
 		printf( "%s()\n", J_ROUTINE_NAME );
 //printf( "%s(iosb is %sNULL)\n", J_ROUTINE_NAME, (iosb)?"NOT ":"" );		// [2002.12.13]
 
-	sprintf(dev_name, "GK%c%d", Key.scsi_port, Key.scsi_address);
+	sprintf(dev_name, "GK%c%d%02d", Key.scsi_port, Key.scsi_address, Key.crate);
         if( (scsiDevice = get_scsi_device_number( dev_name, &enhanced, &online )) < 0 ) {
 		if( MSGLVL(IMPORTANT) )
 			fprintf( stderr, "%s(): error -- no scsi device found for '%s'\n", J_ROUTINE_NAME, dev_name );

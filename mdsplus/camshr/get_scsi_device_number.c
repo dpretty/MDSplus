@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: get_scsi_device_number.c,v 1.2 2003/02/10 21:43:56 twf Exp $
+//	$Id: get_scsi_device_number.c,v 1.3 2003/02/14 20:32:27 twf Exp $
 //-------------------------------------------------------------------------
 
 #include <stdio.h>
@@ -51,9 +51,9 @@ int get_scsi_device_number( char *highway_name, int *enhanced, int *online )
 	}
 
 	// lookup name
-	sprintf(highway, "%.4s", highway_name);				// trim to highway name, only
+	//	sprintf(highway, "%.4s", highway_name);				// trim to highway name, only
 
-	if( (i = lookup_entry( CRATE_DB, highway )) < 0 ) {	// lookup actual device num
+	if( (i = lookup_entry( CRATE_DB, highway_name )) < 0 ) {	// lookup actual device num
 		if( MSGLVL(IMPORTANT) )
 			fprintf( stderr, "no such highway in 'crate.db'\n" );
 
