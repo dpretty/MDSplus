@@ -24,7 +24,7 @@
 #endif
 #define max(a,b) ((a) > (b) ? (a) : (b))
 
-static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.51 $ $Date: 2002/11/05 15:34:04 $";
+static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.52 $ $Date: 2002/12/23 16:02:56 $";
 
 #define node_to_node_number(node_ptr) node_ptr - dblist->tree_info->node
 #define __toupper(c) (((c) >= 'a' && (c) <= 'z') ? (c) & 0xDF : (c))
@@ -486,9 +486,9 @@ int _TreeAddConglom(void *dbid, char *path, char *congtype, int *nid)
   if (!IS_OPEN_FOR_EDIT(dblist))
     return TreeNOEDIT;
   if (path[0] == '\\')
-    sprintf(exp,"%s__add('\\%s',_nid)",congtype,path);
+    sprintf(exp,"DevAddDevice('\\%s', '%s')",path, congtype);
   else
-    sprintf(exp,"%s__add('%s',_nid)",congtype,path);
+     sprintf(exp,"DevAddDevice('%s', '%s')",path, congtype);
   status = LibFindImageSymbol(&tdishr,&tdiexecute,&addr);
   if (status & 1)
   {
