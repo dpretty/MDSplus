@@ -1,4 +1,4 @@
-/* $Id: LocalDataProvider.java,v 1.27 2004/12/22 15:05:09 manduchi Exp $ */
+/* $Id: LocalDataProvider.java,v 1.28 2005/01/13 09:14:48 manduchi Exp $ */
 import javax.swing.JFrame;
 import java.io.IOException;
 import java.util.*;
@@ -33,11 +33,17 @@ public class LocalDataProvider extends MdsDataProvider implements DataProvider
     static {
         try
         {
-	        System.loadLibrary("JavaMds");
-	    }
-	    catch(Throwable e)
-	    {
-	    }
+          System.loadLibrary("MdsShr");
+          System.loadLibrary("MdsIpShr");
+          System.loadLibrary("TreeShr");
+          System.loadLibrary("TdiShr");
+          System.loadLibrary("JavaMds");
+        }
+        catch(Throwable e)
+        {
+          System.out.println("Load library "+e);
+          e.printStackTrace();
+        }
     }
 
     native public void SetEnvironmentSpecific(String in, String defaultNode);
