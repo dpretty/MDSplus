@@ -401,7 +401,7 @@ int LibWait(float *secs)
 
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.43 $ $Date: 1998/12/17 20:12:10 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.44 $ $Date: 1998/12/18 18:54:32 $";
 #ifndef va_count
 #define  va_count(narg) va_start(incrmtr, first); \
                         for (narg=1; (narg < 256) && (va_arg(incrmtr, struct descriptor *) != MdsEND_ARG); narg++)
@@ -600,9 +600,7 @@ int StrGet1Dx(unsigned short *len, struct descriptor *out)
   return 1;
 }
 
-#if defined(__alpha) && defined(__vms)
-typedef __int64 _int64;
-#elif defined(__unix__) || defined(unix) || defined(__unix) ||defined (vxWorks) 
+#ifndef _WIN32
 typedef long long _int64;
 #endif
 

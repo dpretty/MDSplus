@@ -33,7 +33,7 @@ int Tdi3Add(struct descriptor *in1, struct descriptor *in2, struct descriptor *o
 #include <mdsdescrip.h>
 #include <tdimessages.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiAdd.c,v $ $Revision: 1.16 $ $Date: 1998/12/16 10:55:05 $";
+static char *cvsrev = "@(#)$RCSfile: TdiAdd.c,v $ $Revision: 1.17 $ $Date: 1998/12/18 18:54:56 $";
 
 extern int CvtConvertFloat();
 
@@ -257,9 +257,7 @@ int Tdi3Multiply(struct descriptor *in1, struct descriptor *in2, struct descript
   return 1;
 }
 
-#if defined(__alpha) && defined(__vms)
-typedef __int64 _int64;
-#elif defined(__unix__) || defined(unix) || defined(__unix) || defined(vxWorks)
+#ifndef _WIN32
 typedef long long _int64;
 #endif
 
