@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeFindNode.c,v $ $Revision: 1.15 $ $Date: 1998/04/24 18:45:40 $";
+static char *cvsrev = "@(#)$RCSfile: TreeFindNode.c,v $ $Revision: 1.16 $ $Date: 1998/05/06 14:12:12 $";
 
 extern void *DBID;
 
@@ -1124,8 +1124,8 @@ int _TreeFindTag(PINO_DATABASE *db, NODE *default_node, short treelen, char *tre
 		   if ((idx = bsearch((const void *)&tsearch, (const void *)tsearch.info->tags, 
 			   tsearch.info->header->tags, sizeof(int), BsearchCompare)) != 0)
 		   {
-			   *nodeptr = tsearch.info->node + (tsearch.info->tag_info + *idx)->node_idx;
-                           *tagidx = *idx + 1;
+			   *nodeptr = tsearch.info->node + swapint((char *)&(tsearch.info->tag_info + swapint((char *)idx))->node_idx);
+                           *tagidx = swapint((char *)idx) + 1;
 			   return TreeNORMAL;
 		   }
 		   else
