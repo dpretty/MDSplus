@@ -1,4 +1,4 @@
-static char *cvsrev = "@(#)$RCSfile: main-uil.c,v $ $Revision: 1.14 $ $Date: 1999/09/14 15:55:05 $"; 
+static char *cvsrev = "@(#)$RCSfile: main-uil.c,v $ $Revision: 1.15 $ $Date: 2003/03/20 20:15:08 $"; 
 /*
  * README: Portions of this file are merged at file generation
  * time. Edits can be made *only* in between specified code blocks, look
@@ -81,6 +81,7 @@ extern void tag_selection_proc (Widget, XtPointer, XtPointer);
 extern void DeleteNode(Widget, XtPointer, XtPointer);
 extern void DeleteNodeNow(Widget, XtPointer, XtPointer);
 extern void RenameNode(Widget, XtPointer, XtPointer);
+extern void AddNodeStart(Widget, XtPointer, XtPointer);
 
 /*
  * Function prototypes for routines located in utilities file
@@ -161,7 +162,7 @@ int main(int argc, char **argv)
     MrmHierarchy HierarchyID;
     MrmType MrmWClass;
     static char *UidFile [] = { BX_UID_FILE_NAME };
-    MRMRegisterArg NamesList[48];
+    MRMRegisterArg NamesList[49];
     Cardinal Nlac;
     Nlac = 0;
     NamesList[Nlac].name = "CloseTree";
@@ -248,6 +249,9 @@ int main(int argc, char **argv)
     NamesList[Nlac++].value = (XtPointer) DeleteNodeNow;
     NamesList[Nlac].name = "RenameNode";
     NamesList[Nlac++].value = (XtPointer) RenameNode;
+    NamesList[Nlac].name = "AddNodeStart";
+    NamesList[Nlac++].value = (XtPointer) AddNodeStart;
+ 
     NamesList[Nlac].name = NULL;
     NamesList[Nlac].value = NULL;
     
