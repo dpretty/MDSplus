@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: cam_functions.c,v 1.22 2003/09/08 15:04:26 twf Exp $
+//	$Id: cam_functions.c,v 1.23 2003/09/08 15:25:21 twf Exp $
 //-------------------------------------------------------------------------
 // Tue Aug  1 11:22:06 EDT 2000
 // Tue Apr  3 09:57:52 EDT 2001
@@ -1117,7 +1117,13 @@ static int Jorway73ATranslateIosb( int isdatacmd, int reqbytcnt, J73ASenseData *
 	break;
       case 1:
 	LastIosb.x=sense->additional_sense_code != 0x44;
-	LastIosb.q=sense->additional_sense_code != 0x80;
+        if (sense->sense_key == 9)
+	{
+          LastIosb.q=0;
+          status = CamDONE_NOQ;
+        }
+        else
+  	  LastIosb.q=sense->additional_sense_code != 0x80;
 	LastIosb.err=0;
 	LastIosb.lpe=sense->additional_sense_code==0x47;
 	LastIosb.tpe=sense->additional_sense_code==0x47;
