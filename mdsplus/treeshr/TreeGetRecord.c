@@ -20,7 +20,7 @@
 
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.28 $ $Date: 2000/10/06 19:07:03 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.29 $ $Date: 2001/01/19 20:34:55 $";
 
 
 static int OpenDatafileR(TREE_INFO *info);
@@ -56,6 +56,7 @@ int _TreeGetRecord(void *dbid, int nid_in, struct descriptor_xd *dsc)
   int       nidx;
   int       retsize;
   int       nodenum;
+  MdsFree1Dx(dsc,NULL);
   if (!(IS_OPEN(dblist)))
     return TreeNOT_OPEN;
 
