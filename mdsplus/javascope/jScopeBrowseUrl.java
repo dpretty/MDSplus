@@ -1,4 +1,4 @@
-/* $Id: jScopeBrowseUrl.java,v 1.7 2002/05/24 08:55:19 jgk Exp $ */
+/* $Id: jScopeBrowseUrl.java,v 1.8 2002/05/24 14:16:50 jgk Exp $ */
 import javax.swing.border.*;
 import javax.swing.colorchooser.*;
 import javax.swing.filechooser.*;
@@ -109,9 +109,15 @@ public class jScopeBrowseUrl extends JDialog
 
     }
 
+
+    final static String u_agent = "jScopeBrowseUrl.java ($Revision: 1.8 $) for "+jScope.VERSION;
+
     protected void setPage(URL url) throws IOException
     {
         url_con = url.openConnection();
+
+        url_con.setRequestProperty("User-Agent",u_agent);
+
         mime_type = url_con.getContentType();
 
         // Assume (like browsers) that missing mime-type indicates text/html.
