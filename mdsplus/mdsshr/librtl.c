@@ -399,7 +399,7 @@ int LibWait(float *secs)
 
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.39 $ $Date: 1998/10/20 08:22:33 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.40 $ $Date: 1998/11/04 14:02:53 $";
 #ifndef va_count
 #define  va_count(narg) va_start(incrmtr, first); \
                         for (narg=1; (narg < 256) && (va_arg(incrmtr, struct descriptor *) != MdsEND_ARG); narg++)
@@ -1143,8 +1143,12 @@ unsigned int StrMatchWild(struct descriptor *candidate, struct descriptor *patte
   }
 }
 
-#ifndef MAX
+#ifdef MAX
+#undef MAX
+#endif
 #define MAX(a,b) (a) > (b) ? (a) : (b)
+#ifdef MIN
+#undef MIN
 #endif
 #define MIN(a,b) (a) < (b) ? (a) : (b)
 
