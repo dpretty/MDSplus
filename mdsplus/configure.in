@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.169 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.170 $
 AC_INIT()
 
 AC_CONFIG_HEADER(include/config.h)
@@ -274,6 +274,16 @@ dnl          -seg_addr_table_filename \$(@F) -seg_addr_table ../macosx/bindtable
        LINKSHARED="";
        FEXECLIBDIR="-L";
        SHARETYPE="";;
+*qnx*) CFLAGS="$CFLAGS -fpic";
+       LDSHARE="-Wl,-Bdynamic ";
+       LDARC="-Wl,-Bstatic ";
+       LD_LDSHARE="-Bdynamic ";
+       LD_LDARC="-Bstatic ";
+       LINKSHARED="-shared ";
+       LIBPATH="LD_LIBRARY_PATH";
+       FOR_LDFLAGS="";
+       FEXECLIBDIR="-L";
+       SHARETYPE=".so";;
 *)     CFLAGS="$CFLAGS";
        FFLAGS="$FFLAGS";
        FOR_LDFLAGS="";
