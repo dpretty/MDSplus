@@ -399,7 +399,7 @@ int LibWait(float *secs)
 
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.41 $ $Date: 1998/11/09 19:44:04 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.42 $ $Date: 1998/11/09 20:09:35 $";
 #ifndef va_count
 #define  va_count(narg) va_start(incrmtr, first); \
                         for (narg=1; (narg < 256) && (va_arg(incrmtr, struct descriptor *) != MdsEND_ARG); narg++)
@@ -674,11 +674,15 @@ int StrUpcase(struct descriptor *out, struct descriptor *in)
   return 1;
 }
 
-int StrRight(struct descriptor *out, struct descriptor *in, unsigned short *start) {
+int StrRight(struct descriptor *out, struct descriptor *in, unsigned short *start) 
+{
+  struct descriptor tmp = {0,DTYPE_T,CLASS_D,0};
   struct descriptor s = {0,DTYPE_T,CLASS_S,0};
+  StrCopyDx(&tmp,in);
   s.length = (unsigned short)((int)in->length - *start + 1);
-  s.pointer = in->pointer+(*start-1);
-  return StrCopyDx(out,&s);
+  s.pointer = tmp.pointer+(*start-1);
+  StrCopyDx(out,&s);
+  return StrFree1Dx(&tmp);
 }
 
 int LibCreateVmZone(ZoneList **zone)
