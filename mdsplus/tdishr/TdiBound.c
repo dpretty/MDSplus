@@ -16,16 +16,16 @@
 
 	Ken Klare, LANL P-4	(c)1989,1990,1991,1992
 */
+#include <stdlib.h>
 #include <mdsdescrip.h>
 #include <tdimessages.h>
 #include <mdsshr.h>
-#include <stdlib.h>
 #include "tdirefcat.h"
 #include "tdireffunction.h"
 #include "tdirefstandard.h"
 
 
-static char *cvsrev = "@(#)$RCSfile: TdiBound.c,v $ $Revision: 1.5 $ $Date: 1998/04/08 19:05:54 $";
+static char *cvsrev = "@(#)$RCSfile: TdiBound.c,v $ $Revision: 1.6 $ $Date: 1998/12/16 10:55:06 $";
 
 extern struct descriptor *TdiItoXSpecial;
 

@@ -10,12 +10,12 @@
 
 	Ken Klare, LANL CTR-7	(c)1989,1990
 */
+#include <stdlib.h>
 #include <mdsdescrip.h>
 #include <tdimessages.h>
-#include <stdlib.h>
 #include <mdsshr.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiGetArgs.c,v $ $Revision: 1.4 $ $Date: 1998/04/08 19:06:04 $";
+static char *cvsrev = "@(#)$RCSfile: TdiGetArgs.c,v $ $Revision: 1.5 $ $Date: 1998/12/16 10:55:13 $";
 
 extern struct descriptor_xd *TdiSELF_PTR;
 

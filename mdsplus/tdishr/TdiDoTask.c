@@ -14,6 +14,7 @@
 */
 typedef struct {int lo; unsigned int hi;} quadw;
 
+#include <stdlib.h>
 #include <mdsdescrip.h>
 #include "tdirefstandard.h"
 #include <libroutines.h>
@@ -22,11 +23,10 @@ typedef struct {int lo; unsigned int hi;} quadw;
 #ifdef __VMS
 #include <starlet.h>
 #endif
-#include <stdlib.h>
 #include <mdsshr.h>
 #include <treeshr.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiDoTask.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:06:01 $";
+static char *cvsrev = "@(#)$RCSfile: TdiDoTask.c,v $ $Revision: 1.4 $ $Date: 1998/12/16 10:55:12 $";
 
 extern int TdiTaskOf();
 extern int TdiGetFloat();

@@ -3,16 +3,16 @@
 
 	Ken Klare, LANL CTR-7	(c)1990
 */
+#include <stdio.h>
+#include <string.h>
 #include <mdsdescrip.h>
 #include <dbidef.h>
 #include <libroutines.h>
-#include <stdio.h>
-#include <string.h>
 #include <mdsshr.h>
 #include <treeshr.h>
 
 
-static char *cvsrev = "@(#)$RCSfile: TdiExpt.c,v $ $Revision: 1.4 $ $Date: 1998/11/05 16:49:28 $";
+static char *cvsrev = "@(#)$RCSfile: TdiExpt.c,v $ $Revision: 1.5 $ $Date: 1998/12/16 10:55:12 $";
 
 /*--------------------------------------------------------------
 	Default path name.

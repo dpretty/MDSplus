@@ -6,15 +6,15 @@
 
 extern unsigned short OpcCompile;
 
+#include <stdlib.h>
+#include <string.h>
 #include "tdirefzone.h"
 #include "tdirefstandard.h"
 #include <libroutines.h>
 #include <tdimessages.h>
 #include <mdsshr.h>
-#include <stdlib.h>
-#include <string.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiCompile.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:05:55 $";
+static char *cvsrev = "@(#)$RCSfile: TdiCompile.c,v $ $Revision: 1.4 $ $Date: 1998/12/16 10:55:08 $";
 
 extern int TdiEvaluate();
 extern int TdiYacc();

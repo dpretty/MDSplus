@@ -8,10 +8,10 @@
 	NEED to handle array of descriptors.
 */
 #include <mdsdescrip.h>
-#include <mdsdescrip.h>
+/*#include <mdsdescrip.h>*/
 #include <mdsshr.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiCvtDxDx.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:05:57 $";
+static char *cvsrev = "@(#)$RCSfile: TdiCvtDxDx.c,v $ $Revision: 1.4 $ $Date: 1998/12/16 10:55:10 $";
 
 extern int TdiConvert();
 extern int TdiGetShape();

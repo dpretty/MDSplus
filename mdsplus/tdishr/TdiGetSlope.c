@@ -11,20 +11,20 @@
 	NEED to watch for rounding/precision problems.
 */
 
+#include <stdlib.h>
 #include <tdimessages.h>
 #include "tdirefstandard.h"
 #ifdef vxWorks
 #undef MAX
 #endif
 
-#include <stdlib.h>
 #include <mdsshr.h>
 
 #define HUGE 0x1FFFFFFF
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
-static char *cvsrev = "@(#)$RCSfile: TdiGetSlope.c,v $ $Revision: 1.4 $ $Date: 1998/10/23 08:58:16 $";
+static char *cvsrev = "@(#)$RCSfile: TdiGetSlope.c,v $ $Revision: 1.5 $ $Date: 1998/12/16 10:55:13 $";
 
 extern int TdiData(  );
 extern int TdiGetLong(  );

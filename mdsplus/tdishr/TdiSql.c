@@ -20,15 +20,15 @@
 	Ken Klare, LANL P-4	(c)1991,1992
 */
 #define _MOVC3(a,b,c) memcpy(c,b,a)
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
 #include <mdsdescrip.h>
 #include <mdsdescrip.h>
 #include <math.h>	/*for pow definition*/
 #include "tdirefstandard.h"
-#include <string.h>
 #include <strroutines.h>
 #include <libroutines.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include <tdimessages.h>
 #include <mdsshr.h>
 #include <mds_stdarg.h>
@@ -42,7 +42,7 @@
 #define  DTYPE_D DTYPE_G
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TdiSql.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:06:17 $";
+static char *cvsrev = "@(#)$RCSfile: TdiSql.c,v $ $Revision: 1.4 $ $Date: 1998/12/16 10:55:15 $";
 
 extern int TdiFindImageSymbol();
 extern int TdiGetLong();

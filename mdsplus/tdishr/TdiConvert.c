@@ -1,12 +1,12 @@
+#include <string.h>
+#include <stdio.h>
 #include <mdsdescrip.h>
 /*#include <mdsdescrip.h>*/
-#include <string.h>
-#include <math.h>
 #include <tdimessages.h>
-#include <stdio.h>
+#include <math.h>
 #define MAXTYPE (DTYPE_FTC + 1)
 
-static char *cvsrev = "@(#)$RCSfile: TdiConvert.c,v $ $Revision: 1.8 $ $Date: 1998/10/23 08:58:15 $";
+static char *cvsrev = "@(#)$RCSfile: TdiConvert.c,v $ $Revision: 1.9 $ $Date: 1998/12/16 10:55:09 $";
 
 extern void CvtConvertFloat();
 extern int IsRoprand();

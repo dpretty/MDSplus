@@ -29,13 +29,11 @@ int Tdi3Add(struct descriptor *in1, struct descriptor *in2, struct descriptor *o
 
 ------------------------------------------------------------------------------*/
 
-
-#include <mdsdescrip.h>
-#include <mdsdescrip.h>
 #include <string.h>
+#include <mdsdescrip.h>
 #include <tdimessages.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiAdd.c,v $ $Revision: 1.15 $ $Date: 1998/10/23 08:58:15 $";
+static char *cvsrev = "@(#)$RCSfile: TdiAdd.c,v $ $Revision: 1.16 $ $Date: 1998/12/16 10:55:05 $";
 
 extern int CvtConvertFloat();
 

@@ -12,12 +12,12 @@
 
 	Ken Klare, LANL	P-4	(c)1989,1990,1992
 */
+#include <stdlib.h>
 #include "tdirefstandard.h"
 #include "tdirefcat.h"
-#include <stdlib.h>
 #include <mdsshr.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiDecompress.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:05:59 $";
+static char *cvsrev = "@(#)$RCSfile: TdiDecompress.c,v $ $Revision: 1.4 $ $Date: 1998/12/16 10:55:11 $";
 
 extern int TdiGetArgs();
 extern int Tdi2Vector();

@@ -10,15 +10,15 @@
 	Ken Klare, LANL P-4	(c)1990,1991,1992
 	KK	21-Oct-1992	remove text mismatches, NOT FOR EXTEND
 */
+#include <stdlib.h>
+#include <string.h>
 #include "tdirefcat.h"
 #include "tdirefstandard.h"
 #include "tdinelements.h"
 #include <tdimessages.h>
-#include <stdlib.h>
 #include <mdsshr.h>
-#include <string.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiCull.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:05:57 $";
+static char *cvsrev = "@(#)$RCSfile: TdiCull.c,v $ $Revision: 1.4 $ $Date: 1998/12/16 10:55:09 $";
 
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 

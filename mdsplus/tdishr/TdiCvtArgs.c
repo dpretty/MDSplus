@@ -5,16 +5,16 @@
 
 	Ken Klare, LANL CTR-7	(c)1989,1990
 */
+#include <stdlib.h>
 #include "tdirefcat.h"
 #include "tdirefstandard.h"
 #include <tdimessages.h>
-#include <stdlib.h>
 #include <mdsshr.h>
 
 #define SIGNEDNESS	(TdiCAT_B ^ TdiCAT_BU)
 #define FLOATMASK	(TdiCAT_FLOAT | TdiCAT_LENGTH)
 
-static char *cvsrev = "@(#)$RCSfile: TdiCvtArgs.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:05:57 $";
+static char *cvsrev = "@(#)$RCSfile: TdiCvtArgs.c,v $ $Revision: 1.4 $ $Date: 1998/12/16 10:55:10 $";
 
 extern int TdiConvert(  );
 extern int TdiGetShape(  );

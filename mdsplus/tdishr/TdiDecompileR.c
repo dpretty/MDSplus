@@ -5,13 +5,13 @@
 	Josh Stillerman, MIT-PFC, 28-DEC-1988
 	Ken Klare, LANL P-4	(c)1989,1990,1991,1992
 */
+#include <string.h>
 #include <mdsdescrip.h>
-#include <mdsdescrip.h>
+/*#include <mdsdescrip.h>*/
 #include "opcopcodes.h"
 #include "tdirefcat.h"
 #include "tdireffunction.h"
 #include "tdirefzone.h"
-#include <string.h>
 #include <strroutines.h>
 #include <mds_stdarg.h>
 
@@ -19,7 +19,7 @@
 #define	P_ARG		88
 #define P_SUBS		0
 
-static char *cvsrev = "@(#)$RCSfile: TdiDecompileR.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:05:59 $";
+static char *cvsrev = "@(#)$RCSfile: TdiDecompileR.c,v $ $Revision: 1.3 $ $Date: 1998/12/16 10:55:11 $";
 
 extern unsigned int LEX_CONST;
 unsigned int TdiIndent = 1;

@@ -17,16 +17,16 @@
 
 	Ken Klare, LANL	P-4	(c)1990,1992
 */
+#include <string.h>
+#include <stdlib.h>
 #include "tdirefcat.h"
 #include "tdirefstandard.h"
 #include <libroutines.h>
 #include <strroutines.h>
-#include <string.h>
 #include <tdimessages.h>
-#include <stdlib.h>
 #include <mdsshr.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiCall.c,v $ $Revision: 1.4 $ $Date: 1998/10/01 17:37:06 $";
+static char *cvsrev = "@(#)$RCSfile: TdiCall.c,v $ $Revision: 1.5 $ $Date: 1998/12/16 10:55:07 $";
 
 extern unsigned short OpcDescr;
 extern unsigned short OpcRef;

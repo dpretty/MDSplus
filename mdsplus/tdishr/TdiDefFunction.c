@@ -10,10 +10,10 @@
 #include <libroutines.h>
 #include <tdimessages.h>
 #include <mdsdescrip.h>
-#include <mdsdescrip.h>
+/*#include <mdsdescrip.h>*/
 #define COM 
 
-static char *cvsrev = "@(#)$RCSfile: TdiDefFunction.c,v $ $Revision: 1.3 $ $Date: 1998/05/01 18:05:12 $";
+static char *cvsrev = "@(#)$RCSfile: TdiDefFunction.c,v $ $Revision: 1.4 $ $Date: 1998/12/16 10:55:11 $";
 
 extern int TdiIntrinsic();
 

@@ -15,6 +15,7 @@
 #define	P_UNARY	12	/*unary: NEGATE(!) IGNORE_UNDEFINED(?) IGNORE_STATUS(~)*/
 #define	P_TIGHT	16	/*strongest: path <event> and parentheses*/
 
+#include <string.h>
 #include <mdsdescrip.h>
 #include "tdirefstandard.h"
 #include <strroutines.h>
@@ -22,9 +23,8 @@
 #include <mdsshr.h>
 #include <treeshr.h>
 #include <mds_stdarg.h>
-#include <string.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiDecompileDependency.c,v $ $Revision: 1.6 $ $Date: 1998/04/13 18:58:01 $";
+static char *cvsrev = "@(#)$RCSfile: TdiDecompileDependency.c,v $ $Revision: 1.7 $ $Date: 1998/12/16 10:55:10 $";
 
 static DESCRIPTOR(AND,		" & ");
 static DESCRIPTOR(OR,		" | ");

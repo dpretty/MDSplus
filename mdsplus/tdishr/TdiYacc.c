@@ -39,6 +39,8 @@
 	path[b] subscripts whatever is at node. Same problem.
 	NOT and INOT of AND OR etc., form NAND or AND_NOT etc. See KNOT1 and KNOT2. Not after 9/25/89.
 */
+#include <stdio.h>
+#include <string.h>
 #include <mdsdescrip.h>
 #include <mdsdescrip.h>
 #include "tdirefcat.h"
@@ -46,11 +48,13 @@
 #include "tdirefzone.h"
 #include <libroutines.h>
 #include <strroutines.h>
-#include <stdio.h>
-#include <string.h>
 #include <tdimessages.h>
 #include <mds_stdarg.h>
-static char *cvsrev = "@(#)$RCSfile: TdiYacc.c,v $ $Revision: 1.12 $ $Date: 1998/11/03 15:09:40 $";
+
+#ifdef vxWorks
+#undef ERROR
+#endif
+static char *cvsrev = "@(#)$RCSfile: TdiYacc.c,v $ $Revision: 1.13 $ $Date: 1998/12/16 10:55:15 $";
 
 extern unsigned short
 	OpcAbort,
@@ -715,7 +719,7 @@ __YYSCLASS char * yyreds[] =
 };
 #endif /* YYDEBUG */
 #define YYFLAG  (-3000)
-/* @(#) $Revision: 1.12 $ */    
+/* @(#) $Revision: 1.13 $ */    
 
 /*
 ** Skeleton parser driver for yacc output
