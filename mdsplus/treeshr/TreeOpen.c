@@ -32,14 +32,14 @@
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.44 $ $Date: 2000/02/15 16:34:50 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.45 $ $Date: 2000/03/16 22:01:04 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
 
 int treeshr_errno = 0;
 
-extern int MdsEventCan();
+extern int MDSEventCan();
 static void RemoveBlanksAndUpcase(char *out, char *in);
 static int CloseTopTree(PINO_DATABASE *dblist, int call_hook);
 static int ConnectTree(PINO_DATABASE *dblist, char *tree, NODE *parent, char *subtree_list);
@@ -266,7 +266,7 @@ static int CloseTopTree(PINO_DATABASE *dblist, int call_hook)
 					if (local_info->blockid == TreeBLOCKID)
 					{
 						if (local_info->rundown_id)
-							MdsEventCan(local_info->rundown_id);
+							MDSEventCan(local_info->rundown_id);
 						if (local_info->section_addr[0])
 						{
 #if defined(__osf__) && !defined(vxWorks)
