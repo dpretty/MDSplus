@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: cam_functions.c,v 1.3 2003/02/10 21:43:56 twf Exp $
+//	$Id: cam_functions.c,v 1.4 2003/02/11 18:44:00 twf Exp $
 //-------------------------------------------------------------------------
 // Tue Aug  1 11:22:06 EDT 2000
 // Tue Apr  3 09:57:52 EDT 2001
@@ -366,13 +366,11 @@ int Cam##pname(                                     \
 // macro expansion
 //-----------------------------------------------------------
 CallSingleIo( Piow,    QIgnore )	// yields: int = CamPiow( ... )
-CallSingleIo( PioQrep, QRep    )	//       : int = CamPioQrep( ... )
+CallSingleIo( PioQrepw, QRep    )	//       : int = CamPioQrepw( ... )
 
-//CallMultiIo( FQstop, QStop,   1 )	//       : int = CamFQstop( ... )
-//CallMultiIo( FStop,  QIgnore, 1 )	//       : int = CamFStop( ... )
 CallMultiIo( FQstopw, QStop,   1 )	//       : int = CamFQstopw( ... )		[2001.09.13]
 CallMultiIo( FStopw,  QIgnore, 1 )	//       : int = CamFStopw( ... )		[2001.09.13]
-
+CallMultiIo( FQrepw,  QRep,    1 )	//       : int = CamQrepw( ... )		[2001.04.18]
 CallMultiIo( Qrepw,   QRep,    0 )	//       : int = CamQrepw( ... )		[2001.04.18]
 CallMultiIo( Qscanw,  QScan,   0 )	//       : int = CamQscanw( ... )		[2001.04.18]
 CallMultiIo( Qstopw,  QStop,   0 )	//       : int = CamQstopw( ... )		[2001.08.30]
