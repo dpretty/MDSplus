@@ -1,3 +1,6 @@
+#ifdef _WIN32
+#include <io.h>
+#endif
 #include <mdsdescrip.h>
 #include <mdsshr.h>
 #include <string.h>
@@ -19,7 +22,7 @@
 
 #define max(a,b) ((a) > (b) ? (a) : (b))
 
-static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.20 $ $Date: 1998/05/08 16:06:20 $";
+static char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.21 $ $Date: 1998/05/15 15:43:38 $";
 
 #define node_to_node_number(node_ptr) node_ptr - dblist->tree_info->node
 #define __toupper(c) (((c) >= 'a' && (c) <= 'z') ? (c) & 0xDF : (c))
@@ -777,8 +780,8 @@ static int TreeWriteNci(TREE_INFO *info)
     int num;
     status = TreeFAILURE;
 #ifdef _WIN32
-    fseek(info->nci_file->put,info->edit->first_in_mem * sizeof(struct nci),SEEK_SET);
-    num = fwrite(info->edit->nci,sizeof(struct nci),numnodes,info->nci_file->put);
+    _lseek(info->nci_file->put,info->edit->first_in_mem * sizeof(struct nci),SEEK_SET);
+    num = _write(info->nci_file->put,info->edit->nci,numnodes * sizeof(NCI))/sizeof(NCI);
 #else
     lseek(info->nci_file->put,info->edit->first_in_mem * sizeof(struct nci),SEEK_SET);
     num = write(info->nci_file->put,info->edit->nci,numnodes * sizeof(NCI))/sizeof(NCI);
