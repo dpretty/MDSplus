@@ -408,7 +408,7 @@ int LibWait(float *secs)
 
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.53 $ $Date: 1999/07/15 13:53:03 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.54 $ $Date: 1999/07/15 15:04:29 $";
 #ifndef va_count
 #define  va_count(narg) va_start(incrmtr, first); \
                         for (narg=1; (narg < 256) && (va_arg(incrmtr, struct descriptor *) != MdsEND_ARG); narg++)
@@ -1462,7 +1462,7 @@ static char *_FindNextFile(FindFileCtx *ctx, int recursively, int caseBlind)
 #ifdef _LINUX
     if (dp != NULL)
     {
-      if( dp->d_type)
+      if( dp->dype)
       {
         dp = (struct dirent *)(((char *)dp)-1);
       }
