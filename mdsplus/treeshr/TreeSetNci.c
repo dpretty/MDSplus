@@ -51,7 +51,7 @@ extern RMS$_WER;
 #pragma extern_model restore
 #endif /* VMS */
 
-static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.6 $ $Date: 1998/04/08 18:51:40 $";
+static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.7 $ $Date: 1998/04/10 20:01:41 $";
 
 extern void *DBID;
 
@@ -64,7 +64,6 @@ int TreeTurnOff(int nid) { return _TreeTurnOff(DBID, nid);}
 int TreeGetNciLw(TREE_INFO *info, int node_num, NCI *nci);
 
 int TreeOpenNciW(TREE_INFO *info);
-static int SetParentState(PINO_DATABASE *db, NODE *node, unsigned int state);
 static int UnlockNci(TREE_INFO *info, int node_num);
 static int SetNodeParentState(PINO_DATABASE *db, NODE *node, NCI *nci, unsigned int state);
 
@@ -768,7 +767,7 @@ static int UnlockNci(TREE_INFO *info, int node_num)
 
 +-----------------------------------------------------------------------------*/
 
-static int SetParentState(PINO_DATABASE *db, NODE *node, unsigned int state)
+int SetParentState(PINO_DATABASE *db, NODE *node, unsigned int state)
 {
   int       status;
   NCI       nci;
