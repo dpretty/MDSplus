@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: KsM.c,v 1.4 2003/04/16 16:19:05 twf Exp $
+//	$Id: KsM.c,v 1.5 2003/05/12 15:19:16 twf Exp $
 //-------------------------------------------------------------------------
 // Mon Oct 15 16:35:42 EDT 2001	-- seperated out
 //-----------------------------------------------------------
@@ -80,6 +80,7 @@ static int KsMultiIo(
                     Data, xfer_len.l, 
                     (char *)&sense, sizeof(sense), &sb_out_len,&transfer_len);
   LastIosb.bytcnt = (unsigned short)(transfer_len & 0xFFFF);
+  LastIosb.lbytcnt = (unsigned short)(transfer_len >> 16);
   status = KsTranslateIosb(&sense,status);
   if (iosb) *iosb=LastIosb;
   
