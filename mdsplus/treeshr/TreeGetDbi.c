@@ -4,7 +4,7 @@
 #include "treeshrp.h"
 #include <dbidef.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetDbi.c,v $ $Revision: 1.13 $ $Date: 2002/01/22 15:46:48 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetDbi.c,v $ $Revision: 1.14 $ $Date: 2002/03/28 20:25:11 $";
 
 extern void *DBID;
 #ifndef HAVE_VXWORKS_H
@@ -12,7 +12,7 @@ extern void *DBID;
 #endif
 int TreeGetDbi(struct dbi_itm *itmlst) {return _TreeGetDbi(DBID,itmlst);}
 #define set_retlen(length) if (lst->buffer_length < length) { status = TreeBUFFEROVF; break; } else retlen=length
-#define check_open(db) if (!db || !db->open) {status=TreeNOT_OPEN;break;}
+#define CheckOpen(db) if (!db || !db->open) {status=TreeNOT_OPEN;break;}
 #define set_ret_char(val) memset(lst->pointer, 0, lst->buffer_length); *((char *)lst->pointer) = val
 
 int _TreeGetDbi(void *dbid, struct dbi_itm *itmlst)
@@ -28,32 +28,32 @@ int _TreeGetDbi(void *dbid, struct dbi_itm *itmlst)
     {
      case DbiNAME:
 
-      check_open(db);
+      CheckOpen(db);
       string = strcpy(malloc(strlen(db->main_treenam)+1),db->main_treenam);
       break;
 
      case DbiSHOTID:
 
-      check_open(db);
+      CheckOpen(db);
       set_retlen(sizeof(db->shotid));
       *(int *) lst->pointer = db->shotid;
       break;
 
      case DbiMODIFIED:
 
-      check_open(db);
+      CheckOpen(db);
       set_ret_char(db->modified);
       break;
 
      case DbiOPEN_FOR_EDIT:
 
-      check_open(db);
+      CheckOpen(db);
       set_ret_char(db->open_for_edit);
       break;
 
      case DbiOPEN_READONLY:
 
-      check_open(db);
+      CheckOpen(db);
       set_ret_char(db->open_readonly);
       break;
 
@@ -91,7 +91,7 @@ int _TreeGetDbi(void *dbid, struct dbi_itm *itmlst)
 
      case DbiDEFAULT:
 
-      check_open(db);
+      CheckOpen(db);
       {
 	int nid;
         _TreeGetDefaultNid(db,&nid);
