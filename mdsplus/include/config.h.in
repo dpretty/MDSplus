@@ -1,5 +1,5 @@
 /* include/config.h.in.  Generated automatically from configure.in by autoheader.  */
-/* @(#)$RCSfile: config.h.in,v $ $Revision: 1.1 $ */
+/* @(#)$RCSfile: config.h.in,v $ $Revision: 1.2 $ */
 #ifndef _CONFIG_INCLUDED
 
 /* Define to empty if the keyword does not work.  */
@@ -59,6 +59,12 @@
 
 /* The number of bytes in a long.  */
 #undef SIZEOF_LONG
+
+/* The number of bytes in a long long.  */
+#undef SIZEOF_LONG_LONG
+
+/* The number of bytes in a _int64.  */
+#undef SIZEOF__INT64
 
 /* Define if you have the gethostname function.  */
 #undef HAVE_GETHOSTNAME
