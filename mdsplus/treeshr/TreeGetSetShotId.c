@@ -42,7 +42,7 @@ extern char *index();
 
 extern char *TranslateLogical();
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetSetShotId.c,v $ $Revision: 1.6 $ $Date: 2000/10/25 19:06:54 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetSetShotId.c,v $ $Revision: 1.7 $ $Date: 2000/11/01 19:03:24 $";
 
 #define _ToLower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
@@ -122,11 +122,12 @@ int       TreeGetCurrentShotId(char *experiment)
     exp[i] = _ToLower(exp[i]);
   strcat(exp,"_path");
   path = TranslateLogical(exp);
+  exp[strlen(experiment)]='\0';
   if (path && ((slen = strlen(path)) > 2) && (path[slen-1] == ':') && (path[slen-2] == ':'))
-    status = TreeGetCurrentShotIdRemote(experiment, path, &shot);
+    status = TreeGetCurrentShotIdRemote(exp, path, &shot);
   else
   {
-    FILE *file = OpenShotIdFile(experiment,"rb");
+    FILE *file = OpenShotIdFile(exp,"rb");
     if (file)
     {
       status = fread(&shot,sizeof(shot),1,file) == 1;
