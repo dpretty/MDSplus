@@ -4,7 +4,7 @@
 #include "treeshrp.h"
 #include <dbidef.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetDbi.c,v $ $Revision: 1.12 $ $Date: 2001/06/06 17:04:34 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetDbi.c,v $ $Revision: 1.13 $ $Date: 2002/01/22 15:46:48 $";
 
 extern void *DBID;
 #ifndef HAVE_VXWORKS_H
@@ -62,8 +62,6 @@ int _TreeGetDbi(void *dbid, struct dbi_itm *itmlst)
       {
 	int       idx;
 	for (idx = 0, db = (PINO_DATABASE *)dbid; db && (idx < (*(int *) (lst->pointer) & 0xff)); idx++, db = db->next);
-	if (!(db ? db->open : 0))
-	  status = TreeNOT_OPEN;
 	break;
       }
 
