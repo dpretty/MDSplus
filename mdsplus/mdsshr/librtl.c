@@ -9,7 +9,7 @@
 #include <mds_stdarg.h>
 #include <librtl_messages.h>
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.101 $ $Date: 2002/05/29 19:19:26 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.102 $ $Date: 2002/05/29 20:23:05 $";
 
 extern int MdsCopyDxXd();
 
@@ -1199,32 +1199,30 @@ int LibEstablish()
   return 1;
 }
 
-#define SEC_PER_DAY 60*60*24
+#define SEC_PER_DAY (60*60*24)
+
+static int parsedate(char *asctim, void *dummy)
+{
+  return time(0);
+}
 
 int LibConvertDateString(char *asc_time, _int64 *qtime)
 {
-  char *ldate;
   int tim;
   
   /* VMS time = unixtime * 10,000,000 + 0x7c95674beb4000q */
   if (strcasecmp(asc_time, "today") == 0) {
-    time_t tim=time(NULL)/SEC_PER_DAY*SEC_PER_DAY;
-    ldate = ctime(&tim);
+    tim=(time(NULL)/SEC_PER_DAY)*SEC_PER_DAY;
   } else if (strcasecmp(asc_time, "tomorrow") == 0) {
-    time_t tim=time(NULL)/SEC_PER_DAY*SEC_PER_DAY+SEC_PER_DAY;
-    ldate = ctime(&tim);
+    tim=(time(NULL)/SEC_PER_DAY)*SEC_PER_DAY+SEC_PER_DAY;
   }else if (strcasecmp(asc_time, "yesterday") == 0) {
-    time_t tim=time(NULL)/SEC_PER_DAY*SEC_PER_DAY-SEC_PER_DAY;
-    ldate = ctime(&tim);
+    tim=(time(NULL)/SEC_PER_DAY)*SEC_PER_DAY-SEC_PER_DAY;
   }
   else
-    ldate = asc_time;
-
-
-  tim = parsedate(ldate, NULL);
+    tim = parsedate(asc_time, NULL);
   if (tim > 0) {
     _int64 addin = LONG_LONG_CONSTANT(0x7c95674beb4000);
-    *qtime = tim*10000000+addin;
+    *qtime = ((_int64)tim)*10000000+addin;
   } else
     *qtime = 0;
   return 1;
