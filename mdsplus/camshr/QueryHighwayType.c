@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: QueryHighwayType.c,v 1.1 2002/09/10 16:06:59 twf Exp $
+//	$Id: QueryHighwayType.c,v 1.2 2003/09/05 15:59:58 twf Exp $
 //-------------------------------------------------------------------------
 
 //-------------------------------------------------------------------------
@@ -105,10 +105,15 @@ int QueryHighwayType( char *serial_hwy_driver )
 
 		if( foundHost && foundVendor ) {
 			if( strstr(tmpVendor, "JORWAY") ) {
+                          if (strstr(tmpModel,"73A"))
+                            highwayType = JORWAY_73A;
+                          else
+			    {
 				if( atoi(tmpRev) >= 12 )
 					highwayType = JORWAY;
 				else
 					highwayType = JORWAY_OLD;
+			    }
 			}
 			else {
 				if( strstr(tmpVendor, "KINSYSCO") )
