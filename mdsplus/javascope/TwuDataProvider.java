@@ -1,4 +1,4 @@
-/* $Id: TwuDataProvider.java,v 1.4 2002/04/05 09:36:36 manduchi Exp $ */
+/* $Id: TwuDataProvider.java,v 1.5 2002/04/09 16:25:41 jgk Exp $ */
 import java.io.*;
 import java.net.*;
 import java.util.*;
@@ -577,6 +577,8 @@ class TwuDataProvider implements DataProvider
               bulk = new TWUSignal(twup, start_idx, step, n_point);
                 
             int inc = n_point/Waveform.MAX_POINTS;
+            if (inc<1) 
+              inc=1;
 
             while(!bulk.complete())
             {

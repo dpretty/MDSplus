@@ -10,9 +10,12 @@
  * Authors: Jon Krom, H.R.Koslowski, 
  *          Forschungszentrum Jülich, Institut für Plasmaphysik.
  *
- * $Id: TWUSignal.java,v 1.1 2002/04/05 09:36:36 manduchi Exp $
+ * $Id: TWUSignal.java,v 1.2 2002/04/09 16:25:41 jgk Exp $
  *
  * $Log: TWUSignal.java,v $
+ * Revision 1.2  2002/04/09 16:25:41  jgk
+ * Fixed zoming-bug in TWU support classes.
+ *
  * Revision 1.1  2002/04/05 09:36:36  manduchi
  * Upgraded TWUDataProvider
  *
@@ -108,6 +111,13 @@ public class TWUSignal
         while ( sampleCount < maxSamples )
         {
             ydata[sampleCount] = (float)((sampleCount + firstSample) *step * delta + first);
+
+  	    if (ydata[sampleCount] > twup.Maximum())
+  	      ydata[sampleCount] = (float)twup.Maximum();
+	    
+  	    else if (ydata[sampleCount] < twup.Minimum())
+  	      ydata[sampleCount] = (float)twup.Minimum();
+	    
             sampleCount++;
         }
         finished =true;
@@ -130,8 +140,14 @@ public class TWUSignal
 
             bulkURL = new URL(bulk.toString());
 
-            instream = 
-                new BufferedReader(new InputStreamReader(bulkURL.openStream()));
+	    URLConnection con = bulkURL.openConnection();
+
+	    con.setRequestProperty("User-Agent",
+				   "TWUSignal.java for jScope ($Revision: 1.2 $)");
+	    con.connect();
+
+	    instream = 
+		new BufferedReader(new InputStreamReader(con.getInputStream()));
         }
         catch (Exception e) 
         {
@@ -172,6 +188,19 @@ public class TWUSignal
                 try { instream.close(); }
                 catch (Exception e) {}
                 finished =true;
+
+		if (sampleCount<samples2Read)
+		{
+		    // Fill-up required
+		    if (sampleCount==0)
+		      ydata[sampleCount++]=0.0F;
+
+		    while (sampleCount<samples2Read)
+		    {
+			ydata[sampleCount] = ydata[sampleCount-1] ;
+			sampleCount++;
+		    }
+		}
             }
             else
               finished = sampleCount>=samples2Read ;
@@ -208,10 +237,10 @@ public class TWUSignal
     public static String 
     revision()
     {
-        return "$Id: TWUSignal.java,v 1.1 2002/04/05 09:36:36 manduchi Exp $";
+        return "$Id: TWUSignal.java,v 1.2 2002/04/09 16:25:41 jgk Exp $";
     }
 }
 
 /* ------------------------------------------------------------------------ */
-// $Id: TWUSignal.java,v 1.1 2002/04/05 09:36:36 manduchi Exp $
+// $Id: TWUSignal.java,v 1.2 2002/04/09 16:25:41 jgk Exp $
 /* ------------------------------------------------------------------------ */
