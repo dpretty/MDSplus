@@ -39,8 +39,9 @@ int TreeCreatePulseFile(int shotid,int numnids, int *nids)
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
+extern void MaskReplace(char *path, char *tree, int shot);
 
-static char *cvsrev = "@(#)$RCSfile: TreeCreatePulseFile.c,v $ $Revision: 1.14 $ $Date: 2000/10/11 19:31:11 $";
+static char *cvsrev = "@(#)$RCSfile: TreeCreatePulseFile.c,v $ $Revision: 1.15 $ $Date: 2000/10/26 20:37:25 $";
 
 #ifdef _WIN32
 #include <windows.h>
