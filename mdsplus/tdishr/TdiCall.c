@@ -26,7 +26,7 @@
 #include <tdimessages.h>
 #include <mdsshr.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiCall.c,v $ $Revision: 1.7 $ $Date: 2001/07/05 18:42:50 $";
+static char *cvsrev = "@(#)$RCSfile: TdiCall.c,v $ $Revision: 1.8 $ $Date: 2001/07/05 18:53:28 $";
 
 extern unsigned short OpcDescr;
 extern unsigned short OpcRef;
@@ -135,7 +135,7 @@ unsigned char			origin[255];
                                   if (tmp[ntmp].pointer->dtype == DTYPE_T)
 				  {
                                     DESCRIPTOR(zero,"\0");
-                                    TdiConcat(&tmp[ntmp],&zero,&tmp[ntmp]);
+                                    TdiConcat(&tmp[ntmp],&zero,&tmp[ntmp] MDS_END_ARG);
                                   }  
                                   newdsc[j-1] = (struct descriptor *)tmp[ntmp].pointer->pointer;
 				}
