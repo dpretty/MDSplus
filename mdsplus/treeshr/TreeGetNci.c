@@ -19,7 +19,7 @@
 
 extern int StrFree1Dx();
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.36 $ $Date: 1998/10/21 12:11:23 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.37 $ $Date: 1999/05/25 12:45:19 $";
 
 #ifndef vxWorks
 #define min(a,b) (((a) < (b)) ? (a) : (b))
@@ -374,7 +374,7 @@ int _TreeGetNci(void *dbid, int nid_in, struct nci_itm *nci_itm)
 		  {
 			  if (nid.tree == 0 && nid.node == 0)
 			  {
-				  string = malloc(6+strlen(dblist->tree_info->treenam));
+				  string = malloc(7+strlen(dblist->tree_info->treenam));
 				  string[0]='\\';
 				  strcpy(&string[1],dblist->tree_info->treenam);
 				  strcat(string,"::TOP");
