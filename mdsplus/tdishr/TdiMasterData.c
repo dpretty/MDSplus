@@ -17,7 +17,7 @@
 #include <mdsshr.h>
 #include <stdlib.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiMasterData.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:06:10 $";
+static char *cvsrev = "@(#)$RCSfile: TdiMasterData.c,v $ $Revision: 1.4 $ $Date: 1998/11/17 15:19:06 $";
 
 static EMPTYXD(emptyxd);
 
@@ -53,13 +53,13 @@ int				cmode = -1, j, status = 1;
 	struct descriptor_signal	*sig_ptr = (struct descriptor_signal *)sig[cmode].pointer;
 	struct descriptor		*keep_ptr = sig_ptr->data;
 	struct descriptor		*raw_ptr = sig_ptr->raw;
+	DESCRIPTOR_WITH_UNITS(wu,0,0);
                 tmp = emptyxd;
 		sig_ptr->raw = 0;
 		/************************************
 		If we have units, embed data in them.
 		************************************/
 		if (pdu) {
-		DESCRIPTOR_WITH_UNITS(wu,0,0);
                 wu.data = out_ptr->pointer;
                 wu.units = pdu;
 			sig_ptr->data = (struct descriptor *)&wu;
