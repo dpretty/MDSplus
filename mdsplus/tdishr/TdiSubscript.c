@@ -40,7 +40,7 @@
 #include <mdsshr.h>
 #include <string.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiSubscript.c,v $ $Revision: 1.5 $ $Date: 1999/04/14 13:33:00 $";
+static char *cvsrev = "@(#)$RCSfile: TdiSubscript.c,v $ $Revision: 1.6 $ $Date: 1999/06/24 18:37:09 $";
 
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 extern struct descriptor *TdiRANGE_PTRS[3];
@@ -63,6 +63,8 @@ extern int TdiUbound();
 extern int TdiDtypeRange();
 extern int TdiNint();
 extern int TdiDataWithUnits();
+extern int TdiWindowOf();
+extern int TdiSubtract();
 
 typedef struct {int x[2];} quadw;
 

@@ -30,10 +30,16 @@ int TreeGetCurrentShotId(experiment,shot)
 #include <mdsshr.h>
 #include <libroutines.h>
 #include <strroutines.h>
+#include <stdlib.h>
+
+extern void TranslateLogicalFree();
+extern int TreeGetCurrentShotIdRemote();
+extern int TreeSetCurrentShotIdRemote();
+extern char *index();
 
 extern char *TranslateLogical();
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetSetShotId.c,v $ $Revision: 1.2 $ $Date: 1999/06/23 15:09:48 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetSetShotId.c,v $ $Revision: 1.3 $ $Date: 1999/06/24 18:36:14 $";
 
 #define _ToLower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 

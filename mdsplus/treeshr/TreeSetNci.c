@@ -48,9 +48,15 @@
 #define O_RANDOM 0
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.23 $ $Date: 1999/06/22 19:36:46 $";
+static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.24 $ $Date: 1999/06/24 18:36:14 $";
 
 extern void *DBID;
+
+extern int SetNciRemote();
+extern int TreeFlushOffRemote();
+extern int TreeFlushResetRemote();
+extern int TreeTurnOnRemote();
+extern int TreeTurnOffRemote();
 
 int TreeSetNci(int nid, NCI_ITM *nci_itm_ptr) { return _TreeSetNci(DBID, nid, nci_itm_ptr);}
 int TreeFlushOff(int nid) { return _TreeFlushOff(DBID, nid);}

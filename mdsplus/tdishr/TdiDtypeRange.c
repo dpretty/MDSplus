@@ -23,7 +23,7 @@ extern unsigned short OpcValue;
 #include <stdlib.h>
 #include <mdsshr.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiDtypeRange.c,v $ $Revision: 1.6 $ $Date: 1999/04/14 13:32:59 $";
+static char *cvsrev = "@(#)$RCSfile: TdiDtypeRange.c,v $ $Revision: 1.7 $ $Date: 1999/06/24 18:37:09 $";
 
 static DESCRIPTOR_A(arr0, 1, DTYPE_B, 0, 0);
 static int minus_one_value = -1;
@@ -44,6 +44,7 @@ extern int Tdi3Ramp();
 extern int Tdi3Multiply();
 extern int Tdi3Add();
 extern int TdiMasterData();
+extern int TdiNint();
 
 extern struct descriptor *TdiItoXSpecial;
 
