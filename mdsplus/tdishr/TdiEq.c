@@ -65,7 +65,7 @@
 #include <tdimessages.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiEq.c,v $ $Revision: 1.7 $ $Date: 2003/11/17 21:21:21 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiEq.c,v $ $Revision: 1.8 $ $Date: 2004/03/22 21:45:25 $";
 
 #define OP_EQ 0 
 #define OP_GE 1
@@ -142,7 +142,7 @@ break;
     l = longwords*i; \
     for (j=longwords-1;j>=0;j--) \
       if (!j || in1[s1 ? j : l+j] != in2[s2 ? j : l+j]) \
-        if (!(signed) | !(j != longwords-1)) \
+        if (!(signed) || !(j != longwords-1)) \
           {out[i] = (char)(in1[s1 ? j : l+j] op in2[s2 ? j : l+j]); break;} \
         else {i1 = (int *)(in1+(s1 ? j : l+j)), \
 	      i2 = (int *)(in2+(s2 ? j : l+j)); \
