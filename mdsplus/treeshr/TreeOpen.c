@@ -43,7 +43,7 @@ extern char *index(char *str,char c);
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.70 $ $Date: 2003/01/22 13:42:05 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.71 $ $Date: 2003/01/31 15:02:58 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
@@ -1280,4 +1280,24 @@ void *TreeSwitchDbid(void *dbid)
   void *old_dbid = DBID;
   DBID = dbid;
   return old_dbid;
+}
+
+struct descriptor *TreeFileName(char *tree, int shot)
+{
+  static struct descriptor ans_dsc={0, DTYPE_T, CLASS_D, 0};
+  int fd;
+  char *ans;
+  TREE_INFO dummy_info;
+
+  fd = OpenOne(&dummy_info, tree, shot, TREE_TREEFILE_TYPE, 0, &ans, 0);
+  if (fd != -1) {
+    MDS_IO_CLOSE(fd);
+    ans_dsc.pointer = ans;
+    ans_dsc.length = strlen(ans);
+  }
+  else {
+    ans_dsc.pointer = NULL;
+    ans_dsc.length = 0;
+  }
+  return &ans_dsc;
 }
