@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: cam_functions.c,v 1.1 2003/02/09 16:11:32 twf Exp $
+//	$Id: cam_functions.c,v 1.2 2003/02/09 17:34:29 twf Exp $
 //-------------------------------------------------------------------------
 // Tue Aug  1 11:22:06 EDT 2000
 // Tue Apr  3 09:57:52 EDT 2001
@@ -157,7 +157,7 @@ static void str2upcase( char *str );
 //-----------------------------------------------------------
 void 		Blank( UserParams *user );
 int 		JorwayTranslateIosb( SenseData *sense, int scsi_status );
-void 		KsTranslateIosb( UserParams *user );
+int 		KsTranslateIosb( RequestSenseData *sense, int scsi_status );
 
 //-----------------------------------------------------------
 // local, global
