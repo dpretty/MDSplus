@@ -32,11 +32,12 @@ int TreeDoMethod( nid_dsc, method_dsc [,args]...)
 #include "treeshrp.h"
 #include <mdsdescrip.h>
 #include <treeshr.h>
+#include <tdimessages.h>
 #include <libroutines.h>
 #include <strroutines.h>
 #include <mds_stdarg.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeDoMethod.c,v $ $Revision: 1.7 $ $Date: 1999/11/29 15:09:03 $";
+static char *cvsrev = "@(#)$RCSfile: TreeDoMethod.c,v $ $Revision: 1.8 $ $Date: 2000/01/12 19:16:45 $";
 
 #define  count(num) va_start(incrmtr, method_ptr); \
                      for (num=2; (num < 256) && (va_arg(incrmtr, struct descriptor *) != MdsEND_ARG);  num++)
@@ -148,8 +149,10 @@ int _TreeDoMethod(void *dbid, struct descriptor *nid_dsc, struct descriptor *met
 		arglist[nargs-1] = (void *)&retstatus_d;
         arglist[nargs] = MdsEND_ARG;
         status = LibCallg(arglist,addr);
-		if (status & 1)
-			status = retstatus;
+	if (status & 1)
+	  status = retstatus;
+        if (status == TdiUNKNOWN_VAR)
+          status = TreeNOMETHOD;
       }
       StrFree1Dx(&exp);
       /*      status = TreeNOMETHOD; */
