@@ -30,8 +30,9 @@
 #include <stdlib.h>
 #include <mdsshr.h>
 #include <string.h>
+#include <mdstypes.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiSort.c,v $ $Revision: 1.6 $ $Date: 2003/06/27 14:30:31 $";
+static char *cvsrev = "@(#)$RCSfile: TdiSort.c,v $ $Revision: 1.7 $ $Date: 2003/06/27 14:32:20 $";
 
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 extern unsigned short OpcVector;
