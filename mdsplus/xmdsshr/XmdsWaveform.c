@@ -126,7 +126,7 @@ Widget XmdsCreateWaveform( parent, name, args, argcount )
 
  Local variables:                                                             */
 
-static char *cvsrev = "@(#)$RCSfile: XmdsWaveform.c,v $ $Revision: 1.12 $ $Date: 2003/05/13 15:05:14 $";
+static char *cvsrev = "@(#)$RCSfile: XmdsWaveform.c,v $ $Revision: 1.13 $ $Date: 2005/03/07 14:40:10 $";
 static int height_page;
 enum crosshairsmode
 {
@@ -1292,7 +1292,10 @@ static void DrawGrid(XmdsWaveformWidget w)
       int twidth;
       float x;
       float y;
+      char *tmpstr;
       length = lf ? lf - tptr : strlen(tptr);
+      tmpstr=strncpy(malloc(length+1),tptr,length);
+      tmpstr[length]=0;
       twidth = (waveformPrint) ? 0 : XTextWidth(waveformFontStruct(w), tptr, length);
       x = max(0, ((int) XtWidth(w) - twidth) / 2) * ((waveformPrint) ? -1. : 1.);
       y = line * lineheight;
@@ -1301,7 +1304,8 @@ static void DrawGrid(XmdsWaveformWidget w)
 		      min(y + (waveformFontStruct(w)->max_bounds.ascent + waveformFontStruct(w)->max_bounds.descent) / 2,
 			  (int) XtHeight(w) - waveformFontStruct(w)->max_bounds.descent));
       if (y > lasty)
-        DrawString(w,XtDisplay(w),waveformDrawable(w),waveformPlotGC(w),x,y,tptr,length);
+        DrawString(w,XtDisplay(w),waveformDrawable(w),waveformPlotGC(w),x,y,tmpstr,length);
+      free(tmpstr);
       lasty = y;
     }
   }
