@@ -32,7 +32,7 @@
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.43 $ $Date: 1999/11/29 15:08:24 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.44 $ $Date: 2000/02/15 16:34:50 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
@@ -712,10 +712,12 @@ static FILE  *OpenOne(TREE_INFO *info, char *tree, int shot, char *type,int new,
 				part = &path[i+1];
 			}
 		}
+/*
 		if (file == NULL && report)
 		{
 		   perror("Error opening tree file");
 		}
+*/
 		free(path);
 	}
 	if (resnam_out)
