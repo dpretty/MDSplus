@@ -9,9 +9,14 @@
  *
  * Author: Jon Krom, Forschungszentrum Jülich, Institut für Plasmaphysik.
  *
- * $Id: TWUProperties.java,v 1.4 2002/04/26 11:42:38 jgk Exp $
+ * $Id: TWUProperties.java,v 1.5 2002/05/06 16:02:05 jgk Exp $
  *
  * $Log: TWUProperties.java,v $
+ * Revision 1.5  2002/05/06 16:02:05  jgk
+ * Suggested by  Marco van de Giessen <A.P.M.vandeGiessen@phys.uu.nl>:
+ * - equalsIgnoreCase() is more generally useful than equals().
+ * - A faked properties page can sometimes be useful.
+ *
  * Revision 1.4  2002/04/26 11:42:38  jgk
  * Changed End-Of-Line marker from Windows- to CVS standard.
  *
@@ -28,9 +33,9 @@ import java.util.Properties;
 
 public class TWUProperties
 {
-    private URL        signalURL   = null;
-    private Properties signalProps = new Properties();
-    private boolean    textRead    = false;
+    private   URL        signalURL   = null;
+    protected Properties signalProps = new Properties();
+    private   boolean    textRead    = false;
     
     /* -------------------------------------------------------------------- */
     // Constructors
@@ -46,7 +51,7 @@ public class TWUProperties
     {
         final String
             actual_user_agent = (user_agent!=null) ?  user_agent
-            : "TWUProperties.java for jScope ($Revision: 1.4 $)";
+            : "TWUProperties.java for jScope ($Revision: 1.5 $)";
         signalProps = new Properties();
 
         if (SigURL==null)
@@ -175,28 +180,28 @@ public class TWUProperties
     hasAbscissa0()
     {
         String abscissa = signalProps.getProperty("Abscissa.URL.0");
-        return ((abscissa == null) ? false : ( ! abscissa.equals("None"))) ;
+        return ((abscissa == null) ? false : ( ! abscissa.equalsIgnoreCase("None"))) ;
     }
 
     public boolean
     hasAbscissa1()
     {
         String abscissa = signalProps.getProperty("Abscissa.URL.1");
-        return ((abscissa == null) ? false : ( ! abscissa.equals("None"))) ;
+        return ((abscissa == null) ? false : ( ! abscissa.equalsIgnoreCase("None"))) ;
     }
 
     public boolean
     Incrementing()
     {
         String equidistant = signalProps.getProperty("Equidistant");
-        return (equidistant!=null) && equidistant.equals("incrementing") ;
+        return (equidistant!=null) && equidistant.equalsIgnoreCase("incrementing") ;
     }
 
     public boolean
     Decrementing()
     {
         String equidistant = signalProps.getProperty("Equidistant");
-        return (equidistant!=null) && equidistant.equals("decrementing") ;
+        return (equidistant!=null) && equidistant.equalsIgnoreCase("decrementing") ;
     }
 
     public boolean
@@ -244,21 +249,21 @@ public class TWUProperties
     FQAbscissaName()
     {
         String abs = signalProps.getProperty("Abscissa.URL.0");
-        return ((abs==null || abs.equals("None")) ? null : abs);
+        return ((abs==null || abs.equalsIgnoreCase("None")) ? null : abs);
     }
 
     public String
     FQAbscissa0Name()
     {
         String abs = signalProps.getProperty("Abscissa.URL.0");
-        return ((abs==null || abs.equals("None")) ? null : abs);
+        return ((abs==null || abs.equalsIgnoreCase("None")) ? null : abs);
     }
 
     public String
     FQAbscissa1Name()
     {
         String abs = signalProps.getProperty("Abscissa.URL.1");
-        return ((abs==null || abs.equals("None")) ? null : abs);
+        return ((abs==null || abs.equalsIgnoreCase("None")) ? null : abs);
     }
 
     /* -------------------------------------------------------------------- */
@@ -324,7 +329,7 @@ public class TWUProperties
     public static String 
     revision()
     {
-        return "$Id: TWUProperties.java,v 1.4 2002/04/26 11:42:38 jgk Exp $";
+        return "$Id: TWUProperties.java,v 1.5 2002/05/06 16:02:05 jgk Exp $";
     }
 
     public static void 
@@ -357,8 +362,24 @@ public class TWUProperties
 
         System.out.println();
     }
+
+}
+
+
+class FakeTWUProperties extends TWUProperties {
+  public FakeTWUProperties (int len) {
+    super (null) ;
+    signalProps.put ("TWU.properties.version", "0.7");
+    signalProps.put ("Dimensions", "1");
+    signalProps.put ("Length.total",       String.valueOf(len) );
+    signalProps.put ("Length.dimension.0", String.valueOf(len) );
+    signalProps.put ("Equidistant", "Incrementing");
+    signalProps.put ("Signal.Minimum", "0.0");
+
+    signalProps.put ("Signal.Maximum", String.valueOf( (double)(len-1) ) );
+  }
 }
 
 /* ------------------------------------------------------------------------ */
-// End of $Id: TWUProperties.java,v 1.4 2002/04/26 11:42:38 jgk Exp $
+// End of $Id: TWUProperties.java,v 1.5 2002/05/06 16:02:05 jgk Exp $
 /* ------------------------------------------------------------------------ */
