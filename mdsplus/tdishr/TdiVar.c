@@ -49,7 +49,7 @@
 #include <string.h>
 #include <librtl_messages.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiVar.c,v $ $Revision: 1.6 $ $Date: 1998/04/08 19:06:21 $";
+static char *cvsrev = "@(#)$RCSfile: TdiVar.c,v $ $Revision: 1.7 $ $Date: 1998/04/15 18:34:03 $";
 
 extern unsigned short OpcEquals, OpcEqualsFirst;
 extern unsigned short OpcFun;
@@ -759,3 +759,30 @@ TdiRefStandard(Tdi1ShowPrivate)
 TdiRefStandard(Tdi1ShowPublic)
 	return wild((int (*)())show_one, narg, list, &public, out_ptr);
 }
+
+
+int TdiSaveContext(void *ptr[6])
+{
+    ptr[0] = (void *)private.head;
+    ptr[1] = private.head_zone;
+    ptr[2] = private.data_zone;
+    ptr[3] = (void *)public.head;
+    ptr[4] = public.head_zone;
+    ptr[5] = public.data_zone;
+    return 1;
+}
+
+/*-------------------------------------------------------------
+        Restore variable context
+*/
+int TdiRestoreContext(void *ptr[6])
+{
+    private.head = (node_type *)ptr[0];
+    private.head_zone = ptr[1];
+    private.data_zone = ptr[2];
+    public.head = ptr[3];
+    public.head_zone = (node_type *)ptr[4];
+    public.data_zone = ptr[5];
+    return 1;
+}
+
