@@ -13,6 +13,7 @@ int StrFree1Dx(struct descriptor *out);
 int StrGet1Dx(unsigned short *len, struct descriptor *out);
 int StrCopyDx(struct descriptor *out, struct descriptor *in);
 int StrAppend(struct descriptor *out, struct descriptor *tail);
+void TranslateLogicalFree(char *value);
 
 #if defined(WIN32)
 #pragma warning (disable : 4100 4201 4115 4214 4514)
@@ -401,7 +402,7 @@ int LibWait(float *secs)
 
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.44 $ $Date: 1998/12/18 18:54:32 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.45 $ $Date: 1999/03/03 19:26:04 $";
 #ifndef va_count
 #define  va_count(narg) va_start(incrmtr, first); \
                         for (narg=1; (narg < 256) && (va_arg(incrmtr, struct descriptor *) != MdsEND_ARG); narg++)
@@ -416,6 +417,26 @@ typedef struct _ZoneList { VmList *vm;
 			 } ZoneList;
 
 ZoneList *MdsZones=NULL;
+
+
+int TranslateLogicalXd(struct descriptor *in, struct descriptor_xd *out)
+{
+  struct descriptor out_dsc = {0,DTYPE_T,CLASS_S,0};
+  int status = 0;
+  char *in_c = MdsDescrToCstring(in);
+  char *out_c = TranslateLogical(in_c);
+  if (out_c)
+  {
+    out_dsc.length = strlen(out_c);
+    out_dsc.pointer = out_c;
+    status = 1;
+  }
+  MdsCopyDxXd(&out_dsc,out);
+  if (out_c)
+    TranslateLogicalFree(out_c);
+  free(in_c);
+  return status;
+}
 
 void MdsFree(void *ptr)
 {
