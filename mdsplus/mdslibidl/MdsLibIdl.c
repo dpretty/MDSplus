@@ -13,7 +13,7 @@ extern int TdiData();
 extern int TdiCvt();
 extern int TdiCompile();
 
-static char *cvsrev = "@(#)$RCSfile: MdsLibIdl.c,v $ $Revision: 1.14 $ $Date: 2000/04/12 19:59:31 $";
+static char *cvsrev = "@(#)$RCSfile: MdsLibIdl.c,v $ $Revision: 1.15 $ $Date: 2000/08/03 16:15:07 $";
 
 #ifdef _WINDOWS
 #define BlockSig(a)
@@ -97,6 +97,10 @@ static void *MakeDescr(int idx, int *argsize, void *bytes)
     case 7: scalarArgs[idx].length = ((IDL_STRING *)bytes)->slen; scalarArgs[idx].dtype = DTYPE_T; 
                scalarArgs[idx].pointer = ((IDL_STRING *)bytes)->s; break;
     case 9: scalarArgs[idx].length = 16; scalarArgs[idx].dtype = DTYPE_FTC; break;
+    case 12: scalarArgs[idx].length = 2; scalarArgs[idx].dtype = DTYPE_WU; break;
+    case 13: scalarArgs[idx].length = 4; scalarArgs[idx].dtype = DTYPE_LU; break;
+    case 14: scalarArgs[idx].length = 8; scalarArgs[idx].dtype = DTYPE_Q; break;
+    case 15: scalarArgs[idx].length = 8; scalarArgs[idx].dtype = DTYPE_QU; break;
     default: return 0;
     }
     return (void *)&scalarArgs[idx];
@@ -152,6 +156,10 @@ static void *MakeDescr(int idx, int *argsize, void *bytes)
       }
       break;
     case 9: arrayArgs[idx].length = 16; scalarArgs[idx].dtype = DTYPE_FTC; arrayArgs[idx].arsize = argsize[argsize[0]+2] * 16; break;
+    case 12: arrayArgs[idx].length = 2; scalarArgs[idx].dtype = DTYPE_WU;  arrayArgs[idx].arsize = argsize[argsize[0]+2] * 2; break;
+    case 13: arrayArgs[idx].length = 4; scalarArgs[idx].dtype = DTYPE_LU;  arrayArgs[idx].arsize = argsize[argsize[0]+2] * 4; break;
+    case 14: arrayArgs[idx].length = 8; scalarArgs[idx].dtype = DTYPE_Q;   arrayArgs[idx].arsize = argsize[argsize[0]+2] * 8; break;
+    case 15: arrayArgs[idx].length = 8; scalarArgs[idx].dtype = DTYPE_QU;  arrayArgs[idx].arsize = argsize[argsize[0]+2] * 8; break;
     default: return 0;
     }
     return (void *)&arrayArgs[idx];
