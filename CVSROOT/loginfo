@@ -17,4 +17,4 @@
 #
 # For example:
 DEFAULT		(echo ""; whoami; echo %s; date; cat) >> $CVSROOT/CVSROOT/commitlog
-#
+##
