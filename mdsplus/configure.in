@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.188 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.189 $
 AC_INIT()
 
 AC_CONFIG_HEADER(include/config.h)
@@ -70,6 +70,8 @@ EOF
 	exit
   fi
 fi
+
+JDK_DIR="$jdk_dir"
 
 AC_ARG_WITH(xio,
 	[  --with-xio=globus-location:flavor  use globus xio for mdsip communications],
@@ -750,6 +752,7 @@ AC_SUBST(JAR)
 AC_SUBST(JAVAC)
 AC_SUBST(JAVA_APS)
 AC_SUBST(JDK_CFLAGS)
+AC_SUBST(JDK_DIR)
 AC_SUBST(JVM)
 AC_SUBST(LD)
 AC_SUBST(LDSHARE)
