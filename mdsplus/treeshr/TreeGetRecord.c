@@ -1,6 +1,8 @@
 #ifdef _WIN32
 #include <io.h>
 #endif
+#include <string.h>
+#include <stdlib.h>
 #include <mdsdescrip.h>
 #include <mdsshr.h>
 #include <ncidef.h>
@@ -8,8 +10,6 @@
 #include <treeshr.h>
 #include <librtl_messages.h>
 #include <errno.h>
-#include <string.h>
-#include <stdlib.h>
 #include <fcntl.h>
 #ifndef O_BINARY
 #define O_BINARY 0
@@ -20,7 +20,7 @@
 
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.23 $ $Date: 1998/10/21 12:12:22 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.24 $ $Date: 1998/12/16 10:41:16 $";
 
 
 static int OpenDatafileR(TREE_INFO *info);

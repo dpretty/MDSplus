@@ -1,10 +1,10 @@
+#include <stdlib.h>
+#include <string.h>
 #include <treeshr.h>
 #include "treeshrp.h"
 #include <dbidef.h>
-#include <stdlib.h>
-#include <string.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetDbi.c,v $ $Revision: 1.8 $ $Date: 1998/11/06 15:10:25 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetDbi.c,v $ $Revision: 1.9 $ $Date: 1998/12/16 10:41:15 $";
 
 extern void *DBID;
 #ifndef vxWorks

@@ -1,6 +1,8 @@
 #ifdef _WIN32
 #include <io.h>
 #endif
+#include <stdlib.h>
+#include <string.h>
 #include <mdsdescrip.h>
 #include <mdsshr.h>
 #include <treeshr.h>
@@ -11,8 +13,6 @@
 #include <sys/mman.h>
 #include <sys/types.h>
 #endif
-#include <stdlib.h>
-#include <string.h>
 #include <usagedef.h>
 #include <ncidef.h>
 #include <errno.h>
@@ -30,7 +30,7 @@
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.36 $ $Date: 1998/11/10 16:39:17 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.37 $ $Date: 1998/12/16 10:41:16 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
@@ -267,7 +267,7 @@ static int CloseTopTree(PINO_DATABASE *dblist, int call_hook)
 							MdsEventCan(local_info->rundown_id);
 						if (local_info->section_addr[0])
 						{
-#if defined(__osf__)
+#if defined(__osf__) && !defined(vxWorks)
 							if (local_info->channel)
 							{
 							  close(local_info->channel);
@@ -694,12 +694,17 @@ static FILE  *OpenOne(TREE_INFO *info, char *tree, int shot, char *type,int new,
                                 }
                                 else
 				{
+#if defined(vxWorks)
+				  info->channel = 0;
+				  file = fopen(resnam,"rb");
+#else
 #if defined(__osf__) || defined(__hpux) || defined(__sun) || defined(__sgi)
 				  info->channel = open(resnam,O_RDONLY);
 				  file = (info->channel != -1) ? fdopen(info->channel,"rb") : NULL;
 #else
 				  info->channel = 0;
 				  file = fopen(resnam,"rb");
+#endif
 #endif
 				}
 				if (file == NULL)
@@ -805,19 +810,21 @@ static int MapFile(void *file_handle, TREE_INFO *info, int edit_flag, int remote
 	{
 		if (remote_file)
 		{
-
 			fread((void *)info->section_addr[0], 512, info->alq, *(FILE **)file_handle);
 			fclose(*(FILE **)file_handle);
 			status = 1;
 		}
 		else
 		{
-#if defined(__osf__)
+
+#if defined(__osf__) && !defined(vxWorks)
+
                         void *addr = mmap(info->section_addr[0],info->alq * 512,PROT_READ | PROT_WRITE, MAP_FILE | MAP_PRIVATE | MAP_FIXED, 
                             info->channel, 0);
                         status = addr != (void *)-1;
                         if (!status)
                           printf("Error mapping file - errno = %d\n",errno);
+
 #elif defined(__hpux) || defined(__sun) || defined(__sgi)
 #if defined(__sun) || defined(__sgi)
 #define MAP_FILE 0
@@ -827,6 +834,7 @@ static int MapFile(void *file_handle, TREE_INFO *info, int edit_flag, int remote
                         status = info->section_addr[0] != (void *)-1;
                         if (!status)
                           printf("Error mapping file - errno = %d\n",errno);
+
 #endif
                 }
 		/***********************************************
@@ -862,7 +870,7 @@ static int GetVmForTree(TREE_INFO *info)
 {
 	int status;
 
-#if defined(__osf__) || defined(__hpux)
+#if (defined(__osf__) || defined(__hpux)) && !defined(vxWorks)
 	int PAGE_SIZE = sysconf(_SC_PAGE_SIZE)/512;
 #else
 	int PAGE_SIZE=1;

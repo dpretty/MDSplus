@@ -30,11 +30,11 @@
 
 +-----------------------------------------------------------------------------*/
 
+#include <string.h>
 #include <treeshr.h>
 #include "treeshrp.h"
-#include <string.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeRemoveNodesTags.c,v $ $Revision: 1.9 $ $Date: 1998/07/29 16:18:45 $";
+static char *cvsrev = "@(#)$RCSfile: TreeRemoveNodesTags.c,v $ $Revision: 1.10 $ $Date: 1998/12/16 10:41:17 $";
 
 extern void *DBID;
 

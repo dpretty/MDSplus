@@ -1,9 +1,9 @@
-#include <treeshr.h>
-#include "treeshrp.h"
 #include <stdlib.h>
 #include <string.h>
+#include <treeshr.h>
+#include "treeshrp.h"
 
-static char *cvsrev = "@(#)$RCSfile: TreeFindNode.c,v $ $Revision: 1.19 $ $Date: 1998/10/21 12:10:01 $";
+static char *cvsrev = "@(#)$RCSfile: TreeFindNode.c,v $ $Revision: 1.20 $ $Date: 1998/12/16 10:41:15 $";
 
 extern void *DBID;
 

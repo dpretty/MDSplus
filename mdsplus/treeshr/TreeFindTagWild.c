@@ -30,13 +30,13 @@ TreeFindTagEnd(void **ctx);
 
 +-----------------------------------------------------------------------------*/
 
+#include <stdlib.h>
+#include <string.h>
 #include <treeshr.h>
 #include "treeshrp.h"
 #include <strroutines.h>
-#include <stdlib.h>
-#include <string.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeFindTagWild.c,v $ $Revision: 1.7 $ $Date: 1998/11/16 20:52:23 $";
+static char *cvsrev = "@(#)$RCSfile: TreeFindTagWild.c,v $ $Revision: 1.8 $ $Date: 1998/12/16 10:41:15 $";
 
 extern int MdsCopyDxXd();
 

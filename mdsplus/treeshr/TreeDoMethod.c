@@ -28,16 +28,15 @@ int TreeDoMethod( nid_dsc, method_dsc [,args]...)
 
 
 ------------------------------------------------------------------------------*/
-
+#include <ncidef.h>
+#include "treeshrp.h"
 #include <mdsdescrip.h>
 #include <treeshr.h>
-#include "treeshrp.h"
-#include <ncidef.h>
 #include <libroutines.h>
 #include <strroutines.h>
 #include <mds_stdarg.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeDoMethod.c,v $ $Revision: 1.5 $ $Date: 1998/05/22 19:06:57 $";
+static char *cvsrev = "@(#)$RCSfile: TreeDoMethod.c,v $ $Revision: 1.6 $ $Date: 1998/12/16 10:41:14 $";
 
 #define  count(num) va_start(incrmtr, method_ptr); \
                      for (num=2; (num < 256) && (va_arg(incrmtr, struct descriptor *) != MdsEND_ARG);  num++)

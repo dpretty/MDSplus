@@ -28,19 +28,19 @@ int TreeCreatePulseFile(int shotid,int numnids, int *nids)
 
 
 ------------------------------------------------------------------------------*/
-#include <mdsdescrip.h>
-#include <mdsshr.h>
-#include <treeshr.h>
 #include <stdlib.h>
 #include <string.h>
-#include "treeshrp.h"
-#include <ncidef.h>
+#include <mdsdescrip.h>
 #include <sys/stat.h>
+#include <mdsshr.h>
+#include <ncidef.h>
+#include "treeshrp.h"
+#include <treeshr.h>
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
 
-static char *cvsrev = "@(#)$RCSfile: TreeCreatePulseFile.c,v $ $Revision: 1.7 $ $Date: 1998/10/21 12:08:14 $";
+static char *cvsrev = "@(#)$RCSfile: TreeCreatePulseFile.c,v $ $Revision: 1.8 $ $Date: 1998/12/16 10:41:13 $";
 
 static int  TreeCreateTreeFiles(char *tree, int shot, int source_shot);
 #ifdef _WIN32

@@ -28,11 +28,11 @@ int TreeDeletePulseFile(int shotid,int numnids, int *nids)
 
 
 ------------------------------------------------------------------------------*/
+#include <stdlib.h>
+#include <string.h>
 #include <mdsdescrip.h>
 #include <mdsshr.h>
 #include <treeshr.h>
-#include <stdlib.h>
-#include <string.h>
 #include "treeshrp.h"
 #include <ncidef.h>
 #include <sys/stat.h>
@@ -40,7 +40,7 @@ int TreeDeletePulseFile(int shotid,int numnids, int *nids)
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
 
-static char *cvsrev = "@(#)$RCSfile: TreeDeletePulseFile.c,v $ $Revision: 1.8 $ $Date: 1998/10/21 12:09:11 $";
+static char *cvsrev = "@(#)$RCSfile: TreeDeletePulseFile.c,v $ $Revision: 1.9 $ $Date: 1998/12/16 10:41:14 $";
 
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
