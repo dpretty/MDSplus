@@ -274,7 +274,7 @@ $ dwcope [-default setup]
 #include <DXm/DECspecific.h>
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: dwscope.c,v $ $Revision: 1.6 $ $Date: 1998/09/18 16:30:45 $";
+static char *cvsrev = "@(#)$RCSfile: dwscope.c,v $ $Revision: 1.7 $ $Date: 1999/09/29 18:40:04 $";
 
 extern void XmdsInitialize();
 extern void XmdsDestroyWidgetCallback();
@@ -440,7 +440,7 @@ static XtWorkProcId UpdateWaveformsWorkProcID;
 int       main(int argc, String *argv)
 {
   int       i;
-  static String hierarchy_names[] = {{"dwscope.uid"}};
+  static String hierarchy_names[] = {"dwscope.uid"};
   String fallback_resources[] = {"*default_label.labelString: Default node:",
                                  "*exp_label.labelString: Experiment:",
 				 "*brief_errors.set: true",NULL};

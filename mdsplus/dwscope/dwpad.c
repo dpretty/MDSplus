@@ -80,7 +80,7 @@ $ Run SYS$SYSTEM:DWPad
 #include <DXm/DECspecific.h>
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: dwpad.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:38:46 $";
+static char *cvsrev = "@(#)$RCSfile: dwpad.c,v $ $Revision: 1.3 $ $Date: 1999/09/29 18:40:04 $";
 
 extern void XmdsDestroyWidgetCallback();
 extern void XmdsManageChildCallback();
@@ -200,7 +200,7 @@ int       main(int argc, char **argv)
  Local variables:                                                             */
 
   int       i;
-  static String hierarchy_name[] = {{"dwpad.uid"},{"dwscope.uid"}};
+  static String hierarchy_name[] = {"dwpad.uid","dwscope.uid"};
   String fallback_resources[] = {"*default_label.labelString: Default node:",
                                  "*exp_label.labelString: Experiment:", NULL};
   static MrmRegisterArg callbacks[] = {{"Exit", (char *)Exit},
