@@ -131,7 +131,7 @@ extern char *DescToNull ( struct descriptor_s *desc );
 #include <Xmds/XmdsExpr.h>
 #include <Xmds/XmdsExprField.h>
 #include <xmdsshr.h>
-static char *cvsrev = "@(#)$RCSfile: XmdsXdBox.c,v $ $Revision: 1.9 $ $Date: 2002/05/21 17:55:53 $";
+static char *cvsrev = "@(#)$RCSfile: XmdsXdBox.c,v $ $Revision: 1.10 $ $Date: 2002/05/29 14:43:39 $";
 
 extern int TdiCompile();
 /*------------------------------------------------------------------------------
@@ -1725,7 +1725,7 @@ static void task_change_type_proc(Widget w,int *tag)
   Widget task_dlog;
 
   for (task_dlog = w;
-       task_dlog && WigetNameCmp(task_dlog,"task_dlog");
+       task_dlog && WidgetNameCmp(task_dlog,"task_dlog");
        task_dlog = task_dlog->core.parent);
 
   if (task_dlog)
