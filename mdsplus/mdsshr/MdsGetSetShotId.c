@@ -30,7 +30,7 @@ int MdsGetCurrentShotId(experiment,shot)
 #include <mdsshr.h>
 #include <libroutines.h>
 #include <strroutines.h>
-static char *cvsrev = "@(#)$RCSfile: MdsGetSetShotId.c,v $ $Revision: 1.5 $ $Date: 1998/12/16 10:35:24 $";
+static char *cvsrev = "@(#)$RCSfile: MdsGetSetShotId.c,v $ $Revision: 1.6 $ $Date: 1999/05/03 14:12:45 $";
 
 #define _ToLower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
@@ -56,6 +56,32 @@ static FILE *OpenShotIdFile(char *experiment,char *mode)
     static DESCRIPTOR(nullstr,"\0");
     StrAppend(&filename,&nullstr);
     file = fopen(filename.pointer,mode);
+  }
+  return file;
+}
+
+static FILE *CreateShotIdFile(char *experiment)
+{
+  char pathname[512];
+  char *path;
+  FILE *file = 0;
+  char *semi;
+  strcpy(pathname,experiment);
+  strcat(pathname,"_path");
+  path = (char *)TranslateLogical(pathname);
+  if (path != NULL)
+  {
+    if ((semi = (char *)index(path, ';')) != 0)
+      semi = '\0';
+    strncpy(pathname,path,500);
+    TranslateLogicalFree(path);
+#ifdef _WINDOWS
+    strcat(pathname,"\\");
+#else
+    strcat(pathname,"//");
+#endif
+    strcat(pathname,"shotid.sys");
+    file = fopen(pathname,"w+b");
   }
   return file;
 }
@@ -88,6 +114,8 @@ int       MdsSetCurrentShotId(char *experiment, int shot)
 {
   int status = 0;
   FILE *file = OpenShotIdFile(experiment,"r+b");
+  if (file == NULL)
+    file = CreateShotIdFile(experiment);
   if (file)
   {
     int lshot = shot;
