@@ -131,7 +131,7 @@ extern char *DescToNull ( struct descriptor_s *desc );
 #include <Xmds/XmdsExpr.h>
 #include <Xmds/XmdsExprField.h>
 #include <xmdsshr.h>
-static char *cvsrev = "@(#)$RCSfile: XmdsXdBox.c,v $ $Revision: 1.7 $ $Date: 2000/09/14 20:31:03 $";
+static char *cvsrev = "@(#)$RCSfile: XmdsXdBox.c,v $ $Revision: 1.8 $ $Date: 2002/05/16 14:06:42 $";
 
 extern int TdiCompile();
 /*------------------------------------------------------------------------------
@@ -1824,7 +1824,7 @@ static void CalculateNewSize(XmdsXdBoxWidget w,unsigned short *width,unsigned sh
 static XmdsXdBoxWidget FindXdBoxWidget(Widget w)
 {
   Widget xdbw;
-  for (xdbw = w; xdbw && ((xdbw->core.name == 0) || strcmp(xdbw->core.name,"xd_box")); xdbw = XtParent(xdbw));
+  for (xdbw = w; xdbw && ((xdbw->core.name == 0) || (xdbw->core.name==0xffffff) || strcmp(xdbw->core.name,"xd_box")); xdbw = XtParent(xdbw));
   if (xdbw) xdbw = XtParent(xdbw);
   return (XmdsXdBoxWidget) xdbw;
 }
