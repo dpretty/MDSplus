@@ -1,4 +1,4 @@
-/* $Id: MdsDataClient.java,v 1.23 2004/04/26 12:02:25 manduchi Exp $ */
+/* $Id: MdsDataClient.java,v 1.24 2004/11/16 12:39:46 manduchi Exp $ */
 import java.util.Vector;
 
 public class MdsDataClient extends MdsConnection
@@ -442,6 +442,9 @@ public class MdsDataClient extends MdsConnection
                         return (int)desc.byte_data[0];
 		    case Descriptor.DTYPE_FLOAT:
 		        return (int)desc.float_data[0];
+                    case Descriptor.DTYPE_SHORT:
+                    case Descriptor.DTYPE_USHORT:
+                        return (int)desc.short_data[0];
 		    case Descriptor.DTYPE_LONG:
 		        return desc.int_data[0];
 		    case Descriptor.DTYPE_CHAR:
