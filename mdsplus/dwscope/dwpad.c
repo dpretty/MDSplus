@@ -80,7 +80,7 @@ $ Run SYS$SYSTEM:DWPad
 #include <DXm/DECspecific.h>
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: dwpad.c,v $ $Revision: 1.3 $ $Date: 1999/09/29 18:40:04 $";
+static char *cvsrev = "@(#)$RCSfile: dwpad.c,v $ $Revision: 1.4 $ $Date: 2003/04/28 21:15:36 $";
 
 extern void XmdsDestroyWidgetCallback();
 extern void XmdsManageChildCallback();
@@ -642,6 +642,8 @@ static void ResetWindow(String geometry, String title, String icon, int cols, in
   if (geometry)
   {
     XParseGeometry(geometry, &x, &y, &width, &height);
+    if (x >= WidthOfScreen(XtScreen(PadWidget))) x =  WidthOfScreen(XtScreen(PadWidget))-50;
+    if ((y + height) > HeightOfScreen(XtScreen(PadWidget))) y = HeightOfScreen(XtScreen(PadWidget)) - height - 50;
     if (width > 200 && height > 100)
       XtVaSetValues(MainWidget, XtNwidth, width, XtNheight, height, NULL);
     else
