@@ -67,7 +67,7 @@
 #include <mdsdescrip.h>
 #include <mdsshr.h>
 #include <librtl_messages.h>
-static char *cvsrev = "@(#)$RCSfile: MdsCmprs.c,v $ $Revision: 1.12 $ $Date: 1998/12/16 10:35:22 $";
+static char *cvsrev = "@(#)$RCSfile: MdsCmprs.c,v $ $Revision: 1.13 $ $Date: 1998/12/17 20:13:09 $";
 
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
 #define MAXX 1024		/*length of longest run allowed*/
@@ -79,6 +79,8 @@ static char *cvsrev = "@(#)$RCSfile: MdsCmprs.c,v $ $Revision: 1.12 $ $Date: 199
 #pragma HP_ALIGN NOPADDING PUSH
 #elif defined(__sgi)
 #pragma pack(1)
+#elif defined(_AIX)
+#pragma options align=packed
 #endif
 
 #ifdef _big_endian
@@ -134,6 +136,8 @@ struct HEADER
 #pragma HP_ALIGN POP
 #elif defined(__sgi)
 #pragma pack(0)
+#elif defined(_AIX)
+#pragma options align=power
 #endif
 
 static char FIELDSY = BITSY + BITSX;
