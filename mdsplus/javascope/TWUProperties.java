@@ -13,9 +13,12 @@
  *
  * Author: Jon Krom, Forschungszentrum Jülich, Institut für Plasmaphysik.
  *
- * $Id: TWUProperties.java,v 1.7 2002/05/24 08:55:19 jgk Exp $
+ * $Id: TWUProperties.java,v 1.8 2002/05/27 13:49:51 jgk Exp $
  *
  * $Log: TWUProperties.java,v $
+ * Revision 1.8  2002/05/27 13:49:51  jgk
+ * Suggestion from Marco: NaN for min/max when the're no proper values.
+ *
  * Revision 1.7  2002/05/24 08:55:19  jgk
  * A bit more robust when faced with HTTP servers that do not provide
  * a mime_type.   Assume it to be text/html in these cases (like most
@@ -63,7 +66,7 @@ public class TWUProperties
     {
         final String
             actual_user_agent = (user_agent!=null) ?  user_agent
-            : "TWUProperties.java for jScope ($Revision: 1.7 $)";
+            : "TWUProperties.java for jScope ($Revision: 1.8 $)";
         signalProps = new Properties();
 
         if (SigURL==null)
@@ -233,7 +236,7 @@ public class TWUProperties
     Minimum()
     {
         String mini = signalProps.getProperty("Signal.Minimum");
-        Double min  = new Double(0.0);
+        Double min  = new Double(Double.NaN);
         if (mini != null)
           min = Double.valueOf(mini);
         return min.doubleValue();
@@ -243,7 +246,7 @@ public class TWUProperties
     Maximum()
     {
         String maxi = signalProps.getProperty("Signal.Maximum");
-        Double max  = new Double(0.0);
+        Double max  = new Double(Double.NaN);
         if (maxi != null)
           max = Double.valueOf(maxi);
         return max.doubleValue();
@@ -256,7 +259,7 @@ public class TWUProperties
         int segments = LengthTotal()-1;
         if (Decrementing())
           segments *= -1;
-        return (segments==0 ? 0.0 : span/segments);
+        return (segments==0 ? Double.NaN : span/segments);
     }
     
     public String
@@ -343,7 +346,7 @@ public class TWUProperties
     public static String 
     revision()
     {
-        return "$Id: TWUProperties.java,v 1.7 2002/05/24 08:55:19 jgk Exp $";
+        return "$Id: TWUProperties.java,v 1.8 2002/05/27 13:49:51 jgk Exp $";
     }
 
     public static void 
@@ -395,5 +398,5 @@ class FakeTWUProperties extends TWUProperties {
 }
 
 /* ------------------------------------------------------------------------ */
-// End of $Id: TWUProperties.java,v 1.7 2002/05/24 08:55:19 jgk Exp $
+// End of $Id: TWUProperties.java,v 1.8 2002/05/27 13:49:51 jgk Exp $
 /* ------------------------------------------------------------------------ */
