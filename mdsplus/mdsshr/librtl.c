@@ -402,7 +402,7 @@ int LibWait(float *secs)
 
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.45 $ $Date: 1999/03/03 19:26:04 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.46 $ $Date: 1999/04/20 18:07:44 $";
 #ifndef va_count
 #define  va_count(narg) va_start(incrmtr, first); \
                         for (narg=1; (narg < 256) && (va_arg(incrmtr, struct descriptor *) != MdsEND_ARG); narg++)
@@ -650,7 +650,7 @@ int StrTrim(struct descriptor *out, struct descriptor *in, unsigned short *lenou
   struct descriptor tmp = {0,DTYPE_T,CLASS_D,0};
   struct descriptor s = {0,DTYPE_T,CLASS_S,0};
   unsigned short i;
-  for (i=in->length;i>0;i--) if (in->pointer[i-1] != 32) break;
+  for (i=in->length;i>0;i--) if (in->pointer[i-1] != 32 && in->pointer[i-1] != 9) break;
   StrCopyDx(&tmp,in);
   s.length = i;
   s.pointer = tmp.pointer;
