@@ -20,7 +20,7 @@
 
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.19 $ $Date: 1998/07/20 18:47:47 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.20 $ $Date: 1998/07/27 14:21:26 $";
 
 
 static int OpenDatafileR(TREE_INFO *info);
@@ -80,7 +80,7 @@ int _TreeGetRecord(void *dbid, int nid_in, struct descriptor_xd *dsc)
 	   case CLASS_APD:
 	   case CLASS_CA:
 	   case CLASS_R:
-	   case CLASS_A: if (nci.data_in_att_block)
+	   case CLASS_A: if (nci.flags2 & NciM_DATA_IN_ATT_BLOCK)
                          {
 	                   status = TreeINVDFFCLASS;
                            break;
@@ -88,7 +88,7 @@ int _TreeGetRecord(void *dbid, int nid_in, struct descriptor_xd *dsc)
 	   case CLASS_S:
 	   case CLASS_XS:
 	    if (status & 1)
-	      if (nci.data_in_att_block)
+	      if (nci.flags2 & NciM_DATA_IN_ATT_BLOCK)
 	      {
                 unsigned char dsc_dtype = DTYPE_DSC;
                 int dlen = nci.length - 8;
