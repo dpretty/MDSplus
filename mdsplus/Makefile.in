@@ -1,4 +1,4 @@
-#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.52 $
+#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.53 $
 # @configure_input@
 prefix=@prefix@
 SHELL=/bin/sh
@@ -32,8 +32,8 @@ PARTS = \
         tcl \
         tdic \
         traverser \
-        actions \
         mdslib \
+        actions \
         math \
         mitdevices \
         wfevent \
