@@ -19,7 +19,7 @@
 
 extern int StrFree1Dx();
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.32 $ $Date: 1998/09/14 20:56:29 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.33 $ $Date: 1998/09/14 21:33:32 $";
 
 #define min(a,b) (((a) < (b)) ? (a) : (b))
 #define read_nci \
@@ -642,7 +642,7 @@ int TreeGetNciW(TREE_INFO *info, int node_num, NCI *nci)
 	fill in the rab and read the record
 	******************************************/
 
-	if ((info->edit == 0) || (node_num < info->edit->first_in_mem))
+	if ((info->edit == 0) || (node_num <= info->edit->first_in_mem))
 	{
 		if (info->nci_file == NULL)
 			status = OpenNciR(info);
