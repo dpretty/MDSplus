@@ -1,4 +1,4 @@
-#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.51 $
+#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.52 $
 # @configure_input@
 prefix=@prefix@
 SHELL=/bin/sh
@@ -27,7 +27,6 @@ PARTS = \
 	gen_device \
 	@CAMSHR@ \
         remcam \
-        mitdevices \
         ccl     \
 	servershr \
         tcl \
@@ -36,6 +35,7 @@ PARTS = \
         actions \
         mdslib \
         math \
+        mitdevices \
         wfevent \
         setevent \
         mdsmisc \
