@@ -1,4 +1,4 @@
-#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.20 $
+#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.21 $
 # @configure_input@
 SHELL=/bin/sh
 
@@ -16,7 +16,6 @@ PARTS = \
         tditest \
         xmdsshr \
         mdstcpip \
-	tdic \
         dwscope \
         mitdevices \
         mdslibidl \
@@ -27,6 +26,7 @@ PARTS = \
         cts     \
 	servershr \
         tcl \
+        tdic \
         traverser \
         actions \
         mdslib \
