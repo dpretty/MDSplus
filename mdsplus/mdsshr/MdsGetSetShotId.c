@@ -24,7 +24,9 @@ int MdsGetCurrentShotId(experiment,shot)
    Management.
 ------------------------------------------------------------------------------*/
 #include <stdio.h>
-static char *cvsrev = "@(#)$RCSfile: MdsGetSetShotId.c,v $ $Revision: 1.8 $ $Date: 1999/06/23 14:57:12 $";
+#include <STATICdef.h>
+
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: MdsGetSetShotId.c,v $ $Revision: 1.9 $ $Date: 2003/11/24 17:50:18 $";
 
 int       MdsGetCurrentShotId(char *experiment)
 {
