@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.93 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.94 $
 AC_INIT()
 
 AC_CONFIG_HEADER(include/config.h)
@@ -434,6 +434,7 @@ d3dshr/Makefile
 dwscope/Makefile 
 idlmdsevent/Makefile
 idlsql/Makefile
+javaclient/Makefile
 javamds/Makefile 
 javascope/Makefile
 javatraverser/Makefile

@@ -1,10 +1,11 @@
-#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.17 $
+#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.18 $
 # @configure_input@
 SHELL=/bin/sh
 
 JAVA_APS = javamds \
 	   javascope \
-           javatraverser
+           javatraverser \
+	   javaclient
 
 D3D_PACKAGE = d3dshr
 
