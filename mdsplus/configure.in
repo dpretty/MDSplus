@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.108 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.109 $
 AC_INIT()
 
 AC_CONFIG_HEADER(include/config.h)
@@ -98,7 +98,7 @@ sparc-sun-solaris2*)
        IDL_BIN_SUF="solaris2.sparc"
        LIBPATH="LD_LIBRARY_PATH";
        FEXECLIBDIR="-L";
-       SHARETYPE=".so";;
+       SHARETYPE=".so";
        jni_inc_dir="/usr/java1.1/include";
        jni_md_inc_dir="/usr/include/java/solaris";;
 alpha-dec-osf*) CFLAGS="$CFLAGS -pthread -ieee";
