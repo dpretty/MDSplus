@@ -13,6 +13,8 @@ extern int TdiData();
 extern int TdiCvt();
 extern int TdiCompile();
 
+static char *cvsrev = "@(#)$RCSfile: MdsLibIdl.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:33:25 $";
+
 #ifdef _WINDOWS
 #define sighold(a)
 #define sigrelse(a)

@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+static char *cvsrev = "@(#)$RCSfile: CamIosb.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:34:23 $";
+
 extern unsigned short RemCamLastIosb[4];
 
 int CamBytcnt(unsigned short *iosb)

@@ -103,6 +103,8 @@ static unsigned char message_id = 1;
 Message *GetMdsMsg(SOCKET sock, int32 *status);
 int32 SendMdsMsg(SOCKET sock, Message *m, int oob);
 
+static char *cvsrev = "@(#)$RCSfile: mdsipshr.c,v $ $Revision: 1.10 $ $Date: 1998/04/08 19:30:37 $";
+
 static int32 initialized = 0;
 
 #ifdef __MSDOS__

@@ -89,6 +89,8 @@ void CloseDataSources();
 
 #define _LOCAL_ACCESS
 
+static char *cvsrev = "@(#)$RCSfile: evaluate.c,v $ $Revision: 1.5 $ $Date: 1998/04/08 19:38:47 $";
+
 extern void EventUpdate(XtPointer client_data, int *source, XtInputId *id);
 
 #if defined(__VMS)

@@ -80,6 +80,8 @@ $ Run SYS$SYSTEM:DWPad
 #include <DXm/DECspecific.h>
 #endif
 
+static char *cvsrev = "@(#)$RCSfile: dwpad.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:38:46 $";
+
 extern void XmdsDestroyWidgetCallback();
 extern void XmdsManageChildCallback();
 extern void XmdsRegisterWidgetCallback();

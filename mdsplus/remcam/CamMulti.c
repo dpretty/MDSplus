@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <string.h>
 
+static char *cvsrev = "@(#)$RCSfile: CamMulti.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:34:24 $";
+
 struct descriptor { unsigned short length;
                     char dtype;
                     char class;

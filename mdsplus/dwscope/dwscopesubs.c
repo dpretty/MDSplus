@@ -80,6 +80,8 @@
 extern int sys$filescan();
 #endif
 
+static char *cvsrev = "@(#)$RCSfile: dwscopesubs.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:38:47 $";
+
 extern int XmdsManageWindow();
 Boolean   ConvertSelectionToWave(Widget w, Atom result_type, unsigned int length, CutHeader *header, WaveInfo *info);
 Boolean   ConvertWaveToSelection(Widget w, String prefix, WaveInfo *wave, Atom target, Atom *type, String *header,

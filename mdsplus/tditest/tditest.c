@@ -36,6 +36,8 @@
 #define MAXEXPR 16384
 extern int TdiExecute();
 
+static char *cvsrev = "@(#)$RCSfile: tditest.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:41:54 $";
+
 static void tdiputs(char *line);
 
 int main(int argc, char **argv)
