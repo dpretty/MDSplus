@@ -37,7 +37,7 @@ int TreeDeleteNodeInitialize(NID *nid,int *count,reset)
 #include <string.h>
 #include <stdlib.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeDeleteNode.c,v $ $Revision: 1.9 $ $Date: 1998/09/15 13:58:13 $";
+static char *cvsrev = "@(#)$RCSfile: TreeDeleteNode.c,v $ $Revision: 1.10 $ $Date: 1998/09/15 14:04:09 $";
 
 extern void *DBID;
 
@@ -271,7 +271,7 @@ extern void       _TreeDeleteNodeExecute(void *dbid)
     else
       memcpy(edit->nci + nid.node - edit->first_in_mem, &empty_nci, sizeof(struct nci));
     memcpy(node->name,"deleted node",sizeof(node->name));
-    LoadShort(zero,node->conglomerate_elt);
+    LoadShort(zero,&node->conglomerate_elt);
     node->member = 0;
     node->brother = 0;
     node->usage = 0;
