@@ -4,7 +4,7 @@
 #include "treeshrp.h"
 #include <dbidef.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetDbi.c,v $ $Revision: 1.10 $ $Date: 1999/02/19 19:07:09 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetDbi.c,v $ $Revision: 1.11 $ $Date: 1999/07/19 20:01:47 $";
 
 extern void *DBID;
 #ifndef vxWorks
@@ -95,9 +95,9 @@ int _TreeGetDbi(void *dbid, struct dbi_itm *itmlst)
 
       check_open(db);
       {
-	NID       nid;
-	node_to_nid(db, db->default_node, (&nid));
-	string = _TreeGetPath(db, *(int *)&nid);
+	int nid;
+        _TreeGetDefaultNid(db,&nid);
+	string = _TreeGetPath(db, nid);
       }
       break;
 

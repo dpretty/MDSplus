@@ -40,7 +40,7 @@ int TreeCreatePulseFile(int shotid,int numnids, int *nids)
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
 
-static char *cvsrev = "@(#)$RCSfile: TreeCreatePulseFile.c,v $ $Revision: 1.9 $ $Date: 1999/06/23 14:56:48 $";
+static char *cvsrev = "@(#)$RCSfile: TreeCreatePulseFile.c,v $ $Revision: 1.10 $ $Date: 1999/07/19 20:01:47 $";
 
 static int  TreeCreateTreeFiles(char *tree, int shot, int source_shot);
 #ifdef _WIN32
@@ -93,7 +93,8 @@ int       _TreeCreatePulseFile(void *dbid, int shotid, int numnids_in, int *nids
 	nids[num++] = nids_in[i];
     }
   }
-
+  if (dblist->remote)
+    return CreatePulseFileRemote(dblist, shotid, nids, num);
   if (shotid)
     shot = shotid;
   else
