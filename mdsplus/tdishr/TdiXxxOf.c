@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <mdsshr.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiXxxOf.c,v $ $Revision: 1.5 $ $Date: 1998/04/08 19:06:23 $";
+static char *cvsrev = "@(#)$RCSfile: TdiXxxOf.c,v $ $Revision: 1.6 $ $Date: 1999/09/28 18:00:01 $";
 
 extern int TdiGetData();
 extern int TdiGetLong();
@@ -272,7 +272,7 @@ static unsigned char omits[] = {
 			else status=MdsCopyDxXd((struct descriptor *)&tmp, out_ptr);
 			break;
 		case DTYPE_SIGNAL :
-			if (index >= ((struct descriptor_signal *)pa)->ndesc+2
+			if (index >= ((struct descriptor_signal *)pa)->ndesc-2
 			|| ((struct descriptor_signal *)pa)->dimensions[index] == 0) {
                                 struct descriptor_s index_dsc = {sizeof(int), DTYPE_L, CLASS_S, 0};
                                 index_dsc.pointer = (char *)&index;
