@@ -1,4 +1,4 @@
-/* $Id: WaveformContainer.java,v 1.35 2004/12/31 10:59:05 manduchi Exp $ */
+/* $Id: WaveformContainer.java,v 1.36 2005/03/17 09:35:21 manduchi Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -231,12 +231,13 @@ public class WaveformContainer extends RowColumnContainer implements WaveformMan
                 if(w.GetMode() == Waveform.MODE_POINT)
                 {
                     double x = e.point_x;
+                    double y = e.point_y;
                     if(w.IsImage())
                         x = e.delta_x;
 		            else
 			            if(e.is_mb2)
 			                AllSameXScaleAutoY(w);
-                    UpdatePoints(x, (Waveform)e.getSource());
+                    UpdatePoints(x, y, (Waveform)e.getSource());
                 }
                 if(!w.IsImage() && show_measure)
                     e = new WaveformEvent(e.getSource(), WaveformEvent.MEASURE_UPDATE,
@@ -351,6 +352,11 @@ public class WaveformContainer extends RowColumnContainer implements WaveformMan
         show_measure = state;
     }
 
+    synchronized public void UpdatePoints(double x, Waveform curr_w)
+    {
+        UpdatePoints(x, Double.NaN, curr_w);
+    }
+
     /**
      * Update crosshair position
      *
@@ -359,7 +365,7 @@ public class WaveformContainer extends RowColumnContainer implements WaveformMan
      * @see Waveform
      * @see MultiWaveform
      */
-    synchronized public void UpdatePoints(double x, Waveform curr_w)
+    synchronized public void UpdatePoints(double x, double y, Waveform curr_w)
     {
         Waveform w;
 
@@ -367,7 +373,7 @@ public class WaveformContainer extends RowColumnContainer implements WaveformMan
 	    {
 	        w = GetWavePanel(i);
 	        if(w != null && w != curr_w)
-	              w.UpdatePoint(x);
+	              w.UpdatePoint(x, y);
 	    }
     }
 
