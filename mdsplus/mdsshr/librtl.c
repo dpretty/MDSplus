@@ -9,7 +9,7 @@
 #include <mds_stdarg.h>
 #include <librtl_messages.h>
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.74 $ $Date: 2001/01/10 19:57:25 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.75 $ $Date: 2001/02/09 19:36:09 $";
 
 extern int MdsCopyDxXd();
 
@@ -526,6 +526,7 @@ static void  child_done(	/* Return: meaningless sts		*/
 
 int LibSpawn(struct descriptor *cmd, int waitflag, int notifyFlag)
 {
+  char *sh = "/bin/sh";
   pid_t  pid,xpid;
   char *cmdstring = MdsDescrToCstring(cmd);
   int   sts=0;
@@ -537,7 +538,10 @@ int LibSpawn(struct descriptor *cmd, int waitflag, int notifyFlag)
     static char  *arglist[4];
     char  *p;
     int i=0;
-    arglist[i++] = getenv("SHELL");
+    arglist[0] = getenv("SHELL");
+    if (arglist[0] == 0)
+      arglist[0] = sh;
+    i++;
     if (cmd->length != 0)
     {
       arglist[i++] = "-c";
