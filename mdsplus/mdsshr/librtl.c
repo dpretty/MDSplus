@@ -9,7 +9,7 @@
 #include <mds_stdarg.h>
 #include <librtl_messages.h>
 
-static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.61 $ $Date: 2000/05/04 20:21:00 $";
+static char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.62 $ $Date: 2000/05/09 16:06:44 $";
 
 extern int MdsCopyDxXd();
 
@@ -146,7 +146,7 @@ char *TranslateLogical(char *pathname)
 int LibSpawn(struct descriptor *cmd, int waitFlag, int notifyFlag)
 {
   char *cmd_c = MdsDescrToCstring(cmd);
-  int status = _spawnlp(waitflag ? _P_WAIT : _P_NOWAIT, cmd_c, cmd_c, NULL);
+  int status = _spawnlp(waitFlag ? _P_WAIT : _P_NOWAIT, cmd_c, cmd_c, NULL);
   free(cmd_c);
   return (status == 0);
 }
