@@ -1,4 +1,4 @@
-/* $Id: MdsConnection.java,v 1.21 2003/02/06 16:38:40 manduchi Exp $ */
+/* $Id: MdsConnection.java,v 1.27 2003/06/10 12:23:24 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.*;
@@ -99,7 +99,7 @@ public class MdsConnection
 	                    
 	                    curr_message = null;
 	                    //if(pending_count == 0)
-	                      //  MdsConnection.this.NotifyMessage();
+	                    //    MdsConnection.this.NotifyMessage();
 	                }
         	    }
 	        } 
@@ -109,7 +109,7 @@ public class MdsConnection
 	            {
 	                message = null;
 	                connected = false;
-	                ConnectionEvent ce = new ConnectionEvent(MdsConnection.this, ConnectionEvent.LOST_CONNECTION, "Lost connection "+provider); 
+	                ConnectionEvent ce = new ConnectionEvent(MdsConnection.this, ConnectionEvent.LOST_CONNECTION, "Lost connection from : "+provider); 
 	                MdsConnection.this.dispatchConnectionEvent(ce);
 	                MdsConnection.this.NotifyMessage();
 	            }
@@ -352,6 +352,7 @@ public class MdsConnection
 	            error.concat("Could not get IO for "+provider + e); 
 	            return 0;
 	        }
+	        
 	    return 1;	
     }	    
     

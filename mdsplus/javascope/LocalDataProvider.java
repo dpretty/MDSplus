@@ -1,4 +1,4 @@
-/* $Id: LocalDataProvider.java,v 1.15 2003/01/16 14:18:05 manduchi Exp $ */
+/* $Id: LocalDataProvider.java,v 1.18 2003/04/18 13:08:55 manduchi Exp $ */
 import javax.swing.JFrame;
 import java.io.IOException;
 
@@ -66,7 +66,8 @@ public class LocalDataProvider extends MdsDataProvider implements DataProvider
     public void SetCompression(boolean state){}
     public boolean SupportsContinuous() {return false; }
     public boolean DataPending() {return  false;}
-    public int     InquireCredentials(JFrame f, String user){return DataProvider.LOGIN_OK;}
+    public int     InquireCredentials(JFrame f, DataServerItem server_item){return DataProvider.LOGIN_OK;}
     public boolean SupportsFastNetwork(){return false;}
     public void    SetArgument(String arg){};
+    public boolean SupportsTunneling(){return false;}    
 }

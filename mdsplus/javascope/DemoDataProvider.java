@@ -1,4 +1,4 @@
-/* $Id: DemoDataProvider.java,v 1.12 2003/01/16 14:18:03 manduchi Exp $ */
+/* $Id: DemoDataProvider.java,v 1.20 2003/08/08 12:35:35 manduchi Exp $ */
 import java.io.*;
 import javax.swing.JFrame;
 
@@ -84,9 +84,11 @@ class DemoDataProvider implements DataProvider
     public boolean SupportsCompression(){return false;}
     public void    SetCompression(boolean state){}
     public boolean SupportsContinuous() { return true; }
-    public int     InquireCredentials(JFrame f, String user){return DataProvider.LOGIN_OK;}
+    public int     InquireCredentials(JFrame f, DataServerItem server_item){return DataProvider.LOGIN_OK;}
     public boolean SupportsFastNetwork(){return false;}
     public void    SetArgument(String arg){}
+    public boolean SupportsTunneling() {return false; }
+    
 
     
     public void SetEnvironment(String exp)

@@ -1,4 +1,4 @@
-/* $Id: SetupDataDialog.java,v 1.42 2003/01/16 14:18:08 manduchi Exp $ */
+/* $Id: SetupDataDialog.java,v 1.43 2003/02/28 09:50:46 manduchi Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -608,6 +608,9 @@ import javax.swing.event.*;
        
        public boolean evaluateShotList(String in_shot) throws IOException
        {
+        
+            System.out.println("Evaluate shot "+in_shot);
+            
 		    if(shots != null && shots.length != 0)
 		        list_num_shot = shots.length;
 		    else
@@ -629,7 +632,10 @@ import javax.swing.event.*;
 		            return true;		        
 		        } else {
 		            if(shots.equals(new_shots))
-		                return false;
+		            {
+                        System.out.println("Shot non cambiato");
+                        return false;
+		            }
 		            shots = new_shots;
 		            if(image_b.isSelected())
 		            {

@@ -1,4 +1,4 @@
-/* $Id: TSDataProvider.java,v 1.13 2002/12/03 10:34:25 manduchi Exp $ */
+/* $Id: TSDataProvider.java,v 1.21 2003/08/08 12:35:41 manduchi Exp $ */
 import java.util.*;
 import java.io.IOException;
 import javax.swing.JFrame;
@@ -95,7 +95,7 @@ public boolean SupportsCompression(){return false;}
 public void    SetCompression(boolean state){}
 public boolean SupportsContinuous() {return false; }
 public boolean DataPending() {return  false;}
-public int     InquireCredentials(JFrame f, String user){return DataProvider.LOGIN_OK;}
+public int     InquireCredentials(JFrame f, DataServerItem server_item){return DataProvider.LOGIN_OK;}
 public boolean SupportsFastNetwork(){return false;}
 public int []    GetNumDimensions(String spec) {return new int[] {1};}
 }

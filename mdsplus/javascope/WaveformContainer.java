@@ -1,4 +1,4 @@
-/* $Id: WaveformContainer.java,v 1.23 2003/01/16 14:18:10 manduchi Exp $ */
+/* $Id: WaveformContainer.java,v 1.24 2003/02/28 09:51:11 manduchi Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -6,6 +6,7 @@ import java.awt.image.*;
 import java.util.Vector;
 import java.awt.print.*;
 import java.awt.geom.*;
+import javax.swing.RepaintManager;
  
 /**
  * A MultiWaveform container
@@ -953,8 +954,10 @@ public class WaveformContainer extends RowColumnContainer implements WaveformMan
 	                    print_mode |= MultiWaveform.PRINT_LEGEND;
 	                if(print_bw)
 	                    print_mode |= MultiWaveform.PRINT_BW;
-	                    
+	                
+	                disableDoubleBuffering(w);    
 	                w.paint(g, new Dimension(curr_width,curr_height), print_mode);	                
+	                enableDoubleBuffering(w);    
 	            }
 	            py = curr_height - pix;
 	            pos += (curr_height - pix);
@@ -964,6 +967,17 @@ public class WaveformContainer extends RowColumnContainer implements WaveformMan
 	        g.translate(0, -pos - st_y + py);
         }
     }         
+  
+    public static void disableDoubleBuffering(Component c) {
+        RepaintManager currentManager = RepaintManager.currentManager(c);
+        currentManager.setDoubleBufferingEnabled(false);
+    }
+
+    public static void enableDoubleBuffering(Component c) {
+        RepaintManager currentManager = RepaintManager.currentManager(c);
+        currentManager.setDoubleBufferingEnabled(true);
+    }
+  
   
 }
 

@@ -1,4 +1,4 @@
-/* $Id: TwuAccess.java,v 1.14 2002/11/12 17:18:29 manduchi Exp $ */
+/* $Id: TwuAccess.java,v 1.15 2003/02/28 09:51:05 manduchi Exp $ */
 import java.util.*;
 import java.awt.*;
 import java.io.IOException;
@@ -49,7 +49,7 @@ public class TwuAccess implements DataAccess
         
         if(tw == null)
         {
-            tw = new TwuDataProvider("jScope applet (Version 7.2)");
+            tw = new TwuDataProvider("jScope applet (Version 7.2.2)");
         }        
         return signal;
     }

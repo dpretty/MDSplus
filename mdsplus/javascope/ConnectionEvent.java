@@ -1,4 +1,4 @@
-/* $Id: ConnectionEvent.java,v 1.13 2003/01/16 14:18:02 manduchi Exp $ */
+/* $Id: ConnectionEvent.java,v 1.21 2003/08/08 12:35:34 manduchi Exp $ */
 import java.awt.AWTEvent;
 import java.awt.Event;
 
@@ -6,7 +6,7 @@ import java.awt.Event;
  * ConnectionEvent instances describe the current status of the data transfer and are passed by the DataProvider
  * implementation to jScope by means of ConnectionListener.processConnectionEvent method.
  * ConnectionEvent instances can also signal a connection lost. In this case field id (inherited by AWTEvent) is set 
- * to CponnectionEvent.LOST_CONNECTION, otherwise field id should be set to 0.
+ * to ConnectionEvent.LOST_CONNECTION, otherwise field id should be set to 0.
  * 
  * @see Connection Listener
  * @see DataProvider

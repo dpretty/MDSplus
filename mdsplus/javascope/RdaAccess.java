@@ -1,4 +1,4 @@
-/* $Id: RdaAccess.java,v 1.16 2003/01/16 14:18:07 manduchi Exp $ */
+/* $Id: RdaAccess.java,v 1.21 2003/06/10 12:23:26 manduchi Exp $ */
 import java.util.*;
 import java.awt.*;
 import java.io.IOException;
@@ -64,7 +64,7 @@ public class RdaAccess implements DataAccess
                 ( ip_addr != null && !ip_addr.equals(addr)) )
             {
                 encoded_credentials = new String();
-                login_status = jp.InquireCredentials(null, "");
+                login_status = jp.InquireCredentials(null, null);
                 if(login_status == DataProvider.LOGIN_OK)
                     ip_addr = addr;
                 else

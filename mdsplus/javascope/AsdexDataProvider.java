@@ -1,4 +1,4 @@
-/* $Id: AsdexDataProvider.java,v 1.12 2003/01/16 14:18:02 manduchi Exp $ */
+/* $Id: AsdexDataProvider.java,v 1.20 2003/08/08 12:35:34 manduchi Exp $ */
 import java.util.*;
 import java.io.IOException;
 import javax.swing.JFrame;
@@ -78,7 +78,7 @@ public boolean SupportsCompression(){return false;}
 public void    SetCompression(boolean state){}
 public boolean SupportsContinuous() {return false; }
 public boolean DataPending() {return  false;}
-public int     InquireCredentials(JFrame f, String user){return DataProvider.LOGIN_OK;}
+public int     InquireCredentials(JFrame f, DataServerItem server_item){return DataProvider.LOGIN_OK;}
 public boolean SupportsFastNetwork(){return false;}
 public int []    GetNumDimensions(String spec) {return new int[] {1};}
 }

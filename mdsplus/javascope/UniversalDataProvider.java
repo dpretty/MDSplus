@@ -1,4 +1,4 @@
-/* $Id: UniversalDataProvider.java,v 1.16 2003/01/16 14:18:08 manduchi Exp $ */
+/* $Id: UniversalDataProvider.java,v 1.19 2003/04/18 13:09:04 manduchi Exp $ */
 import java.io.*;
 import javax.swing.JFrame;
 import java.util.*;
@@ -101,11 +101,12 @@ class UniversalDataProvider implements DataProvider
     public boolean SupportsCompression(){return false;}
     public void    SetCompression(boolean state){}
     public boolean SupportsContinuous() { return true; }
-    public int     InquireCredentials(JFrame f, String user)
+    public int     InquireCredentials(JFrame f, DataServerItem server_item)
     {   
-        if(rfx != null) rfx.InquireCredentials(f, "java_user_ext");
-        return jet.InquireCredentials(f, user);
+        if(rfx != null) rfx.InquireCredentials(f, new DataServerItem("java_user_ext"));
+        return jet.InquireCredentials(f, server_item);
     }
+    public boolean SupportsTunneling() {return false; }
     public boolean SupportsFastNetwork(){return false;}
     public void    SetArgument(String arg){}
 
