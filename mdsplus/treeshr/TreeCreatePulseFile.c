@@ -39,9 +39,9 @@ int TreeCreatePulseFile(int shotid,int numnids, int *nids)
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
-extern void MaskReplace(char *path, char *tree, int shot);
+extern char *MaskReplace();
 
-static char *cvsrev = "@(#)$RCSfile: TreeCreatePulseFile.c,v $ $Revision: 1.15 $ $Date: 2000/10/26 20:37:25 $";
+static char *cvsrev = "@(#)$RCSfile: TreeCreatePulseFile.c,v $ $Revision: 1.16 $ $Date: 2000/11/16 19:52:36 $";
 
 #ifdef _WIN32
 #include <windows.h>
@@ -153,7 +153,6 @@ int  TreeCreateTreeFiles(char *tree, int shot, int source_shot)
   if (pathin)
   {
     pathlen = strlen(pathin);
-    path = malloc(pathlen+1+strlen(tree_lower));
     for (itype=0;itype<3 && (status & 1);itype++)
     {
       struct stat stat_info;
@@ -161,8 +160,7 @@ int  TreeCreateTreeFiles(char *tree, int shot, int source_shot)
       char *dstfile = 0;
       char *type = types[itype];
       char *part;
-      strcpy(path,pathin);
-      MaskReplace(path,tree_lower,source_shot);
+      path = MaskReplace(pathin,tree_lower,source_shot);
       pathlen = strlen(path);
       if (source_shot < 0)
         sprintf(name,"%s_model",tree_lower);
@@ -194,8 +192,7 @@ int  TreeCreateTreeFiles(char *tree, int shot, int source_shot)
       }
       if (srcfile)
       {
-        strcpy(path,pathin);
-        MaskReplace(path,tree_lower,shot);
+        path = MaskReplace(pathin,tree_lower,shot);
         pathlen = strlen(path);
         if (shot < 0)
           sprintf(name,"%s_model",tree_lower);
@@ -239,7 +236,7 @@ int  TreeCreateTreeFiles(char *tree, int shot, int source_shot)
       }
     }
     free(path);
-	TranslateLogicalFree(pathin);
+    TranslateLogicalFree(pathin);
   }
   return status;
 }

@@ -36,13 +36,14 @@ int TreeGetCurrentShotId(experiment,shot)
 extern void TranslateLogicalFree();
 extern int TreeGetCurrentShotIdRemote();
 extern int TreeSetCurrentShotIdRemote();
+extern char *MaskReplace();
 #ifndef index
 extern char *index();
 #endif
 
 extern char *TranslateLogical();
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetSetShotId.c,v $ $Revision: 1.7 $ $Date: 2000/11/01 19:03:24 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetSetShotId.c,v $ $Revision: 1.8 $ $Date: 2000/11/16 19:52:37 $";
 
 #define _ToLower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
@@ -69,6 +70,7 @@ static char *GetFileName(char *experiment,char **ctx)
     part = *ctx;
   if (part != NULL)
   {
+    char *tmp;
     if ((semi = (char *)index(part, ';')) != 0)
       *semi = '\0';
     strncpy(pathname,part,500);
@@ -82,7 +84,9 @@ static char *GetFileName(char *experiment,char **ctx)
     strcat(pathname,"/");
 #endif
     strcat(pathname,"shotid.sys");
-    MaskReplace(pathname,experiment,0);
+    tmp = MaskReplace(pathname,experiment,0);
+    strcpy(pathname,tmp);
+    free(tmp);
     ans = pathname;
   }
   return ans;
