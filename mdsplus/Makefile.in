@@ -1,6 +1,10 @@
-#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.2 $
+#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.3 $
 # @configure_input@
 SHELL=/bin/sh
+
+JAVA_APS = javamds \
+	   javascope \
+           javatraverser
 
 PARTS = ipcs \
         mdsshr \
@@ -23,7 +27,8 @@ PARTS = ipcs \
         mdslib \
         math \
         @D3DSHR@ \
-        wfevent
+        wfevent \
+	@JAVA_APS@
 
 all:
 	cdir=`pwd`;\
