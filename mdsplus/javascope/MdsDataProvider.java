@@ -1,4 +1,4 @@
-/* $Id: MdsDataProvider.java,v 1.36 2005/02/11 10:30:54 manduchi Exp $ */
+/* $Id: MdsDataProvider.java,v 1.37 2005/02/28 14:03:55 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.*;
@@ -120,7 +120,7 @@ public class MdsDataProvider
                 {
                     if (mframe_error != null)
                         error =
-                            " Pulse file or image file not found\nRead on pulse file error\n" +
+                            " Pulse file or image file not found\nRead pulse file error\n" +
                             mframe_error + "\nFrame times read error";
                     else
                         error = " Image file not found ";
@@ -704,6 +704,7 @@ public class MdsDataProvider
             return null;
 
         String in = "DIM_OF(" + in_frame + ")";
+        System.out.println(in);
         time = GetFloatArray(in);
         if (time == null)
             return null;
@@ -1190,23 +1191,24 @@ public class MdsDataProvider
         return null;
     }
 
-    public void Dispose()
+    public synchronized void Dispose()
     {
         if (connected)
         {
             connected = false;
             mds.DisconnectFromMds();
+
+            if (is_tunneling && ssh_tunneling != null)
+            {
+                ssh_tunneling.Dispose();
+            }
+            ConnectionEvent ce = new ConnectionEvent(this,
+                ConnectionEvent.
+                LOST_CONNECTION,
+                "Lost connection from : " +
+                provider);
+            mds.dispatchConnectionEvent(ce);
         }
-        if (is_tunneling && ssh_tunneling != null)
-        {
-            ssh_tunneling.Dispose();
-        }
-        ConnectionEvent ce = new ConnectionEvent(this,
-                                                 ConnectionEvent.
-                                                 LOST_CONNECTION,
-                                                 "Lost connection from : " +
-                                                 provider);
-        mds.dispatchConnectionEvent(ce);
     }
 
     protected synchronized void CheckConnection() throws IOException
