@@ -33,7 +33,7 @@ extern char *index(char *str,char c);
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.51 $ $Date: 2000/12/01 15:11:07 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.52 $ $Date: 2000/12/19 20:14:20 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
@@ -648,6 +648,8 @@ char *MaskReplace(char *path_in,char *tree,int shot)
   char *path = strcpy(malloc(strlen(path_in)+1),path_in);
   char ShotMask[13];
   char *tilde;
+  int replace_tilde = 0;
+  unsigned int i; 
   if (shot > 0)
     sprintf(ShotMask,"%012u",shot);
   else
@@ -675,8 +677,14 @@ char *MaskReplace(char *path_in,char *tree,int shot)
                free(path);
                path=tmp2;
                break;
-    default: path=tilde+1;
+    default: tilde[0]=1;
+             replace_tilde = (char)1;
+             break;
     }
+  }
+  if (replace_tilde)
+  {
+    for (i=0;i<strlen(path);i++) if (path[i] == (char)1) path[i] = '~';
   }
   return path;
 }  
@@ -714,10 +722,10 @@ static FILE  *OpenOne(TREE_INFO *info, char *tree, int shot, char *type,int new,
 		char *part;
 		int pathlen = strlen(path);
 		char *npath;
-                npath = MaskReplace(path,tree_lower,shot);
+    npath = MaskReplace(path,tree_lower,shot);
 		TranslateLogicalFree(path);
 		path = npath;
-                pathlen = strlen(path);
+    pathlen = strlen(path);
 		if (shot < 0)
 			sprintf(name,"%s_model",tree_lower);
 		else if (shot < 1000)
