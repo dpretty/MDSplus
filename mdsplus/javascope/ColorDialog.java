@@ -1,4 +1,4 @@
-/* $Id: ColorDialog.java,v 1.26 2002/11/12 17:18:25 manduchi Exp $ */
+/* $Id: ColorDialog.java,v 1.36 2003/08/08 12:35:34 manduchi Exp $ */
 import java.awt.*;
 import java.awt.event.*;
 import java.lang.*;
@@ -42,8 +42,6 @@ class ColorDialog extends JDialog implements ActionListener, ItemListener
     {
 
         super(dw, title, true);
-	    //setResizable(false);
-	    //super.setFont(new Font("Helvetica", Font.PLAIN, 10));    
 
 	    main_scope = (jScope)dw;
 	    

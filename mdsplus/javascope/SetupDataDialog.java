@@ -1,4 +1,4 @@
-/* $Id: SetupDataDialog.java,v 1.40 2002/11/12 17:18:28 manduchi Exp $ */
+/* $Id: SetupDataDialog.java,v 1.41 2002/11/22 14:44:06 manduchi Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -154,8 +154,6 @@ import javax.swing.event.*;
       SError(Frame fw) 
       {               
 	        super(fw, "Error Setup", true); 	
-//	        super.setFont(new Font("Helvetica", Font.PLAIN, 10)); 
-//	        setResizable(false);   
         	    
 	        JLabel label;
         		    

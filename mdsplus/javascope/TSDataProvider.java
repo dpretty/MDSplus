@@ -1,4 +1,4 @@
-/* $Id: TSDataProvider.java,v 1.11 2002/11/12 17:18:29 manduchi Exp $ */
+/* $Id: TSDataProvider.java,v 1.12 2002/11/22 14:44:06 manduchi Exp $ */
 import java.util.*;
 import java.io.IOException;
 import javax.swing.JFrame;
@@ -25,7 +25,7 @@ class TSDataProvider extends MdsDataProvider
     public synchronized void Update(String exp, long s)
 	{
 	    error = null;
-		shot = s;
+		shot = (int) s;
 	}
 	
 	protected String ParseExpression(String in)
@@ -36,10 +36,11 @@ class TSDataProvider extends MdsDataProvider
         String res = "GetTSData(\"";
 	    try{
 	        String name = st.nextToken();
-	        String rang0 = st.nextToken();
+/*	        String rang0 = st.nextToken();
 	        String rang1 = st.nextToken();
-	        res = "GetTSData(\"" + name + "\", " + shot + ", " + 
-	            rang0 + ", " + rang1 + ")";
+	        res = "GetTSData(\"" + name + "\", " + shot + ", " +
+	            rang0 + ", " + rang1 + ")"; */
+	        res = "GetTsBase(" + shot + ", \"" + name + "\")";
 	    }catch(Exception e)
 	    {
 	        error = "Wrong signal format: must be <signal_name>:<rangs[0]>:<rangs[1]>";

@@ -1,13 +1,20 @@
-/* $Id: LocalDataProvider.java,v 1.13 2002/11/12 17:18:27 manduchi Exp $ */
+/* $Id: LocalDataProvider.java,v 1.15 2003/01/16 14:18:05 manduchi Exp $ */
 import javax.swing.JFrame;
 import java.io.IOException;
 
 public class LocalDataProvider extends MdsDataProvider implements DataProvider 
 {
+    
     static {
-	System.loadLibrary("JavaMds");
+        try
+        {
+	        System.loadLibrary("JavaMds");
+	    } 
+	    catch(Throwable e)
+	    {	        
+	    }
     }
-
+    
     native public void SetEnvironment(String exp);
     native public void Update(String exp, long s);
     native public String GetString(String in);

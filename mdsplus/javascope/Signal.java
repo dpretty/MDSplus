@@ -1,4 +1,4 @@
-/* $Id: Signal.java,v 1.25 2002/11/12 17:18:29 manduchi Exp $ */
+/* $Id: Signal.java,v 1.26 2002/11/22 14:44:06 manduchi Exp $ */
 import java.awt.Color;
 
 /**
@@ -1545,6 +1545,9 @@ public class Signal
         {
             return;
         }
+        
+        if(n_points > x.length) n_points = x.length;
+        if(n_points > y.length) n_points = y.length;
                 
         
         for(j = 0; j < n_points; j++)
