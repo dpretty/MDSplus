@@ -34,13 +34,9 @@ int Tdi3Divide(struct descriptor *in1, struct descriptor *in2, struct descriptor
 #include <mdstypes.h>
 #include <tdimessages.h>
 
-#ifdef HAVE_VXWORKS_H
-typedef long long _int64;
-typedef unsigned long long _int64u;
-#endif
 
 
-static char *cvsrev = "@(#)$RCSfile: TdiDivide.c,v $ $Revision: 1.5 $ $Date: 2001/06/06 17:05:17 $";
+static char *cvsrev = "@(#)$RCSfile: TdiDivide.c,v $ $Revision: 1.6 $ $Date: 2002/11/05 15:35:15 $";
 
 extern int CvtConvertFloat();
 extern double WideIntToDouble();

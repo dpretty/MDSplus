@@ -4,13 +4,14 @@
 	Ken Klare, LANL P-4	(c)1989,1990,1991
 */
 #include <stdlib.h>
+#include <mdsdescrip.h>
 #include "tdirefcat.h"
 #include "tdireffunction.h"
 #include "tdirefstandard.h"
 #include <tdimessages.h>
 #include <mdsshr.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiBuild.c,v $ $Revision: 1.5 $ $Date: 1998/12/16 10:55:07 $";
+static char *cvsrev = "@(#)$RCSfile: TdiBuild.c,v $ $Revision: 1.6 $ $Date: 2002/11/05 15:35:15 $";
 
 extern int TdiGetLong();
 extern int TdiEvaluate();

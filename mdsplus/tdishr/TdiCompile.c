@@ -8,6 +8,7 @@ extern unsigned short OpcCompile;
 
 #include <stdlib.h>
 #include <string.h>
+#include <mdsdescrip.h>
 #include "tdirefzone.h"
 #include "tdirefstandard.h"
 #include <libroutines.h>
@@ -20,7 +21,7 @@ extern void pthread_lock_global_np();
 extern void pthread_unlock_global_np();
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TdiCompile.c,v $ $Revision: 1.6 $ $Date: 2001/02/27 18:06:08 $";
+static char *cvsrev = "@(#)$RCSfile: TdiCompile.c,v $ $Revision: 1.7 $ $Date: 2002/11/05 15:35:15 $";
 
 extern int TdiEvaluate();
 extern int TdiYacc();

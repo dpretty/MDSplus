@@ -7,15 +7,18 @@
 extern unsigned short OpcSetRange;
 
 #include <stdlib.h>
+#include <mdsdescrip.h>
+#include "tdirefstandard.h"
 #include "tdirefcat.h"
 #include "tdireffunction.h"
-#include "tdirefstandard.h"
 #include "tdirefzone.h"
 #include <libroutines.h>
 #include <tdimessages.h>
 #include <mdsshr.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiYaccSubs.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:06:25 $";
+
+
+static char *cvsrev = "@(#)$RCSfile: TdiYaccSubs.c,v $ $Revision: 1.4 $ $Date: 2002/11/05 15:35:15 $";
 
 extern int Tdi1Build();
 extern int TdiEvaluate();

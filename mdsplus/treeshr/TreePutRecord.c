@@ -50,10 +50,11 @@
 
 #ifdef HAVE_VXWORKS_H
 static int timezone = 0;
+static int daylight = 0;
 #define LONG_LONG_CONSTANT(value) value##ll
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.64 $ $Date: 2002/10/25 16:51:00 $";
+static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.65 $ $Date: 2002/11/05 15:34:05 $";
 
 #ifdef min
 #undef min

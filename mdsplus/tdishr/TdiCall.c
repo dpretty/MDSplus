@@ -20,6 +20,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <mdsdescrip.h>
 #include "tdirefcat.h"
 #include "tdirefstandard.h"
 #include <libroutines.h>
@@ -27,7 +28,7 @@
 #include <tdimessages.h>
 #include <mdsshr.h>
 
-static char *cvsrev = "@(#)$RCSfile: TdiCall.c,v $ $Revision: 1.11 $ $Date: 2002/05/31 14:16:29 $";
+static char *cvsrev = "@(#)$RCSfile: TdiCall.c,v $ $Revision: 1.12 $ $Date: 2002/11/05 15:35:15 $";
 
 extern unsigned short OpcDescr;
 extern unsigned short OpcRef;

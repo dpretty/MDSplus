@@ -41,11 +41,10 @@
 */
 #include <stdio.h>
 #include <string.h>
-#include <mdsdescrip.h>
-#include <mdsdescrip.h>
 #include "tdirefcat.h"
 #include "tdireffunction.h"
 #include "tdirefzone.h"
+#include "tdirefstandard.h"
 #include <libroutines.h>
 #include <strroutines.h>
 #include <tdimessages.h>
@@ -54,7 +53,7 @@
 #ifdef HAVE_VXWORKS_H
 #undef ERROR
 #endif
-static char *cvsrev = "@(#)$RCSfile: TdiYacc.c,v $ $Revision: 1.14 $ $Date: 2001/06/06 17:05:19 $";
+static char *cvsrev = "@(#)$RCSfile: TdiYacc.c,v $ $Revision: 1.15 $ $Date: 2002/11/05 15:35:15 $";
 
 extern unsigned short
 	OpcAbort,
@@ -719,7 +718,7 @@ __YYSCLASS char * yyreds[] =
 };
 #endif /* YYDEBUG */
 #define YYFLAG  (-3000)
-/* @(#) $Revision: 1.14 $ */    
+/* @(#) $Revision: 1.15 $ */    
 
 /*
 ** Skeleton parser driver for yacc output

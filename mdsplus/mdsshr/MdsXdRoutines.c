@@ -15,13 +15,12 @@
 #include <string.h>
 #include <stdlib.h>
 #include <mdsdescrip.h>
-#include <mdsdescrip.h>
 #include <libroutines.h>
 #include <strroutines.h>
 #include <librtl_messages.h>
 #include <mdsshr.h>
 
-static char *cvsrev = "@(#)$RCSfile: MdsXdRoutines.c,v $ $Revision: 1.15 $ $Date: 2002/09/09 18:20:20 $";
+static char *cvsrev = "@(#)$RCSfile: MdsXdRoutines.c,v $ $Revision: 1.16 $ $Date: 2002/11/05 15:34:52 $";
 #define LibVM_FIRST_FIT      1
 #define LibVM_BOUNDARY_TAGS  1
 #define LibVM_EXTEND_AREA    32

@@ -63,13 +63,11 @@ int Tdi3xxxxx(struct descriptor *in1, struct descriptor *in2,
 #ifdef HAVE_VXWORKS_H
 /*#define _int64  long long
 #define _int64u unsigned long long*/
-typedef long long _int64;
-typedef unsigned long long _int64u;
 
 #define LONG_LONG_CONSTANT(value) value##ll
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TdiDim.c,v $ $Revision: 1.12 $ $Date: 2001/06/06 17:05:16 $";
+static char *cvsrev = "@(#)$RCSfile: TdiDim.c,v $ $Revision: 1.13 $ $Date: 2002/11/05 15:35:15 $";
 
 extern int TdiConvert(  ); 
 extern int Tdi3Subtract(  );
