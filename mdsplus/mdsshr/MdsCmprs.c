@@ -67,7 +67,7 @@
 #include <mdsshr.h>
 #include <string.h>
 #include <librtl_messages.h>
-static char *cvsrev = "@(#)$RCSfile: MdsCmprs.c,v $ $Revision: 1.9 $ $Date: 1998/07/27 18:28:30 $";
+static char *cvsrev = "@(#)$RCSfile: MdsCmprs.c,v $ $Revision: 1.10 $ $Date: 1998/07/27 18:34:33 $";
 
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
 #define MAXX 1024		/*length of longest run allowed*/
@@ -349,8 +349,10 @@ Do this in runs.
   ******************************/
     if (*bit_ptr + xe * ye + xn * yn > limit)
       return LibSTRTRU;
+    header.n.dummy = 0;
     header.n.fields.x = xn - 1;
     header.n.fields.y = yn;
+    header.e.dummy = 0;
     header.e.fields.x = xe;
     header.e.fields.y = ye - 1;
     MdsPk((char *) &FIELDSY, &FIELDSX, (int *) ppack, (int *) &header, (int *) bit_ptr);
