@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: turn_crate_on_off_line.c,v 1.5 2003/09/05 19:50:46 twf Exp $
+//	$Id: turn_crate_on_off_line.c,v 1.6 2003/09/05 20:24:16 twf Exp $
 //-------------------------------------------------------------------------
 
 //-----------------------------------------------------------
@@ -99,7 +99,7 @@ int turn_crate_on_off_line( char *crate_name, int state )
 	    }
 	}
         else {
-	    CRATEdb[idx].online = (status == ON) ? '1' : '0';
+	    CRATEdb[idx].online = (state == ON) ? '1' : '0';
             CRATEdb[idx].enhanced = '0';
             status = 1;
 	}
