@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.103 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.104 $
 AC_INIT()
 
 AC_CONFIG_HEADER(include/config.h)
@@ -447,6 +447,7 @@ math/Makefile
 math/csint.f 
 math/umach.f 
 mdsdcl/Makefile 
+mdsjet/Makefile
 mdslib/Makefile 
 mdslibidl/Makefile 
 mdsshr/Makefile 
