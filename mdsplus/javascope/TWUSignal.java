@@ -10,9 +10,12 @@
  * Authors: Jon Krom, H.R.Koslowski, 
  *          Forschungszentrum Jülich, Institut für Plasmaphysik.
  *
- * $Id: TWUSignal.java,v 1.6 2002/04/26 14:00:35 jgk Exp $
+ * $Id: TWUSignal.java,v 1.7 2002/05/06 16:07:10 jgk Exp $
  *
  * $Log: TWUSignal.java,v $
+ * Revision 1.7  2002/05/06 16:07:10  jgk
+ * Further adjustment suggested by Marco van de Giessen.
+ *
  * Revision 1.6  2002/04/26 14:00:35  jgk
  * Added an error reporting method, as suggested by
  * Marco van de Giessen <A.P.M.vandeGiessen@phys.uu.nl>.
@@ -156,7 +159,7 @@ public class TWUSignal
             URLConnection con = bulkURL.openConnection();
 
             con.setRequestProperty("User-Agent",
-                                   "TWUSignal.java for jScope ($Revision: 1.6 $)");
+                                   "TWUSignal.java for jScope ($Revision: 1.7 $)");
             con.connect();
 
             instream = 
@@ -203,11 +206,15 @@ public class TWUSignal
                 ydata[sampleCount++] = F.floatValue();
             }
 
-            if (s==null)
+            finished = (sampleCount>=samples2Read || s == null) ;
+
+            if ( finished )
             {
+                // boolean premature_eof = (s==null);
+                // We should handle this, if it is a real problem.
+                
                 try { instream.close(); }
                 catch (Exception e) {}
-                finished =true;
 
                 if (sampleCount<samples2Read)
                 {
@@ -222,8 +229,6 @@ public class TWUSignal
                     }
                 }
             }
-            else
-              finished = sampleCount>=samples2Read ;
         }
         catch (Exception e) 
         {
@@ -258,10 +263,10 @@ public class TWUSignal
     public static String 
     revision()
     {
-        return "$Id: TWUSignal.java,v 1.6 2002/04/26 14:00:35 jgk Exp $";
+        return "$Id: TWUSignal.java,v 1.7 2002/05/06 16:07:10 jgk Exp $";
     }
 }
 
 /* ------------------------------------------------------------------------ */
-// $Id: TWUSignal.java,v 1.6 2002/04/26 14:00:35 jgk Exp $
+// $Id: TWUSignal.java,v 1.7 2002/05/06 16:07:10 jgk Exp $
 /* ------------------------------------------------------------------------ */
