@@ -16,7 +16,7 @@
 #include <math.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.135 $ $Date: 2003/12/15 15:41:31 $ $Name:  $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.136 $ $Date: 2003/12/18 16:04:43 $ $Name:  $";
 
 extern int MdsCopyDxXd();
 STATIC_ROUTINE char *GetTdiLogical(char *name);
@@ -1289,7 +1289,7 @@ int LibFindImageSymbol(struct descriptor *filename, struct descriptor *symbol, v
       strlen(full_filename)*2+strlen(tmp)+strlen(tmp_error1)+strlen(tmp_error2)+10)),
       "Error loading library:\n\t %s - %s\n\t %s - %s\n\t%s - %s\n",c_filename,tmp_error1,full_filename,tmp_error2,&full_filename[3],tmp);
   }
-  if (old_fis_error != FIS_Error)
+  if (old_fis_error != 0 && old_fis_error != FIS_Error)
     free(old_fis_error);
 #ifndef HAVE_WINDOWS_H
   dlopen_unlock();
