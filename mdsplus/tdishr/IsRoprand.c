@@ -4,7 +4,7 @@
 /*  CMS REPLACEMENT HISTORY, Element ISROPRAND.C */
 #include <mdsdescrip.h>
 
-static char *cvsrev = "@(#)$RCSfile: IsRoprand.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 19:05:51 $";
+static char *cvsrev = "@(#)$RCSfile: IsRoprand.c,v $ $Revision: 1.4 $ $Date: 2000/02/07 21:05:15 $";
 
 #define f_float_exp(val) ((*(int *)val >> 7) & 0xff)
 #define f_float_sign(val) ((*(int *)val >> 15) &0x1)
@@ -15,7 +15,7 @@ static char *cvsrev = "@(#)$RCSfile: IsRoprand.c,v $ $Revision: 1.3 $ $Date: 199
 #define g_float_exp(val) ((*(int *)val >> 4) & 0x7ff)
 #define g_float_sign(val) ((*(int *)val >> 15) &0x1)
 #define IsRoprandG(val) ((g_float_exp(val) == 0) && (g_float_sign(val) == 1))
-#define t_float_exp(val) ((((int *)val)[1] >> 4) & 0x7ff)
+#define t_float_exp(val) ((((int *)val)[1] >> 20) & 0x7ff)
 #define IsRoprandT(val) (t_float_exp(val) == 2047)
 
 int IsRoprand(int dtype,void *value)

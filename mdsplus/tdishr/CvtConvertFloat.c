@@ -1,7 +1,7 @@
 #include <string.h>
 #include <mdsdescrip.h>
 
-static char *cvsrev = "@(#)$RCSfile: CvtConvertFloat.c,v $ $Revision: 1.6 $ $Date: 1998/04/08 19:05:50 $";
+static char *cvsrev = "@(#)$RCSfile: CvtConvertFloat.c,v $ $Revision: 1.7 $ $Date: 2000/02/07 21:05:14 $";
 
 /** Adapted from VMS V7.0 sources CvtConvertFloat.lis                      **/  
 /******************************************************************************/
@@ -215,7 +215,7 @@ typedef struct {unsigned int low2; unsigned low:16; unsigned hi : 4; unsigned ex
 #define g_float_exp(val) ((*(int *)val >> 4) & 0x7ff)
 #define g_float_sign(val) ((*(int *)val >> 15) &0x1)
 #define IsRoprandG(val) ((g_float_exp(val) == 0) && (g_float_sign(val) == 1))
-#define t_float_exp(val) ((((int *)val)[1] >> 4) & 0x7ff)
+#define t_float_exp(val) ((((int *)val)[1] >> 20) & 0x7ff)
 #define IsRoprandT(val) (t_float_exp(val) == 2047)
 
 #define cvt_s_normal 			CvtNORMAL
