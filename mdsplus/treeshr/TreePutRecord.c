@@ -43,7 +43,7 @@
 #include <strroutines.h>
 #include <libroutines.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.15 $ $Date: 1998/04/08 18:51:39 $";
+static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.16 $ $Date: 1998/04/10 13:47:49 $";
 
 #define min(a,b) (((a) < (b)) ? (a) : (b))
 
@@ -57,7 +57,7 @@ static void EndEvent(int id, int length, int status, int stv);
 static int AddQuadword(unsigned int *a, unsigned int *b, unsigned int *ans);
 static int       OpenDatafileW(TREE_INFO *info, int *stv_ptr);
 static int PutDatafile(TREE_INFO *info, int nodenum, NCI *nci_ptr, struct descriptor_xd *data_dsc_ptr);
-
+static int UpdateDatafile(TREE_INFO *info, int nodenum, NCI *nci_ptr, struct descriptor_xd *data_dsc_ptr);
 static int compress_utility;
 static char nid_reference;
 static char path_reference;

@@ -37,11 +37,13 @@ int TreeDeletePulseFile(int shotid,int numnids, int *nids)
 #include "treeshrp.h"
 #include <ncidef.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeDeletePulseFile.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 18:51:34 $";
+static char *cvsrev = "@(#)$RCSfile: TreeDeletePulseFile.c,v $ $Revision: 1.4 $ $Date: 1998/04/10 13:47:49 $";
 
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 extern void *DBID;
+static int  TreeDeleteTreeFiles(char *tree, int shot);
+static int DeleteFile(char *src);
 
 int       TreeDeletePulseFile(int shotid, int allfiles)
 {

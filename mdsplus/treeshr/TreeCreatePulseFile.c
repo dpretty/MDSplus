@@ -37,7 +37,10 @@ int TreeCreatePulseFile(int shotid,int numnids, int *nids)
 #include "treeshrp.h"
 #include <ncidef.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeCreatePulseFile.c,v $ $Revision: 1.3 $ $Date: 1998/04/08 18:51:34 $";
+static char *cvsrev = "@(#)$RCSfile: TreeCreatePulseFile.c,v $ $Revision: 1.4 $ $Date: 1998/04/10 13:47:48 $";
+
+static int  TreeCreateTreeFiles(char *tree, int shot, int source_shot);
+static int CopyFile(char *src, char *dst);
 
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
