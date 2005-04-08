@@ -1,4 +1,4 @@
-/* $Id: jScope.java,v 1.64 2005/03/21 14:36:06 manduchi Exp $ */
+/* $Id: jScope.java,v 1.65 2005/04/08 14:10:18 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.List;
@@ -1435,7 +1435,7 @@ public class jScope extends JFrame implements ActionListener, ItemListener,
 
   public void UpdateAllWaves()
   {
-	   executing_update = true;
+       executing_update = true;
        apply_b.setText("Abort");
        setPublicVariables(pub_var_diag.getPublicVar());
        SetMainShot();
@@ -1813,7 +1813,11 @@ public class jScope extends JFrame implements ActionListener, ItemListener,
 	        {
 	            case WaveformEvent.EVENT_UPDATE:
 	                if(EventUpdateEnabled())
-	                    wave_panel.Refresh(w, we.status_info);
+                        {
+                            setPublicVariables(pub_var_diag.getPublicVar());
+                            SetMainShot();
+                            wave_panel.Refresh(w, we.status_info);
+                        }
 	            break;
     	        case WaveformEvent.MEASURE_UPDATE:
 	            case WaveformEvent.POINT_UPDATE:
@@ -1899,7 +1903,8 @@ public class jScope extends JFrame implements ActionListener, ItemListener,
         String event = wave_panel.GetEvent();
 
         if(e.name.equals(event))
-            wave_panel.StartUpdate();
+            UpdateAllWaves();
+            //wave_panel.StartUpdate();
 
         if(e.name.equals(print_event))
             wave_panel.StartPrint(prnJob,  pageFormat);
