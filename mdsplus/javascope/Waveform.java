@@ -1,4 +1,4 @@
-/* $Id: Waveform.java,v 1.63 2005/04/21 16:05:01 manduchi Exp $ */
+/* $Id: Waveform.java,v 1.64 2005/04/21 16:56:17 manduchi Exp $ */
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -1794,7 +1794,7 @@ public class Waveform
     img = frames.GetFrame(frame_idx, d);
 
     if (img == null) {
-      wave_error = " No frame at time " + frames.GetTime(frame_idx);
+      wave_error = " No frame at time " + curr_point;//frames.GetTime(frame_idx);
       return false;
     }
 
