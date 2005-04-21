@@ -1,4 +1,4 @@
-/* $Id: MdsDataProvider.java,v 1.37 2005/02/28 14:03:55 manduchi Exp $ */
+/* $Id: MdsDataProvider.java,v 1.38 2005/04/21 16:05:00 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.*;
@@ -704,7 +704,6 @@ public class MdsDataProvider
             return null;
 
         String in = "DIM_OF(" + in_frame + ")";
-        System.out.println(in);
         time = GetFloatArray(in);
         if (time == null)
             return null;
@@ -1418,7 +1417,7 @@ public class MdsDataProvider
             catch (Throwable exc)
             {
                 if (exc instanceof NoClassDefFoundError)
-                    JOptionPane.showMessageDialog(f, "The MindTerm.jar library is required for ssh tunneling.You can download it from \nhttp://www.appgate.com/mindterm/download.php",
+                    JOptionPane.showMessageDialog(f, "The MindTerm.jar library is required for ssh tunneling.You can download it from \nhttp://www.appgate.com/mindterm/download.php\n"+exc,
                                                   "alert",
                                                   JOptionPane.ERROR_MESSAGE);
                 return DataProvider.LOGIN_ERROR;

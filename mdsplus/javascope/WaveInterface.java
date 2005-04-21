@@ -1,4 +1,4 @@
-/* $Id: WaveInterface.java,v 1.68 2005/04/01 10:54:33 manduchi Exp $ */
+/* $Id: WaveInterface.java,v 1.69 2005/04/21 16:05:00 manduchi Exp $ */
 import java.awt.*;
 import java.io.*;
 import java.awt.image.*;
@@ -1023,8 +1023,10 @@ public class WaveInterface
             {
                 throw(new IOException("Java Advanced Imaging must be installed to show this type of image"));
             }
-        } else
+        } else {
             frames = new Frames();
+ //           frames.setColorMap(wave.getColorMap());
+        }
     }
 
 
