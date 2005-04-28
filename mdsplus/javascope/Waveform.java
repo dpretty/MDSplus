@@ -1,4 +1,4 @@
-/* $Id: Waveform.java,v 1.64 2005/04/21 16:56:17 manduchi Exp $ */
+/* $Id: Waveform.java,v 1.65 2005/04/28 14:52:24 manduchi Exp $ */
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -1835,9 +1835,7 @@ public class Waveform
     else {
       g2.clearRect(0, 0, dim.width, dim.height);
       g2.drawRenderedImage( (RenderedImage) img,
-                                          new
-                                          AffineTransform(1f, 0f, 0f, 1f, 0F,
-          0F));
+                             new AffineTransform(1f, 0f, 0f, 1f, 0F,0F));
     }
   }
 

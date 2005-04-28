@@ -1,4 +1,4 @@
-/* $Id: MdsDataProvider.java,v 1.38 2005/04/21 16:05:00 manduchi Exp $ */
+/* $Id: MdsDataProvider.java,v 1.39 2005/04/28 14:52:24 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.*;
@@ -1192,15 +1192,17 @@ public class MdsDataProvider
 
     public synchronized void Dispose()
     {
-        if (connected)
+
+       if (is_tunneling && ssh_tunneling != null)
+       {
+           ssh_tunneling.Dispose();
+       }
+
+       if (connected)
         {
             connected = false;
             mds.DisconnectFromMds();
 
-            if (is_tunneling && ssh_tunneling != null)
-            {
-                ssh_tunneling.Dispose();
-            }
             ConnectionEvent ce = new ConnectionEvent(this,
                 ConnectionEvent.
                 LOST_CONNECTION,

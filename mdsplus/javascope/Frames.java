@@ -1,4 +1,4 @@
-/* $Id: Frames.java,v 1.39 2005/04/21 16:56:17 manduchi Exp $ */
+/* $Id: Frames.java,v 1.40 2005/04/28 14:52:23 manduchi Exp $ */
 import java.awt.*;
 import java.io.*;
 import java.awt.image.*;
@@ -232,9 +232,14 @@ class Frames extends Canvas
         Image img;
         MemoryImageSource source;
         if(buf == null || d == null) return false;
+
         source = new MemoryImageSource(d.width, d.height, c_model, buf, 0, d.width);
         img = createImage(source);
-
+/*
+        DataBufferByte db = new DataBufferByte(buf, buf.length);
+        SinglePixelPackedSampleModel  sm = new SinglePixelPackedSampleModel(DataBuffer.TYPE_BYTE, d.width, d.height, new int[]{8,0,0});
+        img = new BufferedImage(c_model, Raster.createWritableRaster(sm, db, new Point(0,0)), false, null);
+*/
         return AddFrame(img, t);
     }
 
@@ -977,7 +982,6 @@ class Frames extends Canvas
             return 0;
 
         if(t > ((Float)frame_time.elementAt(frame.size()-1)).floatValue())
-//            return frame.size()-1;
             return -1;
 
         for(int i = 0; i < frame.size() - 1; i++)
