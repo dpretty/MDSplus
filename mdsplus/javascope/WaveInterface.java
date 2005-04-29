@@ -1,4 +1,4 @@
-/* $Id: WaveInterface.java,v 1.70 2005/04/28 16:53:32 manduchi Exp $ */
+/* $Id: WaveInterface.java,v 1.71 2005/04/29 07:40:25 manduchi Exp $ */
 import java.awt.*;
 import java.io.*;
 import java.awt.image.*;
@@ -747,18 +747,19 @@ public class WaveInterface
             return 0;
         }
 
-        if (shots == null)
+        if (shots == null && ! ( experiment == null || experiment.trim().length() == 0) )
         {
             error = "Missing shot value";
             signals = null;
 
         }
 
-        if ( experiment == null || experiment.trim().length() == 0)
+        if (shots != null && ( experiment == null || experiment.trim().length() == 0) )
         {
             error = "Missing experiment name";
             signals = null;
         }
+
 
         num_waves = in_y.length;
 
