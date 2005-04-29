@@ -21,12 +21,12 @@
 #include <mdsshr.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: MdsXdRoutines.c,v $ $Revision: 1.17 $ $Date: 2003/11/24 17:50:18 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: MdsXdRoutines.c,v $ $Revision: 1.18 $ $Date: 2005/04/29 15:02:07 $";
 #define LibVM_FIRST_FIT      1
 #define LibVM_BOUNDARY_TAGS  1
 #define LibVM_EXTEND_AREA    32
 #define LibVM_TAIL_LARGE     128
-#define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
+#define align(bytes,size) ((((unsigned long)(bytes) + (size) - 1)/(size)) * (size))
 #define compression_threshold 128
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 
