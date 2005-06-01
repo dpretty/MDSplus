@@ -1,4 +1,4 @@
-/* $Id: jScope.java,v 1.66 2005/04/28 14:52:24 manduchi Exp $ */
+/* $Id: jScope.java,v 1.67 2005/06/01 15:34:38 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.List;
@@ -2007,7 +2007,9 @@ public class jScope
             String event = wave_panel.GetEvent();
 
             if (e.name.equals(event))
-                UpdateAllWaves();
+            {
+               SwingUtilities.invokeLater(new Runnable() {public void run() {UpdateAllWaves();}});
+            }
                 //wave_panel.StartUpdate();
 
             if (e.name.equals(print_event))
@@ -2983,7 +2985,9 @@ class ServerDialog
         "AsdexDataProvider",
         "ASCIIDataProvider",
         "T2DataProvider",
-        "MdsContinuousDataProvider"};
+        "MdsContinuousDataProvider",
+        "LocalDataProvider",
+        "LocalRealtimeDataProvider"};
 
     ServerDialog(JFrame _dw, String title)
     {
