@@ -1,4 +1,4 @@
-/* $Id: Frames.java,v 1.40 2005/04/28 14:52:23 manduchi Exp $ */
+/* $Id: Frames.java,v 1.41 2005/06/01 15:47:52 manduchi Exp $ */
 import java.awt.*;
 import java.io.*;
 import java.awt.image.*;
@@ -266,6 +266,7 @@ class Frames extends Canvas
     public void AddJAIImage(byte[] buf, float t) throws IOException
     {
     }
+
 
     public void SetColorIdx(int color_idx)
     {
@@ -973,20 +974,26 @@ class Frames extends Canvas
     public int GetFrameIdxAtTime(float t)
     {
         int idx = -1;
+        float dt;
 
-        if(frame.size() < 0)
+        if(frame.size() <= 0)
             return -1;
 
 
         if(frame.size() == 1)
-            return 0;
+           dt = 1;
+        else
+           dt = ( (Float) frame_time.elementAt(1)).floatValue() -
+                ( (Float) frame_time.elementAt(0)).floatValue();
 
-        if(t > ((Float)frame_time.elementAt(frame.size()-1)).floatValue())
+        if(t >= ((Float)frame_time.elementAt(frame.size()-1)).floatValue() + dt)
             return -1;
+
+        if(t >= ((Float)frame_time.elementAt(frame.size()-1)).floatValue() )
+            return  frame.size()-1;
 
         for(int i = 0; i < frame.size() - 1; i++)
         {
-
             if( t >= ((Float)frame_time.elementAt(i)).floatValue() &&
                 t < ((Float)frame_time.elementAt(i + 1)).floatValue())
             {
@@ -1126,7 +1133,7 @@ class Frames extends Canvas
         if(curr_frame_idx + 1 == getNumFrame())
             return curr_frame_idx;
         else
-            return curr_frame_idx + 1;
+            return curr_frame_idx += 1;
 
     }
 
@@ -1135,7 +1142,7 @@ class Frames extends Canvas
         if(curr_frame_idx - 1 < 0)
             return 0;
         else
-            return curr_frame_idx - 1;
+            return curr_frame_idx -= 1;
     }
 
     public int GetFrameIdx()
