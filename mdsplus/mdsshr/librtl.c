@@ -17,7 +17,7 @@
 #include <math.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.142 $ $Date: 2004/12/03 21:36:15 $ $Name:  $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.143 $ $Date: 2005/06/15 19:07:44 $ $Name:  $";
 
 extern int MdsCopyDxXd();
 STATIC_ROUTINE char *GetTdiLogical(char *name);
@@ -1205,7 +1205,7 @@ int LibFindImageSymbol(struct descriptor *filename, struct descriptor *symbol, v
   dlopen_lock();
 #endif
 #ifdef linux
-  dlopen_mode = RTLD_NOW | RTLD_GLOBAL;
+  dlopen_mode = RTLD_NOW /* | RTLD_GLOBAL */;
 #endif
   handle = dlopen(full_filename,dlopen_mode);
   if (handle == NULL) {
