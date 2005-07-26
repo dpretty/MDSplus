@@ -76,7 +76,7 @@ struct dsc$descriptor_xd *XmdsNidOptionMenuIdxGetXd(Widget w, int selected);
 #include <xmdsshr.h>
 #include <mds_stdarg.h>
 
-static char *cvsrev = "@(#)$RCSfile: XmdsNidOptionMenu.c,v $ $Revision: 1.7 $ $Date: 2003/09/15 14:17:30 $";
+static char *cvsrev = "@(#)$RCSfile: XmdsNidOptionMenu.c,v $ $Revision: 1.8 $ $Date: 2005/07/26 15:22:55 $";
 
 typedef struct _Resources
 {
@@ -123,7 +123,7 @@ Widget XmdsCreateNidOptionMenu(Widget parent,String name,ArgList args,Cardinal a
   for (idx = 0,s = info->labels,v = info->values; s && *s && v && *v; s++,v++,idx++)
   {
     String expression = "";
-    expression = XmStringUnparse(*v, NULL, 0, XmCHARSET_TEXT, NULL, 0, XmOUTPUT_ALL);
+    expression = XmStringUnparse(*v, NULL, 0, XmCHARSET_TEXT, XmCHARSET_TEXT, 0, XmOUTPUT_ALL);
     {
       static EMPTYXD(empty_xd);
       struct descriptor_xd *xd = (struct descriptor_xd *) XtMalloc(sizeof(empty_xd));
