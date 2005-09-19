@@ -1,4 +1,4 @@
-/* $Id: WaveformContainer.java,v 1.36 2005/03/17 09:35:21 manduchi Exp $ */
+/* $Id: WaveformContainer.java,v 1.37 2005/09/19 16:08:19 manduchi Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -942,6 +942,7 @@ public class WaveformContainer extends RowColumnContainer implements WaveformMan
 	                curr_height = height - pos;
 	            g.setClip(0, 0, curr_width, curr_height);
 	            w = GetWavePanel(k);
+
 	            if(w != null)
 	            {
 	                int print_mode = Waveform.PRINT;

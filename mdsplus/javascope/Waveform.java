@@ -1,4 +1,4 @@
-/* $Id: Waveform.java,v 1.67 2005/06/01 15:47:52 manduchi Exp $ */
+/* $Id: Waveform.java,v 1.68 2005/09/19 16:08:19 manduchi Exp $ */
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -1364,7 +1364,7 @@ public class Waveform
                                frames.GetFrameTime(), 0,
                                frames.getPixel(frames.GetFrameIdx(), p.x, p.y),
                                0);
-        if (frame_type == FrameData.BITMAP_IMAGE_32) {
+        if (frame_type == FrameData.BITMAP_IMAGE_32 || frame_type == FrameData.BITMAP_IMAGE_16 ) {
           we.setPointValue(frames.getPointValue(frames.GetFrameIdx(), p.x, p.y));
 
         }
@@ -1423,7 +1423,8 @@ public class Waveform
       Point p = frames.getFramePoint(new Point(end_x, end_y), d);
       int frame_type = frames.getFrameType(frames.GetFrameIdx());
 
-      if (frame_type == FrameData.BITMAP_IMAGE_32) {
+      if (frame_type == FrameData.BITMAP_IMAGE_32 ||
+          frame_type == FrameData.BITMAP_IMAGE_16 ) {
         we = new WaveformEvent(this,
                                frames.getName(),
                                frames.getValuesX(p.y),
@@ -1569,6 +1570,10 @@ public class Waveform
     setFont(g);
     Dimension dim;
 
+    Graphics2D g2D = (Graphics2D) g;
+
+
+
     if (not_drawn || prev_width != d.width
         || prev_height != d.height || execute_print
         || (is_image && prev_frame != frame)) {
@@ -1588,6 +1593,8 @@ public class Waveform
             end_y = p.y;
           }
         }
+
+
 
         dim = getWaveSize();
         if (dim.width < MIN_W || dim.height < MIN_H) {
@@ -1613,7 +1620,8 @@ public class Waveform
           off_graphics.translate(i.right, i.top);
         }
       }
-      else {
+      else
+      {
         resizing = true;
         dim = d;
         off_graphics = g;
