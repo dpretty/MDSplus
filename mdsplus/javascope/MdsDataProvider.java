@@ -1,4 +1,4 @@
-/* $Id: MdsDataProvider.java,v 1.41 2005/09/20 12:07:33 manduchi Exp $ */
+/* $Id: MdsDataProvider.java,v 1.42 2005/09/21 15:53:45 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.*;
@@ -73,24 +73,7 @@ public class MdsDataProvider
                 {
                     all_times[i] = d.readFloat();
                 }
-                //header_size = 13 + 4 * n_frame;
                 header_size = 16 + 4 * n_frame;
-                /*
-                                 for(i = 0; i < n_frame; i++)
-                                 {
-                    t = d.readFloat();
-                    if(t > time_max)
-                        break;
-                    if(t > time_min)
-                    {
-                        f_time.addElement(new Float(t));
-                        if(st_idx == -1) st_idx = i;
-                    }
-                                 }
-                                 end_idx = i;
-                                 for(i = 0; i < f_time.size(); i++)
-                    all_times[i] = ((Float)f_time.elementAt(i)).floatValue();
-                 */
 
                 switch (pixel_size)
                 {
@@ -106,7 +89,6 @@ public class MdsDataProvider
                 }
             }
             else
-
             {
                 String mframe_error = ErrorString();
 
@@ -735,7 +717,6 @@ public class MdsDataProvider
             {
                 throw (new IOException("The evaluated signal is not an image"));
             }
-
         }
 
         ByteArrayOutputStream b = new ByteArrayOutputStream();

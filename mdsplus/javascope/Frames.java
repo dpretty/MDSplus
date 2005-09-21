@@ -1,4 +1,4 @@
-/* $Id: Frames.java,v 1.42 2005/09/19 16:08:19 manduchi Exp $ */
+/* $Id: Frames.java,v 1.43 2005/09/21 15:53:45 manduchi Exp $ */
 import java.awt.*;
 import java.io.*;
 import java.awt.image.*;
@@ -89,7 +89,7 @@ class Frames extends Canvas
 
     public int getFrameType(int i)
     {
-        if(i > 0 && i < getNumFrame())
+        if(i >= 0 && i < getNumFrame())
             return frame_type[i];
         else
             return 0;
@@ -205,15 +205,11 @@ class Frames extends Canvas
                    int buf_outl[] = new int[n_pix];
                    for(int j = 0; j < n_pix; j++)
                    {
-                      buf_outl[j] = (int)(255 * (buf_out[j] - min)/(max - min));
+                     buf_outl[j] = (int)(255 * (buf_out[j] - min)/(max - min));
                    }
 
                     AddBITMAPImage(buf_outl, d, t[i]);
 
-/*
-                    frame_Bvalues.addElement(buf_out);
-                    AddBITMAPImage(buf_out, d, t[i]);
-*/
                 }
                 break;
                 case FrameData.BITMAP_IMAGE_32 :
