@@ -1,4 +1,4 @@
-/* $Id: WaveformContainer.java,v 1.37 2005/09/19 16:08:19 manduchi Exp $ */
+/* $Id: WaveformContainer.java,v 1.38 2005/10/05 13:52:41 manduchi Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -239,10 +239,16 @@ public class WaveformContainer extends RowColumnContainer implements WaveformMan
 			                AllSameXScaleAutoY(w);
                     UpdatePoints(x, y, (Waveform)e.getSource());
                 }
+                /*
                 if(!w.IsImage() && show_measure)
-                    e = new WaveformEvent(e.getSource(), WaveformEvent.MEASURE_UPDATE,
-                                        e.point_x, e.point_y, e.delta_x, e.delta_y,
-                                        0, e.signal_idx);
+                {
+                    e = new WaveformEvent(e.getSource(),
+                                          WaveformEvent.MEASURE_UPDATE,
+                                          e.point_x, e.point_y, e.delta_x,
+                                          e.delta_y,
+                                          0, e.signal_idx);
+                }
+                */
            break;
            case WaveformEvent.POINT_IMAGE_UPDATE:
            break;

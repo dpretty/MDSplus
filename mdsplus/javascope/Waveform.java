@@ -1,4 +1,4 @@
-/* $Id: Waveform.java,v 1.68 2005/09/19 16:08:19 manduchi Exp $ */
+/* $Id: Waveform.java,v 1.69 2005/10/05 13:52:41 manduchi Exp $ */
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -1278,6 +1278,9 @@ public class Waveform
       grid.setLabels(sigTitle, orizLabel, vertLabel);
     }
 
+    if(waveform_signal != null)
+        grid.setXaxisHMS(waveform_signal.isLongX());
+
     if (!copy_selected || print_mode != NO_PRINT) {
       if (reversed && print_mode == NO_PRINT) {
         g.setColor(Color.black);
@@ -1410,6 +1413,8 @@ public class Waveform
         we.setXValue(s.getXData());
         we.setDataValue(s.getDataValue());
         we.setIsMB2(is_mb2);
+        if(s.isLongX())
+            we.setDateVale(s.x_long[0]);
 
         dispatchWaveformEvent(we);
       }

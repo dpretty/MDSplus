@@ -1,8 +1,8 @@
-/* $Id: MdsMessage.java,v 1.28 2005/02/18 08:04:41 manduchi Exp $ */
+/* $Id: MdsMessage.java,v 1.29 2005/10/05 13:52:40 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.*;
-import java.util.Vector;
+import java.util.*;
 import java.util.zip.*;
 
 

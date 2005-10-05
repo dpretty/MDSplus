@@ -1,4 +1,4 @@
-/* $Id: WaveData.java,v 1.21 2004/05/27 07:50:44 manduchi Exp $ */
+/* $Id: WaveData.java,v 1.22 2005/10/05 13:52:41 manduchi Exp $ */
 import java.io.IOException;
 
 /**
@@ -42,6 +42,15 @@ interface WaveData
      * @exception java.io.IOException
      */
     public double[] GetXDoubleData()   throws IOException;
+
+    /**
+     * Get X array, in long format.
+     *
+     * @return The returned X values coded as a long array,
+     * or null if the Data provider does not support long values for X axis
+     * @exception java.io.IOException
+     */
+    public long[] GetXLongData()   throws IOException;
 
     /**
      * Get Y data description (only for bidimensional signals)

@@ -1,4 +1,4 @@
-/* $Id: DemoDataProvider.java,v 1.21 2004/05/27 07:50:44 manduchi Exp $ */
+/* $Id: DemoDataProvider.java,v 1.22 2005/10/05 13:52:40 manduchi Exp $ */
 import java.io.*;
 import javax.swing.JFrame;
 
@@ -36,7 +36,8 @@ class DemoDataProvider implements DataProvider
         }
 
         public double[] GetXDoubleData(){return null;}
-       public float[] GetXData()   throws IOException
+        public long[] GetXLongData(){return null;}
+        public float[] GetXData()   throws IOException
         {
             return GetFloatArray(in_x);
         }

@@ -1,4 +1,4 @@
-/* $Id: JetDataProvider.java,v 1.39 2004/05/27 07:50:44 manduchi Exp $ */
+/* $Id: JetDataProvider.java,v 1.40 2005/10/05 13:52:40 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.util.*;
@@ -95,6 +95,7 @@ class JetDataProvider implements DataProvider
         }
 
         public double[] GetXDoubleData(){return null;}
+        public long[] GetXLongData(){return null;}
         public float[] GetXData()   throws IOException
         {
             if(in_x != null)

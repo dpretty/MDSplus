@@ -1,4 +1,4 @@
-/* $Id: MdsConnection.java,v 1.38 2005/02/11 10:30:54 manduchi Exp $ */
+/* $Id: MdsConnection.java,v 1.39 2005/10/05 13:52:40 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.*;
@@ -258,6 +258,7 @@ public class MdsConnection
 		            out.long_data = message.ToUIntArray();
 		        break;
               */
+                    case Descriptor.DTYPE_ULONGLONG:
 	            case Descriptor.DTYPE_LONGLONG:
 		            out.long_data = message.ToLongArray();
 		        break;

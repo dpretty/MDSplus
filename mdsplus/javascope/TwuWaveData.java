@@ -2,7 +2,7 @@
 // TwuWaveData
 // An implementation of "WaveData" for signals from a TEC Web-Umbrella (TWU) server.
 //
-// $Id: TwuWaveData.java,v 2.8 2004/05/27 07:50:44 manduchi Exp $
+// $Id: TwuWaveData.java,v 2.9 2005/10/05 13:52:41 manduchi Exp $
 //
 // ---------------------------------------------------------------------------------------------
 
@@ -130,6 +130,7 @@ class TwuWaveData
     }
 
     public double[] GetXDoubleData(){return null;}
+    public long[]   GetXLongData(){return null;}
     public float[]
     GetXData()
         throws IOException
@@ -234,5 +235,5 @@ class TwuWaveData
 }
 
 // ---------------------------------------------------------------------------------------------
-// End of: $Id: TwuWaveData.java,v 2.8 2004/05/27 07:50:44 manduchi Exp $
+// End of: $Id: TwuWaveData.java,v 2.9 2005/10/05 13:52:41 manduchi Exp $
 // ---------------------------------------------------------------------------------------------
