@@ -43,7 +43,7 @@
 #define  DTYPE_D DTYPE_G
 #endif
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSql.c,v $ $Revision: 1.20 $ $Date: 2005/09/29 18:59:05 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSql.c,v $ $Revision: 1.21 $ $Date: 2005/10/31 19:41:16 $";
 
 extern int stat;
 extern int TdiFindImageSymbol();
@@ -563,7 +563,7 @@ STATIC_CONSTANT DESCRIPTOR(zero, "\0");
         }
 
         /* see if the 2nd to last argument is "/NaN" */
-        if (status & 1) {
+        if ((status & 1) && (narg > 2)) {
           int ss = TdiData(list[narg-2], &dq_text MDS_END_ARG);
           if (ss) {
 	    if (dq_text.length == 4)
@@ -571,8 +571,8 @@ STATIC_CONSTANT DESCRIPTOR(zero, "\0");
             else
 	      NaN = 0;
 	    StrFree1Dx( &dq_text);
-          } else date = 0;
-        }
+          } else NaN = 0;
+        } else NaN = 0;
 
  
 	if (status & 1) status = SQL_DYNAMIC(
