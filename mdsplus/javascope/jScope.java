@@ -1,4 +1,4 @@
-/* $Id: jScope.java,v 1.71 2005/10/05 13:52:41 manduchi Exp $ */
+/* $Id: jScope.java,v 1.72 2005/11/16 14:56:31 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.List;
@@ -1562,7 +1562,7 @@ public class jScope
 
         if (srv_item == null || !SetDataServer(srv_item))
         {
-            srv_item = wave_panel.DataServerFromClient();
+            srv_item = wave_panel.DataServerFromClient(srv_item);
             if (srv_item == null || !SetDataServer(srv_item))
             {
                 if (server_ip_list != null && default_server_idx >= 0 &&
