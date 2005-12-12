@@ -1,4 +1,4 @@
-/* $Id: jScopeMultiWave.java,v 1.37 2005/09/19 16:08:20 manduchi Exp $ */
+/* $Id: jScopeMultiWave.java,v 1.38 2005/12/12 16:54:03 manduchi Exp $ */
 import java.awt.*;
 import java.util.*;
 import java.io.*;
@@ -67,6 +67,17 @@ public class jScopeMultiWave
             }
         };
         p.start();
+    }
+
+    public void setColorMap(ColorMap colorMap)
+    {
+        super.setColorMap(colorMap);
+        wi.setColorMap(colorMap);
+    }
+
+    public ColorMap getColorMap()
+    {
+        return wi.getColorMap();
     }
 
     public void jScopeErase()
@@ -321,11 +332,11 @@ public class jScopeMultiWave
         super.removeNotify();
     }
 
-    protected void DrawImage(Graphics g, Object img, Dimension dim)
+    protected void DrawImage(Graphics g, Object img, Dimension dim, int type)
     {
-        if (! (img instanceof RenderedImage))
+        if ( type != FrameData.JAI_IMAGE )
         {
-            super.DrawImage(g, img, dim);
+            super.DrawImage(g, img, dim, type);
         }
         else
         {

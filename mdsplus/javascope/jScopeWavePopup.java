@@ -1,4 +1,4 @@
-/* $Id: jScopeWavePopup.java,v 1.34 2005/09/19 16:08:20 manduchi Exp $ */
+/* $Id: jScopeWavePopup.java,v 1.35 2005/12/12 16:54:03 manduchi Exp $ */
 import java.awt.Point;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -19,9 +19,11 @@ class jScopeWavePopup
     protected JSeparator sep1, sep3;
 
     public jScopeWavePopup(SetupDataDialog setup_dialog,
-                           ProfileDialog profDialog)
+                           ProfileDialog profDialog,
+                           ColorMapDialog colorMapDialog)
     {
         super(null, profDialog);
+        this.setColorMapDialog(colorMapDialog);
         setup.setText("Setup data source...");
         this.setup_dialog = setup_dialog;
 

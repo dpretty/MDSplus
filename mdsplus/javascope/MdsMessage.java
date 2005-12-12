@@ -1,4 +1,4 @@
-/* $Id: MdsMessage.java,v 1.29 2005/10/05 13:52:40 manduchi Exp $ */
+/* $Id: MdsMessage.java,v 1.30 2005/12/12 16:54:02 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.*;
@@ -225,7 +225,7 @@ class MdsMessage extends Object
         int c_type = 0;
         int idx = 0;
 
-        //ReadBuf(header_b, dis);
+//        ReadBuf(header_b, dis);
 
 /*
         if(dis.read(header_b) == -1)
