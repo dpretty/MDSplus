@@ -1,5 +1,5 @@
 #include <STATICdef.h>
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.60 $ $Date: 2004/06/22 13:02:23 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.61 $ $Date: 2005/12/16 20:03:37 $";
 
 #ifndef HAVE_VXWORKS_H
 #include <config.h>
@@ -743,6 +743,11 @@ int _TreeWriteTree(void **dbid, char *exp_ptr, int shotid)
 
 	(*dblist)->modified = 0;
         TreeCallHook(WriteTree, info_ptr,0);
+      }
+      else
+      {
+	(*dblist)->modified = 0;
+        status = TreeFAILURE;
       }
     }
   }
