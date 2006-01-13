@@ -1,4 +1,4 @@
-/* $Id: WaveformMetrics.java,v 1.30 2005/05/12 08:29:04 manduchi Exp $ */
+/* $Id: WaveformMetrics.java,v 1.31 2006/01/13 11:05:35 manduchi Exp $ */
 import java.awt.*;
 import java.awt.image.*;
 import java.awt.event.*;
@@ -273,6 +273,8 @@ public class WaveformMetrics
             ;
         yEt = i;
 
+        if(yEt == 0) return;
+
         int p = 0;
         int h = 0;
         int w = 0;
@@ -331,6 +333,7 @@ public class WaveformMetrics
         }
 
         yPix0 = yPix1;
+
         yPix1 = 2 * YPixel(s.x_data[yEt - 1]) - yPix1;
         h = yPix0 - yPix1;
 

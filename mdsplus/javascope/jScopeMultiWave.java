@@ -1,4 +1,4 @@
-/* $Id: jScopeMultiWave.java,v 1.38 2005/12/12 16:54:03 manduchi Exp $ */
+/* $Id: jScopeMultiWave.java,v 1.39 2006/01/13 11:05:35 manduchi Exp $ */
 import java.awt.*;
 import java.util.*;
 import java.io.*;
@@ -37,6 +37,46 @@ public class jScopeMultiWave
         });
     }
 
+
+    public void RefreshOnEvent()
+    {
+        /*
+        setCursor(new Cursor(Cursor.WAIT_CURSOR));
+        try
+        {
+            AddEvent();
+        }
+        catch (IOException e)
+        {}
+        */
+
+       /*
+        Thread p = new Thread()
+        {
+            public void run()
+            {
+       */
+                MdsWaveInterface mwi = (MdsWaveInterface) wi;
+                boolean cache_state = mwi.cache_enabled;
+                mwi.cache_enabled = false;
+                mwi.refresh();
+                mwi.cache_enabled = cache_state;
+
+                SwingUtilities.invokeLater(new Runnable()
+                {
+                    public void run()
+                    {
+                        jScopeWaveUpdate();
+                    }
+                });
+        /*
+            }
+        };
+        p.start();
+        */
+    }
+
+
     public void Refresh()
     {
         setCursor(new Cursor(Cursor.WAIT_CURSOR));
@@ -58,12 +98,12 @@ public class jScopeMultiWave
                 mwi.cache_enabled = cache_state;
 
                 SwingUtilities.invokeLater(new Runnable()
-                {
-                    public void run()
                     {
-                        jScopeWaveUpdate();
-                    }
-                });
+                        public void run()
+                        {
+                            jScopeWaveUpdate();
+                        }
+                    });
             }
         };
         p.start();

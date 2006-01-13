@@ -1,4 +1,4 @@
-/* $Id: jScope.java,v 1.73 2005/12/12 16:54:03 manduchi Exp $ */
+/* $Id: jScope.java,v 1.74 2006/01/13 11:05:35 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.List;
@@ -2146,7 +2146,11 @@ public class jScope
                         {
                             setPublicVariables(pub_var_diag.getPublicVar());
                             SetMainShot();
+                            /*
                             wave_panel.Refresh(w, we.status_info);
+                            */
+                            w.RefreshOnEvent();
+                            //??????*******
                         }
                         break;
                     case WaveformEvent.MEASURE_UPDATE:
@@ -2243,7 +2247,7 @@ public class jScope
             {
                SwingUtilities.invokeLater(new Runnable() {public void run() {UpdateAllWaves();}});
             }
-                //wave_panel.StartUpdate();
+            //wave_panel.StartUpdate();
 
             if (e.name.equals(print_event))
                 wave_panel.StartPrint(prnJob, attrs);

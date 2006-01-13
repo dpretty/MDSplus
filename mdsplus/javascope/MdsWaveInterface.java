@@ -1,4 +1,4 @@
-/* $Id: MdsWaveInterface.java,v 1.40 2005/12/12 16:54:02 manduchi Exp $ */
+/* $Id: MdsWaveInterface.java,v 1.41 2006/01/13 11:05:34 manduchi Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.util.*;
@@ -277,6 +277,8 @@ class MdsWaveInterface
 
         error = null;
 
+/*
+Fix bug : shot expression must be always evaluated.
         if (c_shot_str != null)
         {
             if (previous_shot.equals(c_shot_str) && !previous_shot.equals("0"))
@@ -289,7 +291,7 @@ class MdsWaveInterface
                 return;
             previous_shot = "not defined";
         }
-
+*/
         if (UseDefaultShot())
         {
 
