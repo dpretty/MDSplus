@@ -1,4 +1,4 @@
-/* $Id: jScopeMultiWave.java,v 1.39 2006/01/13 11:05:35 manduchi Exp $ */
+/* $Id: jScopeMultiWave.java,v 1.40 2006/01/25 13:33:02 manduchi Exp $ */
 import java.awt.*;
 import java.util.*;
 import java.io.*;
@@ -212,6 +212,7 @@ public class jScopeMultiWave
                     wi.signals[i].setMode1D( (int) wi.mode1D[i]);
                     wi.signals[i].setMode2D( (int) wi.mode2D[i]);
 
+
                 }
             if (!all_null)
             {
@@ -304,13 +305,13 @@ public class jScopeMultiWave
                             " ]";
                         break;
                     case Signal.MODE_XY:
-                        s = s + " [X-Y T = " +
-                            Waveform.ConvertToString(sign.getTime(), false) +
+                        s = s + " [X-Y T = " + sign.getStringTime() +
+                             //Waveform.ConvertToString(sign.getTime(), false) +
                             " ]";
                         break;
                     case Signal.MODE_YX:
-                        s = s + " [Y-X T = " +
-                            Waveform.ConvertToString(sign.getTime(), false) +
+                        s = s + " [Y-X T = " +  sign.getStringTime() +
+                            //Waveform.ConvertToString(sign.getTime(), false) +
                             " ]";
                         break;
                 }

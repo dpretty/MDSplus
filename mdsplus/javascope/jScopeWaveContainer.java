@@ -1,4 +1,4 @@
-/* $Id: jScopeWaveContainer.java,v 1.49 2006/01/13 11:05:35 manduchi Exp $ */
+/* $Id: jScopeWaveContainer.java,v 1.50 2006/01/25 13:33:02 manduchi Exp $ */
 import java.awt.Graphics;
 import java.awt.Component;
 import java.awt.Font;
@@ -442,7 +442,12 @@ remove 28/06/2005
         if (pageIndex == 0)
         {
             g2.translate(pf.getImageableX(), pf.getImageableY());
-
+/*
+            double scale = (72.0/600.);
+            height /= scale;
+            width /= scale;
+            g2.scale(scale, scale);
+*/
             PrintAll(g2, st_x,
                      st_y,
                      (int) height,

@@ -1,4 +1,4 @@
-/* $Id: WaveInterface.java,v 1.76 2005/12/12 16:54:03 manduchi Exp $ */
+/* $Id: WaveInterface.java,v 1.77 2006/01/25 13:33:02 manduchi Exp $ */
 import java.awt.*;
 import java.io.*;
 import java.awt.image.*;
@@ -1204,6 +1204,7 @@ public class WaveInterface
             if (in_y[curr_wave] == null)
             {
                 curr_error = "Missing Y value";
+                this.wave.SetMode(mode);
                 return null;
             }
 
@@ -1227,6 +1228,7 @@ public class WaveInterface
                     // In this case GetSignal is called only
                     // to inflate the signal and therefore
                     // limits must not be changed
+                    this.wave.SetMode(mode);
                     return out_signal;
                 }
 

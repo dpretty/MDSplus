@@ -1,4 +1,4 @@
-/* $Id: WaveformEvent.java,v 1.30 2005/10/05 13:52:41 manduchi Exp $ */
+/* $Id: WaveformEvent.java,v 1.31 2006/01/25 13:33:02 manduchi Exp $ */
 import java.awt.AWTEvent;
 import java.awt.Event;
 import java.util.*;
@@ -243,8 +243,16 @@ public class WaveformEvent
                                 Waveform.ConvertToString(x_value, false);
                         else
                         if (!tf.equals(nan_f))
-                            xt_string = ", T = " +
-                                Waveform.ConvertToString(time_value, false);
+                            if(showXasDate)
+                            {
+                                DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                Date date = new Date();
+                                date.setTime(dateValue + (long)time_value);
+                                xt_string = ", T = " + format.format(date).toString();
+                                showXasDate = false;
+                            }
+                            else
+                                xt_string = ", T = " + Waveform.ConvertToString(time_value, false);
                         else
                         if (!df.equals(nan_f))
                             xt_string = ", Data = " +
