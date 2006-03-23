@@ -1,4 +1,4 @@
-/* $Id: Waveform.java,v 1.71 2006/01/25 13:33:02 manduchi Exp $ */
+/* $Id: Waveform.java,v 1.72 2006/03/23 09:54:37 manduchi Exp $ */
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -1559,6 +1559,10 @@ public class Waveform
     Dimension d = getSize();
     paint(g, d, NO_PRINT);
   }
+
+
+
+
 
   synchronized public void paint(Graphics g, Dimension d, int print_mode) {
     execute_print = (print_mode != NO_PRINT);
