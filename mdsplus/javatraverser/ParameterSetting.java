@@ -26,7 +26,7 @@ Le tabelle di configurazione rfxConfigHash e rfxConfigOnHash sono aggiornate in:
 
  Quando viene caricata una configurazione salvata si esegue il confronto tra la configurazione salvata
  e l'experiment model attuale.
-
+La configurazione viene salvata solamente alla partenza e quando viene modificato un device di config
 
 */
 public class ParameterSetting
@@ -70,6 +70,7 @@ public class ParameterSetting
     JTabbedPane tabbedP;
 
     NidData nids[] = new NidData[NUM_DEVICES];
+    NidData mhdBcNid;
     DeviceSetup devices[] = new DeviceSetup[NUM_DEVICES];
 
     String rtIp;
@@ -90,6 +91,53 @@ public class ParameterSetting
     JTextArea messageArea;
 
     WarningDialog checkedWd, configWd, limitsWd;
+
+    boolean isOnline;
+    JComboBox modeC;
+    int shot = -1;
+
+    int []
+        pm_mask = new int[]{25,26,1},
+        pc_mask = new int[]{29,30,14},
+        pv_mask = new int[]{27,28},
+        pp_mask = new int[]{2,3,4,5},
+        pr_mask = new int[]{45,46},
+        ptso_mask = new int[]{19,20,21,22},
+        ptcb_mask = new int[]{15,16,17,18},
+        ptct_mask = new int[]{6,7,8,9,10,11,12,13},
+        gas_mask = new int[]{47,48},
+        tf_mask = new int[]{23,24},
+        is_mask = new int[]{38,39},
+        chopper_mask = new int[]{32,33},
+        inverter_mask = new int[]{34,35,36,37,41,42,43,44};
+
+    JCheckBox
+        poloidalCB,
+        axiCB,
+        pcCB,
+        pmCB,
+        toroidalCB,
+        chopperCB,
+        feedForwardCB,
+        inverterCB,
+        tfCB,
+        bfCB,
+        mhdCB,
+        viCB,
+        timesPmCB,
+        timesPcCB,
+        timesPvCB,
+        timesPpCB,
+        timesPrCB,
+        timesPtsoCB,
+        timesPtcbCB,
+        timesPtctCB,
+        timesGasCB,
+        timesTfCB,
+        timesIsCB,
+        timesChopperCB,
+        timesInverterCB;
+    JDialog saveSetupD = null;
 
     JFileChooser chooser = new JFileChooser();
 
@@ -131,7 +179,7 @@ public class ParameterSetting
             }
         });
         fileMenu.add(printItem);
-        if (isRt)
+        if(!isRt)
         {
             JMenuItem loadItem = new JMenuItem("Load pulse");
             loadItem.addActionListener(new ActionListener()
@@ -142,10 +190,7 @@ public class ParameterSetting
                 }
             });
             fileMenu.add(loadItem);
-        }
-        else
-        {
-            JMenuItem saveItem = new JMenuItem("Save Configuration");
+            JMenuItem saveItem = new JMenuItem("Save Configuration...");
             saveItem.addActionListener(new ActionListener()
             {
                 public void actionPerformed(ActionEvent e)
@@ -154,7 +199,7 @@ public class ParameterSetting
                 }
             });
             fileMenu.add(saveItem);
-            JMenuItem loadItem = new JMenuItem("Load Configuration");
+            loadItem = new JMenuItem("Load Configuration");
             loadItem.addActionListener(new ActionListener()
             {
                 public void actionPerformed(ActionEvent e)
@@ -185,6 +230,45 @@ public class ParameterSetting
 
         JPanel jp = new JPanel();
 
+        if(!isRt)
+        {
+            jp.add(new JLabel("Mode: "));
+            modeC = new JComboBox(new String[]{"Online", "Offline"});
+            modeC.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e)
+                {
+                    int idx = modeC.getSelectedIndex();
+                    if(idx == 0) //Online
+                    {
+                        if(shot != -1)
+                        {
+                            try {
+                                rfx.close(0);
+                                rfx = new Database("rfx", -1);
+                                rfx.open();
+                            }catch(Exception exc){System.err.println("Error opening RFX model: " + exc);}
+                            shot = -1;
+                        }
+                    }
+                    else //Offline
+                    {
+                        if(shot == -1)
+                        {
+                            try {
+                                rfx.close(0);
+                                rfx = new Database("rfx", 100);
+                                rfx.open();
+                            }catch(Exception exc){System.err.println("Error opening RFX model: " + exc);}
+                            shot = 100;
+                        }
+                    }
+                }
+            });
+            modeC.setSelectedIndex(0);
+            jp.add(modeC);
+        }
+
+
         buttons[0] = timesB = new JButton("Times Setup");
         timesB.addActionListener(new ActionListener()
         {
@@ -204,9 +288,9 @@ public class ParameterSetting
                     device.setVisible(true);
                     device.addDeviceCloseListener(new DeviceCloseListener()
                     {
-                        public void deviceClosed(boolean isChanged)
+                        public void deviceClosed(boolean updated)
                         {
-                            handleDeviceClosed(0, isChanged);
+                            handleDeviceClosed(0, updated);
                         }
                     });
                 }
@@ -243,9 +327,9 @@ public class ParameterSetting
                     device.setVisible(true);
                     device.addDeviceCloseListener(new DeviceCloseListener()
                     {
-                        public void deviceClosed(boolean isChanged)
+                        public void deviceClosed(boolean updated)
                         {
-                            handleDeviceClosed(1, isChanged);
+                            handleDeviceClosed(1, updated);
                         }
                     });
                 }
@@ -276,9 +360,9 @@ public class ParameterSetting
                     device.setVisible(true);
                     device.addDeviceCloseListener(new DeviceCloseListener()
                     {
-                        public void deviceClosed(boolean isChanged)
+                        public void deviceClosed(boolean updated)
                         {
-                            handleDeviceClosed(2, isChanged);
+                            handleDeviceClosed(2, updated);
                         }
                     });
                 }
@@ -309,9 +393,9 @@ public class ParameterSetting
                     device.setVisible(true);
                     device.addDeviceCloseListener(new DeviceCloseListener()
                     {
-                        public void deviceClosed(boolean isChanged)
+                        public void deviceClosed(boolean updated)
                         {
-                            handleDeviceClosed(3, isChanged);
+                            handleDeviceClosed(3, updated);
                         }
                     });
                 }
@@ -343,9 +427,9 @@ public class ParameterSetting
                     device.setVisible(true);
                     device.addDeviceCloseListener(new DeviceCloseListener()
                     {
-                        public void deviceClosed(boolean isChanged)
+                        public void deviceClosed(boolean updated)
                         {
-                            handleDeviceClosed(4, isChanged);
+                            handleDeviceClosed(4, updated);
                         }
                     });
                 }
@@ -380,9 +464,9 @@ public class ParameterSetting
                     device.setVisible(true);
                     device.addDeviceCloseListener(new DeviceCloseListener()
                     {
-                        public void deviceClosed(boolean isChanged)
+                        public void deviceClosed(boolean updated)
                         {
-                            handleDeviceClosed(5, isChanged);
+                            handleDeviceClosed(5, updated);
                         }
                     });
                 }
@@ -413,9 +497,9 @@ public class ParameterSetting
                     device.setVisible(true);
                     device.addDeviceCloseListener(new DeviceCloseListener()
                     {
-                        public void deviceClosed(boolean isChanged)
+                        public void deviceClosed(boolean updated)
                         {
-                            handleDeviceClosed(6, isChanged);
+                            handleDeviceClosed(6, updated);
                         }
                     });
                 }
@@ -446,9 +530,9 @@ public class ParameterSetting
                     device.setVisible(true);
                     device.addDeviceCloseListener(new DeviceCloseListener()
                     {
-                        public void deviceClosed(boolean isChanged)
+                        public void deviceClosed(boolean updated)
                         {
-                            handleDeviceClosed(7, isChanged);
+                            handleDeviceClosed(7, updated);
                         }
                     });
                 }
@@ -479,12 +563,12 @@ public class ParameterSetting
                     device.setVisible(true);
                     device.addDeviceCloseListener(new DeviceCloseListener()
                     {
-                        public void deviceClosed(boolean isChanged)
+                        public void deviceClosed(boolean updated)
                         {
-                            handleDeviceClosed(8, isChanged);
+                            handleDeviceClosed(8, updated);
                         }
                     });
-                }
+               }
                 else
                     device.setVisible(true);
                 if (states[8] == UNCHECKED)
@@ -512,9 +596,9 @@ public class ParameterSetting
                     device.setVisible(true);
                     device.addDeviceCloseListener(new DeviceCloseListener()
                     {
-                        public void deviceClosed(boolean isChanged)
+                        public void deviceClosed(boolean updated)
                         {
-                            handleDeviceClosed(9, isChanged);
+                            handleDeviceClosed(9, updated);
                         }
                     });
                 }
@@ -545,9 +629,9 @@ public class ParameterSetting
                     device.setVisible(true);
                     device.addDeviceCloseListener(new DeviceCloseListener()
                     {
-                        public void deviceClosed(boolean isChanged)
+                        public void deviceClosed(boolean updated)
                         {
-                            handleDeviceClosed(10, isChanged);
+                            handleDeviceClosed(10, updated);
                         }
                     });
                 }
@@ -583,10 +667,13 @@ public class ParameterSetting
                     device.setVisible(true);
                     device.addDeviceCloseListener(new DeviceCloseListener()
                     {
-                        public void deviceClosed(boolean isChanged)
+                        public void deviceClosed(boolean updated)
                         {
-                            handleDeviceClosed(11, isChanged);
-                        }
+                            handleDeviceClosed(11, updated);
+                            //Copy the same configuration to MHD BC
+                            //devices[11].apply( mhdControlRoot.getInt());
+                            devices[11].apply(mhdBcNid.getInt());
+                       }
                     });
                 }
                 else
@@ -621,9 +708,9 @@ public class ParameterSetting
                     device.setVisible(true);
                     device.addDeviceCloseListener(new DeviceCloseListener()
                     {
-                        public void deviceClosed(boolean isChanged)
+                        public void deviceClosed(boolean updated)
                         {
-                            handleDeviceClosed(12, isChanged);
+                            handleDeviceClosed(12, updated);
                         }
                     });
                 }
@@ -669,9 +756,9 @@ public class ParameterSetting
                     device.setVisible(true);
                     device.addDeviceCloseListener(new DeviceCloseListener()
                     {
-                        public void deviceClosed(boolean isChanged)
+                        public void deviceClosed(boolean updated)
                         {
-                            handleDeviceClosed(13, isChanged);
+                            handleDeviceClosed(13, updated);
                         }
                     });
                 }
@@ -701,9 +788,9 @@ public class ParameterSetting
                     device.setVisible(true);
                     device.addDeviceCloseListener(new DeviceCloseListener()
                     {
-                        public void deviceClosed(boolean isChanged)
+                        public void deviceClosed(boolean updated)
                         {
-                            handleDeviceClosed(14, isChanged);
+                            handleDeviceClosed(14, updated);
                         }
                     });
                 }
@@ -733,9 +820,9 @@ public class ParameterSetting
                     device.setVisible(true);
                     device.addDeviceCloseListener(new DeviceCloseListener()
                     {
-                        public void deviceClosed(boolean isChanged)
+                        public void deviceClosed(boolean updated)
                         {
-                            handleDeviceClosed(15, isChanged);
+                            handleDeviceClosed(15, updated);
                         }
                     });
                 }
@@ -769,9 +856,9 @@ public class ParameterSetting
                     device.setVisible(true);
                     device.addDeviceCloseListener(new DeviceCloseListener()
                     {
-                        public void deviceClosed(boolean isChanged)
+                        public void deviceClosed(boolean updated)
                         {
-                            handleDeviceClosed(16, isChanged);
+                            handleDeviceClosed(16, updated);
                         }
                     });
                 }
@@ -801,9 +888,9 @@ public class ParameterSetting
                     device.setVisible(true);
                     device.addDeviceCloseListener(new DeviceCloseListener()
                     {
-                        public void deviceClosed(boolean isChanged)
+                        public void deviceClosed(boolean updated)
                         {
-                            handleDeviceClosed(17, isChanged);
+                            handleDeviceClosed(17, updated);
                         }
                     });
                 }
@@ -833,9 +920,9 @@ public class ParameterSetting
                     device.setVisible(true);
                     device.addDeviceCloseListener(new DeviceCloseListener()
                     {
-                        public void deviceClosed(boolean isChanged)
+                        public void deviceClosed(boolean updated)
                         {
-                            handleDeviceClosed(18, isChanged);
+                            handleDeviceClosed(18, updated);
                         }
                     });
                 }
@@ -865,9 +952,9 @@ public class ParameterSetting
                     device.setVisible(true);
                     device.addDeviceCloseListener(new DeviceCloseListener()
                     {
-                        public void deviceClosed(boolean isChanged)
+                        public void deviceClosed(boolean updated)
                         {
-                            handleDeviceClosed(19, isChanged);
+                            handleDeviceClosed(19, updated);
                         }
                     });
                 }
@@ -1109,6 +1196,8 @@ public class ParameterSetting
                 "\\AXI_TOROIDAL_CONTROL"), 0);
             nids[11] = mhdControlRoot = rfx.resolve(new PathData(
                 "\\MHD_AC::CONTROL"), 0);
+            mhdBcNid = rfx.resolve(new PathData(
+                "\\MHD_BC::CONTROL"), 0);
             nids[12] = viSetupRoot = rfx.resolve(new PathData("\\VI_SETUP"), 0);
             nids[13] = mopRoot = rfx.resolve(new PathData("\\MOP"), 0);
             nids[14] = ansaldoConfigRoot = rfx.resolve(new PathData("\\ANSALDO"),
@@ -1153,13 +1242,13 @@ public class ParameterSetting
         {
             readSetupFromFile(chooser.getSelectedFile().getPath());
             applySetup();
-            String errMsg = checkConfig(currConfigHash, currConfigOnHash);
+           /* String errMsg = checkConfig(currConfigHash, currConfigOnHash);
             if(errMsg != null)
             {
                 JOptionPane.showMessageDialog(this, errMsg, "Configuration error",
                                               JOptionPane.WARNING_MESSAGE);
 
-            }
+            }*/
         }
     }
 
@@ -1177,16 +1266,120 @@ public class ParameterSetting
     }
 
 
+
     void saveSetup()
+    {
+        if (saveSetupD == null)
+        {
+            saveSetupD = new JDialog(this, "Component Selection");
+            JPanel jp1 = new JPanel();
+            jp1.setLayout(new GridLayout(1, 2));
+            JPanel jp = new JPanel();
+            jp.setLayout(new GridLayout(13, 1));
+            jp.add(poloidalCB = new JCheckBox("Poloidal"));
+            jp.add(axiCB = new JCheckBox("Axisymmetric contr."));
+            jp.add(pcCB = new JCheckBox("PC"));
+            jp.add(pmCB = new JCheckBox("PM"));
+            jp.add(toroidalCB = new JCheckBox("Toroidal"));
+            jp.add(chopperCB = new JCheckBox("Chopper"));
+            jp.add(feedForwardCB = new JCheckBox("Feed Forward"));
+            jp.add(inverterCB = new JCheckBox("Inverter"));
+            jp.add(tfCB = new JCheckBox("TF"));
+            jp.add(bfCB = new JCheckBox("B & F"));
+            jp.add(mhdCB = new JCheckBox("MHD"));
+            jp.add(viCB = new JCheckBox("VI"));
+            jp1.add(jp);
+
+            jp = new JPanel();
+            jp.setLayout(new GridLayout(13, 1));
+            jp.add(timesPmCB = new JCheckBox("Times: PM"));
+            jp.add(timesPcCB = new JCheckBox("Times: PC"));
+            jp.add(timesPvCB = new JCheckBox("Times: PV"));
+            jp.add(timesPpCB = new JCheckBox("Times: PP"));
+            jp.add(timesPrCB = new JCheckBox("Times: PR"));
+            jp.add(timesPtsoCB = new JCheckBox("Times: PTSO"));
+            jp.add(timesPtcbCB = new JCheckBox("Times: PTCB"));
+            jp.add(timesPtctCB = new JCheckBox("Times: PTCT"));
+            jp.add(timesGasCB = new JCheckBox("Times: Gas"));
+            jp.add(timesTfCB = new JCheckBox("Times: TF"));
+            jp.add(timesIsCB = new JCheckBox("Times: IS"));
+            jp.add(timesChopperCB = new JCheckBox("Times: Chopper"));
+            jp.add(timesInverterCB = new JCheckBox("Times: Inverter"));
+
+            jp1.add(jp);
+
+            saveSetupD.add(jp1, "Center");
+            jp = new JPanel();
+            JButton saveB = new JButton("Save");
+            saveB.addActionListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent e)
+                {
+                    saveSetup(new boolean[]
+                              {
+                              poloidalCB.isSelected(),
+                              axiCB.isSelected(),
+                              pcCB.isSelected(),
+                              pmCB.isSelected(),
+                              toroidalCB.isSelected(),
+                              chopperCB.isSelected(),
+                              feedForwardCB.isSelected(),
+                              inverterCB.isSelected(),
+                              tfCB.isSelected(),
+                              bfCB.isSelected(),
+                              mhdCB.isSelected(),
+                              viCB.isSelected()},
+                              new boolean[]
+                              {
+                              timesPmCB.isSelected(),
+                              timesPcCB.isSelected(),
+                              timesPvCB.isSelected(),
+                              timesPpCB.isSelected(),
+                              timesPrCB.isSelected(),
+                              timesPtsoCB.isSelected(),
+                              timesPtcbCB.isSelected(),
+                              timesPtctCB.isSelected(),
+                              timesGasCB.isSelected(),
+                              timesTfCB.isSelected(),
+                              timesIsCB.isSelected(),
+                              timesChopperCB.isSelected(),
+                              timesInverterCB.isSelected()});
+                    saveSetupD.setVisible(false);
+
+                }
+            });
+            jp.add(saveB);
+            saveSetupD.add(jp, "South");
+            saveSetupD.pack();
+        }
+        saveSetupD.setVisible(true);
+    }
+
+
+    void saveSetup(boolean select[], boolean timeSelect[])
     {
         chooser.rescanCurrentDirectory();
         int returnVal = chooser.showSaveDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION)
         {
-            for (int i = 0; i < 13; i++)
-                saveConfig(i, currSetupHash, currSetupOnHash);
-            for (int i = 13; i < 20; i++)
-                saveConfig(i, currConfigHash, currConfigOnHash);
+            for (int i = 1; i < 13; i++)
+                if(select[i-1]) saveConfig(i, currSetupHash, currSetupOnHash);
+
+            //Timing components
+            if(timeSelect[0]) saveConfig(0, pm_mask, currSetupHash, currSetupOnHash);
+            if(timeSelect[1]) saveConfig(0, pc_mask, currSetupHash, currSetupOnHash);
+            if(timeSelect[2]) saveConfig(0, pv_mask, currSetupHash, currSetupOnHash);
+            if(timeSelect[3]) saveConfig(0, pp_mask, currSetupHash, currSetupOnHash);
+            if(timeSelect[4]) saveConfig(0, pr_mask, currSetupHash, currSetupOnHash);
+            if(timeSelect[5]) saveConfig(0, ptso_mask, currSetupHash, currSetupOnHash);
+            if(timeSelect[6]) saveConfig(0, ptcb_mask, currSetupHash, currSetupOnHash);
+            if(timeSelect[7]) saveConfig(0, ptct_mask, currSetupHash, currSetupOnHash);
+            if(timeSelect[8]) saveConfig(0, gas_mask, currSetupHash, currSetupOnHash);
+            if(timeSelect[9]) saveConfig(0, tf_mask, currSetupHash, currSetupOnHash);
+            if(timeSelect[10]) saveConfig(0, is_mask, currSetupHash, currSetupOnHash);
+            if(timeSelect[11]) saveConfig(0, chopper_mask, currSetupHash, currSetupOnHash);
+            if(timeSelect[12]) saveConfig(0, inverter_mask, currSetupHash, currSetupOnHash);
+
             writeSetupToFile(chooser.getSelectedFile().getPath());
         }
     }
@@ -1244,7 +1437,7 @@ public class ParameterSetting
         }
         else
         {
-            if (isChanged)
+            if (isChanged && shot == -1)
             {
                 setUncheckedRt(idx);
             }
@@ -1266,6 +1459,27 @@ public class ParameterSetting
             }
         }
     }
+
+
+    void signalConfigWarning(String message)
+    {
+        if (rtDos != null)
+        {
+            try
+            {
+                rtDos.writeInt(-1);
+                rtDos.writeUTF(message);
+            }
+            catch (Exception exc)
+            {
+                rtDos = null;
+                handleNotRt();
+            }
+        }
+
+
+    }
+
 
     void handleNotRt()
     {
@@ -1322,17 +1536,29 @@ public class ParameterSetting
                         {
                             //The index of the changed forms are passed
                             currIdx = dis.readInt();
-                            System.out.println("RECEIVED UNCHECK " + currIdx);
-
-                            states[currIdx] = UNCHECKED;
-                            SwingUtilities.invokeAndWait(new Runnable()
+                            if(currIdx >= 0)
                             {
-                                public void run()
+                                System.out.println("RECEIVED UNCHECK " +
+                                    currIdx);
+
+                                states[currIdx] = UNCHECKED;
+                                SwingUtilities.invokeAndWait(new Runnable()
                                 {
-                                    System.out.println("ADESSO METTO ROSSO");
-                                    buttons[currIdx].setForeground(Color.red);
-                                }
-                            });
+                                    public void run()
+                                    {
+                                        System.out.println("ADESSO METTO ROSSO");
+                                        buttons[currIdx].setForeground(Color.
+                                            red);
+                                    }
+                                });
+                            }
+                            else
+                            {
+                                String message = dis.readUTF();
+                                JOptionPane.showMessageDialog(ParameterSetting.this, message,
+                                                               "Configuration error",
+                                                               JOptionPane.WARNING_MESSAGE);
+                            }
                         }
                     }
                     catch (Exception exc)
@@ -1399,8 +1625,9 @@ public class ParameterSetting
                                                 if (allChecked())
                                                 {
                                                     checkedWd.dispose();
-                                                    proceedeConfig();
-                                                    saveConfig();
+                                                    //proceedeConfig();
+                                                    //saveConfig();
+                                                    proceedeLimits();
                                                 }
                                             }
                                         });
@@ -1409,8 +1636,9 @@ public class ParameterSetting
                                     }
                                     else
                                     {
-                                        proceedeConfig();
-                                        saveConfig();
+                                        //proceedeConfig();
+                                        //saveConfig();
+                                        proceedeLimits();
                                     }
                                 }
                                 else
@@ -1518,6 +1746,7 @@ public class ParameterSetting
 
     void setReadOnly(boolean readOnly)
     {
+        System.out.println("SET READ ONLY ");
         this.readOnly = readOnly;
         for (int i = 0; i < nids.length; i++)
         {
@@ -1742,6 +1971,33 @@ public class ParameterSetting
             System.err.println("Error getting device nids: " + exc1);
         }
     }
+    void saveConfig(int idx, int nidOffsets[], Hashtable configHash, Hashtable configOnHash)
+    {
+        try
+        {
+            for (int nidIdx = 0; nidIdx < nidOffsets.length; nidIdx++)
+            {
+                NidData currNid = new NidData(nids[idx].getInt() +
+                                              nidOffsets[nidIdx]);
+                String currDec;
+                try
+                {
+                    currDec = (rfx.getData(currNid, 0)).toString();
+                    configHash.put(rfx.getInfo(currNid, 0).
+                                   getFullPath(), currDec);
+                }
+                catch (Exception exc)
+                {}
+                configOnHash.put(rfx.getInfo(currNid, 0).
+                                 getFullPath(),
+                                 new Boolean(rfx.isOn(currNid, 0)));
+            }
+        }
+        catch (Exception exc1)
+        {
+            System.err.println("Error getting device nids: " + exc1);
+        }
+    }
 
     NidData checkDeviceConfig(NidData deviceRoot, Hashtable configHash, Hashtable configOnHash)
     {
@@ -1950,10 +2206,10 @@ public class ParameterSetting
                 float maxCurr = 0;
                 for (int i = 0; i < pmWave.length; i++)
                 {
-                    if (maxCurr < pmWave[i])
+                    if (maxCurr > pmWave[i])
                         maxCurr = pmWave[i];
                 }
-                if (maxCurr > maxTCAC)
+                if (Math.abs(maxCurr) > Math.abs(maxTCAC))
                 {
                     return "Corrente Inverter toroidale sopra i limiti";
                 }
@@ -1972,19 +2228,23 @@ public class ParameterSetting
             "Enter shot", JOptionPane.INFORMATION_MESSAGE);
         try
         {
-            int shot = Integer.parseInt(shotStr);
+            int currShot = Integer.parseInt(shotStr);
             rfx.close(0);
             LoadPulse loadP = new LoadPulse();
-            loadP.load("rfx", shot, -1);
+            loadP.load("rfx", currShot, shot);
+            Convert conv = new Convert(
+                "\\mhd_ac::control.parameters:par236_val",
+                "mutua.txt");
+            conv.convertMatrix();
+            conv = new Convert("\\mhd_bc::control.parameters:par236_val",
+                               "mutua.txt");
+            conv.convertMatrix();
+            rfx = new Database("rfx", shot);
             rfx.open();
-	    Convert conv = new Convert("\\mhd_ac::control.parameters:par236_val", "normalised_gain_0.01.txt");
-	    conv.convertMatrix();
- 	    conv = new Convert("\\mhd_bc::control.parameters:par236_val", "normalised_gain_0.01.txt");
-	    conv.convertMatrix();
-        String configMsg = checkConfig(rfxConfigHash, rfxConfigOnHash);
-	    if(configMsg != null)
-	    	JOptionPane.showMessageDialog(this, configMsg, "Configuration error", JOptionPane.WARNING_MESSAGE);
-        }
+            String configMsg = checkConfig(rfxConfigHash, rfxConfigOnHash);
+            if (configMsg != null)
+                signalConfigWarning(configMsg);
+         }
         catch (Exception exc)
         {
             JOptionPane.showMessageDialog(this,
