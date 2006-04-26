@@ -20,7 +20,7 @@
 */
 #include <config.h>
 #if SIZEOF__INT64 != 8
-typedef unsigned long long _int64;
+typedef unsigned long long _int64u;
 #endif
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 #include <STATICdef.h>
@@ -48,7 +48,7 @@ typedef unsigned long long _int64;
 #define  DTYPE_D DTYPE_G
 #endif
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSql.c,v $ $Revision: 1.23 $ $Date: 2006/04/26 18:37:43 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSql.c,v $ $Revision: 1.24 $ $Date: 2006/04/26 18:39:59 $";
 
 extern int stat;
 extern int TdiFindImageSymbol();
@@ -84,7 +84,7 @@ STATIC_CONSTANT  unsigned int nan_f_bits =  0x7fbfffff;
 STATIC_CONSTANT unsigned long long nan_d_bits = 0xffffffff7ff7ffff;
 */
 STATIC_CONSTANT  unsigned int nan_f_bits =  0x7fc00000;
-STATIC_CONSTANT _int64 nan_d_bits = 0x7ff8000000000000;
+STATIC_CONSTANT _int64u nan_d_bits = 0x7ff8000000000000;
 
 static double d_null = 0;
 static float  f_null = 0;
