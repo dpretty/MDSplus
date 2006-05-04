@@ -1,4 +1,4 @@
-/* $Id: MdsDataProvider.java,v 1.46 2005/12/12 16:54:02 manduchi Exp $ */
+/* $Id: MdsDataProvider.java,v 1.47 2006/05/04 09:12:38 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.*;
@@ -909,6 +909,11 @@ public class MdsDataProvider
         if (in == null || in.length() == 0)
             return;
 
+        if(in.indexOf("pulseSetVer") != 0)
+        {
+            open = false;
+        }
+
         Properties pr = new Properties();
         pr.load(new ByteArrayInputStream(in.getBytes()));
         String def_node = ( (String) pr.getProperty("__default_node"));
@@ -931,7 +936,6 @@ public class MdsDataProvider
             return;
         }
         SetEnvironmentSpecific(in, default_node);
-
     }
 
     void SetEnvironmentSpecific(String in, String defaultNode)

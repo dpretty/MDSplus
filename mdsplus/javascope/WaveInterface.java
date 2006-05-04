@@ -1,4 +1,4 @@
-/* $Id: WaveInterface.java,v 1.77 2006/01/25 13:33:02 manduchi Exp $ */
+/* $Id: WaveInterface.java,v 1.78 2006/05/04 09:12:38 manduchi Exp $ */
 import java.awt.*;
 import java.io.*;
 import java.awt.image.*;
@@ -593,7 +593,7 @@ public class WaveInterface
 
                 new_interpolates[k] = true;
                 new_evaluated[k] = false;
-                new_mode2D[k] = Signal.MODE_YTIME;
+                new_mode2D[k] = Signal.MODE_XZ;
                 new_mode1D[k] = Signal.MODE_LINE;
                 if (shots != null && shots.length != 0 && num_shot > 0)
                     new_shots[k] = shots[j];

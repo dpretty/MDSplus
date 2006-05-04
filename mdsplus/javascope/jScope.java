@@ -1,4 +1,4 @@
-/* $Id: jScope.java,v 1.75 2006/01/25 13:33:02 manduchi Exp $ */
+/* $Id: jScope.java,v 1.76 2006/05/04 09:12:38 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.List;
@@ -32,7 +32,7 @@ public class jScope
     UpdateEventListener, ConnectionListener, Printable
 {
 
-    static final String VERSION = "jScope (version 7.3.8)";
+    static final String VERSION = "jScope (version 7.4.0)";
     static public boolean is_debug = false;
 
     public static final int MAX_NUM_SHOT = 30;
@@ -91,7 +91,7 @@ public class jScope
     private boolean executing_update = false;
     private JFrame main_scope;
 
-    DocPrintJob prnJob;
+    DocPrintJob prnJob = null;
   //  PageFormat pageFormat;
     PrintRequestAttributeSet attrs;
     PrintService[] printersServices;
@@ -540,7 +540,8 @@ public class jScope
                                          5,
                                          MediaPrintableArea.MM));
         attrs.add(res);
-        prnJob = printerSelection.createPrintJob();
+        if(printerSelection != null)
+            prnJob = printerSelection.createPrintJob();
 
 /*
         PrintServiceAttributeSet pras = printerSelection.getAttributes();

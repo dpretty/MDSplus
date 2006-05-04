@@ -1,4 +1,4 @@
-/* $Id: jScopeMultiWave.java,v 1.40 2006/01/25 13:33:02 manduchi Exp $ */
+/* $Id: jScopeMultiWave.java,v 1.41 2006/05/04 09:12:38 manduchi Exp $ */
 import java.awt.*;
 import java.util.*;
 import java.io.*;
@@ -187,6 +187,8 @@ public class jScopeMultiWave
         else
             super.title = "";
 
+        setColorMap(wi.getColorMap());
+
         super.show_legend = wi.show_legend;
         super.legend_x = wi.legend_x;
         super.legend_y = wi.legend_y;
@@ -299,21 +301,23 @@ public class jScopeMultiWave
             {
                 switch (sign.getMode2D())
                 {
-                    case Signal.MODE_YTIME:
-                        s = s + " [Y-TIME X = " +
-                            Waveform.ConvertToString(sign.getXData(), false) +
+                    case Signal.MODE_XZ:
+                        s = s + " [X-Z Y = " +
+                            Waveform.ConvertToString(sign.getYinXZplot(), false) +
                             " ]";
                         break;
-                    case Signal.MODE_XY:
-                        s = s + " [X-Y T = " + sign.getStringTime() +
+                    case Signal.MODE_YZ:
+                        s = s + " [Y-Z X = " + sign.getStringOfXinYZplot() +
                              //Waveform.ConvertToString(sign.getTime(), false) +
                             " ]";
                         break;
+                        /*
                     case Signal.MODE_YX:
                         s = s + " [Y-X T = " +  sign.getStringTime() +
                             //Waveform.ConvertToString(sign.getTime(), false) +
                             " ]";
                         break;
+                        */
                 }
             }
         }
