@@ -47,6 +47,8 @@
 #ifdef HAVE_WINDOWS_H
 #include <windows.h>
 #include <io.h>
+#else
+#include <sys/time.h>
 #endif
 
 #ifdef HAVE_VXWORKS_H
@@ -55,7 +57,7 @@ static int daylight = 0;
 #define LONG_LONG_CONSTANT(value) value##ll
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.72 $ $Date: 2004/08/24 18:46:23 $";
+static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.73 $ $Date: 2006/06/02 16:39:06 $";
 
 #ifdef min
 #undef min
@@ -140,6 +142,15 @@ int       _TreePutRecord(void *dbid, int nid, struct descriptor *descriptor_ptr,
         tzset();
 #endif
 
+#ifdef HAVE_GETTIMEOFDAY
+	{
+	  struct timeval tv;
+	  struct timezone tz;
+	  gettimeofday(&tv,&tz);
+          local_nci.time_inserted=(_int64)(tv.tv_sec-(tz.tz_minuteswest*60)+(daylight * 3600))*10000000+tv.tv_usec*10 + addin;
+	}
+#else
+
 #ifdef USE_TM_GMTOFF      
     /* this is a suggestion to change all code 
        for this as timezone is depricated unix
@@ -155,6 +166,7 @@ int       _TreePutRecord(void *dbid, int nid, struct descriptor *descriptor_ptr,
 #endif
 	LibEmul(&m1,&m2,&zero,&temp);
         local_nci.time_inserted = temp + addin;
+#endif
       }
       if (!(open_status & 1))
       {
