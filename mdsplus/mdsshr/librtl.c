@@ -19,7 +19,7 @@
 #include <math.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.145 $ $Date: 2006/06/08 15:41:27 $ $Name:  $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.146 $ $Date: 2006/06/08 17:18:06 $ $Name:  $";
 
 extern int MdsCopyDxXd();
 STATIC_ROUTINE char *GetTdiLogical(char *name);
@@ -1691,13 +1691,15 @@ int LibSysAscTim(unsigned short *len, struct descriptor *str, int *time_in)
   _int64 chunks=0;
   _int64 *time_q=(_int64 *)time_in;
   _int64 seconds;
+  _int64 tmp;
   struct timeval tv;
   struct timezone tz;
   tzset();
   if (time_in != NULL) {
 #ifdef HAVE_GETTIMEOFDAY
     gettimeofday(&tv,&tz);
-    bintim = (*time_q-0x7c95674beb4000)/10000000+tz.tz_minuteswest*60-(daylight * 3600);
+    tmp = (*time_q-0x7c95674beb4000)/10000000+tz.tz_minuteswest*60-(daylight * 3600);
+    bintim=(tmp < 0) ? (time_t)0 : (time_t)tmp;
 #endif
     chunks = *time_q % 10000000;
   }
