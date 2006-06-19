@@ -18,7 +18,7 @@
 	The SQL string sElEcT is a blob write. 
 	Ken Klare, LANL P-4	(c)1991,1992
 */
-#include <config.h>
+#include <mdstypes.h>
 #if SIZEOF__INT64 != 8
 typedef unsigned long long _int64u;
 #endif
@@ -48,7 +48,7 @@ typedef unsigned long long _int64u;
 #define  DTYPE_D DTYPE_G
 #endif
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSql.c,v $ $Revision: 1.24 $ $Date: 2006/04/26 18:39:59 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSql.c,v $ $Revision: 1.25 $ $Date: 2006/06/19 14:27:09 $";
 
 extern int stat;
 extern int TdiFindImageSymbol();
