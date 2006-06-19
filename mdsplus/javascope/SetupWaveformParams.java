@@ -1,4 +1,4 @@
-/* $Id: SetupWaveformParams.java,v 1.21 2005/12/12 16:54:02 manduchi Exp $ */
+/* $Id: SetupWaveformParams.java,v 1.22 2006/06/19 13:54:24 manduchi Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.util.*;
@@ -424,7 +424,7 @@ public class SetupWaveformParams extends JDialog implements ActionListener
         wave = w;
         initialize();
         setLocationRelativeTo(wave.getParent());
-        show();
+        setVisible(true);
    }
 
 

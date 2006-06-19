@@ -1,4 +1,4 @@
-/* $Id: JetDataProvider.java,v 1.40 2005/10/05 13:52:40 manduchi Exp $ */
+/* $Id: JetDataProvider.java,v 1.41 2006/06/19 13:54:24 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.util.*;
@@ -236,7 +236,7 @@ class JetDataProvider implements DataProvider
 	       inquiry_dialog.setLocation(screenSize.width/2 - inquiry_dialog.getSize().width/2,
 				                      screenSize.height/2 - inquiry_dialog.getSize().height/2);
 		}
-        inquiry_dialog.show();
+        inquiry_dialog.setVisible(true);
         return login_status;
     }
 

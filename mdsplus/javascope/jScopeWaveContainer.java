@@ -1,4 +1,4 @@
-/* $Id: jScopeWaveContainer.java,v 1.50 2006/01/25 13:33:02 manduchi Exp $ */
+/* $Id: jScopeWaveContainer.java,v 1.51 2006/06/19 13:54:25 manduchi Exp $ */
 import java.awt.Graphics;
 import java.awt.Component;
 import java.awt.Font;
@@ -386,7 +386,7 @@ remove 28/06/2005
                                                   JOptionPane.ERROR_MESSAGE);
                 }
             }
-            browse_sig.show();
+            browse_sig.setVisible(true);
         }
         else
         {

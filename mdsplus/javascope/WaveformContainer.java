@@ -1,4 +1,4 @@
-/* $Id: WaveformContainer.java,v 1.38 2005/10/05 13:52:41 manduchi Exp $ */
+/* $Id: WaveformContainer.java,v 1.39 2006/06/19 13:54:24 manduchi Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -70,7 +70,7 @@ public class WaveformContainer extends RowColumnContainer implements WaveformMan
 	    {
 	          public void mousePressed(MouseEvent e)
 	          {
-                Dimension scr_dim = getToolkit().getScreenSize();
+                        Dimension scr_dim = getToolkit().getScreenSize();
 		        Waveform w = (Waveform)e.getSource();
 		        int x = e.getX();
 		        int y = e.getY();
@@ -381,6 +381,17 @@ public class WaveformContainer extends RowColumnContainer implements WaveformMan
 	        if(w != null && w != curr_w)
 	              w.UpdatePoint(x, y);
 	    }
+    }
+
+    synchronized public void liveUpdateWaveforms()
+    {
+        Waveform w;
+        for(int i = 0; i < getGridComponentCount(); i++)
+        {
+            w = GetWavePanel(i);
+            if(w != null )
+                  w.liveUpdate();
+        }
     }
 
 
