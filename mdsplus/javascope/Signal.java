@@ -1,4 +1,4 @@
-/* $Id: Signal.java,v 1.42 2006/06/19 13:54:24 manduchi Exp $ */
+/* $Id: Signal.java,v 1.43 2006/06/20 12:04:22 manduchi Exp $ */
 import java.awt.Color;
 import java.text.*;
 import java.util.*;
@@ -2714,8 +2714,8 @@ public class Signal
 
     private float[] appendArray(float arr1[], int sizeUsed, float arr2[], int incSize)
     {
-        if(arr1 == null) return arr2.clone();
-        if(arr2 == null) return arr1.clone();
+        if(arr1 == null) return (float [])arr2.clone();
+        if(arr2 == null) return (float [])arr1.clone();
         float val[];
         if(arr1.length < sizeUsed + arr2.length)
         {
