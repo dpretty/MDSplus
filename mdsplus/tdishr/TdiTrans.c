@@ -58,7 +58,7 @@
 #define MaskTrue (pi0[0] & 1)
 #endif
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiTrans.c,v $ $Revision: 1.8 $ $Date: 2003/11/17 21:21:21 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiTrans.c,v $ $Revision: 1.9 $ $Date: 2006/06/26 16:23:37 $";
 
 extern  unsigned short
 	OpcAccumulate,
@@ -235,6 +235,7 @@ unsigned char			out_dtype;
 	*************************************/
 	else if (opcode == OpcSpread) {
 		if (ndim > dim) {
+		  EMPTYXD(tmpxd);
 			*(struct descriptor_signal *)&tmpsig = *psig;
 			++tmpsig.ndesc;
 			for (j = ndim; --j >= dim;) tmpsig.dimensions[j+1] = psig->dimensions[j];
@@ -242,7 +243,9 @@ unsigned char			out_dtype;
 			for (j = dim; --j >= 0;) tmpsig.dimensions[j] = psig->dimensions[j];
 			tmpsig.raw = 0;
 			tmpsig.data = 0;
-			status = MdsCopyDxXd((struct descriptor *)&tmpsig, &sig[0]);
+			status = MdsCopyDxXd((struct descriptor *)&tmpsig, &tmpxd); 
+			status = MdsCopyDxXd((struct descriptor *)&tmpxd, &sig[0]);
+                        MdsFree1Dx(&tmpxd,NULL);
 			if (!(status  & 1)) goto err;
 		}
 		pmask = (struct descriptor *)&ncopies;
