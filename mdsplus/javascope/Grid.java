@@ -1,4 +1,4 @@
-/* $Id: Grid.java,v 1.31 2006/05/04 09:12:37 manduchi Exp $ */
+/* $Id: Grid.java,v 1.32 2006/07/07 13:27:41 manduchi Exp $ */
 import java.awt.*;
 import java.awt.image.*;
 import java.awt.event.*;
@@ -379,7 +379,7 @@ public class Grid
                     {
                         long datel = (long) x_values[i];
                         DateFormat df = new SimpleDateFormat("HH:mm:ss");
-                        df.setTimeZone(new SimpleTimeZone(60*60*1000, "GMT"));
+                        df.setTimeZone(new SimpleTimeZone(0, "GMT"));
                         Date date = new Date();
                         date.setTime(datel);
                         curr_string = df.format(date).toString();
@@ -391,7 +391,7 @@ public class Grid
                             int num_day  = calculateDifference(new Date((long)x_values[i + 1]), new Date((long)x_values[i]));
                             if(num_day != 0)
                             {
-                                ca = new GregorianCalendar(new SimpleTimeZone(60*60*1000, "GMT"), Locale.ITALY);
+                                ca = new GregorianCalendar(new SimpleTimeZone(0, "GMT"), Locale.ITALY);
 
                                 for(int dd = 0; dd <= num_day; dd++)
                                 {
