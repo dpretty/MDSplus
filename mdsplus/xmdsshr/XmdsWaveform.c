@@ -126,7 +126,7 @@ Widget XmdsCreateWaveform( parent, name, args, argcount )
 
  Local variables:                                                             */
 
-static char *cvsrev = "@(#)$RCSfile: XmdsWaveform.c,v $ $Revision: 1.13 $ $Date: 2005/03/07 14:40:10 $";
+static char *cvsrev = "@(#)$RCSfile: XmdsWaveform.c,v $ $Revision: 1.14 $ $Date: 2006/08/10 20:19:17 $";
 static int height_page;
 enum crosshairsmode
 {
@@ -2168,6 +2168,7 @@ static void Print(XmdsWaveformWidget w,FILE *filefid,int inp_total_width,int inp
 	}
         strcpy(fontname,fontinfo);
         XFree(fontinfo);
+        fontinfo=NULL;
         if (strstr(fontname,"New Century Schoolbook"))
             strcpy(fontname,"NewCenturySchlbk");
         while (strstr(fontname," ")) strncpy(strstr(fontname," "),"-",1);
@@ -2177,27 +2178,33 @@ static void Print(XmdsWaveformWidget w,FILE *filefid,int inp_total_width,int inp
 	  fontinfo = XGetAtomName(XtDisplay(w), fs->properties[i].card32);
           break;
 	}
-        if (strstr(fontinfo,"Bold")) strcat(fontname,"-Bold");
-        XFree(fontinfo);
+        if (fontinfo != NULL && strstr(fontinfo,"Bold")) strcat(fontname,"-Bold");
+        if (fontinfo != NULL) { 
+	  XFree(fontinfo);
+	  fontinfo=NULL;
+	}
         fatom = XInternAtom (XtDisplay(w), "FULL_NAME", False);
         for (i = 0; i < fs->n_properties; i++)
 	if (fs->properties[i].name == fatom) {
 	  fontinfo = XGetAtomName(XtDisplay(w), fs->properties[i].card32);
           break;
 	}
-        if (strstr(fontinfo,"Italic"))
+        if (fontinfo != NULL && strstr(fontinfo,"Italic"))
         {
            if (!strstr(fontname,"-Bold")) strcat(fontname,"-"); 
 	   strcat(fontname,"Italic");
         }
-        if (strstr(fontinfo,"Oblique"))
+        if (fontinfo != NULL && strstr(fontinfo,"Oblique"))
         {
 	   if (!strstr(fontname,"-Bold")) strcat(fontname,"-"); 
 	   strcat(fontname,"Oblique");
         }
         if (!strcmp(fontname,"Times") || !strcmp(fontname,"NewCenturySchlbk"))
             strcat(fontname,"-Roman");
-        XFree(fontinfo);
+        if (fontinfo != NULL) {
+	  XFree(fontinfo);
+          fontinfo = NULL;
+        }
       }
       fatom = XInternAtom (XtDisplay(w), "POINT_SIZE", False);
       for (i = 0; i < fs->n_properties; i++)
