@@ -7,7 +7,7 @@
 
 #define MAXTYPE (DTYPE_FTC + 1)
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiConvert.c,v $ $Revision: 1.16 $ $Date: 2003/11/17 21:21:21 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiConvert.c,v $ $Revision: 1.17 $ $Date: 2006/08/25 17:52:37 $";
 
 extern void CvtConvertFloat();
 extern int IsRoprand();
@@ -602,6 +602,15 @@ typedef union {double f; char i;} binary_double;
 
 
 
+static void mem_shift(char *in,int offset, int num)
+{
+  int i;
+  char *p1=in,*p2=in+offset;
+  for(i=0;i<num;i++)
+    *p1++=*p2++;
+}
+
+
 
 STATIC_ROUTINE void FLOAT_TO_TEXT(int itype, char *pa, char *pb, int numb, int lenb, char sym)
 {
@@ -634,8 +643,8 @@ STATIC_ROUTINE void FLOAT_TO_TEXT(int itype, char *pa, char *pb, int numb, int l
         *pe=sym; 
       else 
       {
-        if (text[0] == ' ') memcpy(text,text+1,n-1);
-        if (text[0] == ' ') memcpy(text,text+1,n-2);
+        if (text[0] == ' ') mem_shift(text,1,n-1);
+        if (text[0] == ' ') mem_shift(text,1,n-2);
         text[n-2]=sym; 
         text[n-1]='0';
       }
