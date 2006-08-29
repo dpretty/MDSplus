@@ -45,7 +45,11 @@
 #define  DTYPE_D DTYPE_G
 #endif
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSql.c,v $ $Revision: 1.26 $ $Date: 2006/06/26 16:51:58 $";
+#ifndef MAX
+#define MAX(a,b) (((a) > (b)) ? (a): (b))
+#endif
+
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSql.c,v $ $Revision: 1.27 $ $Date: 2006/08/29 19:35:03 $";
 
 extern int stat;
 extern int TdiFindImageSymbol();
@@ -286,7 +290,7 @@ int 	rblob;
 		*/
 	}
 	else 
-		for (j = 0; j < ncol; ++j, ++used) { 
+		for (j = 0; j < MAX(ncol,num_bufs); ++j, ++used) { 
 			if (rows < 0) {
  	/*		dst = (struct descriptor *)(used + j > arg->c ? 0 : *(argv+used)); // should'nt it be used > arg-> c ? */
 				dst = (struct descriptor *)(used  > arg->c ? 0 : *(argv+used)); /* // should'nt it be used > arg-> c ? */
@@ -298,7 +302,7 @@ int 	rblob;
 					if (!(status & 1)) break;
 					dst->dtype = DTYPE_IDENT;
 				}
-				StoreAnswer(j, dst, SYB_dbcoltype(dbproc, j+1));
+				StoreAnswer(j, dst, bufs[j].syb_type);
 			} else {
 				if (j > num_bufs) {
 					num_bufs++;
