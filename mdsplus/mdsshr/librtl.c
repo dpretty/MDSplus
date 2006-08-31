@@ -19,7 +19,7 @@
 #include <math.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.149 $ $Date: 2006/08/25 17:54:48 $ $Name:  $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.150 $ $Date: 2006/08/31 18:39:24 $ $Name:  $";
 
 extern int MdsCopyDxXd();
 STATIC_ROUTINE char *GetTdiLogical(char *name);
@@ -220,7 +220,7 @@ int LibWait(float *secs)
   return 1;
 }
 
-unsigned int LibCallg(void **arglist, FARPROC *routine)
+void *LibCallg(void **arglist, FARPROC *routine)
 {
   int a_idx;
 
@@ -650,7 +650,7 @@ char *TranslateLogical(char *name)
 */
 	return env;
 }
-unsigned int LibCallg(void **arglist, unsigned int (*routine)())
+void *LibCallg(void **arglist, void * (*routine)())
 {
   switch (*(long *)arglist & 0xff)
   {
