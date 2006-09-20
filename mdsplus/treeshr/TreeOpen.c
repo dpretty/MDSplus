@@ -45,7 +45,7 @@ extern char *index(char *str,char c);
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.79 $ $Date: 2006/08/09 19:05:03 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.80 $ $Date: 2006/09/20 17:30:43 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
@@ -745,7 +745,7 @@ static char *GetFname(char *tree, int shot)
     status = LibFindImageSymbol(&image,&routine,&TdiExecute);
   }
   if (status & 1)
-    status = LibCallg(arglist,TdiExecute);
+    status = (int)LibCallg(arglist,TdiExecute);
   if (status & 1)
   {
     ans = strncpy(malloc(fname.length+2),fname.pointer,fname.length);

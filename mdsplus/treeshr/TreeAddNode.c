@@ -1,5 +1,5 @@
 #include <STATICdef.h>
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.61 $ $Date: 2005/12/16 20:03:37 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.62 $ $Date: 2006/09/20 17:30:43 $";
 
 #ifndef HAVE_VXWORKS_H
 #include <config.h>
@@ -501,7 +501,7 @@ int _TreeAddConglom(void *dbid, char *path, char *congtype, int *nid)
     arglist[2] = &statdsc;
     arglist[3] = MdsEND_ARG;
     DBID = dbid;
-    status = LibCallg(arglist,addr);
+    status = (int)LibCallg(arglist,addr);
     DBID = old_dbid;
     if (status & 1)
     {
