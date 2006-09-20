@@ -1,5 +1,5 @@
 /* include/config.h.in.  Generated automatically from configure.in by autoheader.  */
-/* @(#)$RCSfile: config.h.in,v $ $Revision: 1.10 $ */
+/* @(#)$RCSfile: config.h.in,v $ $Revision: 1.11 $ */
 #ifndef _CONFIG_INCLUDED
 
 /* Define to empty if the keyword does not work.  */
@@ -110,6 +110,9 @@
 
 /* Define if you have the <sys/resource.h> header file.  */
 #undef HAVE_SYS_RESOURCE_H
+
+/* Define if you have sys <sys/types.h> header file. */
+#undef HAVE_SYS_TYPES_H
 
 /* Define if you have the <syslog.h> header file.  */
 #undef HAVE_SYSLOG_H
