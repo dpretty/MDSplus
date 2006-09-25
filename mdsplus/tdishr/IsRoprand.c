@@ -2,10 +2,11 @@
 /*  *2    28-AUG-1996 10:45:43 TWF "Cleanup" */
 /*  *1    27-AUG-1996 07:51:38 TWF "Test for reserved oprand" */
 /*  CMS REPLACEMENT HISTORY, Element ISROPRAND.C */
+#include <mdstypes.h>
 #include <mdsdescrip.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: IsRoprand.c,v $ $Revision: 1.5 $ $Date: 2003/11/17 21:21:21 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: IsRoprand.c,v $ $Revision: 1.6 $ $Date: 2006/09/25 15:52:03 $";
 
 #define f_float_exp(val) ((*(int *)val >> 7) & 0xff)
 #define f_float_sign(val) ((*(int *)val >> 15) &0x1)
@@ -16,7 +17,7 @@ STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: IsRoprand.c,v $ $Revision: 1.5 $ $
 #define g_float_exp(val) ((*(int *)val >> 4) & 0x7ff)
 #define g_float_sign(val) ((*(int *)val >> 15) &0x1)
 #define IsRoprandG(val) ((g_float_exp(val) == 0) && (g_float_sign(val) == 1))
-#define t_float_exp(val) ((((int *)val)[1] >> 20) & 0x7ff)
+#define t_float_exp(val) (((*(_int64 *)val) >> 52) & 0x7ff)
 #define IsRoprandT(val) (t_float_exp(val) == 2047)
 
 int IsRoprand(int dtype,void *value)
