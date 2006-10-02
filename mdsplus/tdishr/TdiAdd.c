@@ -36,7 +36,7 @@ int Tdi3Add(struct descriptor *in1, struct descriptor *in2, struct descriptor *o
 #include "roprand.h"
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiAdd.c,v $ $Revision: 1.27 $ $Date: 2006/10/02 14:31:24 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiAdd.c,v $ $Revision: 1.28 $ $Date: 2006/10/02 16:13:59 $";
 
 extern int CvtConvertFloat();
 
@@ -302,7 +302,7 @@ int TdiMultiplyQuadword(int *in1, int *in2, int *out)
   _int64 *arg1=(_int64 *)in1;
   _int64 *arg2=(_int64 *)in2;
   *((_int64 *)out)=*arg1 * *arg2;
-  return;
+  return 1;
   /*
   
   int tmp[3] = {0,0,0};

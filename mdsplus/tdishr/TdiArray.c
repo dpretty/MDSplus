@@ -15,6 +15,7 @@
 	Limitation: product of dimensions must not exceed virtual-memory paging space.
 	Ken Klare, LANL CTR-7	(c)1989,1990
 */
+#include <config.h>
 #include <stdlib.h>
 #include <mdsdescrip.h>
 #include <tdimessages.h>
@@ -26,7 +27,7 @@
 #include "tdirefstandard.h"
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiArray.c,v $ $Revision: 1.14 $ $Date: 2004/04/08 14:02:15 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiArray.c,v $ $Revision: 1.15 $ $Date: 2006/10/02 16:13:59 $";
 
 int Tdi_RandomSeed = 1234567;
 
