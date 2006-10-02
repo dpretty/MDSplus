@@ -4,7 +4,7 @@
 #include "treeshrp.h"
 #include <dbidef.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetDbi.c,v $ $Revision: 1.14 $ $Date: 2002/03/28 20:25:11 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetDbi.c,v $ $Revision: 1.15 $ $Date: 2006/10/02 13:56:07 $";
 
 extern void *DBID;
 #ifndef HAVE_VXWORKS_H
@@ -98,6 +98,29 @@ int _TreeGetDbi(void *dbid, struct dbi_itm *itmlst)
 	string = _TreeGetPath(db, nid);
       }
       break;
+
+     case DbiVERSIONS_IN_MODEL:
+       CheckOpen(db);
+       {
+         int value=db->tree_info->header->versions_in_model;
+         memset(lst->pointer,0,lst->buffer_length);
+         memcpy(lst->pointer,&value,min(lst->buffer_length,sizeof(int)));
+         if (lst->return_length_address)
+           *lst->return_length_address = min(lst->buffer_length, sizeof(int));
+         break;
+       }
+
+     case DbiVERSIONS_IN_PULSE:
+       CheckOpen(db);
+       {
+         int value=db->tree_info->header->versions_in_pulse;
+         memset(lst->pointer,0,lst->buffer_length);
+         memcpy(lst->pointer,&value,min(lst->buffer_length,sizeof(int)));
+         if (lst->return_length_address)
+           *lst->return_length_address = min(lst->buffer_length, sizeof(int));
+         break;
+       }
+
 
      default:
       status = TreeILLEGAL_ITEM;
