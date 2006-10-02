@@ -19,7 +19,7 @@
 #include <math.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.151 $ $Date: 2006/09/25 16:03:51 $ $Name:  $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.152 $ $Date: 2006/10/02 13:49:04 $ $Name:  $";
 
 extern int MdsCopyDxXd();
 STATIC_ROUTINE char *GetTdiLogical(char *name);
@@ -1589,11 +1589,11 @@ int LibConvertDateString(char *asc_time, _int64 *qtime)
 #ifndef HAVE_VXWORKS_H
     struct tm tm = {0,0,0,0,0,0,0,0,0};
     char *tmp;
-    tmp = strptime(asc_time, "%x %X", &tm);
-    if (tmp != asc_time) {
+    tmp = strptime(asc_time, "%d-%b-%Y %H:%M:%S", &tm);
+    if (tmp) {
       time_t t=time(0);
       struct tm *tm_p=localtime(&t);
-      tim = mktime(&tm);
+      tim = mktime(&tm) + 1;
 #ifndef __hpux
       tim += tm_p->tm_gmtoff;
 #endif
@@ -1617,7 +1617,7 @@ int LibConvertDateString(char *asc_time, _int64 *qtime)
     *qtime = ((_int64)tim)*10000000+addin;
   } else
     *qtime = 0;
-  return 1;
+  return tim > 0;
 }
   
     
