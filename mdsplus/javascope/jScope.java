@@ -1,4 +1,4 @@
-/* $Id: jScope.java,v 1.77 2006/06/19 13:54:25 manduchi Exp $ */
+/* $Id: jScope.java,v 1.78 2006/10/12 09:38:21 jgk Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.List;
@@ -948,7 +948,7 @@ public class jScope
         network_m = new JMenu("Network");
         mb.add(network_m);
 
-        fast_network_i = new JCheckBoxMenuItem("Fast network access", false);
+        fast_network_i = new JCheckBoxMenuItem("Faster, sub-sampled, access", false);
         fast_network_i.setEnabled(false);
         network_m.add(fast_network_i);
         fast_network_i.addItemListener(this);
