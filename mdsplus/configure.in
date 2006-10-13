@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.193 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.194 $
 AC_INIT()
 
 #AC_CONFIG_HEADER(include/config.h)
@@ -180,7 +180,7 @@ GROFF_MAN_FLAGS="-t -man -Tascii"
 GROFF=groff
 HUP_TO_XINETD=""
 HUP_TO_INETD=""
-UILCMD="uid"
+UILCMD="uil"
 CC_LDFLAGS=""
 FOR_LDFLAGS=""
 
