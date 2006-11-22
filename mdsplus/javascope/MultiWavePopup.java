@@ -1,4 +1,4 @@
-/* $Id: MultiWavePopup.java,v 1.26 2005/05/12 08:29:04 manduchi Exp $ */
+/* $Id: MultiWavePopup.java,v 1.27 2006/11/22 14:57:00 manduchi Exp $ */
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -200,12 +200,12 @@ public class MultiWavePopup
         super.SetMenu();
     }
 
-    /*
-        protected void SetInterpolate(boolean state)
-        {
-            wave.SetInterpolate(wave.GetSelectedSignal(), state);
-        }
-     */
+
+    protected void SetInterpolate(boolean state)
+    {
+        wave.SetInterpolate(wave.GetSelectedSignal(), state);
+    }
+
     protected void SetMode2D(int mode)
     {
         wave.setSignalMode(wave.GetSelectedSignal(), mode);

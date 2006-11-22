@@ -1,4 +1,4 @@
-/* $Id: WaveformContainer.java,v 1.39 2006/06/19 13:54:24 manduchi Exp $ */
+/* $Id: WaveformContainer.java,v 1.40 2006/11/22 14:57:00 manduchi Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -383,14 +383,25 @@ public class WaveformContainer extends RowColumnContainer implements WaveformMan
 	    }
     }
 
-    synchronized public void liveUpdateWaveforms()
+    synchronized public void appendUpdateWaveforms()
     {
         Waveform w;
         for(int i = 0; i < getGridComponentCount(); i++)
         {
             w = GetWavePanel(i);
             if(w != null )
-                  w.liveUpdate();
+                  w.appendUpdate();
+        }
+    }
+
+    synchronized public void updateWaveforms()
+    {
+        Waveform w;
+        for(int i = 0; i < getGridComponentCount(); i++)
+        {
+            w = GetWavePanel(i);
+            if(w != null )
+                  w.Update();
         }
     }
 

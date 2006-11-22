@@ -1,4 +1,4 @@
-/* $Id: Descriptor.java,v 1.26 2005/02/11 10:30:54 manduchi Exp $ */
+/* $Id: Descriptor.java,v 1.27 2006/11/22 14:57:00 manduchi Exp $ */
 import java.io.*;
 
 class Descriptor
@@ -216,6 +216,7 @@ class Descriptor
 
     public static void main(String arg[])
     {
+/*
         float f[] = new float[100];
         Descriptor dsc = new Descriptor();
 
@@ -230,5 +231,6 @@ class Descriptor
         System.out.println("  "+b.length);
         b = dataToByteArray(new Double(100));
         System.out.println("  "+b.length);
+*/
     }
 }

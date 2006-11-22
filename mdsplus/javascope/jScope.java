@@ -1,4 +1,4 @@
-/* $Id: jScope.java,v 1.78 2006/10/12 09:38:21 jgk Exp $ */
+/* $Id: jScope.java,v 1.79 2006/11/22 14:57:00 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.List;
@@ -32,7 +32,7 @@ public class jScope
     UpdateEventListener, ConnectionListener, Printable
 {
 
-    static final String VERSION = "jScope (version 7.4.0)";
+    static final String VERSION = "jScope (version 7.4.1)";
     static public boolean is_debug = false;
 
     public static final int MAX_NUM_SHOT = 30;

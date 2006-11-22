@@ -1,4 +1,4 @@
-/* $Id: jScopeWavePopup.java,v 1.36 2006/05/04 09:12:38 manduchi Exp $ */
+/* $Id: jScopeWavePopup.java,v 1.37 2006/11/22 14:57:00 manduchi Exp $ */
 import java.awt.Point;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -167,14 +167,14 @@ class jScopeWavePopup
             ( (jScopeMultiWave) wave).GetLegendYPosition());
     }
 
-    /*
-        protected void SetInterpolate(boolean state)
-        {
-            super.SetInterpolate(state);
-         jScopeMultiWave w = (jScopeMultiWave)wave;
-            w.wi.interpolates[w.GetSelectedSignal()] = state;
-        }
-     */
+
+    protected void SetInterpolate(boolean state)
+    {
+        super.SetInterpolate(state);
+        jScopeMultiWave w = (jScopeMultiWave)wave;
+        w.wi.interpolates[w.GetSelectedSignal()] = state;
+    }
+
 
     protected void SetMode1D(int mode)
     {

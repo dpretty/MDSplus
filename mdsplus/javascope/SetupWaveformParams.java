@@ -1,4 +1,4 @@
-/* $Id: SetupWaveformParams.java,v 1.22 2006/06/19 13:54:24 manduchi Exp $ */
+/* $Id: SetupWaveformParams.java,v 1.23 2006/11/22 14:57:00 manduchi Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.util.*;
@@ -337,7 +337,7 @@ public class SetupWaveformParams extends JDialog implements ActionListener
             wave.lx_min = convertToFloat(x_min.getText(), true);
             wave.ly_max = convertToFloat(y_max.getText(), false);
             wave.ly_min = convertToFloat(y_min.getText(), true);
-	        wave.setFixedLimits();
+            wave.setFixedLimits();
         }
 
 

@@ -1,4 +1,4 @@
-/* $Id: SetupDataDialog.java,v 1.53 2006/06/19 13:54:24 manduchi Exp $ */
+/* $Id: SetupDataDialog.java,v 1.54 2006/11/22 14:57:00 manduchi Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -19,7 +19,7 @@ import javax.swing.event.*;
    private JLabel	    lab;
    private SError	    error_w;
    private jScope	    main_scope;
-   private ExpandExp    expand_expr;
+   private ExpandExp        expand_expr;
    private SList	    signalList;
    private jScopeMultiWave    wave;
    public  MdsWaveInterface   wi;
