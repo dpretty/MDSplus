@@ -1,4 +1,4 @@
-/* $Id: RowColumnContainer.java,v 1.27 2004/12/31 10:59:05 manduchi Exp $ */
+/* $Id: RowColumnContainer.java,v 1.28 2006/11/23 15:11:20 manduchi Exp $ */
 import java.awt.Panel;
 import java.awt.Component;
 import java.awt.Point;
@@ -814,7 +814,7 @@ public class RowColumnContainer extends JComponent
         }
         add(c, row, col);
 
-        split_pos = new Point(row, col);
+        split_pos = new Point(col, row);
         update();
         return idx-1;
     }

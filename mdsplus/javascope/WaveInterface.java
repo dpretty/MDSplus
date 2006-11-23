@@ -1,4 +1,4 @@
-/* $Id: WaveInterface.java,v 1.79 2006/11/22 14:57:00 manduchi Exp $ */
+/* $Id: WaveInterface.java,v 1.80 2006/11/23 15:11:20 manduchi Exp $ */
 import java.awt.*;
 import java.io.*;
 import java.awt.image.*;
@@ -822,13 +822,13 @@ public class WaveInterface
             }
         }
         /*
-              else
-              {
+        else
+        {
             try{
                 title = dp.GetWaveData(in_y[0]).GetTitle();
             }catch(Exception exc) {title = null;}
-              }
-         */
+        }
+        */
 
 
         //compute limits
@@ -1544,10 +1544,10 @@ public class WaveInterface
                 }
             }
         }
-        if ( ( (curr_x == null        || curr_x.length <= 1) &&
-               (curr_x_long == null   || curr_x_long.length <=1 ) &&
-               (curr_x_double == null || curr_x_double.length <=1 )) ||
-               (curr_data == null     || curr_data.length <=1 ) )
+        if ( ( (curr_x == null        || curr_x.length < 1) &&
+               (curr_x_long == null   || curr_x_long.length < 1 ) &&
+               (curr_x_double == null || curr_x_double.length < 1 )) ||
+               (curr_data == null     || curr_data.length < 1 ) )
         {
             curr_error = dp.ErrorString();
             return null;

@@ -1,4 +1,4 @@
-/* $Id: jScopeWaveContainer.java,v 1.51 2006/06/19 13:54:25 manduchi Exp $ */
+/* $Id: jScopeWaveContainer.java,v 1.52 2006/11/23 15:11:20 manduchi Exp $ */
 import java.awt.Graphics;
 import java.awt.Component;
 import java.awt.Font;
@@ -362,7 +362,7 @@ remove 28/06/2005
 
                 WaveContainerEvent wce = new WaveContainerEvent(this,
                     WaveContainerEvent.END_UPDATE,
-                    "Wave row " + p.x + " column " + p.y + " is updated");
+                    "Wave column " + p.x + " row " + p.y + " is updated");
                 jScopeWaveContainer.this.dispatchWaveContainerEvent(wce);
                 break;
         }
@@ -1630,7 +1630,7 @@ remove 28/06/2005
 
         WaveContainerEvent wce = new WaveContainerEvent(this,
             WaveContainerEvent.START_UPDATE,
-            label + " wave row " + p.x + " column " + p.y);
+            label + " wave column " + p.x + " row " + p.y);
         jScopeWaveContainer.this.dispatchWaveContainerEvent(wce);
 
         //If is added a signal to the waveform only signal added
