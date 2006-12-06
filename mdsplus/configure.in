@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.202 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.203 $
 AC_INIT()
 
 #AC_CONFIG_HEADER(include/config.h)
@@ -24,8 +24,6 @@ fi
 dnl Check out the compiler
 AC_PROG_CC
 
-dnl Check out the c++compiler
-AC_PROG_CXX
 
 AC_ARG_ENABLE(nodebug,
 	[  --enable-nodebug        compile without debug info],
@@ -909,6 +907,5 @@ traverser/Makefile
 treeshr/Makefile 
 wfevent/Makefile 
 xmdsshr/Makefile
-cacheshr/Makefile
 )
 AC_OUTPUT_COMMANDS(make depend)
