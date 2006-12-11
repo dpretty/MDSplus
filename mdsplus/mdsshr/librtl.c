@@ -19,7 +19,7 @@
 #include <math.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.153 $ $Date: 2006/10/04 19:19:21 $ $Name:  $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.154 $ $Date: 2006/12/11 16:33:24 $ $Name:  $";
 
 extern int MdsCopyDxXd();
 STATIC_ROUTINE char *GetTdiLogical(char *name);
@@ -823,7 +823,7 @@ STATIC_ROUTINE void TimerExpired(int par)
   semGive(sem);
 }
 
-STATIC_ROUTINE void sleep(unsigned int secs)
+/*STATIC_ROUTINE void sleep(unsigned int secs)
 {
   if((sem = semBCreate(SEM_Q_FIFO, SEM_EMPTY)) == NULL)
     return;
@@ -835,7 +835,7 @@ STATIC_ROUTINE void sleep(unsigned int secs)
   wdDelete(wd);
   semDelete(sem);
 }
-
+*/
 #endif
 
 
@@ -1714,7 +1714,11 @@ int LibSysAscTim(unsigned short *len, struct descriptor *str, int *time_in)
 }
 #else
 #ifndef HAVE_WINDOWS_H
+#ifdef HAVE_VXWORKS_H
+#include <time.h>
+#else
 #include <sys/time.h>
+#endif
 #endif
 int LibSysAscTim(unsigned short *len, struct descriptor *str, int *time_in)
 {

@@ -40,13 +40,14 @@
 	NOT and INOT of AND OR etc., form NAND or AND_NOT etc. See KNOT1 and KNOT2. Not after 9/25/89.
 */
 #include <STATICdef.h>
-#include "tdithreadsafe.h"
 #include <stdio.h>
 #include <string.h>
+#include "tdithreadsafe.h"
 #include "tdirefcat.h"
 #include "tdireffunction.h"
 #include "tdirefzone.h"
 #include "tdirefstandard.h"
+
 #include <libroutines.h>
 #include <strroutines.h>
 #include <tdimessages.h>
@@ -55,7 +56,7 @@
 #ifdef HAVE_VXWORKS_H
 #undef ERROR
 #endif
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiYacc.c,v $ $Revision: 1.16 $ $Date: 2003/11/17 21:21:22 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiYacc.c,v $ $Revision: 1.17 $ $Date: 2006/12/11 16:34:34 $";
 
 extern unsigned short
 	OpcAbort,
@@ -718,7 +719,7 @@ __YYSCLASS char * yyreds[] =
 };
 #endif /* YYDEBUG */
 #define YYFLAG  (-3000)
-/* @(#) $Revision: 1.16 $ */    
+/* @(#) $Revision: 1.17 $ */    
 
 /*
 ** Skeleton parser driver for yacc output
