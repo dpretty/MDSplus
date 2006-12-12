@@ -1,4 +1,6 @@
+#ifndef HAVE_VXWORKS_H
 #include <config.h>
+#endif
 #ifdef _WIN32
 #include <io.h>
 #endif
@@ -21,7 +23,7 @@
 
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.40 $ $Date: 2006/10/02 13:56:07 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.41 $ $Date: 2006/12/12 13:37:19 $";
 
 
 static _int64 ViewDate = -1;

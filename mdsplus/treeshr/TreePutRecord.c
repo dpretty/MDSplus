@@ -27,7 +27,9 @@
 
 
 +-----------------------------------------------------------------------------*/
+#ifndef HAVE_VXWORKS_H
 #include <config.h>
+#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <mdstypes.h>
@@ -48,7 +50,11 @@
 #include <windows.h>
 #include <io.h>
 #else
+#ifdef HAVE_VXWORKS_H
+#include <time.h>
+#else
 #include <sys/time.h>
+#endif
 #endif
 
 #ifdef HAVE_VXWORKS_H
@@ -57,7 +63,7 @@ static int daylight = 0;
 #define LONG_LONG_CONSTANT(value) value##ll
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.74 $ $Date: 2006/10/02 13:56:07 $";
+static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.75 $ $Date: 2006/12/12 13:37:19 $";
 
 #ifdef min
 #undef min
