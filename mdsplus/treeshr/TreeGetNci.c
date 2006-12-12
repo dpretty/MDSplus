@@ -21,9 +21,10 @@
 #define O_RANDOM 0
 #endif
 
+
 extern int StrFree1Dx();
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.53 $ $Date: 2006/12/12 13:37:19 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.54 $ $Date: 2006/12/12 13:42:22 $";
 
 #ifndef HAVE_VXWORKS_H
 #define min(a,b) (((a) < (b)) ? (a) : (b))

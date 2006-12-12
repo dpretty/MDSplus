@@ -29,7 +29,6 @@
 
 	Description:
 
-
 +-----------------------------------------------------------------------------*/
 #ifndef HAVE_VXWORKS_H
 #include <config.h>
@@ -45,7 +44,7 @@
 #include "treeshrp.h"
 #include <ncidef.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.35 $ $Date: 2006/12/12 13:37:19 $";
+static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.36 $ $Date: 2006/12/12 13:42:22 $";
 
 extern void *DBID;
 

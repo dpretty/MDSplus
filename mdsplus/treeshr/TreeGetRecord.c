@@ -23,8 +23,7 @@
 
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.41 $ $Date: 2006/12/12 13:37:19 $";
-
+static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.42 $ $Date: 2006/12/12 13:42:22 $";
 
 static _int64 ViewDate = -1;
 static int OpenDatafileR(TREE_INFO *info);

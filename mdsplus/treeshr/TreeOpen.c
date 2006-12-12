@@ -36,7 +36,6 @@ extern char *index(char *str,char c);
 #endif
 #include "treeshrp.h"
 
-
 #ifdef __toupper
 #undef __toupper
 #endif
@@ -47,7 +46,7 @@ extern char *index(char *str,char c);
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.82 $ $Date: 2006/12/12 13:37:19 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.83 $ $Date: 2006/12/12 13:42:22 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);

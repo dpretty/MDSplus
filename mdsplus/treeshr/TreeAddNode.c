@@ -1,5 +1,5 @@
 #include <STATICdef.h>
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.63 $ $Date: 2006/12/12 13:37:19 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.64 $ $Date: 2006/12/12 13:42:22 $";
 
 #ifndef HAVE_VXWORKS_H
 #include <config.h>
@@ -26,6 +26,7 @@ STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.63 
 #undef max
 #endif
 #define max(a,b) ((a) > (b) ? (a) : (b))
+
 
 #define node_to_node_number(node_ptr) node_ptr - dblist->tree_info->node
 #define __toupper(c) (((c) >= 'a' && (c) <= 'z') ? (c) & 0xDF : (c))
