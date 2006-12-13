@@ -29,7 +29,7 @@
 #include "tdirefstandard.h"
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiArray.c,v $ $Revision: 1.16 $ $Date: 2006/12/11 16:34:34 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiArray.c,v $ $Revision: 1.17 $ $Date: 2006/12/13 12:43:20 $";
 
 int Tdi_RandomSeed = 1234567;
 
@@ -196,8 +196,15 @@ int	i;
           srand(time(0)+getpid());
           Tdi_RandomSeed = rand();
 #else
+#ifdef HAVE_VXWORKS_H
+          srandom(time(0));
+          Tdi_RandomSeed = random();
+
+#else
           srandom(time(0)+getpid());
           Tdi_RandomSeed = random();
+
+#endif
 #endif
         }
 	N_ELEMENTS(out_ptr, n);

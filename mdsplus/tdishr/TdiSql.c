@@ -33,7 +33,9 @@
 #include <tdimessages.h>
 #include <mdsshr.h>
 #include <mds_stdarg.h>
+#ifndef HAVE_VXWORKS_H
 #include <config.h>
+#endif
 #ifdef SYBASE
 #ifdef __VMS
 #include <dvidef.h>	/*for line width*/
@@ -49,7 +51,7 @@
 #define MAX(a,b) (((a) > (b)) ? (a): (b))
 #endif
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSql.c,v $ $Revision: 1.29 $ $Date: 2006/10/04 15:39:59 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSql.c,v $ $Revision: 1.30 $ $Date: 2006/12/13 12:43:20 $";
 
 extern int stat;
 extern int TdiFindImageSymbol();
