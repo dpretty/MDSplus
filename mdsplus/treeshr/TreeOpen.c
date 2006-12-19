@@ -46,7 +46,7 @@ extern char *index(char *str,char c);
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.86 $ $Date: 2006/12/13 21:02:19 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.87 $ $Date: 2006/12/19 15:08:41 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
@@ -993,7 +993,8 @@ void FixupHeader(TREE_HEADER *hdr)
   char flags = ((char *)hdr)[1];
   hdr->sort_children = (flags & 1) != 0;
   hdr->sort_members = (flags & 2) != 0;
-  hdr->version = (flags & 4) != 0;
+  hdr->versions_in_model = (flags & 4) != 0;
+  hdr->versions_in_pulse = (flags & 8) != 0;
   SwapBytesInt((char *)&hdr->free);
   SwapBytesInt((char *)&hdr->tags);
   SwapBytesInt((char *)&hdr->externals);
