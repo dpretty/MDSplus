@@ -62,7 +62,7 @@ static int daylight = 0;
 #define LONG_LONG_CONSTANT(value) value##ll
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.77 $ $Date: 2007/01/02 14:35:57 $";
+static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.78 $ $Date: 2007/01/02 15:59:06 $";
 
 #ifdef min
 #undef min
@@ -135,7 +135,8 @@ int       _TreePutRecord(void *dbid, int nid, struct descriptor *descriptor_ptr,
     {
       if (utility_update)
       {
-        bitassign(dblist->setup_info,TemplateNci.flags,NciM_SETUP_INFORMATION);
+	local_nci.flags = TemplateNci.flags;
+	bitassign(0,local_nci.flags,NciM_VERSIONS);
         local_nci.owner_identifier = TemplateNci.owner_identifier;
         local_nci.time_inserted= TemplateNci.time_inserted;
 	//	length = local_nci.length = 0;
