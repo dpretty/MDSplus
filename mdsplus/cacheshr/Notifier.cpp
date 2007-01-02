@@ -1,11 +1,9 @@
 #include "Notifier.h"
 
 #ifdef HAVE_WINDOWS_H
-#include <windows.h>
-#include <stdio.h>
+#include "Notifier.h"
+
 #define NUM_HANDLES 10000
-static int nids[NUM_HANDLES];
-static HANDLE handles[NUM_HANDLES];
 
 extern "C" void handleEvents(ThreadInfo *info)
 {
@@ -63,7 +61,7 @@ void Notifier::initialize(int nid, void (*callback)(int))
 
 void Notifier::notify()
 {
-    pulseEvent(info.handle);
+    PulseEvent(info.handle);
 }
 
 void Notifier::dispose()
@@ -74,6 +72,56 @@ void Notifier::dispose()
 
 #else
 
+#ifdef HAVE_VXWORKS_H
+extern "C" void handleEvents(ThreadInfo *info)
+{
+	while(1)
+	{
+		semTake(info->semaphore, WAIT_FOREVER);
+		if(info->killed) 
+		{
+			return;
+		}
+		info->callback(info->nid);
+	}
+}
+
+void Notifier::initialize(int nid, void (*callback)(int))
+{
+    info.nid = nid;
+    info.killed = 0;
+    info.callback = callback;
+    info.semaphore = semBCreate(SEM_Q_FIFO, SEM_EMPTY); 
+    if(info.semaphore == (void *)ERROR)
+    {
+	perror("Cannot create semaphore");
+	exit(0); //Fatal error
+    }
+    //100KBytes stack size
+    int status = taskSpawn(NULL, 10, VX_FP_TASK, 100000, (FUNCPTR)handleEvents, (int)&info,0,0,0,0,0,0,0,0,0);
+    if(status == ERROR)
+    {
+	perror("Cannot create task");
+	exit(0); //Fatal error
+    }
+}
+
+
+
+void Notifier::notify()
+{
+	semGive(info.semaphore);
+}    
+    
+void Notifier::dispose()
+{
+    info.killed = 1;
+    notify();
+}    
+
+
+
+#else
 
 extern "C" void handleEvents(ThreadInfo *info)
 {
@@ -87,7 +135,6 @@ extern "C" void handleEvents(ThreadInfo *info)
 		info->callback(info->nid);
 	}
 }
-
 
 
 void Notifier::initialize(int nid, void (*callback)(int))
@@ -116,5 +163,5 @@ void Notifier::dispose()
     notify();
 }    
 
-
+#endif
 #endif
