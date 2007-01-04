@@ -62,7 +62,7 @@ static int daylight = 0;
 #define LONG_LONG_CONSTANT(value) value##ll
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.78 $ $Date: 2007/01/02 15:59:06 $";
+static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.79 $ $Date: 2007/01/04 16:12:25 $";
 
 #ifdef min
 #undef min
@@ -173,7 +173,7 @@ int       _TreePutRecord(void *dbid, int nid, struct descriptor *descriptor_ptr,
          time_t t;
          t = time(NULL);
          tm = localtime(&t);
-         m1 = (unsigned int)t + tm->tm_gmtoff;
+         m1 = (unsigned int)t + tm->tm_gmtoff + daylight * 3600;
        }
 #else
         m1 = (unsigned int)time(NULL) - timezone + daylight * 3600;

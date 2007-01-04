@@ -19,7 +19,7 @@
 #include <math.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.156 $ $Date: 2006/12/19 15:13:09 $ $Name:  $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.157 $ $Date: 2007/01/04 16:10:54 $ $Name:  $";
 
 extern int MdsCopyDxXd();
 STATIC_ROUTINE char *GetTdiLogical(char *name);
@@ -1449,12 +1449,13 @@ int LibConvertDateString(char *asc_time, _int64 *qtime)
       time_t t=time(0);
       struct tm *tm_p=localtime(&t);
       tim = mktime(&tm);
-	  if ((int)tim == -1) return 0;
-	  tim++;
+      if ((int)tim == -1) return 0;
+      tim++;
 #if defined(HAVE_WINDOWS_H)
-	  _tzset();
-	  tim -= _timezone;
+      _tzset();
+      tim -= _timezone;
 #elif !defined(__hpux) && !defined(HAVE_WINDOWS_H)
+      tzset();
       tim += tm_p->tm_gmtoff;
 #endif
     }
@@ -1470,7 +1471,7 @@ int LibConvertDateString(char *asc_time, _int64 *qtime)
 #else
     _int64 addin = 0x7c95674beb4000;
 #endif
-    *qtime = ((_int64)tim)*10000000+addin;
+    *qtime = ((_int64)tim + daylight * 3600)*10000000+addin;
   } else
     *qtime = 0;
   return tim > 0;
