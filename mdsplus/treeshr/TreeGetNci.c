@@ -24,7 +24,7 @@
 
 extern int StrFree1Dx();
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.54 $ $Date: 2006/12/12 13:42:22 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.55 $ $Date: 2007/01/26 19:25:03 $";
 
 #ifndef HAVE_VXWORKS_H
 #define min(a,b) (((a) < (b)) ? (a) : (b))
@@ -624,7 +624,6 @@ char *_TreeGetMinimumPath(void *dbid, int *def_nid_in, int nid_in)
 {
 	PINO_DATABASE *dblist = (PINO_DATABASE *)dbid;
 	NID *def_nid = (NID *)def_nid_in;
-	NID *nid = (NID *)&nid_in;
 	int status;
 	NCI_ITM   itm_lst[] = {{0, NciMINPATH, 0, 0},
 	{0, NciEND_OF_LIST, 0, 0}};

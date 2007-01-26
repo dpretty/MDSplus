@@ -36,7 +36,7 @@ int TreeDeleteNodeInitialize(NID *nid,int *count,reset)
 #include "treeshrp.h"
 
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeDeleteNode.c,v $ $Revision: 1.14 $ $Date: 2006/12/12 13:42:22 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeDeleteNode.c,v $ $Revision: 1.15 $ $Date: 2007/01/26 19:25:03 $";
 
 extern void *DBID;
 
@@ -192,8 +192,6 @@ extern void       _TreeDeleteNodeExecute(void *dbid)
 	  (NODE *) ((char *) dblist->tree_info->node + dblist->tree_info->header->free);
 
   TREE_EDIT *edit = dblist->tree_info->edit;
-  static int sizeof_nci = sizeof(NCI);
-  static int sizeof_nodename = sizeof(node->name);
   static int zero = 0;
 /*------------------------------------------------------------------------------
 

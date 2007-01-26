@@ -36,7 +36,7 @@ TreeFindTagEnd(void **ctx);
 #include "treeshrp.h"
 #include <strroutines.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeFindTagWild.c,v $ $Revision: 1.11 $ $Date: 2001/08/27 18:34:02 $";
+static char *cvsrev = "@(#)$RCSfile: TreeFindTagWild.c,v $ $Revision: 1.12 $ $Date: 2007/01/26 19:25:03 $";
 
 extern int MdsCopyDxXd();
 extern char * FindTagWildRemote();
@@ -243,7 +243,6 @@ void       TreeFindTagEnd(void **ctx_inout)
 static TAG_SEARCH *NewTagSearch(char *tagnam_ptr)
 {
   static    DESCRIPTOR(top, "TOP");
-  static    DESCRIPTOR(colons, "::");
   TAG_SEARCH *ctx = (TAG_SEARCH *) malloc(sizeof(TAG_SEARCH));
   static struct descriptor_d empty = {0, DTYPE_T, CLASS_D, 0};
   struct descriptor tag_dsc = {0, DTYPE_T, CLASS_S, 0};

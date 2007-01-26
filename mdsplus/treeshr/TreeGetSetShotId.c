@@ -44,7 +44,7 @@ extern char *index();
 
 extern char *TranslateLogical();
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetSetShotId.c,v $ $Revision: 1.13 $ $Date: 2003/03/26 16:04:16 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetSetShotId.c,v $ $Revision: 1.14 $ $Date: 2007/01/26 19:25:03 $";
 
 #define _ToLower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
@@ -53,7 +53,6 @@ static char *GetFileName(char *experiment,char **ctx)
   char *ans = 0;
   static char pathname[1024];
   static char *path;
-  int fd = -1;
   char *semi = 0;
   char *part;
   if (*ctx == NULL)

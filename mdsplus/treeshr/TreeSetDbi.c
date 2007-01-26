@@ -42,7 +42,7 @@
 #include "treeshrp.h"
 #include <dbidef.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeSetDbi.c,v $ $Revision: 1.3 $ $Date: 2006/12/12 13:42:22 $";
+static char *cvsrev = "@(#)$RCSfile: TreeSetDbi.c,v $ $Revision: 1.4 $ $Date: 2007/01/26 19:25:03 $";
 
 extern void *DBID;
 
@@ -54,7 +54,6 @@ int       _TreeSetDbi(void *dbid, DBI_ITM *dbi_itm_ptr)
 {
   PINO_DATABASE *dblist = (PINO_DATABASE *)dbid;
   int       status = TreeNORMAL;
-  TREE_INFO *tree_info;
   DBI_ITM  *itm_ptr;
 /*------------------------------------------------------------------------------
 
