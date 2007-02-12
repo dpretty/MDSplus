@@ -19,7 +19,7 @@
 #include <math.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.158 $ $Date: 2007/01/18 22:43:44 $ $Name:  $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.159 $ $Date: 2007/02/12 19:42:40 $ $Name:  $";
 
 extern int MdsCopyDxXd();
 STATIC_ROUTINE char *GetTdiLogical(char *name);
@@ -1314,7 +1314,7 @@ int LibResetVmZone(ZoneList **zone)
 }
 
 
-int LibFreeVm(int *len, void **vm, ZoneList **zone)
+int LibFreeVm(unsigned int *len, void **vm, ZoneList **zone)
 {
   VmList *list = NULL;
   if (zone != NULL) {
@@ -1344,11 +1344,12 @@ int libfreevm(int *len, void **vm, ZoneList **zone)
   return(LibFreeVm(len, vm, zone));
 }
 
-int LibGetVm(int *len, void **vm, ZoneList **zone)
+int LibGetVm(unsigned int *len, void **vm, ZoneList **zone)
 {
   *vm = malloc(*len);
-  if (*vm == NULL)
+  if (*vm == NULL) {
     printf("Insufficient virtual memory\n");
+  }
   if (zone != NULL) {
     VmList *list = malloc(sizeof(VmList));
     list->ptr = *vm;
@@ -1362,7 +1363,7 @@ int LibGetVm(int *len, void **vm, ZoneList **zone)
   return (*vm != NULL);
 }
 
-int libgetvm_(int *len, void **vm, ZoneList **zone)
+int libgetvm_(unsigned int *len, void **vm, ZoneList **zone)
 {
   return(LibGetVm(len, vm, zone));
 }
