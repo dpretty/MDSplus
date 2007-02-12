@@ -29,7 +29,10 @@ int TreeDeletePulseFile(int shotid,int numnids, int *nids)
 
 ------------------------------------------------------------------------------*/
 #include <STATICdef.h>
+#include <fcntl.h>
+#include <STATICdef.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 #include <mdsdescrip.h>
 #include <mdsshr.h>
@@ -42,7 +45,7 @@ extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
 extern char *MaskReplace();
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeDeletePulseFile.c,v $ $Revision: 1.14 $ $Date: 2004/01/05 15:53:31 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeDeletePulseFile.c,v $ $Revision: 1.15 $ $Date: 2007/02/12 20:32:11 $";
 
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
@@ -156,6 +159,7 @@ STATIC_ROUTINE int  TreeDeleteTreeFiles(char *tree, int shot)
           part++;
         else if ((path[i] == ';' || path[i] == 0) && strlen(part))
         {
+	  int fd;
 	  path[i] = 0;
           sfile = strcpy(malloc(strlen(part)+strlen(name)+strlen(type)+2),part);
 	  if (strcmp(sfile+strlen(sfile)-1,TREE_PATH_DELIM))
@@ -164,8 +168,11 @@ STATIC_ROUTINE int  TreeDeleteTreeFiles(char *tree, int shot)
 	  strcat(sfile,type);
 	  dfile = MaskReplace(sfile,tree_lower,shot);
           free(sfile);
-          if (stat(dfile,&stat_info) == 0)
+	  fd = MDS_IO_OPEN(dfile,O_RDWR,0);
+          if (fd != -1) {
+	    MDS_IO_CLOSE(fd);
             break;
+	  }
           else
 	  {
             free(dfile);
@@ -176,7 +183,7 @@ STATIC_ROUTINE int  TreeDeleteTreeFiles(char *tree, int shot)
       }
       if (dfile)
       {
-        retstatus = DeleteFile(dfile);
+        retstatus = MDS_IO_REMOVE(dfile)==0;
         free(dfile);
       }
     }
