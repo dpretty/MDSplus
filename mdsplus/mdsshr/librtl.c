@@ -19,7 +19,7 @@
 #include <math.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.160 $ $Date: 2007/02/28 20:39:55 $ $Name:  $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.161 $ $Date: 2007/02/28 21:10:32 $ $Name:  $";
 
 extern int MdsCopyDxXd();
 STATIC_ROUTINE char *GetTdiLogical(char *name);
@@ -1497,7 +1497,6 @@ time_t LibCvtTim(int *time_in,double *t)
     tmval = localtime(&time_int);
 #ifdef USE_TM_GMTOFF
     t_out = (time_d > 0 ? time_d : 0) - tmval->tm_gmtoff; // - (tmval->tm_isdst ? 3600 : 0);
-    printf("tm_isdst=%d\n",tmval->tm_isdst);
 #else
     t_out = (time_d > 0 ? time_d : 0) + timezone - daylight * (tmval->tm_isdst ? 3600 : 0);
 #endif
