@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.208 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.209 $
 AC_INIT()
 
 #AC_CONFIG_HEADER(include/config.h)
@@ -986,5 +986,6 @@ traverser/Makefile
 treeshr/Makefile 
 wfevent/Makefile 
 xmdsshr/Makefile
+xtreeshr/Makefile
 )
 AC_OUTPUT_COMMANDS(make depend)
