@@ -1,4 +1,4 @@
-/* $Id: jScopeBrowseUrl.java,v 1.26 2003/08/08 12:35:42 manduchi Exp $ */
+/* $Id: jScopeBrowseUrl.java,v 1.27 2007/03/20 12:45:18 manduchi Exp $ */
 import javax.swing.border.*;
 import javax.swing.colorchooser.*;
 import javax.swing.filechooser.*;
@@ -32,6 +32,8 @@ public class jScopeBrowseUrl extends JDialog
     public jScopeBrowseUrl(JFrame owner)
     {
         super(owner);
+
+
         html = new JEditorPane();
         html.setEditable(false);
         html.addHyperlinkListener(createHyperLinkListener());
@@ -110,11 +112,12 @@ public class jScopeBrowseUrl extends JDialog
     }
 
 
-    final static String u_agent = "jScopeBrowseUrl.java ($Revision: 1.26 $) for "+jScope.VERSION;
+    final static String u_agent = "jScopeBrowseUrl.java ($Revision: 1.27 $) for "+jScope.VERSION;
 
     protected void setPage(URL url) throws IOException
     {
         url_con = url.openConnection();
+
 
         url_con.setRequestProperty("User-Agent",u_agent);
 

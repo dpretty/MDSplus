@@ -1,4 +1,4 @@
-/* $Id: MdsDataProvider.java,v 1.48 2006/11/23 15:11:20 manduchi Exp $ */
+/* $Id: MdsDataProvider.java,v 1.49 2007/03/20 12:45:18 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.*;
@@ -826,6 +826,7 @@ public class MdsDataProvider
                     dos.writeFloat(desc.float_data[i]);
                 out_byte = dosb.toByteArray();
                 return out_byte;
+            case Descriptor.DTYPE_USHORT: 
             case Descriptor.DTYPE_SHORT: // bdb hacked this to try to make profile dialog read true data values, not normalised
                 for(int i = 0; i < desc.short_data.length; i++)
                     dos.writeShort(desc.short_data[i]);

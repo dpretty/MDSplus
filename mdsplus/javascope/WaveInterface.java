@@ -1,4 +1,4 @@
-/* $Id: WaveInterface.java,v 1.80 2006/11/23 15:11:20 manduchi Exp $ */
+/* $Id: WaveInterface.java,v 1.81 2007/03/20 12:45:18 manduchi Exp $ */
 import java.awt.*;
 import java.io.*;
 import java.awt.image.*;
@@ -1145,7 +1145,7 @@ public class WaveInterface
             //e.printStackTrace();
             this.wave.SetMode(mode);
             frames = null;
-            curr_error = " Load Frames error " + e;
+            curr_error = " Load Frames error " + e.getMessage();
         }
     }
 

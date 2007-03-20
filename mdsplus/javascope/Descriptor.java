@@ -1,4 +1,4 @@
-/* $Id: Descriptor.java,v 1.27 2006/11/22 14:57:00 manduchi Exp $ */
+/* $Id: Descriptor.java,v 1.28 2007/03/20 12:45:18 manduchi Exp $ */
 import java.io.*;
 
 class Descriptor
@@ -44,14 +44,14 @@ class Descriptor
         this.error = error;
     }
 
-/*
+
     public Descriptor(byte dtype, int dims[], byte byte_data[])
     {
         this.dtype = dtype;
         this.dims = dims;
         this.byte_data = byte_data;
     }
-*/
+
 
     public Descriptor(int dims[], byte byte_data[])
     {
