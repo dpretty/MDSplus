@@ -1,4 +1,4 @@
-/* $Id: JetDataProvider.java,v 1.41 2006/06/19 13:54:24 manduchi Exp $ */
+/* $Id: JetDataProvider.java,v 1.42 2007/03/21 12:51:25 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.util.*;
@@ -58,7 +58,7 @@ class JetDataProvider implements DataProvider
     public void    SetEnvironment(String s) {}
     public void    Dispose(){}
     public String  GetString(String in) {return in; }
-    public float   GetFloat(String in){ return new Float(in).floatValue(); }
+    public double   GetFloat(String in){ return new Double(in).doubleValue(); }
     public String  ErrorString() { return error_string; }
     public void    AddUpdateEventListener(UpdateEventListener l, String event){}
     public void    RemoveUpdateEventListener(UpdateEventListener l, String event){}
@@ -135,15 +135,14 @@ class JetDataProvider implements DataProvider
     {
         return new SimpleWaveData(in_y, in_x);
     }
-    public WaveData GetResampledWaveData(String in, float start, float end, int n_points)
+    public WaveData GetResampledWaveData(String in, double start, double end, int n_points)
     {
         return null;
     }
-    public WaveData GetResampledWaveData(String in_y, String in_x, float start, float end, int n_points)
+    public WaveData GetResampledWaveData(String in_y, String in_x, double start, double end, int n_points)
     {
         return null;
     }
-
 
 
     public int GetLoginStatus()

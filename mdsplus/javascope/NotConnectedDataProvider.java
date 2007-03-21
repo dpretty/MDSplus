@@ -1,13 +1,13 @@
-/* $Id: NotConnectedDataProvider.java,v 1.20 2003/08/08 12:35:40 manduchi Exp $ */
+/* $Id: NotConnectedDataProvider.java,v 1.21 2007/03/21 12:51:25 manduchi Exp $ */
 import java.io.*;
 import javax.swing.JFrame;
 
 
-class NotConnectedDataProvider implements DataProvider 
+class NotConnectedDataProvider implements DataProvider
 {
     final String error = "Not Connected";
 
-    
+
     public WaveData GetWaveData(String in)
     {
         return null;
@@ -16,15 +16,15 @@ class NotConnectedDataProvider implements DataProvider
     {
         return null;
     }
-    public WaveData GetResampledWaveData(String in, float start, float end, int n_points)
+    public WaveData GetResampledWaveData(String in, double start, double end, int n_points)
     {
         return null;
     }
-    public WaveData GetResampledWaveData(String in_y, String in_x, float start, float end, int n_points)
+    public WaveData GetResampledWaveData(String in_y, String in_x, double start, double end, int n_points)
     {
         return null;
     }
-    
+
     public void    Dispose(){}
     public boolean SupportsCompression(){return false;}
     public void    SetCompression(boolean state){}
@@ -33,9 +33,9 @@ class NotConnectedDataProvider implements DataProvider
     public boolean SupportsFastNetwork(){return false;}
     public void    SetArgument(String arg){}
     public boolean SupportsTunneling() {return false; }
-    
 
-    
+
+
     public void SetEnvironment(String exp)
     {
     }
@@ -46,29 +46,29 @@ class NotConnectedDataProvider implements DataProvider
     {
         return "";
     }
-    public float GetFloat(String in)
+    public double GetFloat(String in)
     {
-        Float f = new Float(in); 
-        return f.floatValue();
+        Double f = new Double(in);
+        return f.doubleValue();
     }
-    
+
     public float[] GetFloatArray(String in_x, String in_y, float start, float end)
     {
         return null;
     }
-    
+
     public float[] GetFloatArray(String in)
     {
         return null;
     }
-    
+
     public long[] GetShots(String in)
     {
         long d[] = new long[1];
         d[0] = 0;
-        return d;        
+        return d;
     }
-    
+
     public String ErrorString()
     {
         return error;
@@ -95,5 +95,5 @@ class NotConnectedDataProvider implements DataProvider
     {
         return false;
     }
-    
- }	    
+
+ }

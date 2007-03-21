@@ -1,4 +1,4 @@
-/* $Id: LocalDataProvider.java,v 1.30 2006/12/19 16:39:48 twf Exp $ */
+/* $Id: LocalDataProvider.java,v 1.31 2007/03/21 12:51:25 manduchi Exp $ */
 import javax.swing.JFrame;
 import java.io.IOException;
 import java.util.*;
@@ -55,7 +55,7 @@ public class LocalDataProvider extends MdsDataProvider implements DataProvider
     native public void SetEnvironmentSpecific(String in, String defaultNode);
     native public void UpdateNative(String exp, long s);
     native public String GetString(String in);
-    native public float GetFloat(String in);
+    native public double GetFloat(String in);
 
     public synchronized float[] GetFloatArray(String in)  throws IOException
     {

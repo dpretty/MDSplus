@@ -1,4 +1,4 @@
-/* $Id: Grid.java,v 1.33 2006/11/22 14:57:00 manduchi Exp $ */
+/* $Id: Grid.java,v 1.34 2007/03/21 12:51:25 manduchi Exp $ */
 import java.awt.*;
 import java.awt.image.*;
 import java.awt.event.*;
@@ -46,6 +46,7 @@ public class Grid
         x_values = new double[50];
         y_values = new double[50];
         this.xmax = xmax;
+
         x_dim = BuildGrid(x_values, IS_X, xmax, ymax, xmin, ymin, xlog, ylog);
         y_dim = BuildGrid(y_values, IS_Y, xmax, ymax, xmin, ymin, xlog, ylog);
     }

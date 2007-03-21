@@ -1,4 +1,4 @@
-/* $Id: WaveformEvent.java,v 1.34 2006/11/22 14:57:00 manduchi Exp $ */
+/* $Id: WaveformEvent.java,v 1.35 2007/03/21 12:51:26 manduchi Exp $ */
 import java.awt.AWTEvent;
 import java.awt.Event;
 import java.util.*;
@@ -86,7 +86,7 @@ public class WaveformEvent
         point_value = val;
     }
 
-    public void setDateVale(long date)
+    public void setDateValue(long date)
     {
         long dayMilliSeconds = 24 * 60 * 60 * 1000;
         dateValue = date - (date % dayMilliSeconds );

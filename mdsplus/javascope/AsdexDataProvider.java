@@ -1,4 +1,4 @@
-/* $Id: AsdexDataProvider.java,v 1.23 2006/11/23 15:11:20 manduchi Exp $ */
+/* $Id: AsdexDataProvider.java,v 1.24 2007/03/21 12:51:25 manduchi Exp $ */
 import java.util.*;
 import java.io.IOException;
 import javax.swing.JFrame;
@@ -117,7 +117,7 @@ class AsdexDataProvider extends MdsDataProvider
         {
             try
             {
-                float t0 = GetFloat("dscptr(window_of(dim_of(" + expr + ")),2)");
+                double t0 = GetFloat("dscptr(window_of(dim_of(" + expr + ")),2)");
                 int startIdx[] = GetIntArray("begin_of(window_of(dim_of(" +
                                              expr + ")))");
                 int endIdx[] = GetIntArray("end_of(window_of(dim_of(" + expr +
