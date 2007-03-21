@@ -1,4 +1,4 @@
-/* $Id: Signal.java,v 1.46 2007/03/21 12:51:25 manduchi Exp $ */
+/* $Id: Signal.java,v 1.47 2007/03/21 14:25:49 manduchi Exp $ */
 import java.awt.Color;
 import java.text.*;
 import java.util.*;
@@ -1747,6 +1747,7 @@ public class Signal
     {
         int i;
 
+        if(y == null) return;
         if(x != null)
         {
             ymax = ymin = y[0];
