@@ -1,4 +1,4 @@
-/* $Id: Grid.java,v 1.34 2007/03/21 12:51:25 manduchi Exp $ */
+/* $Id: Grid.java,v 1.35 2007/03/21 16:15:11 manduchi Exp $ */
 import java.awt.*;
 import java.awt.image.*;
 import java.awt.event.*;
@@ -407,10 +407,13 @@ public class Grid
                                         Color c = g.getColor();
                                         g.setColor(Color.BLUE);
                                         curr_dim = wm.XPixel( (double) timeMillis, d);
-                                        if (curr_dim >= label_width)
-                                            g.drawLine(curr_dim, 0, curr_dim,
-                                                d.height - label_height);
-                                        g.setColor(c);
+                                            if (curr_dim >= label_width)
+                                            {
+                                              //  g.drawLine(curr_dim, 0, curr_dim,d.height - label_height);                                                                    case IS_DOTTED:
+                                                for (j = 0; j < d.height - label_height; j += 7)
+                                                    g.fillRect(curr_dim, j, 1, 5);
+                                            }
+                                            g.setColor(c);
                                     }
                                 }
                             }
