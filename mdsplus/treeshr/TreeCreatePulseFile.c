@@ -45,7 +45,7 @@ extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
 extern char *MaskReplace();
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeCreatePulseFile.c,v $ $Revision: 1.27 $ $Date: 2005/07/21 13:58:54 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeCreatePulseFile.c,v $ $Revision: 1.28 $ $Date: 2007/03/22 13:01:50 $";
 
 #include <fcntl.h>
 #ifdef _WIN32
@@ -293,7 +293,7 @@ STATIC_ROUTINE int MdsCopyFile(char *src, char *dst, int lock_it)
     if (dst_fd != -1)
     {
       MDS_IO_LSEEK(src_fd, 0, SEEK_SET);
-      if (lock_it) MDS_IO_LOCK(src_fd,0,src_len,1);
+      if (lock_it) MDS_IO_LOCK(src_fd,0,src_len,1,0);
       if (src_len > 0)
       {
         void *buff = malloc(src_len);
@@ -309,7 +309,7 @@ STATIC_ROUTINE int MdsCopyFile(char *src, char *dst, int lock_it)
       }
       else if (src_len == 0)
           status = TreeSUCCESS;
-      if (lock_it) MDS_IO_LOCK(src_fd,0,src_len,0);
+      if (lock_it) MDS_IO_LOCK(src_fd,0,src_len,0,0);
       MDS_IO_CLOSE(dst_fd);
     }
     MDS_IO_CLOSE(src_fd);
