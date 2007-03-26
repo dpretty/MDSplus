@@ -21,7 +21,7 @@
 #include <mdsshr.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: MdsXdRoutines.c,v $ $Revision: 1.19 $ $Date: 2007/03/21 20:36:54 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: MdsXdRoutines.c,v $ $Revision: 1.20 $ $Date: 2007/03/26 18:35:06 $";
 #define LibVM_FIRST_FIT      1
 #define LibVM_BOUNDARY_TAGS  1
 #define LibVM_EXTEND_AREA    32
@@ -109,7 +109,7 @@ STATIC_ROUTINE int copy_dx(
               size;
   struct descriptor *in_ptr = (struct descriptor *) in_dsc_ptr;
   int align_size;
-  while (in_ptr && in_ptr->dtype == DTYPE_DSC)
+  while (in_ptr && in_ptr->dtype == DTYPE_DSC && in_ptr->class != CLASS_APD)
     in_ptr = (struct descriptor *) in_ptr->pointer;
   if (in_ptr)
     switch (in_ptr->class)
