@@ -1,4 +1,4 @@
-/* $Id: WaveInterface.java,v 1.82 2007/03/21 12:51:26 manduchi Exp $ */
+/* $Id: WaveInterface.java,v 1.83 2007/03/28 13:36:30 manduchi Exp $ */
 import java.awt.*;
 import java.io.*;
 import java.awt.image.*;
@@ -1553,17 +1553,6 @@ public class WaveInterface
                         if (curr_x == null)
                              curr_data = null;
                      }
-
-
-                     else
-                         for(int i = 0; i <10; i++)
-                             System.out.println("CACCA"+ curr_x_long[i]);
-
-
-
-
-
-
                 }
             }
         }
