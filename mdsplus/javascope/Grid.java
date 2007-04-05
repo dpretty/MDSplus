@@ -1,4 +1,4 @@
-/* $Id: Grid.java,v 1.36 2007/03/28 13:36:30 manduchi Exp $ */
+/* $Id: Grid.java,v 1.37 2007/04/05 13:02:48 manduchi Exp $ */
 import java.awt.*;
 import java.awt.image.*;
 import java.awt.event.*;
@@ -384,12 +384,13 @@ public class Grid
                     {
                         long datel = (long) x_values[i];
                         DateFormat df = new SimpleDateFormat("HH:mm:ss");
-                        //df.setTimeZone(new SimpleTimeZone(0, "GMT"));
+                        df.setTimeZone(new SimpleTimeZone(0, "GMT"));
                         Date date = new Date();
                         date.setTime(datel);
                         curr_string = df.format(date).toString();
 
                         DateFormat df1 = new SimpleDateFormat("d-MMM-yyyy");
+                        df1.setTimeZone(new SimpleTimeZone(0, "GMT"));
                         String new_date_string = df1.format(date).toString();
                         if(i == 0 || !new_date_string.equals(prev_date_string))
                         {

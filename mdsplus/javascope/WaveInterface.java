@@ -1,4 +1,4 @@
-/* $Id: WaveInterface.java,v 1.83 2007/03/28 13:36:30 manduchi Exp $ */
+/* $Id: WaveInterface.java,v 1.84 2007/04/05 13:02:48 manduchi Exp $ */
 import java.awt.*;
 import java.io.*;
 import java.awt.image.*;
@@ -1400,7 +1400,13 @@ public class WaveInterface
         {
             try
             {
-                wd = dp.GetWaveData(in_y[curr_wave]);
+                if(xmin != -HUGE || !full_flag) //If we actually have some limit or resampling enabled
+                {
+                    wd = dp.GetResampledWaveData(in_y[curr_wave], xmin, xmax,
+                                                 Waveform.MAX_POINTS);
+                }
+                else
+                    wd = dp.GetWaveData(in_y[curr_wave]);
                 dimension = wd.GetNumDimension();
                 if (dimension == 2)
                     zlabel = wd.GetZLabel();
@@ -1477,7 +1483,7 @@ public class WaveInterface
             }
             else
             {
-                if(xmin != -HUGE) //If we actually have some limit
+                if(xmin != -HUGE || !full_flag) //If we actually have some limit
                 {
                     wd = dp.GetResampledWaveData(in_y[curr_wave], xmin, xmax,
                                                  Waveform.MAX_POINTS);

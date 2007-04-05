@@ -1,4 +1,4 @@
-/* $Id: Signal.java,v 1.47 2007/03/21 14:25:49 manduchi Exp $ */
+/* $Id: Signal.java,v 1.48 2007/04/05 13:02:48 manduchi Exp $ */
 import java.awt.Color;
 import java.text.*;
 import java.util.*;
@@ -760,15 +760,16 @@ public class Signal
             {
                 DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                 DateFormat df1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                df.setTimeZone(new SimpleTimeZone(FUSO, "GMT"));
-                df1.setTimeZone(new SimpleTimeZone(FUSO, "GMT"));
+                //df.setTimeZone(new SimpleTimeZone(FUSO, "GMT"));
+                //df1.setTimeZone(new SimpleTimeZone(FUSO, "GMT"));
                 Calendar ca = new GregorianCalendar(new SimpleTimeZone(FUSO, "GMT"));
 
                 java.util.Date date = new java.util.Date();
                 date.setTime(x2D[0]);
                 s = df.format(date).toString();
                 date = df1.parse(s + " 00:00:00");
-                t0 = date.getTime() +  date.getTimezoneOffset() * 60 * 1000;
+               // t0 = date.getTime() +  date.getTimezoneOffset() * 60 * 1000;
+                t0 = date.getTime();
 
             }
             catch (Exception exc)
@@ -935,7 +936,7 @@ public class Signal
     static String toStringTime(long time)
     {
         DateFormat df = new SimpleDateFormat("HH:mm:ss");
-        df.setTimeZone(new SimpleTimeZone(FUSO, "GMT"));
+        //df.setTimeZone(new SimpleTimeZone(FUSO, "GMT"));
         Date date = new Date();
         date.setTime(time);
         return df.format(date).toString();
