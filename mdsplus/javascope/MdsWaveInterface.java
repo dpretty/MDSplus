@@ -1,4 +1,4 @@
-/* $Id: MdsWaveInterface.java,v 1.42 2006/05/04 09:12:38 manduchi Exp $ */
+/* $Id: MdsWaveInterface.java,v 1.43 2007/04/06 14:16:30 manduchi Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.util.*;
@@ -764,6 +764,7 @@ Fix bug : shot expression must be always evaluated.
 
         cnum_shot = num_shot;
 
+        /*
         if (UseDefaultShot())
         {
             if (cin_shot != null && cin_shot.length() > 0)
@@ -775,6 +776,7 @@ Fix bug : shot expression must be always evaluated.
                 cnum_shot = 1;
             }
         }
+        */
 
         WaveInterface.WriteLine(out, prompt + "x_label: ", cin_xlabel);
         WaveInterface.WriteLine(out, prompt + "y_label: ", cin_ylabel);
