@@ -1,4 +1,4 @@
-/* $Id: ProfileDialog.java,v 1.24 2005/09/19 16:08:19 manduchi Exp $ */
+/* $Id: ProfileDialog.java,v 1.25 2007/04/11 11:28:33 manduchi Exp $ */
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import java.awt.event.*;
@@ -205,7 +205,7 @@ public class ProfileDialog extends JDialog implements WaveformListener
                                                   e.values_x, e.start_pixel_x,
                                                   e.values_y, e.start_pixel_y,
                                                   e.values_signal, e.frames_time);
-                        if(e.pixels_line != null)
+                        if(e.values_line != null)
                             updateProfileLine(e.values_line);
                         else
                             removeProfileLine();
