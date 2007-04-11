@@ -1,4 +1,4 @@
-/* $Id: MdsWaveInterface.java,v 1.43 2007/04/06 14:16:30 manduchi Exp $ */
+/* $Id: MdsWaveInterface.java,v 1.44 2007/04/11 11:01:46 manduchi Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.util.*;
@@ -806,9 +806,15 @@ Fix bug : shot expression must be always evaluated.
         }
 
         if(colorMap != null)
+        {
             WaveInterface.WriteLine(out, prompt + "palette: ",
                                 "" + colorMap.name);
-
+            WaveInterface.WriteLine(out, prompt + "bitShift: ",
+                                "" + colorMap.bitShift);            
+            WaveInterface.WriteLine(out, prompt + "bitClip: ",
+                                "" + colorMap.bitClip);
+            
+        }
         WaveInterface.WriteLine(out, prompt + "experiment: ", cexperiment);
         WaveInterface.WriteLine(out, prompt + "event: ", cin_upd_event);
         WaveInterface.WriteLine(out, prompt + "default_node: ", cin_def_node);
@@ -1026,8 +1032,26 @@ Fix bug : shot expression must be always evaluated.
 
             prop = pr.getProperty(prompt + ".palette");
             if (prop != null)
+            {
                 colorMap = cmd.getColorMap(prop);
-
+                
+                try
+                {
+                    prop = pr.getProperty(prompt + ".bitShift");
+                    if (prop != null)
+                        colorMap.bitShift = Integer.parseInt(prop);
+                    
+                    prop = pr.getProperty(prompt + ".bitClip");
+                    if (prop != null)
+                        colorMap.bitClip = new Boolean(prop).booleanValue();
+                }
+                catch(Exception exc)
+                {
+                    colorMap.bitShift = 0;    
+                    colorMap.bitClip = false;    
+                }
+            }
+            
             cexperiment = pr.getProperty(prompt + ".experiment");
 
             cin_shot = pr.getProperty(prompt + ".shot");

@@ -1,4 +1,4 @@
-/* $Id: Waveform.java,v 1.77 2007/03/21 14:25:49 manduchi Exp $ */
+/* $Id: Waveform.java,v 1.78 2007/04/11 11:01:46 manduchi Exp $ */
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -137,6 +137,8 @@ public class Waveform
   public float ly_min = Float.MIN_VALUE;
 
   protected ColorMap colorMap = new ColorMap();
+  
+
 
   class ZoomRegion {
     double start_xs;
@@ -2791,6 +2793,17 @@ protected void drawMarkers(Graphics g, Vector segments, int marker, int step,
       repaint();
   }
 
+  public void setFrameBitShift(int bitShift, boolean bitClip)
+  {
+      if(frames != null)
+      {
+          ((Frames)frames).shiftImagePixel(bitShift, bitClip);
+          not_drawn = true;
+          repaint();
+      }
+  }
+
+  
   public ColorMap getColorMap()
   {
       return frames.getColorMap();
