@@ -1,4 +1,4 @@
-/* $Id: Waveform.java,v 1.78 2007/04/11 11:01:46 manduchi Exp $ */
+/* $Id: Waveform.java,v 1.79 2007/04/11 17:29:46 manduchi Exp $ */
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -1962,7 +1962,7 @@ public class Waveform
            y = s.getY(idx);
          }
          else {
-           y = s.getY(idx) + (s.getY(idx + 1) - s.getY(idx) * (x - s.getX(idx)) /
+           y = s.getY(idx) + ((s.getY(idx + 1) - s.getY(idx)) * (x - s.getX(idx)) /
                (s.getX(idx + 1) - s.getX(idx)));
          }
        }
