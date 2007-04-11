@@ -1,4 +1,4 @@
-/* $Id: Frames.java,v 1.47 2007/04/11 11:28:33 manduchi Exp $ */
+/* $Id: Frames.java,v 1.48 2007/04/11 13:39:41 manduchi Exp $ */
 import java.awt.*;
 import java.io.*;
 import java.awt.image.*;
@@ -366,7 +366,9 @@ class Frames extends Canvas
         BufferedImage bi;
         float values[] = null; 
         boolean right = false;
-                        
+ 
+        
+        
         if(bitShift < 0)
             right = true;
         
@@ -374,6 +376,9 @@ class Frames extends Canvas
 
           for( int i = 0; i < frame.size() ; i++)
           {
+                if(this.frame_type[i] != FrameData.BITMAP_IMAGE_16)
+                    continue;
+
                 bi = (BufferedImage)frame.elementAt(i);
                 values = (float[])frame_values.elementAt(i);
                 WritableRaster wr = bi.getRaster();
