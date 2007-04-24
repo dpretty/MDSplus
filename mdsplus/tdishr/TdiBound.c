@@ -25,7 +25,7 @@
 #include "tdirefstandard.h"
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiBound.c,v $ $Revision: 1.7 $ $Date: 2003/11/17 21:21:21 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiBound.c,v $ $Revision: 1.8 $ $Date: 2007/04/24 18:18:10 $";
 
 extern struct descriptor *TdiItoXSpecial;
 
@@ -167,7 +167,7 @@ int	dimct, j;
 			else					*pbound = pa->m[dim];
 		}
 	}
-	else	*pbound = (int)pa->arsize / (int)pa->length;
+	else	*pbound = ((int)pa->length > 0) ? (int)pa->arsize / (int)pa->length : 0;
 	return 1;
 }
 /*--------------------------------------------------------------

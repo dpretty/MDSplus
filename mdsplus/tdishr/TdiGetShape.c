@@ -18,7 +18,7 @@
 #include "tdirefcat.h"
 #include <mdsshr.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiGetShape.c,v $ $Revision: 1.4 $ $Date: 2003/11/17 21:21:21 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiGetShape.c,v $ $Revision: 1.5 $ $Date: 2007/04/24 18:18:10 $";
 
 int				TdiGetShape(
 int				narg,
@@ -42,7 +42,7 @@ struct descriptor_a		*aptr;
 		case CLASS_D :
 			break;
 		case CLASS_A :
-			nelem = (int)aptr->arsize / (int)aptr->length;
+			nelem = ((int)aptr->length >0) ? (int)aptr->arsize / (int)aptr->length : 0;
 			if (nelem < count) {
 				count = nelem;
 				cmode = j;
