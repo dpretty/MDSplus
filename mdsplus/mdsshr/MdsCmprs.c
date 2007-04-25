@@ -69,7 +69,7 @@
 #include <librtl_messages.h>
 #include <STATICdef.h>
 #include <mdstypes.h>
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: MdsCmprs.c,v $ $Revision: 1.22 $ $Date: 2007/02/12 19:35:27 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: MdsCmprs.c,v $ $Revision: 1.23 $ $Date: 2007/04/25 20:40:36 $";
 
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
 #define MAXX 1024		/*length of longest run allowed*/
@@ -305,7 +305,7 @@ Do this in runs.
   /******************************
   Must have enough room to store.
   ******************************/
-    if (*bit_ptr + xe * ye + xn * yn > limit)
+    if ((_int64u)(*bit_ptr + xe * ye + xn * yn) > limit)
       return LibSTRTRU;
     header.n = X_AND_Y(xn - 1,yn);
     header.e = X_AND_Y(xe,ye - 1);

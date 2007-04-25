@@ -19,7 +19,7 @@
 #include <math.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.165 $ $Date: 2007/03/26 19:49:00 $ $Name:  $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.166 $ $Date: 2007/04/25 20:40:36 $ $Name:  $";
 
 extern int MdsCopyDxXd();
 STATIC_ROUTINE char *GetTdiLogical(char *name);
@@ -2181,7 +2181,7 @@ STATIC_ROUTINE int FindFileStart(struct descriptor *filespec, FindFileCtx **ctx,
 		  lctx->env_strs = (char **)malloc(num*sizeof(char *));
 		  for (ptr=env,i=0; i<num; i++) {
 			  char *cptr;
-			  int len = ((cptr= (char *)index(ptr, ';'))==0) ? strlen(ptr) : cptr-ptr; 
+			  int len = ((cptr= (char *)index(ptr, ';'))==(char *)0) ? (int)strlen(ptr) : cptr-ptr; 
 			  lctx->env_strs[i] = strncpy(malloc(len+1),ptr,len);
 			  lctx->env_strs[i][len] = '\0';
 			  ptr=cptr+1;
