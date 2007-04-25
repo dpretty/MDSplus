@@ -23,7 +23,7 @@
 
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.45 $ $Date: 2007/03/22 13:01:50 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.46 $ $Date: 2007/04/25 20:41:55 $";
 
 static _int64 ViewDate = -1;
 int TreeOpenDatafileR(TREE_INFO *info);
@@ -336,8 +336,8 @@ int TreeGetDatafile(TREE_INFO *info, unsigned char *rfa_in, int *buffer_size, ch
       int       blen = *buffer_size + (*buffer_size + DATAF_C_MAX_RECORD_SIZE + 1)/(DATAF_C_MAX_RECORD_SIZE + 2)*sizeof(RECORD_HEADER);
       char     *buffer = (char *)malloc(blen);
       char     *bptr_in;
-      int      bytes_remaining;
-      int      partlen = (blen % (DATAF_C_MAX_RECORD_SIZE + 2 + sizeof(RECORD_HEADER)));
+      unsigned int      bytes_remaining;
+      unsigned int      partlen = (blen % (DATAF_C_MAX_RECORD_SIZE + 2 + sizeof(RECORD_HEADER)));
       _int64 rfa_l = RfaToSeek(rfa);
       rfa_l -= blen - (partlen ? partlen : (DATAF_C_MAX_RECORD_SIZE + 2 + sizeof(RECORD_HEADER)));
       status = (MDS_IO_READ_X(info->data_file->get,rfa_l,(void *)buffer,blen,0) == blen) ? TreeSUCCESS : TreeFAILURE;

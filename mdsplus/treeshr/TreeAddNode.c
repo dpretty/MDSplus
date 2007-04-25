@@ -1,5 +1,5 @@
 #include <STATICdef.h>
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.64 $ $Date: 2006/12/12 13:42:22 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.65 $ $Date: 2007/04/25 20:41:55 $";
 
 #ifndef HAVE_VXWORKS_H
 #include <config.h>
@@ -137,7 +137,7 @@ int       _TreeAddNode(void *dbid, char *name, int *nid_out, char usage)
 	status = TreeNewNode(dblist, &new_ptr, &parent);
 	if (status & 1)
 	{
-	  int       i;
+	  unsigned int       i;
           unsigned short idx = *conglom_index;
           strncpy(new_ptr->name,node_name,sizeof(new_ptr->name));
           for (i=strlen(node_name);i<sizeof(new_ptr->name);i++)

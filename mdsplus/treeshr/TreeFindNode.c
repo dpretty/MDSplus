@@ -5,7 +5,7 @@
 #include <treeshr.h>
 #include "treeshrp.h"
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeFindNode.c,v $ $Revision: 1.32 $ $Date: 2006/08/09 19:05:03 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeFindNode.c,v $ $Revision: 1.33 $ $Date: 2007/04/25 20:41:55 $";
 
 extern void *DBID;
 
@@ -955,7 +955,7 @@ char *_TreeFindNodeTags(void *dbid, int nid_in, void **ctx_ptr)
     }
     if ((*ctx > 0) && (*ctx <= info_ptr->header->tags))
     {
-      int i;
+      unsigned int i;
       char *name = (char *) (info_ptr->tag_info + *ctx - 1)->name;
       for (i=0;i<sizeof(TAG_NAME) && name[i] != ' ';i++);
       answer = strncpy(malloc(i+1),name,i);
@@ -1083,7 +1083,7 @@ struct tag_search { TAG_NAME   tag;
 int _TreeFindTag(PINO_DATABASE *db, NODE *default_node, short treelen, char *tree, short taglen, char *tagnam, NODE **nodeptr, int *tagidx)
 
 {
-  int len = min(taglen,sizeof(TAG_NAME));
+  int len = min(taglen,(short)sizeof(TAG_NAME));
   int i;
   int *idx;
   int status;
