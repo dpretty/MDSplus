@@ -18,7 +18,7 @@
 #include <stdlib.h>
 #include <mdsshr.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiVector.c,v $ $Revision: 1.5 $ $Date: 2003/11/14 21:34:17 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiVector.c,v $ $Revision: 1.6 $ $Date: 2007/04/25 20:04:24 $";
 
 extern int TdiConvert();
 extern int TdiCvtArgs();
@@ -94,7 +94,7 @@ int	virt = (sizeof(struct descriptor_xd)*3 + sizeof(int *))*narg + sizeof(struct
 			else {
 				n++;
 				if (j == 0) arr.m[0] = (*pnelem)[j];
-				else if (arr.m[0] != (*pnelem)[j]) goto simple;
+				else if (((int)(arr.m[0])) != (*pnelem)[j]) goto simple;
 			}
 		}
 		arr.dimct = (unsigned char)(mind + 1);

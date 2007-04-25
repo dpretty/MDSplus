@@ -41,7 +41,7 @@
 #include <mdsshr.h>
 #include <string.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSubscript.c,v $ $Revision: 1.8 $ $Date: 2003/11/17 21:21:21 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSubscript.c,v $ $Revision: 1.9 $ $Date: 2007/04/25 20:04:24 $";
 
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 extern struct descriptor *TdiRANGE_PTRS[3];
@@ -237,7 +237,7 @@ struct TdiCatStruct		cats[2];
 		Must avoid reading beyond end of vector.
 		******************************************************/
 		for (j = 0; ++j < highest;) {
-			if (++count[j] < arr.m[j]) {
+			if (++count[j] < ((int)(arr.m[j]))) {
 				pin += stride[j] * (*(px[j]+count[j]) - *(px[j]+count[j]-1));
 				goto inner;
 			}

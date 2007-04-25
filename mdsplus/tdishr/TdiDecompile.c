@@ -10,7 +10,7 @@
 #include <tdimessages.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiDecompile.c,v $ $Revision: 1.12 $ $Date: 2003/11/17 21:21:21 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiDecompile.c,v $ $Revision: 1.13 $ $Date: 2007/04/25 20:04:24 $";
 
 unsigned int TdiDECOMPILE_MAX = 0xffff;
 
@@ -101,7 +101,7 @@ char			**item_ptr_ptr,
 struct descriptor_d	*out_ptr)
 {
 array_bounds_desc *a_ptr = (array_bounds_desc *)in_ptr;
-int	n = a_ptr->aflags.coeff ? a_ptr->m[level] : (int)a_ptr->arsize / max(1,(int)a_ptr->length);
+int	n = a_ptr->aflags.coeff ? a_ptr->m[level] : (int)a_ptr->arsize / max((unsigned int)1,a_ptr->length);
 int	j, status;
 
 	status = StrAppend(out_ptr, &LEFT_BRACKET);
