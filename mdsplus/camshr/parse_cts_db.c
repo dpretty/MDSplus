@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: parse_cts_db.c,v 1.1 2002/09/10 16:06:59 twf Exp $
+//	$Id: parse_cts_db.c,v 1.2 2007/05/07 17:06:15 twf Exp $
 //-------------------------------------------------------------------------
 
 //-------------------------------------------------------------------------
@@ -49,7 +49,7 @@
 void parse_cts_db( struct MODULE *in, struct Module_ *out )
 {
 	char adpt, fmt[6], line[MODULE_ENTRY+1];
-	char comm[40];
+	char comm[41];
 	int i;
 
 	if( MSGLVL(FUNCTION_NAME) )
