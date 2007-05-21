@@ -19,7 +19,7 @@
 #include <math.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.169 $ $Date: 2007/05/21 15:48:58 $ $Name:  $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.170 $ $Date: 2007/05/21 16:12:04 $ $Name:  $";
 
 extern int MdsCopyDxXd();
 STATIC_ROUTINE char *GetTdiLogical(char *name);
@@ -1537,11 +1537,11 @@ int LibTimeToVMSTime(time_t *time_in,_int64 *time_out) {
   { 
     struct tm *tm;
     tm = localtime(&t);
-    *time_out = (_int64)((unsigned int)t + tm->tm_gmtoff) * (_int64)10000000 + addin + microseconds * 10000;
+    *time_out = (_int64)((unsigned int)t + tm->tm_gmtoff) * (_int64)10000000 + addin + microseconds * 10;
   }
 #else
   tzset();
-  *time_out = (_int64)(t - timezone + daylight * 3600) * (_int64)10000000 + addin + microseconds * 10000;
+  *time_out = (_int64)(t - timezone + daylight * 3600) * (_int64)10000000 + addin + microseconds * 10;
 #endif
   return 1;
 }
