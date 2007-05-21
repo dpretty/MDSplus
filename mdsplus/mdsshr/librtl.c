@@ -19,7 +19,7 @@
 #include <math.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.170 $ $Date: 2007/05/21 16:12:04 $ $Name:  $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.171 $ $Date: 2007/05/21 18:27:57 $ $Name:  $";
 
 extern int MdsCopyDxXd();
 STATIC_ROUTINE char *GetTdiLogical(char *name);
@@ -1560,6 +1560,7 @@ time_t LibCvtTim(int *time_in,double *t)
     time_t dummy=0;
     memcpy(&time_local,time_in,sizeof(time_local));
     time_local = (*(_int64 *)time_in - addin);
+    if (time_local < 0) time_local=0;
     bintim=time_local/LONG_LONG_CONSTANT(10000000);
     time_d = (double)bintim + (double)(time_local % LONG_LONG_CONSTANT(10000000))*1E-7;
     tmval = localtime(&bintim);
