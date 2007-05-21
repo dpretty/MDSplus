@@ -19,7 +19,7 @@
 #include <math.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.168 $ $Date: 2007/05/14 18:45:10 $ $Name:  $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.169 $ $Date: 2007/05/21 15:48:58 $ $Name:  $";
 
 extern int MdsCopyDxXd();
 STATIC_ROUTINE char *GetTdiLogical(char *name);
@@ -1518,7 +1518,18 @@ static _int64 addin = LONG_LONG_CONSTANT(0x7c95674beb4000);
   
 int LibTimeToVMSTime(time_t *time_in,_int64 *time_out) {
   time_t t;
+#ifdef HAVE_GETTIMEOFDAY
+  struct timeval tm;
+  suseconds_t microseconds=0;
+  if (time_in == NULL) {
+    gettimeofday(&tm,0);
+    t = tm.tv_sec;
+    microseconds = tm.tv_usec;
+  } else t = *time_in;
+#else
+  int microseconds=0;
   t = (time_in == NULL) ? t=time(0) : *time_in;
+#endif
 #if defined(USE_TM_GMTOFF)
   /* this is a suggestion to change all code 
      for this as timezone is depricated unix
@@ -1526,11 +1537,11 @@ int LibTimeToVMSTime(time_t *time_in,_int64 *time_out) {
   { 
     struct tm *tm;
     tm = localtime(&t);
-    *time_out = (_int64)((unsigned int)t + tm->tm_gmtoff) * (_int64)10000000 + addin;
+    *time_out = (_int64)((unsigned int)t + tm->tm_gmtoff) * (_int64)10000000 + addin + microseconds * 10000;
   }
 #else
   tzset();
-  *time_out = (_int64)(t - timezone + daylight * 3600) * (_int64)10000000 + addin;
+  *time_out = (_int64)(t - timezone + daylight * 3600) * (_int64)10000000 + addin + microseconds * 10000;
 #endif
   return 1;
 }
