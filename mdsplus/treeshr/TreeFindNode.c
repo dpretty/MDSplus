@@ -5,7 +5,7 @@
 #include <treeshr.h>
 #include "treeshrp.h"
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeFindNode.c,v $ $Revision: 1.33 $ $Date: 2007/04/25 20:41:55 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeFindNode.c,v $ $Revision: 1.34 $ $Date: 2007/06/27 13:46:36 $";
 
 extern void *DBID;
 
@@ -1167,7 +1167,9 @@ int _TreeFindTag(PINO_DATABASE *db, NODE *default_node, short treelen, char *tre
         int nid;
         NODE *node;
         NID *nidptr=(NID *)&nid;
-        tag = TreeFindTagWild(tagnam, &nid, &ctx);
+        int i;
+        for (i=0;i<sizeof(tsearch.tag);i++) if (tsearch.tag[i]==' ') tsearch.tag[i]='\0';
+        tag = TreeFindTagWild(tsearch.tag, &nid, &ctx);
         if (tag)
 	{
           status = TreeNORMAL;
