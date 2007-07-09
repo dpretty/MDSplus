@@ -15,7 +15,7 @@
   | Author:                                                              |
   +----------------------------------------------------------------------+
 
-  $Id: mdsplus.c,v 1.1 2004/08/31 17:27:44 twf Exp $ 
+  $Id: mdsplus.c,v 1.2 2007/07/09 13:02:33 twf Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -451,7 +451,7 @@ PHP_FUNCTION(mdsplus_value)
 			}
 			else
 			{
-				mdsplus_replace_error("mdsplus_php currently cannot handle multidimensional arrays",0);
+				mdsplus_replace_error("mdsplus php currently cannot handle multidimensional arrays",0);
                 RETVAL_FALSE;
                 return;
             }
