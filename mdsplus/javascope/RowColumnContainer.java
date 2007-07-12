@@ -1,4 +1,4 @@
-/* $Id: RowColumnContainer.java,v 1.28 2006/11/23 15:11:20 manduchi Exp $ */
+/* $Id: RowColumnContainer.java,v 1.29 2007/07/12 15:45:25 manduchi Exp $ */
 import java.awt.Panel;
 import java.awt.Component;
 import java.awt.Point;
@@ -383,6 +383,12 @@ public class RowColumnContainer extends JComponent
       return maximizeC;
     }
 
+    public void resetMaximizeComponent()
+    {
+        maximizeC = null;
+    }
+
+    
     public boolean isMaximize()
     {
       return ( maximizeC != null);
