@@ -1,4 +1,4 @@
-/* $Id: jScopeWaveContainer.java,v 1.53 2007/03/21 12:51:26 manduchi Exp $ */
+/* $Id: jScopeWaveContainer.java,v 1.54 2007/07/12 15:42:41 manduchi Exp $ */
 import java.awt.Graphics;
 import java.awt.Component;
 import java.awt.Font;
@@ -1090,6 +1090,10 @@ remove 28/06/2005
             {
             0, 0, 0, 0};
 
+        
+        resetMaximizeComponent();
+        
+        
         prop = pr.getProperty(prompt + ".columns");
         if (prop == null)
             throw (new IOException("missing columns keyword"));
