@@ -1,4 +1,4 @@
-/* $Id: MdsDataClient.java,v 1.25 2005/02/11 10:30:54 manduchi Exp $ */
+/* $Id: MdsDataClient.java,v 1.26 2007/09/24 08:25:48 manduchi Exp $ */
 import java.util.Vector;
 
 public class MdsDataClient extends MdsConnection
@@ -35,9 +35,8 @@ public class MdsDataClient extends MdsConnection
             throw new MdsIOException(error);
     }
 
-
-    /**
-     * Open an MdsPlus experiment
+	    /**
+     * Open an MdsPlus experiment in read only access mode
      *
      * @param experiment Experiment name
      * @param shot Shot number
@@ -45,12 +44,25 @@ public class MdsDataClient extends MdsConnection
      */
     public void open(String experiment, int shot) throws MdsIOException
     {
+		open(experiment, shot, 1);
+	}
+
+    /**
+     * Open an MdsPlus experiment
+     *
+     * @param experiment Experiment name
+     * @param shot Shot number
+    * @param readOnly  access mode 1 for read only	
+     * @exception MdsIOException if an I/0 error occurs
+     */
+    public void open(String experiment, int shot, int readOnly) throws MdsIOException
+    {
         if(!connected)
             throw new MdsIOException("Mds data client not connected to "+provider);
 
         this.experiment = experiment;
         this.shot = shot;
-	    Descriptor descr = MdsValue("JavaOpen(\""+experiment+"\"," + shot +")");
+	    Descriptor descr = MdsValue("JavaOpen(\""+experiment+"\"," + shot + ","+ readOnly +")");
 	    if(!(descr.dtype != Descriptor.DTYPE_CSTRING
 		   && descr.dtype == Descriptor.DTYPE_LONG && descr.int_data != null
 		   && descr.int_data.length > 0 && (descr.int_data[0]%2 == 1)))
