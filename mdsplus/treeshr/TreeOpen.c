@@ -46,7 +46,7 @@ extern char *index(char *str,char c);
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.90 $ $Date: 2007/07/13 20:33:15 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.91 $ $Date: 2007/10/01 16:22:03 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
@@ -403,6 +403,7 @@ static int CloseTopTree(PINO_DATABASE *dblist, int call_hook)
       dblist->experiment = 0;
       free(dblist->main_treenam);
       dblist->main_treenam = 0;
+      memset(dblist->big_node_linkage,0,sizeof(dblist->big_node_linkage));
     }
   }
   return status;
