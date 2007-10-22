@@ -1,5 +1,5 @@
 /* include/config.h.in.  Generated automatically from configure.in by autoheader.  */
-/* @(#)$RCSfile: config.h.in,v $ $Revision: 1.11 $ */
+/* @(#)$RCSfile: config.h.in,v $ $Revision: 1.12 $ */
 #ifndef _CONFIG_INCLUDED
 
 /* Define to empty if the keyword does not work.  */
@@ -165,6 +165,9 @@
 
 /* Define if use need to use localtime instead of timezone and daylight */
 #undef USE_TM_GMTOFF
+
+/* Define if you want to collect performance statistics -- linux only */
+#undef USE_PERF
 
 /* Define if you compiler likes 0xnnnnll long long constants  */
 #define HAVE_LL_CONSTANTS

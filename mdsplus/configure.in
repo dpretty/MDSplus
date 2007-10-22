@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.209 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.210 $
 AC_INIT()
 
 #AC_CONFIG_HEADER(include/config.h)
@@ -31,6 +31,12 @@ AC_ARG_ENABLE(nodebug,
                CFLAGS="";
                FFLAGS="";
 	fi)
+
+AC_ARG_ENABLE(perf,
+	[  --enable-perf          enable MDSplus I/O statistics])
+	if test "$enableval" = yes; then
+		AC_DEFINE(USE_PERF)
+	fi
 
 dnl See if we should build the camac libraries, mitdevices etc.
 
