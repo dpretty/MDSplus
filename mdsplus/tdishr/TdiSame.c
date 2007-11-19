@@ -19,7 +19,7 @@
 #include "tdirefstandard.h"
 #include <libroutines.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSame.c,v $ $Revision: 1.6 $ $Date: 2007/03/21 19:30:30 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSame.c,v $ $Revision: 1.7 $ $Date: 2007/11/19 20:03:53 $";
 
 extern int Tdi3undef();
 extern int TdiGetArgs();
@@ -40,6 +40,9 @@ int				cmode = -1, j, (*routine)() = fun_ptr->f3;
 	/******************************************
 	Fetch signals and data and data's category.
 	******************************************/
+        memset(sig,0,sizeof(sig));
+        memset(uni,0,sizeof(uni));
+        memset(dat,0,sizeof(dat));
         memset(cats,0,sizeof(cats));
         status = TdiGetArgs(opcode, narg, list, sig, uni, dat, cats);
 
