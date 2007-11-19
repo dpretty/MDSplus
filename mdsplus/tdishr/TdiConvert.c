@@ -7,7 +7,7 @@
 
 #define MAXTYPE (DTYPE_FTC + 1)
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiConvert.c,v $ $Revision: 1.17 $ $Date: 2006/08/25 17:52:37 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiConvert.c,v $ $Revision: 1.18 $ $Date: 2007/11/19 18:55:41 $";
 
 extern void CvtConvertFloat();
 extern int IsRoprand();
@@ -689,10 +689,10 @@ STATIC_ROUTINE void DOUBLE_TO_TEXT(int itype, char *pa, char *pb, int numb, int 
       pe = strchr(text,'E'); 
       if (pe) 
         *pe=sym; 
-      else 
-      {
-        if (text[0] == ' ') memcpy(text,text+1,n-1);
-        if (text[0] == ' ') memcpy(text,text+1,n-2);
+      else {
+	int i;
+        if (text[0] == ' ') for (i=0;i<(n-1);i++) text[i]=text[i+1];/* memcpy(text,text+1,n-1);*/
+        if (text[0] == ' ') for (i=0;i<(n-2);i++) text[i]=text[i+1];/* memcpy(text,text+1,n-2); */
         text[n-2]=sym; 
         text[n-1]='0';
       }
