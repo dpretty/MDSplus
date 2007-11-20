@@ -1,4 +1,4 @@
-/* $Id: MdsDataProvider.java,v 1.52 2007/04/05 13:02:48 manduchi Exp $ */
+/* $Id: MdsDataProvider.java,v 1.53 2007/11/20 10:55:22 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.*;
@@ -983,6 +983,7 @@ public class MdsDataProvider
         //First check Whether this is a date
         try {
             Calendar cal = Calendar.getInstance();
+            cal.setTimeZone(TimeZone.getTimeZone("GMT+00"));
             DateFormat df = new SimpleDateFormat("d-MMM-yyyy HH:mm");
             Date date = df.parse(in);
             cal.setTime(date);

@@ -1,4 +1,4 @@
-/* $Id: LocalDataProvider.java,v 1.32 2007/04/05 13:02:48 manduchi Exp $ */
+/* $Id: LocalDataProvider.java,v 1.33 2007/11/20 10:55:22 manduchi Exp $ */
 import javax.swing.JFrame;
 import java.io.IOException;
 import java.util.*;
@@ -67,6 +67,8 @@ public class LocalDataProvider extends MdsDataProvider implements DataProvider
         try
         {
             Calendar cal = Calendar.getInstance();
+            cal.setTimeZone(TimeZone.getTimeZone("GMT+00"));
+
             DateFormat df = new SimpleDateFormat("d-MMM-yyyy HH:mm");
             Date date = df.parse(in);
             cal.setTime(date);
