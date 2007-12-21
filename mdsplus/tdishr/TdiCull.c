@@ -19,9 +19,9 @@
 #include <mdsshr.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiCull.c,v $ $Revision: 1.5 $ $Date: 2003/11/17 21:21:21 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiCull.c,v $ $Revision: 1.6 $ $Date: 2007/12/21 16:38:49 $";
 
-#define _MOVC3(a,b,c) memcpy(c,b,a)
+#define _MOVC3(a,b,c) memmove(c,b,a)
 
 extern struct descriptor *TdiRANGE_PTRS[3];
 extern unsigned short OpcValue;
