@@ -51,7 +51,7 @@
 #define MAX(a,b) (((a) > (b)) ? (a): (b))
 #endif
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSql.c,v $ $Revision: 1.32 $ $Date: 2007/03/12 15:46:29 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSql.c,v $ $Revision: 1.33 $ $Date: 2008/01/02 18:29:23 $";
 
 extern int stat;
 extern int TdiFindImageSymbol();
@@ -448,7 +448,7 @@ int 	rblob;
 						moptr = strstr(moname, mon);
 						if (moptr) mo = (moptr - moname)/3; else mo = 0;
 						leap = yr/4 - yr/100 + yr/400;
-						leap += mo >= 2 && yr%4 == 0 && (yr%100 != 0 || yr%400 == 0);
+						leap -= mo < 2 && yr%4 == 0 && (yr%100 != 0 || yr%400 == 0);
 						d_ans = (double)(yr * 365 + day[mo] + da + leap - 678941);
 						d_ans += (double)(th + 1000*(se + 60*(mi + 60*hr)))/86400000.;
 						buf = (char *)&d_ans;
