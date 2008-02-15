@@ -80,7 +80,7 @@
 extern int sys$filescan();
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: dwscopesubs.c,v $ $Revision: 1.9 $ $Date: 2003/06/23 15:31:35 $";
+static char *cvsrev = "@(#)$RCSfile: dwscopesubs.c,v $ $Revision: 1.10 $ $Date: 2008/02/15 16:46:59 $";
 
 extern int XmdsManageWindow();
 Boolean   ConvertSelectionToWave(Widget w, Atom result_type, unsigned long length, CutHeader *header, WaveInfo *info);
@@ -525,9 +525,9 @@ XrmDatabase GetFileDatabase(String file_spec)
   XrmDatabase db = 0;
   if (file)
   {
-    char      line_text[1024];
-    char      doubled[1024];
-    while (fgets(line_text, 1024, file))
+    char      line_text[32768];
+    char      doubled[32768];
+    while (fgets(line_text, 32768, file))
     {
       int       i;
       int       j;
