@@ -19,7 +19,7 @@
 #include <math.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.174 $ $Date: 2007/12/26 16:22:00 $ $Name:  $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.175 $ $Date: 2008/07/15 15:47:08 $ $Name:  $";
 
 #ifndef HAVE_VXWORKS_H
 STATIC_CONSTANT _int64 addin = LONG_LONG_CONSTANT(0x7c95674beb4000);
@@ -179,16 +179,17 @@ STATIC_ROUTINE char *GetRegistry(char *where, char *pathname)
 
 char *TranslateLogical(char *pathname)
 {
-	char *path = GetRegistry((char *)HKEY_CURRENT_USER, pathname);
-	if (!path)
-	{
-	  path = GetRegistry((char *)HKEY_LOCAL_MACHINE, pathname);
-          if (!path)
-           // path = GetTdiLogical(char *pathname);
-           path = GetTdiLogical(pathname);
-	}
-
-	return path;
+  char *path=NULL;
+  char *tpath=getenv(pathname);
+  if (tpath)
+    path = strcpy((char *)malloc(strlen(tpath)+1),tpath);
+  if (!path)
+	path = GetRegistry((char *)HKEY_CURRENT_USER, pathname);
+  if (!path)
+	path = GetRegistry((char *)HKEY_LOCAL_MACHINE, pathname);
+  if (!path)
+    path = GetTdiLogical(pathname);
+  return path;
 }
 
 int LibSpawn(struct descriptor *cmd, int waitFlag, int notifyFlag)
