@@ -46,7 +46,7 @@ extern char *index(char *str,char c);
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.94 $ $Date: 2008/04/07 16:51:06 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.95 $ $Date: 2008/08/21 12:57:59 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
@@ -483,10 +483,10 @@ static int ConnectTree(PINO_DATABASE *dblist, char *tree, NODE *parent, char *su
    info->treenam = strcpy(malloc(strlen(tree)+1),tree);
    info->shot = dblist->shotid;
    status = MapTree(tree, dblist->shotid, info, 0, parent == 0);
-   if (status == TreeFAILURE && treeshr_errno == TreeFILE_NOT_FOUND)
+   if (!(status & 1) && (status == TreeFILE_NOT_FOUND || treeshr_errno == TreeFILE_NOT_FOUND))
    {
      status = TreeCallHook(RetrieveTree, info,0);
-     if (status == TreeNORMAL)
+     if (status & 1)
        status = MapTree(tree, dblist->shotid, info, 0, parent == 0);
    }
    if (status == TreeNORMAL)
@@ -1214,10 +1214,10 @@ int       _TreeOpenEdit(void **dbid, char *tree_in, int shot_in)
         info->treenam = strcpy(malloc(strlen(tree)+1),tree);
 	info->shot = (*dblist)->shotid;
         status = MapTree(tree, (*dblist)->shotid, info, 1, 1);
-        if (status == TreeFAILURE && treeshr_errno == TreeFILE_NOT_FOUND)
+        if (!(status & 1) && (status == TreeFILE_NOT_FOUND || treeshr_errno == TreeFILE_NOT_FOUND))
         {
           status = TreeCallHook(RetrieveTree, info,0);
-          if (status == TreeNORMAL)
+          if (status & 1)
             status = MapTree(tree, (*dblist)->shotid, info, 1, 1);
         }
         if (status & 1)
