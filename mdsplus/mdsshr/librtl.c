@@ -19,7 +19,7 @@
 #include <math.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.175 $ $Date: 2008/07/15 15:47:08 $ $Name:  $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.176 $ $Date: 2008/08/28 18:00:26 $ $Name:  $";
 
 #ifndef HAVE_VXWORKS_H
 STATIC_CONSTANT _int64 addin = LONG_LONG_CONSTANT(0x7c95674beb4000);
@@ -1504,17 +1504,13 @@ int LibConvertDateString(char *asc_time, _int64 *qtime)
 #else
     tmp = strptime(asc_time, "%d-%b-%Y %H:%M:%S", &tm);
 #endif
-    if (tmp) {
-      tm.tm_isdst=-1;
-      tim = mktime(&tm);
-      if ((int)tim == -1) return 0;
+    tm.tm_isdst=-1;
+    tim = mktime(&tm);
+    if ((int)tim == -1) return 0;
 #if defined(HAVE_WINDOWS_Hxxxxx)
-      _tzset();
-      tim -= _timezone;
+    _tzset();
+    tim -= _timezone;
 #endif
-    }
-    else
-      tim = 0;
 }
 #else
     tim = 0; /*It is vxWorks */
