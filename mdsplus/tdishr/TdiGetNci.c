@@ -42,7 +42,7 @@
 #include "tdirefstandard.h"
 #include "tdinelements.h"
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiGetNci.c,v $ $Revision: 1.24 $ $Date: 2006/07/24 20:31:47 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiGetNci.c,v $ $Revision: 1.25 $ $Date: 2008/10/16 20:32:30 $";
 
 extern unsigned short OpcVector;
 
@@ -244,12 +244,17 @@ unsigned short                  maxlen = 0;
 		if (status & 1) status = TdiUpcase(&tmp, &tmp MDS_END_ARG);
 		if (status & 1) {
 		struct descriptor	allow = *tmp.pointer;
+		int length;
 		struct descriptor	usage = {0,DTYPE_T,CLASS_S,0};
 		int	nallow;
 			N_ELEMENTS(tmp.pointer, nallow);
+			length=allow.length;
 			allow.class = CLASS_S;
-			for (; --nallow >= 0; allow.pointer += allow.length) {
-			struct usage_item	*puse = &usage_table[sizeof(usage_table)/sizeof(usage_table[0])];
+			for (; --nallow >= 0; allow.pointer += length) {
+			  struct usage_item	*puse = &usage_table[sizeof(usage_table)/sizeof(usage_table[0])];
+			  allow.length=length;
+			  while(((char *)allow.pointer)[allow.length-1]==' ')
+			    allow.length--;
 				for (; --puse >= &usage_table[0];) {
 					usage.length = (unsigned short)strlen(usage.pointer = puse->usage_name);
 					if (StrCompare(&allow, &usage) == 0) {
