@@ -38,7 +38,7 @@ int TreeDoMethod( nid_dsc, method_dsc [,args]...)
 #include <strroutines.h>
 #include <mds_stdarg.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeDoMethod.c,v $ $Revision: 1.16 $ $Date: 2006/09/20 17:30:43 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeDoMethod.c,v $ $Revision: 1.17 $ $Date: 2008/11/03 19:29:33 $";
 
 #define  count(num) va_start(incrmtr, method_ptr); \
                      for (num=2; (num < 256) && (va_arg(incrmtr, struct descriptor *) != MdsEND_ARG);  num++)
@@ -109,6 +109,31 @@ int _TreeDoMethod(void *dbid, struct descriptor *nid_dsc, struct descriptor *met
     conglom_ptr = (struct descriptor_conglom *) xd.pointer;
     if (conglom_ptr->dtype != DTYPE_CONGLOM)
       return TreeNOT_CONGLOM;
+    if (conglom_ptr->image && conglom_ptr->image->length == strlen("__python__") && strncmp(conglom_ptr->image->pointer,"__python__",strlen("__python__"))==0) {
+      /**** Try python class ***/
+      struct descriptor exp = {0, DTYPE_T, CLASS_D, 0};
+      STATIC_CONSTANT DESCRIPTOR(open,"PyDoMethod(");
+      STATIC_CONSTANT DESCRIPTOR(close,"$)");
+      STATIC_CONSTANT DESCRIPTOR(arg,"$,");
+      STATIC_CONSTANT DESCRIPTOR(tdishr,"TdiShr");
+      STATIC_CONSTANT DESCRIPTOR(tdiexecute,"TdiExecute");
+      StrCopyDx(&exp, &open);
+      for (i=1;i<nargs-1;i++) StrAppend(&exp,&arg);
+      StrAppend(&exp,&close);
+      status = LibFindImageSymbol(&tdishr,&tdiexecute,&addr);
+      if (status & 1) {
+	for (i=nargs;i>0;i--) arglist[i+1] = arglist[i];
+	nargs += 2;
+	arglist[0] = (void *)nargs;
+	arglist[1] = &exp;
+	arglist[nargs] = MdsEND_ARG;
+	status = (int)LibCallg(arglist,addr);
+	if (status == TdiUNKNOWN_VAR)
+	  status = TreeNOMETHOD;
+      }
+      StrFree1Dx(&exp);
+      return status;
+    }   
     StrConcat(&method, conglom_ptr->model, &underunder, method_ptr MDS_END_ARG);
     for (i=0;i<method.length;i++) method.pointer[i] = __tolower(method.pointer[i]);
     /*
