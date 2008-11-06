@@ -1,11 +1,12 @@
 #include <STATICdef.h>
+#include <config.h>
 #include <stdlib.h>
 #include <string.h>
 #include <strroutines.h>
 #include <treeshr.h>
 #include "treeshrp.h"
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeFindNode.c,v $ $Revision: 1.36 $ $Date: 2008/11/05 15:15:32 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeFindNode.c,v $ $Revision: 1.37 $ $Date: 2008/11/06 17:02:52 $";
 
 extern void *DBID;
 

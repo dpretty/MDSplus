@@ -46,7 +46,7 @@ extern char *index(char *str,char c);
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.95 $ $Date: 2008/08/21 12:57:59 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.96 $ $Date: 2008/11/06 17:02:52 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
@@ -133,7 +133,7 @@ static char *ReplaceAliasTrees(char *tree_in)
   return ans;
 }
     
-int _TreeOpen(void **dbid, char *tree_in, int shot_in, int read_only_flag)
+EXPORT int _TreeOpen(void **dbid, char *tree_in, int shot_in, int read_only_flag)
 {
   int       status = TreeFAILURE;
   int       shot;
