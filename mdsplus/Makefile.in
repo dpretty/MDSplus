@@ -1,4 +1,4 @@
-#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.57 $
+#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.58 $
 # @configure_input@
 prefix=@prefix@
 SHELL=/bin/sh
@@ -21,6 +21,8 @@ PARTS = \
         xmdsshr \
 	xtreeshr \
 	cacheshr \
+	mdsobjects/cpp \
+	rtevents \
         @MDSTCPIP@ \
         dwscope \
         mdslibidl \
