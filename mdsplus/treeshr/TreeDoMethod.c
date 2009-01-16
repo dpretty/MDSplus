@@ -38,7 +38,7 @@ int TreeDoMethod( nid_dsc, method_dsc [,args]...)
 #include <strroutines.h>
 #include <mds_stdarg.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeDoMethod.c,v $ $Revision: 1.17 $ $Date: 2008/11/03 19:29:33 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeDoMethod.c,v $ $Revision: 1.18 $ $Date: 2009/01/16 19:11:44 $";
 
 #define  count(num) va_start(incrmtr, method_ptr); \
                      for (num=2; (num < 256) && (va_arg(incrmtr, struct descriptor *) != MdsEND_ARG);  num++)
@@ -110,6 +110,7 @@ int _TreeDoMethod(void *dbid, struct descriptor *nid_dsc, struct descriptor *met
     if (conglom_ptr->dtype != DTYPE_CONGLOM)
       return TreeNOT_CONGLOM;
     if (conglom_ptr->image && conglom_ptr->image->length == strlen("__python__") && strncmp(conglom_ptr->image->pointer,"__python__",strlen("__python__"))==0) {
+      void *dbid=DBID;
       /**** Try python class ***/
       struct descriptor exp = {0, DTYPE_T, CLASS_D, 0};
       STATIC_CONSTANT DESCRIPTOR(open,"PyDoMethod(");
@@ -128,10 +129,22 @@ int _TreeDoMethod(void *dbid, struct descriptor *nid_dsc, struct descriptor *met
 	arglist[1] = &exp;
 	arglist[nargs] = MdsEND_ARG;
 	status = (int)LibCallg(arglist,addr);
+	if (status & 1) {
+	  STATIC_CONSTANT DESCRIPTOR(getstat,"public _method_status");
+	  int stat;
+	  DESCRIPTOR_LONG(stat_d,&stat);
+	  arglist[0]=(void *)3;
+	  arglist[1]=&getstat;
+	  arglist[2]=&stat_d;
+	  arglist[3]=MdsEND_ARG;
+	  status = (int)LibCallg(arglist,addr);
+	  if (status & 1) status=stat;
+	}
 	if (status == TdiUNKNOWN_VAR)
 	  status = TreeNOMETHOD;
       }
       StrFree1Dx(&exp);
+      DBID=dbid;
       return status;
     }   
     StrConcat(&method, conglom_ptr->model, &underunder, method_ptr MDS_END_ARG);
