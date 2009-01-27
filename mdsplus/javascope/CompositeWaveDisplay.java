@@ -1,4 +1,4 @@
-/* $Id: CompositeWaveDisplay.java,v 1.34 2006/11/22 14:57:00 manduchi Exp $ */
+/* $Id: CompositeWaveDisplay.java,v 1.35 2009/01/27 18:10:12 manduchi Exp $ */
 import java.applet.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -915,7 +915,7 @@ public class CompositeWaveDisplay extends JApplet implements WaveContainerListen
 		        wi.EvaluateOthers();
 		        if(wi.error != null)
 		            throw(new IOException(wi.error));
-		        w.Update(wi.frames);
+		        w.Update(wi.getFrames());
             }
         }
         catch(Exception e)
