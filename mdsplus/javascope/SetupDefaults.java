@@ -1,4 +1,4 @@
-/* $Id: SetupDefaults.java,v 1.39 2006/06/19 13:54:24 manduchi Exp $ */
+/* $Id: SetupDefaults.java,v 1.40 2009/01/27 18:21:39 manduchi Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.util.*;
@@ -448,7 +448,7 @@ public class SetupDefaults extends JDialog implements ActionListener
 	    y_curr_lines_grid = Grid.MAX_GRID;
 	  y_grid_lines.setText(""+y_curr_lines_grid);
 
-	  def_vals.is_evaluated = false;
+	  def_vals.setIsEvaluated(false);
     }
 
 
