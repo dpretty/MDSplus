@@ -10,7 +10,7 @@
 #include <tdimessages.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiDecompile.c,v $ $Revision: 1.13 $ $Date: 2007/04/25 20:04:24 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiDecompile.c,v $ $Revision: 1.14 $ $Date: 2009/01/28 21:19:36 $";
 
 unsigned int TdiDECOMPILE_MAX = 0xffff;
 
@@ -537,6 +537,13 @@ char n1c;
 			t2.dtype = DTYPE_T;
 			status = StrConcat(out_ptr, out_ptr, &BUILD_EVENT, &t2, &CLOSE_EVENT MDS_END_ARG);
 			break;
+		case DTYPE_POINTER : {
+			char outstr[256];
+                        struct descriptor out={0,DTYPE_T,CLASS_S,outstr};
+			out.length=sprintf(outstr,"Pointer(%p)",*(void **)in_ptr->pointer);
+			status = StrAppend(out_ptr,&out);
+			break;
+			}
 		}
 		break;
 
