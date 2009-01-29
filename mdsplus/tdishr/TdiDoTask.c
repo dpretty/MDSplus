@@ -27,7 +27,7 @@ typedef struct {int lo; unsigned int hi;} quadw;
 #include <mdsshr.h>
 #include <treeshr.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiDoTask.c,v $ $Revision: 1.10 $ $Date: 2007/04/25 20:04:24 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiDoTask.c,v $ $Revision: 1.11 $ $Date: 2009/01/29 15:13:25 $";
 
 extern int TdiTaskOf();
 extern int TdiGetFloat();
@@ -71,7 +71,7 @@ STATIC_ROUTINE int Doit(struct descriptor_routine	*ptask, struct descriptor_xd *
       nid_dsc.pointer = (char *)&nid;
       status = TdiData(pmethod->method, &method_d MDS_END_ARG);
       if (status & 1) status = TdiGetNid(pmethod->object, &nid);
-      arglist[0] = (int *)ndesc;
+      arglist[0] = (int *)(long)ndesc;
       arglist[1] = (int *)&nid_dsc;
       arglist[2] = (int *)&method_d;
 
@@ -79,7 +79,7 @@ STATIC_ROUTINE int Doit(struct descriptor_routine	*ptask, struct descriptor_xd *
       for (j = 3; j < ndesc; ++j) arglist[j] = (int *)pmethod->arguments[j-3];
 	  arglist[ndesc] = MdsEND_ARG;
       if (status & 1) {
-	    status = (int)LibCallg(arglist, TreeDoMethod);
+	    status = (long)LibCallg(arglist, TreeDoMethod);
 	    status = TdiPutLong(&status, out_ptr);
       }
       StrFree1Dx(&method_d);

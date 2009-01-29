@@ -29,7 +29,7 @@
 #include <mdsshr.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiCall.c,v $ $Revision: 1.16 $ $Date: 2009/01/28 21:19:36 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiCall.c,v $ $Revision: 1.17 $ $Date: 2009/01/29 15:13:25 $";
 
 extern unsigned short OpcDescr;
 extern unsigned short OpcRef;
@@ -142,7 +142,7 @@ unsigned char			origin[255];
 	MdsFree1Dx(&entry, NULL);
 	MdsFree1Dx(&image, NULL);
 
-	newdsc[0] = (struct descriptor *)(narg-2);
+        newdsc[0] = (struct descriptor *)(long)(narg-2);
 	for (j = 2; j < narg && status & 1; ++j) {
 		for (pfun = (struct descriptor_function *)list[j];
                              pfun && pfun->dtype == DTYPE_DSC;) 

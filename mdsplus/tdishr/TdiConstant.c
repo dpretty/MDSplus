@@ -11,11 +11,11 @@
 #include <mdsshr.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiConstant.c,v $ $Revision: 1.5 $ $Date: 2003/11/17 21:21:21 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiConstant.c,v $ $Revision: 1.6 $ $Date: 2009/01/29 15:13:25 $";
 
 TdiRefStandard(Tdi1Constant)
 
-	status = MdsCopyDxXd((struct descriptor *)(*TdiRefFunction[opcode].f3)(), out_ptr);
+	status = MdsCopyDxXd((struct descriptor *)(long)(*TdiRefFunction[opcode].f3)(), out_ptr);
 	return status;
 }
 /*------------------------------------------------

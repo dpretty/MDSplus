@@ -14,12 +14,13 @@
 #include <stdlib.h>
 #include <mdsdescrip.h>
 #include <mdsshr.h>
+#include <string.h>
 #include "tdirefcat.h"
 #include "tdireffunction.h"
 #include "tdirefstandard.h"
 #include <libroutines.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSame.c,v $ $Revision: 1.7 $ $Date: 2007/11/19 20:03:53 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSame.c,v $ $Revision: 1.8 $ $Date: 2009/01/29 15:13:25 $";
 
 extern int Tdi3undef();
 extern int TdiGetArgs();

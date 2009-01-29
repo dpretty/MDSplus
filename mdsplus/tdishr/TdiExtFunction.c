@@ -35,7 +35,7 @@
 #include <mds_stdarg.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiExtFunction.c,v $ $Revision: 1.9 $ $Date: 2003/11/17 21:21:21 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiExtFunction.c,v $ $Revision: 1.10 $ $Date: 2009/01/29 15:13:25 $";
 
 extern unsigned short OpcDescr;
 extern unsigned short OpcFun;
@@ -112,7 +112,7 @@ int                             geterror = 0;
 	Requires: image found and routine symbol found.
 	**********************************************/
  if (status & 1) {
-	new[0] = (struct descriptor *)(narg-1);
+	new[0] = (struct descriptor *)(long)(narg-1);
 	new[narg-1] = (struct descriptor *)out_ptr;
 	for (j = 2; j < narg && status & 1; ++j) {
 		pfun = (struct descriptor_function *)(new[j-1] = list[j]);
@@ -155,7 +155,7 @@ ident:
 	Same form as system calls.
 	Watch, may not be XD.
 	*************************/
-	if (status & 1) status = LibCallg(&new[0], routine);
+	if (status & 1) status = (long)LibCallg(&new[0], routine);
 
 	for (; --ntmp >= 0;) MdsFree1Dx(&tmp[ntmp], NULL);
  }
