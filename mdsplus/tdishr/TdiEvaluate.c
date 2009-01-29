@@ -22,7 +22,7 @@ RULES OF THE GAME:
 #include <stdlib.h>
 #include <string.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiEvaluate.c,v $ $Revision: 1.6 $ $Date: 2003/11/17 21:21:21 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiEvaluate.c,v $ $Revision: 1.7 $ $Date: 2009/01/29 21:47:08 $";
 
 STATIC_CONSTANT struct descriptor missing = {0,DTYPE_MISSING,CLASS_S,0};
 
@@ -163,9 +163,13 @@ WARNING falls through if an XD but not DSC of usable data (no known examples).
 		status = -1;
 		break;
 	case CLASS_APD :
+	  if (list[0]->dtype == DTYPE_DICTIONARY || list[0]->dtype == DTYPE_TUPLE || list[0]->dtype == DTYPE_LIST) {
+	    status = -1;
+	  } else {
 		status = Tdi1Vector(0, (int)((struct descriptor_a *)list[0])->arsize/(int)list[0]->length,
 			list[0]->pointer, out_ptr);
 		if (status & 1) status = TdiImpose(list[0], out_ptr);
+	  }
 		break;
 	default :
 		status = TdiINVCLADSC;
