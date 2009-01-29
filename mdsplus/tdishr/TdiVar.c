@@ -51,7 +51,7 @@
 #include <string.h>
 #include <librtl_messages.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiVar.c,v $ $Revision: 1.18 $ $Date: 2009/01/29 21:47:08 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiVar.c,v $ $Revision: 1.19 $ $Date: 2009/01/29 21:53:30 $";
 
 extern unsigned short OpcEquals, OpcEqualsFirst;
 extern unsigned short OpcFun;
@@ -289,7 +289,7 @@ block_type			*block_ptr;
 int				size = 0, status;
 STATIC_CONSTANT int zero = 0;
  if (ident_ptr->dtype == DTYPE_DSC)
-   return TdiPutIdent(ident_ptr->pointer,data_ptr);
+   return TdiPutIdent((struct descriptor_r *)ident_ptr->pointer,data_ptr);
   LockTdiMutex(&lock,&lock_initialized);
 
 	/************************************
