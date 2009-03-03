@@ -23,7 +23,7 @@
 
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.47 $ $Date: 2009/02/11 14:08:25 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.48 $ $Date: 2009/03/03 20:24:26 $";
 
 static _int64 ViewDate = -1;
 int TreeOpenDatafileR(TREE_INFO *info);
@@ -108,7 +108,7 @@ int _TreeGetRecord(void *dbid, int nid_in, struct descriptor_xd *dsc)
 		   status = TreeGetDsc(info,attributes.facility_offset[STANDARD_RECORD_FACILITY],
 				       attributes.facility_length[STANDARD_RECORD_FACILITY],dsc);
 		 } else if ( status & 1 && attributes.facility_offset[SEGMENTED_RECORD_FACILITY] != -1) {
-		   status = TreeGetSegmentedRecord(nid_in,dsc);
+		   status = _TreeGetSegmentedRecord(dbid,nid_in,dsc);
 		 } else
 		   status = TreeBADRECORD;
 	       }
