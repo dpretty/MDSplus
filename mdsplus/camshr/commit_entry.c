@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: commit_entry.c,v 1.1 2002/09/10 16:06:59 twf Exp $
+//	$Id: commit_entry.c,v 1.2 2009/03/11 18:05:03 twf Exp $
 //-------------------------------------------------------------------------
 
 //-------------------------------------------------------------------------
@@ -53,11 +53,11 @@ int commit_entry( int dbType )
 
 	switch( dbType ) {
 		case CTS_DB:
-			(struct MODULE *)dbptr = CTSdb;
+			dbptr = (void *)CTSdb;
 			break;
 
 		case CRATE_DB:
-			(struct CRATE  *)dbptr = CRATEdb;
+			dbptr = (void *)CRATEdb;
 			break;
 	}
 

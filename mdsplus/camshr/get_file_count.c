@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: get_file_count.c,v 1.1 2002/09/10 16:06:59 twf Exp $
+//	$Id: get_file_count.c,v 1.2 2009/03/11 18:05:03 twf Exp $
 //-------------------------------------------------------------------------
 
 //-------------------------------------------------------------------------
@@ -59,14 +59,14 @@ int get_file_count( int dbType )
 
 	switch( dbType ) {
 		case CTS_DB:
-			(struct MODULE *)dbptr = CTSdb;
+			dbptr = (void *)CTSdb;
 			entrySize              = MODULE_ENTRY;
 			FileIsMapped           = &CTSdbFileIsMapped;
 			sprintf(dbFileName, "%s", CTS_DB_FILE);
 			break;
 
 		case CRATE_DB:
-			(struct CRATE *)dbptr  = CRATEdb;
+			dbptr  = (void *)CRATEdb;
 			entrySize              = CRATE_ENTRY;
 			FileIsMapped           = &CRATEdbFileIsMapped;
 			sprintf(dbFileName, "%s", CRATE_DB_FILE);

@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: add_entry.c,v 1.1 2002/09/10 16:06:59 twf Exp $
+//	$Id: add_entry.c,v 1.2 2009/03/11 18:05:03 twf Exp $
 //-------------------------------------------------------------------------
 
 //-------------------------------------------------------------------------
@@ -75,13 +75,13 @@ int add_entry( int dbType, char *newEntry )
 	// cull db specific info
 	switch( dbType ) {
 		case CTS_DB:
-			(struct MODULE *)dbptr = CTSdb;
-			entrySize              = MODULE_ENTRY;
+			dbptr = (void *)CTSdb;
+			entrySize = MODULE_ENTRY;
 			break;
 
 		case CRATE_DB:
-			(struct CRATE  *)dbptr = CRATEdb;
-			entrySize              = CRATE_ENTRY;
+			dbptr = (void *)CRATEdb;
+			entrySize = CRATE_ENTRY;
 			break;
 	}
 
