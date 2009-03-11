@@ -1,4 +1,4 @@
-/* $Id: MdsDataProvider.java,v 1.57 2009/01/27 18:27:18 manduchi Exp $ */
+/* $Id: MdsDataProvider.java,v 1.58 2009/03/11 10:57:17 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.*;
@@ -70,11 +70,20 @@ public class MdsDataProvider
                 Vector f_time = new Vector();
 
                 dim = new Dimension(width, height);
-                all_times = new float[n_frame];
-                for (i = 0; i < n_frame; i++)
+                if (in_x == null || in_x.length() == 0)
                 {
-                    all_times[i] = d.readFloat();
+                    all_times = new float[n_frame];                
+                    for (i = 0; i < n_frame; i++)
+                    {
+                        all_times[i] = d.readFloat();
+                    }
                 }
+                else
+                {
+                    all_times = MdsDataProvider.this.GetWaveData(in_x).
+                        GetFloatData();
+                }
+                
                 header_size = 16 + 4 * n_frame;
 
                 switch (pixel_size)
@@ -184,11 +193,17 @@ public class MdsDataProvider
                 ByteArrayInputStream b = new ByteArrayInputStream(buf);
                 DataInputStream d = new DataInputStream(b);
 
+                
                 if (buf == null)
                     throw (new IOException("Frames dimension not evaluated"));
 
                 int img_size = dim.width * dim.height * pixel_size / 8;
+                
                 d.skip(header_size + (st_idx + idx) * img_size);
+
+                if( d.available() < img_size )
+                    return null;
+                
 
                 b_img = new byte[img_size];
                 d.readFully(b_img);
@@ -196,8 +211,8 @@ public class MdsDataProvider
             }
             else
             {
-                //              we = new WaveformEvent(wave, "Loading frame "+idx+"/"+n_frames);
-                //              wave.dispatchWaveformEvent(we);
+                //we = new WaveformEvent(wave, "Loading frame "+idx+"/"+n_frames);
+                //wave.dispatchWaveformEvent(we);
                 if (idx == first_frame_idx && buf != null)
                     return buf;
                 b_img = MdsDataProvider.this.GetFrameAt(in_y, st_idx + idx);

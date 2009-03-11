@@ -1,4 +1,4 @@
-/* $Id: Waveform.java,v 1.82 2009/01/27 18:20:36 manduchi Exp $ */
+/* $Id: Waveform.java,v 1.83 2009/03/11 10:57:17 manduchi Exp $ */
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -649,7 +649,7 @@ public class Waveform
               }
               repaint();
               sendUpdateEvent();
-
+          
           }
           public void keyReleased(KeyEvent e)
           {}
@@ -1634,9 +1634,15 @@ public class Waveform
     if (execute_print) {
       return;
     }
+    
     Insets i = this.getInsets();
+    
     Dimension d = getSize();
     paint(g, d, NO_PRINT);
+    
+    if (mode == MODE_POINT && send_profile) 
+        sendProfileEvent();
+
   }
 
 

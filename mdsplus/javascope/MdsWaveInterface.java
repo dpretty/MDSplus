@@ -1,4 +1,4 @@
-/* $Id: MdsWaveInterface.java,v 1.46 2009/02/13 17:06:10 manduchi Exp $ */
+/* $Id: MdsWaveInterface.java,v 1.47 2009/03/11 10:57:17 manduchi Exp $ */
 import java.io.*;
 import java.awt.*;
 import java.util.*;
@@ -940,10 +940,6 @@ Fix bug : shot expression must be always evaluated.
                 return "xz(y)";
             case Signal.MODE_YZ:
                 return "yz(x)";
-            /*
-            case Signal.MODE_YX:
-                return "y & x";
-            */
             case Signal.MODE_IMAGE:
                 return "Image";
         }
@@ -956,10 +952,6 @@ Fix bug : shot expression must be always evaluated.
             return Signal.MODE_XZ;
         if (mode.equals("yz(x)"))
             return Signal.MODE_YZ;
-        /*
-        if (mode.equals("yz(x)"))
-            return Signal.MODE_YX;
-        */
         if (mode.equals("Image"))
             return Signal.MODE_IMAGE;
         return 0;

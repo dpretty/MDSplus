@@ -1,4 +1,4 @@
-/* $Id: MdsMessage.java,v 1.33 2006/11/22 14:57:00 manduchi Exp $ */
+/* $Id: MdsMessage.java,v 1.34 2009/03/11 10:57:17 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.*;
@@ -84,9 +84,6 @@ class MdsMessage extends Object
         status = 0;
         message_id = msgid;
 
-//Cesare 2004 la length e' la dimensione del body
-//se stringa e il numero di byte del dato elementare se array
-//      this.length = (short)body_size;
         this.length = Descriptor.getDataSize(dtype, body);
 
         this.nargs = nargs;
