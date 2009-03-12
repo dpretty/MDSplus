@@ -69,7 +69,8 @@
 #include <librtl_messages.h>
 #include <STATICdef.h>
 #include <mdstypes.h>
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: MdsCmprs.c,v $ $Revision: 1.25 $ $Date: 2007/12/26 18:51:02 $";
+#include <stdlib.h>
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: MdsCmprs.c,v $ $Revision: 1.26 $ $Date: 2009/03/12 20:29:45 $";
 
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
 #define MAXX 1024		/*length of longest run allowed*/

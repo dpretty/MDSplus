@@ -1,5 +1,5 @@
 #include <STATICdef.h>
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.67 $ $Date: 2008/03/18 19:05:41 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.68 $ $Date: 2009/03/12 20:29:06 $";
 
 #ifndef HAVE_VXWORKS_H
 #include <config.h>
@@ -355,8 +355,8 @@ int       TreeExpandNodes(PINO_DATABASE *db_ptr, int num_fixup, NODE ***fixup_no
     int       uic_code = JPI$_UIC;
     lib$getjpi(&uic_code, 0, 0, &empty_nci.nci$l_owner_identifier, 0, 0);
     */
-    int offset1=sizeof(NODE)*1;
-    int offset2=sizeof(NODE)*2;
+    char *offset1=(char *)(sizeof(NODE)*1);
+    char *offset2=(char *)(sizeof(NODE)*2);
     link_it(empty_node.parent,offset2,offset1);
     link_it(empty_node.INFO.TREE_INFO.child,offset1,offset2);
     empty_node_array = (NODE *) malloc(empty_node_size);
@@ -502,7 +502,7 @@ int _TreeAddConglom(void *dbid, char *path, char *congtype, int *nid)
     arglist[2] = &statdsc;
     arglist[3] = MdsEND_ARG;
     DBID = dbid;
-    status = (int)LibCallg(arglist,addr);
+    status = (char *)LibCallg(arglist,addr) - (char *)0;
     DBID = old_dbid;
     if (status & 1)
     {
