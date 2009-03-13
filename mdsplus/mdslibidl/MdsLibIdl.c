@@ -14,7 +14,7 @@ extern int TdiCvt();
 extern int TdiCompile();
 extern int TdiDebug();
 
-static char *cvsrev = "@(#)$RCSfile: MdsLibIdl.c,v $ $Revision: 1.29 $ $Date: 2004/05/21 15:42:35 $";
+static char *cvsrev = "@(#)$RCSfile: MdsLibIdl.c,v $ $Revision: 1.30 $ $Date: 2009/03/13 19:18:47 $";
 
 #ifdef _WINDOWS
 #define BlockSig(a)
@@ -243,7 +243,7 @@ int IdlMdsValue(int argc, void **argv)
   arglist[argidx++] = (void *)&tmp;
   arglist[argidx++] = MdsEND_ARG;
   *(long *)&arglist[0] = argidx; 
-  status = LibCallg(arglist,TdiExecute);
+  status = (char *)LibCallg(arglist,TdiExecute) - (char *)0;
   if (status & 1)
   {
     status = TdiData(tmp.pointer,&mdsValueAnswer MDS_END_ARG);
@@ -397,7 +397,7 @@ int IdlMdsPut(int argc, void **argv)
     arglist[argidx++] = (void *)&tmp;
     arglist[argidx++] = MdsEND_ARG;
     *(int *)&arglist[0] = argidx; 
-    status = LibCallg(arglist,TdiCompile);
+    status = (char *)LibCallg(arglist,TdiCompile) - (char *)0;
     if (status & 1)
     {
       status = TreePutRecord(nid,(struct descriptor *)&tmp,0);
