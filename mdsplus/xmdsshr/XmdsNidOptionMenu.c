@@ -76,7 +76,7 @@ struct dsc$descriptor_xd *XmdsNidOptionMenuIdxGetXd(Widget w, int selected);
 #include <xmdsshr.h>
 #include <mds_stdarg.h>
 
-static char *cvsrev = "@(#)$RCSfile: XmdsNidOptionMenu.c,v $ $Revision: 1.8 $ $Date: 2005/07/26 15:22:55 $";
+static char *cvsrev = "@(#)$RCSfile: XmdsNidOptionMenu.c,v $ $Revision: 1.9 $ $Date: 2009/03/13 16:03:20 $";
 
 typedef struct _Resources
 {
@@ -139,7 +139,7 @@ Widget XmdsCreateNidOptionMenu(Widget parent,String name,ArgList args,Cardinal a
 	arglist[0].value = (long) *s;
 	arglist[1].value = (long) xd;
 	b = XmCreatePushButtonGadget(info->pulldown,"",arglist,XtNumber(arglist));
-	XtAddCallback(b,XmNactivateCallback,(XtCallbackProc)ButtonPushed,(XtPointer)idx);
+	XtAddCallback(b,XmNactivateCallback,(XtCallbackProc)ButtonPushed,(XtPointer)(idx + (char *)0));
       }
     }
   }
