@@ -1,4 +1,4 @@
-static char *cvsrev = "@(#)$RCSfile: bxutils-uil.c,v $ $Revision: 1.4 $ $Date: 2002/10/25 16:48:22 $"; 
+static char *cvsrev = "@(#)$RCSfile: bxutils-uil.c,v $ $Revision: 1.5 $ $Date: 2009/03/13 19:37:12 $"; 
 /*
  * WARNING: This file is overwritten at code generation time.
  * Any changes to this file will be lost.
@@ -454,7 +454,7 @@ static void copyWcsToMbs
     }
 
     tmp = tbuf[lenToConvert];
-    tbuf[lenToConvert] = (wchar_t) NULL;
+    tbuf[lenToConvert] = 0; /* (wchar_t) NULL; */
     numCvt = doWcstombs(mbs, tbuf, lenToConvert);
     tbuf[lenToConvert] = tmp;
     
