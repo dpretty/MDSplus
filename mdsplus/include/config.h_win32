@@ -1,5 +1,5 @@
 /* include/config.h.in.  Generated automatically from configure.in by autoheader.  */
-/* @(#)$RCSfile: config.h_win32,v $ $Revision: 1.2 $ */
+/* @(#)$RCSfile: config.h_win32,v $ $Revision: 1.3 $ */
 #ifndef _CONFIG_INCLUDED
 
 /* Define to empty if the keyword does not work.  */
@@ -94,6 +94,9 @@ struct timezone { short timezone; };
 
 /* Define if you have the sigvector function.  */
 #undef HAVE_SIGVECTOR
+
+/* Define if you have the getaddrinfo function. */
+#define HAVE_GETADDRINFO
 
 /* Define if you have the socket function.  */
 #undef HAVE_SOCKET
