@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.217 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.218 $
 AC_INIT()
 
 #AC_CONFIG_HEADER(include/config.h)
@@ -221,11 +221,11 @@ CAMSHR=""
 CFLAGS="$CFLAGS $GCCPROF $MEMCHK -I\$(top_srcdir)/include"
 FFLAGS="$FFLAGS  -I\$(top_srcdir)/include"
 
-if test "$prefix" = "NONE"
+if test "$exec_prefix" = "NONE"
 then
-  : ${uiddir:=$ac_default_prefix/uid}
+  : ${uiddir:=$ac_default_exec_prefix/uid}
 else
-  : ${uiddir:=$prefix/uid}
+  : ${uiddir:=$exec_prefix/uid}
 fi
 MAKEUIDDIR="\$(top_srcdir)/uid/"
 MAKESHLIBDIR="\$(top_srcdir)/lib/"
