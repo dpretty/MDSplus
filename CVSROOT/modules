@@ -25,8 +25,8 @@
 # can be useful for creating a module that consists of many directories
 # spread out over the entire source repository.
 
-CVSROOT	-i mkmodules CVSROOT
-modules -i mkmodules CVSROOT modules
+CVSROOT	CVSROOT
+modules CVSROOT modules
 tdishr mdsplus/tdishr
 include mdsplus/include
 mdsshr mdsplus/mdsshr
