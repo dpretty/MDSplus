@@ -1,5 +1,5 @@
 #include <STATICdef.h>
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.68 $ $Date: 2009/03/12 20:29:06 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.69 $ $Date: 2009/03/31 17:49:20 $";
 
 #ifndef HAVE_VXWORKS_H
 #include <config.h>
@@ -109,7 +109,7 @@ int       _TreeAddNode(void *dbid, char *name, int *nid_out, char usage)
   /****************************************************
     make sure that the node is not already there
   *****************************************************/
-    status = TreeFindNode(upcase_name, &nid);
+    status = _TreeFindNode(dbid,upcase_name, &nid);
     if (status & 1)
       status = TreeALREADY_THERE;
     else if (status == TreeNNF)
