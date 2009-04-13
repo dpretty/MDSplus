@@ -44,7 +44,7 @@
 #include "treeshrp.h"
 #include <ncidef.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.39 $ $Date: 2009/03/12 20:29:06 $";
+static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.40 $ $Date: 2009/04/13 19:24:13 $";
 
 extern void *DBID;
 
@@ -684,11 +684,12 @@ static int SetNodeParentState(PINO_DATABASE *db, NODE *node, NCI *nci, unsigned 
 
 int TreeLockNci(TREE_INFO *info, int readonly, int nodenum, int *deleted)
 {
-  return MDS_IO_LOCK(readonly ? info->nci_file->get : info->nci_file->put,nodenum * 42,42,readonly ? 1 : 2,deleted);
+  return MDS_IO_LOCK(readonly ? info->nci_file->get : info->nci_file->put,
+	  nodenum * 42,42,readonly ? MDS_IO_LOCK_RD : MDS_IO_LOCK_WRT,deleted);
 }
 
 int TreeUnLockNci(TREE_INFO *info, int readonly, int nodenum)
 {
-  return MDS_IO_LOCK(readonly ? info->nci_file->get : info->nci_file->put,nodenum * 42,42,0,0);
+  return MDS_IO_LOCK(readonly ? info->nci_file->get : info->nci_file->put,nodenum * 42,42,MDS_IO_LOCK_NONE,0);
 }
 

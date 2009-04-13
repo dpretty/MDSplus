@@ -1,5 +1,5 @@
 #include <STATICdef.h>
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.70 $ $Date: 2009/04/13 14:28:48 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.71 $ $Date: 2009/04/13 19:24:13 $";
 
 #ifndef HAVE_VXWORKS_H
 #include <config.h>
@@ -749,7 +749,7 @@ int _TreeWriteTree(void **dbid, char *exp_ptr, int shotid)
 	if (status == -1) {status=0; goto error_exit;}
 	info_ptr->channel = MDS_IO_OPEN(info_ptr->filespec,O_RDWR,0);
 	if (info_ptr->channel == -1) {status=0; goto error_exit;}
-	status=MDS_IO_LOCK(info_ptr->channel,1,1,10,0);
+	status=MDS_IO_LOCK(info_ptr->channel,1,1,MDS_IO_LOCK_RD | MDS_IO_LOCK_NOWAIT,0);
 	status=1;
 	
 	(*dblist)->modified = 0;	

@@ -46,7 +46,7 @@ extern char *index(char *str,char c);
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.98 $ $Date: 2009/04/13 14:29:27 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.99 $ $Date: 2009/04/13 19:24:13 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
@@ -918,7 +918,7 @@ static int  OpenOne(TREE_INFO *info, char *tree, int shot, char *type,int new,ch
   }
   if (fd != -1 && is_tree && edit_flag)
   {
-    if (!(MDS_IO_LOCK(fd,1,1,10,0) & 1))
+    if (!(MDS_IO_LOCK(fd,1,1,MDS_IO_LOCK_RD | MDS_IO_LOCK_NOWAIT,0) & 1))
     {
       MDS_IO_CLOSE(fd);
       fd = -2;
