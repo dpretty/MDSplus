@@ -46,7 +46,7 @@ extern char *index(char *str,char c);
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.97 $ $Date: 2009/03/12 20:29:06 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.98 $ $Date: 2009/04/13 14:29:27 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
@@ -1020,9 +1020,7 @@ static int MapFile(int fd, TREE_INFO *info, int edit_flag, int nomap)
   {
     if (nomap)
     {
-      MDS_IO_READ(fd,(void *)info->section_addr[0], 512 * info->alq);
-      //      MDS_IO_CLOSE(fd);
-      status = 1;
+		status = (MDS_IO_READ(fd,(void *)info->section_addr[0], 512 * info->alq) == (512*info->alq)) ? TreeNORMAL : TreeFAILURE;
     }
 #if (!defined (HAVE_WINDOWS_H) && !defined(HAVE_VXWORKS_H))
     else
@@ -1299,7 +1297,7 @@ int       _TreeOpenNew(void **dbid, char *tree_in, int shot_in)
         {
           char *resnam = 0;
           MDS_IO_CLOSE(fd);
-          info->channel=0;
+          info->channel=-2;
           fd = OpenOne(info, tree, (*dblist)->shotid, TREE_NCIFILE_TYPE, 1, &resnam, 0, 0);
           if (resnam)
             free(resnam);
