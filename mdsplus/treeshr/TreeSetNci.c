@@ -44,7 +44,7 @@
 #include "treeshrp.h"
 #include <ncidef.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.40 $ $Date: 2009/04/13 19:24:13 $";
+static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.41 $ $Date: 2009/04/21 16:19:28 $";
 
 extern void *DBID;
 
@@ -425,6 +425,7 @@ int TreePutNci(TREE_INFO *info, int node_num, NCI *nci, int flush)
 
   else
     memcpy(info->edit->nci + (node_num - info->edit->first_in_mem),nci,sizeof(*nci));
+  TreeUnLockNci(info,0,node_num);
   return status;
 }
 
