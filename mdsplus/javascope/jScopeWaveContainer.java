@@ -1,4 +1,4 @@
-/* $Id: jScopeWaveContainer.java,v 1.57 2009/03/11 10:57:17 manduchi Exp $ */
+/* $Id: jScopeWaveContainer.java,v 1.58 2009/04/28 15:40:29 manduchi Exp $ */
 import java.awt.Graphics;
 import java.awt.Component;
 import java.awt.Font;
@@ -777,8 +777,12 @@ remove 28/06/2005
                             WaveContainerEvent.START_UPDATE,
                             "Start Evaluate column " + (i + 1) + " row " +
                             (j + 1));
-                        dispatchWaveContainerEvent(wce);
-                        ( (MdsWaveInterface) wave_all[k].wi).StartEvaluate();
+                        try
+                        {
+                            dispatchWaveContainerEvent(wce);
+                            ( (MdsWaveInterface) wave_all[k].wi).StartEvaluate();
+                        }
+                        catch(Exception exc){}
                     }
                 }
             }
@@ -868,7 +872,7 @@ remove 28/06/2005
         }
         catch (Exception e)
         {
-            //e.printStackTrace();
+            e.printStackTrace();
             RepaintAllWave();
             //throw (e);
         }
