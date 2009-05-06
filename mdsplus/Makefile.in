@@ -1,4 +1,4 @@
-#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.60 $
+#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.61 $
 # @configure_input@
 prefix=@prefix@
 SHELL=/bin/sh
@@ -7,7 +7,8 @@ JAVA_APS = javamds \
 	   javascope \
            javatraverser \
 	   javadispatcher \
-	   javaclient
+	   javaclient \
+	   mdsobjects/java
 
 HDF5_APS = hdf5
 
