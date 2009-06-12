@@ -63,7 +63,7 @@ static int daylight = 0;
 #define LONG_LONG_CONSTANT(value) value##ll
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.87 $ $Date: 2009/06/11 15:42:05 $";
+static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.88 $ $Date: 2009/06/12 12:56:39 $";
 
 #ifdef min
 #undef min
@@ -427,6 +427,7 @@ static int PutDatafile(TREE_INFO *info, int nodenum, NCI *nci_ptr, struct descri
     {
       bitassign(1,nci_ptr->flags2,NciM_NON_VMS);
       status = TreeLockDatafile(info, 0, 0);
+      locked=1;
       eof = MDS_IO_LSEEK(info->data_file->put,0,SEEK_END);
       buffer = (char *)data_dsc_ptr->pointer->pointer;
       bptr = buffer + nci_ptr->DATA_INFO.DATA_LOCATION.record_length;
@@ -448,6 +449,7 @@ static int PutDatafile(TREE_INFO *info, int nodenum, NCI *nci_ptr, struct descri
       }
       bptr = buffer;
       status = TreeLockDatafile(info, 0, 0);
+      locked=1;
       eof = MDS_IO_LSEEK(info->data_file->put,0,SEEK_END);
       bytes_to_put = nci_ptr->DATA_INFO.DATA_LOCATION.record_length;
       while (bytes_to_put && (status & 1))
@@ -467,7 +469,6 @@ static int PutDatafile(TREE_INFO *info, int nodenum, NCI *nci_ptr, struct descri
     }
     if (status & 1)
     {
-      locked=1;
       status = (MDS_IO_WRITE(info->data_file->put,(void *) buffer,bptr - buffer) == (bptr - buffer))
                     ? TreeNORMAL : TreeFAILURE;
       if (status & 1)
