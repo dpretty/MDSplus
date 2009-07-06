@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: get_file_count.c,v 1.2 2009/03/11 18:05:03 twf Exp $
+//	$Id: get_file_count.c,v 1.3 2009/07/06 17:19:56 twf Exp $
 //-------------------------------------------------------------------------
 
 //-------------------------------------------------------------------------
@@ -49,7 +49,7 @@
 int get_file_count( int dbType )
 {
 	void 				 *dbptr;	// generic pointer to struct's
-	char 				 ch, dbFileName[16];
+	char 				 dbFileName[16];
 	int					 dbFileSize, entrySize, i, numOfEntries;
 	int 				 *FileIsMapped;
 	extern struct MODULE *CTSdb;
@@ -96,9 +96,9 @@ int get_file_count( int dbType )
 		if( (i + entrySize) > dbFileSize )	// make sure we don't fall off the end ...
 			break;
 
-		sprintf(&ch, "%.1s", (char *)(dbptr+i));
+		//		sprintf(&ch, "%.1s", (char *)(dbptr+i));
 
-		if( ch == ' ' )						// we're done, so out'a here
+		if( *(char *)(dbptr+i) == ' ' )						// we're done, so out'a here
 			break;
 
 		++numOfEntries;
