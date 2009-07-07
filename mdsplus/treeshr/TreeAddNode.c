@@ -1,5 +1,5 @@
 #include <STATICdef.h>
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.71 $ $Date: 2009/04/13 19:24:13 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.72 $ $Date: 2009/07/07 17:07:01 $";
 
 #ifndef HAVE_VXWORKS_H
 #include <config.h>
@@ -321,6 +321,7 @@ STATIC_ROUTINE int       TreeNewNode(PINO_DATABASE *db_ptr, NODE **node_ptrptr, 
   /***********************************
     Return the node
   ************************************/
+    memset(node_ptr,0,sizeof(*node_ptr));
 
     *node_ptrptr = node_ptr;
   }
