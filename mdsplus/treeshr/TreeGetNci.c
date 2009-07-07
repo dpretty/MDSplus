@@ -24,7 +24,7 @@
 
 extern int StrFree1Dx();
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.57 $ $Date: 2007/04/25 20:41:55 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.58 $ $Date: 2009/07/07 17:06:33 $";
 
 #ifndef HAVE_VXWORKS_H
 #define min(a,b) (((a) < (b)) ? (a) : (b))
@@ -735,8 +735,11 @@ int TreeGetNciW(TREE_INFO *info, int node_num, NCI *nci, unsigned int version)
     the attributes are just a memory reference
     away.
 		*********************************************/
+	  if (version == 0)
 
 		memcpy(nci,info->edit->nci +  node_num - info->edit->first_in_mem, sizeof(NCI));
+	  else
+	    status=TreeFAILURE;
 	}
 
 	return status;
