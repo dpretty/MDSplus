@@ -20,7 +20,7 @@
 #include <math.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.177 $ $Date: 2009/08/24 19:06:51 $ $Name:  $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.178 $ $Date: 2009/08/24 20:17:01 $ $Name:  $";
 int LibTimeToVMSTime(time_t *time_in,_int64 *time_out);  
 #ifndef HAVE_VXWORKS_H
 STATIC_CONSTANT _int64 addin = LONG_LONG_CONSTANT(0x7c95674beb4000);
@@ -315,7 +315,7 @@ int pthread_cond_timedwait(HANDLE *cond, HANDLE *mutex, int msec)
    return status;
 }
 
-int pthread_mutex_init(HANDLE *mutex)
+int pthread_mutex_init(HANDLE *mutex, void *dummy)
 {
   *mutex = CreateMutex(0,FALSE,NULL);
   return (*mutex == NULL);
@@ -333,7 +333,7 @@ void pthread_unlock_global_np()
   if (!global_mutex_initialized)
   {
     global_mutex_initialized = 1;
-    pthread_mutex_init(&global_mutex);
+    pthread_mutex_init(&global_mutex,NULL);
   }
   pthread_mutex_unlock(&global_mutex);
 
@@ -343,7 +343,7 @@ void pthread_lock_global_np()
   if (!global_mutex_initialized)
   {
     global_mutex_initialized = 1;
-    pthread_mutex_init(&global_mutex);
+    pthread_mutex_init(&global_mutex,NULL);
   }
   pthread_mutex_lock(&global_mutex);
 }
@@ -1000,7 +1000,7 @@ STATIC_ROUTINE void dlopen_lock()
   {
     dlopen_mutex_initialized = 1;
 #ifdef HAVE_WINDOWS_H
-	pthread_mutex_init(&dlopen_mutex);
+	pthread_mutex_init(&dlopen_mutex,NULL);
 #else
 	pthread_mutex_init(&dlopen_mutex, pthread_mutexattr_default);
 #endif
@@ -1016,7 +1016,7 @@ STATIC_ROUTINE void dlopen_unlock()
   {
     dlopen_mutex_initialized = 1;
 #ifdef HAVE_WINDOWS_H
-    pthread_mutex_init(&dlopen_mutex);
+    pthread_mutex_init(&dlopen_mutex,NULL);
 #else
     pthread_mutex_init(&dlopen_mutex, pthread_mutexattr_default);
 #endif
