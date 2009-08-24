@@ -23,12 +23,10 @@
 
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.49 $ $Date: 2009/04/21 16:19:28 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.50 $ $Date: 2009/08/24 19:07:05 $";
 
 static _int64 ViewDate = -1;
-int TreeOpenDatafileR(TREE_INFO *info);
 static int MakeNidsLocal(struct descriptor *dsc_ptr, unsigned char tree);
-int TreeGetDatafile(TREE_INFO *info_ptr, unsigned char *rfa, int *buffer_size, char *record, int *retsize,int *nodenum, unsigned char flags);
 
 int MdsSerializeDscIn(char *in, struct descriptor_xd *out_dsc_ptr);
 

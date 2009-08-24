@@ -45,7 +45,7 @@ extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
 extern char *MaskReplace();
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeDeletePulseFile.c,v $ $Revision: 1.15 $ $Date: 2007/02/12 20:32:11 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeDeletePulseFile.c,v $ $Revision: 1.16 $ $Date: 2009/08/24 19:07:05 $";
 
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
@@ -141,7 +141,6 @@ STATIC_ROUTINE int  TreeDeleteTreeFiles(char *tree, int shot)
     path = malloc(pathlen+1);
     for (itype=0;itype<3 && (status & 1);itype++)
     {
-      struct stat stat_info;
       char *sfile = 0;
       char *dfile = 0;
       char *type = types[itype];

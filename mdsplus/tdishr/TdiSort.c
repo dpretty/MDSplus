@@ -33,7 +33,7 @@
 #include <string.h>
 #include <mdstypes.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSort.c,v $ $Revision: 1.8 $ $Date: 2003/11/17 21:21:21 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSort.c,v $ $Revision: 1.9 $ $Date: 2009/08/24 19:07:20 $";
 
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 extern unsigned short OpcVector;
@@ -355,7 +355,7 @@ int				stack[64];
 		Choose an index between l and r.
 		***********************************/
 		ran = (ran * 211 + 1663) % 7875;
-                i = l + (r - l + 1) * ran / 7875; 
+                i = (int)(l + (r - l + 1) * ran / 7875); 
 		keep = *(ndx+i);
 		pkeep = pinput+len*keep;
 		*(ndx+i) = *(ndx+l);

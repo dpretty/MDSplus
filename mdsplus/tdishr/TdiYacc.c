@@ -53,10 +53,20 @@
 #include <tdimessages.h>
 #include <mds_stdarg.h>
 
-#ifdef HAVE_VXWORKS_H
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiYacc.c,v $ $Revision: 1.18 $ $Date: 2009/08/24 19:07:20 $";
+
+#ifdef ERROR
 #undef ERROR
 #endif
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiYacc.c,v $ $Revision: 1.17 $ $Date: 2006/12/11 16:34:34 $";
+#ifdef TEXT
+#undef TEXT
+#endif
+#ifdef CONST
+#undef CONST
+#endif
+#ifdef IN
+#undef IN
+#endif
 
 extern unsigned short
 	OpcAbort,
@@ -114,7 +124,7 @@ typedef union 	{struct marker mark;} YYSTYPE;
 #ifdef __cplusplus
 #  include <stdio.h>
 #  include <yacc.h>
-#endif	/* __cplusplus */ 
+#endif	/* __cplusplus */
 # define ERROR 257
 # define IDENT 258
 # define POINT 259
@@ -719,7 +729,7 @@ __YYSCLASS char * yyreds[] =
 };
 #endif /* YYDEBUG */
 #define YYFLAG  (-3000)
-/* @(#) $Revision: 1.17 $ */    
+/* @(#) $Revision: 1.18 $ */    
 
 /*
 ** Skeleton parser driver for yacc output
