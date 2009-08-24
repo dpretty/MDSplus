@@ -19,7 +19,7 @@
 #define	P_ARG		88
 #define P_SUBS		0
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiDecompileR.c,v $ $Revision: 1.4 $ $Date: 2003/11/17 21:21:21 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiDecompileR.c,v $ $Revision: 1.5 $ $Date: 2009/08/24 19:43:11 $";
 
 extern unsigned int LEX_CONST;
 unsigned int TdiIndent = 1;
@@ -482,7 +482,7 @@ first:			for (pop = binary; pop->opcode; pop++) if (pop->opcode == newone) break
 	case DTYPE_CALL : /*label->label(arg, ...) or label->label:type(arg, ...)*/
 		if (pin->dscptrs[0] == 0 || pin->dscptrs[0]->dtype != DTYPE_T) goto build;
 		if (pin->dscptrs[1] == 0 || pin->dscptrs[1]->dtype != DTYPE_T) goto build;
-		status = StrConcat(pout, pout, pin->dscptrs[0], &ARROW, pin->dscptrs[1] MDS_END_ARG);
+		status = StrConcat((struct descriptor *)pout, (struct descriptor *)pout, pin->dscptrs[0], &ARROW, pin->dscptrs[1] MDS_END_ARG);
 		if (status&1 && pin->length && pin->pointer) {
 			dtype = *(char *)pin->pointer;
 			if (dtype < TdiCAT_MAX)  ptext = TdiREF_CAT[dtype].name;

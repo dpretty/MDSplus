@@ -53,7 +53,7 @@
 #include <tdimessages.h>
 #include <mds_stdarg.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiYacc.c,v $ $Revision: 1.18 $ $Date: 2009/08/24 19:07:20 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiYacc.c,v $ $Revision: 1.19 $ $Date: 2009/08/24 19:43:11 $";
 
 #ifdef ERROR
 #undef ERROR
@@ -729,7 +729,7 @@ __YYSCLASS char * yyreds[] =
 };
 #endif /* YYDEBUG */
 #define YYFLAG  (-3000)
-/* @(#) $Revision: 1.18 $ */    
+/* @(#) $Revision: 1.19 $ */    
 
 /*
 ** Skeleton parser driver for yacc output
@@ -1457,7 +1457,7 @@ case 86:
 case 88:
 # line 375 "TdiYacc.y"
 {MAKE_S(DTYPE_T, yypvt[-1].mark.rptr->length + yypvt[-0].mark.rptr->length, yyval.mark.rptr);
-					StrConcat(yyval.mark.rptr, yypvt[-1].mark.rptr, yypvt[-0].mark.rptr MDS_END_ARG);
+					StrConcat((struct descriptor *)yyval.mark.rptr, (struct descriptor *)yypvt[-1].mark.rptr, yypvt[-0].mark.rptr MDS_END_ARG);
 				} break;
 case 89:
 # line 384 "TdiYacc.y"

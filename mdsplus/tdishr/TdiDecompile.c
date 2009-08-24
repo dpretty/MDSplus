@@ -10,7 +10,7 @@
 #include <tdimessages.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiDecompile.c,v $ $Revision: 1.14 $ $Date: 2009/01/28 21:19:36 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiDecompile.c,v $ $Revision: 1.15 $ $Date: 2009/08/24 19:43:11 $";
 
 unsigned int TdiDECOMPILE_MAX = 0xffff;
 
@@ -408,7 +408,7 @@ char n1c;
 			struct descriptor	sdsc = {0,DTYPE_T,CLASS_S,0};
                                 sdsc.length = (unsigned short)strlen(TdiREF_CAT[dtype].name);
                                 sdsc.pointer = TdiREF_CAT[dtype].name;
-				status = StrConcat(out_ptr, out_ptr, &cdsc, &sdsc MDS_END_ARG);
+				status = StrConcat((struct descriptor *)out_ptr, (struct descriptor *)out_ptr, &cdsc, &sdsc MDS_END_ARG);
 			}
 			break;
 
@@ -439,7 +439,7 @@ char n1c;
 			{struct descriptor	sdsc = {0,DTYPE_T,CLASS_S,0};
                                 sdsc.length = (unsigned short)strlen(TdiREF_CAT[dtype].name);
                                 sdsc.pointer = TdiREF_CAT[dtype].name;
-				status = StrConcat(out_ptr, out_ptr, &HEX, &cdsc, &sdsc MDS_END_ARG);
+				status = StrConcat((struct descriptor *)out_ptr, (struct descriptor *)out_ptr, &HEX, &cdsc, &sdsc MDS_END_ARG);
 		  }
 			break;
 
@@ -535,7 +535,7 @@ char n1c;
 		case DTYPE_EVENT :
 			t2 = *in_ptr;
 			t2.dtype = DTYPE_T;
-			status = StrConcat(out_ptr, out_ptr, &BUILD_EVENT, &t2, &CLOSE_EVENT MDS_END_ARG);
+			status = StrConcat((struct descriptor *)out_ptr, (struct descriptor *)out_ptr, &BUILD_EVENT, &t2, &CLOSE_EVENT MDS_END_ARG);
 			break;
 		case DTYPE_POINTER : {
 			char outstr[256];

@@ -25,7 +25,7 @@
 #include <treeshr.h>
 #include <mds_stdarg.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiDecompileDependency.c,v $ $Revision: 1.8 $ $Date: 2003/11/17 21:21:21 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiDecompileDependency.c,v $ $Revision: 1.9 $ $Date: 2009/08/24 19:43:11 $";
 
 STATIC_CONSTANT DESCRIPTOR(AND,		" & ");
 STATIC_CONSTANT DESCRIPTOR(OR,		" | ");
@@ -48,7 +48,7 @@ struct descriptor	*pwhich=0;
 
 	switch (pin->dtype) {
 	case DTYPE_EVENT :
-		status = StrConcat(pout, pout, &LEFT_ANGLE, pin, &RIGHT_ANGLE MDS_END_ARG);
+		status = StrConcat((struct descriptor *)pout, (struct descriptor *)pout, &LEFT_ANGLE, pin, &RIGHT_ANGLE MDS_END_ARG);
 		break;
 	case DTYPE_NID :
 		{
