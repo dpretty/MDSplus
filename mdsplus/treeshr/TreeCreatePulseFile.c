@@ -45,7 +45,7 @@ extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
 extern char *MaskReplace();
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeCreatePulseFile.c,v $ $Revision: 1.31 $ $Date: 2009/08/24 19:07:05 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeCreatePulseFile.c,v $ $Revision: 1.32 $ $Date: 2009/08/24 19:27:40 $";
 
 STATIC_ROUTINE int _CopyFile(char *src, char *dst, int lock_it);
 #include <fcntl.h>
@@ -288,7 +288,7 @@ STATIC_ROUTINE int _CopyFile(char *src, char *dst, int lock_it)
   int src_fd = MDS_IO_OPEN(src,O_RDONLY | O_BINARY | O_RANDOM, 0);
   if (src_fd != -1)
   {
-    __int64 src_len = MDS_IO_LSEEK(src_fd, 0, SEEK_END);
+    _int64 src_len = MDS_IO_LSEEK(src_fd, 0, SEEK_END);
     int dst_fd = MDS_IO_OPEN(dst,O_RDWR | O_CREAT | O_TRUNC, 0664);
     if ((dst_fd != -1) && (src_len != -1))
     {
