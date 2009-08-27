@@ -50,3 +50,4 @@ SunOS	binaries SunOS*
 Irix	binaries Irix*
 Win32	binaries Win32*
 Cray	binaries Cray*
+mdsplus-win !mdsplus/actions !mdsplus/camshr !mdsplus/ccl !mdsplus/conf !mdsplus/d3dshr !mdsplus/devscripts !mdsplus/dwscope !mdsplus/examples !mdsplus/gen_device !mdsplus/gsilite !mdsplus/hdf5 !mdsplus/html !mdsplus/html-old !mdsplus/idlmdswidgets !mdsplus/kbsidevices !mdsplus/macosx !mdsplus/manpages !mdsplus/mdsip_xio !mdsplus/mdsremote !mdsplus/mdsvb !mdsplus/mdsvme !mdsplus/mitdevices !mdsplus/php !mdsplus/pixmaps !mdsplus/RealTimeTreeShr !mdsplus/roam !mdsplus/rpm !mdsplus/scripts !mdsplus/sys_specific !mdsplus/tdi !mdsplus/traverser !mdsplus/xmdsshr mdsplus
