@@ -46,7 +46,7 @@ extern char *index(char *str,char c);
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.99 $ $Date: 2009/04/13 19:24:13 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.100 $ $Date: 2009/10/07 07:56:42 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
@@ -214,6 +214,8 @@ int _TreeClose(void **dbid, char *tree, int shot)
   PINO_DATABASE *db;
   PINO_DATABASE *prev_db;
   status = TreeNOT_OPEN;
+  
+  //printf("TREE CLOSE\n");
   if (dblist && *dblist)
   {
     if (tree)
