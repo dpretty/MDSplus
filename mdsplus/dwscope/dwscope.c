@@ -58,7 +58,7 @@ $ dwcope [-default setup]
 #include <DXm/DECspecific.h>
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: dwscope.c,v $ $Revision: 1.28 $ $Date: 2009/07/15 19:00:23 $";
+static char *cvsrev = "@(#)$RCSfile: dwscope.c,v $ $Revision: 1.29 $ $Date: 2009/10/19 19:11:20 $";
 
 extern void XmdsInitialize();
 extern void XmdsDestroyWidgetCallback();
@@ -1133,8 +1133,11 @@ static void /*XtCallbackProc*/ApplyCustomizeWindow(Widget w, XtPointer client_da
           int height = (pane_height - 2 * Rows[c] + (r % 2) * .4999) / Rows[c];
   	  XtVaSetValues(Wave[c][r].w, XtNheight, height, NULL);
         }
-        if ((r >= old_rows[c]) && (r < Rows[c]))
-          UpdateWaveform(0, &Wave[c][r], 0, -1, -1);
+        if ((r >= old_rows[c]) && (r < Rows[c])) {
+          WaveInfo *info=&Wave[c][r];
+          UpdateWaveform(0, info, 0, -1, -1);
+	  SetupEvent(info->_global.global.event ? GlobalWave.event : info->event, &info->received, &info->eventid);
+	}
       }
     }
   }
