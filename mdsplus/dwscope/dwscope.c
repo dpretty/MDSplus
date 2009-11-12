@@ -58,7 +58,7 @@ $ dwcope [-default setup]
 #include <DXm/DECspecific.h>
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: dwscope.c,v $ $Revision: 1.29 $ $Date: 2009/10/19 19:11:20 $";
+static char *cvsrev = "@(#)$RCSfile: dwscope.c,v $ $Revision: 1.30 $ $Date: 2009/11/12 20:09:22 $";
 
 extern void XmdsInitialize();
 extern void XmdsDestroyWidgetCallback();
@@ -2009,8 +2009,10 @@ static void  RestoreDatabase(String dbname, Widget w)
   {
     XtRealizeWidget(TopWidget);
     RaiseWindows();
-    PreventResize = FALSE;
+/*    PreventResize = FALSE; */
   }
+  PreventResize = FALSE;
+
   XrmDestroyDatabase(scopedb);
 }
 
