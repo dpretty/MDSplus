@@ -58,7 +58,7 @@ $ dwcope [-default setup]
 #include <DXm/DECspecific.h>
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: dwscope.c,v $ $Revision: 1.30 $ $Date: 2009/11/12 20:09:22 $";
+static char *cvsrev = "@(#)$RCSfile: dwscope.c,v $ $Revision: 1.31 $ $Date: 2009/11/13 21:38:22 $";
 
 extern void XmdsInitialize();
 extern void XmdsDestroyWidgetCallback();
@@ -1955,9 +1955,10 @@ static void  RestoreDatabase(String dbname, Widget w)
   XtVaSetValues(TopWidget, XtNx, x, XtNy, y, NULL);
   if (XtWidth(MainWidget) != width || XtHeight(MainWidget) != height)
   {
-    XtVaSetValues(MainWidget, XtNwidth, width, XtNheight, height, NULL);
-    XtVaSetValues(TopWidget, XtNwidth, width, XtNheight, height, NULL);
     PreventResize = TRUE;
+    /* XtVaSetValues(MainWidget, XtNwidth, width, XtNheight, height, NULL); */
+    XtVaSetValues(TopWidget, XtNwidth, width, XtNheight, height, NULL);
+    /* PreventResize = TRUE; */
   }
   MenusHeight = 66;
   Columns = min(max(atoi(GetResource(scopedb, "Scope.columns", "1")), 1), MaxCols);
