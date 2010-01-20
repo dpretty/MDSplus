@@ -51,7 +51,7 @@
 #include <string.h>
 #include <librtl_messages.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiVar.c,v $ $Revision: 1.19 $ $Date: 2009/01/29 21:53:30 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiVar.c,v $ $Revision: 1.20 $ $Date: 2010/01/20 20:52:41 $";
 
 extern unsigned short OpcEquals, OpcEqualsFirst;
 extern unsigned short OpcFun;
@@ -727,6 +727,7 @@ TdiRefStandard(Tdi1ResetPublic)
 
   LockTdiMutex(&lock,&lock_initialized);
 	_public.head = 0;
+        TdiResetGetRecord();
 	if (_public.data_zone) status = LibResetVmZone(&_public.data_zone);
 	if (_public.head_zone) status = LibResetVmZone(&_public.head_zone);
 	UnlockTdiMutex(&lock);
