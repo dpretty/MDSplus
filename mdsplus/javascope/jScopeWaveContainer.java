@@ -1,4 +1,4 @@
-/* $Id: jScopeWaveContainer.java,v 1.58 2009/04/28 15:40:29 manduchi Exp $ */
+/* $Id: jScopeWaveContainer.java,v 1.59 2010/01/20 16:35:51 manduchi Exp $ */
 import java.awt.Graphics;
 import java.awt.Component;
 import java.awt.Font;
@@ -1385,12 +1385,18 @@ remove 28/06/2005
                 case DataProvider.LOGIN_ERROR:
                 case DataProvider.LOGIN_CANCEL:
                     server_item = new DataServerItem("Not Connected", null, null,
-                        null, null, null, null, false);
+                        "NotConnectedDataProvider", null, null, null, false);
                     dp = new NotConnectedDataProvider();
             }
 
             if (dp != null)
                 dp.AddConnectionListener( (ConnectionListener) l);
+
+            if( !server_item.class_name.equals("NotConnectedDataProvider") )
+            {
+                //Check data server connection
+                dp.GetShots("0");
+            }
 
             ChangeDataProvider(dp);
             AddAllEvents(l);
@@ -1421,9 +1427,12 @@ remove 28/06/2005
             this.server_item = server_item;
         }
         catch (IOException e)
-        {     
-            server_item = null;
-            dp = null;
+        {
+            this.server_item = new DataServerItem("Not Connected", null, null,
+                          "NotConnectedDataProvider", null, null, null, false);
+            dp = new NotConnectedDataProvider();
+            ChangeDataProvider(dp);
+
             throw (new Exception(e.getMessage()));
         }
     }
