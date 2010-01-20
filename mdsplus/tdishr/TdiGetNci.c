@@ -42,7 +42,7 @@
 #include "tdirefstandard.h"
 #include "tdinelements.h"
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiGetNci.c,v $ $Revision: 1.25 $ $Date: 2008/10/16 20:32:30 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiGetNci.c,v $ $Revision: 1.26 $ $Date: 2010/01/20 20:08:43 $";
 
 extern unsigned short OpcVector;
 
@@ -340,7 +340,7 @@ more:		switch (dtype) {
 		if (key_ptr->item_code == NID_NUMBER) *(int *)hold_ptr = nid;
 		else if (key_ptr->item_code == RECORDIDX) {
 			*(struct descriptor_xd *)hold_ptr = EMPTY_XD;
-			status = TreeGetRecord(nid, (struct descriptor_xd *)hold_ptr);
+			status = TdiGetRecord(nid, (struct descriptor_xd *)hold_ptr);
 		}
 		/********************************
 		Logical results for bit or value.

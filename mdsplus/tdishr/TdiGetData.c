@@ -32,7 +32,7 @@
 #include <string.h>
 #include "tdithreadsafe.h"
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiGetData.c,v $ $Revision: 1.9 $ $Date: 2003/11/17 21:21:21 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiGetData.c,v $ $Revision: 1.10 $ $Date: 2010/01/20 20:08:43 $";
 
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 
@@ -178,14 +178,14 @@ redo:			if (status & 1) status = TdiGetData(omits, (struct descriptor *)&hold, &
 			break;
 		case DTYPE_NID :
 			pnid = (int *)pin->pointer;
-			status = TreeGetRecord(*pnid, &hold);
+			status = TdiGetRecord(*pnid, &hold);
 			goto redo;
 		case DTYPE_PATH :
 			{
 				char *path = MdsDescrToCstring((struct descriptor *)pin);
 				status = TreeFindNode(path, &nid);
 				MdsFree(path);
-				if (status & 1) status = TreeGetRecord(nid, &hold);
+				if (status & 1) status = TdiGetRecord(nid, &hold);
 			}
 			goto redo;
 		/*******************
@@ -578,4 +578,29 @@ STATIC_CONSTANT unsigned char noomits[] = {0};
 	default : status = TdiINVDTYDSC; break;
 	}
 	return status;
+}
+
+int TdiGetRecord(int nid, struct descriptor *out) {
+  static DESCRIPTOR(exp,"_status=TdiGetRecord($,_out),_status");
+  static DESCRIPTOR(out_exp,"_out");
+  DESCRIPTOR_LONG(nid_d,&nid);
+  int stat;
+  DESCRIPTOR_LONG(stat_d,&stat);
+  int status;
+  static int use_fun=1;
+  if (use_fun) {
+    status = TdiExecute(&exp,&nid_d,&stat_d MDS_END_ARG);
+    if (status == TdiUNKNOWN_VAR) {
+      use_fun=0;
+    } else if (status & 1) {
+      status = stat;
+      if (stat & 1) {
+        TdiExecute(&out_exp,out MDS_END_ARG);
+      }
+    }
+  }
+  if (! use_fun) {
+    status = TreeGetRecord(nid,(struct descriptor_xd *)out);
+  }
+  return status;
 }

@@ -22,7 +22,7 @@ RULES OF THE GAME:
 #include <stdlib.h>
 #include <string.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiEvaluate.c,v $ $Revision: 1.7 $ $Date: 2009/01/29 21:47:08 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiEvaluate.c,v $ $Revision: 1.8 $ $Date: 2010/01/20 20:08:43 $";
 
 STATIC_CONSTANT struct descriptor missing = {0,DTYPE_MISSING,CLASS_S,0};
 
@@ -90,7 +90,7 @@ WARNING falls through if an XD but not DSC of usable data (no known examples).
 			break;
 		case DTYPE_NID :
 			pnid = (int *)list[0]->pointer;
-			status = TreeGetRecord(*pnid, out_ptr);
+			status = TdiGetRecord(*pnid, out_ptr);
 			if (status & 1) status = TdiEvaluate(out_ptr, out_ptr MDS_END_ARG);
 			break;
 		case DTYPE_PATH :
@@ -98,7 +98,7 @@ WARNING falls through if an XD but not DSC of usable data (no known examples).
 				char *path = MdsDescrToCstring(list[0]);
 				status = TreeFindNode(path, &nid);
 				MdsFree(path);
-				if (status & 1) status = TreeGetRecord(nid, out_ptr);
+				if (status & 1) status = TdiGetRecord(nid, out_ptr);
 				if (status & 1) status = TdiEvaluate(out_ptr, out_ptr MDS_END_ARG);
 			}
 			break;
