@@ -1,4 +1,4 @@
-/* $Id: jScopeWaveContainer.java,v 1.59 2010/01/20 16:35:51 manduchi Exp $ */
+/* $Id: jScopeWaveContainer.java,v 1.60 2010/01/27 10:56:06 manduchi Exp $ */
 import java.awt.Graphics;
 import java.awt.Component;
 import java.awt.Font;
@@ -914,8 +914,8 @@ remove 28/06/2005
                 {
                     dp.RemoveUpdateEventListener(l, curr_event);
                     dp.AddUpdateEventListener(l, event);
-                    return event;
                 }
+                return event;
             }
         }
         else
@@ -924,7 +924,6 @@ remove 28/06/2005
                 dp.AddUpdateEventListener(l, event);
             return event;
         }
-        return null;
     }
 
     public void SetEvent(UpdateEventListener l, String event) throws
