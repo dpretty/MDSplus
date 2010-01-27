@@ -1,4 +1,4 @@
-/* $Id: MdsConnection.java,v 1.41 2010/01/27 09:22:52 manduchi Exp $ */
+/* $Id: MdsConnection.java,v 1.42 2010/01/27 10:52:36 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.util.Hashtable;
@@ -112,7 +112,6 @@ public class MdsConnection
                         PMET PMdsEvent = new PMET();
                         PMdsEvent.SetEventName( event );
                         PMdsEvent.start();
-                        dispatchUpdateEvent(event);
                     } catch (IOException ex) {
                         Logger.getLogger(MdsConnection.class.getName()).log(Level.SEVERE, null, ex);
                     }
