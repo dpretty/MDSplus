@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: verbs.c,v 1.10 2010/02/18 14:35:56 twf Exp $
+//	$Id: verbs.c,v 1.11 2010/02/18 19:38:26 twf Exp $
 //-------------------------------------------------------------------------
 
 //-------------------------------------------------------------------------
@@ -93,7 +93,7 @@ static void str_upcase( struct descriptor *in, struct descriptor *out )
 //-------------------------------------------------------------------------
 int Assign()
 {
-	char	line[MODULE_ENTRY];
+	char	line[MODULE_ENTRY+1];
 	int		dbFileSize, fd, i, nullMask, numOfEntries, rc;
 	int		status = SUCCESS;				// assume the best
 
