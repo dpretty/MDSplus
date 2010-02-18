@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: verbs.c,v 1.9 2009/08/30 13:17:54 twf Exp $
+//	$Id: verbs.c,v 1.10 2010/02/18 14:35:56 twf Exp $
 //-------------------------------------------------------------------------
 
 //-------------------------------------------------------------------------
@@ -170,7 +170,7 @@ int Assign()
 	sprintf( line, "%-32s %-10s %-40s\n", 
 		log_name.pointer, 								// these were entered by the user
 		phy_name.pointer, 
-		comment.pointer
+		comment.pointer ? comment.pointer : ""
 		);
 
 	// check comment field for null string, ie "(null)"
