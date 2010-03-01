@@ -1,4 +1,4 @@
-#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.66 $
+#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.67 $
 # @configure_input@
 prefix=@prefix@
 SHELL=/bin/sh
@@ -41,7 +41,7 @@ PARTS = \
         @CCL@     \
 	servershr \
         tcl \
-        tdic \
+        @TDIC@ \
         mdslib \
         @MATH@ \
         wfevent \
