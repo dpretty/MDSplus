@@ -1,4 +1,4 @@
-static char *cvsrev = "@(#)$RCSfile: main-uil.c,v $ $Revision: 1.15 $ $Date: 2003/03/20 20:15:08 $"; 
+static char *cvsrev = "@(#)$RCSfile: main-uil.c,v $ $Revision: 1.16 $ $Date: 2010/03/02 17:12:12 $"; 
 /*
  * README: Portions of this file are merged at file generation
  * time. Edits can be made *only* in between specified code blocks, look
@@ -30,6 +30,7 @@ static char *cvsrev = "@(#)$RCSfile: main-uil.c,v $ $Revision: 1.15 $ $Date: 200
 #include <Xm/RepType.h>
 #endif
 #include <Xm/MwmUtil.h>
+#include <Xm/Protocols.h>
 
 #define DECLARE_BX_GLOBALS
 
@@ -136,6 +137,10 @@ Widget WriteDialog;
 Widget AddDialog;
 Widget AddDeviceDialog;
 Widget OpenDialog;
+
+void CloseWindow(Widget w, caddr_t client_data, caddr_t call_data) {
+  exit(0);
+}
 
 /*
  * Main Program
@@ -351,6 +356,7 @@ int main(int argc, char **argv)
     
     /* Begin user code block <main_loop> */
     /* End user code block <main_loop> */
+XmAddWMProtocolCallback(TopLevelShell,XmInternAtom(XtDisplay(TopLevelShell),"WM_DELETE_WINDOW",False),CloseWindow,NULL);
     
     XtAppMainLoop(context);
     
