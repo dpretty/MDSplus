@@ -1,5 +1,5 @@
 #include <STATICdef.h>
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.73 $ $Date: 2010/03/05 11:14:36 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.74 $ $Date: 2010/03/05 14:07:02 $";
 
 #ifndef HAVE_VXWORKS_H
 #include <config.h>
@@ -21,6 +21,7 @@ STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.73 
 #include <usagedef.h>
 #include <libroutines.h>
 #include <strroutines.h>
+
 
 #ifdef max
 #undef max
@@ -662,7 +663,7 @@ STATIC_ROUTINE void FreeHeaderOut(TREE_HEADER *hdr)
 #endif
 
 
-STATIC_ROUTINE _int64 _TreeGetDatafileSize(void *dbid)
+_int64 _TreeGetDatafileSize(void *dbid)
 {
 	int status;
 	PINO_DATABASE *dblist = (PINO_DATABASE *)dbid;
