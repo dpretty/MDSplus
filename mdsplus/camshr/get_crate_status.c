@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: get_crate_status.c,v 1.2 2010/02/18 19:40:58 twf Exp $
+//	$Id: get_crate_status.c,v 1.3 2010/03/05 17:14:23 twf Exp $
 //-------------------------------------------------------------------------
 
 //-----------------------------------------------------------
@@ -29,7 +29,7 @@
 //-----------------------------------------------------------
 int get_crate_status( char *crate_name, int *ptr_crate_status )
 {
-	char					controller[10];
+	char					controller[11];
 	short					SCCdata;
 	int						status = SUCCESS;		// optimistic ...
 	TranslatedIosb 			iosb;
