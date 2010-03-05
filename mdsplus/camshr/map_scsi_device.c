@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: map_scsi_device.c,v 1.1 2002/09/10 16:06:59 twf Exp $
+//	$Id: map_scsi_device.c,v 1.2 2010/03/05 18:44:27 twf Exp $
 //-------------------------------------------------------------------------
 
 //-------------------------------------------------------------------------
@@ -45,7 +45,7 @@ struct scsi_info {
 int map_scsi_device( char *highway_name )
 {
 	char				line[80], *pline, tmp[7];
-	char				dsf[3], hwytype;
+	char				dsf[4], hwytype;
 	int					adapter, i, numOfEntries, scsi_id, sg_number;
 	int					status = SUCCESS;		// optimistic
 	int					found = FALSE;
