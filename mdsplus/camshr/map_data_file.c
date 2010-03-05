@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: map_data_file.c,v 1.1 2002/09/10 16:06:59 twf Exp $
+//	$Id: map_data_file.c,v 1.2 2010/03/05 17:21:14 twf Exp $
 //-------------------------------------------------------------------------
 
 //-------------------------------------------------------------------------
@@ -126,6 +126,7 @@ MapData_Exit:
 	if( fd != ERROR )						// still open ...
 		close(fd);							// ... finished with file descriptor
 
+        printf("Error mapping %s\n",FileName);
 	if( MSGLVL(DETAILS) ) {
 		printf( "map_data_file('%s'): ", FileName ); ShowStatus( status );
 	}
