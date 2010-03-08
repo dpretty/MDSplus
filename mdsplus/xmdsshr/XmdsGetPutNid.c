@@ -117,7 +117,7 @@ static int GetLong(int nid,int *intptr);
 
  Local variables:                                                             */
 
-static char *cvsrev = "@(#)$RCSfile: XmdsGetPutNid.c,v $ $Revision: 1.5 $ $Date: 1998/04/08 19:23:47 $";
+static char *cvsrev = "@(#)$RCSfile: XmdsGetPutNid.c,v $ $Revision: 1.6 $ $Date: 2010/03/08 21:24:27 $";
 
 /*------------------------------------------------------------------------------
 
@@ -323,6 +323,8 @@ void XmdsResetAllXds(Widget w)
     XmdsXdBoxReset(w);
   else if (XmdsIsNidOptionMenu(w))
     XmdsNidOptionMenuReset(w);
+  else if (XmdsIsXdBoxOnOffButton(w))
+    XmdsXdBoxOnOffButtonReset(w);
   else if (XtIsComposite(w))
   {
     Widget *children;
@@ -355,6 +357,10 @@ Boolean XmdsApplyAllXds(Widget w)
     return XmdsOnOffToggleButtonApply(w);
   else if (XmdsIsXdBox(w))
     return XmdsXdBoxApply(w);
+  else if (XmdsIsNidOptionMenu(w))
+    return XmdsNidOptionMenuApply(w);
+  else if (XmdsIsXdBoxOnOffButton(w))
+    return XmdsXdBoxOnOffButtonApply(w);
   else if (XtIsComposite(w))
   {
     Widget *children;
