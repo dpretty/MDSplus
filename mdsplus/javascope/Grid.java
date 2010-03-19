@@ -1,4 +1,4 @@
-/* $Id: Grid.java,v 1.40 2009/03/11 10:57:17 manduchi Exp $ */
+/* $Id: Grid.java,v 1.41 2010/03/19 17:59:14 manduchi Exp $ */
 import java.awt.*;
 import java.awt.image.*;
 import java.awt.event.*;
@@ -542,7 +542,7 @@ public class Grid
                             {
 
                                 Calendar ca = Calendar.getInstance();
-                                ca.setTimeZone(TimeZone.getTimeZone("GMT+00"));
+                                //ca.setTimeZone(TimeZone.getTimeZone("GMT+00"));
 
                                 ca.setTimeInMillis((long)x_values[i]);
                                 ca.set(ca.get(Calendar.YEAR), ca.get(Calendar.MONTH), ca.get(Calendar.DAY_OF_MONTH)+1, 0, 0);
