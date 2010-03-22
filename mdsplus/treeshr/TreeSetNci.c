@@ -45,7 +45,7 @@
 #include "treeshrp.h"
 #include <ncidef.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.43 $ $Date: 2010/03/16 17:37:26 $";
+static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.44 $ $Date: 2010/03/22 18:34:33 $";
 
 extern void *DBID;
 
@@ -90,8 +90,6 @@ int       _TreeSetNci(void *dbid, int nid_in, NCI_ITM *nci_itm_ptr)
   status = TreeCallHook(PutNci, tree_info, nid_in);
   if (status && !(status & 1))
     return status;
-  if (tree_info->reopen)
-    TreeCloseFiles(tree_info);
   status = TreeGetNciLw(tree_info, node_number, &nci);
   if (status & 1)
   {
@@ -250,7 +248,7 @@ int TreeGetNciLw(TREE_INFO *info, int node_num, NCI *nci)
 	char nci_bytes[42];
 	status = TreeLockNci(info,0,node_num,&deleted);
 	if (status & 1 && deleted) {
-	  TreeCloseFiles(info);
+	  TreeCloseFiles(info,1,0);
 	}
 	else {
 	  if (!(status & 1)) return status;

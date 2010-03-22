@@ -23,7 +23,7 @@
 
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.50 $ $Date: 2009/08/24 19:07:05 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.51 $ $Date: 2010/03/22 18:34:33 $";
 
 static _int64 ViewDate = -1;
 static int MakeNidsLocal(struct descriptor *dsc_ptr, unsigned char tree);
@@ -70,8 +70,6 @@ int _TreeGetRecord(void *dbid, int nid_in, struct descriptor_xd *dsc)
     status = TreeCallHook(GetNci,info,nid_in);
     if (status && !(status & 1))
       return 0;
-    if (info->reopen)
-      TreeCloseFiles(info);
     if (!info->data_file)
       status = TreeOpenDatafileR(info);
     else
@@ -388,7 +386,7 @@ int TreeGetVersionNci(TREE_INFO *info, NCI *nci, NCI *v_nci)
     while (status & 1 && deleted) {
       status = (MDS_IO_READ_X(info->data_file->get,rfa_l,(void *)nci_bytes,42,&deleted) == 42) ? TreeSUCCESS : TreeFAILURE;
       if (status & 1 && deleted) {
-	TreeCloseFiles(info);
+	TreeCloseFiles(info,0,1);
 	status = TreeOpenDatafileR(info);
       }
     }

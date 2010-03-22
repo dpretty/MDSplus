@@ -63,7 +63,7 @@ static int daylight = 0;
 #define LONG_LONG_CONSTANT(value) value##ll
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.88 $ $Date: 2009/06/12 12:56:39 $";
+static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.89 $ $Date: 2010/03/22 18:34:33 $";
 
 #ifdef min
 #undef min
@@ -129,8 +129,6 @@ int       _TreePutRecord(void *dbid, int nid, struct descriptor *descriptor_ptr,
     status = TreeCallHook(PutData,info_ptr,nid);
     if (status && !(status & 1))
       return status;
-    if (info_ptr->reopen)
-      TreeCloseFiles(info_ptr);
     TreeGetViewDate(&saved_viewdate);
     status = TreeGetNciLw(info_ptr, nidx, &local_nci);
     TreeSetViewDate(&saved_viewdate);
