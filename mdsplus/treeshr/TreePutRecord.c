@@ -1,4 +1,3 @@
-
 /*------------------------------------------------------------------------------
 
 		Name: TreePutRecord
@@ -63,7 +62,7 @@ static int daylight = 0;
 #define LONG_LONG_CONSTANT(value) value##ll
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.89 $ $Date: 2010/03/22 18:34:33 $";
+static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.90 $ $Date: 2010/03/23 12:58:35 $";
 
 #ifdef min
 #undef min
@@ -606,8 +605,15 @@ int TreeSetTemplateNci(NCI *nci)
 
 int TreeLockDatafile(TREE_INFO *info, int readonly, _int64 offset)
 {
-  return MDS_IO_LOCK(readonly ? info->data_file->get : info->data_file->put, 
-	  offset, offset >= 0 ? 12 : (DATAF_C_MAX_RECORD_SIZE * 3), readonly ? MDS_IO_LOCK_RD : MDS_IO_LOCK_WRT,0);
+  int deleted=1;
+  int status=1;
+  while (deleted && status & 1) {
+     status = MDS_IO_LOCK(readonly ? info->data_file->get : info->data_file->put, 
+	  offset, offset >= 0 ? 12 : (DATAF_C_MAX_RECORD_SIZE * 3), readonly ? MDS_IO_LOCK_RD : MDS_IO_LOCK_WRT,&deleted);
+     if (deleted && status & 1)
+       status=TreeReopenDatafile(info);
+  }
+  return status;
 }
 
 int TreeUnLockDatafile(TREE_INFO *info, int readonly, _int64 offset)
