@@ -45,7 +45,7 @@
 #include "treeshrp.h"
 #include <ncidef.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.45 $ $Date: 2010/03/23 12:58:35 $";
+static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.46 $ $Date: 2010/03/23 15:37:35 $";
 
 extern void *DBID;
 
@@ -707,6 +707,19 @@ static int SetNodeParentState(PINO_DATABASE *db, NODE *node, NCI *nci, unsigned 
   }
   return status;
 }
+#ifdef HAVE_WINDOWS_H
+#define pthread_mutex_t int
+static void LockMdsShrMutex(){}
+static void UnlockMdsShrMutex(){}
+#endif
+#ifdef HAVE_VXWORKS_H
+#define pthread_mutex_t int
+static void LockMdsShrMutex(){}
+static void UnlockMdsShrMutex(){}
+#endif
+
+
+
 STATIC_THREADSAFE pthread_mutex_t NCIMutex;
 STATIC_THREADSAFE int NCIMutex_initialized;
 
