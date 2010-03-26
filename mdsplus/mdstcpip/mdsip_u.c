@@ -145,18 +145,19 @@ typedef ARRAY_COEFF(char,7) ARRAY_7;
 typedef struct _context { void *tree;
                         } Context;
 
-typedef struct _client { SOCKET sock;
-                         Context context;
-                         unsigned char message_id;
-                         int client_type;
-                         int nargs;
-                         struct descriptor *descrip[MAX_ARGS];
-                         MdsEventList *event;
-			 void         *tdicontext[6];
-                         int addr;
-                         int compression_level;
-                         struct _client *next;
-                       } Client;
+typedef struct _client { 
+  SOCKET sock;
+  Context context;
+  unsigned char message_id;
+  int client_type;
+  int nargs;
+  struct descriptor *descrip[MAX_ARGS];
+  MdsEventList *event;
+  void         *tdicontext[6];
+  int addr;
+  int compression_level;
+  struct _client *next;
+} Client;
 
 static Client *ClientList = 0;
 static int multi = 0;
@@ -174,6 +175,7 @@ static int MaxCompressionLevel = 9;
 #define IS_SERVICE 0x200
 
 static void ParseCommand(int argc, char **argv,char **portname, short *port, char **hostfile, char *mode, int *flags, int *compression_level);
+static int ConnectToStdIn();
 extern int TdiSaveContext();
 extern int TdiRestoreContext();
 extern int TdiExecute();
@@ -609,7 +611,11 @@ int main(int argc, char **argv)
   }
   else if (!IsWorker)
   {
-    serverSock = ConnectToInet(port,AddClient,DoMessage);
+    if (port==0) {
+      serverSock = ConnectToStdIn();
+    } else {
+      serverSock = ConnectToInet(port,AddClient,DoMessage);
+    }
     shut = (ClientList == NULL);
 #ifdef GLOBUS
     if (shut)
@@ -848,6 +854,57 @@ static int CheckClient(char *hostnum_c, char *host_c, char *user_c)
 }
 
 #endif
+
+static int ConnectToStdIn() {
+  Message *m_user;
+  static Message m;
+  int i;
+  int status;
+  int pid;
+  int ok = 0;
+  Client *new;
+  time_t tim;
+  int m_status;
+  int user_compression_level;
+  int log;
+  int stdin;
+  stdin=dup(1);
+  close(1);
+  dup2(2,1);
+  SetFileIO(0,stdin);
+  m.h.msglen = sizeof(MsgHdr);
+  m_user = GetMdsMsg(0,&status);
+  if (m_user == 0 || !(status & 1))
+  {
+    return -1;
+  }
+  if ((status & 1) && (m_user) && (m_user->h.dtype == DTYPE_CSTRING))  {
+    ok=1;
+  }
+  if (ok & 1) {
+    user_compression_level = m_user->h.status & 0xf;
+    if (user_compression_level > MaxCompressionLevel)
+      user_compression_level = MaxCompressionLevel;
+  }
+  m_status = m.h.status = (ok & 1) ? (1 | (user_compression_level << 1)) : 0;
+  m.h.client_type = m_user ? m_user->h.client_type : 0; 
+  if (m_user)
+    MdsIpFree(m_user);
+  SendMdsMsg(1,&m,0);
+  ClientList = new = malloc(sizeof(Client));
+  SetFD(0);
+  new->sock = 0;
+  new->context.tree = 0;
+  new->message_id = 0;
+  new->event = 0;
+  new->compression_level = user_compression_level;
+  for (i=0;i<6;i++)
+    new->tdicontext[i] = NULL;
+  for (i=0;i<MAX_ARGS;i++)
+    new->descrip[i] = NULL;
+  new->next = NULL;
+  return -1;
+}
 
 static void AddClient(SOCKET sock,struct sockaddr_in *sin,char *dn)
 {
@@ -1937,6 +1994,11 @@ static short ParsePort(char *name, char **portname)
 {
   short port;
   struct servent *sp;
+  if (strcmp(name,"0")==0) {
+    char *pn="stdin";
+    *portname=(char *)strcpy(malloc(strlen(pn)+1),pn);
+    return 0;
+  }
   port = htons((short)atoi(name));
   if (port == 0)
   {
@@ -2132,7 +2194,7 @@ static void ParseCommand(int argc, char **argv,char **portname, short *port, cha
 {
   int i;
   if (argc < 2) PrintHelp(0);
-  *port = 0;
+  *port = -1;
   *mode = 0;
   *flags = 0;
   *hostfile = 0;
@@ -2178,7 +2240,7 @@ static void ParseCommand(int argc, char **argv,char **portname, short *port, cha
         }
         break;
       default:
-        if (*port == 0)
+        if (*port == -1)
           *port = ParsePort(option,portname);
         else if (strcmp(argv[i],"multi") == 0)
           SetMode('m',mode);
@@ -2208,7 +2270,7 @@ static void ParseCommand(int argc, char **argv,char **portname, short *port, cha
   else if (*compression_level > 9)
     *compression_level = 9;
   if (*hostfile == 0) *hostfile = strcpy((char *)malloc(strlen(DEFAULT_HOSTFILE)+1),DEFAULT_HOSTFILE);
-  if (*port == 0)
+  if (*port == -1)
   {
     printf("port must be specified\n\n");
     PrintHelp(0);

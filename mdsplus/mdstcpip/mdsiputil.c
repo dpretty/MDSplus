@@ -441,30 +441,47 @@ static SOCKET ConnectToPort(char *host, char *service)
 #endif
   return s;
 }
+static void ParseHost(char *hostin, char **protocol, char **host, char **port) {
+  int i;
+  *protocol=strcpy((char *)malloc(strlen(hostin)+10),"");
+  *host=strcpy((char *)malloc(strlen(hostin)+10),"");
+  *port=strcpy((char *)malloc(strlen(hostin)+10),"");
+  sscanf(hostin,"%[^:]://%[^:]:%s",*protocol,*host,*port);
+  if (strlen(*host) == 0) {
+    strcpy(*protocol,"tcp");
+    sscanf(hostin,"%[^:]:%s",*host,*port);
+  }
+  if (strlen(*port) == 0) {
+    if ((*host)[0] == '_' || strcmp(*protocol,"gsi")==0)
+      strcpy(*port,"mdsips");
+    else
+      strcpy(*port,"mdsip");
+  }
+  for (i=strlen(*host)-1;i>=0 && (*host)[i]==32;(*host)[i]=0,i--);
+}
 
-int HostToIp(char *host, int *addr, short *port)
+int HostToIp(char *hostin, int *addr, short *port)
 {
   struct hostent *hp = NULL;
   struct servent *sp;
-
-  char hostpart[256] = {0};
-  char portpart[256] = {0};
-
-  sscanf(host,"%[^:]:%s",hostpart,portpart);
-  if (strlen(portpart) == 0)
-  {
-    if (host[0] == '_')
-      strcpy(portpart,"mdsips");
-    else
-      strcpy(portpart,"mdsip");
-  }
-  if (strcmp(hostpart, "local") == 0) {
+  char *host=0;
+  char *hostfree=0;
+  char *protocol=0;
+  char *portname=0;
+  char *tmp;
+  ParseHost(hostin,&protocol,&host,&portname);
+  hostfree=host;
+  if (strcmp(host, "local") == 0) {
     *addr = 0;
     *port = 0;
+    if (hostfree) free(hostfree);
+    if (protocol) free(protocol);
+    if (portname) free(portname);
     return 1;
   }
+  if ((tmp=strstr(host,"@")) != 0) host=tmp+1;
 #ifndef HAVE_VXWORKS_H
-  hp = gethostbyname(hostpart);
+  hp = gethostbyname(host);
 #endif
 #ifdef _WIN32
   if ((hp == NULL) && (WSAGetLastError() == WSANOTINITIALISED))
@@ -473,12 +490,12 @@ int HostToIp(char *host, int *addr, short *port)
     WORD wVersionRequested;
     wVersionRequested = MAKEWORD(1,1);
     WSAStartup(wVersionRequested,&wsaData);
-    hp = gethostbyname(hostpart);
+    hp = gethostbyname(host);
   }
 #endif
   if (hp == NULL)
   {
-    *addr = inet_addr(hostpart);
+    *addr = inet_addr(host);
 #ifndef HAVE_VXWORKS_H
     if (*addr != 0xffffffff)
       hp = gethostbyaddr((void *) addr, (int) sizeof(* addr), AF_INET);
@@ -490,34 +507,40 @@ int HostToIp(char *host, int *addr, short *port)
   if (hp == NULL)
 #endif
   {
-    printf("Error in MDSplus ConnectToPort: %s unknown\n",host);
+    printf("Error in MDSplus HostToIp: %s unknown\n",hostin);
+    if (hostfree) free(hostfree);
+    if (protocol) free(protocol);
+    if (portname) free(portname);
     return INVALID_SOCKET;
   }
 #ifdef HAVE_VXWORKS_H
-  if (atoi(portpart) == 0)
+  if (atoi(portname) == 0)
   {
     *port=8000;
   }
   else
-    *port = (short)atoi(portpart);
+    *port = (short)atoi(portname);
 #else
-  if (atoi(portpart) == 0)
+  if (atoi(portname) == 0)
   {
-    sp = getservbyname(portpart,"tcp");
+    sp = getservbyname(portname,"tcp");
     if (sp != NULL)
       *port = ntohs(sp->s_port);
     else
     {
-      char *portc = getenv(portpart);
+      char *portc = getenv(portname);
       *port = (portc == NULL) ? 8000 : (short)atoi(portc);
     }
   }
   else
-    *port = (short)atoi(portpart);
+    *port = (short)atoi(portname);
 #endif
   if (*port == 0)
   {
-    printf("Error in MDSplus ConnectToPort: Unknown service: %s\nSet environment variable %s if port is known\n",portpart,portpart);
+    printf("Error in MDSplus HostToIp: Unknown service: %s\nSet environment variable %s if port is known\n",port,port);
+    if (hostfree) free(hostfree);
+    if (protocol) free(protocol);
+    if (portname) free(portname);
     return INVALID_SOCKET;
   }
 /* for vxWorks addr is already filled in */
@@ -528,24 +551,170 @@ int HostToIp(char *host, int *addr, short *port)
   memcpy(addr, hp->h_addr_list[0], sizeof(*addr));
 #endif
 #endif
+  if (hostfree) free(hostfree);
+  if (protocol) free(protocol);
+  if (portname) free(portname);
   return 1;
 }
 
-SOCKET  ConnectToMds(char *host)
-{
-  char hostpart[256] = {0};
-  char portpart[256] = {0};
-  int i;
-  sscanf(host,"%[^:]:%s",hostpart,portpart);
-  if (strlen(portpart) == 0)
-  {
-    if (host[0] == '_')
-      strcpy(portpart,"mdsips");
+struct TUNNEL_PIPES {
+  int files[2];
+  int pid;
+  struct TUNNEL_PIPES *next;
+} *TUNNEL_PIPES=0;
+
+int GetTunnelStdOut(int stdin) {
+  struct TUNNEL_PIPES *p;
+  for (p=TUNNEL_PIPES;p && p->files[0] != stdin;p=p->next);
+  if (p)
+    return p->files[1];
+  else
+    return -1;
+}
+
+int CloseTunnel(int s) {
+  struct TUNNEL_PIPES *p,*pp;
+  for (pp=0,p=TUNNEL_PIPES;p && p->files[0] != s;pp=p,p=p->next);
+  if (p) {
+    int status;
+    kill(p->pid,9);
+    waitpid(p->pid,&status,0);
+    if (pp)
+      pp->next = p->next;
     else
-      strcpy(portpart,"mdsip");
+      TUNNEL_PIPES=0;
+    close(p->files[0]);
+    return close(p->files[1]);
+  } else
+    return -1;
+}
+  
+
+SOCKET ConnectViaTunnel(char *protocol, char *host) {
+  pid_t  pid,xpid;
+  struct TUNNEL_PIPES *pipes,*p;
+  int sts=0;
+  int pipe_fd1[2],pipe_fd2[2];
+  pipe(pipe_fd1);
+  pipe(pipe_fd2);
+  pid = fork();
+  if (!pid)
+  {
+    char *remotecmd=strcpy((char *)malloc(strlen(protocol)+7),"mdsip-");
+    char *arglist[]={protocol,host,remotecmd,0};
+    char  *p;
+    int i=0;
+    strcat(remotecmd,protocol);
+    signal(SIGCHLD,SIG_IGN);
+    dup2(pipe_fd2[0],0);
+    close(pipe_fd2[0]);
+    dup2(pipe_fd1[1],1);
+    close(pipe_fd1[1]);
+    sts = execvp(arglist[0],arglist);
+    printf("Shouldn't get here\n");
+  } else if (pid == -1) {
+    fprintf(stderr,"Error %d from fork()\n",errno);
+    close(pipe_fd1[0]);
+    close(pipe_fd1[2]);
+    close(pipe_fd2[0]);
+    close(pipe_fd2[1]);
+    return(-1);
+  } else {
+    pipes=(struct TUNNEL_PIPES *)malloc(sizeof(struct TUNNEL_PIPES));
+    pipes->files[0]=pipe_fd1[0];
+    pipes->files[1]=pipe_fd2[1];
+    pipes->pid=pid;
+    close(pipe_fd1[1]);
+    close(pipe_fd2[0]);
+    pipes->next=0;
+    for (p=TUNNEL_PIPES;p && p->next; p=p->next);
+    if (p)
+      p->next=pipes;
+    else
+      TUNNEL_PIPES=pipes;
   }
-  for (i=strlen(hostpart)-1;i>=0 && hostpart[i]==32;hostpart[i]=0,i--);
-  return ConnectToPort(hostpart,portpart);
+  {
+    int status;
+    Message *m;
+#ifdef _WIN32
+	static char user[128];
+	int bsize=128;
+#ifdef _NI_RT_
+	char *user_p = "Windows User";
+#else
+	char *user_p = GetUserName(user,&bsize) ? user : "Windows User";
+#endif
+#elif __MWERKS__
+        static char user[128];
+        int bsize=128;
+        char *user_p = "Macintosh User";
+#elif __APPLE__
+    char *user_p;
+    struct passwd *pwd;
+    pwd = getpwuid(geteuid());
+    user_p = pwd->pw_name;
+#else
+    char *user_p;
+#ifdef HAVE_VXWORKS_H
+    user_p = "vxWorks";
+#else
+	struct passwd *passStruct = getpwuid(geteuid());
+	if(!passStruct)
+		user_p = "Linux";
+	else
+		user_p = passStruct->pw_name;
+    /*
+    user_p = (cuserid(user) && strlen(user)) ? user : "?";
+    */
+
+#endif
+#endif
+    m = malloc(sizeof(MsgHdr) + strlen(user_p));
+    memset(m,0,sizeof(MsgHdr) + strlen(user_p));
+    m->h.client_type = SENDCAPABILITIES;
+    m->h.length = strlen(user_p);
+    m->h.msglen = sizeof(MsgHdr) + m->h.length;
+    m->h.dtype = DTYPE_CSTRING;
+    m->h.status = CompressionLevel;
+    m->h.ndims = 0;
+    memcpy(m->bytes,user_p,m->h.length);
+    status = SendMdsMsg(pipes->files[0],m,0);
+    free(m);
+    if (status & 1) {
+      m = GetMdsMsg(pipes->files[0],&status);
+      if (m==0 || !(status & 1)) {
+        printf("Error in MDSplus ConnectToPort connect to service\n");
+        if (m) free(m);
+        CloseTunnel(pipes->files[0]);
+        return INVALID_SOCKET;
+      }
+      if (m) free(m);
+    }
+    else {
+      CloseTunnel(pipes->files[0]);
+      return INVALID_SOCKET;
+    } 
+    return pipes->files[0];
+  }
+  return pipes->files[0];
+}
+  
+SOCKET  ConnectToMds(char *hostin)
+{
+  int i;
+  char *host=0;
+  char *protocol=0;
+  char *port=0;
+  int s;
+  ParseHost(hostin,&protocol,&host,&port);
+  if (strcmp(protocol,"tcp") == 0 || strcmp(protocol,"gsi") == 0)
+    s = ConnectToPort(host,port);
+  else
+    s = ConnectViaTunnel(protocol,host);
+  if (host) free(host);
+  if (protocol) free(protocol);
+  if (port) free(port);
+  return s;
 }
 
 SOCKET  ConnectToMdsEvents(char *host)

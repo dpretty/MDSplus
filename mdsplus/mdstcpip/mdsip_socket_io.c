@@ -2,6 +2,7 @@
 #include <config.h>
 #include <STATICdef.h>
 #include <mdsshr.h>
+#include <signal.h>
 
 int CloseSocket(SOCKET s);
 extern int GetBytes(SOCKET sock, char *bptr, int bytes_to_recv, int oob);
@@ -10,6 +11,10 @@ extern void FlipHeader(MsgHdr *header);
 #ifndef MSG_NOSIGNAL
 #define MSG_NOSIGNAL 0
 #endif
+int FILE_INPUT;
+int FILE_OUTPUT;
+int USE_FILE_IO=0;
+
 #ifdef GLOBUS
 #if defined(__VMS)
 #include <descrip.h>
@@ -455,12 +460,22 @@ static void ABORT(int sigval)
   unlock_socket_list();
 }
 
+extern int GetTunnelStdOut(int s);
+
 int SocketRecv(SOCKET s, char *bptr, int num,int oob)
 {
-#ifndef GLOBUS
   int num_got=0;
   struct sockaddr sin;
   socklen_t n = sizeof(sin);
+  if (USE_FILE_IO) 
+    return (int)read(FILE_INPUT,bptr,num);
+  if (GetTunnelStdOut(s) != -1) {
+    signal(SIGPIPE,SIG_IGN);
+    num_got = (int)read(s,bptr,num);
+    signal(SIGPIPE,SIG_DFL);
+    return num_got;
+  }
+#ifndef GLOBUS
   PushSocket(s);
 #ifndef WIN32
   signal(SIGABRT,ABORT);
@@ -507,9 +522,19 @@ int SocketRecv(SOCKET s, char *bptr, int num,int oob)
 
 int SocketSend(SOCKET s, char *bptr, int num, int options)
 {
+  int stdout;
+  if (USE_FILE_IO)
+    return write(FILE_OUTPUT,bptr,num);
+  if ((stdout=GetTunnelStdOut(s)) != -1) {
+    int num_sent;
+    signal(SIGPIPE,SIG_IGN);
+    num_sent = write(stdout,bptr,num);
+    signal(SIGPIPE,SIG_DFL);
+    return num_sent;
+  }
 #ifndef GLOBUS
 #ifdef WIN32
-	num=(num > 256000 ? 256000 : num);
+  num=(num > 256000 ? 256000 : num);
 #endif
   return send(s,bptr,num, options | MSG_NOSIGNAL);
 #else
@@ -701,6 +726,15 @@ SOCKET MConnect(char *host, unsigned short port)
 
 int CloseSocket(SOCKET s)
 {
+  int stdout;
+  if (USE_FILE_IO) {
+    close(FILE_OUTPUT);
+    return close(FILE_INPUT)==0;
+  }
+  if ((stdout=GetTunnelStdOut(s)) != -1) {
+    return CloseTunnel(s)==0;
+  }
+
 #ifndef GLOBUS
   int status = shutdown(s,2);
 #ifdef HAVE_WINDOWS_H
@@ -1002,5 +1036,12 @@ int ConnectToInet(unsigned short port,void (*AddClient_in)(SOCKET,void *,char *)
 #endif
   return -1;
 #endif
+}
+
+
+void SetFileIO(in,out) {
+  FILE_INPUT=in;
+  FILE_OUTPUT=out;
+  USE_FILE_IO=1;
 }
 
