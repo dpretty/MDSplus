@@ -51,4 +51,5 @@ SetCloseOnExec
 MdsDispatchEvent
 ZeroFD
 FreeMessage
+SetFileIO
 

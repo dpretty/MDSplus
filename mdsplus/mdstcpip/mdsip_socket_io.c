@@ -467,6 +467,7 @@ int SocketRecv(SOCKET s, char *bptr, int num,int oob)
   int num_got=0;
   struct sockaddr sin;
   socklen_t n = sizeof(sin);
+#ifndef _WIN32
   if (USE_FILE_IO) 
     return (int)read(FILE_INPUT,bptr,num);
   if (GetTunnelStdOut(s) != -1) {
@@ -475,6 +476,7 @@ int SocketRecv(SOCKET s, char *bptr, int num,int oob)
     signal(SIGPIPE,SIG_DFL);
     return num_got;
   }
+#endif
 #ifndef GLOBUS
   PushSocket(s);
 #ifndef WIN32
@@ -522,6 +524,7 @@ int SocketRecv(SOCKET s, char *bptr, int num,int oob)
 
 int SocketSend(SOCKET s, char *bptr, int num, int options)
 {
+#ifndef _WIN32
   int stdout;
   if (USE_FILE_IO)
     return write(FILE_OUTPUT,bptr,num);
@@ -532,6 +535,7 @@ int SocketSend(SOCKET s, char *bptr, int num, int options)
     signal(SIGPIPE,SIG_DFL);
     return num_sent;
   }
+#endif
 #ifndef GLOBUS
 #ifdef WIN32
   num=(num > 256000 ? 256000 : num);
@@ -726,6 +730,7 @@ SOCKET MConnect(char *host, unsigned short port)
 
 int CloseSocket(SOCKET s)
 {
+#ifndef _WIN32
   int stdout;
   if (USE_FILE_IO) {
     close(FILE_OUTPUT);
@@ -734,7 +739,7 @@ int CloseSocket(SOCKET s)
   if ((stdout=GetTunnelStdOut(s)) != -1) {
     return CloseTunnel(s)==0;
   }
-
+#endif
 #ifndef GLOBUS
   int status = shutdown(s,2);
 #ifdef HAVE_WINDOWS_H

@@ -867,11 +867,11 @@ static int ConnectToStdIn() {
   int m_status;
   int user_compression_level;
   int log;
-  int stdin;
-  stdin=dup(1);
+  int fstdin;
+  fstdin=dup(1);
   close(1);
   dup2(2,1);
-  SetFileIO(0,stdin);
+  SetFileIO(0,fstdin);
   m.h.msglen = sizeof(MsgHdr);
   m_user = GetMdsMsg(0,&status);
   if (m_user == 0 || !(status & 1))

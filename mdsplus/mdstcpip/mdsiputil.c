@@ -563,9 +563,10 @@ struct TUNNEL_PIPES {
   struct TUNNEL_PIPES *next;
 } *TUNNEL_PIPES=0;
 
-int GetTunnelStdOut(int stdin) {
+int GetTunnelStdOut(int fstdin)
+{
   struct TUNNEL_PIPES *p;
-  for (p=TUNNEL_PIPES;p && p->files[0] != stdin;p=p->next);
+  for (p=TUNNEL_PIPES;p && p->files[0] != fstdin;p=p->next);
   if (p)
     return p->files[1];
   else
@@ -577,8 +578,10 @@ int CloseTunnel(int s) {
   for (pp=0,p=TUNNEL_PIPES;p && p->files[0] != s;pp=p,p=p->next);
   if (p) {
     int status;
+#ifndef _WIN32
     kill(p->pid,9);
     waitpid(p->pid,&status,0);
+#endif
     if (pp)
       pp->next = p->next;
     else
@@ -591,6 +594,10 @@ int CloseTunnel(int s) {
   
 
 SOCKET ConnectViaTunnel(char *protocol, char *host) {
+#ifdef _WIN32
+  printf("Connection using protocol %d is not supported\n",protocol);
+  return INVALID_SOCKET;
+#else
   pid_t  pid,xpid;
   struct TUNNEL_PIPES *pipes,*p;
   int sts=0;
@@ -697,20 +704,23 @@ SOCKET ConnectViaTunnel(char *protocol, char *host) {
     return pipes->files[0];
   }
   return pipes->files[0];
+#endif
 }
-  
+ 
 SOCKET  ConnectToMds(char *hostin)
 {
   int i;
   char *host=0;
   char *protocol=0;
   char *port=0;
-  int s;
+  int s=INVALID_SOCKET;
   ParseHost(hostin,&protocol,&host,&port);
   if (strcmp(protocol,"tcp") == 0 || strcmp(protocol,"gsi") == 0)
     s = ConnectToPort(host,port);
+#ifndef _WIN32
   else
     s = ConnectViaTunnel(protocol,host);
+#endif
   if (host) free(host);
   if (protocol) free(protocol);
   if (port) free(port);
