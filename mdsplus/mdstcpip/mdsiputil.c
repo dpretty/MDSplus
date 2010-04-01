@@ -607,10 +607,12 @@ SOCKET ConnectViaTunnel(char *protocol, char *host) {
   pid = fork();
   if (!pid)
   {
-    char *remotecmd=strcpy((char *)malloc(strlen(protocol)+7),"mdsip-");
-    char *arglist[]={protocol,host,remotecmd,0};
+    char *localcmd=strcpy((char *)malloc(strlen(protocol)+strlen("mdsip-client-")+1),"mdsip-client-");
+    char *remotecmd=strcpy((char *)malloc(strlen(protocol)+strlen("mdsip-server-")+1),"mdsip-server-");
+    char *arglist[]={localcmd,host,remotecmd,0};
     char  *p;
     int i=0;
+    strcat(localcmd,protocol);
     strcat(remotecmd,protocol);
     signal(SIGCHLD,SIG_IGN);
     dup2(pipe_fd2[0],0);
