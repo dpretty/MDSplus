@@ -27,7 +27,7 @@ typedef struct {int lo; unsigned int hi;} quadw;
 #include <mdsshr.h>
 #include <treeshr.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiDoTask.c,v $ $Revision: 1.12 $ $Date: 2009/06/11 19:39:19 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiDoTask.c,v $ $Revision: 1.13 $ $Date: 2010/04/07 17:54:06 $";
 
 extern int TdiTaskOf();
 extern int TdiGetFloat();
@@ -93,7 +93,7 @@ STATIC_ROUTINE int Doit(struct descriptor_routine	*ptask, struct descriptor_xd *
 	{
 	    struct descriptor_program *prog_task = (struct descriptor_program *)ptask;
 	    if(prog_task->program && prog_task->program->dtype == DTYPE_T) 
-	    status = LibSpawn(prog_task->program, 1, 0);
+	    status = LibSpawn(prog_task->program, 1, 0) == 0;
 		
 		status = TdiPutLong(&status, out_ptr);
 
@@ -118,14 +118,42 @@ struct descriptor_routine	*ptask;
         timeout_dsc.pointer = (char *)&timeout;
         dt_dsc.pointer = (char *)&dt;
 	status = TdiTaskOf(list[0], &task_xd MDS_END_ARG);
+        if (!(status & 1)) 
+          goto cleanup;
 	ptask = (struct descriptor_routine *)task_xd.pointer;
 	if (!ptask) return TdiNULL_PTR;
-        if (ptask->dtype == DTYPE_L)
+        switch (ptask->dtype) {
+        case DTYPE_L:
+        case DTYPE_LU:
         {
-           status = *(int *)task_xd.pointer->pointer;
+           status = *(int *)ptask->pointer;
 	   status = TdiPutLong(&status, out_ptr);
            goto cleanup;
         }
+        case DTYPE_W:
+        case DTYPE_WU:
+        {
+          status = (int)*(short *)ptask->pointer;
+          status = TdiPutLong(&status, out_ptr);
+          goto cleanup;
+        }
+        case DTYPE_B:
+	case DTYPE_BU:
+	{
+	  status = (int)*(char *)ptask->pointer;
+	  status = TdiPutLong(&status,out_ptr);
+          goto cleanup;
+        }
+        case DTYPE_PROGRAM:
+        case DTYPE_METHOD:
+        case DTYPE_ROUTINE:
+          break;
+        default:
+          status = TdiINVDTYDSC;
+          status = TdiPutLong(&status,out_ptr);
+          goto cleanup;
+        }
+        
 	/***** get timeout *****/
 	if (status & 1) status=TdiGetFloat(ptask->time_out, &timeout);
 	if (timeout > 0.) {

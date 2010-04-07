@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <mdsshr.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiXxxOf.c,v $ $Revision: 1.9 $ $Date: 2003/11/17 21:21:21 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiXxxOf.c,v $ $Revision: 1.10 $ $Date: 2010/04/07 17:54:06 $";
 
 extern int TdiGetData();
 extern int TdiGetLong();
@@ -914,6 +914,11 @@ STATIC_CONSTANT unsigned char omits[] = {
 	case DTYPE_PROGRAM :
 	case DTYPE_ROUTINE :
         case DTYPE_L :
+	case DTYPE_LU :
+	case DTYPE_W :
+	case DTYPE_WU :
+	case DTYPE_B :
+	case DTYPE_BU :
 		MdsFree1Dx(out_ptr,NULL);
 		*out_ptr = tmp;
 		return status;
