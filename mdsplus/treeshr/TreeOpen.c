@@ -46,7 +46,7 @@ extern char *index(char *str,char c);
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.102 $ $Date: 2010/03/23 12:58:35 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.103 $ $Date: 2010/04/20 15:47:53 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
@@ -1378,6 +1378,15 @@ void *TreeSwitchDbid(void *dbid)
   void *old_dbid = DBID;
   DBID = dbid;
   return old_dbid;
+}
+
+void TreeFreeDbid(void *dbid) {
+  PINO_DATABASE *db=(PINO_DATABASE *)dbid;
+  if (db) {
+    if (db->next) 
+      TreeFreeDbid(db->next);
+    free(db);
+  }
 }
 
 struct descriptor *TreeFileName(char *tree, int shot)
