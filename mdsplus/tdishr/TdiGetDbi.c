@@ -17,7 +17,7 @@
 #include <treeshr.h>
 #include <mdsshr.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiGetDbi.c,v $ $Revision: 1.11 $ $Date: 2003/11/17 21:21:21 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiGetDbi.c,v $ $Revision: 1.12 $ $Date: 2010/04/20 15:48:32 $";
 
 STATIC_CONSTANT DESCRIPTOR(pathtext, "PATH");
 STATIC_CONSTANT DESCRIPTOR(coloncolon, "::");
@@ -258,7 +258,8 @@ unsigned char	omits[] = {DTYPE_PATH,0};
         if (reset_ctx)
         {
           while(TreeClose(0,0) & 1);
-	  TreeSwitchDbid(ctx);
+	  TreeFreeDbid(TreeSwitchDbid(ctx));
+          
         }
 	return status;
 }
