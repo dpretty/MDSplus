@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: verbs.c,v 1.11 2010/02/18 19:38:26 twf Exp $
+//	$Id: verbs.c,v 1.12 2010/05/21 15:51:25 twf Exp $
 //-------------------------------------------------------------------------
 
 //-------------------------------------------------------------------------
@@ -747,7 +747,9 @@ int AddCrate()
 	}
 
 	if( numOfEntries ) {		// 1 or more
-		if( lookup_entry(CRATE_DB, phy_name.pointer) >= 0 ) {			// duplicate !
+                char pname[7];
+                sprintf(pname,"%.6s",phy_name.pointer);
+		if( lookup_entry(CRATE_DB, pname) >= 0 ) {			// duplicate !
 			if( MSGLVL(IMPORTANT) )
 				fprintf( stderr, "duplicate crate name '%.6s' -- not allowed\n", phy_name.pointer );
 
