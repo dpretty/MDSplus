@@ -29,7 +29,7 @@ extern unsigned short OpcCompile;
 #endif
 
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiCompile.c,v $ $Revision: 1.12 $ $Date: 2003/11/17 21:21:21 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiCompile.c,v $ $Revision: 1.13 $ $Date: 2010/05/21 20:38:04 $";
 
 extern int TdiEvaluate();
 extern int TdiYacc();
@@ -65,13 +65,26 @@ STATIC_CONSTANT DESCRIPTOR(compile_zone,"TDI Compile Zone");
 		{
 #ifndef HAVE_WINDOWS_H
 #ifndef HAVE_VXWORKS_H
+#if !defined(PTHREAD_MUTEX_RECURSIVE)
+#define PTHREAD_MUTEX_RECURSIVE PTHREAD_MUTEX_RECURSIVE_NP
+#endif
+
 		  STATIC_THREADSAFE  int yacc_mutex_initialized = 0;
                   STATIC_THREADSAFE  pthread_mutex_t yacc_mutex;
 
                   if(!yacc_mutex_initialized)
                   {
+                    pthread_mutexattr_t m_attr;
+                    pthread_mutexattr_init(&m_attr);
+#ifndef __sun
+#ifdef HAVE_PTHREAD_MUTEXATTR_SETKIND_NP
+    pthread_mutexattr_setkind_np(&m_attr,PTHREAD_MUTEX_RECURSIVE);
+#else
+    pthread_mutexattr_settype(&m_attr,PTHREAD_MUTEX_RECURSIVE);
+#endif
+#endif
 	            yacc_mutex_initialized = 1;
-	            pthread_mutex_init(&yacc_mutex, pthread_mutexattr_default);
+	            pthread_mutex_init(&yacc_mutex, &m_attr);
                   }
                   pthread_mutex_lock(&yacc_mutex);
 #endif
