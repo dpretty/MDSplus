@@ -44,7 +44,7 @@
 #include <tdimessages.h>
 #include <mdsshr.h>
 #include <mds_stdarg.h>
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiIntrinsic.c,v $ $Revision: 1.12 $ $Date: 2009/08/24 19:43:11 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiIntrinsic.c,v $ $Revision: 1.13 $ $Date: 2010/05/21 20:42:59 $";
 
 typedef struct _bounds { int l; int u; } BOUNDS;
 
@@ -228,15 +228,20 @@ TdiRefStandard(TdiIntrinsic)
   {
     int list_size = narg * sizeof(struct descriptor *);
     struct descriptor *fixed_list[256];
+    char fixed[256];
     int i;
           for (i=0;i<narg;i++)
-            if (list[i] != NULL && list[i]->class == CLASS_NCA)
+            if (list[i] != NULL && list[i]->class == CLASS_NCA) {
+              fixed[i]=1;
               fixed_list[i] = FixedArray(list[i]);
-            else
+	    }
+            else {
+              fixed[i]=0;
               fixed_list[i] = list[i];
+	    }
           status = interlude(fun_ptr->f1, opcode, narg, fixed_list, &tmp);
           for (i=0;i<narg;i++)
-            if (list[i] != fixed_list[i]) free(fixed_list[i]);
+            if (fixed[i]) free(fixed_list[i]);
         }
 	if (status & 1
 	|| status == TdiBREAK
