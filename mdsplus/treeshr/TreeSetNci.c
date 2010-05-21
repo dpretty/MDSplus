@@ -37,6 +37,10 @@
 #ifdef _WIN32
 #include <windows.h>
 #include <io.h>
+#else
+#ifndef HAVE_VXWORKS_H
+#include <pthread.h>
+#endif
 #endif
 #include <string.h>
 #include <stdlib.h>
@@ -45,7 +49,7 @@
 #include "treeshrp.h"
 #include <ncidef.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.46 $ $Date: 2010/03/23 15:37:35 $";
+static char *cvsrev = "@(#)$RCSfile: TreeSetNci.c,v $ $Revision: 1.47 $ $Date: 2010/05/21 13:48:28 $";
 
 extern void *DBID;
 
