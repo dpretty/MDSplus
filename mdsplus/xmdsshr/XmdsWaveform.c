@@ -126,7 +126,7 @@ Widget XmdsCreateWaveform( parent, name, args, argcount )
 
  Local variables:                                                             */
 
-static char *cvsrev = "@(#)$RCSfile: XmdsWaveform.c,v $ $Revision: 1.16 $ $Date: 2009/12/07 16:35:14 $";
+static char *cvsrev = "@(#)$RCSfile: XmdsWaveform.c,v $ $Revision: 1.17 $ $Date: 2010/05/26 18:13:39 $";
 static int height_page;
 enum crosshairsmode
 {
@@ -948,7 +948,7 @@ static void GetPixVals(XmdsWaveformWidget w,Dimension width,Dimension height)
 #define LoadPoint(idx,penDown)\
 {\
   XPoint    this_point;\
-  static Boolean last_pen_down;\
+  static Boolean last_pen_down = False;\
   int x = xp[idx];\
   int y = yp[idx];\
   Boolean is_missing = (x == missing || y == missing);\
