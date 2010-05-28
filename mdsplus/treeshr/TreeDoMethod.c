@@ -41,7 +41,7 @@ int TreeDoMethod( nid_dsc, method_dsc [,args]...)
 #include <string.h>
 #include <librtl_messages.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeDoMethod.c,v $ $Revision: 1.23 $ $Date: 2010/05/26 18:12:19 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeDoMethod.c,v $ $Revision: 1.24 $ $Date: 2010/05/28 14:58:41 $";
 
 #define  count(num) va_start(incrmtr, method_ptr); \
                      for (num=2; (num < 256) && (va_arg(incrmtr, struct descriptor *) != MdsEND_ARG);  num++)
@@ -144,6 +144,10 @@ int _TreeDoMethod(void *dbid, struct descriptor *nid_dsc, struct descriptor *met
       struct descriptor exp = {0, DTYPE_T, CLASS_D, 0};
       STATIC_CONSTANT DESCRIPTOR(open,"PyDoMethod(");
       StrCopyDx(&exp, &open);
+      if (nargs==4 && method_ptr->length == strlen("DW_SETUP") && strncmp(method_ptr->pointer,"DW_SETUP",strlen("DW_SETUP")) == 0) {
+        arglist[3]=arglist[4];
+        nargs--;
+      }
       for (i=1;i<nargs-1;i++) StrAppend(&exp,&arg);
       StrAppend(&exp,&close);
       if (TdiExecute == 0)
