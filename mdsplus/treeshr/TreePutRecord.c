@@ -62,7 +62,7 @@ static int daylight = 0;
 #define LONG_LONG_CONSTANT(value) value##ll
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.90 $ $Date: 2010/03/23 12:58:35 $";
+static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.91 $ $Date: 2010/06/11 20:54:41 $";
 
 #ifdef min
 #undef min
@@ -137,9 +137,10 @@ int       _TreePutRecord(void *dbid, int nid, struct descriptor *descriptor_ptr,
     else
       open_status = 1;
     if (local_nci.flags2 & NciM_EXTENDED_NCI) {
+      int ext_status;
       extended_offset = RfaToSeek(local_nci.DATA_INFO.DATA_LOCATION.rfa);
-      status = TreeGetExtendedAttributes(info_ptr,extended_offset,&attributes);
-      if (!(status & 1)) {
+      ext_status = TreeGetExtendedAttributes(info_ptr,extended_offset,&attributes);
+      if (!(ext_status & 1)) {
 	local_nci.flags2 &= ~NciM_EXTENDED_NCI;
       } else {
 	extended=1;
