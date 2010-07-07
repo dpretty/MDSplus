@@ -15,7 +15,7 @@
 #include <mdsshr.h>
 #include <mds_stdarg.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiTrim.c,v $ $Revision: 1.5 $ $Date: 2009/08/24 19:43:11 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiTrim.c,v $ $Revision: 1.5.2.1 $ $Date: 2010/07/07 17:22:58 $";
 
 extern int TdiGetLong();
 extern int TdiGetArgs();
@@ -98,7 +98,7 @@ STATIC_CONSTANT unsigned char dtype = (unsigned char)DTYPE_T;
 	if (status & 1 && ind < (unsigned int)TdiFUNCTION_MAX) {
 	char *name_ptr = TdiRefFunction[ind].name;
 	struct descriptor str2 = {0,DTYPE_T,CLASS_S,0};
-	unsigned short total;
+	unsigned long total;
                 str2.length = (unsigned short)strlen(name_ptr);
                 str2.pointer = name_ptr;
 	        total = (unsigned short)(str1.length + str2.length);

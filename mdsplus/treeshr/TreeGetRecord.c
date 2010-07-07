@@ -23,7 +23,7 @@
 
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.52 $ $Date: 2010/03/23 12:58:35 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.52.2.1 $ $Date: 2010/07/07 17:22:58 $";
 
 static _int64 ViewDate = -1;
 static int MakeNidsLocal(struct descriptor *dsc_ptr, unsigned char tree);
@@ -112,8 +112,8 @@ int _TreeGetRecord(void *dbid, int nid_in, struct descriptor_xd *dsc)
 		 if (nci.flags2 & NciM_DATA_IN_ATT_BLOCK)
 		   {
 		     unsigned char dsc_dtype = DTYPE_DSC;
-		     int dlen = nci.length - 8;
-		     unsigned int ddlen = dlen + sizeof(struct descriptor);
+		     unsigned long long dlen = nci.length - 8;
+		     unsigned long long ddlen = dlen + sizeof(struct descriptor);
 		     status = MdsGet1Dx(&ddlen, &dsc_dtype, dsc,0);
 		     dptr = dsc->pointer;
 		     dptr->length = dlen;

@@ -58,7 +58,7 @@
 #define MaskTrue (pi0[0] & 1)
 #endif
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiTrans.c,v $ $Revision: 1.9 $ $Date: 2006/06/26 16:23:37 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiTrans.c,v $ $Revision: 1.9.2.1 $ $Date: 2010/07/07 17:22:58 $";
 
 extern  unsigned short
 	OpcAccumulate,
@@ -103,7 +103,8 @@ struct TdiFunctionStruct	*pfun = (struct TdiFunctionStruct *)&TdiRefFunction[opc
 int				cmode = -1, dim = -1, j, mul=0, ncopies, rank=0, ndim;
 int				step_bef=0, step_dim=0, step_aft=0;
 int				count_bef = 1, count_dim = 1, count_aft = 1;
-unsigned short			digits, head;
+unsigned long digits;
+unsigned short			head;
 unsigned char			out_dtype;
 
 	/******************************************

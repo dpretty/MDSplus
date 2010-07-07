@@ -44,7 +44,7 @@
 #include <tdimessages.h>
 #include <mdsshr.h>
 #include <mds_stdarg.h>
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiIntrinsic.c,v $ $Revision: 1.13 $ $Date: 2010/05/21 20:42:59 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiIntrinsic.c,v $ $Revision: 1.13.2.1 $ $Date: 2010/07/07 17:22:58 $";
 
 typedef struct _bounds { int l; int u; } BOUNDS;
 
@@ -387,7 +387,7 @@ struct descriptor_d *message = &((TdiThreadStatic())->TdiIntrinsic_message);
 		StrConcat((struct descriptor *)message, &dmsg, &newline, message MDS_END_ARG);
 	}
 	if (message->length) {
-		if (option & 2) printf("%.*s", message->length, message->pointer);
+	  if (option & 2) printf("%.*s", (int)message->length, message->pointer);
 		if (option & 4) (TdiThreadStatic())->TdiIntrinsic_mess_stat = StrFree1Dx(message);
 	}
 	status = MdsCopyDxXd((struct descriptor *)message, out_ptr);

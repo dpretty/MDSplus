@@ -41,7 +41,7 @@
 #include <mdsshr.h>
 #include <string.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSubscript.c,v $ $Revision: 1.11 $ $Date: 2009/08/24 19:07:20 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSubscript.c,v $ $Revision: 1.11.2.1 $ $Date: 2010/07/07 17:22:58 $";
 
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 extern struct descriptor *TdiRANGE_PTRS[3];
@@ -233,7 +233,7 @@ struct TdiCatStruct		cats[2];
 	if (psig && psig->ndesc > highdim + 2) psig->ndesc = (unsigned char)(highdim + 2);
 	if (psig) for (j = psig->ndesc; --j >= 0;) psig->dimensions[j] = xx[j].pointer;
 	if (highest <= 0) {
-                unsigned short llen = (unsigned short)0;
+                unsigned long llen = 0;
                 unsigned char dtype = (unsigned char)DTYPE_MISSING;
 		if (arr.arsize) status = MdsGet1DxS(&pdat->length, &pdat->dtype, out_ptr);
 		else status = MdsGet1DxS(&llen, &dtype, out_ptr);

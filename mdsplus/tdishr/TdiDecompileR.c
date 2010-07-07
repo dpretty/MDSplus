@@ -19,7 +19,7 @@
 #define	P_ARG		88
 #define P_SUBS		0
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiDecompileR.c,v $ $Revision: 1.5 $ $Date: 2009/08/24 19:43:11 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiDecompileR.c,v $ $Revision: 1.5.2.1 $ $Date: 2010/07/07 17:22:58 $";
 
 extern unsigned int LEX_CONST;
 unsigned int TdiIndent = 1;
@@ -102,7 +102,7 @@ char			*pstr,
 struct descriptor_d	*pd)
 {
 struct descriptor	dstr = {0,DTYPE_T,CLASS_S,0};
-dstr.length = (unsigned short)strlen(pstr);
+dstr.length = strlen(pstr);
 dstr.pointer = pstr;
 	return StrAppend(pd, &dstr);
 }
@@ -116,7 +116,7 @@ char	*start = pout->pointer, *fin = start + pout->length - 1;
 
 	if (!start) return;
 	while (fin >= start && (*fin == '\t' || *fin == '\n' || *fin == '\r')) --fin;
-	pout->length = (unsigned short)(fin - start + 1);
+	pout->length = fin - start + 1;
 	return;
 }
 
@@ -124,7 +124,7 @@ STATIC_ROUTINE int		Indent(
 int			step,
 struct descriptor_d	*pout)
 {
-	newline.length = (unsigned short)(((TdiIndent += step) < 8 ? TdiIndent : 8) + 1);
+	newline.length = (((TdiIndent += step) < 8 ? TdiIndent : 8) + 1);
 	return StrAppend(pout, &newline);
 }
 

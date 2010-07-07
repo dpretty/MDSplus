@@ -24,7 +24,7 @@ extern unsigned short OpcValue;
 #include <stdlib.h>
 #include <mdsshr.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiDtypeRange.c,v $ $Revision: 1.8 $ $Date: 2003/11/17 21:21:21 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiDtypeRange.c,v $ $Revision: 1.8.4.1 $ $Date: 2010/07/07 17:22:58 $";
 
 STATIC_CONSTANT DESCRIPTOR_A(arr0, 1, DTYPE_B, 0, 0);
 STATIC_CONSTANT int minus_one_value = -1;
@@ -50,7 +50,7 @@ extern int TdiNint();
 extern struct descriptor *TdiItoXSpecial;
 
 TdiRefStandard(Tdi1DtypeRange)
-unsigned short len;
+unsigned long len;
 unsigned char dtype;
 int				cmode = -1, j, nseg=0, nnew = narg;
 int				*pl, tot=0;

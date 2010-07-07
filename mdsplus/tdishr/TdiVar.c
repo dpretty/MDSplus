@@ -51,7 +51,7 @@
 #include <string.h>
 #include <librtl_messages.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiVar.c,v $ $Revision: 1.20 $ $Date: 2010/01/20 20:52:41 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiVar.c,v $ $Revision: 1.20.2.1 $ $Date: 2010/07/07 17:22:58 $";
 
 extern unsigned short OpcEquals, OpcEqualsFirst;
 extern unsigned short OpcFun;
@@ -115,7 +115,7 @@ int			TdiPutLogical(
 unsigned char		data,
 struct descriptor_xd *out_ptr) {
 int	status;
-STATIC_CONSTANT unsigned short len = (unsigned short)sizeof(unsigned char);
+STATIC_CONSTANT unsigned long len = sizeof(unsigned char);
 STATIC_CONSTANT unsigned char dtype = (unsigned char)DTYPE_BU;
 	if (out_ptr == 0) return 0;
 	status = MdsGet1DxS(&len, &dtype, out_ptr);
@@ -752,17 +752,17 @@ struct descriptor_r	*rptr = (struct descriptor_r *)node_ptr->xd.pointer;
 		if (status & 1) {
 			if (rptr && rptr->dtype == DTYPE_FUNCTION
 			&& *(unsigned short *)rptr->pointer == OpcFun)
-				printf("%.*s\n", tmp.length, tmp.pointer);
+			  printf("%.*s\n", (int)tmp.length, tmp.pointer);
 			else if (tmp.length > 0)
 				printf("%s %.*s\t= %.*s\n", user_ptr->block_ptr->_public ? "Public" : "Private",
-				node_ptr->name_dsc.length, node_ptr->name_dsc.pointer,
-				tmp.length, tmp.pointer);
+				       (int)node_ptr->name_dsc.length, node_ptr->name_dsc.pointer,
+				       (int)tmp.length, tmp.pointer);
 			else
 				printf("%s %.*s\t=\n", user_ptr->block_ptr->_public ? "Public" : "Private",
-				node_ptr->name_dsc.length, node_ptr->name_dsc.pointer);
+				       (int)node_ptr->name_dsc.length, node_ptr->name_dsc.pointer);
 			user_ptr->count++;
 		}
-		else printf("ERROR on %.*s\n", node_ptr->name_dsc.length, node_ptr->name_dsc.pointer);
+		else printf("ERROR on %.*s\n", (int)node_ptr->name_dsc.length, node_ptr->name_dsc.pointer);
 		StrFree1Dx(&tmp);
 	}
 	else 
