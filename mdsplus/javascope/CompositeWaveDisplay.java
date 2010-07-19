@@ -1,4 +1,4 @@
-/* $Id: CompositeWaveDisplay.java,v 1.35 2009/01/27 18:10:12 manduchi Exp $ */
+/* $Id: CompositeWaveDisplay.java,v 1.36 2010/07/19 16:49:45 manduchi Exp $ */
 import java.applet.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.lang.NumberFormatException;
 import java.util.*;
 import javax.swing.*;
+import javax.swing.event.*;
 import java.security.AccessControlException;
 import java.awt.print.*;
 
@@ -435,7 +436,7 @@ public class CompositeWaveDisplay extends JApplet implements WaveContainerListen
     }
 
 
-    JRadioButton liveUpdate;
+    JCheckBox liveUpdate;
 
     public void init()
     {
@@ -483,12 +484,12 @@ public class CompositeWaveDisplay extends JApplet implements WaveContainerListen
 		       }
 		    });
 
-        liveUpdate = new JRadioButton("Live Update", true);
-        liveUpdate.addItemListener(new ItemListener ()
+        liveUpdate = new JCheckBox("Live Update", true);
+        liveUpdate.addChangeListener(new ChangeListener ()
         {
-            public void itemStateChanged(ItemEvent e)
+            public void stateChanged(ChangeEvent e)
             {
-                setLiveUpdate(e.getStateChange() == ItemEvent.SELECTED, false);
+                setLiveUpdate(liveUpdate.isSelected(), false);
             }
         });
 
@@ -574,9 +575,13 @@ public class CompositeWaveDisplay extends JApplet implements WaveContainerListen
             liveUpdate.setSelected(state);
             return;
         }
+	if(wave_container.GetMode() != Waveform.MODE_WAIT)
+	{
+	    currentMode = wave_container.GetMode();
+	}
         if( state )
         {
-            currentMode = wave_container.GetMode();
+
             setEnabledMode(false);
             wave_container.SetMode(Waveform.MODE_WAIT);
             appendThread.resumeThread();
