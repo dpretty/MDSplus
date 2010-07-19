@@ -15,7 +15,7 @@
 #include <mdsshr.h>
 #include <mds_stdarg.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiTrim.c,v $ $Revision: 1.5.2.1 $ $Date: 2010/07/07 17:22:58 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiTrim.c,v $ $Revision: 1.5.2.2 $ $Date: 2010/07/19 13:18:35 $";
 
 extern int TdiGetLong();
 extern int TdiGetArgs();
@@ -74,7 +74,7 @@ STATIC_CONSTANT unsigned char dtype = (unsigned char)DTYPE_T;
 	status = TdiGetLong(in_ptr, &ind);
 	if (status & 1 && ind < (unsigned int)TdiFUNCTION_MAX) {
 	char *name_ptr = TdiRefFunction[ind].name;
-	struct descriptor str2 = {0,DTYPE_T,CLASS_S,0};
+	struct descriptor str2 = DESCRIPTOR_INIT(0,DTYPE_T,CLASS_S,0);
                 str2.length = (unsigned short)strlen(name_ptr);
                 str2.pointer = name_ptr;
 		status = MdsGet1DxS(&str2.length, &dtype, out_ptr);
@@ -97,7 +97,7 @@ STATIC_CONSTANT unsigned char dtype = (unsigned char)DTYPE_T;
 	status = TdiGetLong(in_ptr, &ind);
 	if (status & 1 && ind < (unsigned int)TdiFUNCTION_MAX) {
 	char *name_ptr = TdiRefFunction[ind].name;
-	struct descriptor str2 = {0,DTYPE_T,CLASS_S,0};
+	struct descriptor str2 = DESCRIPTOR_INIT(0,DTYPE_T,CLASS_S,0);
 	unsigned long total;
                 str2.length = (unsigned short)strlen(name_ptr);
                 str2.pointer = name_ptr;

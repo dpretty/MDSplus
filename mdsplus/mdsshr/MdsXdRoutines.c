@@ -21,7 +21,7 @@
 #include <mdsshr.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: MdsXdRoutines.c,v $ $Revision: 1.20.2.1 $ $Date: 2010/07/07 17:22:58 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: MdsXdRoutines.c,v $ $Revision: 1.20.2.2 $ $Date: 2010/07/19 13:18:34 $";
 #define LibVM_FIRST_FIT      1
 #define LibVM_BOUNDARY_TAGS  1
 #define LibVM_EXTEND_AREA    32
@@ -52,7 +52,7 @@ int  MdsGet1Dx(unsigned long *length_ptr, unsigned char *dtype_ptr, struct descr
       status = 1;
     if (status & 1)
     {
-      dsc_ptr->length = 0;
+      dsc_ptr->len_fill = 0;
       dsc_ptr->l_length = *length_ptr;
       dsc_ptr->class = CLASS_XD;
       dsc_ptr->dtype = *dtype_ptr;

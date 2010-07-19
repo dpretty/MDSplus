@@ -29,7 +29,7 @@
 #include <mdsshr.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiCall.c,v $ $Revision: 1.17 $ $Date: 2009/01/29 15:13:25 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiCall.c,v $ $Revision: 1.17.2.1 $ $Date: 2010/07/19 13:18:35 $";
 
 extern unsigned short OpcDescr;
 extern unsigned short OpcRef;
@@ -242,10 +242,11 @@ fort:			tmp[ntmp] = EMPTY_XD;
 		break;
 	case DTYPE_POINTER:
 	  dx.length=sizeof(void *);
-	  //	  if (sizeof(void *) == 8)
-	  //  dx.dtype = DTYPE_QU;
-	  //else
-	  //  dx.dtype = DTYPE_LU;
+	  /*	  if (sizeof(void *) == 8)
+	    dx.dtype = DTYPE_QU;
+	  else
+	    dx.dtype = DTYPE_LU;
+          */
 	  break;
 
 	default :

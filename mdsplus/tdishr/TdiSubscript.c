@@ -41,7 +41,7 @@
 #include <mdsshr.h>
 #include <string.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSubscript.c,v $ $Revision: 1.11.2.1 $ $Date: 2010/07/07 17:22:58 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSubscript.c,v $ $Revision: 1.11.2.2 $ $Date: 2010/07/19 13:18:35 $";
 
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 extern struct descriptor *TdiRANGE_PTRS[3];
@@ -83,7 +83,7 @@ struct descriptor_dimension *pdim;
 struct descriptor		*keeps = TdiSELF_PTR;
 array_coeff			*pdat, *pdi=0;
 array_coeff			arr = *(array_coeff *)&coeff0;
-struct descriptor	        ddim = {sizeof(dim),DTYPE_L,CLASS_S,0};
+struct descriptor	        ddim = DESCRIPTOR_INIT(sizeof(dim),DTYPE_L,CLASS_S,0);
 struct descriptor_xd	ii[MAXDIM], xx[MAXDIM];
 struct descriptor_xd	sig[1], uni[1], dat[1];
 struct TdiCatStruct		cats[2];
@@ -187,8 +187,8 @@ struct TdiCatStruct		cats[2];
 			}
 			else {
 			int left, right;
-			struct descriptor dleft = {sizeof(int),DTYPE_L, CLASS_S,0};
-			struct descriptor dright = {sizeof(int),DTYPE_L, CLASS_S,0};
+			struct descriptor dleft = DESCRIPTOR_INIT(sizeof(int),DTYPE_L, CLASS_S,0);
+			struct descriptor dright = DESCRIPTOR_INIT(sizeof(int),DTYPE_L, CLASS_S,0);
                                 dleft.pointer = (char *)&left;
                                 dright.pointer = (char *)&right;
 				status = TdiLbound(pdat, &ddim, &dleft MDS_END_ARG);
@@ -233,11 +233,12 @@ struct TdiCatStruct		cats[2];
 	if (psig && psig->ndesc > highdim + 2) psig->ndesc = (unsigned char)(highdim + 2);
 	if (psig) for (j = psig->ndesc; --j >= 0;) psig->dimensions[j] = xx[j].pointer;
 	if (highest <= 0) {
-                unsigned long llen = 0;
-                unsigned char dtype = (unsigned char)DTYPE_MISSING;
-		if (arr.arsize) status = MdsGet1DxS(&pdat->length, &pdat->dtype, out_ptr);
-		else status = MdsGet1DxS(&llen, &dtype, out_ptr);
-		if (status & 1) _MOVC3(len, pin, out_ptr->pointer->pointer);
+	  unsigned long llen = pdat->length;
+          unsigned long llen_z = 0;
+	  unsigned char dtype = (unsigned char)DTYPE_MISSING;
+	  if (arr.arsize) status = MdsGet1DxS(&llen, &pdat->dtype, out_ptr);
+	  else status = MdsGet1DxS(&llen_z, &dtype, out_ptr);
+	  if (status & 1) _MOVC3(len, pin, out_ptr->pointer->pointer);
 	}
 	else {
 		arr.dimct = (unsigned char)highest;
@@ -302,8 +303,8 @@ int				cmode = -1, n=0, len;
 int			 left, right;
 struct descriptor		*keep[3];
 struct descriptor		range[2] = {
-	{sizeof(int),DTYPE_L,CLASS_S,0},
-	{sizeof(int),DTYPE_L,CLASS_S,0}};
+  DESCRIPTOR_INIT(sizeof(int),DTYPE_L,CLASS_S,0),
+  DESCRIPTOR_INIT(sizeof(int),DTYPE_L,CLASS_S,0)};
 array_coeff			*pa;
 char				*abase, *po=0;
 int				*pindex=0;

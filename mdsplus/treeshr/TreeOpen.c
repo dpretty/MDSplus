@@ -46,7 +46,7 @@ extern char *index(char *str,char c);
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.103 $ $Date: 2010/04/20 15:47:53 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.103.2.1 $ $Date: 2010/07/19 13:18:35 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
@@ -720,11 +720,11 @@ static char *GetFname(char *tree, int shot)
 {
   int status = 1;
   static char *ans = 0;
-  struct descriptor fname = {0, DTYPE_T, CLASS_D, 0};
+  struct descriptor fname = DESCRIPTOR_INIT(0, DTYPE_T, CLASS_D, 0);
   void *arglist[4];
   char expression[128];
   static void *TdiExecute = 0;
-  struct descriptor expression_d = {0, DTYPE_T, CLASS_S, 0};
+  struct descriptor expression_d = DESCRIPTOR_INIT(0, DTYPE_T, CLASS_S, 0);
   if (ans)
   {
     free(ans);
@@ -1391,7 +1391,7 @@ void TreeFreeDbid(void *dbid) {
 
 struct descriptor *TreeFileName(char *tree, int shot)
 {
-  static struct descriptor ans_dsc={0, DTYPE_T, CLASS_D, 0};
+  static struct descriptor ans_dsc=DESCRIPTOR_INIT(0, DTYPE_T, CLASS_D, 0);
   int fd;
   char *ans;
   TREE_INFO dummy_info;

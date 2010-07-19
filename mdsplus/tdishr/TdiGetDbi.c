@@ -17,7 +17,7 @@
 #include <treeshr.h>
 #include <mdsshr.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiGetDbi.c,v $ $Revision: 1.12.2.1 $ $Date: 2010/07/07 17:22:58 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiGetDbi.c,v $ $Revision: 1.12.2.2 $ $Date: 2010/07/19 13:18:35 $";
 
 STATIC_CONSTANT DESCRIPTOR(pathtext, "PATH");
 STATIC_CONSTANT DESCRIPTOR(coloncolon, "::");
@@ -69,7 +69,7 @@ char			c0;
 	return cmp;
 }
 TdiRefStandard(Tdi1GetDbi)
-struct descriptor_d		string = {0,DTYPE_T,CLASS_D,0};
+struct descriptor_d		string = DESCRIPTOR_INIT(0,DTYPE_T,CLASS_D,0);
 struct descriptor_xd	tmp = EMPTY_XD;
 struct item			*key_ptr=0;
 int				index;
@@ -110,7 +110,7 @@ DBI_ITM lst[] = {{sizeof(index),DbiINDEX,0,0},EOL,EOL};
 			status = TreeGetDbi(lst);
 			if (status & 1)
 			{
-				struct descriptor ans = {0,DTYPE_T,CLASS_S,0};
+			  struct descriptor ans = DESCRIPTOR_INIT(0,DTYPE_T,CLASS_S,0);
 				if (lst[1].pointer) {
 				  ans.length = strlen((char *)lst[1].pointer);
 				  ans.pointer = (char *)lst[1].pointer;
@@ -160,7 +160,7 @@ TdiRefStandard(Tdi1Using)
 void *ctx;
 int reset_ctx=0;
 int nid, shot, stat1;
-struct descriptor def = {0,DTYPE_T,CLASS_D,0}, expt = def;
+struct descriptor def = DESCRIPTOR_INIT(0,DTYPE_T,CLASS_D,0), expt = def;
 unsigned char	omits[] = {DTYPE_PATH,0};
 
 	/**********************

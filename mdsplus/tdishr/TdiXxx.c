@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #include <mdsshr.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiXxx.c,v $ $Revision: 1.7.4.1 $ $Date: 2010/07/07 17:22:58 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiXxx.c,v $ $Revision: 1.7.4.2 $ $Date: 2010/07/19 13:18:35 $";
 
 extern int TdiConcat();
 extern int TdiTranslate();
@@ -702,7 +702,7 @@ unsigned int	length, status;
 
 	cats[1].out_dtype = cats[1].in_dtype;
 	cats[1].out_cat = cats[1].in_cat;
-	cats[1].digits = dat[1].length;
+        cats[1].digits = dat[1].l_length;
 	status = TdiGetLong(dat[1].pointer, &length);
 	if (status & 1) {
 		if (length > 65535) status = TdiTOO_BIG;
@@ -718,7 +718,7 @@ unsigned int	length, status;
 
 	cats[1].out_dtype = cats[1].in_dtype;
 	cats[1].out_cat = cats[1].in_cat;
-	cats[1].digits = dat[1].length;
+	cats[1].digits = dat[1].l_length;
 	status = TdiGetLong(dat[1].pointer, &length);
 	if (status & 1) {
 		if (length > 65535) status = TdiTOO_BIG;

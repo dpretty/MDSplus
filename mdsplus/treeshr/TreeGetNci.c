@@ -24,7 +24,7 @@
 
 extern int StrFree1Dx();
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.61 $ $Date: 2010/03/23 12:58:35 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.61.2.1 $ $Date: 2010/07/19 13:18:35 $";
 
 #ifndef HAVE_VXWORKS_H
 #define min(a,b) (((a) < (b)) ? (a) : (b))
@@ -331,7 +331,7 @@ int _TreeGetNci(void *dbid, int nid_in, struct nci_itm *nci_itm)
 		  break_on_no_node;
 		  if (swapshort((char *)&node->conglomerate_elt))
 		  {
-                          struct descriptor string_d = {0, DTYPE_T, CLASS_D, 0};
+		    struct descriptor string_d = DESCRIPTOR_INIT(0, DTYPE_T, CLASS_D, 0);
 			  DESCRIPTOR_NID(nid_dsc,0);
                           DESCRIPTOR(part_name,"PART_NAME");
 			  nid_dsc.pointer = (char *) &nid;

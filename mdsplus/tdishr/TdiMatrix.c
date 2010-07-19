@@ -17,14 +17,14 @@
 #include <mdsshr.h>
 #include <string.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiMatrix.c,v $ $Revision: 1.5 $ $Date: 2003/11/17 21:21:21 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiMatrix.c,v $ $Revision: 1.5.4.1 $ $Date: 2010/07/19 13:18:35 $";
 
 extern int TdiGetArgs();
 extern int TdiData();
 extern int TdiConvert();
 extern int TdiMasterData();
 
-STATIC_CONSTANT struct descriptor missing = {0,DTYPE_MISSING,CLASS_S,0};
+STATIC_CONSTANT struct descriptor missing = DESCRIPTOR_INIT(0,DTYPE_MISSING,CLASS_S,0);
 typedef struct {int q[2];} quadw;
 STATIC_ROUTINE int copy(
 int	len,

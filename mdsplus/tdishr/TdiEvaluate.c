@@ -22,9 +22,9 @@ RULES OF THE GAME:
 #include <stdlib.h>
 #include <string.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiEvaluate.c,v $ $Revision: 1.8 $ $Date: 2010/01/20 20:08:43 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiEvaluate.c,v $ $Revision: 1.8.2.1 $ $Date: 2010/07/19 13:18:35 $";
 
-STATIC_CONSTANT struct descriptor missing = {0,DTYPE_MISSING,CLASS_S,0};
+STATIC_CONSTANT struct descriptor missing = DESCRIPTOR_INIT(0,DTYPE_MISSING,CLASS_S,0);
 
 extern int TdiGetIdent();
 extern int TdiEvaluate();

@@ -41,7 +41,7 @@ int TreeDoMethod( nid_dsc, method_dsc [,args]...)
 #include <string.h>
 #include <librtl_messages.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeDoMethod.c,v $ $Revision: 1.24 $ $Date: 2010/05/28 14:58:41 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeDoMethod.c,v $ $Revision: 1.24.2.1 $ $Date: 2010/07/19 13:18:35 $";
 
 #define  count(num) va_start(incrmtr, method_ptr); \
                      for (num=2; (num < 256) && (va_arg(incrmtr, struct descriptor *) != MdsEND_ARG);  num++)
@@ -109,7 +109,7 @@ int _TreeDoMethod(void *dbid, struct descriptor *nid_dsc, struct descriptor *met
   STATIC_CONSTANT DESCRIPTOR(tdievaluate,"TdiEvaluate");
   static struct descriptor_xd xd = {0, 0, CLASS_XD, 0, 0};
   static    DESCRIPTOR(underunder, "__");
-  static struct descriptor_d method = {0, DTYPE_T, CLASS_D, 0};
+  static struct descriptor_d method = DESCRIPTOR_INIT(0, DTYPE_T, CLASS_D, 0);
   static struct descriptor_conglom *conglom_ptr;
   int nargs;
   void *arglist[256];
@@ -141,7 +141,7 @@ int _TreeDoMethod(void *dbid, struct descriptor *nid_dsc, struct descriptor *met
     if (conglom_ptr->image && conglom_ptr->image->length == strlen("__python__") && strncmp(conglom_ptr->image->pointer,"__python__",strlen("__python__"))==0) {
       void *dbid=DBID;
       /**** Try python class ***/
-      struct descriptor exp = {0, DTYPE_T, CLASS_D, 0};
+      struct descriptor exp = DESCRIPTOR_INIT(0, DTYPE_T, CLASS_D, 0);
       STATIC_CONSTANT DESCRIPTOR(open,"PyDoMethod(");
       StrCopyDx(&exp, &open);
       if (nargs==4 && method_ptr->length == strlen("DW_SETUP") && strncmp(method_ptr->pointer,"DW_SETUP",strlen("DW_SETUP")) == 0) {

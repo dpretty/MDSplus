@@ -19,7 +19,7 @@ extern unsigned short OpcSetRange;
 
 
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiYaccSubs.c,v $ $Revision: 1.5 $ $Date: 2003/11/14 21:34:17 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiYaccSubs.c,v $ $Revision: 1.5.4.1 $ $Date: 2010/07/19 13:18:35 $";
 
 extern int Tdi1Build();
 extern int TdiEvaluate();
@@ -41,7 +41,7 @@ struct marker			*mark_ptr)
 {
 struct descriptor		*ptr;
 struct descriptor_xd	junk = EMPTY_XD;
-int				len = mark_ptr->rptr->length, status;
+ int				len = ((struct descriptor *)mark_ptr->rptr)->length, status;
 unsigned char			*c_ptr;
 
 	if (len == 1) ++TdiRefZone.l_iarg;
