@@ -55,7 +55,7 @@ int XmdsOnOffToggleButtonApply(Widget w);
 #include <Xmds/XmdsOnOffToggleButton.h>
 #include <Mrm/MrmPublic.h>
 #include <xmdsshr.h>
-static char *cvsrev = "@(#)$RCSfile: XmdsOnOffToggleButton.c,v $ $Revision: 1.2 $ $Date: 1998/04/08 19:23:51 $";
+static char *cvsrev = "@(#)$RCSfile: XmdsOnOffToggleButton.c,v $ $Revision: 1.3 $ $Date: 2010/07/19 20:39:59 $";
 Widget XmdsCreateOnOffToggleButton(Widget parent,String name,ArgList args,Cardinal argcount);
 Boolean XmdsIsOnOffToggleButton(Widget w);
 void XmdsOnOffToggleButtonReset(Widget w);
@@ -102,11 +102,11 @@ Widget XmdsCreateOnOffToggleButton(Widget parent,String name,ArgList args,Cardin
     path_c = TreeGetMinimumPath(0,info->nid+info->nid_offset);
     path = XmStringCreateSimple(path_c);
     TreeFree(path_c);
-    XtVaSetValues(w,XmNlabelString,path,0);
+    XtVaSetValues(w,XmNlabelString,path,NULL);
     XmStringFree(path);
   }
   else if (info->label)
-    XtVaSetValues(w,XmNlabelString,info->label,0);
+    XtVaSetValues(w,XmNlabelString,info->label,NULL);
 
   XtAddCallback(w,XmNdestroyCallback,(XtCallbackProc)Destroy,info);
   XmdsOnOffToggleButtonReset(w);
