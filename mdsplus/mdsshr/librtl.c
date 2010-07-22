@@ -20,7 +20,7 @@
 #include <math.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.181 $ $Date: 2010/03/01 19:18:07 $ $Name:  $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.182 $ $Date: 2010/07/22 20:08:16 $ $Name:  $";
 int LibTimeToVMSTime(time_t *time_in,_int64 *time_out);  
 #ifndef HAVE_VXWORKS_H
 STATIC_CONSTANT _int64 addin = LONG_LONG_CONSTANT(0x7c95674beb4000);
@@ -1360,18 +1360,23 @@ int StrRight(struct descriptor *out, struct descriptor *in, unsigned short *star
   return StrFree1Dx(&tmp);
 }
 
+pthread_mutex_t VmMutex;
+int VmMutex_initialized=0;
+
 int LibCreateVmZone(ZoneList **zone)
 {
   ZoneList *list;
   *zone = malloc(sizeof(ZoneList));
   (*zone)->vm = NULL;
   (*zone)->next = NULL;
+  LockMdsShrMutex(&VmMutex,&VmMutex_initialized);
   if (MdsZones == NULL)
     MdsZones = *zone;
   else {
     for (list = MdsZones; list->next; list = list->next);
     list->next = *zone;
   }
+  UnlockMdsShrMutex(&VmMutex);
   return (*zone != NULL);
 }
 
@@ -1379,6 +1384,7 @@ int LibDeleteVmZone(ZoneList **zone)
 {
   int found = 0;
   ZoneList *list,*prev;
+  LockMdsShrMutex(&VmMutex,&VmMutex_initialized);
   LibResetVmZone(zone);
   if (*zone == MdsZones)
   {
@@ -1399,14 +1405,17 @@ int LibDeleteVmZone(ZoneList **zone)
     free(*zone);
     *zone=0;
   }
+  UnlockMdsShrMutex(&VmMutex);
   return found;
 }
    
 int LibResetVmZone(ZoneList **zone)
 {
   VmList *list;
+  LockMdsShrMutex(&VmMutex,&VmMutex_initialized);
   while ((list = zone ? (*zone ? (*zone)->vm : NULL) : NULL) != NULL)
     LibFreeVm(0, &list->ptr, zone);
+  UnlockMdsShrMutex(&VmMutex);
   return 1;
 }
 
@@ -1416,6 +1425,7 @@ int LibFreeVm(unsigned int *len, void **vm, ZoneList **zone)
   VmList *list = NULL;
   if (zone != NULL) {
     VmList *prev;
+    LockMdsShrMutex(&VmMutex,&VmMutex_initialized);
     for (prev = NULL, list = (*zone)->vm; 
          list && (list->ptr != *vm); prev=list, list = list->next);
     if (list) {
@@ -1424,6 +1434,7 @@ int LibFreeVm(unsigned int *len, void **vm, ZoneList **zone)
       else
 	(*zone)->vm = list->next;
     }
+    UnlockMdsShrMutex(&VmMutex,&VmMutex_initialized);
   }
   free(*vm);
   if (list) 
@@ -1451,11 +1462,13 @@ int LibGetVm(unsigned int *len, void **vm, ZoneList **zone)
     VmList *list = malloc(sizeof(VmList));
     list->ptr = *vm;
     list->next = NULL;
+    LockMdsShrMutex(&VmMutex,&VmMutex_initialized);
     if ((*zone)->vm) {
       VmList *ptr;
       for (ptr = (*zone)->vm; ptr->next; ptr = ptr->next);
       ptr->next = list;
     } else (*zone)->vm = list;
+    UnlockMdsShrMutex(&VmMutex,&VmMutex_initialized);
   }
   return (*vm != NULL);
 }
