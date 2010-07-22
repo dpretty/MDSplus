@@ -63,12 +63,12 @@ The expansion routine "xentry":
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 typedef ARRAY_COEFF(char, 1) array_coef;
 typedef RECORD(4) record_four;
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: MdsCompress.c,v $ $Revision: 1.18.2.2 $ $Date: 2010/07/19 13:18:34 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: MdsCompress.c,v $ $Revision: 1.18.2.3 $ $Date: 2010/07/22 21:14:32 $";
 
 STATIC_CONSTANT unsigned short opcode = OpcDECOMPRESS;
 STATIC_CONSTANT record_four rec0 = {sizeof(opcode), DTYPE_FUNCTION, CLASS_R, (unsigned char *) &opcode, 4, 0, 0, 0, 0};
 STATIC_CONSTANT    DESCRIPTOR_A(dat0, 1, DTYPE_BU, 0, 0);
-STATIC_CONSTANT struct descriptor EMPTY_D = DESCRIPTOR_INIT(0, DTYPE_T, CLASS_D, 0);
+STATIC_CONSTANT struct descriptor EMPTY_D = {DESCRIPTOR_HEAD_INI(0, DTYPE_T, CLASS_D, 0)};
 STATIC_CONSTANT EMPTYXD(EMPTY_XD);
 /*--------------------------------------------------------------------------
 	The inner routine scans some classes and tries to compress arrays.
@@ -290,8 +290,7 @@ Compact/copy from work.
   if (status & 1)
 #endif
   {
-    unsigned long len=(unsigned long)work.l_length;
-    status = MdsGet1Dx(&len, &dsc_dtype, out_ptr, NULL);
+    status = MdsGet1Dx(&work.l_length, &dsc_dtype, out_ptr, NULL);
     if (status & 1)
     {
       int orig_len = work.l_length;

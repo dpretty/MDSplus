@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: KsM.c,v 1.9 2004/11/17 16:02:42 manduchi Exp $
+//	$Id: KsM.c,v 1.9.4.1 2010/07/22 21:14:32 twf Exp $
 //-------------------------------------------------------------------------
 // Mon Oct 15 16:35:42 EDT 2001	-- seperated out
 //-----------------------------------------------------------
@@ -51,7 +51,7 @@ static int KsMultiIo(
 
 
   // sprintf(dev_name, "GK%c%d", Key.scsi_port, Key.scsi_address); 
-  sprintf(dev_name, "GK%c%d%0.2d", Key.scsi_port, Key.scsi_address, Key.crate);
+  sprintf(dev_name, "GK%c%d%.2d", Key.scsi_port, Key.scsi_address, Key.crate);
 
 
   if( (scsiDevice = get_scsi_device_number( dev_name, &enhanced, &online )) < 0 ) {

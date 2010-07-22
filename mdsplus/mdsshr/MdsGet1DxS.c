@@ -45,17 +45,17 @@
 #include <mdsshr.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: MdsGet1DxS.c,v $ $Revision: 1.7.4.1 $ $Date: 2010/07/07 17:22:58 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: MdsGet1DxS.c,v $ $Revision: 1.7.4.2 $ $Date: 2010/07/22 21:14:33 $";
 
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 
-int       MdsGet1DxS(unsigned long *length_ptr, unsigned char *dtype_ptr, struct descriptor_xd *out_dsc_ptr)
+int       MdsGet1DxS(descriptor_llength *length_ptr, unsigned char *dtype_ptr, struct descriptor_xd *out_dsc_ptr)
 {
 
   int       status;
-  int dsc_size = sizeof(struct descriptor);
-  int align_size = (*dtype_ptr == DTYPE_T) ? 1 : *length_ptr;
-  unsigned long length;
+  descriptor_llength dsc_size = sizeof(struct descriptor);
+  descriptor_llength align_size = (*dtype_ptr == DTYPE_T) ? 1 : *length_ptr;
+  descriptor_llength length;
   STATIC_CONSTANT unsigned char dsc_dtype = DTYPE_DSC;
   dsc_size = align(dsc_size,align_size);
   length = dsc_size + *length_ptr;

@@ -8,7 +8,7 @@
 //	specifically:
 //			CAMAC subsystem, ie libCamShr.so and verbs.c for CTS.
 //-------------------------------------------------------------------------
-//	$Id: verbs.c,v 1.12 2010/05/21 15:51:25 twf Exp $
+//	$Id: verbs.c,v 1.12.2.1 2010/07/22 21:14:32 twf Exp $
 //-------------------------------------------------------------------------
 
 //-------------------------------------------------------------------------
@@ -261,7 +261,7 @@ int Autoconfig()
 
 	// loop thru list
 	for( i = 0; i < numOfEntries; ++i ) {
-		fscanf(fp, "%s", line);								// get a crate.db entry
+		int num = fscanf(fp, "%s", line);								// get a crate.db entry
 		sprintf(pHighwayName, "%.6s", line);				// trim it
 
 		// NB! this is a work-around -- seems necessary for the moment

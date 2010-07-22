@@ -54,18 +54,18 @@
 
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: MdsGet1DxA.c,v $ $Revision: 1.14.2.2 $ $Date: 2010/07/19 13:18:34 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: MdsGet1DxA.c,v $ $Revision: 1.14.2.3 $ $Date: 2010/07/22 21:14:33 $";
 
-int       MdsGet1DxA(struct descriptor_a * in_ptr, unsigned short *length_ptr, unsigned char *dtype_ptr,
+  int       MdsGet1DxA(struct descriptor_a * in_ptr, descriptor_length *length_ptr, unsigned char *dtype_ptr,
 			            struct descriptor_xd *out_xd)
 {
   array_coeff *in_dsc = (array_coeff *) in_ptr;
-  unsigned long long       new_arsize;
-  unsigned long       dsc_size;
-  unsigned long new_size;
+  descriptor_a_arsize       new_arsize;
+  descriptor_llength       dsc_size;
+  descriptor_llength new_size;
   int       status;
   int       i;
-  unsigned int align_size;
+  descriptor_llength align_size;
   array_coeff *out_dsc;
   unsigned char dsc_dtype = DTYPE_DSC;
   if ((in_dsc->length == 0) || (*length_ptr == 0))

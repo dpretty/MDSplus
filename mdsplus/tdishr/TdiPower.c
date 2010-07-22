@@ -13,10 +13,10 @@
 #include "tdinelements.h"
 #include <tdimessages.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiPower.c,v $ $Revision: 1.8.4.1 $ $Date: 2010/07/19 13:18:35 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiPower.c,v $ $Revision: 1.8.4.2 $ $Date: 2010/07/22 21:14:33 $";
 
 STATIC_CONSTANT int one = 1;
-STATIC_CONSTANT struct descriptor one_dsc = DESCRIPTOR_INIT(sizeof(one),DTYPE_L,CLASS_S,(char *)&one);
+STATIC_CONSTANT struct descriptor one_dsc = {DESCRIPTOR_HEAD_INI(sizeof(one),DTYPE_L,CLASS_S,(char *)&one)};
 
 extern int Tdi3Log();
 extern int TdiConvert();
@@ -75,7 +75,7 @@ struct descriptor	duno;
 	************************/
 	else {
 	char	xx[32];
-	struct descriptor dx = DESCRIPTOR_INIT(0,0,CLASS_S,0);
+	struct descriptor dx = {DESCRIPTOR_HEAD_INI(0,0,CLASS_S,0)};
 	char	*px = x->pointer;
 	int	incx = x->class == CLASS_A ? x->length : 0;
 	int	*py = (int *)y->pointer;
