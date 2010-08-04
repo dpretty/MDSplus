@@ -4,13 +4,13 @@
 #include "treeshrp.h"
 #include <dbidef.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetDbi.c,v $ $Revision: 1.16 $ $Date: 2007/04/25 20:41:55 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetDbi.c,v $ $Revision: 1.17 $ $Date: 2010/08/04 19:01:11 $";
 
-extern void *DBID;
+extern void **TreeCtx();
 #ifndef HAVE_VXWORKS_H
 #define min(a,b) (((a) < (b)) ? (a) : (b))
 #endif
-int TreeGetDbi(struct dbi_itm *itmlst) {return _TreeGetDbi(DBID,itmlst);}
+int TreeGetDbi(struct dbi_itm *itmlst) {return _TreeGetDbi(*TreeCtx(),itmlst);}
 #define set_retlen(length) if ((unsigned int)lst->buffer_length < length) { status = TreeBUFFEROVF; break; } else retlen=length
 #define CheckOpen(db) if (!db || !db->open) {status=TreeNOT_OPEN;break;}
 #define set_ret_char(val) memset(lst->pointer, 0, lst->buffer_length); *((char *)lst->pointer) = val

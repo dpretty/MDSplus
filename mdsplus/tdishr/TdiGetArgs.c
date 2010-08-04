@@ -16,13 +16,12 @@
 #include <tdimessages.h>
 #include <mdsshr.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiGetArgs.c,v $ $Revision: 1.7 $ $Date: 2003/11/17 21:21:21 $";
-
-extern struct descriptor_xd *TdiSELF_PTR;
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiGetArgs.c,v $ $Revision: 1.8 $ $Date: 2010/08/04 19:05:54 $";
 
 #include "tdirefcat.h"
 #include "tdireffunction.h"
 #include "tdirefstandard.h"
+#include "tdithreadsafe.h"
 
 extern int TdiGetData(  );
 extern int TdiData(  );
@@ -50,8 +49,8 @@ int				status;
 	case DTYPE_SIGNAL :
 		*signal_ptr = *data_ptr;
 		*data_ptr = EMPTY_XD;
-		keep = TdiSELF_PTR;
-		TdiSELF_PTR = (struct descriptor_xd *)signal_ptr->pointer;
+		keep = TdiThreadStatic()->TdiSELF_PTR;
+		TdiThreadStatic()->TdiSELF_PTR = (struct descriptor_xd *)signal_ptr->pointer;
 		status = TdiGetData(omitu, 
             ((struct descriptor_signal *)signal_ptr->pointer)->data, 
             data_ptr);
@@ -70,7 +69,7 @@ int				status;
 			MdsFree1Dx(units_ptr, NULL);
 			break;
 		}
-		TdiSELF_PTR = keep;
+		TdiThreadStatic()->TdiSELF_PTR = keep;
 		break;
 	case DTYPE_WITH_UNITS :
 		tmp = *data_ptr;

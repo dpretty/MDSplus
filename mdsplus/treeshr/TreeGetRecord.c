@@ -10,6 +10,7 @@
 #include <mdsshr.h>
 #include <ncidef.h>
 #include "treeshrp.h"
+#include "treethreadsafe.h"
 #include <treeshr.h>
 #include <librtl_messages.h>
 #include <errno.h>
@@ -23,7 +24,7 @@
 
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.52 $ $Date: 2010/03/23 12:58:35 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.53 $ $Date: 2010/08/04 19:01:11 $";
 
 static _int64 ViewDate = -1;
 static int MakeNidsLocal(struct descriptor *dsc_ptr, unsigned char tree);
@@ -31,7 +32,7 @@ static int MakeNidsLocal(struct descriptor *dsc_ptr, unsigned char tree);
 int MdsSerializeDscIn(char *in, struct descriptor_xd *out_dsc_ptr);
 
 
-extern void *DBID;
+extern void **TreeCtx();
 
 
 
@@ -42,7 +43,7 @@ extern void *DBID;
 
 
 
-int TreeGetRecord(int nid_in, struct descriptor_xd *dsc) {return _TreeGetRecord(DBID,nid_in,dsc);}
+int TreeGetRecord(int nid_in, struct descriptor_xd *dsc) {return _TreeGetRecord(*TreeCtx(),nid_in,dsc);}
 
 
 
@@ -378,14 +379,20 @@ int TreeGetDatafile(TREE_INFO *info, unsigned char *rfa_in, int *buffer_size, ch
 }
 
 int TreeSetViewDate(_int64 *date)
-{
-  ViewDate=*date;
+{ 
+  if (TreeGetThreadStatic()->privateCtx)
+    TreeGetThreadStatic()->ViewDate=*date;
+  else
+    ViewDate=*date;
   return TreeSUCCESS;
 }
 
 int TreeGetViewDate(_int64 *date)
 {
-  *date= ViewDate;
+  if (TreeGetThreadStatic()->privateCtx)
+    *date=TreeGetThreadStatic()->ViewDate;
+  else
+    *date= ViewDate;
   return TreeSUCCESS;
 }
 

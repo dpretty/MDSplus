@@ -36,9 +36,9 @@ int TreeDeleteNodeInitialize(NID *nid,int *count,reset)
 #include "treeshrp.h"
 
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeDeleteNode.c,v $ $Revision: 1.15 $ $Date: 2007/01/26 19:25:03 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeDeleteNode.c,v $ $Revision: 1.16 $ $Date: 2010/08/04 19:01:11 $";
 
-extern void *DBID;
+extern void **TreeCtx();
 
 static unsigned char *TREE_DELETE_LIST = 0;
 
@@ -46,17 +46,17 @@ STATIC_ROUTINE void check_nid(PINO_DATABASE *dblist, NID *nid, int *count);
 
 int TreeDeleteNodeGetNid(int *nid)
 {
-  return _TreeDeleteNodeGetNid(DBID, nid);
+  return _TreeDeleteNodeGetNid(*TreeCtx(), nid);
 }
 
 int TreeDeleteNodeInitialize(int nid, int *count, int reset)
 {
-  return(_TreeDeleteNodeInitialize(DBID, nid, count, reset));
+  return(_TreeDeleteNodeInitialize(*TreeCtx(), nid, count, reset));
 }
 
 void TreeDeleteNodeExecute()
 {
-  _TreeDeleteNodeExecute(DBID);
+  _TreeDeleteNodeExecute(*TreeCtx());
 }
   
 

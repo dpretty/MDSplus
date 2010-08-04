@@ -35,9 +35,9 @@
 #include "treeshrp.h"
 
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeAddTag.c,v $ $Revision: 1.8 $ $Date: 2004/01/05 15:53:31 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeAddTag.c,v $ $Revision: 1.9 $ $Date: 2010/08/04 19:01:11 $";
 
-extern void *DBID;
+extern void **TreeCtx();
 
 #ifdef min
 #undef min
@@ -51,7 +51,7 @@ extern void *DBID;
 
 int TreeAddTag(int nid, char *tagnam)
 {
-  return _TreeAddTag(DBID, nid, tagnam);
+  return _TreeAddTag(*TreeCtx(), nid, tagnam);
 }
 
 int _TreeAddTag(void *dbid, int nid_in, char *tagnam)
