@@ -36,13 +36,13 @@ TreeFindTagEnd(void **ctx);
 #include "treeshrp.h"
 #include <strroutines.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeFindTagWild.c,v $ $Revision: 1.12.2.2 $ $Date: 2010/07/22 21:14:34 $";
+static char *cvsrev = "@(#)$RCSfile: TreeFindTagWild.c,v $ $Revision: 1.12.2.3 $ $Date: 2010/08/10 15:33:01 $";
 
 extern int MdsCopyDxXd();
 extern char * FindTagWildRemote();
 extern int FindTagEndRemote();
 
-extern void *DBID;
+extern void **TreeCtx();
 typedef struct tag_search
 {
   int       next_tag;
@@ -63,13 +63,13 @@ char *_TreeFindTagWild(void *dbid, char *wild, int *nidout, void **ctx_inout);
 
 char *TreeFindTagWild(char *wild, int *nidout, void **ctx_inout)
 {
-  return _TreeFindTagWild(DBID, wild, nidout, ctx_inout);
+  return _TreeFindTagWild(*TreeCtx(), wild, nidout, ctx_inout);
 }
 
 int TreeFindTagWildDsc(char *wild, int *nidout, void **ctx_inout, struct descriptor_xd *name)
 {
   int status;
-  char *ans = _TreeFindTagWild(DBID, wild, nidout, ctx_inout);
+  char *ans = _TreeFindTagWild(*TreeCtx(), wild, nidout, ctx_inout);
   if (ans)
     {
       static struct descriptor tag = {DESCRIPTOR_HEAD_INI(0, DTYPE_T, CLASS_S, 0)};

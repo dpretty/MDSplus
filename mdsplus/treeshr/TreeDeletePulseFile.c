@@ -45,11 +45,11 @@ extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
 extern char *MaskReplace();
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeDeletePulseFile.c,v $ $Revision: 1.16 $ $Date: 2009/08/24 19:07:05 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeDeletePulseFile.c,v $ $Revision: 1.16.2.1 $ $Date: 2010/08/10 15:33:01 $";
 
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
-extern void *DBID;
+extern void **TreeCtx();
 STATIC_ROUTINE int  TreeDeleteTreeFiles(char *tree, int shot);
 
 #if defined(_WIN32)
@@ -60,7 +60,7 @@ STATIC_ROUTINE int DeleteFile(char *src);
 
 int       TreeDeletePulseFile(int shotid, int allfiles)
 {
-  return _TreeDeletePulseFile(DBID, shotid, allfiles);
+  return _TreeDeletePulseFile(*TreeCtx(), shotid, allfiles);
 }
 
 int       _TreeDeletePulseFile(void *dbid, int shotid, int allfiles)

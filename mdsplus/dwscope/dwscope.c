@@ -58,7 +58,7 @@ $ dwcope [-default setup]
 #include <DXm/DECspecific.h>
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: dwscope.c,v $ $Revision: 1.32.2.1 $ $Date: 2010/07/22 21:14:32 $";
+static char *cvsrev = "@(#)$RCSfile: dwscope.c,v $ $Revision: 1.32.2.2 $ $Date: 2010/08/10 15:33:00 $";
 
 extern void XmdsInitialize();
 extern void XmdsDestroyWidgetCallback();
@@ -386,8 +386,9 @@ int       main(int argc, String *argv)
 static void DoPrint(char *filename)
 {
   char cmd[512];
+  int status;
   sprintf(cmd,"dwscopePrint %s %s",filename,ScopePrinter);
-  system(cmd);
+  status = system(cmd);
 }
 
 static char *GetPrinterList()

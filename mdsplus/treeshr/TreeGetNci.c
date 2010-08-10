@@ -24,7 +24,7 @@
 
 extern int StrFree1Dx();
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.61.2.2 $ $Date: 2010/07/22 21:14:34 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.61.2.3 $ $Date: 2010/08/10 15:33:01 $";
 
 #ifndef HAVE_VXWORKS_H
 #define min(a,b) (((a) < (b)) ? (a) : (b))
@@ -47,12 +47,12 @@ static char *getPath(PINO_DATABASE *dblist, NODE *node, int remove_tree_refs);
 static const char *nonode = "<no-node>   ";
 int TreeOpenNciR(TREE_INFO *info);
 
-extern void *DBID;
+extern void **TreeCtx();
 
-char *TreeGetMinimumPath(int *def_nid_in, int nid_in) {return _TreeGetMinimumPath(DBID,def_nid_in,nid_in);}
-int  TreeGetNci(int nid_in, struct nci_itm *nci_itm) {return _TreeGetNci(DBID,nid_in,nci_itm);}
-char *TreeGetPath(int nid_in) {return _TreeGetPath(DBID,nid_in);}
-int TreeIsOn(int nid) {return _TreeIsOn(DBID,nid);}
+char *TreeGetMinimumPath(int *def_nid_in, int nid_in) {return _TreeGetMinimumPath(*TreeCtx(),def_nid_in,nid_in);}
+int  TreeGetNci(int nid_in, struct nci_itm *nci_itm) {return _TreeGetNci(*TreeCtx(),nid_in,nci_itm);}
+char *TreeGetPath(int nid_in) {return _TreeGetPath(*TreeCtx(),nid_in);}
+int TreeIsOn(int nid) {return _TreeIsOn(*TreeCtx(),nid);}
 
 int _TreeGetNci(void *dbid, int nid_in, struct nci_itm *nci_itm)
 {

@@ -42,13 +42,13 @@
 #include "treeshrp.h"
 #include <dbidef.h>
 
-static char *cvsrev = "@(#)$RCSfile: TreeSetDbi.c,v $ $Revision: 1.4 $ $Date: 2007/01/26 19:25:03 $";
+static char *cvsrev = "@(#)$RCSfile: TreeSetDbi.c,v $ $Revision: 1.4.2.1 $ $Date: 2010/08/10 15:33:01 $";
 
-extern void *DBID;
+extern void **TreeCtx();
 
 extern int SetDbiRemote();
 
-int TreeSetDbi(DBI_ITM *dbi_itm_ptr) { return _TreeSetDbi(DBID, dbi_itm_ptr);}
+int TreeSetDbi(DBI_ITM *dbi_itm_ptr) { return _TreeSetDbi(*TreeCtx(), dbi_itm_ptr);}
 
 int       _TreeSetDbi(void *dbid, DBI_ITM *dbi_itm_ptr)
 {

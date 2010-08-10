@@ -20,7 +20,7 @@
 #include <math.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.181.2.4 $ $Date: 2010/08/10 14:33:28 $ $Name:  $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.181.2.5 $ $Date: 2010/08/10 15:33:00 $ $Name:  $";
 int LibTimeToVMSTime(time_t *time_in,_int64 *time_out);  
 #ifndef HAVE_VXWORKS_H
 STATIC_CONSTANT _int64 addin = LONG_LONG_CONSTANT(0x7c95674beb4000);
@@ -1363,6 +1363,7 @@ int StrRight(struct descriptor *out, struct descriptor *in, descriptor_length *s
   StrCopyDx(out,&s);
   return StrFree1Dx(&tmp);
 }
+
 
 #ifndef HAVE_WINDOWS_H
 STATIC_THREADSAFE pthread_mutex_t VmMutex;

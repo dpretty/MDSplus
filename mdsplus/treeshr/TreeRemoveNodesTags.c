@@ -34,14 +34,14 @@
 #include <treeshr.h>
 #include "treeshrp.h"
 
-static char *cvsrev = "@(#)$RCSfile: TreeRemoveNodesTags.c,v $ $Revision: 1.11 $ $Date: 2000/06/26 15:16:50 $";
+static char *cvsrev = "@(#)$RCSfile: TreeRemoveNodesTags.c,v $ $Revision: 1.11.4.1 $ $Date: 2010/08/10 15:33:01 $";
 
-extern void *DBID;
+extern void **TreeCtx();
 
 static void      _RemoveTagIdx(PINO_DATABASE *dblist, int tagidx);
 
-int TreeRemoveTag(char *name) { return _TreeRemoveTag(DBID, name); }
-int TreeRemoveNodesTags(int nid) { return _TreeRemoveNodesTags(DBID, nid);}
+int TreeRemoveTag(char *name) { return _TreeRemoveTag(*TreeCtx(), name); }
+int TreeRemoveNodesTags(int nid) { return _TreeRemoveNodesTags(*TreeCtx(), nid);}
 
 int       _TreeRemoveNodesTags(void *dbid, int nid)
 {
