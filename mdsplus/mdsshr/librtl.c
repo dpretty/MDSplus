@@ -20,7 +20,7 @@
 #include <math.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.181.2.3 $ $Date: 2010/07/22 21:14:33 $ $Name:  $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.181.2.4 $ $Date: 2010/08/10 14:33:28 $ $Name:  $";
 int LibTimeToVMSTime(time_t *time_in,_int64 *time_out);  
 #ifndef HAVE_VXWORKS_H
 STATIC_CONSTANT _int64 addin = LONG_LONG_CONSTANT(0x7c95674beb4000);
@@ -891,9 +891,11 @@ int LibSpawn(struct descriptor *cmd, int waitflag, int notifyFlag)
   {
     for ( ; ; )
     {
-      xpid = wait(&sts);
+      xpid = waitpid(pid,&sts,0);
       if (xpid == pid)
-      break;
+        break;
+      else if (xpid == -1)
+        perror("Error during wait call");
     }
   }
   free(cmdstring);
@@ -1361,7 +1363,13 @@ int StrRight(struct descriptor *out, struct descriptor *in, descriptor_length *s
   StrCopyDx(out,&s);
   return StrFree1Dx(&tmp);
 }
-pthread_mutex_t VmMutex;
+
+#ifndef HAVE_WINDOWS_H
+STATIC_THREADSAFE pthread_mutex_t VmMutex;
+#else
+STATIC_THREADSAFE HANDLE VmMutex;
+#endif
+
 int VmMutex_initialized=0;
 
 int LibCreateVmZone(ZoneList **zone)
