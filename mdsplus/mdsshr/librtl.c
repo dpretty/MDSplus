@@ -20,7 +20,7 @@
 #include <math.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.181.2.5 $ $Date: 2010/08/10 15:33:00 $ $Name:  $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.181.2.6 $ $Date: 2010/08/16 13:09:38 $ $Name:  $";
 int LibTimeToVMSTime(time_t *time_in,_int64 *time_out);  
 #ifndef HAVE_VXWORKS_H
 STATIC_CONSTANT _int64 addin = LONG_LONG_CONSTANT(0x7c95674beb4000);
@@ -1784,6 +1784,15 @@ int StrFree1Dx(struct descriptor *out)
     out->pointer = NULL;
     out->length = 0;
   }
+#ifdef BIG_DESC
+  else if (out->class == CLASS_D_SHORT) {
+    struct short_descriptor *o = (struct short_descriptor *)out;
+    if (o->pointer)
+      free(out->pointer);
+    o->pointer = NULL;
+    o->length = 0;
+  }
+#endif
   return 1;
 }
 

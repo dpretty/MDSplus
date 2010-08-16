@@ -5,7 +5,7 @@
 #define MAXEXPR 16384
 extern int TdiExecute();
 
-static char *cvsrev = "@(#)$RCSfile: tditest.c,v $ $Revision: 1.5.4.2 $ $Date: 2010/07/22 21:14:33 $";
+static char *cvsrev = "@(#)$RCSfile: tditest.c,v $ $Revision: 1.5.4.3 $ $Date: 2010/08/16 13:09:38 $";
 
 static void tdiputs(char *line);
 #ifdef HAVE_VXWORKS_H
@@ -20,7 +20,7 @@ int main(int argc, char **argv)
   static char expr[MAXEXPR] = "WRITE(_OUTPUT_UNIT,`DECOMPILE(`";
 */
   static char expr[MAXEXPR] = "";
-  static struct descriptor expr_dsc = {0, DTYPE_T, CLASS_S, (char *)expr};
+  static struct descriptor expr_dsc = {DESCRIPTOR_HEAD_INI(0, DTYPE_T, CLASS_S, (char *)expr)};
   static EMPTYXD(ans);
   static EMPTYXD(output_unit);
   static DESCRIPTOR(out_unit_stdout,"PUBLIC _OUTPUT_UNIT=*");
