@@ -41,7 +41,7 @@ extern int IsRoprand();
 #include <mdsshr.h>
 #include <string.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiItoX.c,v $ $Revision: 1.11.4.4 $ $Date: 2010/08/10 15:33:01 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiItoX.c,v $ $Revision: 1.11.4.5 $ $Date: 2010/08/31 17:40:03 $";
 
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 
@@ -356,7 +356,6 @@ if (status & 1) switch (paxis->dtype) {
     
     /*****************************************************************
 		When we can't get left side, use right of first segment for limit.
-<<<<<<< TdiItoX.c
     *****************************************************************/
     if (kseg == 0 && big_beg && (nseg > 1 || !big_end)) {
       if (status & 1) {
