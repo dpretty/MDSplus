@@ -1,6 +1,6 @@
 package jScope;
 
-/* $Id: CompositeWaveDisplay.java,v 1.1 2010/09/03 09:58:16 manduchi Exp $ */
+/* $Id: CompositeWaveDisplay.java,v 1.2 2010/09/03 12:45:00 manduchi Exp $ */
 import java.applet.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -411,7 +411,6 @@ public class CompositeWaveDisplay extends JApplet implements WaveContainerListen
             this.enqueueUpdateSignal(null, CompositeWaveDisplay.CMND_STOP, null, null);
             this.appendThread.join(1000);
             w.dispose();
-            System.out.println("EXIT");
         } catch (Exception exc){}
     }
 
