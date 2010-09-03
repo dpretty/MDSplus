@@ -1,9 +1,9 @@
 package jScope;
 
-/* $Id: Descriptor.java,v 1.1 2010/09/03 09:58:16 manduchi Exp $ */
+/* $Id: Descriptor.java,v 1.2 2010/09/03 11:29:52 manduchi Exp $ */
 import java.io.*;
 
-class Descriptor
+public class Descriptor
 {
     public    static final byte MAX_DIM                 = 8;
     public    static final byte DTYPE_UBYTE             = 2;
@@ -94,7 +94,7 @@ class Descriptor
     public int getStatus() {return status;}
     public int getInt() {return int_data[0];}
 
-    static byte[] dataToByteArray(Object o)
+    public static byte[] dataToByteArray(Object o)
     {
         byte b[] = null;
         try

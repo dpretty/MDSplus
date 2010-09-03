@@ -1,6 +1,6 @@
 package jScope;
 
-/* $Id: ConnectionEvent.java,v 1.1 2010/09/03 09:58:16 manduchi Exp $ */
+/* $Id: ConnectionEvent.java,v 1.2 2010/09/03 11:29:52 manduchi Exp $ */
 import java.awt.AWTEvent;
 import java.awt.Event;
 
@@ -39,7 +39,7 @@ public class ConnectionEvent extends AWTEvent
         this.current_size = current_size;
         this.info = info;
     }
-
+    public String getInfo() { return info;}
     public ConnectionEvent(Object source, int total_size, int current_size) 
     {
         super(source, 0);

@@ -1,6 +1,6 @@
 package jScope;
 
-/* $Id: MdsMessage.java,v 1.1 2010/09/03 09:58:17 manduchi Exp $ */
+/* $Id: MdsMessage.java,v 1.2 2010/09/03 11:29:52 manduchi Exp $ */
 import java.io.*;
 import java.net.*;
 import java.awt.*;
@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.zip.*;
 
 
-class MdsMessage extends Object
+public class MdsMessage extends Object
 {
     public    static final int    HEADER_SIZE          = 48;
     public    static final int    SUPPORTS_COMPRESSION = (int)0x8000;
