@@ -9,10 +9,14 @@
 //
 // Copyright (c) 2003, J.G.Krom, Forschungszentrum Juelich GmbH, Juelich, Germany.
 // All rights reserved.
-// $Id: TestTwuSingleSignal2.java,v 1.1 2003/10/31 15:17:04 jgk Exp $
+// $Id: TestTwuSingleSignal2.java,v 1.2 2010/09/03 09:58:16 manduchi Exp $
 // 
 // -------------------------------------------------------------------------------------------------
 
+import jScope.TwuSingleSignal;
+import jScope.TWUProperties;
+import jScope.TWUFetchOptions;
+import jScope.FakeTWUProperties;
 import java.lang.InterruptedException;
 
 class TestTwuSingleSignal2
@@ -21,7 +25,7 @@ class TestTwuSingleSignal2
     public static String 
     revision()
     {
-        return "$Id: TestTwuSingleSignal2.java,v 1.1 2003/10/31 15:17:04 jgk Exp $";
+        return "$Id: TestTwuSingleSignal2.java,v 1.2 2010/09/03 09:58:16 manduchi Exp $";
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -172,5 +176,5 @@ class TestTwuSingleSignal2
 
 
 // -------------------------------------------------------------------------------------------------
-// End of: $Id: TestTwuSingleSignal2.java,v 1.1 2003/10/31 15:17:04 jgk Exp $
+// End of: $Id: TestTwuSingleSignal2.java,v 1.2 2010/09/03 09:58:16 manduchi Exp $
 // -------------------------------------------------------------------------------------------------

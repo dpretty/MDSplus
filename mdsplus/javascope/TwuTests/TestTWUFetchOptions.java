@@ -1,3 +1,6 @@
+
+import jScope.TWUFetchOptions;
+
 // -------------------------------------------------------------------------------------------------
 // TestTWUFetchOptions
 //
@@ -9,7 +12,7 @@
 //
 // Copyright (c) 2003, J.G.Krom, Forschungszentrum Juelich GmbH, Juelich, Germany.
 // All rights reserved.
-// $Id: TestTWUFetchOptions.java,v 1.1 2003/10/31 15:17:04 jgk Exp $
+// $Id: TestTWUFetchOptions.java,v 1.2 2010/09/03 09:58:16 manduchi Exp $
 // 
 // -------------------------------------------------------------------------------------------------
 
@@ -19,7 +22,7 @@ class TestTWUFetchOptions
     public static String 
     revision()
     {
-        return "$Id: TestTWUFetchOptions.java,v 1.1 2003/10/31 15:17:04 jgk Exp $";
+        return "$Id: TestTWUFetchOptions.java,v 1.2 2010/09/03 09:58:16 manduchi Exp $";
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -202,5 +205,5 @@ class TestTWUFetchOptions
 
 
 // -------------------------------------------------------------------------------------------------
-// End of: $Id: TestTWUFetchOptions.java,v 1.1 2003/10/31 15:17:04 jgk Exp $
+// End of: $Id: TestTWUFetchOptions.java,v 1.2 2010/09/03 09:58:16 manduchi Exp $
 // -------------------------------------------------------------------------------------------------

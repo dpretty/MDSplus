@@ -1,10 +1,15 @@
+
+import jScope.TWUProperties;
+import jScope.TWUSignal;
+import jScope.FakeTWUProperties;
+
 // -------------------------------------------------------------------------------------------------
 // TestTWUSignalProperties
 //
 // A support class for for the TWU* classes in jScope, implementing a number of tests on
 // these TWU* classes, in particular on TWUProperties and TWUSignal.
 //
-// $Id: TestTWUSignalProperties.java,v 1.1 2003/10/31 15:17:04 jgk Exp $
+// $Id: TestTWUSignalProperties.java,v 1.2 2010/09/03 09:58:16 manduchi Exp $
 // 
 // -------------------------------------------------------------------------------------------------
 
@@ -14,7 +19,7 @@ class TestTWUSignalProperties
     public static String 
     revision()
     {
-        return "$Id: TestTWUSignalProperties.java,v 1.1 2003/10/31 15:17:04 jgk Exp $";
+        return "$Id: TestTWUSignalProperties.java,v 1.2 2010/09/03 09:58:16 manduchi Exp $";
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -329,5 +334,5 @@ class TestTWUSignalProperties
 }
 
 // -------------------------------------------------------------------------------------------------
-// End of: $Id: TestTWUSignalProperties.java,v 1.1 2003/10/31 15:17:04 jgk Exp $
+// End of: $Id: TestTWUSignalProperties.java,v 1.2 2010/09/03 09:58:16 manduchi Exp $
 // -------------------------------------------------------------------------------------------------
