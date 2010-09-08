@@ -41,7 +41,7 @@ extern int IsRoprand();
 #include <mdsshr.h>
 #include <string.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiItoX.c,v $ $Revision: 1.11.4.5 $ $Date: 2010/08/31 17:40:03 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiItoX.c,v $ $Revision: 1.11.4.6 $ $Date: 2010/09/08 18:27:41 $";
 
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 
@@ -548,7 +548,7 @@ if (status & 1) switch (paxis->dtype) {
     if (status & 1)
       if (special) {
 	if (flag) {
-	  unsigned short num = j1;
+	  descriptor_length num = j1;
 	  status = MdsGet1DxA((struct descriptor_a *)&duo, &num, &paxis->dtype,
 			      out_ptr);
 	  if (status & 1) {
