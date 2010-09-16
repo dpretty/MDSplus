@@ -41,7 +41,7 @@ extern int IsRoprand();
 #include <mdsshr.h>
 #include <string.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiItoX.c,v $ $Revision: 1.11.4.6 $ $Date: 2010/09/08 18:27:41 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiItoX.c,v $ $Revision: 1.11.4.7 $ $Date: 2010/09/16 20:52:20 $";
 
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 
@@ -97,7 +97,7 @@ STATIC_CONSTANT DESCRIPTOR_A(duo, sizeof(int), DTYPE_L, 0, 2*sizeof(int));
 STATIC_CONSTANT DESCRIPTOR_RANGE(fake0, 0, 0, 0);
 STATIC_CONSTANT DESCRIPTOR_FUNCTION_0(vector0,&OpcVector);
 TdiRefStandard(Tdi1ItoX)
-unsigned long			j1;
+long			j1;
 int left, right, *pcnt=0, *ptest;
 int				k0,k1;
 int				special = narg > 1 && list[1] == TdiItoXSpecial;
