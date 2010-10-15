@@ -41,7 +41,7 @@ extern int IsRoprand();
 #include <mdsshr.h>
 #include <string.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiItoX.c,v $ $Revision: 1.11.4.7 $ $Date: 2010/09/16 20:52:20 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiItoX.c,v $ $Revision: 1.11.4.8 $ $Date: 2010/10/15 19:05:50 $";
 
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 
@@ -96,10 +96,11 @@ STATIC_CONSTANT struct descriptor done = {DESCRIPTOR_HEAD_INI(sizeof(one),DTYPE_
 STATIC_CONSTANT DESCRIPTOR_A(duo, sizeof(int), DTYPE_L, 0, 2*sizeof(int));
 STATIC_CONSTANT DESCRIPTOR_RANGE(fake0, 0, 0, 0);
 STATIC_CONSTANT DESCRIPTOR_FUNCTION_0(vector0,&OpcVector);
+typedef ARRAY(descriptor_llength) array_cvt;
 TdiRefStandard(Tdi1ItoX)
 long			j1;
 int left, right, *pcnt=0, *ptest;
-int				k0,k1;
+descriptor_llength				k0,k1;
 int				special = narg > 1 && list[1] == TdiItoXSpecial;
 int				arg1 = narg > 1 && list[1] && list[1] != TdiItoXSpecial;
 int				big_beg, big_end, f, nran, tslo;
@@ -407,8 +408,8 @@ if (status & 1) switch (paxis->dtype) {
   select:
     if (status & 1)
       if (special) {
-	int	limits[2];
-	array_int dlimits = *(array_int *)&duo;
+	descriptor_llength	limits[2];
+	array_cvt dlimits = *(array_cvt *)&duo;
 	limits[0] = k0;
 	limits[1] = k1;
 	dlimits.pointer = limits;
@@ -558,7 +559,7 @@ if (status & 1) switch (paxis->dtype) {
 	}
 	else {
 	  int	limits[2];
-	  array_int dlimits = *(array_int *)&duo;
+	  array_cvt dlimits = *(array_cvt *)&duo;
 	  limits[0] = k0;
 	  limits[1] = k1;
 	  dlimits.pointer = limits;
