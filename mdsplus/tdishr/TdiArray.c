@@ -32,7 +32,7 @@
 #include <process.h>
 #endif
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiArray.c,v $ $Revision: 1.19.2.4 $ $Date: 2010/10/15 19:05:50 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiArray.c,v $ $Revision: 1.19.2.5 $ $Date: 2010/10/26 18:15:38 $";
 
 int Tdi_RandomSeed = 1234567;
 
@@ -163,7 +163,7 @@ struct descriptor	*out_ptr)
 			new.class = CLASS_S;
 			if (n > 0) status = TdiConvert(&con0, &new MDS_END_ARG);
 			if (n > 1) {
-			int step = new.length;
+			descriptor_a_mult step = new.length;
 				new.pointer += step;
 				if (status & 1) status = TdiConvert(&con1, &new MDS_END_ARG);
 				if (n > 2) {

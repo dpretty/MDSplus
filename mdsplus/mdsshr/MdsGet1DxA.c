@@ -54,7 +54,7 @@
 
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: MdsGet1DxA.c,v $ $Revision: 1.14.2.3 $ $Date: 2010/07/22 21:14:33 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: MdsGet1DxA.c,v $ $Revision: 1.14.2.4 $ $Date: 2010/10/26 18:13:29 $";
 
   int       MdsGet1DxA(struct descriptor_a * in_ptr, descriptor_length *length_ptr, unsigned char *dtype_ptr,
 			            struct descriptor_xd *out_xd)
@@ -73,8 +73,8 @@ STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: MdsGet1DxA.c,v $ $Revision: 1.14.2
   else
     new_arsize = (in_dsc->arsize / in_dsc->length) * (*length_ptr);
   dsc_size = sizeof(struct descriptor_a) + (in_dsc->aflags.coeff ? sizeof(char *) + 
-                                                          sizeof(int) * in_dsc->dimct : 0) +
-						 (in_dsc->aflags.bounds ? sizeof(int) * (in_dsc->dimct * 2) 
+                                                          sizeof(descriptor_a_mult) * in_dsc->dimct : 0) +
+						 (in_dsc->aflags.bounds ? sizeof(descriptor_a_bounds) * (in_dsc->dimct * 2) 
                                                                                                      : 0);
   align_size = (*dtype_ptr == DTYPE_T) ? 1 : *length_ptr;
   dsc_size = align(dsc_size,align_size);
@@ -92,13 +92,13 @@ STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: MdsGet1DxA.c,v $ $Revision: 1.14.2
     {
       if (out_dsc->class == CLASS_CA)
       {
-        int offset = ((int) out_dsc->length) * ((in_dsc->a0 - (char *)0) / ((int) in_dsc->length));
+        long long offset = ((int) out_dsc->length) * ((in_dsc->a0 - (char *)0) / ((int) in_dsc->length));
 	out_dsc->a0 = out_dsc->pointer + offset;
       }
       else
       {
-        int offset = ((int) out_dsc->length) *
-		       ((in_dsc->a0 - in_dsc->pointer) / ((int) in_dsc->length));
+        long long offset = out_dsc->length *
+	  ((in_dsc->a0 - in_dsc->pointer) / in_dsc->length);
 	out_dsc->a0 = out_dsc->pointer + offset;
       }
       for (i = 0; i < out_dsc->dimct; i++)
@@ -107,8 +107,8 @@ STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: MdsGet1DxA.c,v $ $Revision: 1.14.2
       {
 	struct bound
 	{
-	  int       l;
-	  int       u;
+	  descriptor_a_bounds       l;
+	  descriptor_a_bounds       u;
 	};
 	struct bound *new_bound_ptr = (struct bound *) & out_dsc->m[out_dsc->dimct];
 	struct bound *a_bound_ptr = (struct bound *) & in_dsc->m[in_dsc->dimct];
