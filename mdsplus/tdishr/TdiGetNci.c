@@ -42,7 +42,7 @@
 #include "tdirefstandard.h"
 #include "tdinelements.h"
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiGetNci.c,v $ $Revision: 1.26.2.4 $ $Date: 2010/09/08 18:27:41 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiGetNci.c,v $ $Revision: 1.26.2.5 $ $Date: 2010/11/16 14:57:18 $";
 
 extern unsigned short OpcVector;
 
@@ -84,7 +84,7 @@ STATIC_CONSTANT struct item {
 {"IO_STV",		0,			0,			NciIO_STV,		DTYPE_LU,	4},
 {"IS_CHILD",		0xffff,			NciK_IS_CHILD,		NciPARENT_RELATIONSHIP,DTYPE_BU,1},
 {"IS_MEMBER",		0xffff,			NciK_IS_MEMBER,	NciPARENT_RELATIONSHIP,DTYPE_BU,1},
-{"LENGTH",		0,			0,			NciLENGTH,		DTYPE_L,	4},
+{"LENGTH",		0,			0,			NciLENGTH,		DTYPE_QU,	8},
 {"MEMBER",		0,			0,			NciMEMBER,		DTYPE_NID,4},
 {"MEMBER_NIDS",		0,			NciNUMBER_OF_MEMBERS,	NciMEMBER_NIDS,	DTYPE_NID,0},
 {"MINPATH",		0,			0,			NciMINPATH,		DTYPE_T,	0},
@@ -107,7 +107,7 @@ STATIC_CONSTANT struct item {
 {"PATH_REFERENCE",	NciM_PATH_REFERENCE,	NciM_PATH_REFERENCE,	NciGET_FLAGS,		DTYPE_BU,	1},
 {"RECORD",		0,			0,			RECORDIDX,		DTYPE_L,	0},
 {"RFA",			0,			0,			NciRFA,		DTYPE_Q,	8},
-{"RLENGTH",		0,			0,			NciRLENGTH,		DTYPE_L,	4},
+{"RLENGTH",		0,			0,			NciRLENGTH,		DTYPE_QU,	8},
 {"SEGMENTED",		NciM_SEGMENTED,         NciM_SEGMENTED,    	NciGET_FLAGS,		DTYPE_BU,	1},
 {"SETUP_INFORMATION",	NciM_SETUP_INFORMATION,NciM_SETUP_INFORMATION,NciGET_FLAGS,		DTYPE_BU,	1},
 {"STATE",		NciM_STATE,		NciM_STATE,		NciGET_FLAGS,		DTYPE_BU,	1},

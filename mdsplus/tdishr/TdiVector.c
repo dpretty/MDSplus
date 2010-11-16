@@ -17,8 +17,8 @@
 #include <tdimessages.h>
 #include <stdlib.h>
 #include <mdsshr.h>
-
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiVector.c,v $ $Revision: 1.6.2.5 $ $Date: 2010/10/26 18:15:38 $";
+#include <string.h>
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiVector.c,v $ $Revision: 1.6.2.6 $ $Date: 2010/11/16 14:57:18 $";
 
 extern int TdiConvert();
 extern int TdiCvtArgs();
