@@ -24,7 +24,7 @@
 
 extern int StrFree1Dx();
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.61.2.3 $ $Date: 2010/08/10 15:33:01 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetNci.c,v $ $Revision: 1.61.2.4 $ $Date: 2010/11/19 22:12:42 $";
 
 #ifndef HAVE_VXWORKS_H
 #define min(a,b) (((a) < (b)) ? (a) : (b))
@@ -134,16 +134,16 @@ int _TreeGetNci(void *dbid, int nid_in, struct nci_itm *nci_itm)
 	  case NciLENGTH:
 		  break_on_no_node;
 		  read_nci;
-		  set_retlen(sizeof(nci.length));
-		  *(unsigned int *) itm->pointer = nci.length;
+		  set_retlen(sizeof(descriptor_llength));
+		  *(descriptor_llength *) itm->pointer = (unsigned long long)nci.length + (((unsigned long long)nci.length_hi)<<32);
 		  break;
 	  case NciRLENGTH:
 		  break_on_no_node;
 		  read_nci;
-		  set_retlen(sizeof(nci.length));
-		  *(unsigned int *) itm->pointer =
+		  set_retlen(sizeof(descriptor_llength));
+		  *(descriptor_llength *) itm->pointer =
 			  (nci.flags2 & NciM_DATA_IN_ATT_BLOCK) ? nci.length : 
-                                 nci.DATA_INFO.DATA_LOCATION.record_length;
+		    (unsigned long long)nci.DATA_INFO.DATA_LOCATION.record_length + (((unsigned long long)nci.DATA_INFO.DATA_LOCATION.record_length_hi)<<32);
 		  break;
 	  case NciSTATUS:
 		  break_on_no_node;

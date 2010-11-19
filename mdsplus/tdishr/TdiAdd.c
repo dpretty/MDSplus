@@ -36,7 +36,7 @@ int Tdi3Add(struct descriptor *in1, struct descriptor *in2, struct descriptor *o
 #include "roprand.h"
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiAdd.c,v $ $Revision: 1.29 $ $Date: 2006/10/04 15:39:59 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiAdd.c,v $ $Revision: 1.29.2.1 $ $Date: 2010/11/19 22:12:48 $";
 
 extern int CvtConvertFloat();
 
@@ -52,7 +52,7 @@ int TdiSubtractOctaword();
   struct descriptor_a *ina2 = (struct descriptor_a *)in2;\
   struct descriptor_a *outa = (struct descriptor_a *)out;\
   int scalars = 0;\
-  unsigned int nout;\
+  unsigned long nout;\
   switch (out->class)\
   {\
     case CLASS_S:\

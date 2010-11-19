@@ -29,7 +29,7 @@
 */
 #include <config.h>
 #include <STATICdef.h>
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: MdsPk.c,v $ $Revision: 1.18 $ $Date: 2004/08/26 16:47:26 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: MdsPk.c,v $ $Revision: 1.18.4.1 $ $Date: 2010/11/19 22:12:36 $";
 STATIC_CONSTANT unsigned int masks[33] = {0,
 0x1, 0x3, 0x7, 0xf, 0x1f, 0x3f, 0x7f, 0xff,
 0x1ff, 0x3ff, 0x7ff, 0xfff, 0x1fff, 0x3fff, 0x7fff, 0xffff,
@@ -52,7 +52,7 @@ STATIC_ROUTINE int SwapBytes(char *in_c)
 }
 #define getppack SwapBytes((char *)ppack)
 
-void      MdsPk(signed char *nbits_ptr, int *nitems_ptr, int pack[], int items[], int *bit_ptr)
+void      MdsPk(signed char *nbits_ptr, int *nitems_ptr, int pack[], int items[], descriptor_a_mult *bit_ptr)
 {
   int       nbits = *nbits_ptr;
   int       nitems = *nitems_ptr;
@@ -150,10 +150,10 @@ void      MdsPk(signed char *nbits_ptr, int *nitems_ptr, int pack[], int items[]
 
 
 /*-------------------------------------------------------------*/
-void      MdsUnpk(signed char *nbits_ptr, int *nitems_ptr, int pack[], int items[], int *bit_ptr)
+void      MdsUnpk(signed char *nbits_ptr, int *nitems_ptr, int pack[], int items[], descriptor_a_mult *bit_ptr)
 {
-  int       nbits = *nbits_ptr;
-  int       nitems = *nitems_ptr;
+  int     nbits = *nbits_ptr;
+  int     nitems = *nitems_ptr;
   int     *ppack = &pack[*bit_ptr >> 5];
   int     *pitems = &items[0];
   int       size = nbits >= 0 ? nbits : -nbits;

@@ -24,7 +24,7 @@ extern unsigned short OpcValue;
 #include <stdlib.h>
 #include <mdsshr.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiDtypeRange.c,v $ $Revision: 1.8.4.5 $ $Date: 2010/08/16 13:09:38 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiDtypeRange.c,v $ $Revision: 1.8.4.6 $ $Date: 2010/11/19 22:12:48 $";
 
 STATIC_CONSTANT DESCRIPTOR_A(arr0, 1, DTYPE_B, 0, 0);
 STATIC_CONSTANT int minus_one_value = -1;
@@ -164,7 +164,7 @@ struct TdiCatStruct		cats[4];
                 delta.dtype = dtype;
                 delta.pointer = new[2] ? dat[2].pointer->pointer : 0;
 		for (j = nseg, pl = (int *)nelem.pointer->pointer; --j >= 0;) {
-			x_dsc.arsize = *pl * len;
+			x_dsc.arsize = ((descriptor_a_arsize)*pl) * len;
 			if (status & 1) status = Tdi3Ramp(&x_dsc);
 			if (new[2] && status & 1) status = Tdi3Multiply(&x_dsc, &delta, &x_dsc);
 			if (status & 1) status = Tdi3Add(&x_dsc, &begin, &x_dsc);
