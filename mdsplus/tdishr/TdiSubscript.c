@@ -42,7 +42,7 @@
 #include <mdsshr.h>
 #include <string.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSubscript.c,v $ $Revision: 1.11.2.5 $ $Date: 2010/11/16 14:57:18 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSubscript.c,v $ $Revision: 1.11.2.6 $ $Date: 2010/11/23 19:10:17 $";
 
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 extern unsigned short OpcValue;
@@ -76,7 +76,8 @@ register char			*pin, *pout;
 int				bounded = 0, cmode = -1, dimct, highest = 0, highdim = 0, row;
 int                      	dim;
 register int			j, len;
-s_descriptor_llength				stride[MAXDIM+1], *px[MAXDIM], count[MAXDIM];
+int *px[MAXDIM];
+s_descriptor_llength				stride[MAXDIM+1], count[MAXDIM];
 struct descriptor_signal	*psig;
 struct descriptor_dimension *pdim;
 struct descriptor		*keeps = TdiThreadStatic()->TdiSELF_PTR;
@@ -220,7 +221,7 @@ struct TdiCatStruct		cats[2];
 			N_ELEMENTS(pdi, arr.m[dim]);
 		}
 		if (status & 1 && (arr.arsize *= arr.m[dim]))
-                   pin += stride[dim] * *(px[dim] = (s_descriptor_llength *)pdi->pointer);
+                   pin += stride[dim] * *(px[dim] = (int *)pdi->pointer);
 	}
 	if (!(status & 1)) goto badsub;
 	/********************************************
