@@ -36,7 +36,7 @@ int TreeDeleteNodeInitialize(NID *nid,int *count,reset)
 #include "treeshrp.h"
 
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeDeleteNode.c,v $ $Revision: 1.15.2.1 $ $Date: 2010/08/10 15:33:01 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeDeleteNode.c,v $ $Revision: 1.15.2.2 $ $Date: 2010/11/30 22:23:09 $";
 
 extern void **TreeCtx();
 
@@ -97,7 +97,7 @@ int _TreeDeleteNodeInitialize(void *dbid, int nidin, int *count, int reset)
     if (count)
       *count = 0;
   }
-  if (nid)
+  if (nidin)
     check_nid(dblist, nid, count);
   return TreeNORMAL;
 }
