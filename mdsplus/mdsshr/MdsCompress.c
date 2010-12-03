@@ -63,7 +63,7 @@ The expansion routine "xentry":
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 typedef ARRAY_COEFF(char, 1) array_coef;
 typedef RECORD(4) record_four;
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: MdsCompress.c,v $ $Revision: 1.18.2.5 $ $Date: 2010/11/19 22:12:36 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: MdsCompress.c,v $ $Revision: 1.18.2.6 $ $Date: 2010/12/03 19:57:15 $";
 
 STATIC_CONSTANT unsigned short opcode = OpcDECOMPRESS;
 STATIC_CONSTANT record_four rec0 = {DESCRIPTOR_HEAD_INI(sizeof(opcode), DTYPE_FUNCTION, CLASS_R, (unsigned char *) &opcode), 4, 0, 0, 0, 0};
@@ -356,7 +356,7 @@ int       MdsDecompress(
   {
     struct descriptor_a *pa = (struct descriptor_a *) prec->dscptrs[2];
     descriptor_a_mult       nitems = pa->arsize / pa->length;
-    int      bit = 0;
+    descriptor_a_mult      bit = 0;
     if (prec->dscptrs[1])
     {
       status = LibFindImageSymbol(prec->dscptrs[0], prec->dscptrs[1], &symbol);
