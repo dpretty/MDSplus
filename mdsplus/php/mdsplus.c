@@ -15,7 +15,7 @@
   | Author:                                                              |
   +----------------------------------------------------------------------+
 
-  $Id: mdsplus.c,v 1.4 2010/12/08 21:25:03 twf Exp $ 
+  $Id: mdsplus.c,v 1.5 2010/12/09 15:55:09 twf Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -345,10 +345,9 @@ static void MakeArray(zval *arr, struct descrip *ans, int dim, int *index) {
 			*index = *index + 1;
 		}
 	} else {
-		zval *arr2;;
 		for (i=0;i<ans->dims[dim];i++) {
-			arr2=(zval *)malloc(sizeof(zval));
-			memset(arr2,0,sizeof(zval));
+			zval *arr2;
+			MAKE_STD_ZVAL(arr2);
 			MakeArray(arr2,ans,dim+1,index);
 			add_next_index_zval(arr,arr2);
         }
