@@ -1,6 +1,6 @@
 package jScope;
 
-/* $Id: UpdateEvent.java,v 1.1 2010/09/03 09:58:18 manduchi Exp $ */
+/* $Id: UpdateEvent.java,v 1.2 2011/01/31 13:35:38 manduchi Exp $ */
 import java.awt.AWTEvent;
 import java.awt.Event;
 
@@ -22,4 +22,6 @@ public class UpdateEvent extends AWTEvent
         super(source, 0);
         name = event;
     }
+
+    public String getName() { return name;}
 }

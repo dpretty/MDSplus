@@ -1,6 +1,6 @@
 package jScope;
 
-/* $Id: MdsDataClient.java,v 1.1 2010/09/03 09:58:17 manduchi Exp $ */
+/* $Id: MdsDataClient.java,v 1.2 2011/01/31 13:35:38 manduchi Exp $ */
 import java.util.Vector;
 
 public class MdsDataClient extends MdsConnection
@@ -15,7 +15,7 @@ public class MdsDataClient extends MdsConnection
      * @param provider String to define the mdsip data server to use: host_address[:port]
      * @exception MdsIOException if an I/0 error occurs
      */
-    MdsDataClient(String provider) throws MdsIOException
+    public MdsDataClient(String provider) throws MdsIOException
     {
         super(provider);
         if(ConnectToMds(false) == 0)
@@ -29,7 +29,7 @@ public class MdsDataClient extends MdsConnection
      * @param user String to define the mdsip user name
      * @exception MdsIOException if an I/0 error occurs
      */
-    MdsDataClient(String provider, String user) throws MdsIOException
+    public MdsDataClient(String provider, String user) throws MdsIOException
     {
         super(provider);
         setUser(user);

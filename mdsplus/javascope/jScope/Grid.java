@@ -1,6 +1,6 @@
 package jScope;
 
-/* $Id: Grid.java,v 1.2 2010/10/29 12:05:41 manduchi Exp $ */
+/* $Id: Grid.java,v 1.3 2011/01/31 13:35:38 manduchi Exp $ */
 import java.awt.*;
 import java.awt.image.*;
 import java.awt.event.*;
@@ -521,16 +521,22 @@ public class Grid
                     {
                         long datel = (long) x_values[i];
                         DateFormat df = new SimpleDateFormat("HH:mm:ss");
-                        df.setTimeZone(new SimpleTimeZone(0, "GMT"));
+                        //--df.setTimeZone(new SimpleTimeZone(0, "GMT"));
+                        df.setTimeZone(TimeZone.getDefault());
                         DateFormat dfSubSec = new SimpleDateFormat("HH:mm:ss.SSS");
-                        dfSubSec.setTimeZone(new SimpleTimeZone(0, "GMT"));
+                        //--dfSubSec.setTimeZone(new SimpleTimeZone(0, "GMT"));
+                        dfSubSec.setTimeZone(TimeZone.getDefault());
+
                         Date date = new Date();
                         date.setTime(datel);
                         currStringSubSec = dfSubSec.format(date).toString();
                         curr_string = df.format(date).toString();
 
                         DateFormat df1 = new SimpleDateFormat("d-MMM-yyyy");
-                        df1.setTimeZone(new SimpleTimeZone(0, "GMT"));
+
+                        //--df1.setTimeZone(new SimpleTimeZone(0, "GMT"));
+                        df1.setTimeZone(TimeZone.getDefault());
+
                         String new_date_string = df1.format(date).toString();
                         if(i == 0 || !new_date_string.equals(prev_date_string))
                         {

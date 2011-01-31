@@ -1,6 +1,6 @@
 package jScope;
 
-/* $Id: MdsConnection.java,v 1.2 2010/09/03 11:29:52 manduchi Exp $ */
+/* $Id: MdsConnection.java,v 1.3 2011/01/31 13:35:38 manduchi Exp $ */
 import jScope.ConnectionEvent;
 import jScope.ConnectionListener;
 import java.io.*;
@@ -72,6 +72,9 @@ public class MdsConnection
 
             public ProcessUdpEvent()
             {
+
+		System.out.println("START ProcessUdpEvent " + provider);
+
                 String portStr = System.getenv("mdsevent_port");
                 if( portStr != null )
                 {
@@ -113,12 +116,18 @@ public class MdsConnection
                 while( true )
                 {
                     try {
-                        mSocket.receive(p);
-                        String event =  getEventFromDatagram(p);
-                        PMET PMdsEvent = new PMET();
-                        PMdsEvent.SetEventName( event );
-                        PMdsEvent.start();
+			if(mSocket != null)
+			{
+                        	mSocket.receive(p);
+                        	String event =  getEventFromDatagram(p);
+                        	PMET PMdsEvent = new PMET();
+                        	PMdsEvent.SetEventName( event );
+                        	PMdsEvent.start();
+			} else {
+				System.out.println("START ProcessUdpEvent");
+			}
                     } catch (IOException ex) {
+                        ex.printStackTrace();
                         Logger.getLogger(MdsConnection.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
@@ -294,8 +303,8 @@ public class MdsConnection
         provider = null;
         port = DEFAULT_PORT;
         host = null;
-        processUdpEvent = new ProcessUdpEvent();
-        processUdpEvent.start();
+        //processUdpEvent = new ProcessUdpEvent();
+        //processUdpEvent.start();
     }
 
     public MdsConnection (String provider)
@@ -307,8 +316,8 @@ public class MdsConnection
         this.provider = provider;
         port = DEFAULT_PORT;
         host = null;
-        processUdpEvent = new ProcessUdpEvent();
-        processUdpEvent.start();
+        //processUdpEvent = new ProcessUdpEvent();
+        //processUdpEvent.start();
     }
 
     public void setProvider(String provider)
@@ -571,6 +580,14 @@ public class MdsConnection
                     error = "Could not get IO for : Host " + host +" Port "+ port + " User " + user;
                     return 0;
                 }
+
+		if( processUdpEvent == null )
+		{
+		    processUdpEvent = new ProcessUdpEvent();
+		}
+		if( !processUdpEvent.isAlive() )
+			processUdpEvent.start();
+
                 connected = true;
             } else {
                 error = "Data provider host:port is <null>";
