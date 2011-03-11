@@ -6,7 +6,7 @@
 #include <ipdesc.h>
 #include <stdio.h>
 #include <stdlib.h>
-static char *cvsrev = "@(#)$RCSfile: t.c,v $ $Revision: 1.10 $ $Date: 2009/03/13 17:54:13 $";
+static char *cvsrev = "@(#)$RCSfile: t.c,v $ $Revision: 1.10.2.1 $ $Date: 2011/03/11 14:37:52 $";
 int main( int argc, void **argv)
 {
   int status;
@@ -25,7 +25,7 @@ int main( int argc, void **argv)
       val = val + (float)1.;
     }
     else
-      printf("%s\n",ans.ptr);
+      printf("%s\n",(char *)ans.ptr);
     if (ans.ptr) 
     {
       free(ans.ptr);
@@ -37,7 +37,7 @@ int main( int argc, void **argv)
     if (MdsValue(sock,"42.0",&ans,0) & 1)
       printf("%g\n",*(float *)ans.ptr);
     else
-      printf("%s\n",ans.ptr);
+      printf("%s\n",(char *)ans.ptr);
     if (ans.ptr) free(ans.ptr);
   }
   return 1;
