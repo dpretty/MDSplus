@@ -1,2 +1,0 @@
-#!/bin/sh
-exec ssh $1 ". /etc/profile; $2"
