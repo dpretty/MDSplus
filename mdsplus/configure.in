@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.235 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.236 $
 AC_INIT()
 
 #AC_CONFIG_HEADER(include/config.h)
@@ -28,6 +28,9 @@ AC_ARG_ENABLE(mdsip_connections,
         [ --enable-mdsip_connections     Use new improved mdsip connections],
         if test "$enableval" = yes; then
           AC_DEFINE(MDSIP_CONNECTIONS)
+	  MDSIP_CONNECTIONS="yes";
+        else 
+          MDSIP_CONNECTIONS="no";
         fi)
 
 AC_ARG_ENABLE(nodebug,
