@@ -87,7 +87,7 @@ void CloseDataSources();
 # define _toupper(c)	(((c) >= 'a' && (c) <= 'z') ? (c) & 0xDF : (c))
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: evaluate.c,v $ $Revision: 1.18 $ $Date: 2009/10/19 19:11:20 $";
+static char *cvsrev = "@(#)$RCSfile: evaluate.c,v $ $Revision: 1.19 $ $Date: 2011/03/17 21:00:35 $";
 
 extern void EventUpdate(XtPointer client_data, int *source, XtInputId *id);
 
@@ -891,6 +891,17 @@ static long Connect()
   if (sock == -1)
     exit(1);
   return sock;
+}
+
+static long ConnectToMdsEvents(char *event_host) {
+  char hostpart[256] = {0};
+  char portpart[256] = {0};
+  char host[512];
+  sscanf(host,"%[^:]:%s",hostpart,portpart);
+  if (strlen(portpart) == 0)
+    strcpy(portpart,"mdsipe");
+  sprintf(host,"%s:%s",hostpart,portpart);
+  return ConnectToMds(host);
 }
 
 static long ConnectEvents()
