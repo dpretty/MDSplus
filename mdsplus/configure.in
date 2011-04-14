@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.237 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.238 $
 AC_INIT()
 
 #AC_CONFIG_HEADER(include/config.h)
@@ -23,6 +23,7 @@ fi
 
 dnl Check out the compiler
 AC_PROG_CC
+AC_PROG_CXX
 
 AC_ARG_ENABLE(mdsip_connections,
         [ --enable-mdsip_connections     Use new improved mdsip connections],
