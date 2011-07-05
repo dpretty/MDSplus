@@ -46,7 +46,7 @@ extern char *index(char *str,char c);
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.105 $ $Date: 2011/07/05 14:12:59 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.106 $ $Date: 2011/07/05 14:39:49 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
@@ -1339,6 +1339,7 @@ int       _TreeOpenNew(void **dbid, char *tree_in, int shot_in)
             info->root = info->node;
             (*dblist)->default_node = info->root;
             TreeOpenNciW(info, 0);
+            info->edit->first_in_mem=0;
             status = TreeExpandNodes(*dblist, 0, 0);
             strncpy(info->node->name,"TOP         ",sizeof(info->node->name));
             info->node->parent = 0;
