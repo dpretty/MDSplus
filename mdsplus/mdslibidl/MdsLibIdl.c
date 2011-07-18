@@ -14,7 +14,7 @@ extern int TdiCvt();
 extern int TdiCompile();
 extern int TdiDebug();
 
-static char *cvsrev = "@(#)$RCSfile: MdsLibIdl.c,v $ $Revision: 1.30 $ $Date: 2009/03/13 19:18:47 $";
+static char *cvsrev = "@(#)$RCSfile: MdsLibIdl.c,v $ $Revision: 1.31 $ $Date: 2011/07/18 16:25:51 $";
 
 #ifdef _WINDOWS
 #define BlockSig(a)
@@ -422,7 +422,7 @@ int IdlGetAns(int argc, void **argv)
   {
     memcpy(argv[0], mdsValueAnswer.pointer->pointer, mdsValueAnswer.pointer->length);
   }
-  else if (mdsValueAnswer.pointer->class = CLASS_A)
+  else if (mdsValueAnswer.pointer->class == CLASS_A)
   {
     memcpy(argv[0], mdsValueAnswer.pointer->pointer, ((struct descriptor_a *)mdsValueAnswer.pointer)->arsize);
   }
