@@ -80,7 +80,7 @@
 extern int sys$filescan();
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: dwscopesubs.c,v $ $Revision: 1.11 $ $Date: 2010/01/11 15:59:11 $";
+static char *cvsrev = "@(#)$RCSfile: dwscopesubs.c,v $ $Revision: 1.12 $ $Date: 2011/07/28 16:19:45 $";
 
 extern int XmdsManageWindow();
 Boolean   ConvertSelectionToWave(Widget w, Atom result_type, unsigned long length, CutHeader *header, WaveInfo *info);
@@ -827,11 +827,16 @@ void SetDirMask(Widget w, String *file, XmAnyCallbackStruct *callback_data)
   {
     XmString mask;
     char *tmpfile = strcpy(malloc(strlen(*file)+10),*file);
-    char *pos = strrchr(tmpfile,'/');
-    if (pos)
+    char *typpos = strrchr(tmpfile,'.');
+    char *dirpos = strrchr(tmpfile,'/');
+    if (dirpos)
     {
-        pos[1]=0;
-        strcat(tmpfile,"*.dat");
+        dirpos[1]=0;
+        strcat(tmpfile,"*");
+        if (typpos && typpos > dirpos)
+          strcat(tmpfile,typpos);
+        else
+          strcat(tmpfile,".dat");
     }
     else
       strcpy(tmpfile,"*.dat");
