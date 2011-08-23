@@ -1,4 +1,4 @@
-#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.71 $
+#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.72 $
 # @configure_input@
 prefix=@prefix@
 SHELL=/bin/sh
@@ -54,7 +54,6 @@ PARTS = \
         @JAVA_APS@ \
 	@MOTIF_APS@ \
 	@MDSSQL@ \
-        @IDLSQL@ \
 	@IDLMDSEVENT@ \
 	@MDSVME@ \
 	@HDF5_APS@
