@@ -1,4 +1,4 @@
-#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.72 $
+#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.72.4.1 $
 # @configure_input@
 prefix=@prefix@
 SHELL=/bin/sh
@@ -9,7 +9,8 @@ JAVA_APS = javamds \
 	   javadispatcher \
 	   javadevices \
 	   javaclient \
-	   mdsobjects/java
+	   mdsobjects/java \
+           mdsobjects/cpp
 
 MOTIF_APS = xmdsshr \
 	    actions \
@@ -31,7 +32,6 @@ PARTS = \
         @MDSTCPIP@ \
 	rtevents \
         cacheshr \
-        mdsobjects/cpp \
         mdslibidl \
         cdu     \
         mdsdcl  \
@@ -99,7 +99,7 @@ RELEASE:
 RPM :
 	devscripts/MakeRpm
 
-MISC_PARTS = tdi idl trees setup.sh setup.csh ChangeLog java LabView include mdsobjects/python
+MISC_PARTS = tdi idl trees setup.sh setup.csh ChangeLog java LabView include mdsobjects/python desktop
 
 install: 
 	devscripts/mkdirhier @exec_prefix@/local/tdi
