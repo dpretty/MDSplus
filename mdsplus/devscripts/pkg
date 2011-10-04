@@ -75,7 +75,7 @@ update_mdsplus()
     cvs -Q update -A devscripts/pkg
     cd ..
   else
-    cvs -d :ext:`whoami`@www.mdsplus.org:/mdsplus/repos -Q checkout $1 -f mdsplus >/dev/null
+    cvs -d /mdsplus/repos -Q checkout $1 -f mdsplus >/dev/null
     cd mdsplus
     cvs -Q update -A devscripts/pkg
     cd ..
@@ -248,7 +248,7 @@ EOF
   get_version) #internal use
     # pkg get_version flavor [cvs-status-file]
     flavor=$2
-    cvs_Status=$3
+    cvs_status=$3
     if [ -z "$cvs_status" ]
     then
        cvs_status=$(mktemp -t mdsplus-cvs-status.4.XXXXXXXXXX)
@@ -257,7 +257,7 @@ EOF
     else
        keep="yes"
     fi
-    awk '/release.h,v/ {V="yes"} /pkgver-'$flavor'/ {if (V=="yes"){A[0]="";split($1,A,"-");print A[3] "." A[4];exit;}}' $cvs_status
+    awk '/release.h,v/ {V="yes"} /pkgver-'$flavor'/ {if (V=="yes"){A[0]="";split($1,A,"-");print A[3] "." A[4];exit;}}' $cvs_status 
     if [ -z "$keep" ]
     then
       rm -f $cvs_status
@@ -350,7 +350,7 @@ EOF
      pushd $rpmsdir/${flavor}.${REDHATDIST}/BUILD/x86_64/mdsplus >/dev/null
      cvs_status=$(mktemp)
      devscripts/pkg get_cvs_status > $cvs_status
-     for pkg in $(ls rpm/subpackages | grep -v CVS)
+     for pkg in $(ls rpm/subpackages | grep -v CVS | grep -v '~' | grep -v '#')
      do
        if [ $(stat rpm/subpackages/${pkg} --format=%s) -gt 0 ]
        then
