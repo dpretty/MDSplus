@@ -90,7 +90,7 @@ then
 fi
 if [ -d /usr/share/applications ]
 then
-  mkdir /usr/share/applications/mdsplus
+  mkdir -p /usr/share/applications/mdsplus
   ln -sf $RPM_INSTALL_PREFIX/mdsplus/desktop/kernel /usr/share/applications/mdsplus/
 fi
 
