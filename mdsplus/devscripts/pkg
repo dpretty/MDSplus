@@ -636,10 +636,10 @@ EOF
      # pkg makeRpmsHudson
      # example: pkg makeRpmsHudson
      pushd ${WORKSPACE}/x86_64/mdsplus > /dev/null
-     flavor = $(cvs status configure.in | grep "Sticky Tag:" | grep "stable")
+     flavor=$(cvs status configure.in | grep "Sticky Tag:" | grep "stable")
      if [ -z "$flavor" ]
      then
-       flavor = $(cvs status configure.in | grep "Sticky Tag:" | grep "beta")
+       flavor=$(cvs status configure.in | grep "Sticky Tag:" | grep "beta")
        if [ -z "$flavor" ]
        then
          flavor="alpha"
@@ -783,7 +783,7 @@ EOF
      fi
      rm -f $cvs_status
      buildroot=$(mktemp -t -d mdsplus-repo-build.XXXXXXXXXX)
-     spec=$(dirname $0)/../rpm/repos.spec
+     spec=${WORKSPACE}/x86_64/mdsplus/rpm/repos.spec
      if ! ( rpmbuild -ba --buildroot=$buildroot --define="_topdir $rpmdir" --define="flavor $flavor" $spec >/dev/null )
      then
        if [ ! -z "$notify" ]
