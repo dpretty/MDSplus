@@ -713,7 +713,7 @@ EOF
      status="ok"
      if [ "$need_to_build" == "yes" ]
      then
-       if ! (rpmbuild --target ${target}-linux --buildroot $rpmdir/BUILDROOT/${target} -ba --define="_topdir $rpmdir" $specfile )
+       if ! (rpmbuild --target ${target}-linux --buildroot $rpmdir/BUILDROOT/${target} -ba --define="_builddir ${WORKSPACE}" --define="_topdir $rpmdir" $specfile )
        then
          if [ ! -z "$notify" ]
          then
