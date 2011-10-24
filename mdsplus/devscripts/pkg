@@ -635,7 +635,20 @@ EOF
   makeRpmsHudson)
      # pkg makeRpmsHudson
      # example: pkg makeRpmsHudson
-     flavor=${CVS_BRANCH}
+     pushd ${WORKSPACE}/x86_64/mdsplus > /dev/null
+     flavor = $(cvs status configure.in | grep "Sticky Tag:" | grep "stable")
+     if [ -z "$flavor" ]
+     then
+       flavor = $(cvs status configure.in | grep "Sticky Tag:" | grep "beta")
+       if [ -z "$flavor" ]
+       then
+         flavor="alpha"
+       else
+         flavor="beta"
+       fi
+     else
+       flavor="stable"
+     fi
      if [ -z "$flavor" ]; then flavor="alpha"; fi
      rpmdir=$rpmsdir/${flavor}.${REDHATDIST}
      mkdir -p $rpmdir/RPMS
