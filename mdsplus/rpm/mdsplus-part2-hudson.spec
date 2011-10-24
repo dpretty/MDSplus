@@ -8,13 +8,11 @@ Main libraries and programs to get MDSplus operational
 %build
 if [ "%_target" != "i686-linux" ]
 then
-  cd i686/mdsplus
-  ./configure --exec_prefix=$RPM_BUILD_ROOT/usr/local/mdsplus --bindir=$RPM_BUILD_ROOT/usr/local/mdsplus/bin32 --libdir=$RPM_BUILD_ROOT/usr/local/mdsplus/lib32 --enable-nodebug --target=i686-linux --disable-java --enable-mdsip_connections
-  make
-  cd ..
+  cd ${WORKSPACE}/x86_64/mdsplus
   ./configure --exec_prefix=$RPM_BUILD_ROOT/usr/local/mdsplus --bindir=$RPM_BUILD_ROOT/usr/local/mdsplus/bin64 --libdir=$RPM_BUILD_ROOT/usr/local/mdsplus/lib64 --enable-nodebug --enable-mdsip_connections
   make
 else
+  cd ${WORKSPACE}/i686/mdsplus
   ./configure --exec_prefix=$RPM_BUILD_ROOT/usr/local/mdsplus --bindir=$RPM_BUILD_ROOT/usr/local/mdsplus/bin32 --libdir=$RPM_BUILD_ROOT/usr/local/mdsplus/lib32 --enable-nodebug --target=i686-linux --enable-mdsip_connections
   make
 fi
@@ -24,11 +22,15 @@ fi
 
 if [ "%_target" != "i686-linux" ]
 then
-  cd i686/mdsplus
+  cd ${WORKSPACE}/x86_64/mdsplus
   make install
-  cd ../..
+  rsync -a ${WORKSPACE}/i686/mdsplus/bin32 $RPM_BUILD_ROOT/usr/local/mdsplus/
+  rsync -a ${WORKSPACE}/i686/mdsplus/lib32 $RPM_BUILD_ROOT/usr/local/mdsplus/
+  rsync -a ${WORKSPACE}/i686/mdsplus/uid32 $RPM_BUILD_ROOT/usr/local/mdsplus/
+else
+  cd ${WORKSPACE}/i686/mdsplus
+  make install
 fi
-make install
 
 %clean
 rm -rf $RPM_BUILD_ROOT
