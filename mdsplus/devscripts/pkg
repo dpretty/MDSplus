@@ -633,11 +633,10 @@ EOF
      fi
   ;;
   makeRpmsHudson)
-     # pkg makeRpmsHudson flavor target [notify file]
-     # example: pkg makeRpmsHudson stable i686
-     flavor=$2
-     target=$3
-     notify=$4
+     # pkg makeRpmsHudson
+     # example: pkg makeRpmsHudson
+     flavor=${CVS_BRANCH}
+     if [ -z "$flavor" ]; then flavor="alpha"; fi
      rpmdir=$rpmsdir/${flavor}.${REDHATDIST}
      mkdir -p $rpmdir/RPMS
      mkdir -p $rpmdir/SOURCES
@@ -648,7 +647,7 @@ EOF
      mkdir -p $rpmdir/BUILDROOT/x86_64
      mkdir -p $rpmdir/BUILD/i686
      mkdir -p $rpmdir/BUILDROOT/i686
-     pkgcmd=./devscripts/pkg
+     pkgcmd=$(WORKSPACE)/x86_64/mdsplus/devscripts/pkg
      cvs_status=$(mktemp -t mdsplus-cvs-status.7.XXXXXXXXXX)
      $pkgcmd get_cvs_status > $cvs_status
      version=$($pkgcmd get_version $flavor $cvs_status)
@@ -658,7 +657,8 @@ EOF
      else
        rpmflavor="-${flavor}"
      fi
-     tar zcf $rpmdir/SOURCES/mdsplus${rpmflavor}-${version}.tar.gz --exclude CVS .
+     tar zcf $rpmdir/SOURCES/mdsplus${rpmflavor}-${version}.tar.gz --exclude CVS mdsplus
+     cd mdsplus
      specfile="$rpmdir/SPECS/mdsplus-${flavor}-${version}-${REDHATDIST}.spec"
      release=$($pkgcmd get_release kernel $flavor $cvs_status)
      chk="$($pkgcmd check_release kernel $flavor $cvs_status)"
@@ -695,9 +695,13 @@ EOF
              $pkgcmd check_release $pkg $flavor $cvs_status
              echo "=================================================================================================="
              let release="$release"+1
-           elif ! (ls $rpmdir/RPMS/${target}/mdsplus${rpmflavor}-${pkg}-${version}-${release}* > /dev/null 2>&1)
+           elif ! (ls $rpmdir/RPMS/x86_64/mdsplus${rpmflavor}-${pkg}-${version}-${release}* > /dev/null 2>&1)
            then
-	     echo "RPM $rpmdir/RPMS/${target}/mdsplus${rpmflavor}-${pkg}-${version}-${release} is missing. Creating it."
+	     echo "RPM $rpmdir/RPMS/x86_64/mdsplus${rpmflavor}-${pkg}-${version}-${release} is missing. Creating it."
+	     eval ${pkg}_update="yes"
+	   elif ! (ls $rpmdir/RPMS/i686/mdsplus${rpmflavor}-${pkg}-${version}-${release}* > /dev/null 2>&1)
+           then
+	     echo "RPM $rpmdir/RPMS/i686/mdsplus${rpmflavor}-${pkg}-${version}-${release} is missing. Creating it."
 	     eval ${pkg}_update="yes"
            fi
            eval ${pkg}_release=$release
@@ -713,47 +717,57 @@ EOF
      status="ok"
      if [ "$need_to_build" == "yes" ]
      then
-       if ! (rpmbuild --target ${target}-linux --buildroot $rpmdir/BUILDROOT/${target} -ba --define="_builddir ${WORKSPACE}" --define="_topdir $rpmdir" $specfile )
+       rpmbuild --target x86_64-linux --buildroot $rpmdir/BUILDROOT/x86_64 -ba --define="_topdir $rpmdir" --define="_builddir $rpmdir/BUILD/x86_64" $specfile 
+       rpmbuild_status=$?
+       if [ "rpmbuild_status" != "0" ]
        then
          if [ ! -z "$notify" ]
          then
-           echo "Error building ${target} ${flavor}.${REDHATDIST} rpms." >> $notify
+           echo "Error building x86_64 ${flavor}.${REDHATDIST} rpms." >> $notify
+         fi
+         status="error"
+       fi
+       rpmbuild --target i686-linux --buildroot $rpmdir/BUILDROOT/i686 -ba --define="_topdir $rpmdir" --define="_builddir $rpmdir/BUILD/i686" $specfile
+       rpmbuild_status=$?
+       if [ "rpmbuild_status != "0" ]
+       then
+         if [ ! -z "$notify" ]
+         then
+           echo "Error building i686 ${flavor}.${REDHATDIST} rpms." >> $notify
          fi
          status="error"
        fi
      else
        status="skip"
      fi
-     rm -f $cvs_status
-   ;;
-   tagReleaseHudson)
-     echo "Build completed successfully. Checking for new releases and tagging the modules"
-     pkgcmd=./devscripts/pkg
-     cvs_status=$(mktemp -t mdsplus-cvs-status.7.XXXXXXXXXX)
-     $pkgcmd get_cvs_status > $cvs_status
-     for pkg in $(ls rpm/subpackages)
-     do
-       if [ "$(ls -l rpm/subpackages/$pkg | awk '{print $5}')" != "0" ]
-       then
-         if [ -f rpm/subpackages/$pkg ]
-         then 
-           echo "Checking $pkg for new release"
-           eval update=\$${pkg}_update
-           if [ "$update" == "yes" ]
-           then
-             eval release=\$${pkg}_release
-             echo "$pkg has a new release. Tag modules with $flavor $version $release $REDHATDIST"
-             if [ ! -z "$notify" ]
+     if [ "$status" == "ok" ]
+     then
+       echo "Build completed successfully. Checking for new releases and tagging the modules"
+       for pkg in $(ls rpm/subpackages)
+       do
+         if [ "$(ls -l rpm/subpackages/$pkg | awk '{print $5}')" != "0" ]
+         then
+           if [ -f rpm/subpackages/$pkg ]
+           then 
+             echo "Checking $pkg for new release"
+             eval update=\$${pkg}_update
+             if [ "$update" == "yes" ]
              then
-               echo "New Release: mdsplus${rpmflavor}-${pkg}-$version-${release}.${REDHATDIST}" >> $notify
+               eval release=\$${pkg}_release
+               echo "$pkg has a new release. Tag modules with $flavor $version $release $REDHATDIST"
+               if [ ! -z "$notify" ]
+               then
+                 echo "New Release: mdsplus${rpmflavor}-${pkg}-$version-${release}.${REDHATDIST}" >> $notify
+               fi
+               newRelease "$pkg" "$flavor" "$version" "$release" "$REDHATDIST" "$cvs_status"
+             else
+               echo "$pkg does not seem to be a new release"
              fi
-             newRelease "$pkg" "$flavor" "$version" "$release" "$REDHATDIST" "$cvs_status"
-           else
-             echo "$pkg does not seem to be a new release"
            fi
          fi
-       fi
-     done
+       done
+     fi
+     rm -f $cvs_status
      buildroot=$(mktemp -t -d mdsplus-repo-build.XXXXXXXXXX)
      spec=$(dirname $0)/../rpm/repos.spec
      if ! ( rpmbuild -ba --buildroot=$buildroot --define="_topdir $rpmdir" --define="flavor $flavor" $spec >/dev/null )
@@ -764,7 +778,7 @@ EOF
        fi
        status="error"
      fi
-     if ! ( rpmbuild --target=i686-linux -ba --buildroot=$buildroot --define="_topdir $rpmdir" --define="flavor $flavor" $spec >/dev/null )
+     if ! ( rpmbuild --target=i686-linux -ba --buildroot=$buildroot --define="_topdir $rpmdir" --define="_builddir ${WORKSPACE}" --define="flavor $flavor" $spec >/dev/null )
      then
        if [ ! -z "$notify" ]
        then
