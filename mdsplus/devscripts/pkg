@@ -729,7 +729,7 @@ EOF
        fi
        rpmbuild --target i686-linux --buildroot $rpmdir/BUILDROOT/i686 -ba --define="_topdir $rpmdir" --define="_builddir $rpmdir/BUILD/i686" $specfile
        rpmbuild_status=$?
-       if [ "rpmbuild_status != "0" ]
+       if [ "rpmbuild_status" != "0" ]
        then
          if [ ! -z "$notify" ]
          then
