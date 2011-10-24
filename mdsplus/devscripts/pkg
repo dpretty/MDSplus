@@ -647,7 +647,7 @@ EOF
      mkdir -p $rpmdir/BUILDROOT/x86_64
      mkdir -p $rpmdir/BUILD/i686
      mkdir -p $rpmdir/BUILDROOT/i686
-     pkgcmd=$(WORKSPACE)/x86_64/mdsplus/devscripts/pkg
+     pkgcmd=${WORKSPACE}/x86_64/mdsplus/devscripts/pkg
      cvs_status=$(mktemp -t mdsplus-cvs-status.7.XXXXXXXXXX)
      $pkgcmd get_cvs_status > $cvs_status
      version=$($pkgcmd get_version $flavor $cvs_status)
@@ -657,6 +657,7 @@ EOF
      else
        rpmflavor="-${flavor}"
      fi
+     cd ${WORKSPACE}/x86_64
      tar zcf $rpmdir/SOURCES/mdsplus${rpmflavor}-${version}.tar.gz --exclude CVS mdsplus
      cd mdsplus
      specfile="$rpmdir/SPECS/mdsplus-${flavor}-${version}-${REDHATDIST}.spec"
