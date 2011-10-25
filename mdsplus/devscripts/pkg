@@ -109,7 +109,6 @@ newRelease()
  popd > /dev/null
 }
 
-
 case $1 in
   "")
   cat - <<EOF
