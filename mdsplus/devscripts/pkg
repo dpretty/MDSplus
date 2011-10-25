@@ -733,22 +733,24 @@ EOF
      then
        rpmbuild --target i686-linux --buildroot $rpmdir/BUILDROOT/i686 -ba --define="_topdir $rpmdir" --define="_builddir $rpmdir/BUILD/i686" $specfile
        rpmbuild_status=$?
-       if [ "rpmbuild_status" != "0" ]
+       if [ "$rpmbuild_status" != "0" ]
        then
          if [ ! -z "$notify" ]
          then
            echo "Error building i686 ${flavor}.${REDHATDIST} rpms." >> $notify
          fi
+         echo "Error building i686 ${flavor}.$(REDHATDIST) rpms. rpmbuild returned with status=${rpmbuild_status}"
          status="error"
        else
          rpmbuild --target x86_64-linux --buildroot $rpmdir/BUILDROOT/x86_64 -ba --define="_topdir $rpmdir" --define="_builddir $rpmdir/BUILD/x86_64" $specfile 
          rpmbuild_status=$?
-         if [ "rpmbuild_status" != "0" ]
+         if [ "$rpmbuild_status" != "0" ]
          then
            if [ ! -z "$notify" ]
            then
              echo "Error building x86_64 ${flavor}.${REDHATDIST} rpms." >> $notify
            fi
+           echo "Error build x86_64 ${flavor}.$REDHATDIST} rpms. rpmbuild returned with status=${rpmbuild_status}"
            status="error"
          fi
        fi
@@ -783,23 +785,33 @@ EOF
        done
      fi
      rm -f $cvs_status
-     buildroot=$(mktemp -t -d mdsplus-repo-build.XXXXXXXXXX)
-     spec=${WORKSPACE}/x86_64/mdsplus/rpm/repos.spec
-     if ! ( rpmbuild -ba --buildroot=$buildroot --define="_topdir $rpmdir" --define="flavor $flavor" $spec >/dev/null )
+     if [ "$status" == "ok" ]
      then
-       if [ ! -z "$notify" ]
+       buildroot=$(mktemp -t -d mdsplus-repo-build.XXXXXXXXXX)
+       spec=${WORKSPACE}/x86_64/mdsplus/rpm/repos.spec
+       rpmbuild -ba --buildroot=$buildroot --define="_topdir $rpmdir" --define="flavor $flavor" $spec >/dev/null
+       rpmbuild_status=$?
+       if [ "$rpmbuild_status" != "0" ]
        then
-         echo "Error building repository rpm for x86_64 ${REDHATDIST} $flavor" >> $notify
+         if [ ! -z "$notify" ]
+         then
+           echo "Error building repository rpm for x86_64 ${REDHATDIST} $flavor" >> $notify
+         fi
+         echo "Error building repository rpm for x86_64 ${REDHATDIST} ${flavor}. rpmbuild returned status=${rpmbuild_status}."
+         status="error"
+       else
+         rpmbuild --target=i686-linux -ba --buildroot=$buildroot --define="_topdir $rpmdir" --define="_builddir ${WORKSPACE}" --define="flavor $flavor" $spec >/dev/null
+         rpmbuild_status=$?
+         if [ "$rpmbuild_status" != "0" ]
+         then
+           if [ ! -z "$notify" ]
+           then
+             echo "Error building repository rpm for i686 ${REDHATDIST} $flavor" >> $notify
+           fi
+           echo "Error building repository rpm for i686 ${REDHATDIST} ${flavor}. rpmbuild returned status=${rpmbuild_status}."
+           status="error"
+         fi
        fi
-       status="error"
-     fi
-     if ! ( rpmbuild --target=i686-linux -ba --buildroot=$buildroot --define="_topdir $rpmdir" --define="_builddir ${WORKSPACE}" --define="flavor $flavor" $spec >/dev/null )
-     then
-       if [ ! -z "$notify" ]
-       then
-         echo "Error build repository rpm for i686 ${REDHATDIST} $flavor" >> $notify
-       fi
-       status="error"
      fi
      if [ "$status" == "error" ]
      then
