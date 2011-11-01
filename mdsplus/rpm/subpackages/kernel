@@ -59,6 +59,16 @@ Core applications, libraries and configuration files
 %exclude /usr/local/mdsplus/tdi/d3d
 %exclude /usr/local/mdsplus/tdi/roam
 
+%exclude /usr/local/mdsplus/lib*/libRoam*
+%exclude /usr/local/mdsplus/lib*/libMdsIpGSI*
+%exclude /usr/local/mdsplus/bin*/roam_check_access
+%exclude /usr/local/mdsplus/bin*/mdsipsd
+
+%exclude /usr/local/mdsplus/epics
+
+%exclude /usr/local/mdsplus/lib*/libhdf5*
+%exclude /usr/local/mdsplus/tdi/hdf5
+
 %post kernel
 if [ -d /etc/ld.so.conf.d ]
 then
@@ -90,7 +100,7 @@ then
 fi
 if [ -d /usr/share/applications ]
 then
-  mkdir -p /usr/share/applications/mdsplus
+  mkdir /usr/share/applications/mdsplus
   ln -sf $RPM_INSTALL_PREFIX/mdsplus/desktop/kernel /usr/share/applications/mdsplus/
 fi
 
