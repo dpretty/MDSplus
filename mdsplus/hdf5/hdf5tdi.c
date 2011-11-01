@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include <mdsdescrip.h>
 #include <mds_stdarg.h>
@@ -84,14 +85,33 @@ static void PutData(hid_t obj, char dtype, int htype, int size, int n_dims, hsiz
   if (dtype)
   {
     char *mem;
-    int  array_size = 1;
-    int i;
-    for (i=0;i<n_dims;i++) array_size *= dims[i];
-    mem = malloc(size*array_size);
-    if (is_attr)
-      H5Aread ( obj, htype, (void *)mem);
-    else
-      /* printf("H5Dread: obj = %p, htype = %d, status = %d\n",obj,htype, */ H5Dread ( obj, htype, H5S_ALL, H5S_ALL, H5P_DEFAULT, (void *)mem) /* ) */ ;
+/*     if (dtype == DTYPE_T) { */
+/*       hid_t type = H5Aget_type(obj); */
+/*       int slen = H5Tget_size (type); */
+/*       if (slen <0) { */
+/* 	printf("Badly formed string attribute\n"); */
+/*       } else { */
+/* 	mem = (char *) malloc((slen+1)*sizeof(char)); */
+/* 	hid_t st_id = H5Tcopy (H5T_C_S1); */
+/*         size=slen; */
+/* 	H5Tset_size (st_id, slen); */
+/* 	if (H5Aread(obj, st_id, (void *)mem)) { */
+/* 	  printf("error reading string\n"); */
+/*           free(mem); */
+/*           return; */
+/* 	} */
+/*       } */
+/*     } else { */
+      int  array_size = 1;
+      int i;
+      for (i=0;i<n_dims;i++) array_size *= dims[i];
+      mem = malloc(size*array_size);
+      if (is_attr)
+	H5Aread ( obj, htype, (void *)mem);
+      else
+	/* printf("H5Dread: obj = %p, htype = %d, status = %d\n",obj,htype, */
+	H5Dread ( obj, htype, H5S_ALL, H5S_ALL, H5P_DEFAULT, (void *)mem) /* ) */ ;
+/*     } */
     if (n_dims > 0)
       PutArray(dtype, size, n_dims, dims, mem, xd);
     else
@@ -114,14 +134,16 @@ static int find_attr(hid_t attr_id, const char *name, void *op_data)
   item->parent = parent;
   item->obj = 0;
   item->attribute = 0;
-  if (parent->attribute == NULL)
-  {
-    parent->attribute = item;
-  }
-  else
-  {
-    for (itm = parent->attribute; itm->brother; itm = itm->brother);
-    itm->brother = item;
+  if(parent) {
+    if (parent->attribute == NULL)
+      {
+	parent->attribute = item;
+      }
+    else
+      {
+	for (itm = parent->attribute; itm->brother; itm = itm->brother);
+	itm->brother = item;
+      }
   }
   if ((obj = H5Aopen_name(attr_id,name)) >= 0) {
     int size;
@@ -164,7 +186,9 @@ static int find_objs(hid_t group, const char *name, void *op_data)
     itm->brother = item;
   }
   if (parent->child == item)
-    H5Aiterate(group,&idx,find_attr,(void *)0);
+/*     H5Aiterate(group,&idx,find_attr,(void *)item); */
+    H5Aiterate(group,NULL,find_attr,(void *)item);
+  //    H5Aiterate(group,&idx,find_attr,(void *)0);
   H5Gget_objinfo(group, name, 1, &statbuf);
   item->item_type = statbuf.type;
   switch (statbuf.type) {
@@ -177,6 +201,7 @@ static int find_objs(hid_t group, const char *name, void *op_data)
   case H5G_DATASET:
     if ((obj = H5Dopen (group, name)) >= 0) {
       item->obj = obj;
+/*       H5Aiterate(obj,&idx,find_attr,(void *)item); */
       H5Aiterate(obj,&idx,find_attr,(void *)item);
     }
     break;
@@ -281,7 +306,7 @@ static int FindItem(char *namein, hid_t *obj, int *item_type)
   int status;
   int i;
   char *name = strcpy(malloc(strlen(namein)+1),namein);
-  for (i=strlen(name)-1;i >= 0; i--) if (name[i] == 32) name[i]=0;
+  for (i=strlen(name)-1;i >= 0; i--) if (name[i] == 32) name[i]=0; else break;
   status = find_one(current,name,obj,item_type);
   free(name);
   return status;
@@ -364,7 +389,35 @@ int hdf5read(char *name, struct descriptor_xd *xd)
 	case H5T_TIME:
 	  printf("dataset is time ---- UNSUPPORTED\n"); break;
 	case H5T_STRING:
-	  printf("dataset is string\n"); break;
+	  {
+	    int slen = H5Tget_size(type);
+	    hid_t st_id;
+	    if (slen < 0) {
+	      printf("Badly formed string attribute\n");
+	      return;
+	    }
+#if H5_VERS_MAJOR>=1&&H5_VERS_MINOR>=6&&H5_VERS_RELEASE>=1
+	    if(H5Tis_variable_str(type)) {                    
+	      st_id = H5Tcopy (H5T_C_S1);
+	      H5Tset_size(st_id, H5T_VARIABLE);
+	    } else {
+#endif
+	      st_id = H5Tcopy (type);
+	      H5Tset_cset(st_id, H5T_CSET_ASCII);
+#if H5_VERS_MAJOR>=1&&H5_VERS_MINOR>=6&&H5_VERS_RELEASE>=1
+	    } 
+#endif	  
+            if (H5Tget_size(st_id) > slen) {
+	      slen = H5Tget_size(st_id);
+	    }
+	      H5Tset_size (st_id, slen);
+	      PutData(obj, DTYPE_T, st_id, slen, n_ds_dims, ds_dims, 0, xd); 
+	  }		
+/*        printf("dataset is string\n"); */
+/* 	  dtype = DTYPE_T; */
+/* 	  htype = H5T_STRING; */
+/* 	  PutData(obj, dtype, htype, 0, 0, 0, 1, xd); */
+	  break;
 	case H5T_BITFIELD:
 	  printf("dataset is bitfield ---- UNSUPPORTED\n"); break;
 	case H5T_OPAQUE:
@@ -444,7 +497,34 @@ int hdf5read(char *name, struct descriptor_xd *xd)
 	case H5T_TIME:
 	  printf("dataset is time ---- UNSUPPORTED\n"); break;
 	case H5T_STRING:
-	  printf("dataset is string\n"); break;
+	  {
+	    int slen = H5Tget_size(type);
+	    hid_t st_id;
+	    if (slen < 0) {
+	      printf("Badly formed string attribute\n");
+	      return;
+	    }
+#if H5_VERS_MAJOR>=1&&H5_VERS_MINOR>=6&&H5_VERS_RELEASE>=1
+	    if(H5Tis_variable_str(type)) {                    
+	      st_id = H5Tcopy (H5T_C_S1);
+	      H5Tset_size(st_id, H5T_VARIABLE);
+	    } else {
+#endif
+	      st_id = H5Tcopy (type);
+	      H5Tset_cset(st_id, H5T_CSET_ASCII);
+#if H5_VERS_MAJOR>=1&&H5_VERS_MINOR>=6&&H5_VERS_RELEASE>=1
+	    } 
+#endif	  
+            if (H5Tget_size(st_id) > slen) {
+	      slen = H5Tget_size(st_id);
+	    }
+	      H5Tset_size (st_id, slen);
+	      PutData(obj, DTYPE_T, st_id, slen, n_ds_dims, ds_dims, 1, xd); 
+	  }		
+/* 	  dtype = DTYPE_T; */
+/* 	  htype = H5T_STRING; */
+/* 	  PutData(obj, dtype, htype, 0, 0, 0, 1, xd); */
+	  break;
 	case H5T_BITFIELD:
 	  printf("dataset is bitfield ---- UNSUPPORTED\n"); break;
 	case H5T_OPAQUE:
