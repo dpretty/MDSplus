@@ -1,6 +1,6 @@
 package jScope;
 
-/* $Id: Waveform.java,v 1.1 2010/09/03 09:58:18 manduchi Exp $ */
+/* $Id: Waveform.java,v 1.2 2011/11/08 16:59:31 manduchi Exp $ */
 import jScope.Signal;
 import jScope.Frames;
 import jScope.FrameData;
@@ -1930,8 +1930,7 @@ public class Waveform
           }
         }
         catch (ArrayIndexOutOfBoundsException e) {
-          System.out.println("Excepion on " + getName() + " " +
-                             " " + idx);
+          //System.out.println("Exception on " + getName() + " " + " " + idx);
         }
       }
     }
@@ -1975,8 +1974,7 @@ public class Waveform
          }
        }
        catch (ArrayIndexOutOfBoundsException e) {
-         System.out.println("Excepion on " + getName() + " " + s.getLength() +
-                            " " + idx);
+         //System.out.println("Exception on " + getName() + " " + s.getLength() + " " + idx);
        }
      }
    }
