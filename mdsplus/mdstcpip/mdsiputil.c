@@ -1,4 +1,4 @@
-#include <unistd.h>
+
 #include "mdsip.h"
 #ifdef BUFSIZ
 #undef BUFSIZ
@@ -11,6 +11,7 @@
 #include <io.h>
 #define MSG_DONTWAIT 0
 #else
+#include <unistd.h>
 #ifndef HAVE_VXWORKS_H
 #include <pwd.h>
 #endif
@@ -538,8 +539,7 @@ int HostToIp(char *host, int *addr, short *port)
 #endif
   return 1;
 }
-
-SOCKET  ConnectToMds(char *host)
+int  ConnectToMds(char *host)
 {
   char hostpart[256] = {0};
   char portpart[256] = {0};
@@ -556,7 +556,7 @@ SOCKET  ConnectToMds(char *host)
   return ConnectToPort(hostpart,portpart);
 }
 
-SOCKET  ConnectToMdsEvents(char *host)
+int  ConnectToMdsEvents(char *host)
 {
   char hostpart[256] = {0};
   char portpart[256] = {0};
