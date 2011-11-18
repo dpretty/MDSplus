@@ -20,7 +20,7 @@
 #include <math.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.184 $ $Date: 2010/08/04 11:47:23 $ $Name:  $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.185 $ $Date: 2011/11/18 13:39:53 $ $Name:  $";
 int LibTimeToVMSTime(time_t *time_in,_int64 *time_out);  
 #ifndef HAVE_VXWORKS_H
 STATIC_CONSTANT _int64 addin = LONG_LONG_CONSTANT(0x7c95674beb4000);
@@ -868,6 +868,11 @@ int LibSpawn(struct descriptor *cmd, int waitflag, int notifyFlag)
     char  *arglist[4];
     char  *p;
     int i=0;
+    if (!waitflag) {
+      pid = fork();
+      if (pid != -1 && pid != 0)
+	exit(0);
+    }
     signal(SIGCHLD,SIG_DFL);
     arglist[0] = getenv("SHELL");
     if (arglist[0] == 0)
@@ -887,17 +892,23 @@ int LibSpawn(struct descriptor *cmd, int waitflag, int notifyFlag)
     fprintf(stderr,"Error %d from fork()\n",errno);
     return(0);
   }
-  if (waitflag || cmd->length == 0)
+  /*  if (waitflag || cmd->length == 0)
   {
+  */
     for ( ; ; )
     {
       xpid = waitpid(pid,&sts,0);
       if (xpid == pid)
         break;
-      else if (xpid == -1)
-        perror("Error during wait call");
+      else if (xpid == -1) {
+	if (errno!=ECHILD)
+	  perror("Error during wait call");
+        break;
+      }
     }
+    /*
   }
+    */
   free(cmdstring);
   /* return sts;*/
   return sts >> 8;
