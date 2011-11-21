@@ -20,7 +20,7 @@
 #include <math.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.185 $ $Date: 2011/11/18 13:39:53 $ $Name:  $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.186 $ $Date: 2011/11/21 14:42:54 $ $Name:  $";
 int LibTimeToVMSTime(time_t *time_in,_int64 *time_out);  
 #ifndef HAVE_VXWORKS_H
 STATIC_CONSTANT _int64 addin = LONG_LONG_CONSTANT(0x7c95674beb4000);
@@ -871,7 +871,7 @@ int LibSpawn(struct descriptor *cmd, int waitflag, int notifyFlag)
     if (!waitflag) {
       pid = fork();
       if (pid != -1 && pid != 0)
-	exit(0);
+	_exit(0);
     }
     signal(SIGCHLD,SIG_DFL);
     arglist[0] = getenv("SHELL");
