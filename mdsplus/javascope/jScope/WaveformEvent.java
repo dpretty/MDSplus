@@ -1,6 +1,6 @@
 package jScope;
 
-/* $Id: WaveformEvent.java,v 1.1 2010/09/03 09:58:18 manduchi Exp $ */
+/* $Id: WaveformEvent.java,v 1.2 2011/11/21 09:25:18 manduchi Exp $ */
 import jScope.FrameData;
 import java.awt.AWTEvent;
 import java.awt.Event;
@@ -109,8 +109,8 @@ public class WaveformEvent
     public WaveformEvent(Object source,
                          String name,
                          int pixels_x[], int start_pixel_x,
-                         int pixels_y[], int start_pixel_y,
-                         int pixels_signal[], float frames_time[])
+                         int pixels_y[], int start_pixel_y)
+                         //int pixels_signal[], float frames_time[])
     {
         super(source, PROFILE_UPDATE);
         this.name = name;
@@ -125,8 +125,8 @@ public class WaveformEvent
     public WaveformEvent(Object source,
                          String name,
                          float values_x[], int start_pixel_x,
-                         float values_y[], int start_pixel_y,
-                         float values_signal[], float frames_time[])
+                         float values_y[], int start_pixel_y)
+                         //float values_signal[], float frames_time[])
     {
         super(source, PROFILE_UPDATE);
         this.name = name;

@@ -1,6 +1,6 @@
 package jScope;
 
-/* $Id: WaveInterface.java,v 1.1 2010/09/03 09:58:18 manduchi Exp $ */
+/* $Id: WaveInterface.java,v 1.2 2011/11/21 09:25:18 manduchi Exp $ */
 import jScope.WaveData;
 import jScope.SignalBox;
 import jScope.Signal;
@@ -1183,7 +1183,7 @@ public class WaveInterface
                 curr_error = dp.ErrorString();
                 evaluated[0] = false;
             }
-            frames.WaitLoadFrame();
+            //frames.WaitLoadFrame();
 
             this.wave.SetMode(mode);
 
