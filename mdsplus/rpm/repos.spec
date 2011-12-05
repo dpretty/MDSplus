@@ -1,5 +1,5 @@
 Name: mdsplus-%flavor-repo
-Version: 2.1
+Version: 1.0
 Release: 0%{dist}
 License: BSD Open Source
 Summary: The MDSplus Data System
@@ -17,7 +17,7 @@ MDSplus Yum repository setup
 %install
 mkdir -p $RPM_BUILD_ROOT/etc/yum.repos.d
 mkdir -p $RPM_BUILD_ROOT/etc/pki/rpm-gpg/
-cp /home/mdsplus/RPM-GPG-KEY-MDSplus $RPM_BUILD_ROOT/etc/pki/rpm-gpg/
+cp ${WORKSPACE}/x86_64/mdsplus/rpm/RPM-GPG-KEY-MDSplus $RPM_BUILD_ROOT/etc/pki/rpm-gpg/
 outfile=$RPM_BUILD_ROOT/etc/yum.repos.d/mdsplus-%flavor.repo
 cat - > $outfile <<EOF
 [MDSplus]
@@ -43,8 +43,8 @@ rm -Rf $RPM_BUILD_ROOT
 /etc/pki/rpm-gpg/RPM-GPG-KEY-MDSplus
 
 %post
-rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-MDSplus
+dummy=$(rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-MDSplus 2>/dev/null)
 
 %postun
-for key in $(rpm -qa gpg-pubkey*); do if (rpm -qi $key 2>/dev/null | grep MDSplus >/dev/null);then rpm -e $key; fi; done
+nohup rpm -e gpg-pubkey-b09cb563 &
 
