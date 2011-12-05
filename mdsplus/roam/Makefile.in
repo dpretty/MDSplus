@@ -64,13 +64,13 @@ install:
 	fi;
 
 @MAKESHLIBDIR@libRoam_@GLOBUS_FLAVOR@@SHARETYPE@ : $(OBJECTS)
-	$(GLOBUS_LD) -o $@ @LINKSHARED@ $(OBJECTS) $(LDFLAGS)
+	$(GLOBUS_CC) -o $@ @LINKSHARED@ $(OBJECTS) $(CFLAGS) $(LDFLAGS)
 
 @MAKESHLIBDIR@libRoam@SHARETYPE@ :
 	ln -sf libRoam_@GLOBUS_FLAVOR@@SHARETYPE@ @MAKESHLIBDIR@libRoam@SHARETYPE@
 
 makefile-header:  
-	GLOBUS_LOCATION=@GLOBUS_LOCATION@; $$GLOBUS_LOCATION/bin/globus-makefile-header --flavor=@GLOBUS_FLAVOR@ globus_xio globus_gridmap_callout_error > makefile-header
+	GLOBUS_LOCATION=@GLOBUS_LOCATION@; $$GLOBUS_LOCATION/bin/globus-makefile-header --flavor=@GLOBUS_FLAVOR@pthr globus_xio globus_gridmap_callout_error > makefile-header
 
 @MAKELIBDIR@libRoam_@GLOBUS_FLAVOR@.a : $(OBJECTS)
 	$(AR) -cr $@ $(OBJECTS)
