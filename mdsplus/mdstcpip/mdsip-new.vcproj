@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="mdsipshr-new"
-	ProjectGUID="{DB6527B9-920C-4017-B54A-C3AF8B534696}"
-	RootNamespace="mdsipshr"
+	Name="mdsip-new"
+	ProjectGUID="{0E32D2EA-F72D-4720-917D-6D219F244E45}"
+	RootNamespace="mdsip"
 	TargetFrameworkVersion="131072"
 	>
 	<Platforms>
@@ -22,10 +22,11 @@
 			Name="Release|Win32"
 			OutputDirectory="..\$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)\$(ProjectName)"
-			ConfigurationType="2"
+			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC70.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="2"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -41,25 +42,19 @@
 			/>
 			<Tool
 				Name="VCMIDLTool"
-				PreprocessorDefinitions="NDEBUG"
-				MkTypLibCompatible="true"
-				SuppressStartupBanner="true"
-				TargetEnvironment="1"
-				TypeLibraryName=".\Release/mdsipshr.tlb"
+				TypeLibraryName=".\Release/mdsip.tlb"
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				InlineFunctionExpansion="1"
 				AdditionalIncludeDirectories="../include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
+				PreprocessorDefinitions="WIN32,NDEBUG,_CONSOLE;_CRT_SECURE_NO_WARNINGS"
 				StringPooling="true"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
-				PrecompiledHeaderFile=".\Release/mdsipshr.pch"
+				PrecompiledHeaderFile=".\Release/mdsip.pch"
 				AssemblerListingLocation=".\Release/"
-				WarningLevel="3"
-				SuppressStartupBanner="true"
 				CompileAs="0"
 			/>
 			<Tool
@@ -76,12 +71,10 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="Ws2_32.lib"
-				OutputFile="$(OutDir)\mdsipshr.dll"
+				AdditionalDependencies="wsock32.lib"
+				OutputFile="$(OutDir)\mdsip.exe"
 				LinkIncremental="1"
-				SuppressStartupBanner="true"
-				ModuleDefinitionFile=""
-				SubSystem="2"
+				SubSystem="1"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
 			/>
@@ -111,10 +104,11 @@
 			Name="Release|x64"
 			OutputDirectory="..\$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)\$(ParentName)"
-			ConfigurationType="2"
+			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC70.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="2"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -130,25 +124,20 @@
 			/>
 			<Tool
 				Name="VCMIDLTool"
-				PreprocessorDefinitions="NDEBUG"
-				MkTypLibCompatible="true"
-				SuppressStartupBanner="true"
 				TargetEnvironment="3"
-				TypeLibraryName=".\Release/mdsipshr.tlb"
+				TypeLibraryName=".\Release/mdsip.tlb"
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				InlineFunctionExpansion="1"
 				AdditionalIncludeDirectories="../include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
+				PreprocessorDefinitions="WIN32,NDEBUG,_CONSOLE;_CRT_SECURE_NO_WARNINGS"
 				StringPooling="true"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
-				PrecompiledHeaderFile=".\Release/mdsipshr.pch"
+				PrecompiledHeaderFile=".\Release/mdsip.pch"
 				AssemblerListingLocation=".\Release/"
-				WarningLevel="3"
-				SuppressStartupBanner="true"
 				CompileAs="0"
 			/>
 			<Tool
@@ -165,11 +154,8 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="wsock32.lib"
-				OutputFile="$(OutDir)\mdsipshr.dll"
 				LinkIncremental="1"
-				SuppressStartupBanner="true"
-				ModuleDefinitionFile=""
-				SubSystem="2"
+				SubSystem="1"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
 				TargetMachine="17"
@@ -200,10 +186,11 @@
 			Name="Debug|Win32"
 			OutputDirectory="..\$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
-			ConfigurationType="2"
+			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC70.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="2"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -219,23 +206,17 @@
 			/>
 			<Tool
 				Name="VCMIDLTool"
-				PreprocessorDefinitions="_DEBUG"
-				MkTypLibCompatible="true"
-				SuppressStartupBanner="true"
-				TargetEnvironment="1"
-				TypeLibraryName=".\Debug/mdsipshr.tlb"
+				TypeLibraryName=".\Debug/mdsip.tlb"
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="../include"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS"
+				PreprocessorDefinitions="WIN32,_DEBUG,_CONSOLE;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
-				PrecompiledHeaderFile=".\Debug/mdsipshr.pch"
+				PrecompiledHeaderFile=".\Debug/mdsip.pch"
 				AssemblerListingLocation=".\Debug/"
-				WarningLevel="3"
-				SuppressStartupBanner="true"
 				DebugInformationFormat="4"
 				CompileAs="0"
 			/>
@@ -253,13 +234,11 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="Ws2_32.lib"
-				OutputFile="$(OutDir)\mdsipshr.dll"
+				AdditionalDependencies="wsock32.lib"
+				OutputFile="$(OutDir)\mdsip.exe"
 				LinkIncremental="2"
-				SuppressStartupBanner="true"
-				ModuleDefinitionFile=""
 				GenerateDebugInformation="true"
-				ProgramDatabaseFile="$(IntDir)/mdsipshr.pdb"
+				ProgramDatabaseFile="$(IntDir)/mdsip.pdb"
 				SubSystem="1"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
@@ -290,10 +269,11 @@
 			Name="Debug|x64"
 			OutputDirectory="..\$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)\$(ParentName)"
-			ConfigurationType="2"
+			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC70.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="2"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -309,23 +289,18 @@
 			/>
 			<Tool
 				Name="VCMIDLTool"
-				PreprocessorDefinitions="_DEBUG"
-				MkTypLibCompatible="true"
-				SuppressStartupBanner="true"
 				TargetEnvironment="3"
-				TypeLibraryName=".\Debug/mdsipshr.tlb"
+				TypeLibraryName=".\Debug/mdsip.tlb"
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="../include"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS"
+				PreprocessorDefinitions="WIN32,_DEBUG,_CONSOLE;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
-				PrecompiledHeaderFile=".\Debug/mdsipshr.pch"
+				PrecompiledHeaderFile=".\Debug/mdsip.pch"
 				AssemblerListingLocation=".\Debug/"
-				WarningLevel="3"
-				SuppressStartupBanner="true"
 				DebugInformationFormat="3"
 				CompileAs="0"
 			/>
@@ -343,12 +318,9 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="wsock32.lib"
-				OutputFile="$(OutDir)\mdsipshr.dll"
 				LinkIncremental="2"
-				SuppressStartupBanner="true"
-				ModuleDefinitionFile=""
 				GenerateDebugInformation="true"
-				ProgramDatabaseFile="$(IntDir)/mdsipshr.pdb"
+				ProgramDatabaseFile="$(IntDir)/mdsip.pdb"
 				SubSystem="1"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
@@ -381,193 +353,85 @@
 	</References>
 	<Files>
 		<Filter
-			Name="Includes"
+			Name="Headers"
 			>
 			<File
+				RelativePath=".\b_order.h"
+				>
+			</File>
+			<File
+				RelativePath=".\cvtdef.h"
+				>
+			</File>
+			<File
+				RelativePath=".\deflate.h"
+				>
+			</File>
+			<File
+				RelativePath=".\infblock.h"
+				>
+			</File>
+			<File
+				RelativePath=".\infcodes.h"
+				>
+			</File>
+			<File
+				RelativePath=".\inffast.h"
+				>
+			</File>
+			<File
+				RelativePath=".\inffixed.h"
+				>
+			</File>
+			<File
+				RelativePath=".\inftrees.h"
+				>
+			</File>
+			<File
+				RelativePath=".\infutil.h"
+				>
+			</File>
+			<File
 				RelativePath="..\include\ipdesc.h"
+				>
+			</File>
+			<File
+				RelativePath=".\mdsIo.h"
+				>
+			</File>
+			<File
+				RelativePath=".\mdsip.h"
 				>
 			</File>
 			<File
 				RelativePath=".\mdsip_connections.h"
 				>
 			</File>
+			<File
+				RelativePath=".\trees.h"
+				>
+			</File>
+			<File
+				RelativePath=".\zconf.h"
+				>
+			</File>
+			<File
+				RelativePath=".\zlib.h"
+				>
+			</File>
+			<File
+				RelativePath=".\zutil.h"
+				>
+			</File>
 		</Filter>
-		<File
-			RelativePath=".\adler32.c"
+		<Filter
+			Name="Sources"
 			>
-		</File>
-		<File
-			RelativePath=".\ArgLen.c"
-			>
-		</File>
-		<File
-			RelativePath=".\CheckClient.c"
-			>
-		</File>
-		<File
-			RelativePath=".\ClientType.c"
-			>
-		</File>
-		<File
-			RelativePath=".\CloseConnection.c"
-			>
-		</File>
-		<File
-			RelativePath=".\compress.c"
-			>
-		</File>
-		<File
-			RelativePath=".\Connections.c"
-			>
-		</File>
-		<File
-			RelativePath=".\ConnectToMds.c"
-			>
-		</File>
-		<File
-			RelativePath=".\deflate.c"
-			>
-		</File>
-		<File
-			RelativePath=".\DisconnectFromMds.c"
-			>
-		</File>
-		<File
-			RelativePath=".\DoMessage.c"
-			>
-		</File>
-		<File
-			RelativePath=".\FlipData.c"
-			>
-		</File>
-		<File
-			RelativePath=".\FlipHeader.c"
-			>
-		</File>
-		<File
-			RelativePath=".\FreeMessage.c"
-			>
-		</File>
-		<File
-			RelativePath=".\GetAnswerInfo.c"
-			>
-		</File>
-		<File
-			RelativePath=".\GetMdsMsg.c"
-			>
-		</File>
-		<File
-			RelativePath=".\GetSetSettings.c"
-			>
-		</File>
-		<File
-			RelativePath=".\infblock.c"
-			>
-		</File>
-		<File
-			RelativePath=".\infcodes.c"
-			>
-		</File>
-		<File
-			RelativePath=".\inffast.c"
-			>
-		</File>
-		<File
-			RelativePath=".\inflate.c"
-			>
-		</File>
-		<File
-			RelativePath=".\inftrees.c"
-			>
-		</File>
-		<File
-			RelativePath=".\infutil.c"
-			>
-		</File>
-		<File
-			RelativePath=".\LoadIo.c"
-			>
-		</File>
-		<File
-			RelativePath=".\LockAsts.c"
-			>
-		</File>
-		<File
-			RelativePath=".\MakeDescrip.c"
-			>
-		</File>
-		<File
-			RelativePath=".\MdsClose.c"
-			>
-		</File>
-		<File
-			RelativePath=".\MdsDispatchEvent.c"
-			>
-		</File>
-		<File
-			RelativePath=".\MdsEventAst.c"
-			>
-		</File>
-		<File
-			RelativePath=".\MdsEventCan.c"
-			>
-		</File>
-		<File
-			RelativePath=".\mdsip.pro"
-			>
-		</File>
-		<File
-			RelativePath=".\MdsIpFree.c"
-			>
-		</File>
-		<File
-			RelativePath=".\MdsOpen.c"
-			>
-		</File>
-		<File
-			RelativePath=".\MdsPut.c"
-			>
-		</File>
-		<File
-			RelativePath=".\MdsSetCompression.c"
-			>
-		</File>
-		<File
-			RelativePath=".\MdsSetDefault.c"
-			>
-		</File>
-		<File
-			RelativePath=".\MdsValue.c"
-			>
-		</File>
-		<File
-			RelativePath=".\ParseCommand.c"
-			>
-		</File>
-		<File
-			RelativePath=".\SendArg.c"
-			>
-		</File>
-		<File
-			RelativePath=".\SendMdsMsg.c"
-			>
-		</File>
-		<File
-			RelativePath=".\trees.c"
-			>
-		</File>
-		<File
-			RelativePath=".\uncompr.c"
-			>
-		</File>
-		<File
-			RelativePath=".\vmshpwd.c"
-			>
-		</File>
-		<File
-			RelativePath=".\zutil.c"
-			>
-		</File>
+			<File
+				RelativePath=".\mdsip.c"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>
