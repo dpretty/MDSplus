@@ -1,6 +1,6 @@
 package jScope;
 
-/* $Id: WaveInterface.java,v 1.2 2011/11/21 09:25:18 manduchi Exp $ */
+/* $Id: WaveInterface.java,v 1.3 2011/12/13 13:23:58 manduchi Exp $ */
 import jScope.WaveData;
 import jScope.SignalBox;
 import jScope.Signal;
@@ -1569,14 +1569,17 @@ public class WaveInterface
             }
             else
             {
-//                if(xmin != -HUGE || !full_flag) //If we actually have some limit
-                    if(!full_flag) //If we actually have some limit
+//GAB 2011: Apparently the check wd == null waforgotten
+                if(wd == null)
                 {
-                    wd = dp.GetResampledWaveData(in_y[curr_wave], xmin, xmax,
-                                                 Waveform.MAX_POINTS);
+                    if(!full_flag) //If we actually have some limit
+                    {
+                        wd = dp.GetResampledWaveData(in_y[curr_wave], xmin, xmax,
+                                                     Waveform.MAX_POINTS);
+                    }
+                    else
+                        wd = dp.GetWaveData(in_y[curr_wave]);
                 }
-                else
-                    wd = dp.GetWaveData(in_y[curr_wave]);
             }
             if (wd == null)
                 curr_data = null;
