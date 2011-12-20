@@ -1,6 +1,6 @@
 package jScope;
 
-/* $Id: Frames.java,v 1.2 2011/11/21 09:25:18 manduchi Exp $ */
+/* $Id: Frames.java,v 1.3 2011/12/20 13:28:02 manduchi Exp $ */
 import java.awt.*;
 import java.io.*;
 import java.awt.image.*;
@@ -224,6 +224,7 @@ class Frames extends Canvas
                 default:
                     return;
             }
+            tracker = new MediaTracker(Frames.this);
             tracker.addImage(img, idx);
             recentFrames.put(new Integer(idx), new FrameDescriptor(buf, img, img, 0));
             try {
@@ -303,6 +304,7 @@ class Frames extends Canvas
                     }
                 }
             }
+            tracker = new MediaTracker(Frames.this);
             tracker.addImage(img, idx);
             try {
                 tracker.waitForID(idx);
