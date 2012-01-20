@@ -1,6 +1,6 @@
 package jScope;
 
-/* $Id: MdsDataProvider.java,v 1.5 2012/01/19 16:54:07 manduchi Exp $ */
+/* $Id: MdsDataProvider.java,v 1.6 2012/01/20 07:41:13 manduchi Exp $ */
 import jScope.ConnectionEvent;
 import jScope.ConnectionListener;
 import java.io.*;
@@ -70,10 +70,12 @@ public class MdsDataProvider
                 throw new IOException("Frames outside defined time window");
             for(endSegment = startSegment; endSegment < numSegments-1; endSegment++)
             {
-                float limits[] = GetFloatArray("GetSegmentLimits("+inY+","+endSegment+")");
-                startTimes[endSegment] = limits[0];
-                if(limits[0] > timeMax)
-                    break;
+                try {
+                    float limits[] = GetFloatArray("GetSegmentLimits("+inY+","+endSegment+")");
+                    startTimes[endSegment] = limits[0];
+                    if(limits[0] > timeMax)
+                        break;
+                }catch(Exception exc){break;}
             }
             actSegments = endSegment - startSegment;
 //Get Frame Dimension and frames per segment
