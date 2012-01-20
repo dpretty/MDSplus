@@ -1,6 +1,6 @@
 package jScope;
 
-/* $Id: MdsDataProvider.java,v 1.6 2012/01/20 07:41:13 manduchi Exp $ */
+/* $Id: MdsDataProvider.java,v 1.7 2012/01/20 08:45:02 manduchi Exp $ */
 import jScope.ConnectionEvent;
 import jScope.ConnectionListener;
 import java.io.*;
@@ -409,7 +409,11 @@ public class MdsDataProvider
             if(xmin == -1E8 && xmax == 1E8) //If no limits explicitly set
             {
                 try {
-                    int limits[] = GetIntArray("JavaGetMinMax(\""+in_y+"\")");
+                    int limits[];
+                    if(in_y.startsWith("\\"))
+                        limits = GetIntArray("JavaGetMinMax(\"\\"+in_y+"\")");
+                    else
+                        limits = GetIntArray("JavaGetMinMax(\""+in_y+"\")");
                     this.xmin = this.waveMin = limits[0];
                     this.xmax = this.waveMax = limits[1];
                     
@@ -418,7 +422,11 @@ public class MdsDataProvider
             else
             {
                 try {
-                    int limits[] = GetIntArray("JavaGetMinMax(\""+in_y+"\")");
+                    int limits[];
+                    if(in_y.startsWith("\\"))
+                        limits = GetIntArray("JavaGetMinMax(\"\\"+in_y+"\")");
+                    else
+                        limits = GetIntArray("JavaGetMinMax(\""+in_y+"\")");
                     this.waveMin = limits[0];
                     this.waveMax = limits[1];
                 }catch(IOException exc)
@@ -1544,7 +1552,11 @@ public class MdsDataProvider
         else
         {
             double dt = (max - min) / MAX_PIXELS;
-            String numPointsExpr = "JavaGetNumPoints(\""+inY+"\","+min+","+max+")";
+            String numPointsExpr;
+            if(inY.startsWith("\\"))
+                numPointsExpr = "JavaGetNumPoints(\"\\"+inY+"\","+min+","+max+")";
+            else
+                numPointsExpr = "JavaGetNumPoints(\""+inY+"\","+min+","+max+")";
             int numPoints[];
             try {
                 numPoints = GetIntArray(numPointsExpr);
