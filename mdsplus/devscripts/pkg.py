@@ -299,7 +299,6 @@ def checkReleasesCommand(args):
 
 def promoteCommand(args):
     flavor=args[2]
-    major = len(args) > 3 and args[3] == "major"
     if flavor == "alpha":
         p=Popen('cvs -Q rtag -dB beta mdsplus',shell=True,cwd=os.getcwd())
         if p.wait()!=0:
@@ -323,23 +322,41 @@ def promoteCommand(args):
     else:
         print "You can only promote alpha or beta releases"
         return
-    v=getVersion(flavor).split(".")
-    majv=int(v[0])
-    minv=int(v[1])
-    p=Popen('cvs -Q tag -d pkgver-%s-%d-%d include/release.h' % (flavor,majv,minv),shell=True,cwd=os.getcwd())
-    if p.wait()!=0:
-        print "Error promoting"
+
+def newVersionCommand(args):
+    flavor=args[2]
+    if len(args) <= 3 or (len(args) > 3 and args[3] == "skip"):
+	sys.exit(0)
+    if flavor in ('alpha','beta','stable'):
+      major = len(args) > 3 and args[3] == "major"
+      version=getVersion(flavor)
+      v=version.split('.')
+      majv=int(v[0])
+      minv=int(v[1])
+      p=Popen('cvs -Q tag -d pkgver-%s-%d-%d include/release.h' % (flavor,majv,minv),shell=True,cwd=os.getcwd())
+      if p.wait()!=0:
+        print "Error deleting old version tags"
         return
-    if major:
+      if major:
         majv=majv+1
         minv=0
-    else:
+      elif args[3]=="minor":
         minv=minv+1
-    p=Popen('cvs -Q tag pkgver-%s-%d-%d include/release.h' % (flavor,majv,minv),shell=True,cwd=os.getcwd())
-    if p.wait()!=0:
-        print "Error promoting"
+      else:
+	nversion=args[3]
+        try:
+          nv=float(nversion)
+          nv=nversion.split('.')
+          majv=int(nv[0])
+          minv=int(nv[1])
+        except:
+	  print "version must be one of 'major', 'minor' or nnn.n"
+          sys.exit(1)
+      p=Popen('cvs -Q tag pkgver-%s-%d-%d include/release.h' % (flavor,majv,minv),shell=True,cwd=os.getcwd())
+      if p.wait()!=0:
+        print "Error changing version"
         return
-    for pkg in getPackages():
+      for pkg in getPackages():
         p=Popen('cvs status -v rpm/subpackages/%s' % (pkg,),shell=True,stdout=PIPE,cwd=os.getcwd())
         line=p.stdout.readline()
         while len(line) > 0:
@@ -348,6 +365,8 @@ def promoteCommand(args):
                 p2=Popen('cvs -Q tag -d %s rpm/subpackages/%s' % (rel,pkg),shell=True,cwd=os.getcwd())
                 p2.wait()
             line=p.stdout.readline()
+    else:
+	print "Invalid flavor /%s/. Specify alpha, beta or stable." % (flavor,)
 
 def getWorkspace():
     try:
@@ -397,7 +416,7 @@ def newRelease(pkg,flavor,version,release,dist):
             ls=line.split()
             PKG=ls[0][4:]
             if PKG==pkg and F is not None:
-                p=Popen('cvs -Q tag -F "%s" \'%s\'' % (newtag,F),shell=True,cwd=os.getcwd())
+                p=Popen('cvs -Q tag -F "%s" "%s"' % (newtag,F),shell=True,cwd=os.getcwd())
                 p.wait()
 
 def newReleaseCommand(args):
@@ -607,6 +626,9 @@ def makeRpmsCommand(args):
             p=Popen('createrepo . >/dev/null',shell=True,cwd=WORKSPACE+"/RPMS")
         except Exception,e:
             print "Error creating repo: %s" (e,)
+            sys.exit(p.wait())
+    if status in ('ok','skip'):
+        p=Popen('rsync -a RPMS ../%s;rsync -a SOURCES ../%s;rsync -a EGGS ../%s' % (FLAVOR,FLAVOR,FLAVOR),shell=True,cwd=WORKSPACE)
         sys.exit(p.wait())
 
 def msiUpdateSetup(WORKSPACE,VERSION,release,bits,outfile,msiflavor):
@@ -707,7 +729,7 @@ def makeMsiCommand(args):
             print '%s missing. Rebuilding.' % (msi32,)
             need_to_build=True
     status="ok"
-    rebuild=False
+    rebuild=True
     if need_to_build:
         if rebuild:
             print "%s, Starting build java" % (str(datetime.datetime.now()),)
