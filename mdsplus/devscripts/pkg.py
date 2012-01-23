@@ -416,7 +416,7 @@ def newRelease(pkg,flavor,version,release,dist):
             ls=line.split()
             PKG=ls[0][4:]
             if PKG==pkg and F is not None:
-                p=Popen('cvs -Q tag -F "%s" \'%s\'' % (newtag,F),shell=True,cwd=os.getcwd())
+                p=Popen('cvs -Q tag -F "%s" "%s"' % (newtag,F),shell=True,cwd=os.getcwd())
                 p.wait()
 
 def newReleaseCommand(args):
@@ -626,6 +626,9 @@ def makeRpmsCommand(args):
             p=Popen('createrepo . >/dev/null',shell=True,cwd=WORKSPACE+"/RPMS")
         except Exception,e:
             print "Error creating repo: %s" (e,)
+            sys.exit(p.wait())
+    if status in ('ok','skip'):
+        p=Popen('rsync -a RPMS ../%s;rsync -a SOURCES ../%s;rsync -a EGGS ../%s' % (FLAVOR,FLAVOR,FLAVOR),shell=True,cwd=WORKSPACE)
         sys.exit(p.wait())
 
 def msiUpdateSetup(WORKSPACE,VERSION,release,bits,outfile,msiflavor):
@@ -726,7 +729,7 @@ def makeMsiCommand(args):
             print '%s missing. Rebuilding.' % (msi32,)
             need_to_build=True
     status="ok"
-    rebuild=False
+    rebuild=True
     if need_to_build:
         if rebuild:
             print "%s, Starting build java" % (str(datetime.datetime.now()),)
