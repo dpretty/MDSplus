@@ -63,7 +63,7 @@ static int daylight = 0;
 #define LONG_LONG_CONSTANT(value) value##ll
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.93 $ $Date: 2012/01/23 18:00:00 $";
+static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.94 $ $Date: 2012/01/24 16:47:42 $";
 
 #ifdef min
 #undef min
@@ -493,7 +493,7 @@ static int PutDatafile(TREE_INFO *info, int nodenum, NCI *nci_ptr, struct descri
   TreePutNci(info, nodenum, nci_ptr, 1);
   if (locked)
     TreeUnLockDatafile(info, 0, 0);
-  if (buffer)
+  if (buffer && (!nonvms_compatible))
     free(buffer);
   return status;
 }
