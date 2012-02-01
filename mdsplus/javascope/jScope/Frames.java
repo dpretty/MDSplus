@@ -1,6 +1,6 @@
 package jScope;
 
-/* $Id: Frames.java,v 1.3 2011/12/20 13:28:02 manduchi Exp $ */
+/* $Id: Frames.java,v 1.4 2012/02/01 12:38:35 manduchi Exp $ */
 import java.awt.*;
 import java.io.*;
 import java.awt.image.*;
@@ -143,6 +143,9 @@ class Frames extends Canvas
                         right = true;
                     else
                         right = false;
+                    
+                    bitShift = colorMap.bitShift;
+
                     FlipFrame(buf, frameDim, 2);
                     int n_pix = frameDim.width * frameDim.height;
                     short buf_out[] = new short[n_pix];
