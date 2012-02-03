@@ -1,6 +1,6 @@
 package jScope;
 
-/* $Id: MdsDataProvider.java,v 1.8 2012/02/01 12:38:35 manduchi Exp $ */
+/* $Id: MdsDataProvider.java,v 1.9 2012/02/03 14:38:59 manduchi Exp $ */
 import jScope.ConnectionEvent;
 import jScope.ConnectionListener;
 import java.io.*;
@@ -1276,7 +1276,7 @@ public class MdsDataProvider
             seconds = -seconds;
         }
         Calendar cal = Calendar.getInstance();
-        cal.setTimeZone(TimeZone.getTimeZone("GMT+00"));
+        //cal.setTimeZone(TimeZone.getTimeZone("GMT+00"));
         cal.setTime(new Date());
         cal.add(Calendar.HOUR, hours);
         cal.add(Calendar.MINUTE, minutes);
@@ -1293,7 +1293,7 @@ public class MdsDataProvider
         //First check Whether this is a date
         try {
             Calendar cal = Calendar.getInstance();
-            cal.setTimeZone(TimeZone.getTimeZone("GMT+00"));
+            //cal.setTimeZone(TimeZone.getTimeZone("GMT+00"));
             DateFormat df = new SimpleDateFormat("d-MMM-yyyy HH:mm Z");
             //DateFormat df = new SimpleDateFormat("d-MMM-yyyy HH:mm");-
             Date date = df.parse(in + " GMT");
