@@ -65,7 +65,7 @@ def makeDebsCommand(args):
             need_to_build=True
     status="ok"
     if need_to_build:
-        p=subprocess.Popen('ln -sf $(pwd) ../mdsplus%s-%s;tar zcfh ../SOURCES/mdsplus%s-%s.tar.gz --exclude CVS ../mdsplus%s-%s;rm -f ../mdsplus%s-%s;' % (debflavor,VERSION,debflavor,VERSION,debflavor,VERSION,debflavor,VERSION) +\
+        p=subprocess.Popen('ln -sf $(pwd) ../mdsplus%s-%s;tar zcfh SOURCES/mdsplus%s-%s.tar.gz --exclude CVS --exclude SOURCES --exclude DEBS --exclude EGGS ../mdsplus%s-%s;rm -f ../mdsplus%s-%s;' % (debflavor,VERSION,debflavor,VERSION,debflavor,VERSION,debflavor,VERSION) +\
                     './configure --enable-mdsip_connections --enable-nodebug --exec_prefix=%s/BUILDROOT/usr/local/mdsplus --with-gsi=/usr:gcc%d;' % (WORKSPACE,BITS) +\
                     'make;make install',shell=True,cwd=os.getcwd())
         build_status=p.wait()
@@ -101,5 +101,9 @@ def makeDebsCommand(args):
                 newRelease(pkg,FLAVOR,VERSION,updates[pkg]['Release'],DIST)
     if status=="error":
         sys.exit(1)
-    p=subprocess.Popen('mkdir -p %s;rsync -av DEBS %s;rsync -av SOURCES %s;rsync -av EGGS %s' % (DISTPATH,DISTPATH,DISTPATH,DISTPATH),shell=True,cwd=WORKSPACE)
-    sys.exit(p.wait())
+    p=subprocess.Popen('rsync -av DEBS %s;rsync -av SOURCES %s;rsync -av EGGS %s' % (DISTPATH,DISTPATH,DISTPATH),shell=True,cwd=WORKSPACE)
+    pstat=p.wait()
+    if (pstat == 0):
+      p=subprocess.Popen('rm -Rf DEBS sources EGGS',shell=True,cwd=WORKSPACE)
+      pstat=p.wait()
+    sys.exit(pstat)
