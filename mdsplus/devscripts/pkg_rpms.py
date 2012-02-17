@@ -136,19 +136,19 @@ def makeRpmsCommand(args):
                 for line in c:
                     print line
                 print "================================="
-            else:
-                try:
-                    rpmfile="%s/RPMS/x86_64/mdsplus%s-%s-%s-%s.%s.x86_64.rpm" % (WORKSPACE,rpmflavor,pkg,VERSION,updates[pkg]['Release'],DIST)
-                    os.stat(rpmfile)
-                except Exception,e:
-                    print "%s missing. Rebuilding." % (rpmfile,)
-                    updates[pkg]['Update']=True
-                try:
-                    rpmfile="%s/RPMS/i686/mdsplus%s-%s-%s-%s.%s.i686.rpm" % (WORKSPACE,rpmflavor,pkg,VERSION,updates[pkg]['Release'],DIST)
-                    os.stat(rpmfile)
-                except Exception,e:
-                    print "%s missing. Rebuilding." % (rpmfile,)
-                    updates[pkg]['Update']=True
+#            else:
+#                try:
+#                    rpmfile="%s/RPMS/x86_64/mdsplus%s-%s-%s-%s.%s.x86_64.rpm" % (WORKSPACE,rpmflavor,pkg,VERSION,updates[pkg]['Release'],DIST)
+#                    os.stat(rpmfile)
+#                except Exception,e:
+#                    print "%s missing. Rebuilding." % (rpmfile,)
+#                    updates[pkg]['Update']=True
+#                try:
+#                    rpmfile="%s/RPMS/i686/mdsplus%s-%s-%s-%s.%s.i686.rpm" % (WORKSPACE,rpmflavor,pkg,VERSION,updates[pkg]['Release'],DIST)
+#                    os.stat(rpmfile)
+#                except Exception,e:
+#                    print "%s missing. Rebuilding." % (rpmfile,)
+#                    updates[pkg]['Update']=True
                 
         if updates[pkg]['Update']:
             need_to_build=True
@@ -220,7 +220,7 @@ def makeRpmsCommand(args):
         status=makeRepoRpms()
     if status=="error":
         sys.exit(1)
-    else:
+    elif status=="ok":
         try:
             p=subprocess.Popen('createrepo . >/dev/null',shell=True,cwd=WORKSPACE+"/RPMS")
             stat=p.wait()
@@ -229,7 +229,13 @@ def makeRpmsCommand(args):
         except Exception,e:
             print "Error creating repo: %s" (e,)
             sys.exit(p.wait())
-    if status in ('ok','skip'):
-        
-        p=subprocess.Popen('mkdir -p %s;rsync -a RPMS %s;rsync -a SOURCES %s;rsync -a EGGS %s' % (DISTPATH,DISTPATH,DISTPATH,DISTPATH),shell=True,cwd=WORKSPACE)
-        sys.exit(p.wait())
+    if status=='ok':
+        p=subprocess.Popen('rsync -a RPMS %s;rsync -a SOURCES %s;rsync -a EGGS %s' % (DISTPATH,DISTPATH,DISTPATH,DISTPATH),shell=True,cwd=WORKSPACE)
+        pstat=p.wait()
+        if pstat != 0:
+	  print "Error copying files to final destination. Does the directory %s exist and is it writable by the account used by this hudson node?" % (DISTPATH,)
+        else:
+          p=subprocess.Popen('rm -Rf RPMS SOURCES EGGS',shell=True,cwd=WORKSPACE)
+          pstat=p.wait()
+        sys.exit(pstat)
+    sys.exit(0)
