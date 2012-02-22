@@ -19,6 +19,7 @@ def makeDebsCommand(args):
     WORKSPACE=getWorkspace()
     FLAVOR=getFlavor()
     DISTPATH=args[2]+'/'+DIST+'/'+FLAVOR+'/'
+    need_to_build=len(args) > 3
     for d in ['debian','SOURCES','DEBS','BUILDROOT','EGGS']:
         try:
             os.mkdir("%s%s%s" % (WORKSPACE,os.sep,d))
@@ -32,7 +33,6 @@ def makeDebsCommand(args):
     else:
         debflavor="-"+FLAVOR
         pythonflavor=FLAVOR+"-"
-    need_to_build=False
     updates=dict()
     for pkg in getPackages():
         updates[pkg]=dict()
@@ -65,7 +65,7 @@ def makeDebsCommand(args):
             need_to_build=True
     status="ok"
     if need_to_build:
-        p=subprocess.Popen('ln -sf $(pwd) ../mdsplus%s-%s;tar zcfh SOURCES/mdsplus%s-%s.tar.gz --exclude CVS --exclude SOURCES --exclude DEBS --exclude EGGS ../mdsplus%s-%s;rm -f ../mdsplus%s-%s;' % (debflavor,VERSION,debflavor,VERSION,debflavor,VERSION,debflavor,VERSION) +\
+        p=subprocess.Popen('rm -f DEBS/* SOURCES/*; ln -sf $(pwd) ../mdsplus%s-%s;tar zcfh SOURCES/mdsplus%s-%s.tar.gz --exclude CVS --exclude SOURCES --exclude DEBS --exclude EGGS ../mdsplus%s-%s;rm -f ../mdsplus%s-%s;' % (debflavor,VERSION,debflavor,VERSION,debflavor,VERSION,debflavor,VERSION) +\
                     './configure --enable-mdsip_connections --enable-nodebug --exec_prefix=%s/BUILDROOT/usr/local/mdsplus --with-gsi=/usr:gcc%d;' % (WORKSPACE,BITS) +\
                     'make;make install',shell=True,cwd=os.getcwd())
         build_status=p.wait()
@@ -99,7 +99,7 @@ def makeDebsCommand(args):
         if pstat != 0:
             print "Error copying files to destination"
             sys.exit(1)
-        p=subprocess.Popen('rm -Rf DEBS SOURCES EGGS',shell=True,cwd=WORKSPACE)
+        p=subprocess.Popen('rm -Rf EGGS',shell=True,cwd=WORKSPACE)
         pstat=p.wait()
         if pstat!=0:
             print "Error removing temporary buld directories"
