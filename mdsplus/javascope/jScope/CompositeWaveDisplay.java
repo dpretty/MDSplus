@@ -1,6 +1,6 @@
 package jScope;
 
-/* $Id: CompositeWaveDisplay.java,v 1.2 2010/09/03 12:45:00 manduchi Exp $ */
+/* $Id: CompositeWaveDisplay.java,v 1.3 2012/02/28 08:58:31 manduchi Exp $ */
 import java.applet.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -801,10 +801,22 @@ public class CompositeWaveDisplay extends JApplet implements WaveContainerListen
      * @param inter Interpolation flag, if true a line is draw between adiacent point
      * @param marker Marker point
      */
+
     public void addSignal(float [] x, float [] y,int row, int column,
         String color, String label, boolean inter, int marker)
     {
-        Signal sig = new Signal(x, y);
+        addSignal(new Signal(x, y), row, column, color, label, inter, marker);
+    }
+
+    public void addSignal(double [] x, float [] y,int row, int column,
+        String color, String label, boolean inter, int marker)
+    {
+        addSignal(new Signal(x, y), row, column, color, label, inter, marker);
+    }
+
+    public void addSignal(Signal sig, int row, int column,
+        String color, String label, boolean inter, int marker)
+    {
 
         if(color != null)
 	    {
@@ -1117,6 +1129,12 @@ public class CompositeWaveDisplay extends JApplet implements WaveContainerListen
      * @param label Signal name
      */
     public void addSignal(float [] x, float [] y,int row, int column,
+        String color, String label)
+    {
+    	addSignal(x, y, row, column, color, label, true, 0);
+    }
+
+    public void addSignal(double [] x, float [] y,int row, int column,
         String color, String label)
     {
     	addSignal(x, y, row, column, color, label, true, 0);
