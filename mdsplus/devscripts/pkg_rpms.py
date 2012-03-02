@@ -102,7 +102,7 @@ def makeRpmsCommand(args):
     DISTPATH=args[2]+"/"+DIST+"/"+FLAVOR+"/"
     for d in ['RPMS','SOURCES','SPECS','SRPMS','EGGS']:
         try:
-            os.mkdir("%s%s%s" % (WORKSPACE,os.sep,d))
+            os.mkdir("%s/%s" % (WORKSPACE,d))
         except:
             pass
     VERSION=getVersion()
@@ -153,7 +153,10 @@ def makeRpmsCommand(args):
     status="ok"
     if need_to_build:
         print "%s, Starting to build 32-bit rpms" % (str(datetime.datetime.now()),)
-        p=subprocess.Popen('scp alchome.psfc.mit.edu:/mnt/scratch/mdsplus/rpm-signing-keys.tgz ~/;tar xfC ~/rpm-signing-keys.tgz ~;rm -Rf %s/RPMS/*; tar zcf %s/SOURCES/mdsplus%s-%s.tar.gz --exclude CVS ../mdsplus;' % (WORKSPACE,WORKSPACE,rpmflavor,VERSION) +\
+        p=subprocess.Popen('export MDSPLUS_PYTHON_VERSION="%s%s-%s";' % (pythonflavor,VERSION,updates['python']['Release']) +\
+                    'scp alchome.psfc.mit.edu:/mnt/scratch/mdsplus/rpm-signing-keys.tgz ~/;tar xfC ~/rpm-signing-keys.tgz ~;' +\
+                    'rm -Rf %s/RPMS/*;' % (WORKSPACE,) +\
+                    'tar zcf %s/SOURCES/mdsplus%s-%s.tar.gz --exclude CVS ../mdsplus;' % (WORKSPACE,rpmflavor,VERSION) +\
                     'rpmbuild --target i686-linux' +\
                     ' --buildroot %s/BUILDROOT/i686 -ba' % (WORKSPACE,)+\
                     ' --define="_topdir %s"' % (WORKSPACE,)+\
@@ -194,15 +197,6 @@ def makeRpmsCommand(args):
                 for pkg in getPackages():
                     if updates[pkg]['Update']:
                         writeRpmInfo("%s/RPMS/x86_64/mdsplus%s-%s-%s-%s.%s.x86_64" % (WORKSPACE,rpmflavor,pkg,VERSION,updates[pkg]['Release'],DIST))
-
-        if updates['python']['Update']:
-            p=subprocess.Popen('env MDSPLUS_PYTHON_VERSION="%s%s-%s" python setup.py bdist_egg' % (pythonflavor,VERSION,updates['python']['Release']),shell=True,cwd="%s/x86_64/mdsplus/mdsobjects/python"%(WORKSPACE))
-            python_status=p.wait()
-            if python_status != 0:
-                print "Error building MDSplus-%s%s-%s" % (pythonflavor,VERSION,updates['python']['Release'])
-            else:
-                p=subprocess.Popen('mv dist/* ${WORKSPACE}/../EGGS',shell=True,cwd="%s/x86_64/mdsplus/mdsobjects/python"%(WORKSPACE))
-                p.wait()
     else:
         print 'All RPMS are up to date'
         status="skip"
@@ -222,10 +216,10 @@ def makeRpmsCommand(args):
         pstat=p.wait()
         if pstat != 0:
 	  print "Error copying files to final destination. Does the directory %s exist and is it writable by the account used by this hudson node?" % (DISTPATH,)
+          sys.exit(pstat)
         else:
           p=subprocess.Popen('rm -Rf SOURCES EGGS',shell=True,cwd=WORKSPACE)
           pstat=p.wait()
-        sys.exit(pstat)
         print "Build completed successfully. Checking for new releaseas and tagging the modules"
         for pkg in getPackages():
             print "Checking %s for new release" % (pkg,)
