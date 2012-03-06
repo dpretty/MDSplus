@@ -88,6 +88,10 @@ def makeDebsCommand(args):
             print "Error building mdsplus. Status=%d" % (build_status,)
             status="error"
         else:
+            build_status=createDeb(WORKSPACE,FLAVOR,'all','1.0',0,DIST)
+            if build_status != 0:
+		print "Error build catch all package, status=%d" % (build_status,)
+                sys.exit(build_status)
             for pkg in getPackages():
                 debfile="%s/DEBS/%s/mdsplus%s-%s-%s-%d.%s.%s.deb" % (WORKSPACE,HW,debflavor,pkg,VERSION,updates[pkg]['Release'],DIST,HW)
                 build_status=createDeb(WORKSPACE,FLAVOR,pkg,VERSION,updates[pkg]['Release'],DIST)
@@ -115,12 +119,7 @@ def makeDebsCommand(args):
         if pstat != 0:
             print "Error copying files to destination"
             sys.exit(1)
-        p=subprocess.Popen('rsync -av --delete dist/* %s/' % (DISTPATH,),shell=True,cwd=WORKSPACE)
-        pstat=p.wait()
-        if pstat != 0:
-            print "Error copying repository to destination"
-            sys.exit(1)
-        p=subprocess.Popen('rm -Rf EGGS dist',shell=True,cwd=WORKSPACE)
+        p=subprocess.Popen('rm -Rf EGGS',shell=True,cwd=WORKSPACE)
         pstat=p.wait()
         if pstat!=0:
             print "Error removing temporary buld directories"
