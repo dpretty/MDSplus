@@ -1,8 +1,9 @@
 #!/bin/sh
-check() {
-if (! $1)
-then
-  echo $2
+apt_check() 
+{
+  if (! /usr/bin/apt-get $1)
+  then
+    echo $2
   exit 1
 fi
 }
@@ -19,9 +20,9 @@ grep -v MDSplus /etc/apt/sources.list > /etc/apt/sources.list.save
 mv -f /etc/apt/sources.list.save /etc/apt/sources.list
 echo "deb http://www.mdsplus.org/dist/Ubuntu11/repo MDSplus $1" >>/etc/apt/sources.list
 /usr/bin/apt-get autoremove -y "mdsplus*"
-check "/usr/bin/apt-get update" "Error doing update"
-check "/usr/bin/apt-get install -y mdsplus${flav}-python" "Error doing ${flavor} python install"
-check "/usr/bin/apt-get autoremove -y mdsplus${flav}-python" "Error doing ${flavor} python remove"
-check "/usr/bin/apt-get install -y mdsplus${flav}" "Error doing full ${flavor} install"
-check "/usr/bin/apt-get autoremove -y mdsplus${flav}" "Error doing ${flavor} remove"
+apt-check "update" "Error doing update"
+apt-check "install -y mdsplus${flav}-python" "Error doing ${flavor} python install"
+apt-check "autoremove -y mdsplus${flav}-python" "Error doing ${flavor} python remove"
+apt-check "install -y mdsplus${flav}" "Error doing full ${flavor} install"
+apt-check "autoremove -y mdsplus${flav}" "Error doing ${flavor} remove"
 
