@@ -1,4 +1,4 @@
-import subprocess,datetime,os,sys
+import subprocess,datetime,os,sys,shutil
 from pkg_utils import getLsbReleaseDist, getWorkspace, getFlavor, getVersion, getRelease, getReleaseTag, checkRelease, getPackages, makeSrcTar, newRelease, getHardwarePlatform
 from pkg_rpms import writeRpmInfo
 def writeDebInfo(outfile):
@@ -11,22 +11,51 @@ def writeDebInfo(outfile):
     f.close()
 
 def createDeb(WORKSPACE,FLAVOR,pkg,VERSION,release,DIST):
+    sys.stdout.flush()
     p=subprocess.Popen('%s/devscripts/makeDebian %s %s %s %d %s' % (WORKSPACE,FLAVOR,pkg,VERSION,release,DIST),shell=True,cwd=os.getcwd())
     return p.wait()
 
+def prepareRepo(repodir):
+    for f in ('conf','pool','dists','db'):
+        try:
+            shutil.rmtree(repodir+'/'+f)
+        except:
+            pass
+        os.mkdir(repodir+'/'+f)
+    f=open(repodir+'/conf/distributions','w')
+    f.write(
+"""Origin: MDSplus Development Team
+Label: MDSplus
+Codename: MDSplus
+Version: 1.0
+Architectures: i386 amd64 source
+Components: alpha beta stable
+Description: MDSplus packages
+SignWith: MDSplus
+""")
+    f.close()
+
+def getDebfile(WORKSPACE,arch,debflavor,pkg,VERSION,updates):
+    if pkg == 'all':
+        return "%s/DEBS/%s/mdsplus%s_%s.%d_%s.deb" % (WORKSPACE,arch,debflavor,VERSION,updates[pkg]['Release'],arch)
+    else:
+        return "%s/DEBS/%s/mdsplus%s-%s_%s.%d_%s.deb" % (WORKSPACE,arch,debflavor,pkg,VERSION,updates[pkg]['Release'],arch)
+    
 def makeDebsCommand(args):
     DIST=getLsbReleaseDist()
     WORKSPACE=getWorkspace()
     FLAVOR=getFlavor()
-    DISTPATH=args[2]+'/'+DIST+'/'+FLAVOR+'/'
+    DISTPATH='/mnt/dist/'+FLAVOR+'/'
     need_to_build=len(args) > 3
-    for d in ['debian','SOURCES','DEBS','BUILDROOT','EGGS']:
+    for d in ['debian','SOURCES','DEBS','BUILDROOT','EGGS','REPO']:
         try:
             os.mkdir("%s%s%s" % (WORKSPACE,os.sep,d))
         except:
             pass
+    prepareRepo("%s/REPO" % (WORKSPACE,))
     VERSION=getVersion()
     HW,BITS=getHardwarePlatform()
+    arch={32:'i386',64:'amd64'}[BITS]
     if FLAVOR=="stable":
         debflavor=""
         pythonflavor=""
@@ -55,7 +84,7 @@ def makeDebsCommand(args):
                     print line
                 print "================================="
             else:
-                debfile="%s/DEBS/%s/mdsplus%s-%s-%s-%d.%s.%s.deb" % (WORKSPACE,HW,debflavor,pkg,VERSION,updates[pkg]['Release'],DIST,HW)
+                debfile=getDebfile('/mnt/dist/%s' % (FLAVOR,),arch,debflavor,pkg,VERSION,updates)
                 try:
                     os.stat(debfile)
                 except Exception,e:
@@ -68,7 +97,7 @@ def makeDebsCommand(args):
         cmd='rm -Rf DEBS/* SOURCES/*;' +\
              'ln -sf $(pwd) ../mdsplus%s-%s;' % (debflavor,VERSION) +\
              'tar zcfh SOURCES/mdsplus%s-%s.tar.gz --exclude CVS ' % (debflavor,VERSION) +\
-                 '--exclude SOURCES --exclude DEBS --exclude EGGS ../mdsplus%s-%s;' % (debflavor,VERSION) +\
+                 '--exclude SOURCES --exclude DEBS --exclude EGGS --exclude REPO ../mdsplus%s-%s;' % (debflavor,VERSION) +\
              'rm -f ../mdsplus%s-%s;' % (debflavor,VERSION) +\
              './configure --enable-mdsip_connections --enable-nodebug --exec_prefix=%s/BUILDROOT/usr/local/mdsplus --with-gsi=/usr:gcc%d;' % (WORKSPACE,BITS) +\
              'make;make install;' +\
@@ -79,7 +108,6 @@ def makeDebsCommand(args):
              'python setup.py bdist_egg;' +\
              'rsync -a dist %s/BUILDROOT/usr/local/mdsplus/mdsobjects/python/;' % (WORKSPACE,) +\
              'cd $olddir'
-#        print "Building using cmd: '%s'" % (cmd,)
         sys.stdout.flush()
         p=subprocess.Popen(cmd,shell=True,cwd=os.getcwd())
         build_status=p.wait()
@@ -93,12 +121,12 @@ def makeDebsCommand(args):
 		print "Error build catch all package, status=%d" % (build_status,)
                 sys.exit(build_status)
             for pkg in getPackages():
-                debfile="%s/DEBS/%s/mdsplus%s-%s-%s-%d.%s.%s.deb" % (WORKSPACE,HW,debflavor,pkg,VERSION,updates[pkg]['Release'],DIST,HW)
+                debfile=getDebfile(WORKSPACE,arch,debflavor,pkg,VERSION,updates)
                 build_status=createDeb(WORKSPACE,FLAVOR,pkg,VERSION,updates[pkg]['Release'],DIST)
                 if build_status != 0:
                     print "Error building debian package %s, status=%d" % (debfile,build_status)
                     sys.exit(build_status)
-                writeRpmInfo("%s/DEBS/%s/mdsplus%s-%s-%s-%d.%s.%s" % (WORKSPACE,HW,debflavor,pkg,VERSION,updates[pkg]['Release'],DIST,HW))
+                writeRpmInfo(debfile[0:-3])
         if updates['python']['Update']:
             sys.stdout.flush()     
             p=subprocess.Popen('env MDSPLUS_PYTHON_VERSION="%s%s-%s" python setup.py bdist_egg' % (pythonflavor,VERSION,updates['python']['Release']),shell=True,cwd="%s/mdsobjects/python"%(WORKSPACE))
@@ -113,18 +141,25 @@ def makeDebsCommand(args):
         print 'All DEBS are up to date'
         status="skip"
     if status=="ok":
+        sys.path.insert(0,WORKSPACE+'/tests')
+        from distribution_tests import test_debian as test
+        test(WORKSPACE,FLAVOR)
+        print "Build completed successfully. Checking for new releaseas and tagging the modules"
         sys.stdout.flush()
-        p=subprocess.Popen('rsync -av DEBS %s;rsync -av SOURCES %s;rsync -av EGGS %s' % (DISTPATH,DISTPATH,DISTPATH),shell=True,cwd=WORKSPACE)
+        p=subprocess.Popen(
+            'find DEBS -name "*.deb" -exec reprepro -V --waitforlock 20 -b /mnt/dist/repo -C %s includedeb MDSplus {} \;' % (FLAVOR,),
+            shell=True,cwd=WORKSPACE)
+        pstat=p.wait()
+        p=subprocess.Popen('rsync -av DEBS SOURCES EGGS /mnt/dist/%s/' % (FLAVOR,),shell=True,cwd=WORKSPACE)
         pstat=p.wait()
         if pstat != 0:
             print "Error copying files to destination"
             sys.exit(1)
-        p=subprocess.Popen('rm -Rf EGGS',shell=True,cwd=WORKSPACE)
-        pstat=p.wait()
-        if pstat!=0:
-            print "Error removing temporary buld directories"
-            sys.exit(1)
-        print "Build completed successfully. Checking for new releaseas and tagging the modules"
+        for d in ('EGGS','REPO','DEBS'):
+            try:
+                shutil.rmtree(WORKSPACE+'/'+d)
+            except:
+                pass
         for pkg in getPackages():
             if updates[pkg]['Tag']:
                 print "New release. Tag %s modules with %s %s %s %s" % (pkg,FLAVOR,VERSION,updates[pkg]['Release'],DIST)
