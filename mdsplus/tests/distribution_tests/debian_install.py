@@ -1,8 +1,16 @@
 import subprocess
+import os
 from pkg_utils import getPackages
+import sys
 
-def config_apt(WORKSPACE,FLAVOR):
-  p=subprocess.Popen('devscripts/debianApt init %s' % (FLAVOR,),shell=True,cwd=WORKSPACE)
+WORKSPACE=os.environ['WORKSPACE']
+
+def initApt(WORKSPACE,FLAVOR):
+  p=subprocess.Popen('sudo devscripts/debianApt init %s' % (FLAVOR,),shell=True,cwd=WORKSPACE)
+  return p.wait()
+
+def cleanApt():
+  p=subprocess.Popen('sudo devscripts/debianApt clean',shell=True,cwd=WORKSPACE)
   return p.wait()
   
 def debian_install(pkg,FLAVOR):
@@ -14,7 +22,7 @@ def debian_install(pkg,FLAVOR):
     package='mdsplus%s' % (flav,)
   else:
     package='mdsplus%s-%s' % (flav,pkg)
-  p=subprocess.Popen('devscripts/debianApt install -y %s' % (package),stdout=subprocess.PIPE,shell=True,cwd=WORKSPACE)
+  p=subprocess.Popen('sudo devscripts/debianApt install -y %s' % (package),stdout=subprocess.PIPE,shell=True,cwd=WORKSPACE)
   if p.wait() != 0:
     print p.stdout.read()
     print "Error installing package %s" % (package,)
@@ -31,7 +39,7 @@ def debian_remove(pkg,FLAVOR):
     package='mdsplus%s' % (flav,)
   else:
     package='mdsplus%s-%s' % (flav,pkg)
-  p=subprocess.Popen('devscripts/debianApt autoremove -y %s' % (package,),stdout=subprocess.PIPE,shell=True,cwd=WORKSPACE)
+  p=subprocess.Popen('sudo devscripts/debianApt autoremove -y %s' % (package,),stdout=subprocess.PIPE,shell=True,cwd=WORKSPACE)
   if p.wait() != 0:
     print p.stdout.read()
     print "Error removing package %s" % (package,)
@@ -41,9 +49,9 @@ def debian_remove(pkg,FLAVOR):
 
 def debian_install_tests(WORKSPACE,FLAVOR):
   print "Testing package installation"
-  p=subprocess.Popen('devscripts/debianApt autoremove -y "mdsplus*"',stdout=subprocess.PIPE,shell=True,cwd=WORKSPACE)
+  p=subprocess.Popen('sudo devscripts/debianApt autoremove -y "mdsplus*"',stdout=subprocess.PIPE,shell=True,cwd=WORKSPACE)
   p.wait()
-  p=subprocess.Popen('devscripts/debianApt update 2>&1',stdout=subprocess.PIPE,shell=True,cwd=WORKSPACE)
+  p=subprocess.Popen('sudo devscripts/debianApt update 2>&1',stdout=subprocess.PIPE,shell=True,cwd=WORKSPACE)
   if p.wait() != 0:
     print p.stdout.read()
     print "Error doing apt-get update command"
