@@ -14,7 +14,7 @@ typedef int socklen_t;
 #define MSG_NOSIGNAL 0
 #define MSG_DONTWAIT 0
 #include <io.h>
-#define close _close
+#define close closesocket
 #include <process.h>
 #define getpid _getpid
 extern int pthread_mutex_init();
@@ -244,7 +244,7 @@ static int tcp_disconnect(int conid) {
     status = close(s);
     status = shutdown(s,2);
   }
-  fflush(stdin);
+  fflush(stdout);
   fflush(stderr);
   return status;
 }
@@ -480,7 +480,7 @@ VOID CALLBACK ShutdownEvent(PVOID arg,BOOLEAN fired) {
 
 static int GetSocketHandle(char *name) {
   char logfile[1024];
-  int sock;
+  HANDLE h;
   int ppid;
   int psock;
   char shutdownEventName[120];
@@ -493,7 +493,7 @@ static int GetSocketHandle(char *name) {
   freopen(logfile,"a",stdout);
   freopen(logfile,"a",stderr);
   if (!DuplicateHandle(OpenProcess(PROCESS_ALL_ACCESS,TRUE,ppid), 
-		       (HANDLE)psock,GetCurrentProcess(),(HANDLE *)&sock,
+		       (HANDLE)psock,GetCurrentProcess(),(HANDLE *)&h,
 		       PROCESS_ALL_ACCESS, TRUE,DUPLICATE_CLOSE_SOURCE|DUPLICATE_SAME_ACCESS)) {
     fprintf(stderr,"Attempting to duplicate socket from pid %d socket %d\n",ppid,psock);
     perror("Error duplicating socket from parent");
@@ -503,7 +503,7 @@ static int GetSocketHandle(char *name) {
   shutdownEvent = CreateEvent(NULL,FALSE,FALSE,shutdownEventName);
   if (!RegisterWaitForSingleObject(&waitHandle,shutdownEvent,ShutdownEvent,NULL,INFINITE,0))
     perror("Error registering for shutdown event");
-  return sock;
+  return *(int *)&h;
 }
 #else
 static void ChildSignalHandler(int num) {
