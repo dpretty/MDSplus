@@ -120,6 +120,7 @@ def makeRpmsCommand(args):
     specfile="%s/SPECS/mdsplus-%s-%s-%s.spec" % (WORKSPACE,FLAVOR,VERSION,DIST)
     beginRpmSpec(specfile,VERSION,release,rpmflavor)
     need_to_build=False
+    need_changelog=False
     updates=dict()
     for pkg in getPackages():
         updates[pkg]=dict()
@@ -131,6 +132,7 @@ def makeRpmsCommand(args):
             print "No releases yet for %s mdsplus-%s. Building." % (FLAVOR,pkg)
             updates[pkg]['Update']=True
             updates[pkg]['Tag']=True
+            need_changelog=True
         else:
             c=checkRelease(pkg)
             if len(c) > 0:
@@ -141,6 +143,7 @@ def makeRpmsCommand(args):
                 for line in c:
                     print line
                 print "================================="
+                need_changelog=True
             else:
                 for p in ('x86_64','i686'):
                   try:
@@ -154,6 +157,11 @@ def makeRpmsCommand(args):
         addPkgToRpmSpec(specfile,pkg,updates[pkg]['Release'],DIST,rpmflavor)
     status="ok"
     if need_to_build:
+        if 'UPDATE_CHANGELOG' in os.environ and need_changelog:
+            print "Updating ChangeLog"
+            sys.stdout.flush()
+            p=subprocess.Popen('$(pwd)/UpdateChangeLog %s' % (FLAVOR,),shell=True,cwd=os.getcwd())
+            p.wait()
         print "%s, Starting to build 32-bit rpms" % (str(datetime.datetime.now()),)
         sys.stdout.flush()
         p=subprocess.Popen('export MDSPLUS_PYTHON_VERSION="%s%s-%s";' % (pythonflavor,VERSION,updates['python']['Release']) +\
