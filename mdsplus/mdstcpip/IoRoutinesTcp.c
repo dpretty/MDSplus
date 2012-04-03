@@ -14,7 +14,7 @@ typedef int socklen_t;
 #define MSG_NOSIGNAL 0
 #define MSG_DONTWAIT 0
 #include <io.h>
-#define close _close
+#define close closesocket
 #include <process.h>
 #define getpid _getpid
 extern int pthread_mutex_init();
