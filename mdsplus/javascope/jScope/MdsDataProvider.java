@@ -1,6 +1,6 @@
 package jScope;
 
-/* $Id: MdsDataProvider.java,v 1.11 2012/02/09 16:05:55 manduchi Exp $ */
+/* $Id: MdsDataProvider.java,v 1.12 2012/04/04 14:06:30 manduchi Exp $ */
 import jScope.ConnectionEvent;
 import jScope.ConnectionListener;
 import java.io.*;
@@ -1100,12 +1100,14 @@ public class MdsDataProvider
         return GetByteArray(in);
     }
 
-    protected synchronized byte[] GetByteArray(String in) throws IOException
+    public synchronized byte[] GetByteArray(String in) throws IOException
     {
         byte out_byte[] = null;
         ByteArrayOutputStream dosb = new ByteArrayOutputStream();
         DataOutputStream dos = new DataOutputStream(dosb);
 
+        if (!CheckOpen())
+            return null;
         Descriptor desc = mds.MdsValue(in);
         switch (desc.dtype)
         {
