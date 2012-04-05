@@ -1,6 +1,6 @@
 package jScope;
 
-/* $Id: MdsDataProvider.java,v 1.12 2012/04/04 14:06:30 manduchi Exp $ */
+/* $Id: MdsDataProvider.java,v 1.13 2012/04/05 15:36:58 manduchi Exp $ */
 import jScope.ConnectionEvent;
 import jScope.ConnectionListener;
 import java.io.*;
@@ -531,7 +531,7 @@ public class MdsDataProvider
             }
             int shape[] = GetNumDimensions(expr);
 
-            if (error != null)
+            if (error != null || shape == null)
             {
                 _jscope_set = false;
                 error = null;
