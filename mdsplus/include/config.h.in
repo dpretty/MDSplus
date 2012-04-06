@@ -1,5 +1,5 @@
 /* include/config.h.in.  Generated automatically from configure.in by autoheader.  */
-/* @(#)$RCSfile: config.h.in,v $ $Revision: 1.15 $ */
+/* @(#)$RCSfile: config.h.in,v $ $Revision: 1.16 $ */
 #ifndef _CONFIG_INCLUDED
 
 /* Define to empty if the keyword does not work.  */
@@ -101,6 +101,12 @@
 
 /* Define if you have the <strings.h> header file.  */
 #undef HAVE_STRINGS_H
+
+/* Define if you have the <linux/types.h> header file. */
+#undef HAVE_LINUX_TYPES_H
+
+/* Define if you have the <drm/drm.h> header file. */
+#undef HAVE_DRM_DRM_H
 
 /* Define if you have the <sys/filio.h> header file.  */
 #undef HAVE_SYS_FILIO_H
