@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.244 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.245 $
 AC_INIT()
 
 #AC_CONFIG_HEADER(include/config.h)
@@ -727,7 +727,7 @@ then
     CAMSHR="camshr"
     REMCAMLIB="RemCamShr"
   else
-    CAMAC=""
+    CAMSHR=""
     REMCAMLIB="CamShr"
   fi
 else
