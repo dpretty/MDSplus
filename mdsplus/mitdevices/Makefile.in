@@ -19,7 +19,6 @@ MATH_LIBS=-L@MAKESHLIBDIR@ -lMdsMath
 LIBDC1394_LIBS=-ldc1394 -lraw1394
 LIBDC1394_INCS=-I/usr/local/include/dc1394 -I/usr/local/include/libraw1394
 export @LIBPATH@=@MAKESHLIBDIR@
-DTACQ_FILESYSTEM := $(shell  find acq_root_filesystem -print)
 DC := $(shell date)
 
 UIDS = \
