@@ -8,13 +8,15 @@
 #include <stdio.h>
 #include <config.h>
 #include <time.h>
+#ifdef HAVE_SYS_FILIO_H
+#include <sys/filio.h>
+#endif
 #ifdef HAVE_WINDOWS_H
 typedef int socklen_t;
 #define snprintf _snprintf
-#define MSG_NOSIGNAL 0
 #define MSG_DONTWAIT 0
 #include <io.h>
-#define close _close
+#define close closesocket
 #include <process.h>
 #define getpid _getpid
 extern int pthread_mutex_init();
@@ -27,12 +29,13 @@ extern int pthread_mutex_unlock();
 #include <netinet/tcp.h>
 #include <arpa/inet.h>
 #include <sys/ioctl.h>
-#include <stropts.h>
 #include <sys/wait.h>
 #endif
 #define SEND_BUF_SIZE 32768
 #define RECV_BUF_SIZE 32768
-
+#ifndef MSG_NOSIGNAL
+#define MSG_NOSIGNAL 0
+#endif
 static ssize_t tcp_send(int conid, const void *buffer, size_t buflen, int nowait);
 static ssize_t tcp_recv(int conid, void *buffer, size_t len);
 static int tcp_disconnect(int conid);
@@ -242,9 +245,10 @@ static int tcp_disconnect(int conid) {
       free(c->username);
       free(c);
     }
+    status = close(s);
     status = shutdown(s,2);
   }
-  fflush(stdin);
+  fflush(stdout);
   fflush(stderr);
   return status;
 }
@@ -267,11 +271,7 @@ static int tcp_flush(int conid) {
 	   (status == -1 && errno == EINTR)) && tries < 10)  {
       tries++;
       if (FD_ISSET(sock,&readfds)) {
-#if defined(__QNX__) || defined(HAVE_WINDOWS_H)
 	status = ioctl(sock, FIONREAD, &nbytes);
-#else
-	status = ioctl(sock,I_NREAD,&nbytes);
-#endif
 	if (nbytes > 0 && status != -1) {
 	  nbytes = recv(sock, buffer, sizeof(buffer) > nbytes ? nbytes : sizeof(buffer), MSG_NOSIGNAL);
 	  if (nbytes > 0) tries = 0;
@@ -484,7 +484,7 @@ VOID CALLBACK ShutdownEvent(PVOID arg,BOOLEAN fired) {
 
 static int GetSocketHandle(char *name) {
   char logfile[1024];
-  int sock;
+  HANDLE h;
   int ppid;
   int psock;
   char shutdownEventName[120];
@@ -497,7 +497,7 @@ static int GetSocketHandle(char *name) {
   freopen(logfile,"a",stdout);
   freopen(logfile,"a",stderr);
   if (!DuplicateHandle(OpenProcess(PROCESS_ALL_ACCESS,TRUE,ppid), 
-		       (HANDLE)psock,GetCurrentProcess(),(HANDLE *)&sock,
+		       (HANDLE)psock,GetCurrentProcess(),(HANDLE *)&h,
 		       PROCESS_ALL_ACCESS, TRUE,DUPLICATE_CLOSE_SOURCE|DUPLICATE_SAME_ACCESS)) {
     fprintf(stderr,"Attempting to duplicate socket from pid %d socket %d\n",ppid,psock);
     perror("Error duplicating socket from parent");
@@ -507,7 +507,7 @@ static int GetSocketHandle(char *name) {
   shutdownEvent = CreateEvent(NULL,FALSE,FALSE,shutdownEventName);
   if (!RegisterWaitForSingleObject(&waitHandle,shutdownEvent,ShutdownEvent,NULL,INFINITE,0))
     perror("Error registering for shutdown event");
-  return sock;
+  return *(int *)&h;
 }
 #else
 static void ChildSignalHandler(int num) {
