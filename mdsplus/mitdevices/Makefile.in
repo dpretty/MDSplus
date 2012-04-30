@@ -19,6 +19,7 @@ MATH_LIBS=-L@MAKESHLIBDIR@ -lMdsMath
 LIBDC1394_LIBS=-ldc1394 -lraw1394
 LIBDC1394_INCS=-I/usr/local/include/dc1394 -I/usr/local/include/libraw1394
 export @LIBPATH@=@MAKESHLIBDIR@
+DC := $(shell date)
 
 UIDS = \
 @MAKEUIDDIR@A12.uid \
@@ -208,7 +209,7 @@ all :  @MAKELIBDIR@ @MAKESHLIBDIR@ @MAKEBINDIR@ \
        @MAKELIBDIR@libMitDevices.a \
        @MITDEVICESIO_TARGETS@ $(UIDS) \
        @MAKEBINDIR@reboot_dtaq_satelite \
-       @DC1394_SUPPORT@ @DC1394_SUPPORT2@
+       @DC1394_SUPPORT@ @DC1394_SUPPORT2@ 
 
 
 depend:
@@ -656,18 +657,18 @@ u_of_m_spect_gen.c : u_of_m_spect.gen
 	cp reboot_dtaq_satelite @MAKEBINDIR@reboot_dtaq_satelite
 
 @MAKESHLIBDIR@libMitDevices@SHARETYPE@ : $(OBJECTS) @EXPORTS_FILE@
-	$(LD) -o $@ @LINKSHARED@ $(OBJECTS)  -L@MAKESHLIBDIR@ -lCamShr -lXmdsShr -lGenDevShr -lMdsdcl -lTdiShr -lTreeShr -lMdsShr $(X_LIBS) $(MOTIF_LIBS) $(X_PRE_LIBS) -lXt -lX11 $(X_EXTRA_LIBS) $(LIBS) $(MATH_LIBS)
+	$(LD) -o $@ @LINKSHARED@ $(OBJECTS)  -L@MAKESHLIBDIR@ -lCamShr -lXmdsShr -lGenDevShr -lMdsdcl -lTdiShr -lTreeShr -lMdsShr $(X_LIBS) $(MOTIF_LIBS) $(X_PRE_LIBS) -lXt -lX11 $(X_EXTRA_LIBS) $(LIBS) $(MATH_LIBS) $(LDFLAGS)
 	ln -sf libMitDevices@SHARETYPE@ @MAKESHLIBDIR@libMIT\$$DEVICES@SHARETYPE@
 
 @MAKESHLIBDIR@libMitDevicesMsg@SHARETYPE@ : mitdevices_msg.o
-	$(LD) -o $@ @LINKSHARED@ mitdevices_msg.o $(LIBS)
+	$(LD) -o $@ @LINKSHARED@ mitdevices_msg.o $(LIBS) $(LDFLAGS)
 
 @MAKELIBDIR@libMitDevices.a : $(OBJECTS)
 	$(AR) -cr $@ $(OBJECTS)
 	@RANLIB@ $@
 
 @MAKESHLIBDIR@libMitDevicesIO@SHARETYPE@ : $(IO_OBJECTS)
-	$(LD) -o $@ @LINKSHARED@ $(IO_OBJECTS) $(LIBS) $(MATH_LIBS)
+	$(LD) -o $@ @LINKSHARED@ $(IO_OBJECTS) $(LIBS) $(MATH_LIBS) $(LDFLAGS)
 
 @MAKELIBDIR@libMitDevicesIO.a : $(IO_OBJECTS)
 	$(AR) -cr $@ $(IO_OBJECTS)
@@ -775,15 +776,16 @@ MitDevices.exports: MitDevices.def
 # Support for libdc1394 connected cameras
 #
 @DC1394_SUPPORT@ : dc1394_support.o
-	$(LD) -o $@ @LINKSHARED@  dc1394_support.o $(LIBDC1394_LIBS) $(LIBS)
+	$(LD) -o $@ @LINKSHARED@  dc1394_support.o $(LIBDC1394_LIBS) $(LIBS) $(LDFLAGS)
 
 
 dc1394_support.o : dc1394_support.c
 	$(CC) -c -o $@ $(CFLAGS) $< $(LIBDC1394_INCS)
 
 @DC1394_SUPPORT2@ : dc1394_support2.o
-	$(LD) -o $@ @LINKSHARED@  dc1394_support2.o $(LIBDC1394_LIBS) $(LIBS)
+	$(LD) -o $@ @LINKSHARED@  dc1394_support2.o $(LIBDC1394_LIBS) $(LIBS) $(LDFLAGS)
 
 
 dc1394_support2.o : dc1394_support2.c
 	$(CC) -c -o $@ $(CFLAGS) $< $(LIBDC1394_INCS)
+
