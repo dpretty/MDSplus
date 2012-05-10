@@ -1,4 +1,4 @@
-#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.78 $
+#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.79 $
 # @configure_input@
 prefix=@prefix@
 SHELL=/bin/sh
@@ -30,8 +30,7 @@ PARTS = \
         tditest \
 	xtreeshr \
         @MDSTCPIP@ \
-	rtevents \
-        cacheshr \
+	@RTEVENTS@ \
         mdslibidl \
         cdu     \
         mdsdcl  \
