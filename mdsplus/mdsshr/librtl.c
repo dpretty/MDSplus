@@ -20,7 +20,7 @@
 #include <math.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.186 $ $Date: 2011/11/21 14:42:54 $ $Name:  $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.187 $ $Date: 2012/05/10 16:37:23 $ $Name:  $";
 int LibTimeToVMSTime(time_t *time_in,_int64 *time_out);  
 #ifndef HAVE_VXWORKS_H
 STATIC_CONSTANT _int64 addin = LONG_LONG_CONSTANT(0x7c95674beb4000);
@@ -2062,8 +2062,6 @@ unsigned int StrMatchWild(struct descriptor *candidate, struct descriptor *patte
   struct descr pat;
   struct descr spat;
   char pc;
-  int true;
-  true = 1;
   cand.length = candidate->length;
   cand.ptr = candidate->pointer;
   scand = cand;
@@ -2072,7 +2070,7 @@ unsigned int StrMatchWild(struct descriptor *candidate, struct descriptor *patte
   spat = pat;
   scand.length = 0;
 
-  while (true) {
+  while (1) {
     if (--pat.length < 0)
     {
       if (cand.length == 0)
