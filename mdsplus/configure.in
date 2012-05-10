@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.258 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.259 $
 AC_INIT()
 
 #AC_CONFIG_HEADER(include/config.h)
@@ -241,7 +241,7 @@ then
   fi
 fi
 AC_MSG_CHECKING(for idl)
-if test "$IDL_DIR" != "" -a -r $IDL_DIR
+if test "$IDL_DIR" != "" -a -r "$IDL_DIR"
 then
   IDL_INC="-I$IDL_DIR/external"
   IDLMDSEVENT="idlmdsevent"
