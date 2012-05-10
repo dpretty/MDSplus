@@ -36,7 +36,7 @@
 #ifndef HAVE_VXWORKS_H
 #include <config.h>
 #endif
-#ifdef SYBASE
+#ifdef HAVE_SYBASE
 #ifdef __VMS
 #include <dvidef.h>	/*for line width*/
 #include <starlet.h>
@@ -51,7 +51,7 @@
 #define MAX(a,b) (((a) > (b)) ? (a): (b))
 #endif
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSql.c,v $ $Revision: 1.36 $ $Date: 2011/08/17 20:30:34 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSql.c,v $ $Revision: 1.37 $ $Date: 2012/05/10 18:55:53 $";
 
 extern int stat;
 extern int TdiFindImageSymbol();

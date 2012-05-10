@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.254 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.255 $
 AC_INIT()
 
 #AC_CONFIG_HEADER(include/config.h)
@@ -884,6 +884,7 @@ if test -n "$SYBASE_INC"
 then
         MDSSQL="mdssql"
         AC_MSG_RESULT(have sql so yes.)
+        AC_DEFINE(HAVE_SYBASE)
 else
         MDSSQL=""
         AC_MSG_RESULT(missing sql so no.)
