@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.257 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.258 $
 AC_INIT()
 
 #AC_CONFIG_HEADER(include/config.h)
@@ -1014,7 +1014,7 @@ AC_SUBST(RANLIB)
 AC_SUBST(REMCAM)
 AC_SUBST(REMCAMLIB)
 AC_SUBST(RMIC)
-AC_SUNST(RTEVENTS)
+AC_SUBST(RTEVENTS)
 AC_SUBST(SHARETYPE)
 AC_SUBST(SHARETYPEJNI)
 AC_SUBST(SHARETYPEMOD)
