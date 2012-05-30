@@ -163,5 +163,5 @@ def makeMsiCommand(args):
     print "Done tagging modules. Now copying files to distribution location"
     print "doing command: pushd %s & mkdir %s & xcopy /e/y ..\\%s %s" % (WORKSPACE,DISTPATH,FLAVOR,DISTPATH)
     sys.stdout.flush()
-    p=subprocess.Popen('pushd %s' % (DISTPATH,),shell=True)
+    p=subprocess.Popen('pushd %s & xcopy /e/y %s\\%s %s' % (DISTPATH,WORKSPACE,FLAVOR,FLAVOR),shell=True)
     sys.exit(p.wait())
