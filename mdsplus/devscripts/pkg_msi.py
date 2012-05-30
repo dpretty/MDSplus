@@ -81,11 +81,9 @@ def makeMsiCommand(args):
         need_to_build=True
         release=release+1
         need_to_tag=True
-    print "Making directory: %s\\..\\%s" % (WORKSPACE,FLAVOR) 
     try:
       os.mkdir("%s\\..\\%s" % (WORKSPACE,FLAVOR))
     except Exception,e:
-      print e
       pass
     for p in ('x86','x86_64'):
         try:
@@ -161,6 +159,8 @@ def makeMsiCommand(args):
         build_url=os.environ['BUILD_URL']
         writeMsiInfo(msi32)
         writeMsiInfo(msi64)    
+    sys.stdout.flush()
+    print "Done tagging modules. Now copying files to distribution location"
     sys.stdout.flush()
     p=subprocess.Popen('pushd %s & mkdir %s & xcopy /e/y ..\\%s %s' % (WORKSPACE,DISTPATH,FLAVOR,DISTPATH),shell=True)
     sys.exit(p.wait())
