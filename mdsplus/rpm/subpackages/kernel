@@ -71,6 +71,24 @@ Core applications, libraries and configuration files
 %exclude /usr/local/mdsplus/bin??/*HDF5
 
 %post kernel
+if [ ! -a $RPM_INSTALL_PREFIX/mdsplus/lib ]
+then
+  if [ "$(uname -p)" = "x86_64" ]
+  then
+    ln -sf lib64 $RPM_INSTALL_PREFIX/mdsplus/lib
+  else
+    ln -sf lib32 $RPM_INSTALL_PREFIX/mdsplus/lib
+  fi
+fi
+if [ ! -a $RPM_INSTALL_PREFIX/mdsplus/bin ]
+then
+  if [ "$(uname -p)" = "x86_64" ]
+  then
+    ln -sf bin64 $RPM_INSTALL_PREFIX/mdsplus/bin
+  else
+    ln -sf bin32 $RPM_INSTALL_PREFIX/mdsplus/bin
+  fi
+fi
 if [ -d /etc/ld.so.conf.d ]
 then
   rm -f /etc/ld.so.conf.d/mdsplus.conf 2>/dev/null
@@ -79,7 +97,7 @@ then
   do
     if [ ! -h $RPM_INSTALL_PREFIX/mdsplus/$l -a -d $RPM_INSTALL_PREFIX/mdsplus/$l ]
     then
-      echo "$RPM_INSTALL_PREFIX/mdsplus/lib64" >> /etc/ld.so.conf.d/mdsplus.conf
+      echo "$RPM_INSTALL_PREFIX/mdsplus/$l" >> /etc/ld.so.conf.d/mdsplus.conf
     fi
   done
   ldconfig > /dev/null 2>&1
@@ -105,6 +123,15 @@ then
   ln -sf $RPM_INSTALL_PREFIX/mdsplus/desktop/kernel /usr/share/applications/mdsplus/
 fi
 
+%preun kernel
+if [ -h $RPM_INSTALL_PREFIX/mdsplus/lib ]
+then
+  rm -f $RPM_INSTALL_PREFIX/mdsplus/lib
+fi
+if [ -h $RPM_INSTALL_PREFIX/mdsplus/bin ]
+then
+  rm -f $RPM_INSTALL_PREFIX/mdsplus/bin
+fi
 
 %postun kernel
 
