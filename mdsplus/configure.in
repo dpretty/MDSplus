@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.261 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.262 $
 AC_INIT()
 
 #AC_CONFIG_HEADER(include/config.h)
@@ -501,6 +501,11 @@ alpha*-dec-osf*) CFLAGS="$CFLAGS -pthread -ieee";
 		  FORLD="$CC"
 		  LOC="F2C_LOC"
 		  VAL="F2C_VAL"
+       elif (test "$F77" = "gfortran"); then
+          FFLAGS="$FFLAGS -fno-range-check"
+          FORLD="$F77"
+          LOC="loc"
+          FOR_LDFLAGS="-lg2c"
        fi;
        FEXECLIBDIR="-L";
        LD="$CC"
