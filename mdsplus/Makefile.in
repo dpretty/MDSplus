@@ -1,7 +1,8 @@
-#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.79 $
+#@(#)$RCSfile: Makefile.in,v $ $Revision: 1.80 $
 # @configure_input@
 prefix=@prefix@
 SHELL=/bin/sh
+exec_prefix=@exec_prefix@
 
 JAVA_APS = javamds \
 	   javascope \
@@ -109,6 +110,7 @@ install:
 	done
 	tar cf - --exclude="CVS" $(MISC_PARTS) | (cd @exec_prefix@; tar xf -)
 	(cd @exec_prefix@; chmod -R 755 $(MISC_PARTS))
+	@MAKE_DYNLIB_SYMLINKS@
 
 BINARIES = bin etc lib uid \
            tdi idl trees envsyms \
