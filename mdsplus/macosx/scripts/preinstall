@@ -1,7 +1,0 @@
-#!/bin/sh
-PATH=/bin:/sbin:$PATH
-export PATH
-for f in $(ls $2/mdsplus 2>/dev/null | grep -v local)
-do
-  rm -Rvf $2/mdsplus/$f >> /var/log/preinstall.log
-done
