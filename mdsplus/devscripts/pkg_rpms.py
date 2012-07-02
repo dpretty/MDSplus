@@ -20,7 +20,7 @@ def signrpms(arch):
         return 1
 
 def beginRpmSpec(specfile,version,release,rpmflavor):
-    f_in=open('rpm/mdsplus-part1.spec','r')
+    f_in=open('%s/rpm/mdsplus-part1.spec' % (getTopDir(),),'r')
     f_out=open(specfile,'w')
     line=f_in.readline()
     while len(line) > 0:
@@ -32,7 +32,7 @@ def beginRpmSpec(specfile,version,release,rpmflavor):
     f_in.close()
     for pkg in getPackages():
         f_out.write("requires: mdsplus%s-%s\n" % (rpmflavor,pkg))
-    f_in=open('rpm/mdsplus-part2-hudson.spec',"r")
+    f_in=open('%s/rpm/mdsplus-part2-hudson.spec' % (getTopDir(),),"r")
     line=f_in.readline()
     while len(line) > 0:
         f_out.write(line)
@@ -41,7 +41,7 @@ def beginRpmSpec(specfile,version,release,rpmflavor):
     f_out.close()
 
 def addPkgToRpmSpec(specfile,pkg,release,DIST,rpmflavor):
-    f_in=open('rpm/subpackages/%s' % (pkg,),'r')
+    f_in=open('%s/rpm/subpackages/%s' % (getTopDir(),pkg,),'r')
     f_out=open(specfile,'a')
     line=f_in.readline()
     while len(line) > 0:
