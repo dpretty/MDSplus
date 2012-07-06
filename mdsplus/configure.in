@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.278 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.279 $
 AC_INIT()
 
 #AC_CONFIG_HEADER(include/config.h)
@@ -30,7 +30,7 @@ AC_PROG_CC
 AC_PROG_CXX
 
 AC_ARG_ENABLE(mdsip_connections,
-        [ --enable-mdsip_connections     Default. Use --enable-mdsip_connection=no to override.],
+        [ --enable-mdsip_connections     Default. Use --enable-mdsip_connections=no to override.],
         if test "$enableval" = yes; then
           AC_DEFINE(MDSIP_CONNECTIONS)
 	  MDSIP_CONNECTIONS="yes";
