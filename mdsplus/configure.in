@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.281 $
+dnl @(#)$RCSfile: configure.in,v $ $Revision: 1.282 $
 AC_INIT()
 
 #AC_CONFIG_HEADER(include/config.h)
@@ -523,7 +523,7 @@ alpha*-dec-osf*) CFLAGS="$CFLAGS -pthread -ieee";
        X_CFLAGS="-I/usr/OpenMotif/include"
        LINKJNI="$LINKSHARED";
        SHARETYPE=".dylib";
-       SHARETYPEJNI=".jnilib";
+       SHARETYPEJNI=".dylib";
        SHARETYPEMOD=".dylib";
        LIBPTHREAD="";
        TAR_EXCLUDE="--exclude";
@@ -572,7 +572,7 @@ alpha*-dec-osf*) CFLAGS="$CFLAGS -pthread -ieee";
        X_CFLAGS="-I/usr/OpenMotif/include";
        LINKJNI="$LINKSHARED";
        SHARETYPE=".dylib";
-       SHARETYPEJNI=".jnilib";
+       SHARETYPEJNI=".dylib";
        SHARETYPEMOD=".so";
        LIBPTHREAD="";
        TAR_EXCLUDE="--exclude";
