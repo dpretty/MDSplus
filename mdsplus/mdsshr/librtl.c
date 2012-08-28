@@ -20,7 +20,7 @@
 #include <math.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.187.2.1 $ $Date: 2012/07/10 16:04:14 $ $Name:  $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.187.2.2 $ $Date: 2012/08/28 15:52:07 $ $Name:  $";
 int LibTimeToVMSTime(time_t *time_in,_int64 *time_out);  
 #ifndef HAVE_VXWORKS_H
 STATIC_CONSTANT _int64 addin = LONG_LONG_CONSTANT(0x7c95674beb4000);
@@ -1461,7 +1461,8 @@ int LibFreeVm(unsigned int *len, void **vm, ZoneList **zone)
     }
     UnlockMdsShrMutex(&VmMutex,&VmMutex_initialized);
   }
-  free(*vm);
+  if (len && *len && vm && *vm)
+    free(*vm);
   if (list) 
     free(list);
   return 1;
