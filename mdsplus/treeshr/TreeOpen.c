@@ -46,7 +46,7 @@ extern char *index(char *str,char c);
 #define __tolower(c) (((c) >= 'A' && (c) <= 'Z') ? (c) | 0x20 : (c))
 
 
-static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.106 $ $Date: 2011/07/05 14:39:49 $";
+static char *cvsrev = "@(#)$RCSfile: TreeOpen.c,v $ $Revision: 1.106.4.1 $ $Date: 2012/08/30 13:08:41 $";
 
 extern char *TranslateLogical(char *);
 extern void TranslateLogicalFree(char *);
@@ -861,12 +861,15 @@ static int  OpenOne(TREE_INFO *info, char *tree, int shot, char *type,int new,ch
     TranslateLogicalFree(path);
     path = npath;
     pathlen = strlen(path);
-    if (shot < 0)
-      sprintf(name,"%s_model",tree_lower);
-    else if (shot < 1000)
-      sprintf(name,"%s_%03d",tree_lower,shot);
-    else
+    if (shot > 999)
       sprintf(name,"%s_%d",tree_lower,shot);
+    else if (shot > 0)
+      sprintf(name,"%s_%03d",tree_lower,shot);
+    else if (shot == -1)
+      sprintf(name,"%s_model",tree_lower);
+    else
+      return TreeINVSHOT;
+
     for (i=0,part=path;i<pathlen+1 && fd==-1;i++)
     {
       if (*part == ' ') 
