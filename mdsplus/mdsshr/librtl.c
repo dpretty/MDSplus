@@ -20,7 +20,7 @@
 #include <math.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.189 $ $Date: 2012/08/28 15:51:26 $ $Name:  $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.190 $ $Date: 2012/10/15 14:19:42 $ $Name:  $";
 int LibTimeToVMSTime(time_t *time_in,_int64 *time_out);  
 #ifndef HAVE_VXWORKS_H
 STATIC_CONSTANT _int64 addin = LONG_LONG_CONSTANT(0x7c95674beb4000);
@@ -1437,9 +1437,10 @@ int LibDeleteVmZone(ZoneList **zone)
 int LibResetVmZone(ZoneList **zone)
 {
   VmList *list;
+  unsigned int len=1;
   LockMdsShrMutex(&VmMutex,&VmMutex_initialized);
   while ((list = zone ? (*zone ? (*zone)->vm : NULL) : NULL) != NULL)
-    LibFreeVm(0, &list->ptr, zone);
+    LibFreeVm(&len, &list->ptr, zone);
   UnlockMdsShrMutex(&VmMutex);
   return 1;
 }
