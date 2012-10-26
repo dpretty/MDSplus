@@ -20,7 +20,7 @@
 #include <math.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.187 $ $Date: 2012/05/10 16:37:23 $ $Name:  $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.187.4.3 $ $Date: 2012/10/15 14:23:59 $ $Name:  $";
 int LibTimeToVMSTime(time_t *time_in,_int64 *time_out);  
 #ifndef HAVE_VXWORKS_H
 STATIC_CONSTANT _int64 addin = LONG_LONG_CONSTANT(0x7c95674beb4000);
@@ -1215,9 +1215,11 @@ int StrConcat( struct descriptor *out, struct descriptor *first, ...)
     va_count(narg);
     va_start(incrmtr,first);
     if (out->class == CLASS_D)
-    {
-      for (i=1;i<narg && (status & 1);i++)
-        StrAppend(out,va_arg(incrmtr,struct descriptor *));
+    { struct descriptor *arg=va_arg(incrmtr,struct descriptor *);
+      for (i=1;i<narg && (status & 1) && arg;i++) {
+        StrAppend(out,arg);
+        arg=va_arg(incrmtr,struct descriptor *);
+      }
     }
     else if (out->class == CLASS_S)
     {
@@ -1232,7 +1234,11 @@ int StrConcat( struct descriptor *out, struct descriptor *first, ...)
            temp.pointer += next->length)
       {
         next = va_arg(incrmtr,struct descriptor *);
-        StrCopyDx(&temp,next);
+        if (next) {
+          StrCopyDx(&temp,next);
+        } else {
+          temp.length=0;
+        }
       }
     }
     else
@@ -1431,9 +1437,10 @@ int LibDeleteVmZone(ZoneList **zone)
 int LibResetVmZone(ZoneList **zone)
 {
   VmList *list;
+  unsigned int len=1;
   LockMdsShrMutex(&VmMutex,&VmMutex_initialized);
   while ((list = zone ? (*zone ? (*zone)->vm : NULL) : NULL) != NULL)
-    LibFreeVm(0, &list->ptr, zone);
+    LibFreeVm(&len, &list->ptr, zone);
   UnlockMdsShrMutex(&VmMutex);
   return 1;
 }
@@ -1455,7 +1462,8 @@ int LibFreeVm(unsigned int *len, void **vm, ZoneList **zone)
     }
     UnlockMdsShrMutex(&VmMutex,&VmMutex_initialized);
   }
-  free(*vm);
+  if (len && *len && vm && *vm)
+    free(*vm);
   if (list) 
     free(list);
   return 1;
