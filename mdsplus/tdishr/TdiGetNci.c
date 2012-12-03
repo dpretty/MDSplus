@@ -42,7 +42,7 @@
 #include "tdirefstandard.h"
 #include "tdinelements.h"
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiGetNci.c,v $ $Revision: 1.27 $ $Date: 2012/11/20 18:34:49 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiGetNci.c,v $ $Revision: 1.28 $ $Date: 2012/12/03 18:43:29 $";
 
 extern unsigned short OpcVector;
 
@@ -347,8 +347,8 @@ more:		switch (dtype) {
 		Logical results for bit or value.
 		********************************/
 		else if (key_ptr->item_mask) {
-                flag=0;
-		NCI_ITM masked[2] = {{sizeof(flag),0,0,0},EOL};
+			NCI_ITM masked[2] = {{sizeof(flag),0,0,0},EOL};
+			flag=0;
                         masked[0].code = key_ptr->item_code;
                         masked[0].pointer = (unsigned char *)&flag;
 			masked[0].return_length_address = &retlen;
