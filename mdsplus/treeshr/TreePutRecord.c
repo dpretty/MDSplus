@@ -63,7 +63,7 @@ static int daylight = 0;
 #define LONG_LONG_CONSTANT(value) value##ll
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.94 $ $Date: 2012/01/24 16:47:42 $";
+static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.92 $ $Date: 2010/08/04 19:01:11 $";
 
 #ifdef min
 #undef min
@@ -292,8 +292,7 @@ static int CheckUsage(PINO_DATABASE *dblist, NID *nid_ptr, NCI *nci)
     status = check(is_numeric ||
 		   (nci->dtype == DTYPE_PARAM) ||
 		   (nci->dtype == DTYPE_RANGE) ||
-		   (nci->dtype == DTYPE_WITH_UNITS) || 
-                   (nci->dtype == DTYPE_WITH_ERROR) || is_expression);
+		   (nci->dtype == DTYPE_WITH_UNITS) || is_expression);
     break;
    case TreeUSAGE_SIGNAL:
     status = check(is_numeric ||
@@ -301,8 +300,7 @@ static int CheckUsage(PINO_DATABASE *dblist, NID *nid_ptr, NCI *nci)
 		   (nci->dtype == DTYPE_DIMENSION) ||
 		   (nci->dtype == DTYPE_PARAM) ||
 		   (nci->dtype == DTYPE_RANGE) ||
-		   (nci->dtype == DTYPE_WITH_UNITS) || 
-                   (nci->dtype == DTYPE_WITH_ERROR) || is_expression);
+		   (nci->dtype == DTYPE_WITH_UNITS) || is_expression);
     break;
    case TreeUSAGE_TASK:
     status = check((nci->dtype == DTYPE_PROGRAM) ||
@@ -493,7 +491,7 @@ static int PutDatafile(TREE_INFO *info, int nodenum, NCI *nci_ptr, struct descri
   TreePutNci(info, nodenum, nci_ptr, 1);
   if (locked)
     TreeUnLockDatafile(info, 0, 0);
-  if (buffer && (!nonvms_compatible))
+  if (buffer)
     free(buffer);
   return status;
 }

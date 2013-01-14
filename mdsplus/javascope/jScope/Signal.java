@@ -1,6 +1,6 @@
 package jScope;
 
-/* $Id: Signal.java,v 1.2 2012/02/28 08:58:31 manduchi Exp $ */
+/* $Id: Signal.java,v 1.1 2010/09/03 09:58:17 manduchi Exp $ */
 import jScope.ContourSignal;
 import java.awt.Color;
 import java.text.*;
@@ -322,12 +322,6 @@ public class Signal
     {
         error = asym_error = false;
         setAxis(_x, _y, _n_points);
-        CheckIncreasingX();
-    }
-    public Signal(double _x[], float _y[])
-    {
-        error = asym_error = false;
-        setAxis(_x, _y,_x.length);
         CheckIncreasingX();
     }
 

@@ -1,5 +1,5 @@
 #include <STATICdef.h>
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.77 $ $Date: 2012/01/24 22:54:25 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TreeAddNode.c,v $ $Revision: 1.76 $ $Date: 2010/08/04 19:01:11 $";
 
 #ifndef HAVE_VXWORKS_H
 #include <config.h>
@@ -150,7 +150,7 @@ int       _TreeAddNode(void *dbid, char *name, int *nid_out, char usage)
           free(node_name);
 	  new_ptr->INFO.TREE_INFO.child = 0;
 	  LoadShort(idx,&new_ptr->conglomerate_elt);
-	  if (node_type == BROTHER_TYPE_NOWILD || usage == TreeUSAGE_STRUCTURE)
+	  if (node_type == BROTHER_TYPE_NOWILD)
 	  {
 	    status = TreeInsertChild(parent, new_ptr, dblist->tree_info->header->sort_children);
 	    new_ptr->usage = TreeUSAGE_STRUCTURE;

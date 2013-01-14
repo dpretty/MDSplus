@@ -1,6 +1,6 @@
 package jScope;
 
-/* $Id: LocalDataProvider.java,v 1.3 2012/02/03 14:38:59 manduchi Exp $ */
+/* $Id: LocalDataProvider.java,v 1.2 2010/11/05 09:08:53 manduchi Exp $ */
 import jScope.ConnectionListener;
 import javax.swing.JFrame;
 import java.io.IOException;
@@ -215,7 +215,7 @@ public class LocalDataProvider extends MdsDataProvider implements DataProvider
 
         try {
             Calendar cal = Calendar.getInstance();
-//            cal.setTimeZone(TimeZone.getTimeZone("GMT+00"));
+            cal.setTimeZone(TimeZone.getTimeZone("GMT+00"));
             DateFormat df = new SimpleDateFormat("d-MMM-yyyy HH:mm Z");
             //DateFormat df = new SimpleDateFormat("d-MMM-yyyy HH:mm");-
             Date date = df.parse(in + " GMT");

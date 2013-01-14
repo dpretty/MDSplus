@@ -1,6 +1,6 @@
 package jScope;
 
-/* $Id: MultiWaveform.java,v 1.2 2011/12/13 13:23:58 manduchi Exp $ */
+/* $Id: MultiWaveform.java,v 1.1 2010/09/03 09:58:17 manduchi Exp $ */
 import jScope.Frames;
 import java.awt.*;
 import java.util.*;
@@ -1476,14 +1476,14 @@ public class MultiWaveform
 
         if (wi != null)
 
-//            wi.AsynchUpdate(signals, (double) (start_xs - x_range),
-//                            (double) (end_xs + x_range),
-//                            (double) orig_xmin, (double) orig_xmax,
-//                            update_timestamp, mode == MODE_PAN, this);
-            wi.AsynchUpdate(signals, (float) (start_xs),
-                            (float) (end_xs),
-                            (float) orig_xmin, (float) orig_xmax, update_timestamp,
-                            mode == MODE_PAN, this);
+            wi.AsynchUpdate(signals, (double) (start_xs - x_range),
+                            (double) (end_xs + x_range),
+                            (double) orig_xmin, (double) orig_xmax,
+                            update_timestamp, mode == MODE_PAN, this);
+            //wi.AsynchUpdate(signals, (float) (start_xs),
+            //                (float) (end_xs),
+            //                (float) orig_xmin, (float) orig_xmax, update_timestamp,
+            //                mode == MODE_PAN, this);
 
     }
 
