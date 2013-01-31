@@ -1,6 +1,6 @@
 package jScope;
 
-/* $Id: MdsDataProvider.java,v 1.15 2012/10/23 08:54:19 manduchi Exp $ */
+/* $Id: MdsDataProvider.java,v 1.16 2013/01/31 15:47:29 manduchi Exp $ */
 import jScope.ConnectionEvent;
 import jScope.ConnectionListener;
 import java.io.*;
@@ -396,8 +396,10 @@ public class MdsDataProvider
                         segmentMode = SEGMENTED_YES;
                     else
                         segmentMode = SEGMENTED_NO;
-                }catch(Exception exc)
+                }
+                catch(Exception exc)
                 {
+                    error = null;
                     segmentMode = SEGMENTED_UNKNOWN;
                 }
             }
@@ -418,6 +420,7 @@ public class MdsDataProvider
                         segmentMode = SEGMENTED_NO;
                 }catch(Exception exc)
                 {
+                    error = null;
                     segmentMode = SEGMENTED_UNKNOWN;
                 }
             }
@@ -477,6 +480,7 @@ public class MdsDataProvider
                         segmentMode = SEGMENTED_NO;
                 }catch(Exception exc)
                 {
+                    error = null;
                     segmentMode = SEGMENTED_UNKNOWN;
                 }
             }
@@ -503,6 +507,7 @@ public class MdsDataProvider
                         segmentMode = SEGMENTED_NO;
                 }catch(Exception exc)
                 {
+                    error = null;
                     segmentMode = SEGMENTED_UNKNOWN;
                 }
             }
