@@ -63,7 +63,7 @@ static int daylight = 0;
 #define LONG_LONG_CONSTANT(value) value##ll
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.95 $ $Date: 2013/01/04 18:50:41 $";
+static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.96 $ $Date: 2013/02/11 13:29:17 $";
 
 #ifdef min
 #undef min
@@ -294,7 +294,7 @@ static int CheckUsage(PINO_DATABASE *dblist, NID *nid_ptr, NCI *nci)
 		   (nci->dtype == DTYPE_RANGE) ||
 		   (nci->dtype == DTYPE_WITH_UNITS) || 
                    (nci->dtype == DTYPE_WITH_ERROR) || 
-                   (nci->dtype == DTYPE_OPAQUE) == is_expression);
+                   (nci->dtype == DTYPE_OPAQUE) || == is_expression);
     break;
    case TreeUSAGE_SIGNAL:
     status = check(is_numeric ||
