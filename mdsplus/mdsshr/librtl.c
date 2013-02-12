@@ -13,6 +13,7 @@
 #include <sys/types.h>
 #endif
 #endif
+
 #include <time.h>
 #include <string.h>
 #include <stdio.h>
@@ -20,7 +21,7 @@
 #include <math.h>
 #include <STATICdef.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.190 $ $Date: 2012/10/15 14:19:42 $ $Name:  $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: librtl.c,v $ $Revision: 1.191 $ $Date: 2013/02/12 16:14:57 $ $Name:  $";
 int LibTimeToVMSTime(time_t *time_in,_int64 *time_out);  
 #ifndef HAVE_VXWORKS_H
 STATIC_CONSTANT _int64 addin = LONG_LONG_CONSTANT(0x7c95674beb4000);
