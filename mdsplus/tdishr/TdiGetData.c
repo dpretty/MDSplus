@@ -32,7 +32,7 @@
 #include <string.h>
 #include "tdithreadsafe.h"
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiGetData.c,v $ $Revision: 1.13 $ $Date: 2010/08/04 19:05:54 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiGetData.c,v $ $Revision: 1.14 $ $Date: 2013/03/28 19:19:01 $";
 
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 
@@ -79,8 +79,9 @@ int	in_size, out_size, dimct, status = 1;
 			/*******************************
 			For CA it is a relative pointer.
 			*******************************/
-			if (in_ptr->class == CLASS_CA) 
-                          arr.a0 = pout->pointer + ((char *)arr.a0 - (char *)0);
+			if (in_ptr->class == CLASS_CA) { 
+                          arr.a0 = pout->pointer + (((char *)arr.a0 - (char *)0) & 0xffff);
+                        }
 			else arr.a0 = pout->pointer + (arr.a0 - arr.pointer);
 		}
 		arr.pointer = pout->pointer;
