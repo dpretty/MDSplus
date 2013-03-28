@@ -32,7 +32,7 @@
 #include <string.h>
 #include "tdithreadsafe.h"
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiGetData.c,v $ $Revision: 1.13 $ $Date: 2010/08/04 19:05:54 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiGetData.c,v $ $Revision: 1.13.2.1 $ $Date: 2013/03/28 19:19:43 $";
 
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 
@@ -79,9 +79,12 @@ int	in_size, out_size, dimct, status = 1;
 			/*******************************
 			For CA it is a relative pointer.
 			*******************************/
-			if (in_ptr->class == CLASS_CA) 
-                          arr.a0 = pout->pointer + ((char *)arr.a0 - (char *)0);
+			if (in_ptr->class == CLASS_CA) { 
+                          printf("TdiImpose a0=%d\n", *(int *)&arr.a0);
+                          arr.a0 = pout->pointer + (((char *)arr.a0 - (char *)0) & 0xffff);
+                        }
 			else arr.a0 = pout->pointer + (arr.a0 - arr.pointer);
+                        printf("TdiImpose a0-ptr=%d\n",arr.a0-pout->pointer);
 		}
 		arr.pointer = pout->pointer;
 		out_size = sizeof(struct descriptor_a)
