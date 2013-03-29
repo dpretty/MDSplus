@@ -32,7 +32,7 @@
 #include <string.h>
 #include "tdithreadsafe.h"
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiGetData.c,v $ $Revision: 1.13.2.1 $ $Date: 2013/03/28 19:19:43 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiGetData.c,v $ $Revision: 1.13.2.2 $ $Date: 2013/03/29 17:45:33 $";
 
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 
@@ -65,9 +65,12 @@ int	in_size, out_size, dimct, status = 1;
 	case CLASS_CA :
 		dimct = in_ptr->dimct;
 		if (dimct > MAXDIM) return TdiNDIM_OVER;
-		in_size = sizeof(struct descriptor_a)
-			+ ((in_ptr->aflags.coeff ? 1 + dimct : 0)
-			+ (in_ptr->aflags.bounds ? dimct : 0)) * sizeof(int);
+		in_size = sizeof(struct descriptor_a);
+                if (in_ptr->aflags.coeff) {
+                  in_size+=sizeof(void *)+dimct*sizeof(int);
+                  if (in_ptr->aflags.bounds)
+                    in_size+=dimct*sizeof(int);
+                }
 		dimct = pout->dimct;
 		_MOVC3((short)in_size, (char *)in_ptr, (char *)&arr);
 		if (in_ptr->class == CLASS_APD) {
@@ -80,16 +83,17 @@ int	in_size, out_size, dimct, status = 1;
 			For CA it is a relative pointer.
 			*******************************/
 			if (in_ptr->class == CLASS_CA) { 
-                          printf("TdiImpose a0=%d\n", *(int *)&arr.a0);
                           arr.a0 = pout->pointer + (((char *)arr.a0 - (char *)0) & 0xffff);
                         }
 			else arr.a0 = pout->pointer + (arr.a0 - arr.pointer);
-                        printf("TdiImpose a0-ptr=%d\n",arr.a0-pout->pointer);
 		}
 		arr.pointer = pout->pointer;
-		out_size = sizeof(struct descriptor_a)
-			+ ((pout->aflags.coeff ? 1 + dimct : 0)
-			+ (pout->aflags.bounds ? dimct : 0)) * sizeof(int);
+		out_size = sizeof(struct descriptor_a);
+                if (pout->aflags.coeff) {
+                  out_size+=sizeof(void *)+dimct*sizeof(int);
+                  if (pout->aflags.bounds)
+                    out_size+=dimct*sizeof(int);
+                }
 		if (in_size <= out_size && pout->class == CLASS_A)
 			_MOVC3((short)in_size, (char *)&arr, (char *)pout);
 		else {
