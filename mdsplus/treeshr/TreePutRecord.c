@@ -63,7 +63,7 @@ static int daylight = 0;
 #define LONG_LONG_CONSTANT(value) value##ll
 #endif
 
-static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.94 $ $Date: 2012/01/24 16:47:42 $";
+static char *cvsrev = "@(#)$RCSfile: TreePutRecord.c,v $ $Revision: 1.94.4.3 $ $Date: 2013/02/12 13:30:43 $";
 
 #ifdef min
 #undef min
@@ -293,7 +293,8 @@ static int CheckUsage(PINO_DATABASE *dblist, NID *nid_ptr, NCI *nci)
 		   (nci->dtype == DTYPE_PARAM) ||
 		   (nci->dtype == DTYPE_RANGE) ||
 		   (nci->dtype == DTYPE_WITH_UNITS) || 
-                   (nci->dtype == DTYPE_WITH_ERROR) || is_expression);
+                   (nci->dtype == DTYPE_WITH_ERROR) || 
+                   (nci->dtype == DTYPE_OPAQUE) || is_expression);
     break;
    case TreeUSAGE_SIGNAL:
     status = check(is_numeric ||
@@ -302,7 +303,8 @@ static int CheckUsage(PINO_DATABASE *dblist, NID *nid_ptr, NCI *nci)
 		   (nci->dtype == DTYPE_PARAM) ||
 		   (nci->dtype == DTYPE_RANGE) ||
 		   (nci->dtype == DTYPE_WITH_UNITS) || 
-                   (nci->dtype == DTYPE_WITH_ERROR) || is_expression);
+                   (nci->dtype == DTYPE_WITH_ERROR) || 
+                   (nci->dtype == DTYPE_OPAQUE) || is_expression);
     break;
    case TreeUSAGE_TASK:
     status = check((nci->dtype == DTYPE_PROGRAM) ||
@@ -313,7 +315,8 @@ static int CheckUsage(PINO_DATABASE *dblist, NID *nid_ptr, NCI *nci)
    case TreeUSAGE_TEXT:
     status = check((nci->dtype == DTYPE_T) ||
 		   (nci->dtype == DTYPE_PARAM) ||
-		   (nci->dtype == DTYPE_WITH_UNITS) || is_expression);
+		   (nci->dtype == DTYPE_WITH_UNITS) || 
+                   (nci->dtype == DTYPE_OPAQUE) || is_expression);
     break;
    case TreeUSAGE_WINDOW:
     status = check((nci->dtype == DTYPE_WINDOW) || is_expression);
