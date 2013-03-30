@@ -1,4 +1,4 @@
-import sys
+import sys,os
 
 def python_test():
   import MDSplus
