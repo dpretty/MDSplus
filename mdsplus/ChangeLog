@@ -1,3 +1,21 @@
+2013-03-30 13:39  twf
+
+	* tests/distribution_tests/test_all.py (stable.2):
+	
+	Put back in path for tests
+
+2013-03-29 15:59  twf
+
+	* tests/distribution_tests/test_all.py (stable.1):
+	
+	Do not need to muck with syspath
+
+2013-03-29 13:45  twf
+
+	* tdishr/: TdiGetData.c, TdiSubscript.c (stable.[2,1]):
+	
+	Fix subscripting with bounded arrays
+
 2013-03-28 15:20  twf
 
 	* tdishr/TdiGetData.c (stable.1):
