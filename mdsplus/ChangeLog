@@ -1,3 +1,9 @@
+2013-04-01 14:57  twf
+
+	* rpm/subpackages/python (stable.2):
+	
+	Fix cleanup
+
 2013-03-30 13:39  twf
 
 	* tests/distribution_tests/test_all.py (stable.2):
