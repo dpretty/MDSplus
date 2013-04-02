@@ -247,14 +247,15 @@ class Tree(object):
         finally:
             Tree.unlock()
 
-    def doMethod(nid,method):
+    def doMethod(self,nid,method):
         """For internal use only. Support for PyDoMethod.fun used for python device support"""
         from treenode import TreeNode
-        n=TreeNode(nid,Tree())
+        n=TreeNode(nid,self)
         top=n.conglomerate_nids[0]
         c=top.record
         q=c.qualifiers
         model=c.model
+
         for i in range(len(q)):
             exec str(q[0])
         try:
@@ -268,7 +269,6 @@ class Tree(object):
             makeData(0).setTdiVar("_method_status")
             raise
         return Data.getTdiVar("_result")
-    doMethod=staticmethod(doMethod)
 
     def edit(self):
         """Open tree for editing.
@@ -279,6 +279,7 @@ class Tree(object):
             TreeOpenEdit(self)
         finally:
             Tree.unlock()
+
 
     def findTags(self,wild):
         """Find tags matching wildcard expression
@@ -480,7 +481,8 @@ class Tree(object):
         @rtype: Tree
         """
         old = cls._setActiveTree(tree)
-        tree.restoreContext()
+        if tree is not None:
+          tree.restoreContext()
         return old
     setActiveTree=classmethod(setActiveTree)
 
