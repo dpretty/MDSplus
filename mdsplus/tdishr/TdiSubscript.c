@@ -42,7 +42,7 @@
 #include <mdsshr.h>
 #include <string.h>
 
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSubscript.c,v $ $Revision: 1.12 $ $Date: 2010/08/04 19:05:55 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: TdiSubscript.c,v $ $Revision: 1.12.4.1 $ $Date: 2013/03/29 17:45:50 $";
 
 #define _MOVC3(a,b,c) memcpy(c,b,a)
 extern unsigned short OpcValue;
@@ -177,7 +177,7 @@ struct TdiCatStruct		cats[2];
                                   MdsFree1Dx(&xd, NULL);
                                 }
 			TdiThreadStatic()->TdiSELF_PTR = keeps;
-				if (status & 1 && bounded) pin += pdat->m[dim*2+dimct] * stride[dim];
+				if (status & 1 && bounded) pin += *(int *)&pdat->m[dim*2+dimct] * stride[dim];
 				highdim = dim + 1;
 			}
 			else if (pdim && pdim->dtype == DTYPE_DIMENSION && dim+1 < narg && list[dim+1]) {
