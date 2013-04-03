@@ -2,7 +2,7 @@ import sys,os
 from subprocess import Popen
 
 def python_test(cwd):
-   return Popen('./regression_test',shell=True,cwd=cwd).wait() == 0
+   return Popen('pwd;./regression_test',shell=True,cwd=cwd).wait() == 0
 
 def test_debian(WORKSPACE,FLAVOR):
   from debian_install import debian_install_tests,debian_install,debian_remove,initApt,cleanApt
@@ -20,6 +20,7 @@ def test_debian(WORKSPACE,FLAVOR):
     print "Error %s" % (e,)
   cleanApt()
   if not ok:
+    print "Regression tests failed. Aborting build."
     sys.exit(1)
  
 def test_solaris(WORKSPACE,FLAVOR):
@@ -32,7 +33,7 @@ def test_solaris(WORKSPACE,FLAVOR):
     for pkg in pkgs:
        install(pkg,FLAVOR)
     sys.stdout.flush()
-    ok=python_test(WORKSPACE+'/tests/distribution_tests')
+    ok=python_test(WORKSPACE+'/x86_64/mdsplus/tests/distribution_tests')
     sys.stdout.flush()
     pkgs=list(pkgs)
     pkgs.reverse()
