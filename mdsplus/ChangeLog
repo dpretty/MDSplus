@@ -1,3 +1,35 @@
+2013-04-22 09:42  twf
+
+	* mdsobjects/python/: _descriptor.py, _mdsdtypes.py, _mdsshr.py,
+	_tdishr.py, _treeshr.py, apd.py, compound.py, connection.py,
+	event.py, mdsarray.py, mdsdata.py, mdsdevice.py, mdsscalar.py,
+	setup.py, tdipy.py, tree.py, treenode.py, _opcodes/__init__.py,
+	_opcodes/opcodes.py, tests/__init__.py, tests/dataUnitTest.py,
+	tests/threadsUnitTest.py, tests/treeUnitTest.py
+	(stable.[1,1,1,1,1,1,1,1,1,1,1,1,1,2,3,3,1,1,1,1,1,1,1]):
+	
+	python3 support and fix getDescendants
+
+2013-04-04 15:49  twf
+
+	* devscripts/: pkg_solaris.py, solarisPythonInstall (stable.[3,3]):
+	
+	Fix solaris python handling
+
+2013-04-04 11:29  twf
+
+	* devscripts/: solarisPythonInstall (stable.2),
+	solarisPythonInstall (1.1):
+	
+	Fix regresion testing on solaris
+
+2013-04-04 11:29  twf
+
+	* devscripts/solarisPythonInstall (stable.1):
+	
+	file solarisPythonInstall was added on branch stable on 2013-04-04
+	15:30:10 +0000
+
 2013-04-03 16:29  twf
 
 	* tests/distribution_tests/test_all.py (stable.7):
