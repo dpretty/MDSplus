@@ -33,12 +33,12 @@ class TreeNode(Data):
 
     def __fixTreeReferences__(self,tree):
         if (self.nid >> 24) != 0:
-	    return TreePath(str(self))
-	else:
+            return TreePath(str(self))
+        else:
             relpath=str(self.fullpath)
             relpath=relpath[relpath.find('::TOP')+5:]
             path='\\%s::TOP%s' % (tree.tree,relpath)
-	    try:
+            try:
                 ans=tree.getNode(str(self))
             except:
                 ans=TreePath(path,tree)
@@ -152,7 +152,9 @@ class TreeNode(Data):
                     if isinstance(ans,Uint8):
                         if name not in ('class','dtype'):
                             ans = bool(ans)
-                except TdiException,e:
+                except TdiException:
+                    import sys
+                    e=sys.exc_info()[1]
                     if 'TreeNNF' in str(e):
                         ans=None
                     else:
@@ -162,7 +164,7 @@ class TreeNode(Data):
             if isinstance(ans,String):
                 return String(ans.rstrip())
             return ans
-        raise AttributeError,'Attribute %s is not defined' % (name,)
+        raise AttributeError('Attribute %s is not defined' % (name,))
 
     def __init__(self,n,tree=None):
         """Initialze TreeNode
@@ -228,9 +230,9 @@ class TreeNode(Data):
         elif uname=="TAG":
             self.addTag(value)
         elif uname in nciAttributes:
-            raise AttributeError,'Attribute %s is read only' %(name,)
+            raise AttributeError('Attribute %s is read only' %(name,))
         elif uname == "NID":
-            raise AttributeError,'Attribute nid is read only'
+            raise AttributeError('Attribute nid is read only')
         else:
             self.__dict__[name]=value
 
@@ -245,7 +247,7 @@ class TreeNode(Data):
             if flag is False:
                 switch="/no"
             else:
-                raise TypeError,'Argument must be True or False'
+                raise TypeError('Argument must be True or False')
         try:
             Tree.lock()
             self.restoreContext()
@@ -256,9 +258,9 @@ class TreeNode(Data):
                 from _treeshr import TreeException
                 msg="Error executing command: %s, returned error: %s" % (cmd,str(MdsGetMsg(int(status))))
                 if 'TreeFAILURE' in msg:
-                    raise TreeException,'Error writing to tree, possibly file protection problem'
+                    raise TreeException('Error writing to tree, possibly file protection problem')
                 else:
-                    raise TreeException,msg
+                    raise TreeException(msg)
         finally:
             Tree.unlock()
         return
@@ -283,7 +285,7 @@ class TreeNode(Data):
         """
         if name.find(':') >=0 or name.find('.') >= 0:
             from _treeshr import TreeException
-            raise TreeException,"Invalid node name, do not include path delimiters in nodename"
+            raise TreeException("Invalid node name, do not include path delimiters in nodename")
         return self.tree.addDevice(self.fullpath+":"+name.upper(),model)
 
     def addNode(self,name,usage='ANY'):
@@ -298,7 +300,7 @@ class TreeNode(Data):
         try:
             usagenum=usage_table[usage.upper()]
         except KeyError:
-            raise KeyError,'Invalid usage specified. Use one of %s' % (str(usage_table.keys()),)
+            raise KeyError('Invalid usage specified. Use one of %s' % (str(usage_table.keys()),))
         name=str(name).upper()
         if name[0]==':' or name[0]=='.':
             name=str(self.fullpath)+name
@@ -467,23 +469,21 @@ class TreeNode(Data):
         @return: First level descendants of this node
         @rtype: TreeNodeArray
         """
-        try:
-            members=self.member_nids
-            try:
-                children=self.children_nids
-                ans=list()
-                for i in range(len(members)):
-                    ans.append(members.nids[i].value)
-                for i in range(len(children)):
-                    ans.append(children.nids[i].value)
-                return TreeNodeArray(Int32Array(ans))
-            except:
-                return members
-        except:
-            try:
-                return self.children_nids
-            except:
-                return None
+        ans=None
+        members=self.member_nids
+        children=self.children_nids
+        if members is None:
+          ans=children
+        elif children is None:
+          ans=members
+        else:
+          nids=list()
+          for node in members:
+            nids.append(node.nid)
+          for node in children:
+            nids.append(node.nid)
+          ans=TreeNodeArray(Int32Array(nids))
+        return ans
             
     def getDtype(self):
         """Return the name of the data type stored in this node
@@ -961,11 +961,12 @@ class TreeNode(Data):
         try:
             n=self.tree.getNode('\\'+str(tag))
             if n.nid != self.nid:
-                raise TreeException,"Node %s does not have a tag called %s. That tag refers to %s" % (str(self),str(tag),str(n))
-        except TreeException,e:
-            print e
+                raise TreeException("Node %s does not have a tag called %s. That tag refers to %s" % (str(self),str(tag),str(n)))
+        except TreeException:
+            import sys
+            e=sys.exc_info()[1]
             if str(e).find('TreeNNF') > 0:
-                raise TreeException,"Tag %s is not defined" % (str(tag),)
+                raise TreeException("Tag %s is not defined" % (str(tag),))
             else:
                 raise
         self.tree.removeTag(tag)
@@ -978,7 +979,7 @@ class TreeNode(Data):
         """
         from _treeshr import TreeRenameNode,TreeException
         if newname.find(':') >=0 or newname.find('.') >= 0:
-            raise TreeException,"Invalid node name, do not include path delimiters in nodename"
+            raise TreeException("Invalid node name, do not include path delimiters in nodename")
         try:
             olddefault=self.tree.default
             self.tree.setDefault(self.parent)
@@ -1061,7 +1062,7 @@ class TreeNode(Data):
                 if flag is False:
                     TreeTurnOff(self)
                 else:
-                    raise TypeError,'argument must be True or False'
+                    raise TypeError('argument must be True or False')
         finally:
             Tree.unlock()
         return
@@ -1085,7 +1086,7 @@ class TreeNode(Data):
         try:
             usagenum=usage_table[usage.upper()]
         except KeyError:
-            raise KeyError,'Invalid usage specified. Use one of %s' % (str(usage_table.keys()),)
+            raise KeyError('Invalid usage specified. Use one of %s' % (str(usage_table.keys()),))
         TreeSetUsage(self.tree.ctx,self.nid,usagenum)
     
     def setTree(self,tree):
@@ -1292,9 +1293,11 @@ class TreeNodeArray(Data):
             try:
                 self.restoreContext()
                 ans = Data.execute('getnci($,$)',self.nids,name)
-            except Exception,e:
+            except Exception:
+                import sys
+                e=sys.exc_info()[1]
                 if 'TdiBAD_INDEX' in str(e):
-                    raise AttributeError,'Attribute %s is not defined' % (name,)
+                    raise AttributeError('Attribute %s is not defined' % (name,))
                 else:
                     raise
         finally:
