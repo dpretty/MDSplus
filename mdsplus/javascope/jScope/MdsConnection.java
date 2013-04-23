@@ -1,6 +1,6 @@
 package jScope;
 
-/* $Id: MdsConnection.java,v 1.3 2011/01/31 13:35:38 manduchi Exp $ */
+/* $Id: MdsConnection.java,v 1.4 2013/04/23 09:08:06 manduchi Exp $ */
 import jScope.ConnectionEvent;
 import jScope.ConnectionListener;
 import java.io.*;
@@ -73,7 +73,7 @@ public class MdsConnection
             public ProcessUdpEvent()
             {
 
-		System.out.println("START ProcessUdpEvent " + provider);
+		//System.out.println("START ProcessUdpEvent " + provider);
 
                 String portStr = System.getenv("mdsevent_port");
                 if( portStr != null )

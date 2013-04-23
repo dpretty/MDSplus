@@ -1,6 +1,6 @@
 package jScope;
 
-/* $Id: Waveform.java,v 1.3 2011/11/21 09:25:18 manduchi Exp $ */
+/* $Id: Waveform.java,v 1.4 2013/04/23 09:08:06 manduchi Exp $ */
 import jScope.Signal;
 import jScope.Frames;
 import jScope.FrameData;
@@ -1490,8 +1490,11 @@ public class Waveform
         we.setXValue(s.getYinXZplot());
         we.setDataValue(s.getZValue());
         we.setIsMB2(is_mb2);
+        
+        
         if(s.isLongX())
             we.setDateValue(0);
+        
 
         dispatchWaveformEvent(we);
       }

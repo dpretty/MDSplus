@@ -1,6 +1,6 @@
 package jScope;
 
-/* $Id: jScopeWaveContainer.java,v 1.1 2010/09/03 09:58:18 manduchi Exp $ */
+/* $Id: jScopeWaveContainer.java,v 1.2 2013/04/23 09:08:06 manduchi Exp $ */
 import jScope.WaveformContainer;
 import jScope.WaveformEvent;
 import jScope.Waveform;
@@ -1408,7 +1408,8 @@ remove 28/06/2005
             if( !server_item.class_name.equals("NotConnectedDataProvider") )
             {
                 //Check data server connection
-                dp.GetShots("0");
+                if( dp.GetShots("0") == null )
+                    throw(new Exception("Cannot connect to " + server_item.class_name + " data server"));
             }
 
             ChangeDataProvider(dp);
