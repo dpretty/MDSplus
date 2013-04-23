@@ -1,3 +1,15 @@
+2013-04-23 13:52  twf
+
+	* tests/distribution_tests/solaris_install.py (stable.1):
+	
+	Fix regression testing
+
+2013-04-23 13:02  twf
+
+	* mdsobjects/python/__init__.py (stable.1):
+	
+	Fix for python3
+
 2013-04-22 09:42  twf
 
 	* mdsobjects/python/: _descriptor.py, _mdsdtypes.py, _mdsshr.py,
