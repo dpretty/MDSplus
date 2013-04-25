@@ -158,7 +158,7 @@ def doScope(self):
         if(tree != None):
           outStr = outStr+' tree = "'+tree+'" ';
           if(globalDefs & (1 << GLOBAL_SHOT_IDX)):
-            shotNum = '-2'
+            shotNum = globalShot
           else:
             shotNum = getValue(lines, 'Scope.plot_'+str(rowIdx)+'_'+str(colIdx)+'.shot')
           if(shotNum != None):
