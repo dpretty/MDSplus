@@ -1,3 +1,21 @@
+2013-04-25 11:35  twf
+
+	* mdsobjects/python/wsgi/doScope.py (stable.4):
+	
+	temporary fix to global shot usage
+
+2013-04-25 10:27  twf
+
+	* mdsobjects/python/wsgi/doScope.py (stable.3):
+	
+	Fix error message
+
+2013-04-25 09:30  twf
+
+	* mdsobjects/python/connection.py (stable.2):
+	
+	Close socket when connection object is deleted
+
 2013-04-23 16:05  twf
 
 	* rpm/subpackages/python (stable.4):
