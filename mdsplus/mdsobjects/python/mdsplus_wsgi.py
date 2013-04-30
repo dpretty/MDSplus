@@ -1,10 +1,3 @@
-from MDSplus import *
-import time
-import os
-import sys
-
-from cgi import parse_qs
-
 """Use as a mod_wsgi handler in apache.
 
 This module provide access to MDSplus events and data and is designed for use with AJAX web based
@@ -129,7 +122,11 @@ Currently the following request-types are supported:
        example: http://mywebserver-host/mdsplusWsgi/cmod/-1?node=\ip
 
 """
-
+from MDSplus import *
+import time
+import os
+import sys
+from cgi import parse_qs
 
 class application:
 
@@ -146,10 +143,11 @@ class application:
 	self.args=parse_qs(self.environ['QUERY_STRING'],keep_blank_values=1)
 	self.path_parts=self.environ['PATH_INFO'].split('/')[1:]
         doername='do'+self.path_parts[0].capitalize()
-	if doername in vars(application):
-          self.doer=vars(application)[doername]
-        else:
-          self.doer=None
+        try:
+            exec ('from wsgi import '+doername,globals())
+            self.doer=eval(doername)
+        except Exception,e:
+            self.doer=None
 
     def __iter__(self):
       try:
@@ -163,120 +161,13 @@ class application:
 	self.start(status,response_headers)
 	yield output
       except Exception,e:
+        import traceback
         self.start('500 BAD REQUEST',[('Content-Type','text/xml')])
-	yield '<?xml version="1.0" encoding="ISO-8859-1" ?>'+"\n<exception>%s</exception>" % (str(e),) 
+	yield '<?xml version="1.0" encoding="ISO-8859-1" ?>'+"\n<exception>%s</exception>" % (str(traceback.format_exc()),) 
 
-    def doEvent(self):
-
-        class myevent(Event):
-            def run(self):
-                self.cancel()
-
-        status = '200 OK'
-    	response_headers=list()
-        response_headers.append(('Cache-Control','no-store, no-cache, must-revalidate'))
-        response_headers.append(('Pragma','no-cache'))
-        output=''
-        try:
-	  event=self.path_parts[1]
-        except:
-	  raise Exception("No event string provided, use: /event/event-name-to-waitfor[?timeout=n-secs[&handler=handler]]")
-        timeout=60
-        try:
-          timeout=int(self.args['timeout'][-1])
-        except:
-          pass
-        if 'handler' in self.args:
-          specialHandler=__import__(self.args['handler'][-1])
-          if hasattr(specialHandler,'handler'):
-            specialHandler=specialHandler.handler
-          else:
-            raise Exception("No handler function found in handler module")
-        else:
-          specialHandler=None
-        e=myevent(event,timeout)
-        e.join()
-        if e.exception is None:
-          if specialHandler is not None:
-            status,sresponse_headers,output = specialHandler(e)
-	    for h in sresponse_headers:
-	      response_headers.append(h)
-          else:
-            t=time.ctime(e.time)
-            data=e.getRaw()
-            response_headers.append(('Content-type','text/xml'))
-            output='<?xml version="1.0" encoding="ISO-8859-1" ?>'+"<event><name>%s</name><time>%s</time>" % (event,t)
-            if data is not None:
-              dtext=""
-              for c in data:
-                dtext = dtext+chr(int(c))
-              output += "<data><bytes>%s</bytes><text>%s</text></data>" % (data.tolist(),dtext)
-            output += "</event>"
-            status = '200 OK'
-        else:
-          if 'Timeout' in str(e.exception):
-	    status = '204 NO_CONTENT'
-	  else:
-            raise e.exception
- 	return status,response_headers,output
-
-    def do1darray(self):
-        if len(self.path_parts) > 2:
-           self.openTree(self.path_parts[1],self.path_parts[2])
-        expr=self.args['expr'][-1]
-        try:
-           a=makeData(Data.execute(expr).data())
-        except Exception,e:
-           raise Exception("Error evaluating expression: '%s', error: %s" % (expr,e))
-    	response_headers=list()
-        response_headers.append(('Cache-Control','no-store, no-cache, must-revalidate'))
-        response_headers.append(('Pragma','no-cache'))
-        response_headers.append(('DTYPE',a.__class__.__name__))
-        response_headers.append(('LENGTH',str(len(a))))
-        if self.tree is not None:
-           response_headers.append(('TREE',self.tree))
-           response_headers.append(('SHOT',self.shot))
-        output=str(a.data().data)
-        status = '200 OK'
-	return (status, response_headers, output)
-
-    def do1dsignal(self):
-        if len(self.path_parts) > 2:
-           self.openTree(self.path_parts[1],self.path_parts[2])
-        expr=self.args['expr'][-1]
-        try:
-           sig=Data.execute(expr)
-           y=makeData(sig.data())
-           x=makeData(sig.dim_of().data())
-        except Exception,e:
-           raise Exception("Error evaluating expression: '%s', error: %s" % (expr,e))
-    	response_headers=list()
-        response_headers.append(('Cache-Control','no-store, no-cache, must-revalidate'))
-        response_headers.append(('Pragma','no-cache'))
-        response_headers.append(('XDTYPE',x.__class__.__name__))
-        response_headers.append(('YDTYPE',y.__class__.__name__))
-        response_headers.append(('XLENGTH',str(len(x))))
-        response_headers.append(('YLENGTH',str(len(y))))
-        if self.tree is not None:
-           response_headers.append(('TREE',self.tree))
-           response_headers.append(('SHOT',self.shot))
-        output=str(x.data().data)+str(y.data().data)
-        status = '200 OK'
-	return (status, response_headers, output)
-
-    def doTreepath(self):
-        tree=self.path_parts[1].lower()
-        if tree+'_path' in os.environ:
-          return ('200 OK', [('Content-type','text/text')],os.environ[tree+'_path'])
-        else:
-          return ('400 BAD_REQUEST',[('Content-type','text/text')],'No path defined for '+tree)
-
-    def doGetnid(self):
-        self.openTree(self.path_parts[1],self.path_parts[2])
-        output=str(self.treeObj.getNode(self.args['node'][-1]).nid)
-        return ('200 OK',[('Content-type','text/text')],output)
 
     def openTree(self,tree,shot):
+	Tree.usePrivateCtx()
         try:
             shot=int(shot)
     	except Exception,e:
