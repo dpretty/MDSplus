@@ -1,3 +1,9 @@
+2013-04-30 12:04  twf
+
+	* mdsobjects/python/: _descriptor.py, mdsdata.py (stable.[2,2]):
+	
+	Fix 2d subscripting results
+
 2013-04-25 11:35  twf
 
 	* mdsobjects/python/wsgi/doScope.py (stable.4):
