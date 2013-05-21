@@ -1,3 +1,9 @@
+2013-05-02 19:11  twf
+
+	* mdsobjects/python/_descriptor.py (stable.3):
+	
+	Fix 2d handling
+
 2013-04-30 12:04  twf
 
 	* mdsobjects/python/: _descriptor.py, mdsdata.py (stable.[2,2]):
