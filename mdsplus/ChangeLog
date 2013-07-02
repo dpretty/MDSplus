@@ -1,3 +1,16 @@
+2013-07-02 13:30  twf
+
+	* tdi/Py.fun (stable.2):
+	
+	update from alpha
+
+2013-07-02 13:29  twf
+
+	* mdsobjects/python/: __init__.py, _descriptor.py, _treeshr.py,
+	tdipy.py, treenode.py, wsgi/doScope.py (stable.[3,4,2,4,2,5]):
+	
+	Update from alpha
+
 2013-05-02 19:11  twf
 
 	* mdsobjects/python/_descriptor.py (stable.3):
