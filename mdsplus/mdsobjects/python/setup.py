@@ -1,41 +1,36 @@
 #!/usr/bin/env python
 import sys
+import os
 
 def getRelease():
+    name='MDSplus'
+    remove_args=list()
+    release='1.0'
+
+    for arg in sys.argv:
+        if arg.startswith('name='):
+            name=arg.split('=')[1]
+            remove_args.append(arg)
+        if arg.startswith('version='):
+            release=arg.split('=')[1]
+            remove_args.append(arg)
+    for arg in remove_args:
+        sys.argv.remove(arg)
+
+    if 'MDSPLUS_PYTHON_VERSION' in os.environ:
+        release=os.environ['MDSPLUS_PYTHON_VERSION']
     try:
-      import os
-      if len(sys.argv) > 2 and 'version=' in sys.argv[2]:
-        ans=sys.argv[2].split('=')[1]
-        sys.argv=sys.argv[0:-1]
-        return ans
-      try:
         from mdsplus_version import mdsplus_version
-        return mdsplus_version
-      except:
+        release=mdsplus_version
+    except:
         pass
-      if 'MDSPLUS_PYTHON_VERSION' in os.environ:
-	return os.environ['MDSPLUS_PYTHON_VERSION']
-      for flavor in ['','-beta','-alpha']:
-          f=os.popen("/bin/rpm -q mdsplus%s-python;echo $?" % (flavor,))
-          l=f.readlines()
-          f.close()
-          if l[1]=='0\n':
-              p=l[0].split('-')
-              for i in range(len(p)):
-                  if p[i]=='python':
-                      if p[i-1] != 'mdsplus':
-                          release=p[i-1]+'-'
-                      else:
-                          release=""
-                      release=release+p[i+1]+'-'+p[i+2][0:-1]
-                      return release
-    except Exception,e:
-        return '1.0'
+    return (release,name)
 
 
 from setuptools import setup, Extension, find_packages
-version=getRelease()
-setup(name='MDSplus',
+version,name=getRelease()
+print (version,name)
+setup(name=name,
       version=version,
       description='MDSplus Python Objects',
       long_description = """
@@ -46,9 +41,17 @@ setup(name='MDSplus',
       author_email='twf@www.mdsplus.org',
       url='http://www.mdsplus.org/',
       download_url = 'http://www.mdsplus.org/mdsplus_download/python',
-      package_dir = {'MDSplus':'.','MDSplus._opcodes':'./_opcodes','MDSplus.tests':'./tests','MDSplus.doc':'./doc','MDSplus.widgets':'./widgets'},
-      packages = ['MDSplus','MDSplus._opcodes','MDSplus.tests','MDSplus.widgets'],
-      package_data = {'':['doc/*.*','widgets/*.glade']},
+      package_dir = {name:'.',
+                     name+'._opcodes':'./_opcodes',
+                     name+'.tests':'./tests',
+                     name+'.widgets':'./widgets',
+                     name+'.wsgi':'./wsgi'},
+      packages = [name,
+                  name+'._opcodes',
+                  name+'.tests',
+                  name+'.widgets',
+                  name+'.wsgi'],
+      package_data = {'':['doc/*.*','widgets/*.glade','js/*.js','html/*.html']},
       include_package_data = True,
       platforms = ('Any',),
       classifiers = [ 'Development Status :: 4 - Beta',
