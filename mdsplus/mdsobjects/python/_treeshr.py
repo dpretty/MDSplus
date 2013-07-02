@@ -488,7 +488,7 @@ def TreeCloseAll(ctx):
 
 def TreeSetVersionDate(date):
     from _mdsshr import DateToQuad
-    status = __TreeSetViewDate(DateToQuad(str.encode(date)))
+    status = __TreeSetViewDate(DateToQuad(str.encode(date)).data())
     if not (status & 1):
         raise TreeException(MdsGetMsg(status))
 
@@ -533,7 +533,6 @@ def TreeMakeTimestampedSegment(n,timestamps,value,idx,rows_filled):
     """Put a segment"""
     from mdsarray import makeArray,Int64Array
     timestamps=Int64Array(timestamps)
-    value=makeArray(value).data().transpose()
     try:
         n.tree.lock()
         status=__TreeMakeTimestampedSegment(n.tree.ctx,n.nid,descriptor_a(timestamps).pointer,_C.pointer(descriptor_a(value)),idx,rows_filled)
