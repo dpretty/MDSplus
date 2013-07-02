@@ -158,7 +158,7 @@ def doScope(self):
         if(tree != None):
           outStr = outStr+' tree = "'+tree+'" ';
           if(globalDefs & (1 << GLOBAL_SHOT_IDX)):
-            shotNum = globalShot
+            shotNum = '-2'
           else:
             shotNum = getValue(lines, 'Scope.plot_'+str(rowIdx)+'_'+str(colIdx)+'.shot')
           if(shotNum != None):
@@ -358,7 +358,7 @@ def doScopepanel(self):
                     try:
                         x=makeData(sig.dim_of().data())
                     except Exception,e:
-                        response_headers.append(('ERROR'+sig_idx_s,'Error getting x axis of: "%s", error: %s' % (expr,e)))
+                        response_headers.append(('ERROR'+sig_idx_s,'Error getting x axis of %s: "%s", error: %s' % (expr,e)))
                         continue
                 response_headers.append(('X'+sig_idx_s+'_DATATYPE',x.__class__.__name__))
                 response_headers.append(('Y'+sig_idx_s+'_DATATYPE',y.__class__.__name__))
