@@ -90,7 +90,7 @@ class descriptor(_C.Structure):
                 self.pointer=_C.cast(_C.pointer(_C.c_long(value)),_C.POINTER(descriptor))
                 self.addToCache(value)
                 return
-        if isinstance(value,str):
+        if isinstance(value,str) or isinstance(value,unicode):
             str_d=descriptor_string(value)
             d=_C.cast(_C.pointer(str_d),_C.POINTER(descriptor)).contents
             self.length=d.length
@@ -328,8 +328,7 @@ class descriptor(_C.Structure):
                 if self.length == 0:
                     return makeScalar('')
                 else:
-                    ans=_C.cast(self.pointer,_C.POINTER(_C.c_char*self.length)).contents.value
-                    return makeScalar(ans)
+                    return(makeScalar(_N.array(_C.cast(self.pointer,_C.POINTER((_C.c_byte*self.length))).contents,dtype=_N.uint8).tostring()))
             if (self.dtype == DTYPE_FSC):
                 ans=_C.cast(self.pointer,_C.POINTER((_C.c_float*2))).contents
                 return makeScalar(complex(ans[0],ans[1]))
@@ -372,6 +371,9 @@ class descriptor(_C.Structure):
                     return TreePath(_C.cast(self.pointer,_C.POINTER(_C.c_char*self.length)).contents.value,descriptor.tree)
                 if (self.dtype == DTYPE_IDENT):
                     return Ident(_C.cast(self.pointer,_C.POINTER(_C.c_char*self.length)).contents.value)
+                if (self.dtype == DTYPE_Z):
+                    from compound import Function
+                    return Function('$MISSING',tuple())
                 raise TypeError('Unsupported data type: (%s,%d)' % (str(mdsdtypes(self.dtype)),self.dtype))
         if (self.dclass == CLASS_R):
             ans = _C.cast(_C.pointer(self),_C.POINTER(descriptor_r)).contents
@@ -424,6 +426,8 @@ class descriptor(_C.Structure):
                 return globals()[str(mdsdtypes(self.dtype))[6:].lower().capitalize()](arglist)
             raise Exception("%s is not yet supported" % str(mdsdtypes(ans.dtype)))
         if self.dclass == CLASS_A:
+            if self.dtype == DTYPE_Z:
+                self.dtype = DTYPE_L
             descr = _C.cast(_C.pointer(self),_C.POINTER(descriptor_a)).contents
             if descr.coeff:
                 descr.arsize=descr.length
