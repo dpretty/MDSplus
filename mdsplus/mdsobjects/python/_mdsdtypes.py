@@ -68,6 +68,7 @@ DTYPE_WITH_ERROR=213
 DTYPE_LIST=214
 DTYPE_TUPLE=215
 DTYPE_DICTIONARY=216
+DTYPE_OPAQUE=217
 DTYPE_MISSING=0
 DTYPE_NATIVE_DOUBLE=DTYPE_FT
 DTYPE_NATIVE_FLOAT=DTYPE_FS
@@ -87,7 +88,7 @@ class mdsdtypes:
            194:'DTYPE_PARAM',195:'DTYPE_SIGNAL',196:'DTYPE_DIMENSION',197:'DTYPE_WINDOW',198:'DTYPE_SLOPE',199:'DTYPE_FUNCTION',200:'DTYPE_CONGLOM',
            201:'DTYPE_RANGE',202:'DTYPE_ACTION',203:'DTYPE_DISPATCH',204:'DTYPE_PROGRAM',205:'DTYPE_ROUTINE',206:'DTYPE_PROCEDURE',
            207:'DTYPE_METHOD',208:'DTYPE_DEPENDENCY',209:'DTYPE_CONDITION',210:'DTYPE_EVENT',211:'DTYPE_WITH_UNITS',212:'DTYPE_CALL',
-           213:'DTYPE_WITH_ERROR',214:'DTYPE_LIST',215:'DTYPE_TUPLE',216:'DTYPE_DICTIONARY'}
+           213:'DTYPE_WITH_ERROR',214:'DTYPE_LIST',215:'DTYPE_TUPLE',216:'DTYPE_DICTIONARY',217:'DTYPE_OPAQUE'}
     m_to_n_types={}
     name_to_dtype={}
     dtype=-1
@@ -105,24 +106,24 @@ class mdsdtypes:
         if self.dtype in mdsdtypes.ctypes:
             return mdsdtypes.ctypes[self.dtype]
         else:
-            raise TypeError,'Cannot convert '+str(self.dtype)+' to ctype'
+            raise TypeError('Cannot convert '+str(self.dtype)+' to ctype')
 
     def toNumpy(self):
         if self.dtype in mdsdtypes.numpytypes:
             return mdsdtypes.numpytypes[self.dtype]
         else:
-            raise TypeError,'Cannot convert '+str(self.dtype)+' to numpy type'
+            raise TypeError('Cannot convert '+str(self.dtype)+' to numpy type')
 
     def fromNumpy(cls,value):
         if not mdsdtypes.m_to_n_types:
             for d in mdsdtypes.numpytypes:
                mdsdtypes.m_to_n_types.setdefault(str((mdsdtypes.numpytypes[d])().dtype),d)
-        if str(value.dtype)[1:2]=='S':
+        if str(value.dtype)[1:2]=='S' or str(value.dtype)[1:2]=='U':
             return DTYPE_T
         try:
             return mdsdtypes.m_to_n_types[str(value.dtype)]
         except KeyError:
-            raise TypeError, 'Cannot convert '+str(value.dtype)+' to mdsplus type'
+            raise TypeError('Cannot convert '+str(value.dtype)+' to mdsplus type')
     fromNumpy=classmethod(fromNumpy)
 
     def fromName(name):

@@ -8,7 +8,7 @@ class Compound(Data):
         """MDSplus compound data.
         """
         if self.__class__.__name__=='Compound':
-            raise TypeError,"Cannot create instances of class Compound"
+            raise TypeError("Cannot create instances of class Compound")
         if 'args' in params:
             args=params['args']
         if 'params' in params:
@@ -63,6 +63,8 @@ class Compound(Data):
             return 0
         if name == 'opcode':
             return self._opcode
+        if name == 'dtype':
+            return self._dtype
         if name == self._opcode_name:
             return self._opcode
         if name in self._fields:
@@ -70,7 +72,7 @@ class Compound(Data):
                 return self.args[self._fields[name]]
             except:
                 return None
-        raise AttributeError,'No such attribute '+str(name)
+        raise AttributeError('No such attribute '+str(name))
 
     def __getitem__(self,num):
         try:
@@ -86,7 +88,7 @@ class Compound(Data):
                 self.__dict__[name]=value
                 return
             else:
-                raise TypeError,'args attribute must be a tuple'
+                raise TypeError('args attribute must be a tuple')
         if name in self._fields:
             tmp=list(self.args)
             while len(tmp) <= self._fields[name]:
@@ -181,13 +183,13 @@ class MetaClass(type):
         idx=0
         for f in classDict['fields']:
             name=f[0:1].upper()+f[1:]
-            exec "def get"+name+"(self): return self.__getattr__('"+f+"')"
-            exec "newClassDict['get'+name]=get"+name
+            exec ("def get"+name+"(self): return self.__getattr__('"+f+"')")
+            exec ("newClassDict['get'+name]=get"+name)
             newClassDict['get'+name].__doc__='Get the '+f+' field\n@rtype: Data'
-            exec 'def set'+name+'(self,value): return self.__setattr__("'+f+'",value)'
-            exec "newClassDict['set'+name]=set"+name
+            exec ('def set'+name+'(self,value): return self.__setattr__("'+f+'",value)')
+            exec ("newClassDict['set'+name]=set"+name)
             newClassDict['set'+name].__doc__='Set the '+f+' field\n@type value: Data\n@rtype: None'
-            exec "newClassDict['_dtype']=DTYPE_"+classname.upper()
+            exec ("newClassDict['_dtype']=DTYPE_"+classname.upper())
             newClassDict['_fields'][f]=idx
             idx=idx+1
         c=type.__new__(meta,classname,bases,newClassDict)
@@ -401,4 +403,31 @@ class Window(Compound):
     """
     fields=('startIdx','endIdx','timeAt0')
     __metaclass__=MetaClass
-    
+
+class Opaque(Compound):
+    """An Opaque object containing a binary uint8 array and a string identifying the type.
+    """
+    fields=('data','otype')
+    __metaclass__=MetaClass
+   
+    def getImage(self):
+      import Image
+      from StringIO import StringIO
+      return Image.open(StringIO(makeData(self.getData()).data().data))
+
+    def fromFile(filename,typestring):
+      """Read a file and return an Opaque object
+         @param filename: Name of file to read in
+         @type filename: str
+         @param typestring: String to denote the type of file being stored
+         @type typestring: str
+         @rtype: Opaque instance
+      """
+      import numpy as _N
+      f = open(filename,'rb')
+      try:
+        opq=Opaque(makeData(_N.fromstring(f.read(),dtype="uint8")),typestring)
+      finally:
+        f.close()
+      return opq
+    fromFile=staticmethod(fromFile)

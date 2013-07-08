@@ -54,7 +54,7 @@ class opcode(object):
             exp=exp+'$)",args)'
             return eval(exp)
         else:
-            print "xxxxxx----"+str(self.name)
+            print("xxxxxx----"+str(self.name))
             return eval(self.evaluate_code)
     def check_args(self,args):
         if self.min_args != None and self.min_args > len(args):
@@ -567,6 +567,9 @@ def find_opcode(name):
         opcodes_by_number[451]=opcode("FS_COMPLEX",'"FS_COMPLEX"',None,1,2) ################ NOT IMPLEMENTED
         opcodes_by_number[452]=opcode("FT_FLOAT",'"FT_FLOAT"',None,1,1) ################ NOT IMPLEMENTED
         opcodes_by_number[453]=opcode("FT_COMPLEX",'"FT_COMPLEX"',None,1,2) ################ NOT IMPLEMENTED
+        opcodes_by_number[454]=opcode("BUILD_OPAQUE",'"BUILD_OPAQUE"',None,2,2) ############ NOT IMPLEMENTED
+        opcodes_by_number[455]=opcode("MAKE_OPAQUE",'"MAKE_OPAQUE"',None,2,2) ############ NOT IMPLEMENTED
+
         for opc in opcodes_by_number:
             opcodes_by_name[opcodes_by_number[opc].name]=opcodes_by_number[opc]
             opcodes_by_number[opc].number=opc
@@ -583,7 +586,7 @@ def find_opcode(name):
             
 def f_float(*args):
     import sys
-    print "Name = %s" %__name__
-    print "Dict = %s" % sys.modules[__name__].__dict__
+    print( "Name = %s" %__name__)
+    print( "Dict = %s" % sys.modules[__name__].__dict__)
     return find_opcode('f_float').evaluate(args)
 
