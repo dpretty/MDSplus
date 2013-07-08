@@ -1,3 +1,15 @@
+2013-07-08 12:58  twf
+
+	* mdsobjects/python/compound.py (stable.2):
+	
+	Ensure MDSplus data type when using Opaque.getImage
+
+2013-07-08 10:56  twf
+
+	* mdsobjects/python/_treeshr.py (stable.3):
+	
+	Fix argument types for TreeMakeSegment
+
 2013-07-02 13:30  twf
 
 	* tdi/Py.fun (stable.2):
