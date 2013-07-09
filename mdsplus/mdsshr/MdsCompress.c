@@ -63,7 +63,7 @@ The expansion routine "xentry":
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 typedef ARRAY_COEFF(char, 1) array_coef;
 typedef RECORD(4) record_four;
-STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: MdsCompress.c,v $ $Revision: 1.20 $ $Date: 2013/04/10 07:52:33 $";
+STATIC_CONSTANT char *cvsrev = "@(#)$RCSfile: MdsCompress.c,v $ $Revision: 1.21 $ $Date: 2013/07/09 11:23:20 $";
 
 STATIC_CONSTANT unsigned short opcode = OpcDECOMPRESS;
 STATIC_CONSTANT record_four rec0 = {sizeof(opcode), DTYPE_FUNCTION, CLASS_R, (unsigned char *) &opcode, 4, 0, 0, 0, 0};
@@ -109,7 +109,7 @@ STATIC_ROUTINE  int       compress(
       j = (long) ((struct descriptor_a *) pwork)->arsize / (long) pwork->length;
       for (; --j >= 0 && status & 1;)
 //	if ((stat1 = compress(pcimage, pcentry, delta, pd1++)) != 1)
-		if ((stat1 = compress(pcimage, pcentry, delta, ppd++)) != 1)
+		if ((stat1 = compress(pcimage, pcentry, delta, *ppd++)) != 1)
 			status = stat1;
       break;
      case CLASS_CA:
