@@ -1,4 +1,4 @@
-public fun Py(in _cmd, optional in _varname) {
+public fun Py(in _cmd, optional in _varname, optional in _global_namespace) {
    fun PyCall(in _routine,_locked, optional in _arg) {
       if (_locked) {
         _GIL=build_call(51,getenv("PyLib"),"PyGILState_Ensure"); 
@@ -26,7 +26,7 @@ public fun Py(in _cmd, optional in _varname) {
        abort();
      }
      if (MdsShr->LibFindImageSymbol(descr('MdsMisc'),descr('PyCall'),ref(_sym)) == 1) {
-       MdsMisc->PyCall("from MDSplus import Tree as ___TDI___Tree,execPy as ___TDI___execPy",val(1));
+       MdsMisc->PyCall("from MDSplus import execPy as ___TDI___execPy",val(1));
        public _PyInit=2;
      } else {
        if (MdsShr->LibFindImageSymbol(descr('dl'),descr('dlopen'),ref(_sym)) == 1) {
@@ -35,7 +35,7 @@ public fun Py(in _cmd, optional in _varname) {
        PyCall("Py_Initialize",0);
        PyCall("PyEval_InitThreads",0);
        public _PyInit=1;
-       PyCall("PyRun_SimpleString",1,"from MDSplus import Tree as ___TDI___Tree,execPy as ___TDI___execPy");
+       PyCall("PyRun_SimpleString",1,"from MDSplus import execPy as ___TDI___execPy");
      }
    }
    public ___TDI___cmds=_cmd;
@@ -44,6 +44,10 @@ public fun Py(in _cmd, optional in _varname) {
     else
         _execCall="___TDI___execPy()";
    _locked=!present(_nolock);
+   deallocate(public ___TDI___exception);
+   deallocate(public ___TDI___answer);
+
+   public ___TDI___global_ns= present(_global_namespace) ? 1 : 0;
    if (public _PyInit==1) {
      PyCall("PyRun_SimpleString",_locked,_execCall);
    } else {
