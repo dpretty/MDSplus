@@ -24,7 +24,7 @@
 
 #define align(bytes,size) ((((bytes) + (size) - 1)/(size)) * (size))
 
-static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.53 $ $Date: 2010/08/04 19:01:11 $";
+static char *cvsrev = "@(#)$RCSfile: TreeGetRecord.c,v $ $Revision: 1.54 $ $Date: 2013/07/16 14:17:15 $";
 
 static _int64 ViewDate = -1;
 static int MakeNidsLocal(struct descriptor *dsc_ptr, unsigned char tree);
@@ -245,7 +245,7 @@ static int MakeNidsLocal(struct descriptor *dsc_ptr, unsigned char tree)
       break;
 
      case CLASS_CA:
-      status = MakeNidsLocal((struct descriptor *) dsc_ptr->pointer, tree);
+      status = 1;
       break;
 
      case CLASS_APD:
