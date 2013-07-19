@@ -19,7 +19,6 @@ MATH_LIBS=-L@MAKESHLIBDIR@ -lMdsMath
 LIBDC1394_LIBS=-ldc1394 -lraw1394
 LIBDC1394_INCS=-I/usr/local/include/dc1394 -I/usr/local/include/libraw1394
 export @LIBPATH@=@MAKESHLIBDIR@
-DTACQ_FILESYSTEM := $(shell  find acq_root_filesystem -print)
 DC := $(shell date)
 
 UIDS = \
@@ -210,9 +209,7 @@ all :  @MAKELIBDIR@ @MAKESHLIBDIR@ @MAKEBINDIR@ \
        @MAKELIBDIR@libMitDevices.a \
        @MITDEVICESIO_TARGETS@ $(UIDS) \
        @MAKEBINDIR@reboot_dtaq_satelite \
-       @DC1394_SUPPORT@ @DC1394_SUPPORT2@ \
-       @MAKESHLIBDIR@acq_root_filesystem.tgz \
-       @MAKEBINDIR@dtaq_update_board.sh
+       @DC1394_SUPPORT@ @DC1394_SUPPORT2@ 
 
 
 depend:
@@ -792,10 +789,3 @@ dc1394_support.o : dc1394_support.c
 dc1394_support2.o : dc1394_support2.c
 	$(CC) -c -o $@ $(CFLAGS) $< $(LIBDC1394_INCS)
 
-
-@MAKESHLIBDIR@acq_root_filesystem.tgz : $(DTACQ_FILESYSTEM)
-	echo $(DC) > acq_root_filesystem/ffs/user/MitFilesDate  
-	( cd acq_root_filesystem;  tar  --exclude=ffs -cvzf ../$@  . ; tar -cvzf ../$(@)_ffs ffs/user )
-
-@MAKEBINDIR@dtaq_update_board.sh : dtaq_update_board.sh
-	cp $< $@
